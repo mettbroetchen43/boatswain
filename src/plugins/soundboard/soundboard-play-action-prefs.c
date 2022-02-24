@@ -1,0 +1,143 @@
+/* soundboard-play-action-prefs.c
+ *
+ * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+#include "soundboard-play-action-prefs.h"
+
+#include <glib/gi18n.h>
+
+struct _SoundboardPlayActionPrefs
+{
+  AdwPreferencesGroup parent_instance;
+
+  GtkFileFilter *file_filter;
+  GtkLabel *filename_label;
+
+  SoundboardPlayAction *play_action;
+};
+
+G_DEFINE_FINAL_TYPE (SoundboardPlayActionPrefs, soundboard_play_action_prefs, ADW_TYPE_PREFERENCES_GROUP)
+
+
+/*
+ * Callbacks
+ */
+
+static void
+on_behavior_row_selected_changed_cb (AdwComboRow               *behavior_row,
+                                     GParamSpec                *pspec,
+                                     SoundboardPlayActionPrefs *self)
+{
+  soundboard_play_action_set_behavior (self->play_action,
+                                       adw_combo_row_get_selected (behavior_row));
+}
+
+static void
+on_file_chooser_native_response_cb (GtkNativeDialog           *native,
+                                    int                        response,
+                                    SoundboardPlayActionPrefs *self)
+{
+  if (response == GTK_RESPONSE_ACCEPT)
+    {
+      GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
+      g_autofree char *basename = NULL;
+      g_autoptr (GFile) file = NULL;
+
+      file = gtk_file_chooser_get_file (chooser);
+      soundboard_play_action_set_file (self->play_action, file);
+
+      basename = g_file_get_basename (file);
+      gtk_label_set_label (self->filename_label, basename);
+    }
+
+  g_object_unref (native);
+}
+
+static void
+on_file_row_activated_cb (AdwActionRow              *row,
+                          SoundboardPlayActionPrefs *self)
+{
+  GtkFileChooserNative *native;
+
+  native = gtk_file_chooser_native_new (_("Select audio file"),
+                                        GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
+                                        GTK_FILE_CHOOSER_ACTION_OPEN,
+                                        _("_Open"),
+                                        _("_Cancel"));
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (native), self->file_filter);
+
+  g_signal_connect (native, "response", G_CALLBACK (on_file_chooser_native_response_cb), self);
+  gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
+}
+
+static void
+on_volume_adjustment_value_changed_cb (GtkAdjustment             *adjustment,
+                                       GParamSpec                *pspec,
+                                       SoundboardPlayActionPrefs *self)
+{
+  soundboard_play_action_set_behavior (self->play_action, gtk_adjustment_get_value (adjustment));
+}
+
+
+/*
+ * GObject overrides
+ */
+
+static void
+soundboard_play_action_prefs_finalize (GObject *object)
+{
+  SoundboardPlayActionPrefs *self = (SoundboardPlayActionPrefs *)object;
+
+  G_OBJECT_CLASS (soundboard_play_action_prefs_parent_class)->finalize (object);
+}
+
+static void
+soundboard_play_action_prefs_class_init (SoundboardPlayActionPrefsClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->finalize = soundboard_play_action_prefs_finalize;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/plugins/soundboard/soundboard-play-action-prefs.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, file_filter);
+  gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, filename_label);
+
+  gtk_widget_class_bind_template_callback (widget_class, on_behavior_row_selected_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_file_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_volume_adjustment_value_changed_cb);
+}
+
+static void
+soundboard_play_action_prefs_init (SoundboardPlayActionPrefs *self)
+{
+  gtk_widget_init_template (GTK_WIDGET (self));
+}
+
+AdwPreferencesGroup *
+soundboard_play_action_prefs_new (SoundboardPlayAction *play_action)
+{
+  SoundboardPlayActionPrefs *self;
+
+  self = g_object_new (SOUNDBOARD_TYPE_PLAY_ACTION_PREFS, NULL);
+  self->play_action = play_action;
+
+  return ADW_PREFERENCES_GROUP (self);
+}

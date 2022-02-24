@@ -9,6 +9,7 @@ plugins_libs = []
 plugins_confs = []
 
 subdir('dummy')
+subdir('soundboard')
 
 plugins_lib = static_library(
   'boatswain-plugins',

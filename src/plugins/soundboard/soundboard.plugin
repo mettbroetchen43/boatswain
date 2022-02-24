@@ -1,0 +1,12 @@
+[Plugin]
+Name = Soundboard
+Module = soundboard
+Description = Play sound effects
+Icon=audio-x-generic-symbolic
+Authors = Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
+Copyright = Copyleft © The Boatswain maintainers
+Builtin = true
+License = GPL
+Loader = C
+Embedded = soundboard_plugin_register_types
+Depends =

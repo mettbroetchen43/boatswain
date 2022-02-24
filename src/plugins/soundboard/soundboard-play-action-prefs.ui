@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="SoundboardPlayActionPrefs" parent="AdwPreferencesGroup">
+
+    <child>
+      <object class="AdwActionRow" id="file_row">
+        <property name="title" translatable="yes">File</property>
+        <property name="activatable">True</property>
+        <signal name="activated" handler="on_file_row_activated_cb" object="SoundboardPlayActionPrefs" swapped="no" />
+        <child>
+          <object class="GtkLabel" id="filename_label">
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwComboRow" id="behavior_row">
+        <property name="title" translatable="yes">Behavior</property>
+        <signal name="notify::selected" handler="on_behavior_row_selected_changed_cb" object="SoundboardPlayActionPrefs" swapped="no" />
+        <property name="model">
+          <object class="GtkStringList">
+            <items>
+              <item translatable="yes">Play / Stop</item>
+              <item translatable="yes">Play / Overlap</item>
+              <item translatable="yes">Play / Restart</item>
+              <item translatable="yes">Loop / Stop</item>
+            </items>
+          </object>
+        </property>
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwActionRow">
+        <property name="title" translatable="yes">Volume</property>
+        <child>
+          <object class="GtkScale">
+            <property name="valign">center</property>
+            <property name="hexpand">True</property>
+            <property name="adjustment">
+              <object class="GtkAdjustment" id="volume_adjustment">
+                <property name="lower">0.0</property>
+                <property name="upper">1.0</property>
+                <property name="step-increment">0.02</property>
+                <property name="page-increment">0.05</property>
+                <property name="value">1.0</property>
+                <signal name="notify::value" handler="on_volume_adjustment_value_changed_cb" object="SoundboardPlayActionPrefs" swapped="no" />
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </child>
+
+  </template>
+
+  <object class="GtkFileFilter" id="file_filter">
+    <property name="name" translatable="yes">Audio Files</property>
+    <mime-types>
+      <mime-type>audio/*</mime-type>
+    </mime-types>
+  </object>
+
+</interface>
