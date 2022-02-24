@@ -68,8 +68,6 @@ dummy_action_1_activate (BsAction *action)
 {
   DummyAction1 *self = DUMMY_ACTION_1 (action);
 
-  g_message ("Hi!");
-
   set_icon (self, "face-cool-symbolic");
   bs_icon_set_text (self->icon, "Hi!");
 }
@@ -78,8 +76,6 @@ static void
 dummy_action_1_deactivate (BsAction *action)
 {
   DummyAction1 *self = DUMMY_ACTION_1 (action);
-
-  g_message ("Bye!");
 
   set_icon (self, "face-tired-symbolic");
   bs_icon_set_text (self->icon, "Bye!");
@@ -128,4 +124,5 @@ static void
 dummy_action_1_init (DummyAction1 *self)
 {
   self->icon = bs_icon_new_empty ();
+  set_icon (self, "emoji-body-symbolic");
 }
