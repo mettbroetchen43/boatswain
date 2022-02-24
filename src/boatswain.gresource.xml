@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+
+  <gresource prefix="/com/feaneron/Boatswain">
+    <file>bs-stream-deck-editor.ui</file>
+    <file>bs-stream-deck-button-editor.ui</file>
+    <file>bs-window.ui</file>
+    <file>gtk/help-overlay.ui</file>
+    <file>style.css</file>
+  </gresource>
+
+  <gresource prefix="/com/feaneron/Boatswain/icons/scalable/emblems">
+    <file alias="dialpad-symbolic.svg">icons/dialpad-symbolic.svg</file>
+  </gresource>
+
+</gresources>

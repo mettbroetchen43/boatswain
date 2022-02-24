@@ -1,0 +1,7 @@
+data/com.feaneron.Boatswain.desktop.in
+data/com.feaneron.Boatswain.appdata.xml.in
+data/com.feaneron.Boatswain.gschema.xml
+src/boatswain-window.ui
+src/main.c
+src/boatswain-window.c
+
