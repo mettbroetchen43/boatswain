@@ -86,6 +86,17 @@ dummy_action_1_get_icon (BsAction *action)
   return self->icon;
 }
 
+static AdwPreferencesGroup *
+dummy_action_1_get_preferences (BsAction *action)
+{
+  GtkWidget *group;
+
+  group = adw_preferences_group_new ();
+  adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (group), "Dummy Plugin 1");
+
+  return ADW_PREFERENCES_GROUP (group);
+}
+
 
 /*
  * GObject overrides
@@ -112,6 +123,7 @@ dummy_action_1_class_init (DummyAction1Class *klass)
   action_class->activate = dummy_action_1_activate;
   action_class->deactivate = dummy_action_1_deactivate;
   action_class->get_icon = dummy_action_1_get_icon;
+  action_class->get_preferences = dummy_action_1_get_preferences;
 }
 
 static void

@@ -35,11 +35,13 @@ struct _BsStreamDeckButtonEditor
   AdwPreferencesGroup *actions_group;
   GtkColorChooser *background_color_button;
   GtkWidget *background_color_row;
+  AdwPreferencesPage *button_preferences_page;
   GtkPicture *icon_picture;
   AdwLeaflet *leaflet;
   GtkStack *stack;
 
   BsStreamDeckButton *button;
+  AdwPreferencesGroup *action_preferences;
 
   gulong custom_icon_changed_id;
   gulong icon_changed_id;
@@ -120,6 +122,27 @@ setup_button (BsStreamDeckButtonEditor *self)
 }
 
 static void
+update_action_preferences_group (BsStreamDeckButtonEditor *self)
+{
+  AdwPreferencesGroup *action_preferences;
+  BsAction *action;
+
+  action = self->button ? bs_stream_deck_button_get_action (self->button) : NULL;
+  action_preferences = action ? bs_action_get_preferences (action) : NULL;
+
+  if (self->action_preferences != action_preferences)
+    {
+      if (self->action_preferences)
+        adw_preferences_page_remove (self->button_preferences_page, self->action_preferences);
+
+      self->action_preferences = action_preferences;
+
+      if (action_preferences)
+        adw_preferences_page_add (self->button_preferences_page, action_preferences);
+    }
+}
+
+static void
 update_icon (BsStreamDeckButtonEditor *self)
 {
   BsIcon *icon = bs_stream_deck_button_get_icon (self->button);
@@ -145,6 +168,8 @@ on_action_row_activated_cb (GtkListBoxRow            *row,
   action = bs_action_factory_create_action (action_factory, info);
 
   bs_stream_deck_button_set_action (self->button, action);
+
+  update_action_preferences_group (self);
 
   adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_BACK);
 }
@@ -344,6 +369,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, actions_group);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_button);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_row);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, button_preferences_page);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, icon_picture);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, leaflet);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, stack);
@@ -393,6 +419,7 @@ bs_stream_deck_button_editor_set_button (BsStreamDeckButtonEditor *self,
   if (g_set_object (&self->button, button))
     {
       gtk_stack_set_visible_child_name (self->stack, button ? "button" : "empty");
+      update_action_preferences_group (self);
       setup_button (self);
 
       self->custom_icon_changed_id = g_signal_connect (button,

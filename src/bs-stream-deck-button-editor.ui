@@ -30,7 +30,7 @@
                   <object class="AdwLeafletPage">
                     <property name="name">button</property>
                     <property name="child">
-                      <object class="AdwPreferencesPage">
+                      <object class="AdwPreferencesPage" id="button_preferences_page">
                         <child>
                           <object class="AdwPreferencesGroup">
 
