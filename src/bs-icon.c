@@ -27,6 +27,7 @@ struct _BsIcon
   GdkRGBA background_color;
   GdkPaintable *paintable;
   PangoLayout *layout;
+  int margin;
 
   gulong size_changed_id;
   gulong content_changed_id;
@@ -41,6 +42,7 @@ enum
 {
   PROP_0,
   PROP_BACKGROUND_COLOR,
+  PROP_MARGIN,
   PROP_PAINTABLE,
   PROP_TEXT,
   N_PROPS
@@ -110,7 +112,19 @@ bs_icon_snapshot (GdkPaintable *paintable,
                              &GRAPHENE_RECT_INIT (0, 0, width, height));
 
   if (self->paintable)
-    gdk_paintable_snapshot (self->paintable, snapshot, width, height);
+    {
+      gtk_snapshot_save (snapshot);
+      gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (self->margin, self->margin));
+
+      g_message ("Painting (%d)", self->margin);
+
+      gdk_paintable_snapshot (self->paintable,
+                              snapshot,
+                              width - self->margin * 2,
+                              height - self->margin * 2);
+
+      gtk_snapshot_restore (snapshot);
+    }
 
   if (self->layout)
     {
@@ -169,6 +183,10 @@ bs_icon_get_property (GObject    *object,
       g_value_set_boxed (value, &self->background_color);
       break;
 
+    case PROP_MARGIN:
+      g_value_set_int (value, self->margin);
+      break;
+
     case PROP_PAINTABLE:
       g_value_set_object (value, self->paintable);
       break;
@@ -194,6 +212,10 @@ bs_icon_set_property (GObject      *object,
     {
     case PROP_BACKGROUND_COLOR:
       bs_icon_set_background_color (self, g_value_get_boxed (value));
+      break;
+
+    case PROP_MARGIN:
+      bs_icon_set_margin (self, g_value_get_int (value));
       break;
 
     case PROP_PAINTABLE:
@@ -222,6 +244,10 @@ bs_icon_class_init (BsIconClass *klass)
                                                           GDK_TYPE_RGBA,
                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
+  properties[PROP_MARGIN] = g_param_spec_int ("margin", NULL, NULL,
+                                              0, G_MAXINT, 12,
+                                              G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
   properties[PROP_PAINTABLE] = g_param_spec_object ("paintable", NULL, NULL,
                                                     GDK_TYPE_PAINTABLE,
                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
@@ -236,6 +262,7 @@ bs_icon_class_init (BsIconClass *klass)
 static void
 bs_icon_init (BsIcon *self)
 {
+  self->margin = 12;
 }
 
 
@@ -366,4 +393,31 @@ bs_icon_set_text (BsIcon     *self,
   gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_TEXT]);
+}
+
+int
+bs_icon_get_margin (BsIcon *self)
+{
+  g_return_val_if_fail (BS_IS_ICON (self), 0);
+
+  return self->margin;
+}
+
+void
+bs_icon_set_margin (BsIcon *self,
+                    int     margin)
+{
+  g_return_if_fail (BS_IS_ICON (self));
+
+  if (self->margin == margin)
+    return;
+
+  self->margin = margin;
+
+  g_message ("Setting to %d", margin);
+
+  gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
+  gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_MARGIN]);
 }

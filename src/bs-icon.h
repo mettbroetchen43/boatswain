@@ -44,4 +44,8 @@ const char * bs_icon_get_text (BsIcon *self);
 void bs_icon_set_text (BsIcon     *self,
                        const char *text);
 
+int bs_icon_get_margin (BsIcon *self);
+void bs_icon_set_margin (BsIcon *self,
+                         int     margin);
+
 G_END_DECLS
