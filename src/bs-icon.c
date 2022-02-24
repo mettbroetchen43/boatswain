@@ -113,7 +113,19 @@ bs_icon_snapshot (GdkPaintable *paintable,
     gdk_paintable_snapshot (self->paintable, snapshot, width, height);
 
   if (self->layout)
-    gtk_snapshot_append_layout (snapshot, self->layout, &(GdkRGBA) { 1.0, 1.0, 1.0, 1.0 });
+    {
+      int text_width, text_height;
+      int x, y;
+
+      pango_layout_get_pixel_size (self->layout, &text_width, &text_height);
+      x = (width - text_width) / 2.0;
+      y = height - text_height;
+
+      gtk_snapshot_save (snapshot);
+      gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (x, y));
+      gtk_snapshot_append_layout (snapshot, self->layout, &(GdkRGBA) { 1.0, 1.0, 1.0, 1.0 });
+      gtk_snapshot_restore (snapshot);
+    }
 }
 
 static void
@@ -332,9 +344,10 @@ bs_icon_set_text (BsIcon     *self,
           g_autoptr (PangoFontDescription) font_description = NULL;
           PangoContext *pango_context;
 
-          font_description = pango_font_description_from_string ("Cantarell 11");
+          font_description = pango_font_description_from_string ("Cantarell 10");
 
-          pango_context = pango_context_new ();
+          pango_context = pango_font_map_create_context (pango_cairo_font_map_get_default ());
+          pango_context_set_language (pango_context, gtk_get_default_language ());
           pango_context_set_font_description (pango_context, font_description);
 
           self->layout = pango_layout_new (pango_context);
