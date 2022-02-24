@@ -91,6 +91,7 @@ add_action_factory (BsStreamDeckButtonEditor *self,
   for (l = actions; l; l = l->next)
     {
       const BsActionInfo *info;
+      GtkWidget *image;
       GtkWidget *row;
 
       info = l->data;
@@ -102,6 +103,9 @@ add_action_factory (BsStreamDeckButtonEditor *self,
       g_object_set_data (G_OBJECT (row), "factory", action_factory);
       g_object_set_data (G_OBJECT (row), "action-info", (gpointer) info);
       g_signal_connect (row, "activated", G_CALLBACK (on_action_row_activated_cb), self);
+
+      image = gtk_image_new_from_icon_name (info->icon_name);
+      adw_action_row_add_prefix (ADW_ACTION_ROW (row), image);
 
       adw_expander_row_add_row (ADW_EXPANDER_ROW (expander_row), row);
     }
