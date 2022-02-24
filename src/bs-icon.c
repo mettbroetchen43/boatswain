@@ -116,8 +116,6 @@ bs_icon_snapshot (GdkPaintable *paintable,
       gtk_snapshot_save (snapshot);
       gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (self->margin, self->margin));
 
-      g_message ("Painting (%d)", self->margin);
-
       gdk_paintable_snapshot (self->paintable,
                               snapshot,
                               width - self->margin * 2,
@@ -413,8 +411,6 @@ bs_icon_set_margin (BsIcon *self,
     return;
 
   self->margin = margin;
-
-  g_message ("Setting to %d", margin);
 
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
   gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
