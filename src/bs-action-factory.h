@@ -42,13 +42,13 @@ struct _BsActionFactoryInterface
   GTypeInterface parent;
 
   GList * (*list_actions) (BsActionFactory *self);
-  BsAction * (*create_action) (BsActionFactory *self,
-                               const char      *id);
+  BsAction * (*create_action) (BsActionFactory    *self,
+                               const BsActionInfo *action_info);
 };
 
 GList * bs_action_factory_list_actions (BsActionFactory *self);
 
-BsAction * bs_action_factory_create_action (BsActionFactory *self,
-                                            const char      *id);
+BsAction * bs_action_factory_create_action (BsActionFactory    *self,
+                                            const BsActionInfo *action_info);
 
 G_END_DECLS

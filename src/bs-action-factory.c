@@ -19,6 +19,7 @@
  */
 
 #include "bs-action-factory.h"
+#include "bs-action-private.h"
 
 G_DEFINE_INTERFACE (BsActionFactory, bs_action_factory, G_TYPE_OBJECT)
 
@@ -37,11 +38,21 @@ bs_action_factory_list_actions (BsActionFactory *self)
 }
 
 BsAction *
-bs_action_factory_create_action (BsActionFactory *self,
-                                 const char      *id)
+bs_action_factory_create_action (BsActionFactory    *self,
+                                 const BsActionInfo *action_info)
 {
+  BsAction *action;
+
   g_return_val_if_fail (BS_IS_ACTION_FACTORY (self), NULL);
   g_return_val_if_fail (BS_ACTION_FACTORY_GET_IFACE (self)->create_action, NULL);
 
-  return BS_ACTION_FACTORY_GET_IFACE (self)->create_action (self, id);
+  action = BS_ACTION_FACTORY_GET_IFACE (self)->create_action (self, action_info);
+
+  if (!action)
+    return NULL;
+
+  bs_action_set_id (action, action_info->id);
+  bs_action_set_name (action, action_info->name);
+
+  return action;
 }

@@ -49,11 +49,16 @@ dummy_action_factory_list_actions (BsActionFactory *action_factory)
 }
 
 static BsAction *
-dummy_action_factory_create_action (BsActionFactory *action_factory,
-                                    const char      *id)
+dummy_action_factory_create_action (BsActionFactory    *action_factory,
+                                    const BsActionInfo *action_info)
 {
-  if (g_strcmp0 (id, "dummy-action1") == 0)
-    return g_object_new (DUMMY_TYPE_ACTION_1, NULL);
+  size_t i;
+
+  for (i = 0; i < G_N_ELEMENTS (actions); i++)
+    {
+      if (action_info == &actions[i])
+        return g_object_new (DUMMY_TYPE_ACTION_1, NULL);
+    }
 
   return NULL;
 }

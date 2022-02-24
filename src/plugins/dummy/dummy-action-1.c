@@ -24,15 +24,12 @@
 
 struct _DummyAction1
 {
-  GObject parent_instance;
+  BsAction parent_instance;
 
   BsIcon *icon;
 };
 
-static void bs_action_iface_init (BsActionInterface *iface);
-
-G_DEFINE_FINAL_TYPE_WITH_CODE (DummyAction1, dummy_action_1, G_TYPE_OBJECT,
-                               G_IMPLEMENT_INTERFACE (BS_TYPE_ACTION, bs_action_iface_init))
+G_DEFINE_FINAL_TYPE (DummyAction1, dummy_action_1, BS_TYPE_ACTION)
 
 
 /*
@@ -60,7 +57,7 @@ set_icon (DummyAction1 *self,
 
 
 /*
- * BsAction interface
+ * BsAction overrides
  */
 
 static void
@@ -89,14 +86,6 @@ dummy_action_1_get_icon (BsAction *action)
   return self->icon;
 }
 
-static void
-bs_action_iface_init (BsActionInterface *iface)
-{
-  iface->activate = dummy_action_1_activate;
-  iface->deactivate = dummy_action_1_deactivate;
-  iface->get_icon = dummy_action_1_get_icon;
-}
-
 
 /*
  * GObject overrides
@@ -116,8 +105,13 @@ static void
 dummy_action_1_class_init (DummyAction1Class *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  BsActionClass *action_class = BS_ACTION_CLASS (klass);
 
   object_class->finalize = dummy_action_1_finalize;
+
+  action_class->activate = dummy_action_1_activate;
+  action_class->deactivate = dummy_action_1_deactivate;
+  action_class->get_icon = dummy_action_1_get_icon;
 }
 
 static void

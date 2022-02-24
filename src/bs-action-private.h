@@ -1,4 +1,4 @@
-/* bs-action.h
+/* bs-action-private.h
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -20,34 +20,14 @@
 
 #pragma once
 
-#include <adwaita.h>
-
-#include "bs-types.h"
+#include "bs-action.h"
 
 G_BEGIN_DECLS
 
-#define BS_TYPE_ACTION (bs_action_get_type())
-G_DECLARE_DERIVABLE_TYPE (BsAction, bs_action, BS, ACTION, GObject)
+void bs_action_set_id (BsAction   *self,
+                       const char *id);
 
-struct _BsActionClass
-{
-  GObjectClass parent_class;
-
-  BsIcon * (*get_icon) (BsAction *self);
-
-  void (*activate) (BsAction *self);
-  void (*deactivate) (BsAction *self);
-
-  AdwPreferencesGroup * (*get_preferences) (BsAction *self);
-
-  // TODO: serialize & deserialize
-};
-
-BsIcon * bs_action_get_icon (BsAction *self);
-void bs_action_activate (BsAction *self);
-void bs_action_deactivate (BsAction *self);
-const char * bs_action_get_id (BsAction *self);
-const char * bs_action_get_name (BsAction *self);
-AdwPreferencesGroup * bs_action_get_preferences (BsAction *self);
+void bs_action_set_name (BsAction   *self,
+                         const char *name);
 
 G_END_DECLS

@@ -20,11 +20,11 @@
 
 #pragma once
 
-#include <glib-object.h>
+#include "bs-action.h"
 
 G_BEGIN_DECLS
 
 #define DUMMY_TYPE_ACTION_1 (dummy_action_1_get_type())
-G_DECLARE_FINAL_TYPE (DummyAction1, dummy_action_1, DUMMY, ACTION_1, GObject)
+G_DECLARE_FINAL_TYPE (DummyAction1, dummy_action_1, DUMMY, ACTION_1, BsAction)
 
 G_END_DECLS
