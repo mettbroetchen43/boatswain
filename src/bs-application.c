@@ -100,7 +100,7 @@ bs_application_show_about (GSimpleAction *action,
                            gpointer       user_data)
 {
   BsApplication *self = BS_APPLICATION (user_data);
-  GtkWindow *window = NULL;
+  GtkAboutDialog *dialog;
   const char *authors[] = {
     "Georges Basile Stavracas Neto <georges.stavracas@gmail.com>",
     NULL,
@@ -108,13 +108,24 @@ bs_application_show_about (GSimpleAction *action,
 
   g_return_if_fail (BS_IS_APPLICATION (self));
 
-  window = gtk_application_get_active_window (GTK_APPLICATION (self));
+  if (!self->window)
+    return;
 
-  gtk_show_about_dialog (window,
-                         "program-name", "Boatswain",
-                         "authors", authors,
-                         "version", "0.1.0",
-                         NULL);
+  dialog = GTK_ABOUT_DIALOG (gtk_about_dialog_new ());
+
+  gtk_about_dialog_set_authors (dialog, authors);
+  gtk_about_dialog_set_copyright (dialog, _("Copyright \xc2\xa9 2022 Georges Basile Stavracas Neto"));
+  gtk_about_dialog_set_license_type (dialog, GTK_LICENSE_GPL_3_0);
+  gtk_about_dialog_set_version (dialog, "0.1.0");
+  gtk_about_dialog_set_program_name (dialog, "Boatswain");
+  gtk_about_dialog_set_website (dialog, "https://gitlab.gnome.org/feaneron/boatswain");
+  gtk_about_dialog_set_website_label (dialog, _("Repository"));
+
+  gtk_window_set_modal (GTK_WINDOW (dialog), true);
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), self->window);
+  gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
+
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static gboolean
