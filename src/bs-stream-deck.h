@@ -69,6 +69,7 @@ GIcon * bs_stream_deck_get_icon (BsStreamDeck *self);
 
 const BsStreamDeckButtonLayout * bs_stream_deck_get_button_layout (BsStreamDeck *self);
 
+double bs_stream_deck_get_brightness (BsStreamDeck *self);
 void bs_stream_deck_set_brightness (BsStreamDeck *self,
                                     double        brightness);
 

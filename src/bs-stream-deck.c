@@ -83,6 +83,7 @@ G_DEFINE_QUARK (BsStreamDeck, bs_stream_deck_error);
 enum
 {
   PROP_0,
+  PROP_BRIGHTNESS,
   PROP_DEVICE,
   PROP_ICON,
   PROP_NAME,
@@ -830,6 +831,10 @@ bs_stream_deck_get_property (GObject    *object,
 
   switch (prop_id)
     {
+    case PROP_BRIGHTNESS:
+      g_value_set_double (value, self->brightness);
+      break;
+
     case PROP_DEVICE:
       g_value_set_object (value, self->device);
       break;
@@ -857,6 +862,10 @@ bs_stream_deck_set_property (GObject      *object,
 
   switch (prop_id)
     {
+    case PROP_BRIGHTNESS:
+      bs_stream_deck_set_brightness (self, g_value_get_double (value));
+      break;
+
     case PROP_DEVICE:
       g_assert (self->device == NULL);
       self->device = g_value_dup_object (value);
@@ -875,6 +884,10 @@ bs_stream_deck_class_init (BsStreamDeckClass *klass)
   object_class->finalize = bs_stream_deck_finalize;
   object_class->get_property = bs_stream_deck_get_property;
   object_class->set_property = bs_stream_deck_set_property;
+
+  properties[PROP_BRIGHTNESS] = g_param_spec_double ("brightness", NULL, NULL,
+                                                     0.0, 1.0, 0.5,
+                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_DEVICE] = g_param_spec_object ("device", NULL, NULL,
                                                  G_USB_TYPE_DEVICE,
@@ -988,6 +1001,14 @@ bs_stream_deck_get_button_layout (BsStreamDeck *self)
   return &self->model_info->button_layout;
 }
 
+double
+bs_stream_deck_get_brightness (BsStreamDeck *self)
+{
+  g_return_val_if_fail (BS_IS_STREAM_DECK (self), 0.0);
+
+  return self->brightness;
+}
+
 /**
  * bs_stream_deck_set_brightness:
  * @self: a #BsStreamDeck
@@ -1008,6 +1029,8 @@ bs_stream_deck_set_brightness (BsStreamDeck *self,
 
   self->brightness = brightness;
   self->model_info->set_brightness (self, brightness);
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_BRIGHTNESS]);
 }
 
 /**

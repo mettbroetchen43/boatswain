@@ -31,6 +31,7 @@ struct _BsStreamDeckEditor
 {
   AdwBin parent_instance;
 
+  GtkAdjustment *brightness_adjustment;
   BsStreamDeckButtonEditor *button_editor;
   GtkFlowBox *buttons_flowbox;
   GtkLabel *firmware_version_label;
@@ -136,7 +137,8 @@ setup_editor (BsStreamDeckEditor *self)
 {
   build_button_grid (self);
 
-  bs_stream_deck_set_brightness (self->stream_deck, 0.5);
+  gtk_adjustment_set_value (self->brightness_adjustment,
+                            bs_stream_deck_get_brightness (self->stream_deck));
   gtk_label_set_label (self->serial_number_label,
                        bs_stream_deck_get_serial_number (self->stream_deck));
   gtk_label_set_label (self->firmware_version_label,
@@ -270,6 +272,7 @@ bs_stream_deck_editor_class_init (BsStreamDeckEditorClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-stream-deck-editor.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, brightness_adjustment);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, button_editor);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, buttons_flowbox);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, firmware_version_label);
