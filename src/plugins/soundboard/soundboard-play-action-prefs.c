@@ -36,6 +36,23 @@ G_DEFINE_FINAL_TYPE (SoundboardPlayActionPrefs, soundboard_play_action_prefs, AD
 
 
 /*
+ * Auxiliary methods
+ */
+
+static void
+set_file (SoundboardPlayActionPrefs *self,
+          GFile                     *file)
+{
+  g_autofree char *basename = NULL;
+
+  basename = g_file_get_basename (file);
+  gtk_label_set_label (self->filename_label, basename);
+
+  soundboard_play_action_set_file (self->play_action, file);
+}
+
+
+/*
  * Callbacks
  */
 
@@ -56,14 +73,10 @@ on_file_chooser_native_response_cb (GtkNativeDialog           *native,
   if (response == GTK_RESPONSE_ACCEPT)
     {
       GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
-      g_autofree char *basename = NULL;
       g_autoptr (GFile) file = NULL;
 
       file = gtk_file_chooser_get_file (chooser);
-      soundboard_play_action_set_file (self->play_action, file);
-
-      basename = g_file_get_basename (file);
-      gtk_label_set_label (self->filename_label, basename);
+      set_file (self, file);
     }
 
   g_object_unref (native);
