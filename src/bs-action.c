@@ -20,14 +20,34 @@
 
 
 #include "bs-action-private.h"
+#include "bs-icon.h"
 
 typedef struct
 {
   char *id;
   char *name;
+  BsActionFactory *factory;
+  BsIcon *icon;
 } BsActionPrivate;
 
 G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (BsAction, bs_action, G_TYPE_OBJECT)
+
+
+/*
+ * BsAction overrides
+ */
+
+static BsIcon *
+bs_action_real_get_icon (BsAction *self)
+{
+  BsActionPrivate *priv = bs_action_get_instance_private (self);
+
+  return priv->icon;
+}
+
+/*
+ * GObject overrides
+ */
 
 static void
 bs_action_finalize (GObject *object)
@@ -35,6 +55,7 @@ bs_action_finalize (GObject *object)
   BsAction *self = (BsAction *)object;
   BsActionPrivate *priv = bs_action_get_instance_private (self);
 
+  g_clear_object (&priv->icon);
   g_clear_pointer (&priv->id, g_free);
   g_clear_pointer (&priv->name, g_free);
 
@@ -47,11 +68,41 @@ bs_action_class_init (BsActionClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = bs_action_finalize;
+
+  klass->get_icon = bs_action_real_get_icon;
 }
 
 static void
 bs_action_init (BsAction *self)
 {
+  BsActionPrivate *priv = bs_action_get_instance_private (self);
+
+  priv->icon = bs_icon_new_empty ();
+}
+
+BsActionFactory *
+bs_action_get_factory (BsAction *self)
+{
+  BsActionPrivate *priv;
+
+  g_return_val_if_fail (BS_IS_ACTION (self), NULL);
+
+  priv = bs_action_get_instance_private (self);
+  return priv->factory;
+}
+
+void
+bs_action_set_factory (BsAction        *self,
+                       BsActionFactory *factory)
+{
+
+  BsActionPrivate *priv = bs_action_get_instance_private (self);
+
+  g_return_if_fail (BS_IS_ACTION (self));
+  g_return_if_fail (factory != NULL);
+  g_return_if_fail (priv->factory == NULL);
+
+  priv->factory = factory;
 }
 
 const char *
@@ -139,4 +190,40 @@ bs_action_get_preferences (BsAction *self)
     return BS_ACTION_GET_CLASS (self)->get_preferences (self);
   else
     return NULL;
+}
+
+JsonNode *
+bs_action_serialize_settings (BsAction *self)
+{
+  g_return_val_if_fail (BS_IS_ACTION (self), NULL);
+
+  if (BS_ACTION_GET_CLASS (self)->serialize_settings)
+    {
+      g_autoptr (JsonNode) node = NULL;
+
+      node = BS_ACTION_GET_CLASS (self)->serialize_settings (self);
+
+      if (!JSON_NODE_HOLDS_OBJECT (node))
+        {
+          g_warning ("Serialized action settings must be JsonObjects");
+          return NULL;
+        }
+
+      return g_steal_pointer (&node);
+    }
+  else
+    {
+      return NULL;
+    }
+}
+
+void
+bs_action_deserialize_settings (BsAction   *self,
+                                JsonObject *settings)
+{
+  g_return_if_fail (BS_IS_ACTION (self));
+  g_return_if_fail (settings != NULL);
+
+  if (BS_ACTION_GET_CLASS (self)->deserialize_settings)
+    BS_ACTION_GET_CLASS (self)->deserialize_settings (self, settings);
 }

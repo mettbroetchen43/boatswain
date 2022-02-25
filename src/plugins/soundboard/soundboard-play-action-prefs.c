@@ -26,8 +26,10 @@ struct _SoundboardPlayActionPrefs
 {
   AdwPreferencesGroup parent_instance;
 
+  AdwComboRow *behavior_row;
   GtkFileFilter *file_filter;
   GtkLabel *filename_label;
+  GtkAdjustment *volume_adjustment;
 
   SoundboardPlayAction *play_action;
 };
@@ -130,8 +132,10 @@ soundboard_play_action_prefs_class_init (SoundboardPlayActionPrefsClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/plugins/soundboard/soundboard-play-action-prefs.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, behavior_row);
   gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, file_filter);
   gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, filename_label);
+  gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, volume_adjustment);
 
   gtk_widget_class_bind_template_callback (widget_class, on_behavior_row_selected_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_file_row_activated_cb);
@@ -153,4 +157,30 @@ soundboard_play_action_prefs_new (SoundboardPlayAction *play_action)
   self->play_action = play_action;
 
   return ADW_PREFERENCES_GROUP (self);
+}
+
+void
+soundboard_play_action_prefs_deserialize_settings (SoundboardPlayActionPrefs *self,
+                                                   JsonObject                *settings)
+{
+  SoundboardPlayBehavior behavior;
+  JsonNode *file_node = NULL;
+  double volume;
+
+  file_node = json_object_get_member (settings, "file");
+  if (file_node && !JSON_NODE_HOLDS_NULL (file_node))
+    {
+      g_autoptr (GFile) file = NULL;
+
+      file = g_file_new_for_path (json_node_get_string (file_node));
+      set_file (self, file);
+    }
+
+  behavior = json_object_get_int_member (settings, "behavior");
+  adw_combo_row_set_selected (self->behavior_row, behavior);
+  soundboard_play_action_set_behavior (self->play_action, behavior);
+
+  volume = json_object_get_double_member (settings, "volume");
+  gtk_adjustment_set_value (self->volume_adjustment, volume);
+  soundboard_play_action_set_volume (self->play_action, volume);
 }

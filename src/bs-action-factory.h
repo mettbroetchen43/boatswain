@@ -48,6 +48,9 @@ struct _BsActionFactoryInterface
 
 GList * bs_action_factory_list_actions (BsActionFactory *self);
 
+const BsActionInfo * bs_action_factory_get_info (BsActionFactory *self,
+                                                 const char      *id);
+
 BsAction * bs_action_factory_create_action (BsActionFactory    *self,
                                             const BsActionInfo *action_info);
 

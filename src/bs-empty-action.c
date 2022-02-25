@@ -1,4 +1,4 @@
-/* bs-action-private.h
+/* bs-empty-action.c
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -18,24 +18,27 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#pragma once
+#include "bs-empty-action.h"
 
-#include "bs-action.h"
+struct _BsEmptyAction
+{
+  BsAction parent_instance;
+};
 
-G_BEGIN_DECLS
+G_DEFINE_FINAL_TYPE (BsEmptyAction, bs_empty_action, BS_TYPE_ACTION)
 
-void bs_action_set_id (BsAction   *self,
-                       const char *id);
+static void
+bs_empty_action_class_init (BsEmptyActionClass *klass)
+{
+}
 
-void bs_action_set_name (BsAction   *self,
-                         const char *name);
+static void
+bs_empty_action_init (BsEmptyAction *self)
+{
+}
 
-BsActionFactory * bs_action_get_factory (BsAction *self);
-void bs_action_set_factory (BsAction        *self,
-                            BsActionFactory *factory);
-
-JsonNode * bs_action_serialize_settings (BsAction *self);
-void bs_action_deserialize_settings (BsAction   *self,
-                                     JsonObject *settings);
-
-G_END_DECLS
+BsAction *
+bs_empty_action_new (void)
+{
+  return g_object_new (BS_TYPE_EMPTY_ACTION, NULL);
+}

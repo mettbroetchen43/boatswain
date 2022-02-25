@@ -37,6 +37,29 @@ bs_action_factory_list_actions (BsActionFactory *self)
   return BS_ACTION_FACTORY_GET_IFACE (self)->list_actions (self);
 }
 
+const BsActionInfo *
+bs_action_factory_get_info (BsActionFactory *self,
+                            const char      *id)
+{
+  g_autoptr (GList) actions = NULL;
+  GList *l;
+
+  g_return_val_if_fail (BS_IS_ACTION_FACTORY (self), NULL);
+  g_return_val_if_fail (id != NULL, NULL);
+
+  actions = bs_action_factory_list_actions (self);
+
+  for (l = actions; l; l = l->next)
+    {
+      const BsActionInfo *info = l->data;
+
+      if (g_strcmp0 (info->id, id) == 0)
+        return info;
+    }
+
+  return NULL;
+}
+
 BsAction *
 bs_action_factory_create_action (BsActionFactory    *self,
                                  const BsActionInfo *action_info)
@@ -53,6 +76,7 @@ bs_action_factory_create_action (BsActionFactory    *self,
 
   bs_action_set_id (action, action_info->id);
   bs_action_set_name (action, action_info->name);
+  bs_action_set_factory (action, self);
 
   return action;
 }

@@ -20,13 +20,30 @@
 
 #pragma once
 
-#include <glib-object.h>
+#include <json-glib/json-glib.h>
+#include <stdint.h>
+
+#include "bs-types.h"
 
 G_BEGIN_DECLS
 
 #define BS_TYPE_PAGE (bs_page_get_type())
 G_DECLARE_FINAL_TYPE (BsPage, bs_page, BS, PAGE, GObject)
 
-BsPage * bs_page_new (void);
+BsPage * bs_page_new_empty (BsPage *parent);
+
+BsPage * bs_page_new_from_json (BsPage   *parent,
+                                JsonNode *node);
+
+JsonNode * bs_page_to_json (BsPage *self);
+
+void bs_page_update_button (BsPage             *self,
+                            BsStreamDeckButton *button);
+
+gboolean bs_page_realize (BsPage    *self,
+                          uint8_t    position,
+                          BsIcon   **out_custom_icon,
+                          BsAction **out_action,
+                          GError   **error);
 
 G_END_DECLS

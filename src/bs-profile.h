@@ -20,14 +20,27 @@
 
 #pragma once
 
-#include <glib-object.h>
+#include <json-glib/json-glib.h>
+
+#include "bs-types.h"
 
 G_BEGIN_DECLS
 
 #define BS_TYPE_PROFILE (bs_profile_get_type())
 G_DECLARE_FINAL_TYPE (BsProfile, bs_profile, BS, PROFILE, GObject)
 
-BsProfile * bs_profile_new_from_key_file (const char  *file_path,
-                                          GError     **error);
+BsProfile * bs_profile_new_empty (void);
+
+double bs_profile_get_brightness (BsProfile *self);
+void bs_profile_set_brightness (BsProfile *self,
+                                double     brightness);
+
+const char * bs_profile_get_id (BsProfile *self);
+
+const char * bs_profile_get_name (BsProfile *self);
+void bs_profile_set_name (BsProfile  *self,
+                          const char *name);
+
+BsPage * bs_profile_get_root_page (BsProfile *self);
 
 G_END_DECLS

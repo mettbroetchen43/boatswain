@@ -259,6 +259,50 @@ soundboard_play_action_get_preferences (BsAction *action)
   return self->prefs;
 }
 
+static JsonNode *
+soundboard_play_action_serialize_settings (BsAction *action)
+{
+  g_autoptr (JsonBuilder) builder = NULL;
+  SoundboardPlayAction *self;
+
+  self = SOUNDBOARD_PLAY_ACTION (action);
+  builder = json_builder_new ();
+
+  json_builder_begin_object (builder);
+
+  json_builder_set_member_name (builder, "file");
+  if (self->file)
+    {
+      g_autofree char *path = g_file_get_path (self->file);
+      json_builder_add_string_value (builder, path);
+    }
+  else
+    {
+      json_builder_add_null_value (builder);
+    }
+
+  json_builder_set_member_name (builder, "behavior");
+  json_builder_add_int_value (builder, self->behavior);
+
+  json_builder_set_member_name (builder, "volume");
+  json_builder_add_double_value (builder, self->volume);
+
+  json_builder_end_object (builder);
+
+  return json_builder_get_root (builder);
+}
+
+static void
+soundboard_play_action_deserialize_settings (BsAction   *action,
+                                             JsonObject *settings)
+{
+  SoundboardPlayAction *self = SOUNDBOARD_PLAY_ACTION (action);
+
+  soundboard_play_action_prefs_deserialize_settings (SOUNDBOARD_PLAY_ACTION_PREFS (self->prefs),
+                                                     settings);
+}
+
+
 
 /*
  * GObject overrides
@@ -290,6 +334,8 @@ soundboard_play_action_class_init (SoundboardPlayActionClass *klass)
   action_class->deactivate = soundboard_play_action_deactivate;
   action_class->get_icon = soundboard_play_action_get_icon;
   action_class->get_preferences = soundboard_play_action_get_preferences;
+  action_class->serialize_settings = soundboard_play_action_serialize_settings;
+  action_class->deserialize_settings = soundboard_play_action_deserialize_settings;
 }
 
 static void
@@ -298,12 +344,12 @@ soundboard_play_action_init (SoundboardPlayAction *self)
   self->icon = bs_icon_new_empty ();
   set_icon (self, "media-playback-start-symbolic");
 
-  self->prefs = soundboard_play_action_prefs_new (self);
-  g_object_ref_sink (self->prefs);
-
   self->behavior = SOUNDBOARD_PLAY_BEHAVIOR_PLAY_STOP;
   self->media_streams_queue = g_queue_new ();
   self->volume = 1.0;
+
+  self->prefs = soundboard_play_action_prefs_new (self);
+  g_object_ref_sink (self->prefs);
 }
 
 BsAction *
@@ -345,7 +391,7 @@ soundboard_play_action_set_volume (SoundboardPlayAction *self,
   GList *l;
 
   g_return_if_fail (SOUNDBOARD_IS_PLAY_ACTION (self));
-  g_return_if_fail (volume < 0.0 || volume > 1.0);
+  g_return_if_fail (volume >= 0.0 && volume <= 1.0);
 
   self->volume = volume;
 

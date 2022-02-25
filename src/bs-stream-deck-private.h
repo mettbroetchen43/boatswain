@@ -29,4 +29,9 @@ gboolean bs_stream_deck_set_button_icon (BsStreamDeck  *self,
                                          BsIcon        *icon,
                                          GError       **error);
 
+BsPage * bs_stream_deck_get_active_page (BsStreamDeck *self);
+
+void bs_stream_deck_load_page (BsStreamDeck  *self,
+                               BsPage        *page);
+
 G_END_DECLS

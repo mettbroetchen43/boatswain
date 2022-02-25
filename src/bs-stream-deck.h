@@ -78,4 +78,11 @@ BsIconRenderer * bs_stream_deck_get_icon_renderer (BsStreamDeck *self);
 BsStreamDeckButton * bs_stream_deck_get_button (BsStreamDeck *self,
                                                 uint8_t       position);
 
+GListModel * bs_stream_deck_get_profiles (BsStreamDeck *self);
+
+BsProfile * bs_stream_deck_get_active_profile (BsStreamDeck *self);
+
+void bs_stream_deck_load_profile (BsStreamDeck *self,
+                                  BsProfile    *profile);
+
 G_END_DECLS

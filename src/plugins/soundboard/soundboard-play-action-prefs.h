@@ -31,4 +31,7 @@ G_DECLARE_FINAL_TYPE (SoundboardPlayActionPrefs, soundboard_play_action_prefs, S
 
 AdwPreferencesGroup * soundboard_play_action_prefs_new (SoundboardPlayAction *play_action);
 
+void soundboard_play_action_prefs_deserialize_settings (SoundboardPlayActionPrefs *self,
+                                                        JsonObject                *settings);
+
 G_END_DECLS

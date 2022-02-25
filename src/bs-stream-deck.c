@@ -18,8 +18,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include "bs-action.h"
 #include "bs-device-enums.h"
+#include "bs-icon.h"
 #include "bs-icon-renderer.h"
+#include "bs-page.h"
+#include "bs-profile.h"
 #include "bs-stream-deck-private.h"
 #include "bs-stream-deck-button-private.h"
 
@@ -60,6 +64,9 @@ struct _BsStreamDeck
   GObject parent_instance;
 
   BsIconRenderer *icon_renderer;
+  GListStore *profiles;
+  BsProfile *active_profile;
+  BsPage *active_page;
 
   const StreamDeckModelInfo *model_info;
   GUsbDevice *device;
@@ -83,6 +90,7 @@ G_DEFINE_QUARK (BsStreamDeck, bs_stream_deck_error);
 enum
 {
   PROP_0,
+  PROP_ACTIVE_PROFILE,
   PROP_BRIGHTNESS,
   PROP_DEVICE,
   PROP_ICON,
@@ -104,6 +112,138 @@ static GParamSpec *properties[N_PROPS];
 /*
  * Auxiliary methods
  */
+
+static char *
+get_profile_path (BsStreamDeck *self)
+{
+  g_autofree char *profile_filename = NULL;
+
+  profile_filename = g_strdup_printf ("%s.json", self->serial_number);
+
+  return g_build_filename (g_get_user_data_dir (),
+                           profile_filename,
+                           NULL);
+}
+
+static void
+save_profiles (BsStreamDeck *self)
+{
+  g_autoptr (JsonGenerator) generator = NULL;
+  g_autoptr (JsonBuilder) builder = NULL;
+  g_autoptr (JsonNode) root = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autofree char *profile_path = NULL;
+  g_autofree char *json_str = NULL;
+  unsigned int i;
+
+  /* Update the active profile */
+  bs_profile_set_brightness (self->active_profile, self->brightness);
+
+  for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
+    {
+      BsStreamDeckButton *stream_deck_button = g_ptr_array_index (self->buttons, i);
+      bs_page_update_button (self->active_page, stream_deck_button);
+    }
+
+  builder = json_builder_new ();
+
+  json_builder_begin_object (builder);
+
+  json_builder_set_member_name (builder, "active-profile");
+  json_builder_add_string_value (builder, bs_profile_get_id (self->active_profile));
+
+  json_builder_set_member_name (builder, "profiles");
+  json_builder_begin_array (builder);
+  for (i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->profiles)); i++)
+    {
+      g_autoptr (BsProfile) profile = NULL;
+
+      profile = g_list_model_get_item (G_LIST_MODEL (self->profiles), i);
+      json_builder_add_value (builder, json_gobject_serialize (G_OBJECT (profile)));
+    }
+  json_builder_end_array (builder);
+
+  json_builder_end_object (builder);
+
+  root = json_builder_get_root (builder);
+
+  generator = json_generator_new ();
+  json_generator_set_pretty (generator, TRUE);
+  json_generator_set_root (generator, root);
+  json_str = json_generator_to_data (generator, NULL);
+
+  profile_path = get_profile_path (self);
+  g_file_set_contents (profile_path, json_str, -1, &error);
+
+  if (error)
+    g_warning ("Error saving profiles: %s", error->message);
+}
+
+static void
+load_profiles (BsStreamDeck  *self)
+{
+  g_autoptr (JsonParser) parser = NULL;
+  g_autoptr (BsProfile) active_profile = NULL;
+  g_autoptr (GError) local_error = NULL;
+  g_autofree char *profile_path = NULL;
+  JsonObject *object;
+  JsonArray *profiles_array;
+  JsonNode *root;
+  unsigned int i;
+  const char *active_profile_id;
+
+  profile_path = get_profile_path (self);
+
+  g_debug ("Loading %s", profile_path);
+
+  parser = json_parser_new ();
+
+  json_parser_load_from_file (parser, profile_path, &local_error);
+  if (local_error)
+    {
+      g_debug ("Error loading profile for device %s: %s",
+               self->serial_number,
+               local_error->message);
+      goto out;
+    }
+
+  root = json_parser_get_root (parser);
+  object = json_node_get_object (root);
+
+  active_profile = NULL;
+  active_profile_id = json_object_get_string_member (object, "active-profile");
+
+  profiles_array = json_object_get_array_member (object, "profiles");
+  for (i = 0; i < json_array_get_length (profiles_array); i++)
+    {
+      g_autoptr (BsProfile) profile = NULL;
+      JsonNode *profile_node;
+
+      profile_node = json_array_get_element (profiles_array, i);
+
+      if (!profile_node)
+        continue;
+
+      profile = BS_PROFILE (json_gobject_deserialize (BS_TYPE_PROFILE, profile_node));
+      g_list_store_append (self->profiles, profile);
+
+      if (g_strcmp0 (active_profile_id, bs_profile_get_id (profile)) == 0)
+        active_profile = g_object_ref (profile);
+    }
+
+  if (!active_profile)
+    active_profile = g_list_model_get_item (G_LIST_MODEL (self->profiles), 0);
+
+out:
+  if (!active_profile)
+    {
+      active_profile = bs_profile_new_empty ();
+      bs_profile_set_name (active_profile, _("Default"));
+      g_list_store_append (self->profiles, active_profile);
+    }
+
+  bs_stream_deck_load_profile (self, active_profile);
+}
 
 static inline uint8_t
 swap_button_index_original (BsStreamDeck *self,
@@ -786,6 +926,8 @@ bs_stream_deck_initable_init (GInitable     *initable,
   self->poll_source = stream_deck_source_new (self);
   g_source_attach (self->poll_source, NULL);
 
+  load_profiles (self);
+
   return TRUE;
 }
 
@@ -805,7 +947,10 @@ bs_stream_deck_finalize (GObject *object)
   BsStreamDeck *self = (BsStreamDeck *)object;
 
   if (self->model_info)
-    bs_stream_deck_reset (self);
+    {
+      bs_stream_deck_reset (self);
+      save_profiles (self);
+    }
 
   g_usb_device_close (self->device, NULL);
 
@@ -817,6 +962,7 @@ bs_stream_deck_finalize (GObject *object)
   g_clear_pointer (&self->buttons, g_ptr_array_unref);
   g_clear_pointer (&self->handle, hid_close);
   g_clear_object (&self->device);
+  g_clear_object (&self->profiles);
 
   G_OBJECT_CLASS (bs_stream_deck_parent_class)->finalize (object);
 }
@@ -831,6 +977,10 @@ bs_stream_deck_get_property (GObject    *object,
 
   switch (prop_id)
     {
+    case PROP_ACTIVE_PROFILE:
+      g_value_set_object (value, self->active_profile);
+      break;
+
     case PROP_BRIGHTNESS:
       g_value_set_double (value, self->brightness);
       break;
@@ -885,6 +1035,10 @@ bs_stream_deck_class_init (BsStreamDeckClass *klass)
   object_class->get_property = bs_stream_deck_get_property;
   object_class->set_property = bs_stream_deck_set_property;
 
+  properties[PROP_ACTIVE_PROFILE] = g_param_spec_object ("active-profile", NULL, NULL,
+                                                         BS_TYPE_PROFILE,
+                                                         G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+
   properties[PROP_BRIGHTNESS] = g_param_spec_double ("brightness", NULL, NULL,
                                                      0.0, 1.0, 0.5,
                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
@@ -923,6 +1077,7 @@ static void
 bs_stream_deck_init (BsStreamDeck *self)
 {
   self->buttons = g_ptr_array_new_with_free_func (g_object_unref);
+  self->profiles = g_list_store_new (BS_TYPE_PROFILE);
 }
 
 BsStreamDeck *
@@ -1097,4 +1252,90 @@ bs_stream_deck_get_button (BsStreamDeck *self,
   g_return_val_if_fail (position < self->model_info->button_layout.n_buttons, NULL);
 
   return g_ptr_array_index (self->buttons, position);
+}
+
+GListModel *
+bs_stream_deck_get_profiles (BsStreamDeck *self)
+{
+  g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
+
+  return G_LIST_MODEL (self->profiles);
+}
+
+BsProfile *
+bs_stream_deck_get_active_profile (BsStreamDeck *self)
+{
+  g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
+
+  return self->active_profile;
+}
+
+void
+bs_stream_deck_load_profile (BsStreamDeck *self,
+                             BsProfile    *profile)
+{
+  g_return_if_fail (BS_IS_STREAM_DECK (self));
+  g_return_if_fail (g_list_store_find (self->profiles, profile, NULL));
+
+  if (self->active_profile == profile)
+    return;
+
+  self->active_profile = profile;
+
+  bs_stream_deck_set_brightness (self, bs_profile_get_brightness (profile));
+  bs_stream_deck_load_page (self, bs_profile_get_root_page (profile));
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ACTIVE_PROFILE]);
+}
+
+BsPage *
+bs_stream_deck_get_active_page (BsStreamDeck *self)
+{
+  g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
+
+  return self->active_page;
+}
+
+void
+bs_stream_deck_load_page (BsStreamDeck  *self,
+                          BsPage        *page)
+{
+  uint8_t i;
+
+  g_return_if_fail (BS_IS_STREAM_DECK (self));
+  g_return_if_fail (BS_IS_PAGE (page));
+
+  if (self->active_page == page)
+    return;
+
+  /*
+   * Set the active page to NULL while loading it to avoid updating the page
+   * again during loading.
+   */
+  self->active_page = NULL;
+
+  for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
+    {
+      BsStreamDeckButton *stream_deck_button;
+      g_autoptr (BsAction) action = NULL;
+      g_autoptr (BsIcon) custom_icon = NULL;
+      g_autoptr (GError) error = NULL;
+
+      bs_page_realize (page, i, &custom_icon, &action, &error);
+
+      if (error)
+        {
+          g_warning ("Failed to construct action and icon from page: %s", error->message);
+          continue;
+        }
+
+      stream_deck_button = g_ptr_array_index (self->buttons, i);
+      bs_stream_deck_button_set_action (stream_deck_button, action);
+      bs_stream_deck_button_set_custom_icon (stream_deck_button, custom_icon, &error);
+
+      if (error)
+        g_warning ("Failed to set custom icon: %s", error->message);
+    }
+
+  self->active_page = page;
 }

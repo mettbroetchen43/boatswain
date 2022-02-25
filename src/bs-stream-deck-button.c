@@ -20,6 +20,7 @@
 
 #include "bs-action.h"
 #include "bs-icon.h"
+#include "bs-page.h"
 #include "bs-stream-deck-private.h"
 #include "bs-stream-deck-button-private.h"
 
@@ -63,6 +64,15 @@ static GParamSpec *properties[N_PROPS];
 /*
  * Auxiliary methods
  */
+
+static void
+update_page (BsStreamDeckButton *self)
+{
+  BsPage *page = bs_stream_deck_get_active_page (self->stream_deck);
+
+  if (page)
+    bs_page_update_button (page, self);
+}
 
 static void
 update_icon (BsStreamDeckButton *self)
@@ -119,8 +129,8 @@ bs_stream_deck_button_finalize (GObject *object)
 
   if (self->action)
     {
-      g_clear_signal_handler (&self->action_contents_changed_id, self->action);
-      g_clear_signal_handler (&self->action_size_changed_id, self->action);
+      g_clear_signal_handler (&self->action_contents_changed_id, bs_action_get_icon (self->action));
+      g_clear_signal_handler (&self->action_size_changed_id, bs_action_get_icon (self->action));
       g_clear_object (&self->action);
     }
 
@@ -307,7 +317,6 @@ bs_stream_deck_button_set_custom_icon (BsStreamDeckButton  *self,
   gboolean result;
 
   g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), FALSE);
-  g_return_val_if_fail (BS_IS_ICON (icon), FALSE);
   g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
   if (self->custom_icon == icon)
@@ -325,11 +334,16 @@ bs_stream_deck_button_set_custom_icon (BsStreamDeckButton  *self,
 
   g_set_object (&self->custom_icon, icon);
 
-  self->custom_contents_changed_id =
-    g_signal_connect (icon, "invalidate-contents", G_CALLBACK (on_icon_changed_cb), self);
+  if (icon)
+    {
+      self->custom_contents_changed_id =
+        g_signal_connect (icon, "invalidate-contents", G_CALLBACK (on_icon_changed_cb), self);
 
-  self->custom_size_changed_id =
-    g_signal_connect (icon, "invalidate-size", G_CALLBACK (on_icon_changed_cb), self);
+      self->custom_size_changed_id =
+        g_signal_connect (icon, "invalidate-size", G_CALLBACK (on_icon_changed_cb), self);
+    }
+
+  update_page (self);
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_CUSTOM_ICON]);
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ICON]);
@@ -377,6 +391,7 @@ bs_stream_deck_button_set_action (BsStreamDeckButton *self,
     g_signal_connect (action_icon, "invalidate-size", G_CALLBACK (on_icon_changed_cb), self);
 
   update_icon (self);
+  update_page (self);
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ACTION]);
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ICON]);

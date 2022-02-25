@@ -1,4 +1,4 @@
-/* bs-action-private.h
+/* bs-empty-action.h
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -20,22 +20,15 @@
 
 #pragma once
 
+#include <glib-object.h>
+
 #include "bs-action.h"
 
 G_BEGIN_DECLS
 
-void bs_action_set_id (BsAction   *self,
-                       const char *id);
+#define BS_TYPE_EMPTY_ACTION (bs_empty_action_get_type())
+G_DECLARE_FINAL_TYPE (BsEmptyAction, bs_empty_action, BS, EMPTY_ACTION, BsAction)
 
-void bs_action_set_name (BsAction   *self,
-                         const char *name);
-
-BsActionFactory * bs_action_get_factory (BsAction *self);
-void bs_action_set_factory (BsAction        *self,
-                            BsActionFactory *factory);
-
-JsonNode * bs_action_serialize_settings (BsAction *self);
-void bs_action_deserialize_settings (BsAction   *self,
-                                     JsonObject *settings);
+BsAction * bs_empty_action_new (void);
 
 G_END_DECLS

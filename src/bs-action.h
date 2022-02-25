@@ -21,6 +21,7 @@
 #pragma once
 
 #include <adwaita.h>
+#include <json-glib/json-glib.h>
 
 #include "bs-types.h"
 
@@ -40,7 +41,9 @@ struct _BsActionClass
 
   AdwPreferencesGroup * (*get_preferences) (BsAction *self);
 
-  // TODO: serialize & deserialize
+  JsonNode * (*serialize_settings) (BsAction *self);
+  void (*deserialize_settings) (BsAction   *self,
+                                JsonObject *settings);
 };
 
 BsIcon * bs_action_get_icon (BsAction *self);

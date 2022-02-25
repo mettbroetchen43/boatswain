@@ -107,10 +107,21 @@ bs_icon_renderer_compose_icon (BsIconRenderer      *self,
                           flip_y ? -1.0 : 1.0);
     }
 
-  gdk_paintable_snapshot (GDK_PAINTABLE (icon),
-                          snapshot,
-                          self->layout->width,
-                          self->layout->height);
+  if (icon)
+    {
+      gdk_paintable_snapshot (GDK_PAINTABLE (icon),
+                              snapshot,
+                              self->layout->width,
+                              self->layout->height);
+    }
+  else
+    {
+      gtk_snapshot_append_color (snapshot,
+                                 &(GdkRGBA) { 0.0, 0.0, 0.0, 0.0, },
+                                 &GRAPHENE_RECT_INIT (0, 0,
+                                                      self->layout->width,
+                                                      self->layout->height));
+    }
 
   node = gtk_snapshot_free_to_node (g_steal_pointer (&snapshot));
 
