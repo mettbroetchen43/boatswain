@@ -91,7 +91,7 @@ on_volume_adjustment_value_changed_cb (GtkAdjustment             *adjustment,
                                        GParamSpec                *pspec,
                                        SoundboardPlayActionPrefs *self)
 {
-  soundboard_play_action_set_behavior (self->play_action, gtk_adjustment_get_value (adjustment));
+  soundboard_play_action_set_volume (self->play_action, gtk_adjustment_get_value (adjustment));
 }
 
 
