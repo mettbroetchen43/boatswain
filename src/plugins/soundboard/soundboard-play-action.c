@@ -82,6 +82,7 @@ update_icon_from_state (SoundboardPlayAction *self)
     case SOUNDBOARD_PLAY_BEHAVIOR_PLAY_STOP:
     case SOUNDBOARD_PLAY_BEHAVIOR_PLAY_RESTART:
     case SOUNDBOARD_PLAY_BEHAVIOR_LOOP_STOP:
+    case SOUNDBOARD_PLAY_BEHAVIOR_PRESS_HOLD:
       if (self->media_stream)
         is_playing = gtk_media_stream_get_playing (self->media_stream);
       break;
@@ -104,6 +105,7 @@ get_media_stream (SoundboardPlayAction *self)
     case SOUNDBOARD_PLAY_BEHAVIOR_PLAY_STOP:
     case SOUNDBOARD_PLAY_BEHAVIOR_PLAY_RESTART:
     case SOUNDBOARD_PLAY_BEHAVIOR_LOOP_STOP:
+    case SOUNDBOARD_PLAY_BEHAVIOR_PRESS_HOLD:
       if (!self->media_stream)
         {
           self->media_stream = gtk_media_file_new_for_file (self->file);
@@ -206,6 +208,12 @@ soundboard_play_action_activate (BsAction *action)
     case SOUNDBOARD_PLAY_BEHAVIOR_PLAY_OVERLAP:
       gtk_media_stream_play (media_stream);
       break;
+
+    case SOUNDBOARD_PLAY_BEHAVIOR_PRESS_HOLD:
+      gtk_media_stream_set_loop (media_stream, TRUE);
+      gtk_media_stream_seek (media_stream, 0);
+      gtk_media_stream_play (media_stream);
+      break;
     }
 
   update_icon_from_state (self);
@@ -214,6 +222,25 @@ soundboard_play_action_activate (BsAction *action)
 static void
 soundboard_play_action_deactivate (BsAction *action)
 {
+  SoundboardPlayAction *self = SOUNDBOARD_PLAY_ACTION (action);
+  GtkMediaStream *media_stream;
+
+  media_stream = get_media_stream (self);
+
+  switch (self->behavior)
+    {
+    case SOUNDBOARD_PLAY_BEHAVIOR_PLAY_STOP:
+    case SOUNDBOARD_PLAY_BEHAVIOR_PLAY_RESTART:
+    case SOUNDBOARD_PLAY_BEHAVIOR_LOOP_STOP:
+    case SOUNDBOARD_PLAY_BEHAVIOR_PLAY_OVERLAP:
+      break;
+
+    case SOUNDBOARD_PLAY_BEHAVIOR_PRESS_HOLD:
+      gtk_media_stream_pause (media_stream);
+      break;
+    }
+
+  update_icon_from_state (self);
 }
 
 static BsIcon *

@@ -26,6 +26,7 @@
               <item translatable="yes">Play / Overlap</item>
               <item translatable="yes">Play / Restart</item>
               <item translatable="yes">Loop / Stop</item>
+              <item translatable="yes">Press &amp; Hold</item>
             </items>
           </object>
         </property>
