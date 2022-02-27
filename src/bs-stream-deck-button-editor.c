@@ -32,6 +32,7 @@ struct _BsStreamDeckButtonEditor
 {
   AdwBin parent_instance;
 
+  AdwBin *action_preferences_bin;
   AdwPreferencesGroup *actions_group;
   GtkColorChooser *background_color_button;
   GtkWidget *background_color_row;
@@ -136,13 +137,8 @@ update_action_preferences_group (BsStreamDeckButtonEditor *self)
 
   if (self->action_preferences != action_preferences)
     {
-      if (self->action_preferences)
-        adw_preferences_page_remove (self->button_preferences_page, self->action_preferences);
-
       self->action_preferences = action_preferences;
-
-      if (action_preferences)
-        adw_preferences_page_add (self->button_preferences_page, action_preferences);
+      adw_bin_set_child (self->action_preferences_bin, GTK_WIDGET (action_preferences));
     }
 }
 
@@ -370,6 +366,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-stream-deck-button-editor.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, action_preferences_bin);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, actions_group);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_button);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_row);

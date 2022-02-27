@@ -71,6 +71,15 @@
                           </object>
                         </child>
 
+                        <!-- Action preferences -->
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <child>
+                              <object class="AdwBin" id="action_preferences_bin" />
+                            </child>
+                          </object>
+                        </child>
+
                         <child>
                           <object class="AdwPreferencesGroup">
 
