@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+
+  <menu id="menu">
+    <section>
+      <submenu>
+        <attribute name="label" translatable="yes">Rename</attribute>
+        <item>
+          <attribute name="custom">rename</attribute>
+        </item>
+      </submenu>
+      <item>
+        <attribute name="label" translatable="yes">Move _up</attribute>
+        <attribute name="action">profile-row.move-up</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Move _down</attribute>
+        <attribute name="action">profile-row.move-down</attribute>
+      </item>
+    </section>
+  </menu>
+
+  <template class="BsProfileRow" parent="AdwActionRow">
+
+    <child type="suffix">
+      <object class="GtkButton" id="delete_button">
+        <property name="valign">center</property>
+        <property name="icon-name">user-trash-symbolic</property>
+        <property name="action-name">profile-row.delete</property>
+        <style>
+          <class name="flat" />
+        </style>
+      </object>
+    </child>
+
+    <child type="suffix">
+      <object class="GtkMenuButton" id="menu_button">
+        <property name="valign">center</property>
+        <property name="icon-name">view-more-symbolic</property>
+        <property name="popover">
+          <object class="GtkPopoverMenu">
+            <property name="menu-model">menu</property>
+            <child type="rename">
+              <object class="GtkBox">
+                <property name="margin-top">12</property>
+                <property name="spacing">6</property>
+
+                <child>
+                  <object class="GtkEntry" id="rename_entry">
+                    <signal name="activate" handler="on_rename_entry_activate_cb" object="BsProfileRow" swapped="no" />
+                    <signal name="notify::text" handler="on_rename_entry_text_changed_cb" object="BsProfileRow" swapped="no" />
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="rename_button">
+                    <property name="label" translatable="yes">Rename</property>
+                    <signal name="clicked" handler="on_rename_button_clicked_cb" object="BsProfileRow" swapped="no" />
+                    <style>
+                      <class name="suggested-action" />
+                    </style>
+                  </object>
+                </child>
+
+              </object>
+            </child>
+          </object>
+        </property>
+        <style>
+          <class name="flat" />
+        </style>
+      </object>
+    </child>
+
+  </template>
+</interface>

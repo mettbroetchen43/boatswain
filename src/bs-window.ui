@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
+
+  <menu id="profiles_menu">
+    <section>
+      <item>
+        <attribute name="custom">listbox</attribute>
+      </item>
+    </section>
+    <section>
+      <submenu>
+        <attribute name="label" translatable="yes">_New profile</attribute>
+        <item>
+          <attribute name="custom">new-profile</attribute>
+        </item>
+      </submenu>
+      <item>
+        <attribute name='label' translatable='yes'>Manage profiles…</attribute>
+        <attribute name='action'>win.manage-profiles</attribute>
+      </item>
+    </section>
+  </menu>
+
   <template class="BsWindow" parent="GtkApplicationWindow">
     <property name="title">Boatswain</property>
     <property name="default-width">1200</property>
@@ -8,6 +29,48 @@
 
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header_bar">
+
+        <child type="start">
+          <object class="GtkMenuButton" id="profiles_menu_button">
+            <property name="always-show-arrow">True</property>
+            <property name="popover">
+              <object class="GtkPopoverMenu">
+                <property name="menu-model">profiles_menu</property>
+                <child type="listbox">
+                  <object class="GtkListBox" id="profiles_listbox">
+                    <property name="selection-mode">none</property>
+                    <signal name="row-activated" handler="on_profiles_listbox_row_activated_cb" object="BsWindow" swapped="no" />
+                  </object>
+                </child>
+                <child type="new-profile">
+                  <object class="GtkBox">
+                    <property name="margin-top">12</property>
+                    <property name="spacing">6</property>
+
+                    <child>
+                      <object class="GtkEntry" id="new_profile_name_entry">
+                        <signal name="activate" handler="on_new_profile_name_entry_activate_cb" object="BsWindow" swapped="no" />
+                        <signal name="notify::text" handler="on_new_profile_name_entry_text_changed_cb" object="BsWindow" swapped="no" />
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkButton" id="create_profile_button">
+                        <property name="sensitive">False</property>
+                        <property name="label" translatable="yes">Create</property>
+                        <signal name="clicked" handler="on_create_profile_button_clicked_cb" object="BsWindow" swapped="no" />
+                        <style>
+                          <class name="suggested-action" />
+                        </style>
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </child>
 
         <property name="title-widget">
           <object class="GtkMenuButton" id="stream_deck_menubutton">
