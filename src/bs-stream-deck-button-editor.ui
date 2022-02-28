@@ -73,10 +73,8 @@
 
                         <!-- Action preferences -->
                         <child>
-                          <object class="AdwPreferencesGroup">
-                            <child>
-                              <object class="AdwBin" id="action_preferences_bin" />
-                            </child>
+                          <object class="AdwPreferencesGroup" id="action_preferences_group">
+                            <property name="visible">False</property>
                           </object>
                         </child>
 

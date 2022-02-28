@@ -181,7 +181,7 @@ bs_action_deactivate (BsAction *self)
     BS_ACTION_GET_CLASS (self)->deactivate (self);
 }
 
-AdwPreferencesGroup *
+GtkWidget *
 bs_action_get_preferences (BsAction *self)
 {
   g_return_val_if_fail (BS_IS_ACTION (self), NULL);

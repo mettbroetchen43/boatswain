@@ -148,7 +148,7 @@ soundboard_play_action_prefs_init (SoundboardPlayActionPrefs *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
-AdwPreferencesGroup *
+GtkWidget *
 soundboard_play_action_prefs_new (SoundboardPlayAction *play_action)
 {
   SoundboardPlayActionPrefs *self;
@@ -156,7 +156,7 @@ soundboard_play_action_prefs_new (SoundboardPlayAction *play_action)
   self = g_object_new (SOUNDBOARD_TYPE_PLAY_ACTION_PREFS, NULL);
   self->play_action = play_action;
 
-  return ADW_PREFERENCES_GROUP (self);
+  return GTK_WIDGET (self);
 }
 
 void

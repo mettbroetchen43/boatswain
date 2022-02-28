@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 #define SOUNDBOARD_TYPE_PLAY_ACTION_PREFS (soundboard_play_action_prefs_get_type())
 G_DECLARE_FINAL_TYPE (SoundboardPlayActionPrefs, soundboard_play_action_prefs, SOUNDBOARD, PLAY_ACTION_PREFS, AdwPreferencesGroup)
 
-AdwPreferencesGroup * soundboard_play_action_prefs_new (SoundboardPlayAction *play_action);
+GtkWidget * soundboard_play_action_prefs_new (SoundboardPlayAction *play_action);
 
 void soundboard_play_action_prefs_deserialize_settings (SoundboardPlayActionPrefs *self,
                                                         JsonObject                *settings);

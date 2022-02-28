@@ -39,7 +39,7 @@ struct _BsActionClass
   void (*activate) (BsAction *self);
   void (*deactivate) (BsAction *self);
 
-  AdwPreferencesGroup * (*get_preferences) (BsAction *self);
+  GtkWidget * (*get_preferences) (BsAction *self);
 
   JsonNode * (*serialize_settings) (BsAction *self);
   void (*deserialize_settings) (BsAction   *self,
@@ -51,6 +51,6 @@ void bs_action_activate (BsAction *self);
 void bs_action_deactivate (BsAction *self);
 const char * bs_action_get_id (BsAction *self);
 const char * bs_action_get_name (BsAction *self);
-AdwPreferencesGroup * bs_action_get_preferences (BsAction *self);
+GtkWidget * bs_action_get_preferences (BsAction *self);
 
 G_END_DECLS

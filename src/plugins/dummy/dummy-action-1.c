@@ -86,7 +86,7 @@ dummy_action_1_get_icon (BsAction *action)
   return self->icon;
 }
 
-static AdwPreferencesGroup *
+static GtkWidget *
 dummy_action_1_get_preferences (BsAction *action)
 {
   GtkWidget *group;
@@ -94,7 +94,7 @@ dummy_action_1_get_preferences (BsAction *action)
   group = adw_preferences_group_new ();
   adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (group), "Dummy Plugin 1");
 
-  return ADW_PREFERENCES_GROUP (group);
+  return group;
 }
 
 

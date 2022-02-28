@@ -35,7 +35,7 @@ struct _SoundboardPlayAction
   double volume;
 
   SoundboardPlayBehavior behavior;
-  AdwPreferencesGroup *prefs;
+  GtkWidget *prefs;
 };
 
 static void on_media_stream_ended_changed_cb (GtkMediaStream       *media_stream,
@@ -251,7 +251,7 @@ soundboard_play_action_get_icon (BsAction *action)
   return self->icon;
 }
 
-static AdwPreferencesGroup *
+static GtkWidget *
 soundboard_play_action_get_preferences (BsAction *action)
 {
   SoundboardPlayAction *self = SOUNDBOARD_PLAY_ACTION (action);

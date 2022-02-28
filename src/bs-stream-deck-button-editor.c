@@ -32,7 +32,7 @@ struct _BsStreamDeckButtonEditor
 {
   AdwBin parent_instance;
 
-  AdwBin *action_preferences_bin;
+  AdwPreferencesGroup *action_preferences_group;
   AdwPreferencesGroup *actions_group;
   GtkColorChooser *background_color_button;
   GtkWidget *background_color_row;
@@ -42,7 +42,7 @@ struct _BsStreamDeckButtonEditor
   GtkStack *stack;
 
   BsStreamDeckButton *button;
-  AdwPreferencesGroup *action_preferences;
+  GtkWidget *action_preferences;
 
   gulong custom_icon_changed_id;
   gulong icon_changed_id;
@@ -129,7 +129,7 @@ setup_button (BsStreamDeckButtonEditor *self)
 static void
 update_action_preferences_group (BsStreamDeckButtonEditor *self)
 {
-  AdwPreferencesGroup *action_preferences;
+  GtkWidget *action_preferences;
   BsAction *action;
 
   action = self->button ? bs_stream_deck_button_get_action (self->button) : NULL;
@@ -137,8 +137,16 @@ update_action_preferences_group (BsStreamDeckButtonEditor *self)
 
   if (self->action_preferences != action_preferences)
     {
+      if (self->action_preferences)
+        adw_preferences_group_remove (self->action_preferences_group, self->action_preferences);
+
       self->action_preferences = action_preferences;
-      adw_bin_set_child (self->action_preferences_bin, GTK_WIDGET (action_preferences));
+
+      if (action_preferences)
+        adw_preferences_group_add (self->action_preferences_group, action_preferences);
+
+      gtk_widget_set_visible (GTK_WIDGET (self->action_preferences_group),
+                              action_preferences != NULL);
     }
 }
 
@@ -366,7 +374,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-stream-deck-button-editor.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, action_preferences_bin);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, action_preferences_group);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, actions_group);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_button);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_row);
