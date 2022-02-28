@@ -70,6 +70,7 @@ update_button_texture (BsStreamDeckEditor *self,
   g_autoptr (GError) error = NULL;
   BsStreamDeckButton *stream_deck_button;
   BsIconRenderer *renderer;
+  GtkWidget *aspect_frame;
   GtkWidget *picture;
   BsIcon *icon;
   int position;
@@ -90,7 +91,8 @@ update_button_texture (BsStreamDeckEditor *self,
       return;
     }
 
-  picture = gtk_flow_box_child_get_child (child);
+  aspect_frame = gtk_flow_box_child_get_child (child);
+  picture = gtk_aspect_frame_get_child (GTK_ASPECT_FRAME (aspect_frame));
   gtk_picture_set_paintable (GTK_PICTURE (picture), GDK_PAINTABLE (texture));
 }
 
@@ -107,19 +109,23 @@ build_button_grid (BsStreamDeckEditor *self)
   for (i = 0; i < layout->n_buttons; i++)
     {
       BsStreamDeckButton *stream_deck_button;
+      GtkWidget *aspect_frame;
       GtkWidget *button;
       GtkWidget *picture;
 
       button = gtk_flow_box_child_new ();
       gtk_flow_box_append (self->buttons_flowbox, button);
 
+      aspect_frame = gtk_aspect_frame_new (0.5, 0.5, 1.0, FALSE);
+      gtk_widget_add_css_class (aspect_frame, "card");
+      gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (button), aspect_frame);
+
       picture = gtk_picture_new ();
-      gtk_widget_add_css_class (picture, "card");
       gtk_widget_set_halign (picture, GTK_ALIGN_CENTER);
       gtk_widget_set_overflow (picture, GTK_OVERFLOW_HIDDEN);
       gtk_picture_set_can_shrink (GTK_PICTURE (picture), FALSE);
       gtk_picture_set_keep_aspect_ratio (GTK_PICTURE (picture), FALSE);
-      gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (button), picture);
+      gtk_aspect_frame_set_child (GTK_ASPECT_FRAME (aspect_frame), picture);
 
       stream_deck_button = bs_stream_deck_get_button (self->stream_deck, i);
       g_signal_connect_object (stream_deck_button,
@@ -280,6 +286,8 @@ bs_stream_deck_editor_class_init (BsStreamDeckEditorClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, on_brightness_adjustment_value_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_flowbox_selected_children_changed_cb);
+
+  gtk_widget_class_set_css_name (widget_class, "streamdeckeditor");
 }
 
 static void
