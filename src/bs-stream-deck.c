@@ -1304,6 +1304,7 @@ bs_stream_deck_load_page (BsStreamDeck  *self,
 
   g_return_if_fail (BS_IS_STREAM_DECK (self));
   g_return_if_fail (BS_IS_PAGE (page));
+  g_return_if_fail (bs_page_get_profile (page) == self->active_profile);
 
   if (self->active_page == page)
     return;
