@@ -430,6 +430,7 @@ bs_stream_deck_button_editor_set_button (BsStreamDeckButtonEditor *self,
       gtk_stack_set_visible_child_name (self->stack, button ? "button" : "empty");
       update_action_preferences_group (self);
       setup_button (self);
+      update_icon (self);
 
       self->custom_icon_changed_id = g_signal_connect (button,
                                                        "notify::custom-icon",
