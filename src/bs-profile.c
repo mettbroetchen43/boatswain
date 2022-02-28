@@ -61,9 +61,11 @@ bs_profile_deserialize_property (JsonSerializable *serializable,
                                  GParamSpec       *pspec,
                                  JsonNode         *property_node)
 {
+  BsProfile *self = BS_PROFILE (serializable);
+
   if (g_strcmp0 (property_name, "page") == 0)
     {
-      g_value_set_object (value, bs_page_new_from_json (NULL, property_node));
+      g_value_set_object (value, bs_page_new_from_json (self, NULL, property_node));
       return TRUE;
     }
 
@@ -214,14 +216,19 @@ bs_profile_init (BsProfile *self)
 BsProfile *
 bs_profile_new_empty (void)
 {
+  g_autoptr (BsProfile) profile = NULL;
   g_autofree char *id = g_uuid_string_random ();
 
-  return g_object_new (BS_TYPE_PROFILE,
-                       "id", id,
-                       "name", _("Unnamed profile"),
-                       "page", bs_page_new_empty (NULL),
-                       NULL);
+  profile = g_object_new (BS_TYPE_PROFILE,
+                          "id", id,
+                          "name", _("Unnamed profile"),
+                          NULL);
 
+  g_object_set (profile,
+                "page", bs_page_new_empty (profile, NULL),
+                NULL);
+
+  return g_steal_pointer (&profile);
 }
 
 double
