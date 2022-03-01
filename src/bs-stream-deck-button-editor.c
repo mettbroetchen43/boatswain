@@ -21,6 +21,7 @@
 #include "bs-action.h"
 #include "bs-action-factory.h"
 #include "bs-application.h"
+#include "bs-empty-action.h"
 #include "bs-icon.h"
 #include "bs-stream-deck-button.h"
 #include "bs-stream-deck-button-editor.h"
@@ -39,6 +40,7 @@ struct _BsStreamDeckButtonEditor
   AdwPreferencesPage *button_preferences_page;
   GtkPicture *icon_picture;
   AdwLeaflet *leaflet;
+  GtkWidget *remove_action_button;
   GtkStack *stack;
 
   BsStreamDeckButton *button;
@@ -135,6 +137,9 @@ update_action_preferences_group (BsStreamDeckButtonEditor *self)
 
   action = self->button ? bs_stream_deck_button_get_action (self->button) : NULL;
   action_preferences = action ? bs_action_get_preferences (action) : NULL;
+
+  gtk_widget_set_visible (self->remove_action_button,
+                          action != NULL && !BS_IS_EMPTY_ACTION (action));
 
   if (self->action_preferences != action_preferences)
     {
@@ -306,6 +311,16 @@ on_go_previous_button_clicked_cb (GtkButton                *button,
 }
 
 static void
+on_remove_action_button_clicked_cb (GtkButton                *button,
+                                    BsStreamDeckButtonEditor *self)
+{
+  g_autoptr (BsAction) empty_action = NULL;
+
+  empty_action = bs_empty_action_new (self->button);
+  bs_stream_deck_button_set_action (self->button, empty_action);
+}
+
+static void
 on_select_action_row_activated_cb (GtkListBoxRow            *row,
                                    BsStreamDeckButtonEditor *self)
 {
@@ -393,11 +408,13 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, button_preferences_page);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, icon_picture);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, leaflet);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, remove_action_button);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, on_background_color_button_color_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_go_previous_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_remove_action_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_select_action_row_activated_cb);
 }
 
