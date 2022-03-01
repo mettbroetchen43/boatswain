@@ -1,0 +1,12 @@
+[Plugin]
+Name = Stream Deck
+Module = default
+Description = Standard Stream Deck actions
+Icon=dialpad-symbolic
+Authors = Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
+Copyright = Copyleft © The Boatswain maintainers
+Builtin = true
+License = GPL
+Loader = C
+Embedded = default_plugin_register_types
+Depends =

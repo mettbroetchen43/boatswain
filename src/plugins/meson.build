@@ -8,6 +8,7 @@ plugins_ldflags = []
 plugins_libs = []
 plugins_confs = []
 
+subdir('default')
 subdir('dummy')
 subdir('soundboard')
 
