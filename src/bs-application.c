@@ -95,9 +95,9 @@ on_request_background_called_cb (GObject      *object,
 }
 
 static void
-bs_application_show_about (GSimpleAction *action,
-                           GVariant      *parameter,
-                           gpointer       user_data)
+on_show_about_action_activated_cb (GSimpleAction *action,
+                                   GVariant      *parameter,
+                                   gpointer       user_data)
 {
   BsApplication *self = BS_APPLICATION (user_data);
   GtkAboutDialog *dialog;
@@ -243,7 +243,7 @@ bs_application_init (BsApplication *self)
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (quit_action));
 
   g_autoptr (GSimpleAction) about_action = g_simple_action_new ("about", NULL);
-  g_signal_connect (about_action, "activate", G_CALLBACK (bs_application_show_about), self);
+  g_signal_connect (about_action, "activate", G_CALLBACK (on_show_about_action_activated_cb), self);
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (about_action));
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (self),
