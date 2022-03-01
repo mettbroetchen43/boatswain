@@ -44,6 +44,7 @@ struct _BsStreamDeckButtonEditor
   BsStreamDeckButton *button;
   GtkWidget *action_preferences;
 
+  gulong action_changed_id;
   gulong custom_icon_changed_id;
   gulong icon_changed_id;
 };
@@ -202,6 +203,16 @@ on_action_factory_removed_cb (PeasExtensionSet *extension_set,
 }
 
 static void
+on_action_changed_cb (BsStreamDeckButton       *stream_deck_button,
+                      GParamSpec               *pspec,
+                      BsStreamDeckButtonEditor *self)
+{
+  update_action_preferences_group (self);
+  setup_button (self);
+  update_icon (self);
+}
+
+static void
 on_background_color_button_color_set_cb (GtkColorButton           *color_button,
                                          BsStreamDeckButtonEditor *self)
 {
@@ -311,6 +322,7 @@ bs_stream_deck_button_editor_finalize (GObject *object)
 {
   BsStreamDeckButtonEditor *self = (BsStreamDeckButtonEditor *)object;
 
+  g_clear_signal_handler (&self->action_changed_id, self->button);
   g_clear_signal_handler (&self->custom_icon_changed_id, self->button);
   g_clear_signal_handler (&self->icon_changed_id, self->button);
   g_clear_object (&self->button);
@@ -431,6 +443,11 @@ bs_stream_deck_button_editor_set_button (BsStreamDeckButtonEditor *self,
       update_action_preferences_group (self);
       setup_button (self);
       update_icon (self);
+
+      self->action_changed_id = g_signal_connect (button,
+                                                  "notify::action",
+                                                  G_CALLBACK (on_action_changed_cb),
+                                                  self);
 
       self->custom_icon_changed_id = g_signal_connect (button,
                                                        "notify::custom-icon",
