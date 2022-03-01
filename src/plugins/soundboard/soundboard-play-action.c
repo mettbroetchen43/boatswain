@@ -27,7 +27,6 @@ struct _SoundboardPlayAction
   BsAction parent_instance;
 
   GtkWidget *image;
-  BsIcon *icon;
 
   GFile *file;
   GQueue *media_streams_queue;
@@ -59,6 +58,7 @@ set_icon (SoundboardPlayAction *self,
 {
   g_autoptr (GtkIconPaintable) icon_paintable = NULL;
   GtkIconTheme *icon_theme;
+  BsIcon *icon;
 
   icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
   icon_paintable = gtk_icon_theme_lookup_icon (icon_theme,
@@ -69,7 +69,8 @@ set_icon (SoundboardPlayAction *self,
                                                GTK_TEXT_DIR_RTL,
                                                0);
 
-  bs_icon_set_paintable (self->icon, GDK_PAINTABLE (icon_paintable));
+  icon = bs_action_get_icon (BS_ACTION (self));
+  bs_icon_set_paintable (icon, GDK_PAINTABLE (icon_paintable));
 }
 
 static void
@@ -243,14 +244,6 @@ soundboard_play_action_deactivate (BsAction *action)
   update_icon_from_state (self);
 }
 
-static BsIcon *
-soundboard_play_action_get_icon (BsAction *action)
-{
-  SoundboardPlayAction *self = SOUNDBOARD_PLAY_ACTION (action);
-
-  return self->icon;
-}
-
 static GtkWidget *
 soundboard_play_action_get_preferences (BsAction *action)
 {
@@ -316,7 +309,6 @@ soundboard_play_action_finalize (GObject *object)
   g_queue_free_full (self->media_streams_queue, g_object_unref);
 
   g_clear_object (&self->media_stream);
-  g_clear_object (&self->icon);
   g_clear_object (&self->file);
 
   G_OBJECT_CLASS (soundboard_play_action_parent_class)->finalize (object);
@@ -332,7 +324,6 @@ soundboard_play_action_class_init (SoundboardPlayActionClass *klass)
 
   action_class->activate = soundboard_play_action_activate;
   action_class->deactivate = soundboard_play_action_deactivate;
-  action_class->get_icon = soundboard_play_action_get_icon;
   action_class->get_preferences = soundboard_play_action_get_preferences;
   action_class->serialize_settings = soundboard_play_action_serialize_settings;
   action_class->deserialize_settings = soundboard_play_action_deserialize_settings;
@@ -341,7 +332,6 @@ soundboard_play_action_class_init (SoundboardPlayActionClass *klass)
 static void
 soundboard_play_action_init (SoundboardPlayAction *self)
 {
-  self->icon = bs_icon_new_empty ();
   set_icon (self, "media-playback-start-symbolic");
 
   self->behavior = SOUNDBOARD_PLAY_BEHAVIOR_PLAY_STOP;
