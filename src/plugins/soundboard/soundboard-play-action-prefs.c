@@ -115,20 +115,9 @@ on_volume_adjustment_value_changed_cb (GtkAdjustment             *adjustment,
  */
 
 static void
-soundboard_play_action_prefs_finalize (GObject *object)
-{
-  SoundboardPlayActionPrefs *self = (SoundboardPlayActionPrefs *)object;
-
-  G_OBJECT_CLASS (soundboard_play_action_prefs_parent_class)->finalize (object);
-}
-
-static void
 soundboard_play_action_prefs_class_init (SoundboardPlayActionPrefsClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-  object_class->finalize = soundboard_play_action_prefs_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/plugins/soundboard/soundboard-play-action-prefs.ui");
 
