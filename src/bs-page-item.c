@@ -23,6 +23,7 @@
 #include "bs-application.h"
 #include "bs-enum-types.h"
 #include "bs-empty-action.h"
+#include "bs-page.h"
 #include "bs-page-item.h"
 
 #include <libpeas/peas.h>
@@ -31,22 +32,22 @@ struct _BsPageItem
 {
   GObject parent_instance;
 
+  BsPage *page;
+
   char *action;
   BsPageItemType item_type;
   char *factory;
   JsonNode *settings;
 };
 
-static void json_serializable_iface_init (JsonSerializableIface *iface);
-
-G_DEFINE_FINAL_TYPE_WITH_CODE (BsPageItem, bs_page_item, G_TYPE_OBJECT,
-                               G_IMPLEMENT_INTERFACE (JSON_TYPE_SERIALIZABLE, json_serializable_iface_init))
+G_DEFINE_FINAL_TYPE (BsPageItem, bs_page_item, G_TYPE_OBJECT)
 
 enum
 {
   PROP_0,
   PROP_ACTION,
   PROP_FACTORY,
+  PROP_PAGE,
   PROP_SETTINGS,
   PROP_TYPE,
   N_PROPS
@@ -94,86 +95,6 @@ get_action_factory (const char *factory_id)
 }
 
 
-
-/*
- * JsonSerializable interface
- */
-
-static gboolean
-bs_page_item_deserialize_property (JsonSerializable *serializable,
-                                   const char       *property_name,
-                                   GValue           *value,
-                                   GParamSpec       *pspec,
-                                   JsonNode         *property_node)
-{
-  if (g_strcmp0 (property_name, "settings") == 0)
-    {
-      g_value_set_boxed (value, property_node);
-      return TRUE;
-    }
-
-  return json_serializable_default_deserialize_property (serializable,
-                                                         property_name,
-                                                         value,
-                                                         pspec,
-                                                         property_node);
-}
-
-static JsonNode *
-bs_page_item_serialize_property (JsonSerializable *serializable,
-                                 const char       *property_name,
-                                 const GValue     *value,
-                                 GParamSpec       *pspec)
-{
-  if (g_strcmp0 (property_name, "settings") == 0)
-    return g_value_dup_boxed (value);
-
-  return json_serializable_default_serialize_property (serializable,
-                                                       property_name,
-                                                       value,
-                                                       pspec);
-}
-
-static GParamSpec **
-bs_page_item_list_properties (JsonSerializable *serializable,
-                              unsigned int     *n_properties)
-{
-  BsPageItem *self = BS_PAGE_ITEM (serializable);
-  g_autoptr (GPtrArray) props = NULL;
-
-  props = g_ptr_array_new ();
-
-  g_ptr_array_add (props, properties[PROP_TYPE]);
-
-  switch (self->item_type)
-    {
-    case BS_PAGE_ITEM_EMPTY:
-      break;
-
-    case BS_PAGE_ITEM_ACTION:
-      g_ptr_array_add (props, properties[PROP_ACTION]);
-      g_ptr_array_add (props, properties[PROP_FACTORY]);
-      g_ptr_array_add (props, properties[PROP_SETTINGS]);
-      break;
-    }
-
-  if (n_properties)
-    *n_properties = props->len;
-
-  g_ptr_array_add (props, NULL);
-
-  return (GParamSpec **) g_ptr_array_free (g_steal_pointer (&props), FALSE);
-}
-
-static void
-json_serializable_iface_init (JsonSerializableIface *iface)
-{
-  iface->list_properties = bs_page_item_list_properties;
-  iface->serialize_property = bs_page_item_serialize_property;
-  iface->deserialize_property = bs_page_item_deserialize_property;
-}
-
-
 /*
  * GObject overrides
  */
@@ -208,6 +129,10 @@ bs_page_item_get_property (GObject    *object,
       g_value_set_string (value, self->factory);
       break;
 
+    case PROP_PAGE:
+      g_value_set_object (value, self->page);
+      break;
+
     case PROP_SETTINGS:
       g_value_set_boxed (value, self->settings);
       break;
@@ -237,6 +162,11 @@ bs_page_item_set_property (GObject      *object,
 
     case PROP_FACTORY:
       bs_page_item_set_factory (self, g_value_get_string (value));
+      break;
+
+    case PROP_PAGE:
+      g_assert (self->page == NULL);
+      self->page = g_value_get_object (value);
       break;
 
     case PROP_SETTINGS:
@@ -269,6 +199,10 @@ bs_page_item_class_init (BsPageItemClass *klass)
                                                   "",
                                                   G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
+  properties[PROP_PAGE] = g_param_spec_object ("page", NULL, NULL,
+                                               BS_TYPE_PAGE,
+                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
   properties[PROP_SETTINGS] = g_param_spec_boxed ("settings", NULL, NULL,
                                                   JSON_TYPE_NODE,
                                                   G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
@@ -287,9 +221,96 @@ bs_page_item_init (BsPageItem *self)
 }
 
 BsPageItem *
-bs_page_item_new (void)
+bs_page_item_new (BsPage *page)
 {
-  return g_object_new (BS_TYPE_PAGE_ITEM, NULL);
+  return g_object_new (BS_TYPE_PAGE_ITEM,
+                       "page", page,
+                       NULL);
+}
+
+BsPageItem *
+bs_page_item_new_from_json (BsPage   *page,
+                            JsonNode *node)
+{
+  g_autoptr (GEnumClass) enum_class = NULL;
+  g_autoptr (BsPageItem) page_item = NULL;
+  GEnumValue *enum_value;
+  JsonObject *object;
+
+  if (!JSON_NODE_HOLDS_OBJECT (node))
+    {
+      g_warning ("JSON node is not an object");
+      return bs_page_item_new (page);
+    }
+
+  object = json_node_get_object (node);
+
+  enum_class = g_type_class_ref (BS_TYPE_PAGE_ITEM_TYPE);
+  enum_value = g_enum_get_value_by_nick (enum_class, json_object_get_string_member_with_default (object, "type", ""));
+  if (!enum_value)
+    enum_value = g_enum_get_value_by_name (enum_class, json_object_get_string_member_with_default (object, "type", ""));
+
+  page_item = g_object_new (BS_TYPE_PAGE_ITEM,
+                            "page", page,
+                            "type", enum_value ? enum_value->value : BS_PAGE_ITEM_EMPTY,
+                            "factory", json_object_get_string_member_with_default (object, "factory", NULL),
+                            "action", json_object_get_string_member_with_default (object, "action", NULL),
+                            "settings", json_object_get_member (object, "settings"),
+                            NULL);
+
+  return g_steal_pointer (&page_item);
+}
+
+JsonNode *
+bs_page_item_to_json (BsPageItem *self)
+{
+  g_autoptr (JsonBuilder) builder = NULL;
+  g_autoptr (GEnumClass) enum_class = NULL;
+  GEnumValue *enum_value;
+
+  g_return_val_if_fail (BS_IS_PAGE_ITEM (self), NULL);
+
+  builder = json_builder_new ();
+
+  json_builder_begin_object (builder);
+
+  enum_class = g_type_class_ref (BS_TYPE_PAGE_ITEM_TYPE);
+  enum_value = g_enum_get_value (enum_class, self->item_type);
+
+  switch (self->item_type)
+    {
+    case BS_PAGE_ITEM_EMPTY:
+      break;
+
+    case BS_PAGE_ITEM_ACTION:
+      json_builder_set_member_name (builder, "type");
+      json_builder_add_string_value (builder, enum_value->value_nick);
+
+      json_builder_set_member_name (builder, "factory");
+      json_builder_add_string_value (builder, self->factory);
+
+      json_builder_set_member_name (builder, "action");
+      json_builder_add_string_value (builder, self->action);
+
+      if (self->settings)
+        {
+          json_builder_set_member_name (builder, "settings");
+          json_builder_add_value (builder, self->settings);
+        }
+      break;
+    }
+
+  json_builder_end_object (builder);
+
+  return json_builder_get_root (builder);
+}
+
+BsPage *
+bs_page_item_get_page (BsPageItem *self)
+{
+  g_return_val_if_fail (BS_IS_PAGE_ITEM (self), NULL);
+
+  return self->page;
 }
 
 const char *

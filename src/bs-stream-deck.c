@@ -159,7 +159,7 @@ save_profiles (BsStreamDeck *self)
       g_autoptr (BsProfile) profile = NULL;
 
       profile = g_list_model_get_item (G_LIST_MODEL (self->profiles), i);
-      json_builder_add_value (builder, json_gobject_serialize (G_OBJECT (profile)));
+      json_builder_add_value (builder, bs_profile_to_json (profile));
     }
   json_builder_end_array (builder);
 
@@ -224,7 +224,7 @@ load_profiles (BsStreamDeck  *self)
       if (!profile_node)
         continue;
 
-      profile = BS_PROFILE (json_gobject_deserialize (BS_TYPE_PROFILE, profile_node));
+      profile = bs_profile_new_from_json (self, profile_node);
       g_list_store_append (self->profiles, profile);
 
       if (g_strcmp0 (active_profile_id, bs_profile_get_id (profile)) == 0)
@@ -237,7 +237,7 @@ load_profiles (BsStreamDeck  *self)
 out:
   if (!active_profile)
     {
-      active_profile = bs_profile_new_empty ();
+      active_profile = bs_profile_new_empty (self);
       bs_profile_set_name (active_profile, _("Default"));
       g_list_store_append (self->profiles, active_profile);
     }

@@ -76,7 +76,7 @@ append_new_profile (BsWindow *self)
   new_profile_name = g_strdup (gtk_editable_get_text (self->new_profile_name_entry));
   g_strstrip (new_profile_name);
 
-  new_profile = bs_profile_new_empty ();
+  new_profile = bs_profile_new_empty (self->current_stream_deck);
   bs_profile_set_name (new_profile, new_profile_name);
 
   profiles = bs_stream_deck_get_profiles (self->current_stream_deck);

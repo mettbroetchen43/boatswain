@@ -35,7 +35,14 @@ typedef enum
 #define BS_TYPE_PAGE_ITEM (bs_page_item_get_type())
 G_DECLARE_FINAL_TYPE (BsPageItem, bs_page_item, BS, PAGE_ITEM, GObject)
 
-BsPageItem *bs_page_item_new (void);
+BsPageItem * bs_page_item_new (BsPage *page);
+
+BsPageItem * bs_page_item_new_from_json (BsPage   *page,
+                                         JsonNode *node);
+
+JsonNode * bs_page_item_to_json (BsPageItem *self);
+
+BsPage * bs_page_item_get_page (BsPageItem *self);
 
 const char * bs_page_item_get_action (BsPageItem *self);
 void bs_page_item_set_action (BsPageItem *self,

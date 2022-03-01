@@ -93,7 +93,7 @@ bs_page_get_property (GObject    *object,
       break;
 
     case PROP_PROFILE:
-      g_value_set_object (value, self->parent);
+      g_value_set_object (value, self->profile);
       break;
 
     default:
@@ -190,9 +190,7 @@ bs_page_new_from_json (BsProfile *profile,
     {
       JsonNode *button_node = json_array_get_element (array, i);
 
-      g_ptr_array_insert (page->items,
-                          i,
-                          json_gobject_deserialize (BS_TYPE_PAGE_ITEM, button_node));
+      g_ptr_array_insert (page->items, i, bs_page_item_new_from_json (page, button_node));
     }
 
 out:
@@ -216,7 +214,7 @@ bs_page_to_json (BsPage *self)
       BsPageItem *item;
 
       item = g_ptr_array_index (self->items, i);
-      json_builder_add_value (builder, json_gobject_serialize (G_OBJECT (item)));
+      json_builder_add_value (builder, bs_page_item_to_json (item));
     }
 
   json_builder_end_array (builder);
@@ -249,7 +247,7 @@ bs_page_update_button (BsPage             *self,
 
   if (!item)
     {
-      item = bs_page_item_new ();
+      item = bs_page_item_new (self);
       g_ptr_array_insert (self->items, position, item);
     }
 
