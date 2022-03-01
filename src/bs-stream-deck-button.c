@@ -36,6 +36,7 @@ struct _BsStreamDeckButton
   gulong custom_size_changed_id;
   gulong action_contents_changed_id;
   gulong action_size_changed_id;
+  int inhibit_page_updates_counter;
   gboolean pressed;
 };
 
@@ -70,7 +71,7 @@ update_page (BsStreamDeckButton *self)
 {
   BsPage *page = bs_stream_deck_get_active_page (self->stream_deck);
 
-  if (page)
+  if (page && self->inhibit_page_updates_counter == 0)
     bs_page_update_button (page, self);
 }
 
@@ -398,4 +399,21 @@ bs_stream_deck_button_set_action (BsStreamDeckButton *self,
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_CUSTOM_ICON]);
 
   g_signal_emit (self, signals[ICON_CHANGED], 0, bs_stream_deck_button_get_icon (self));
+}
+
+void
+bs_stream_deck_button_inhibit_page_updates (BsStreamDeckButton *self)
+{
+  g_return_if_fail (BS_IS_STREAM_DECK_BUTTON (self));
+
+  self->inhibit_page_updates_counter++;
+}
+
+void
+bs_stream_deck_button_uninhibit_page_updates (BsStreamDeckButton *self)
+{
+  g_return_if_fail (BS_IS_STREAM_DECK_BUTTON (self));
+  g_return_if_fail (self->inhibit_page_updates_counter > 0);
+
+  self->inhibit_page_updates_counter--;
 }

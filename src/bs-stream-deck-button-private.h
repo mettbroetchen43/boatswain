@@ -33,4 +33,7 @@ BsStreamDeckButton * bs_stream_deck_button_new (BsStreamDeck *stream_deck,
 void bs_stream_deck_button_set_pressed (BsStreamDeckButton *self,
                                         gboolean            pressed);
 
+void bs_stream_deck_button_inhibit_page_updates (BsStreamDeckButton *self);
+void bs_stream_deck_button_uninhibit_page_updates (BsStreamDeckButton *self);
+
 G_END_DECLS

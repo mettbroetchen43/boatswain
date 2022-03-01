@@ -1309,11 +1309,7 @@ bs_stream_deck_load_page (BsStreamDeck  *self,
   if (self->active_page == page)
     return;
 
-  /*
-   * Set the active page to NULL while loading it to avoid updating the page
-   * again during loading.
-   */
-  self->active_page = NULL;
+  self->active_page = page;
 
   for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
     {
@@ -1332,12 +1328,14 @@ bs_stream_deck_load_page (BsStreamDeck  *self,
           continue;
         }
 
+      bs_stream_deck_button_inhibit_page_updates (stream_deck_button);
+
       bs_stream_deck_button_set_action (stream_deck_button, action);
       bs_stream_deck_button_set_custom_icon (stream_deck_button, custom_icon, &error);
 
       if (error)
         g_warning ("Failed to set custom icon: %s", error->message);
-    }
 
-  self->active_page = page;
+      bs_stream_deck_button_uninhibit_page_updates (stream_deck_button);
+    }
 }
