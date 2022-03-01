@@ -43,6 +43,7 @@ struct _BsActionFactoryInterface
 
   GList * (*list_actions) (BsActionFactory *self);
   BsAction * (*create_action) (BsActionFactory    *self,
+                               BsStreamDeckButton *stream_deck_button,
                                const BsActionInfo *action_info);
 };
 
@@ -52,6 +53,7 @@ const BsActionInfo * bs_action_factory_get_info (BsActionFactory *self,
                                                  const char      *id);
 
 BsAction * bs_action_factory_create_action (BsActionFactory    *self,
+                                            BsStreamDeckButton *stream_deck_button,
                                             const BsActionInfo *action_info);
 
 G_END_DECLS

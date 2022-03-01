@@ -274,11 +274,11 @@ bs_page_update_button (BsPage             *self,
 }
 
 gboolean
-bs_page_realize (BsPage    *self,
-                 uint8_t    position,
-                 BsIcon   **out_custom_icon,
-                 BsAction **out_action,
-                 GError   **error)
+bs_page_realize (BsPage              *self,
+                 BsStreamDeckButton  *stream_deck_button,
+                 BsIcon             **out_custom_icon,
+                 BsAction           **out_action,
+                 GError             **error)
 {
   BsPageItem *item;
 
@@ -286,14 +286,18 @@ bs_page_realize (BsPage    *self,
   g_return_val_if_fail (out_custom_icon != NULL, FALSE);
   g_return_val_if_fail (out_action != NULL, FALSE);
 
-  item = get_item (self, position);
+  item = get_item (self, bs_stream_deck_button_get_position (stream_deck_button));
 
   if (!item)
     {
       *out_custom_icon = NULL;
-      *out_action = bs_empty_action_new ();
+      *out_action = bs_empty_action_new (stream_deck_button);
       return FALSE;
     }
 
-  return bs_page_item_realize (item, out_custom_icon, out_action, error);
+  return bs_page_item_realize (item,
+                               stream_deck_button,
+                               out_custom_icon,
+                               out_action,
+                               error);
 }

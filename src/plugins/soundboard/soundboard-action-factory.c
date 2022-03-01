@@ -58,10 +58,11 @@ soundboard_action_factory_list_actions (BsActionFactory *action_factory)
 
 static BsAction *
 soundboard_action_factory_create_action (BsActionFactory    *action_factory,
+                                         BsStreamDeckButton *stream_deck_button,
                                          const BsActionInfo *action_info)
 {
   if (g_strcmp0 (action_info->id, "soundboard-play-action") == 0)
-    return soundboard_play_action_new ();
+    return soundboard_play_action_new (stream_deck_button);
 
   return NULL;
 }

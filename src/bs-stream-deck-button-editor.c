@@ -173,7 +173,7 @@ on_action_row_activated_cb (GtkListBoxRow            *row,
 
   action_factory = g_object_get_data (G_OBJECT (row), "factory");
   info = g_object_get_data (G_OBJECT (row), "action-info");
-  action = bs_action_factory_create_action (action_factory, info);
+  action = bs_action_factory_create_action (action_factory, self->button, info);
 
   bs_stream_deck_button_set_action (self->button, action);
 

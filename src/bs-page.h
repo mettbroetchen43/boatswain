@@ -44,10 +44,10 @@ BsProfile * bs_page_get_profile (BsPage *self);
 void bs_page_update_button (BsPage             *self,
                             BsStreamDeckButton *button);
 
-gboolean bs_page_realize (BsPage    *self,
-                          uint8_t    position,
-                          BsIcon   **out_custom_icon,
-                          BsAction **out_action,
-                          GError   **error);
+gboolean bs_page_realize (BsPage              *self,
+                          BsStreamDeckButton  *stream_deck_button,
+                          BsIcon             **out_custom_icon,
+                          BsAction           **out_action,
+                          GError             **error);
 
 G_END_DECLS

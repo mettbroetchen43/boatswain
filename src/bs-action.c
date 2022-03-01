@@ -21,6 +21,7 @@
 
 #include "bs-action-private.h"
 #include "bs-icon.h"
+#include "bs-stream-deck-button.h"
 
 typedef struct
 {
@@ -28,9 +29,19 @@ typedef struct
   char *name;
   BsActionFactory *factory;
   BsIcon *icon;
+  BsStreamDeckButton *stream_deck_button;
 } BsActionPrivate;
 
 G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (BsAction, bs_action, G_TYPE_OBJECT)
+
+enum
+{
+  PROP_0,
+  PROP_STREAM_DECK_BUTTON,
+  N_PROPS,
+};
+
+static GParamSpec* properties[N_PROPS];
 
 
 /*
@@ -63,13 +74,62 @@ bs_action_finalize (GObject *object)
 }
 
 static void
+bs_action_get_property (GObject    *object,
+                        guint       prop_id,
+                        GValue     *value,
+                        GParamSpec *pspec)
+{
+  BsAction *self = BS_ACTION (object);
+  BsActionPrivate *priv = bs_action_get_instance_private (self);
+
+  switch (prop_id)
+    {
+    case PROP_STREAM_DECK_BUTTON:
+      g_value_set_object (value, priv->stream_deck_button);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+bs_action_set_property (GObject      *object,
+                        guint         prop_id,
+                        const GValue *value,
+                        GParamSpec   *pspec)
+{
+  BsAction *self = BS_ACTION (object);
+  BsActionPrivate *priv = bs_action_get_instance_private (self);
+
+  switch (prop_id)
+    {
+    case PROP_STREAM_DECK_BUTTON:
+      g_assert (priv->stream_deck_button == NULL);
+      priv->stream_deck_button = g_value_get_object (value);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
 bs_action_class_init (BsActionClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = bs_action_finalize;
+  object_class->get_property = bs_action_get_property;
+  object_class->set_property = bs_action_set_property;
 
   klass->get_icon = bs_action_real_get_icon;
+
+  properties[PROP_STREAM_DECK_BUTTON] = g_param_spec_object ("stream-deck-button", NULL, NULL,
+                                                             BS_TYPE_STREAM_DECK_BUTTON,
+                                                             G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
 static void
@@ -226,4 +286,15 @@ bs_action_deserialize_settings (BsAction   *self,
 
   if (BS_ACTION_GET_CLASS (self)->deserialize_settings)
     BS_ACTION_GET_CLASS (self)->deserialize_settings (self, settings);
+}
+
+BsStreamDeckButton *
+bs_action_get_stream_deck_button (BsAction *self)
+{
+  BsActionPrivate *priv;
+
+  g_return_val_if_fail (BS_IS_ACTION (self), NULL);
+
+  priv = bs_action_get_instance_private (self);
+  return priv->stream_deck_button;
 }

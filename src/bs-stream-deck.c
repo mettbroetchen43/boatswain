@@ -1322,7 +1322,9 @@ bs_stream_deck_load_page (BsStreamDeck  *self,
       g_autoptr (BsIcon) custom_icon = NULL;
       g_autoptr (GError) error = NULL;
 
-      bs_page_realize (page, i, &custom_icon, &action, &error);
+      stream_deck_button = g_ptr_array_index (self->buttons, i);
+
+      bs_page_realize (page, stream_deck_button, &custom_icon, &action, &error);
 
       if (error)
         {
@@ -1330,7 +1332,6 @@ bs_stream_deck_load_page (BsStreamDeck  *self,
           continue;
         }
 
-      stream_deck_button = g_ptr_array_index (self->buttons, i);
       bs_stream_deck_button_set_action (stream_deck_button, action);
       bs_stream_deck_button_set_custom_icon (stream_deck_button, custom_icon, &error);
 

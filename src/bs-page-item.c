@@ -402,10 +402,11 @@ bs_page_item_set_settings (BsPageItem *self,
 }
 
 gboolean
-bs_page_item_realize (BsPageItem  *self,
-                      BsIcon       **out_custom_icon,
-                      BsAction     **out_action,
-                      GError       **error)
+bs_page_item_realize (BsPageItem          *self,
+                      BsStreamDeckButton  *stream_deck_button,
+                      BsIcon             **out_custom_icon,
+                      BsAction           **out_action,
+                      GError             **error)
 {
   const BsActionInfo *action_info;
   BsActionFactory *action_factory;
@@ -418,7 +419,7 @@ bs_page_item_realize (BsPageItem  *self,
     {
     case BS_PAGE_ITEM_EMPTY:
       *out_custom_icon = NULL; // TODO
-      *out_action = bs_empty_action_new ();
+      *out_action = bs_empty_action_new (stream_deck_button);
       break;
 
     case BS_PAGE_ITEM_ACTION:
@@ -435,7 +436,9 @@ bs_page_item_realize (BsPageItem  *self,
 
       action_info = bs_action_factory_get_info (action_factory, self->action);
       *out_custom_icon = NULL; // TODO
-      *out_action = bs_action_factory_create_action (action_factory, action_info);
+      *out_action = bs_action_factory_create_action (action_factory,
+                                                     stream_deck_button,
+                                                     action_info);
       if (self->settings)
         bs_action_deserialize_settings (*out_action, json_node_get_object (self->settings));
       break;

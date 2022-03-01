@@ -62,6 +62,7 @@ bs_action_factory_get_info (BsActionFactory *self,
 
 BsAction *
 bs_action_factory_create_action (BsActionFactory    *self,
+                                 BsStreamDeckButton *stream_deck_button,
                                  const BsActionInfo *action_info)
 {
   BsAction *action;
@@ -69,7 +70,9 @@ bs_action_factory_create_action (BsActionFactory    *self,
   g_return_val_if_fail (BS_IS_ACTION_FACTORY (self), NULL);
   g_return_val_if_fail (BS_ACTION_FACTORY_GET_IFACE (self)->create_action, NULL);
 
-  action = BS_ACTION_FACTORY_GET_IFACE (self)->create_action (self, action_info);
+  action = BS_ACTION_FACTORY_GET_IFACE (self)->create_action (self,
+                                                              stream_deck_button,
+                                                              action_info);
 
   if (!action)
     return NULL;

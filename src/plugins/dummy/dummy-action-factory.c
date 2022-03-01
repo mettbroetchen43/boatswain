@@ -50,6 +50,7 @@ dummy_action_factory_list_actions (BsActionFactory *action_factory)
 
 static BsAction *
 dummy_action_factory_create_action (BsActionFactory    *action_factory,
+                                    BsStreamDeckButton *stream_deck_button,
                                     const BsActionInfo *action_info)
 {
   size_t i;
@@ -57,7 +58,7 @@ dummy_action_factory_create_action (BsActionFactory    *action_factory,
   for (i = 0; i < G_N_ELEMENTS (actions); i++)
     {
       if (action_info == &actions[i])
-        return g_object_new (DUMMY_TYPE_ACTION_1, NULL);
+        return g_object_new (DUMMY_TYPE_ACTION_1, "stream-deck-button", stream_deck_button, NULL);
     }
 
   return NULL;

@@ -60,9 +60,10 @@ JsonNode * bs_page_item_get_settings (BsPageItem *self);
 void bs_page_item_set_settings (BsPageItem *self,
                                 JsonNode   *settings);
 
-gboolean bs_page_item_realize (BsPageItem  *self,
-                               BsIcon     **out_custom_icon,
-                               BsAction   **out_action,
-                               GError     **error);
+gboolean bs_page_item_realize (BsPageItem          *self,
+                               BsStreamDeckButton  *stream_deck_button,
+                               BsIcon             **out_custom_icon,
+                               BsAction           **out_action,
+                               GError             **error);
 
 G_END_DECLS
