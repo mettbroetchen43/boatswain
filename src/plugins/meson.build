@@ -9,7 +9,6 @@ plugins_libs = []
 plugins_confs = []
 
 subdir('default')
-subdir('dummy')
 subdir('soundboard')
 
 plugins_lib = static_library(
