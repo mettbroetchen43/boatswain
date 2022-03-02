@@ -222,6 +222,14 @@ bs_page_to_json (BsPage *self)
   return json_builder_get_root (builder);
 }
 
+BsPage *
+bs_page_get_parent (BsPage *self)
+{
+  g_return_val_if_fail (BS_IS_PAGE (self), NULL);
+
+  return self->parent;
+}
+
 BsProfile *
 bs_page_get_profile (BsPage *self)
 {

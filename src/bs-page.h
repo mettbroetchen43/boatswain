@@ -39,6 +39,8 @@ BsPage * bs_page_new_from_json (BsProfile *profile,
 
 JsonNode * bs_page_to_json (BsPage *self);
 
+BsPage * bs_page_get_parent (BsPage *self);
+
 BsProfile * bs_page_get_profile (BsPage *self);
 
 void bs_page_update_button (BsPage             *self,

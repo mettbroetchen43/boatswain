@@ -85,4 +85,11 @@ BsProfile * bs_stream_deck_get_active_profile (BsStreamDeck *self);
 void bs_stream_deck_load_profile (BsStreamDeck *self,
                                   BsProfile    *profile);
 
+BsPage * bs_stream_deck_get_active_page (BsStreamDeck *self);
+
+void bs_stream_deck_push_page (BsStreamDeck  *self,
+                               BsPage        *page);
+
+void bs_stream_deck_pop_page (BsStreamDeck *self);
+
 G_END_DECLS

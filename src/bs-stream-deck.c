@@ -66,7 +66,7 @@ struct _BsStreamDeck
   BsIconRenderer *icon_renderer;
   GListStore *profiles;
   BsProfile *active_profile;
-  BsPage *active_page;
+  GQueue *active_pages;
 
   const StreamDeckModelInfo *model_info;
   GUsbDevice *device;
@@ -134,15 +134,18 @@ save_profiles (BsStreamDeck *self)
   g_autoptr (GError) error = NULL;
   g_autofree char *profile_path = NULL;
   g_autofree char *json_str = NULL;
+  BsPage *active_page;
   unsigned int i;
 
   /* Update the active profile */
   bs_profile_set_brightness (self->active_profile, self->brightness);
 
+  active_page = bs_stream_deck_get_active_page (self);
+
   for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
     {
       BsStreamDeckButton *stream_deck_button = g_ptr_array_index (self->buttons, i);
-      bs_page_update_button (self->active_page, stream_deck_button);
+      bs_page_update_button (active_page, stream_deck_button);
     }
 
   builder = json_builder_new ();
@@ -243,6 +246,43 @@ out:
     }
 
   bs_stream_deck_load_profile (self, active_profile);
+}
+
+static void
+load_active_page (BsStreamDeck *self)
+{
+  BsPage *active_page;
+  uint8_t i;
+
+  active_page = bs_stream_deck_get_active_page (self);
+
+  for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
+    {
+      BsStreamDeckButton *stream_deck_button;
+      g_autoptr (BsAction) action = NULL;
+      g_autoptr (BsIcon) custom_icon = NULL;
+      g_autoptr (GError) error = NULL;
+
+      stream_deck_button = g_ptr_array_index (self->buttons, i);
+
+      bs_page_realize (active_page, stream_deck_button, &custom_icon, &action, &error);
+
+      if (error)
+        {
+          g_warning ("Failed to construct action and icon from page: %s", error->message);
+          continue;
+        }
+
+      bs_stream_deck_button_inhibit_page_updates (stream_deck_button);
+
+      bs_stream_deck_button_set_action (stream_deck_button, action);
+      bs_stream_deck_button_set_custom_icon (stream_deck_button, custom_icon, &error);
+
+      if (error)
+        g_warning ("Failed to set custom icon: %s", error->message);
+
+      bs_stream_deck_button_uninhibit_page_updates (stream_deck_button);
+    }
 }
 
 static inline uint8_t
@@ -961,6 +1001,7 @@ bs_stream_deck_finalize (GObject *object)
   g_clear_pointer (&self->serial_number, g_free);
   g_clear_pointer (&self->buttons, g_ptr_array_unref);
   g_clear_pointer (&self->handle, hid_close);
+  g_queue_free_full (self->active_pages, g_object_unref);
   g_clear_object (&self->device);
   g_clear_object (&self->profiles);
 
@@ -1078,6 +1119,7 @@ bs_stream_deck_init (BsStreamDeck *self)
 {
   self->buttons = g_ptr_array_new_with_free_func (g_object_unref);
   self->profiles = g_list_store_new (BS_TYPE_PROFILE);
+  self->active_pages = g_queue_new ();
 }
 
 BsStreamDeck *
@@ -1280,10 +1322,12 @@ bs_stream_deck_load_profile (BsStreamDeck *self,
   if (self->active_profile == profile)
     return;
 
+  g_queue_clear_full (self->active_pages, g_object_unref);
+
   self->active_profile = profile;
 
   bs_stream_deck_set_brightness (self, bs_profile_get_brightness (profile));
-  bs_stream_deck_load_page (self, bs_profile_get_root_page (profile));
+  bs_stream_deck_push_page (self, bs_profile_get_root_page (profile));
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ACTIVE_PROFILE]);
 }
@@ -1293,49 +1337,37 @@ bs_stream_deck_get_active_page (BsStreamDeck *self)
 {
   g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
 
-  return self->active_page;
+  return g_queue_peek_head (self->active_pages);
 }
 
 void
-bs_stream_deck_load_page (BsStreamDeck  *self,
+bs_stream_deck_push_page (BsStreamDeck  *self,
                           BsPage        *page)
 {
-  uint8_t i;
-
   g_return_if_fail (BS_IS_STREAM_DECK (self));
   g_return_if_fail (BS_IS_PAGE (page));
   g_return_if_fail (bs_page_get_profile (page) == self->active_profile);
+  g_return_if_fail (g_queue_find (self->active_pages, page) == NULL);
+  g_return_if_fail (bs_page_get_parent (page) == bs_stream_deck_get_active_page (self));
 
-  if (self->active_page == page)
-    return;
+  g_queue_push_head (self->active_pages, g_object_ref (page));
 
-  self->active_page = page;
+  load_active_page (self);
+}
+
+void
+bs_stream_deck_pop_page (BsStreamDeck *self)
+{
+  g_autoptr (BsPage) page = NULL;
+  unsigned int i;
+
+  g_return_if_fail (BS_IS_STREAM_DECK (self));
+  g_return_if_fail (g_queue_get_length (self->active_pages) > 1);
+
+  page = g_queue_pop_head (self->active_pages);
 
   for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
-    {
-      BsStreamDeckButton *stream_deck_button;
-      g_autoptr (BsAction) action = NULL;
-      g_autoptr (BsIcon) custom_icon = NULL;
-      g_autoptr (GError) error = NULL;
+    bs_page_update_button (page, g_ptr_array_index (self->buttons, i));
 
-      stream_deck_button = g_ptr_array_index (self->buttons, i);
-
-      bs_page_realize (page, stream_deck_button, &custom_icon, &action, &error);
-
-      if (error)
-        {
-          g_warning ("Failed to construct action and icon from page: %s", error->message);
-          continue;
-        }
-
-      bs_stream_deck_button_inhibit_page_updates (stream_deck_button);
-
-      bs_stream_deck_button_set_action (stream_deck_button, action);
-      bs_stream_deck_button_set_custom_icon (stream_deck_button, custom_icon, &error);
-
-      if (error)
-        g_warning ("Failed to set custom icon: %s", error->message);
-
-      bs_stream_deck_button_uninhibit_page_updates (stream_deck_button);
-    }
+  load_active_page (self);
 }
