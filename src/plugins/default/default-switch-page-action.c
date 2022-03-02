@@ -41,7 +41,7 @@ G_DEFINE_FINAL_TYPE (DefaultSwitchPageAction, default_switch_page_action, BS_TYP
  */
 
 static gboolean
-is_move_up_action (DefaultSwitchPageAction *self)
+is_enter_folder_action (DefaultSwitchPageAction *self)
 {
   BsStreamDeckButton *stream_deck_button;
   BsStreamDeck *stream_deck;
@@ -51,8 +51,8 @@ is_move_up_action (DefaultSwitchPageAction *self)
   stream_deck = bs_stream_deck_button_get_stream_deck (stream_deck_button);
   active_page = bs_stream_deck_get_active_page (stream_deck);
 
-  return bs_stream_deck_button_get_position (stream_deck_button) == 0 &&
-         bs_page_get_parent (active_page) != NULL;
+  return bs_stream_deck_button_get_position (stream_deck_button) != 0 ||
+         bs_page_get_parent (active_page) == NULL;
 }
 
 static void
@@ -90,7 +90,7 @@ default_switch_page_action_activate (BsAction *action)
   stream_deck_button = bs_action_get_stream_deck_button (BS_ACTION (self));
   stream_deck = bs_stream_deck_button_get_stream_deck (stream_deck_button);
 
-  if (!is_move_up_action (self))
+  if (is_enter_folder_action (self))
     bs_stream_deck_push_page (stream_deck, self->page);
   else
     bs_stream_deck_pop_page (stream_deck);
@@ -130,14 +130,10 @@ default_switch_page_action_deserialize_settings (BsAction   *action,
 
   if (json_object_has_member (object, "page"))
     {
+      g_clear_object (&self->page);
       self->page = bs_page_new_from_json (bs_stream_deck_get_active_profile (stream_deck),
                                           bs_stream_deck_get_active_page (stream_deck),
                                           json_object_get_member (object, "page"));
-    }
-  else if (!is_move_up_action (self))
-    {
-      self->page = bs_page_new_empty (bs_stream_deck_get_active_profile (stream_deck),
-                                      bs_stream_deck_get_active_page (stream_deck));
     }
 }
 
@@ -167,10 +163,23 @@ default_switch_page_action_constructed (GObject *object)
   icon = bs_action_get_icon (BS_ACTION (self));
   bs_icon_set_margin (icon, 18);
 
-  if (is_move_up_action (self))
-    set_icon (self, "go-up-symbolic");
+  if (is_enter_folder_action (self))
+    {
+      BsStreamDeckButton *stream_deck_button;
+      BsStreamDeck *stream_deck;
+
+      stream_deck_button = bs_action_get_stream_deck_button (BS_ACTION (self));
+      stream_deck = bs_stream_deck_button_get_stream_deck (stream_deck_button);
+
+      set_icon (self, "folder-symbolic");
+
+      self->page = bs_page_new_empty (bs_stream_deck_get_active_profile (stream_deck),
+                                      bs_stream_deck_get_active_page (stream_deck));
+    }
   else
-    set_icon (self, "folder-symbolic");
+    {
+      set_icon (self, "go-up-symbolic");
+    }
 }
 
 static void
