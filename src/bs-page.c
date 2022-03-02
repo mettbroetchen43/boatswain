@@ -63,6 +63,31 @@ get_item (BsPage       *self,
   return g_ptr_array_index (self->items, position);
 }
 
+static void
+ensure_first_subpage_item_is_move_up (BsPage *self)
+{
+  BsPageItem *item;
+
+  if (!self->parent)
+    return;
+
+  item = get_item (self, 0);
+
+  if (!item ||
+      bs_page_item_get_item_type (item) != BS_PAGE_ITEM_ACTION ||
+      g_strcmp0 (bs_page_item_get_factory (item), "default") != 0 ||
+      g_strcmp0 (bs_page_item_get_action (item), "default-switch-page-action") != 0)
+    {
+      item = bs_page_item_new (self);
+      bs_page_item_set_item_type (item, BS_PAGE_ITEM_ACTION);
+      bs_page_item_set_factory (item, "default");
+      bs_page_item_set_action (item, "default-switch-page-action");
+      bs_page_item_set_settings (item, NULL);
+
+      g_ptr_array_insert (self->items, 0, item);
+    }
+}
+
 
 /*
  * GObject overrides
@@ -162,10 +187,16 @@ BsPage *
 bs_page_new_empty (BsProfile *profile,
                    BsPage    *parent)
 {
-  return g_object_new (BS_TYPE_PAGE,
+  g_autoptr (BsPage) page = NULL;
+
+  page = g_object_new (BS_TYPE_PAGE,
                        "profile", profile,
                        "parent", parent,
                        NULL);
+
+  ensure_first_subpage_item_is_move_up (page);
+
+  return g_steal_pointer (&page);
 }
 
 BsPage *
@@ -177,7 +208,10 @@ bs_page_new_from_json (BsProfile *profile,
   JsonArray *array;
   guint i;
 
-  page = bs_page_new_empty (profile, parent);
+  page = g_object_new (BS_TYPE_PAGE,
+                       "profile", profile,
+                       "parent", parent,
+                       NULL);
 
   if (!JSON_NODE_HOLDS_ARRAY (node))
     {
@@ -194,6 +228,8 @@ bs_page_new_from_json (BsProfile *profile,
     }
 
 out:
+  ensure_first_subpage_item_is_move_up (page);
+
   return g_steal_pointer (&page);
 }
 
