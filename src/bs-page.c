@@ -275,8 +275,8 @@ bs_page_get_profile (BsPage *self)
 }
 
 void
-bs_page_update_button (BsPage             *self,
-                       BsStreamDeckButton *button)
+bs_page_update_item_from_button (BsPage             *self,
+                                 BsStreamDeckButton *button)
 {
   BsPageItem *item;
   BsAction *action;

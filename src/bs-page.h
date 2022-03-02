@@ -43,8 +43,8 @@ BsPage * bs_page_get_parent (BsPage *self);
 
 BsProfile * bs_page_get_profile (BsPage *self);
 
-void bs_page_update_button (BsPage             *self,
-                            BsStreamDeckButton *button);
+void bs_page_update_item_from_button (BsPage             *self,
+                                      BsStreamDeckButton *button);
 
 gboolean bs_page_realize (BsPage              *self,
                           BsStreamDeckButton  *stream_deck_button,

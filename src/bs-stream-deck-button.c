@@ -72,7 +72,7 @@ update_page (BsStreamDeckButton *self)
   BsPage *page = bs_stream_deck_get_active_page (self->stream_deck);
 
   if (page && self->inhibit_page_updates_counter == 0)
-    bs_page_update_button (page, self);
+    bs_page_update_item_from_button (page, self);
 }
 
 static void

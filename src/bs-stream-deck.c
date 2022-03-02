@@ -145,7 +145,7 @@ save_profiles (BsStreamDeck *self)
   for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
     {
       BsStreamDeckButton *stream_deck_button = g_ptr_array_index (self->buttons, i);
-      bs_page_update_button (active_page, stream_deck_button);
+      bs_page_update_item_from_button (active_page, stream_deck_button);
     }
 
   builder = json_builder_new ();
@@ -1367,7 +1367,7 @@ bs_stream_deck_pop_page (BsStreamDeck *self)
   page = g_queue_pop_head (self->active_pages);
 
   for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
-    bs_page_update_button (page, g_ptr_array_index (self->buttons, i));
+    bs_page_update_item_from_button (page, g_ptr_array_index (self->buttons, i));
 
   load_active_page (self);
 }
