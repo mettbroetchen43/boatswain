@@ -21,6 +21,7 @@
 #include "bs-action-factory.h"
 #include "default-action-factory.h"
 #include "default-brightness-action.h"
+#include "default-switch-page-action.h"
 #include "default-switch-profile-action.h"
 
 #include <glib/gi18n.h>
@@ -36,6 +37,12 @@ G_DEFINE_FINAL_TYPE_WITH_CODE (DefaultActionFactory, default_action_factory, PEA
                                G_IMPLEMENT_INTERFACE (BS_TYPE_ACTION_FACTORY, bs_action_factory_iface_init));
 
 static const BsActionInfo actions[] = {
+  {
+    .id = "default-switch-page-action",
+    .icon_name = "folder-symbolic",
+    .name = N_("Folder"),
+    .description = NULL,
+  },
   {
     .id = "default-switch-profile-action",
     .icon_name = "view-list-bullet-symbolic",
@@ -71,6 +78,8 @@ default_action_factory_create_action (BsActionFactory    *action_factory,
     return default_switch_profile_action_new (stream_deck_button);
   else if (g_strcmp0 (action_info->id, "default-brightness-action") == 0)
     return default_brightness_action_new (stream_deck_button);
+  else if (g_strcmp0 (action_info->id, "default-switch-page-action") == 0)
+    return default_switch_page_action_new (stream_deck_button);
 
   return NULL;
 }

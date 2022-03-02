@@ -11,6 +11,7 @@ plugins_sources += files(
   'default-action-factory.c',
   'default-brightness-action.c',
   'default-plugin.c',
+  'default-switch-page-action.c',
   'default-switch-profile-action.c',
 )
 
