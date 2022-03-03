@@ -53,27 +53,6 @@ G_DEFINE_FINAL_TYPE (SoundboardPlayAction, soundboard_play_action, BS_TYPE_ACTIO
  */
 
 static void
-set_icon (SoundboardPlayAction *self,
-          const char           *icon_name)
-{
-  g_autoptr (GtkIconPaintable) icon_paintable = NULL;
-  GtkIconTheme *icon_theme;
-  BsIcon *icon;
-
-  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
-  icon_paintable = gtk_icon_theme_lookup_icon (icon_theme,
-                                               icon_name,
-                                               NULL,
-                                               72,
-                                               1,
-                                               GTK_TEXT_DIR_RTL,
-                                               0);
-
-  icon = bs_action_get_icon (BS_ACTION (self));
-  bs_icon_set_paintable (icon, GDK_PAINTABLE (icon_paintable));
-}
-
-static void
 update_icon_from_state (SoundboardPlayAction *self)
 {
   gboolean is_playing = FALSE;
@@ -93,7 +72,8 @@ update_icon_from_state (SoundboardPlayAction *self)
       break;
     }
 
-  set_icon (self, is_playing ? "media-playback-stop-symbolic" : "media-playback-start-symbolic");
+  bs_icon_set_icon_name (bs_action_get_icon (BS_ACTION (self)),
+                         is_playing ? "media-playback-stop-symbolic" : "media-playback-start-symbolic");
 }
 
 static GtkMediaStream *
@@ -332,7 +312,7 @@ soundboard_play_action_class_init (SoundboardPlayActionClass *klass)
 static void
 soundboard_play_action_init (SoundboardPlayAction *self)
 {
-  set_icon (self, "media-playback-start-symbolic");
+  bs_icon_set_icon_name (bs_action_get_icon (BS_ACTION (self)), "media-playback-start-symbolic");
 
   self->behavior = SOUNDBOARD_PLAY_BEHAVIOR_PLAY_STOP;
   self->media_streams_queue = g_queue_new ();

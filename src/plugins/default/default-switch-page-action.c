@@ -55,26 +55,6 @@ is_enter_folder_action (DefaultSwitchPageAction *self)
          bs_page_get_parent (active_page) == NULL;
 }
 
-static void
-set_icon (DefaultSwitchPageAction *self,
-          const char              *icon_name)
-{
-  g_autoptr (GtkIconPaintable) icon_paintable = NULL;
-  GtkIconTheme *icon_theme;
-
-  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
-  icon_paintable = gtk_icon_theme_lookup_icon (icon_theme,
-                                               icon_name,
-                                               NULL,
-                                               72,
-                                               1,
-                                               GTK_TEXT_DIR_RTL,
-                                               0);
-
-  bs_icon_set_paintable (bs_action_get_icon (BS_ACTION (self)),
-                         GDK_PAINTABLE (icon_paintable));
-}
-
 
 /*
  * BsAction overrides
@@ -171,14 +151,14 @@ default_switch_page_action_constructed (GObject *object)
       stream_deck_button = bs_action_get_stream_deck_button (BS_ACTION (self));
       stream_deck = bs_stream_deck_button_get_stream_deck (stream_deck_button);
 
-      set_icon (self, "folder-symbolic");
+      bs_icon_set_icon_name (bs_action_get_icon (BS_ACTION (self)), "folder-symbolic");
 
       self->page = bs_page_new_empty (bs_stream_deck_get_active_profile (stream_deck),
                                       bs_stream_deck_get_active_page (stream_deck));
     }
   else
     {
-      set_icon (self, "go-up-symbolic");
+      bs_icon_set_icon_name (bs_action_get_icon (BS_ACTION (self)), "go-up-symbolic");
     }
 }
 

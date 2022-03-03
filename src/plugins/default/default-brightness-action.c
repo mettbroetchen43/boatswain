@@ -58,26 +58,6 @@ static GParamSpec *properties[N_PROPS];
  */
 
 static void
-set_icon (DefaultBrightnessAction *self,
-          const char              *icon_name)
-{
-  g_autoptr (GtkIconPaintable) icon_paintable = NULL;
-  GtkIconTheme *icon_theme;
-
-  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
-  icon_paintable = gtk_icon_theme_lookup_icon (icon_theme,
-                                               icon_name,
-                                               NULL,
-                                               72,
-                                               1,
-                                               GTK_TEXT_DIR_RTL,
-                                               0);
-
-  bs_icon_set_paintable (bs_action_get_icon (BS_ACTION (self)),
-                         GDK_PAINTABLE (icon_paintable));
-}
-
-static void
 set_brightness_mode (DefaultBrightnessAction *self,
                      BrightnessMode           mode)
 {
@@ -89,15 +69,18 @@ set_brightness_mode (DefaultBrightnessAction *self,
   switch (mode)
     {
     case MODE_SET_VALUE:
-      set_icon (self, "display-brightness-symbolic");
+      bs_icon_set_icon_name (bs_action_get_icon (BS_ACTION (self)),
+                             "display-brightness-symbolic");
       break;
 
     case MODE_INCREASE:
-      set_icon (self, "daytime-sunrise-symbolic");
+      bs_icon_set_icon_name (bs_action_get_icon (BS_ACTION (self)),
+                             "daytime-sunrise-symbolic");
       break;
 
     case MODE_DECREASE:
-      set_icon (self, "daytime-sunset-symbolic");
+      bs_icon_set_icon_name (bs_action_get_icon (BS_ACTION (self)),
+                             "daytime-sunset-symbolic");
       break;
     }
 }
@@ -226,7 +209,8 @@ default_brightness_action_constructed (GObject *object)
 
   bs_icon_set_margin (bs_action_get_icon (BS_ACTION (self)), 18);
 
-  set_icon (self, "display-brightness-symbolic");
+  bs_icon_set_icon_name (bs_action_get_icon (BS_ACTION (self)),
+                         "display-brightness-symbolic");
   set_brightness_mode (self, MODE_SET_VALUE);
 }
 

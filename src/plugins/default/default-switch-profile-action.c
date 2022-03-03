@@ -201,9 +201,7 @@ static void
 default_switch_profile_action_constructed (GObject *object)
 {
   DefaultSwitchProfileAction *self = (DefaultSwitchProfileAction *)object;
-  g_autoptr (GtkIconPaintable) icon_paintable = NULL;
   BsStreamDeckButton *stream_deck_button;
-  GtkIconTheme *icon_theme;
   BsStreamDeck *stream_deck;
   GListModel *profiles;
   BsIcon *icon;
@@ -219,18 +217,9 @@ default_switch_profile_action_constructed (GObject *object)
                            self,
                            0);
 
-  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
-  icon_paintable = gtk_icon_theme_lookup_icon (icon_theme,
-                                               "preferences-desktop-apps-symbolic",
-                                               NULL,
-                                               72,
-                                               1,
-                                               GTK_TEXT_DIR_RTL,
-                                               0);
-
   icon = bs_action_get_icon (BS_ACTION (self));
   bs_icon_set_margin (icon, 18);
-  bs_icon_set_paintable (icon, GDK_PAINTABLE (icon_paintable));
+  bs_icon_set_icon_name (icon, "preferences-desktop-apps-symbolic");
 }
 
 
