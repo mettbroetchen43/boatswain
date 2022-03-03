@@ -265,32 +265,23 @@ on_file_chooser_native_response_cb (GtkNativeDialog          *native,
   if (response == GTK_RESPONSE_ACCEPT)
     {
       GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
-      g_autoptr (GtkIconPaintable) paintable = NULL;
+      g_autoptr (GError) error = NULL;
+      g_autoptr (BsIcon) icon = NULL;
       g_autoptr (GFile) file = NULL;
-      BsIcon *icon;
 
       file = gtk_file_chooser_get_file (chooser);
-      icon = bs_stream_deck_button_get_custom_icon (self->button);
+      icon = bs_icon_new_empty ();
 
-      if (!icon)
+      bs_icon_set_file (icon, file, &error);
+      if (error)
         {
-          g_autoptr (BsIcon) new_icon = NULL;
-          g_autoptr (GError) error = NULL;
-
-          new_icon = bs_icon_new_empty ();
-          bs_stream_deck_button_set_custom_icon (self->button, new_icon, &error);
-
-          if (error)
-            {
-              g_warning ("Error setting custom icon: %s", error->message);
-              goto out;
-            }
-
-          icon = new_icon;
+          g_warning ("Error setting custom icon: %s", error->message);
+          goto out;
         }
 
-      paintable = gtk_icon_paintable_new_for_file (file, 72, 1);
-      bs_icon_set_paintable (icon, GDK_PAINTABLE (paintable));
+      bs_stream_deck_button_set_custom_icon (self->button, icon, &error);
+      if (error)
+        g_warning ("Error setting custom icon: %s", error->message);
     }
 
 out:
