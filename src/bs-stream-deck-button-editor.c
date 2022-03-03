@@ -23,6 +23,8 @@
 #include "bs-application.h"
 #include "bs-empty-action.h"
 #include "bs-icon.h"
+#include "bs-page.h"
+#include "bs-stream-deck.h"
 #include "bs-stream-deck-button.h"
 #include "bs-stream-deck-button-editor.h"
 
@@ -118,7 +120,15 @@ add_action_factory (BsStreamDeckButtonEditor *self,
 static void
 setup_button (BsStreamDeckButtonEditor *self)
 {
-  BsIcon *custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+  BsStreamDeck *stream_deck;
+  BsIcon *custom_icon;
+
+  stream_deck = bs_stream_deck_button_get_stream_deck (self->button);
+  custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+
+  gtk_widget_set_sensitive (GTK_WIDGET (self),
+                            bs_stream_deck_button_get_position (self->button) != 0 ||
+                            bs_page_get_parent (bs_stream_deck_get_active_page (stream_deck)) == NULL);
 
   gtk_widget_set_visible (self->background_color_row, custom_icon != NULL);
 
