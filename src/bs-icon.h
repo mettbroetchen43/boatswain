@@ -21,20 +21,35 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include <json-glib/json-glib.h>
 
 G_BEGIN_DECLS
 
 #define BS_TYPE_ICON (bs_icon_get_type())
 G_DECLARE_FINAL_TYPE (BsIcon, bs_icon, BS, ICON, GObject)
 
+BsIcon * bs_icon_new_from_json (JsonNode  *node,
+                                GError   **error);
+
 BsIcon * bs_icon_new (const GdkRGBA *background_color,
                       GdkPaintable  *paintable);
 
 BsIcon * bs_icon_new_empty (void);
 
+JsonNode * bs_icon_to_json (BsIcon *self);
+
 const GdkRGBA * bs_icon_get_background_color (BsIcon *self);
 void bs_icon_set_background_color (BsIcon        *self,
                                    const GdkRGBA *background_color);
+
+GFile * bs_icon_get_file (BsIcon *self);
+void bs_icon_set_file (BsIcon  *self,
+                       GFile   *file,
+                       GError **error);
+
+const char * bs_icon_get_icon_name (BsIcon *self);
+void bs_icon_set_icon_name (BsIcon     *self,
+                            const char *icon_name);
 
 GdkPaintable * bs_icon_get_paintable (BsIcon *self);
 void bs_icon_set_paintable (BsIcon       *self,

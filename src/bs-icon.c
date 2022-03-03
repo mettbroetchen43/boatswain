@@ -27,7 +27,12 @@ struct _BsIcon
   GdkRGBA background_color;
   GdkPaintable *paintable;
   PangoLayout *layout;
+  GFile *file;
+  char *icon_name;
   int margin;
+
+  GtkIconPaintable *icon_paintable;
+  GdkTexture *file_texture;
 
   gulong size_changed_id;
   gulong content_changed_id;
@@ -42,6 +47,8 @@ enum
 {
   PROP_0,
   PROP_BACKGROUND_COLOR,
+  PROP_FILE,
+  PROP_ICON_NAME,
   PROP_MARGIN,
   PROP_PAINTABLE,
   PROP_TEXT,
@@ -111,18 +118,33 @@ bs_icon_snapshot (GdkPaintable *paintable,
                              &self->background_color,
                              &GRAPHENE_RECT_INIT (0, 0, width, height));
 
+  gtk_snapshot_save (snapshot);
+  gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (self->margin, self->margin));
+
+
   if (self->paintable)
     {
-      gtk_snapshot_save (snapshot);
-      gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (self->margin, self->margin));
-
       gdk_paintable_snapshot (self->paintable,
                               snapshot,
                               width - self->margin * 2,
                               height - self->margin * 2);
-
-      gtk_snapshot_restore (snapshot);
     }
+  else if (self->file_texture)
+    {
+      gdk_paintable_snapshot (GDK_PAINTABLE (self->file_texture),
+                              snapshot,
+                              width - self->margin * 2,
+                              height - self->margin * 2);
+    }
+  else if (self->icon_paintable)
+    {
+      gdk_paintable_snapshot (GDK_PAINTABLE (self->icon_paintable),
+                              snapshot,
+                              width - self->margin * 2,
+                              height - self->margin * 2);
+    }
+
+  gtk_snapshot_restore (snapshot);
 
   if (self->layout)
     {
@@ -161,7 +183,10 @@ bs_icon_finalize (GObject *object)
 
   g_clear_signal_handler (&self->content_changed_id, self->paintable);
   g_clear_signal_handler (&self->size_changed_id, self->paintable);
+  g_clear_pointer (&self->icon_name, g_free);
   g_clear_object (&self->paintable);
+  g_clear_object (&self->file_texture);
+  g_clear_object (&self->file);
   g_clear_object (&self->layout);
 
   G_OBJECT_CLASS (bs_icon_parent_class)->finalize (object);
@@ -179,6 +204,14 @@ bs_icon_get_property (GObject    *object,
     {
     case PROP_BACKGROUND_COLOR:
       g_value_set_boxed (value, &self->background_color);
+      break;
+
+    case PROP_FILE:
+      g_value_set_object (value, self->file);
+      break;
+
+    case PROP_ICON_NAME:
+      g_value_set_string (value, self->icon_name);
       break;
 
     case PROP_MARGIN:
@@ -212,6 +245,14 @@ bs_icon_set_property (GObject      *object,
       bs_icon_set_background_color (self, g_value_get_boxed (value));
       break;
 
+    case PROP_FILE:
+      bs_icon_set_file (self, g_value_get_object (value), NULL);
+      break;
+
+    case PROP_ICON_NAME:
+      bs_icon_set_icon_name (self, g_value_get_string (value));
+      break;
+
     case PROP_MARGIN:
       bs_icon_set_margin (self, g_value_get_int (value));
       break;
@@ -241,6 +282,14 @@ bs_icon_class_init (BsIconClass *klass)
   properties[PROP_BACKGROUND_COLOR] = g_param_spec_boxed ("background-color", NULL, NULL,
                                                           GDK_TYPE_RGBA,
                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_FILE] = g_param_spec_object ("file", NULL, NULL,
+                                               G_TYPE_FILE,
+                                               G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_ICON_NAME] = g_param_spec_string ("icon-name", NULL, NULL,
+                                                    NULL,
+                                                    G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_MARGIN] = g_param_spec_int ("margin", NULL, NULL,
                                               0, G_MAXINT, 12,
@@ -282,6 +331,80 @@ bs_icon_new (const GdkRGBA *background_color,
                        NULL);
 }
 
+BsIcon *
+bs_icon_new_from_json (JsonNode  *node,
+                       GError   **error)
+{
+  g_autoptr (GFile) file = NULL;
+  JsonObject *object;
+  GdkRGBA background_color;
+
+  if (!JSON_NODE_HOLDS_OBJECT (node))
+    {
+      g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "JSON node is not an object");
+      return NULL;
+    }
+
+  object = json_node_get_object (node);
+  gdk_rgba_parse (&background_color,
+                  json_object_get_string_member_with_default (object,
+                                                              "background-color",
+                                                              "rgba(0,0,0,0)"));
+
+  if (json_object_has_member (object, "file"))
+    file = g_file_new_for_uri (json_object_get_string_member (object, "file"));
+
+  return g_object_new (BS_TYPE_ICON,
+                       "background-color", &background_color,
+                       "file", file,
+                       "icon-name", json_object_get_string_member_with_default (object, "icon-name", NULL),
+                       "text", json_object_get_string_member_with_default (object, "text", NULL),
+                       "margin", json_object_get_int_member_with_default (object, "margin", 12),
+                       NULL);
+}
+
+JsonNode *
+bs_icon_to_json (BsIcon *self)
+{
+  g_autoptr (JsonBuilder) builder = NULL;
+  g_autofree char *background_color = NULL;
+
+  g_return_val_if_fail (BS_IS_ICON (self), NULL);
+
+  builder = json_builder_new ();
+
+  json_builder_begin_object (builder);
+
+  background_color = gdk_rgba_to_string (&self->background_color);
+
+  json_builder_set_member_name (builder, "background-color");
+  json_builder_add_string_value (builder, background_color);
+
+  json_builder_set_member_name (builder, "margin");
+  json_builder_add_int_value (builder, self->margin);
+
+  json_builder_set_member_name (builder, "text");
+  json_builder_add_string_value (builder, self->layout ? pango_layout_get_text (self->layout) : "");
+
+  if (self->file)
+    {
+      g_autofree char *uri = g_file_get_uri (self->file);
+
+      json_builder_set_member_name (builder, "file");
+      json_builder_add_string_value (builder, uri);
+    }
+
+  if (self->icon_name)
+    {
+      json_builder_set_member_name (builder, "icon-name");
+      json_builder_add_string_value (builder, self->icon_name);
+    }
+
+  json_builder_end_object (builder);
+
+  return json_builder_get_root (builder);
+}
+
 const GdkRGBA *
 bs_icon_get_background_color (BsIcon *self)
 {
@@ -304,6 +427,79 @@ bs_icon_set_background_color (BsIcon        *self,
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_BACKGROUND_COLOR]);
+}
+
+GFile *
+bs_icon_get_file (BsIcon *self)
+{
+  g_return_val_if_fail (BS_IS_ICON (self), NULL);
+
+  return self->file;
+}
+
+void
+bs_icon_set_file (BsIcon  *self,
+                  GFile   *file,
+                  GError **error)
+{
+  g_autoptr (GdkTexture) texture = NULL;
+
+  g_return_if_fail (BS_IS_ICON (self));
+
+  if (self->file == file)
+    return;
+
+  if (file)
+    {
+      texture = gdk_texture_new_from_file (file, error);
+      if (!texture)
+        return;
+    }
+
+  g_set_object (&self->file_texture, texture);
+  g_set_object (&self->file, file);
+
+  gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
+  gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_FILE]);
+}
+
+const char *
+bs_icon_get_icon_name (BsIcon *self)
+{
+  g_return_val_if_fail (BS_IS_ICON (self), NULL);
+
+  return self->icon_name;
+}
+
+void
+bs_icon_set_icon_name (BsIcon     *self,
+                       const char *icon_name)
+{
+  GtkIconTheme *icon_theme;
+
+  g_return_if_fail (BS_IS_ICON (self));
+
+  if (g_strcmp0 (self->icon_name, icon_name) == 0)
+    return;
+
+  g_clear_pointer (&self->icon_name, g_free);
+  self->icon_name = g_strdup (icon_name);
+
+  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
+  self->icon_paintable = gtk_icon_theme_lookup_icon (icon_theme,
+                                                     icon_name,
+                                                     NULL,
+                                                     96,
+                                                     1,
+                                                     GTK_TEXT_DIR_RTL,
+                                                     0);
+
+  gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
+  gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ICON_NAME]);
 }
 
 GdkPaintable *
