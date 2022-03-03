@@ -126,19 +126,11 @@ get_profile_path (BsStreamDeck *self)
 }
 
 static void
-save_profiles (BsStreamDeck *self)
+update_pages (BsStreamDeck *self)
 {
-  g_autoptr (JsonGenerator) generator = NULL;
-  g_autoptr (JsonBuilder) builder = NULL;
-  g_autoptr (JsonNode) root = NULL;
-  g_autoptr (GError) error = NULL;
-  g_autofree char *profile_path = NULL;
-  g_autofree char *json_str = NULL;
   BsPage *active_page;
+  GList *l;
   unsigned int i;
-
-  /* Update the active profile */
-  bs_profile_set_brightness (self->active_profile, self->brightness);
 
   active_page = bs_stream_deck_get_active_page (self);
 
@@ -147,6 +139,25 @@ save_profiles (BsStreamDeck *self)
       BsStreamDeckButton *stream_deck_button = g_ptr_array_index (self->buttons, i);
       bs_page_update_item_from_button (active_page, stream_deck_button);
     }
+
+  for (l = g_queue_peek_head_link (self->active_pages); l; l = l->next)
+    bs_page_update_all_items (l->data);
+}
+
+static void
+save_profiles (BsStreamDeck *self)
+{
+  g_autoptr (JsonGenerator) generator = NULL;
+  g_autoptr (JsonBuilder) builder = NULL;
+  g_autoptr (JsonNode) root = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autofree char *profile_path = NULL;
+  g_autofree char *json_str = NULL;
+  unsigned int i;
+
+  /* Update the active profile */
+  bs_profile_set_brightness (self->active_profile, self->brightness);
+  update_pages (self);
 
   builder = json_builder_new ();
 
@@ -1368,6 +1379,8 @@ bs_stream_deck_pop_page (BsStreamDeck *self)
 
   for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
     bs_page_update_item_from_button (page, g_ptr_array_index (self->buttons, i));
+
+  bs_page_update_all_items (g_queue_peek_head (self->active_pages));
 
   load_active_page (self);
 }

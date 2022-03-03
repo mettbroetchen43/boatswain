@@ -66,4 +66,6 @@ gboolean bs_page_item_realize (BsPageItem          *self,
                                BsAction           **out_action,
                                GError             **error);
 
+void bs_page_item_update (BsPageItem *self);
+
 G_END_DECLS

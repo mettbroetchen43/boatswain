@@ -483,3 +483,14 @@ bs_page_item_realize (BsPageItem          *self,
 
   return TRUE;
 }
+
+void
+bs_page_item_update (BsPageItem *self)
+{
+  g_return_if_fail (BS_IS_PAGE_ITEM (self));
+
+  if (!self->cached)
+    return;
+
+  bs_page_item_set_settings (self, bs_action_serialize_settings (self->cached_action));
+}

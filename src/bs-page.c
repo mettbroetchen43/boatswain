@@ -317,6 +317,23 @@ bs_page_update_item_from_button (BsPage             *self,
     }
 }
 
+void
+bs_page_update_all_items (BsPage *self)
+{
+  BsPageItem *item;
+  uint8_t i;
+
+  g_return_if_fail (BS_IS_PAGE (self));
+
+  for (i = 0; i < self->items->len; i++)
+    {
+      item = get_item (self, i);
+
+      if (item)
+        bs_page_item_update (item);
+    }
+}
+
 gboolean
 bs_page_realize (BsPage              *self,
                  BsStreamDeckButton  *stream_deck_button,
