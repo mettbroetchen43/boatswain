@@ -310,7 +310,7 @@ bs_page_item_to_json (BsPageItem *self)
       if (self->settings)
         {
           json_builder_set_member_name (builder, "settings");
-          json_builder_add_value (builder, self->settings);
+          json_builder_add_value (builder, json_node_copy (self->settings));
         }
       break;
     }
