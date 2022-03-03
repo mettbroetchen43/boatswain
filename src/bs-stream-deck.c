@@ -999,8 +999,8 @@ bs_stream_deck_finalize (GObject *object)
 
   if (self->model_info)
     {
-      bs_stream_deck_reset (self);
       save_profiles (self);
+      bs_stream_deck_reset (self);
     }
 
   g_usb_device_close (self->device, NULL);
