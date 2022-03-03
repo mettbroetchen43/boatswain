@@ -39,10 +39,10 @@ struct _BsPageItem
   BsPageItemType item_type;
   char *factory;
   JsonNode *settings;
+  JsonNode *custom_icon;
 
   BsAction *cached_action;
   BsIcon *cached_custom_icon;
-  gboolean cached;
 };
 
 G_DEFINE_FINAL_TYPE (BsPageItem, bs_page_item, G_TYPE_OBJECT)
@@ -51,6 +51,7 @@ enum
 {
   PROP_0,
   PROP_ACTION,
+  PROP_CUSTOM_ICON,
   PROP_FACTORY,
   PROP_PAGE,
   PROP_SETTINGS,
@@ -104,7 +105,6 @@ invalidate_cache (BsPageItem *self)
 {
   g_clear_object (&self->cached_action);
   g_clear_object (&self->cached_custom_icon);
-  self->cached = FALSE;
 }
 
 
@@ -122,6 +122,7 @@ bs_page_item_finalize (GObject *object)
   g_clear_pointer (&self->action, g_free);
   g_clear_pointer (&self->factory, g_free);
   g_clear_pointer (&self->settings, json_node_unref);
+  g_clear_pointer (&self->custom_icon, json_node_unref);
 
   G_OBJECT_CLASS (bs_page_item_parent_class)->finalize (object);
 }
@@ -138,6 +139,10 @@ bs_page_item_get_property (GObject    *object,
     {
     case PROP_ACTION:
       g_value_set_string (value, self->action);
+      break;
+
+    case PROP_CUSTOM_ICON:
+      g_value_set_boxed (value, self->custom_icon);
       break;
 
     case PROP_FACTORY:
@@ -175,6 +180,10 @@ bs_page_item_set_property (GObject      *object,
       bs_page_item_set_action (self, g_value_get_string (value));
       break;
 
+    case PROP_CUSTOM_ICON:
+      bs_page_item_set_custom_icon (self, g_value_get_boxed (value));
+      break;
+
     case PROP_FACTORY:
       bs_page_item_set_factory (self, g_value_get_string (value));
       break;
@@ -209,6 +218,10 @@ bs_page_item_class_init (BsPageItemClass *klass)
   properties[PROP_ACTION] = g_param_spec_string ("action", NULL, NULL,
                                                  "",
                                                  G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_CUSTOM_ICON] = g_param_spec_boxed ("custom-icon", NULL, NULL,
+                                                     JSON_TYPE_NODE,
+                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_FACTORY] = g_param_spec_string ("factory", NULL, NULL,
                                                   "",
@@ -271,6 +284,7 @@ bs_page_item_new_from_json (BsPage   *page,
                             "factory", json_object_get_string_member_with_default (object, "factory", NULL),
                             "action", json_object_get_string_member_with_default (object, "action", NULL),
                             "settings", json_object_get_member (object, "settings"),
+                            "custom-icon", json_object_get_member (object, "custom-icon"),
                             NULL);
 
   return g_steal_pointer (&page_item);
@@ -295,6 +309,11 @@ bs_page_item_to_json (BsPageItem *self)
   switch (self->item_type)
     {
     case BS_PAGE_ITEM_EMPTY:
+      if (self->custom_icon)
+        {
+          json_builder_set_member_name (builder, "custom-icon");
+          json_builder_add_value (builder, json_node_copy (self->custom_icon));
+        }
       break;
 
     case BS_PAGE_ITEM_ACTION:
@@ -306,6 +325,12 @@ bs_page_item_to_json (BsPageItem *self)
 
       json_builder_set_member_name (builder, "action");
       json_builder_add_string_value (builder, self->action);
+
+      if (self->custom_icon)
+        {
+          json_builder_set_member_name (builder, "custom-icon");
+          json_builder_add_value (builder, json_node_copy (self->custom_icon));
+        }
 
       if (self->settings)
         {
@@ -326,6 +351,38 @@ bs_page_item_get_page (BsPageItem *self)
   g_return_val_if_fail (BS_IS_PAGE_ITEM (self), NULL);
 
   return self->page;
+}
+
+JsonNode *
+bs_page_item_get_custom_icon (BsPageItem *self)
+{
+  g_return_val_if_fail (BS_IS_PAGE_ITEM (self), NULL);
+
+  return self->custom_icon;
+}
+
+void
+bs_page_item_set_custom_icon (BsPageItem *self,
+                              JsonNode   *custom_icon)
+{
+  g_return_if_fail (BS_IS_PAGE_ITEM (self));
+  g_return_if_fail (custom_icon == NULL || JSON_NODE_HOLDS_OBJECT (custom_icon));
+
+  if (self->custom_icon == custom_icon)
+    return;
+
+  if (custom_icon)
+    {
+      g_autoptr (JsonGenerator) generator = json_generator_new ();
+      json_generator_set_pretty (generator, TRUE);
+      json_generator_set_root (generator, json_node_copy (custom_icon));
+    }
+
+  g_clear_object (&self->cached_custom_icon);
+
+  g_clear_pointer (&self->custom_icon, json_node_unref);
+  self->custom_icon = custom_icon ? json_node_ref (custom_icon) : NULL;
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_CUSTOM_ICON]);
 }
 
 const char *
@@ -431,47 +488,56 @@ bs_page_item_realize (BsPageItem          *self,
 {
   g_autoptr (BsAction) action = NULL;
   g_autoptr (BsIcon) custom_icon = NULL;
-  const BsActionInfo *action_info;
-  BsActionFactory *action_factory;
 
   g_return_val_if_fail (BS_IS_PAGE_ITEM (self), FALSE);
   g_return_val_if_fail (out_custom_icon != NULL, FALSE);
   g_return_val_if_fail (out_action != NULL, FALSE);
 
-  if (self->cached)
+  if (!self->cached_action)
     {
-      *out_custom_icon = self->cached_custom_icon ? g_object_ref (self->cached_custom_icon) : NULL;
-      *out_action = self->cached_action ? g_object_ref (self->cached_action) : NULL;
-      return TRUE;
+      const BsActionInfo *action_info;
+      BsActionFactory *action_factory;
+
+      switch (self->item_type)
+        {
+        case BS_PAGE_ITEM_EMPTY:
+          action = bs_empty_action_new (stream_deck_button);
+          break;
+
+        case BS_PAGE_ITEM_ACTION:
+          action_factory = get_action_factory (self->factory);
+
+          if (!action_factory)
+            {
+              g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                           "No action factory named \"%s\"", self->factory);
+              *out_custom_icon = NULL;
+              *out_action = NULL;
+              return FALSE;
+            }
+
+          action_info = bs_action_factory_get_info (action_factory, self->action);
+          action = bs_action_factory_create_action (action_factory,
+                                                    stream_deck_button,
+                                                    action_info);
+          if (self->settings)
+            bs_action_deserialize_settings (action, json_node_get_object (self->settings));
+          break;
+        }
+    }
+  else
+    {
+      action = g_object_ref (self->cached_action);
     }
 
-  switch (self->item_type)
+  if (!self->cached_custom_icon)
     {
-    case BS_PAGE_ITEM_EMPTY:
-      custom_icon = NULL; // TODO
-      action = bs_empty_action_new (stream_deck_button);
-      break;
-
-    case BS_PAGE_ITEM_ACTION:
-      action_factory = get_action_factory (self->factory);
-
-      if (!action_factory)
-        {
-          g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
-                       "No action factory named \"%s\"", self->factory);
-          *out_custom_icon = NULL; // TODO
-          *out_action = NULL;
-          return FALSE;
-        }
-
-      action_info = bs_action_factory_get_info (action_factory, self->action);
-      custom_icon = NULL; // TODO
-      action = bs_action_factory_create_action (action_factory,
-                                                stream_deck_button,
-                                                action_info);
-      if (self->settings)
-        bs_action_deserialize_settings (action, json_node_get_object (self->settings));
-      break;
+      if (self->custom_icon)
+        custom_icon = bs_icon_new_from_json (self->custom_icon, NULL);
+    }
+  else
+    {
+      custom_icon = g_object_ref (self->cached_custom_icon);
     }
 
   *out_custom_icon = custom_icon ? g_object_ref (custom_icon) : NULL;
@@ -479,7 +545,6 @@ bs_page_item_realize (BsPageItem          *self,
 
   self->cached_action = g_steal_pointer (&action);
   self->cached_custom_icon = g_steal_pointer (&custom_icon);
-  self->cached = TRUE;
 
   return TRUE;
 }
@@ -489,8 +554,9 @@ bs_page_item_update (BsPageItem *self)
 {
   g_return_if_fail (BS_IS_PAGE_ITEM (self));
 
-  if (!self->cached)
-    return;
+  if (self->cached_action)
+    bs_page_item_set_settings (self, bs_action_serialize_settings (self->cached_action));
 
-  bs_page_item_set_settings (self, bs_action_serialize_settings (self->cached_action));
+  if (self->cached_custom_icon)
+    bs_page_item_set_custom_icon (self, bs_icon_to_json (self->cached_custom_icon));
 }

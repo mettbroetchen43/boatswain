@@ -20,6 +20,7 @@
 
 #include "bs-action-private.h"
 #include "bs-empty-action.h"
+#include "bs-icon.h"
 #include "bs-page.h"
 #include "bs-page-item.h"
 #include "bs-profile.h"
@@ -280,6 +281,7 @@ bs_page_update_item_from_button (BsPage             *self,
 {
   BsPageItem *item;
   BsAction *action;
+  BsIcon *custom_icon;
   GType action_type;
   uint8_t position;
 
@@ -297,6 +299,9 @@ bs_page_update_item_from_button (BsPage             *self,
 
   action = bs_stream_deck_button_get_action (button);
   action_type = G_OBJECT_TYPE (action);
+
+  custom_icon = bs_stream_deck_button_get_custom_icon (button);
+  bs_page_item_set_custom_icon (item, custom_icon ? bs_icon_to_json (custom_icon) : NULL);
 
   if (action_type == BS_TYPE_EMPTY_ACTION)
     {

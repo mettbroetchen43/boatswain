@@ -48,6 +48,10 @@ const char * bs_page_item_get_action (BsPageItem *self);
 void bs_page_item_set_action (BsPageItem *self,
                               const char *action);
 
+JsonNode * bs_page_item_get_custom_icon (BsPageItem *self);
+void bs_page_item_set_custom_icon (BsPageItem *self,
+                                   JsonNode   *custom_icon);
+
 BsPageItemType bs_page_item_get_item_type (BsPageItem *self);
 void bs_page_item_set_item_type (BsPageItem     *self,
                                  BsPageItemType  item_type);
