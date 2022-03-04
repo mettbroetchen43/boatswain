@@ -149,6 +149,8 @@ setup_button (BsStreamDeckButtonEditor *self)
     }
   else
     {
+      gtk_color_chooser_set_rgba (self->background_color_button,
+                                  &(GdkRGBA) { 0.0, 0.0, 0.0, 0.0 });
       gtk_editable_set_text (self->custom_icon_text_entry, "");
     }
 
