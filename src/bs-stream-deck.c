@@ -1358,7 +1358,8 @@ bs_stream_deck_push_page (BsStreamDeck  *self,
   g_return_if_fail (g_queue_find (self->active_pages, page) == NULL);
   g_return_if_fail (bs_page_get_parent (page) == bs_stream_deck_get_active_page (self));
 
-  bs_page_update_all_items (g_queue_peek_head (self->active_pages));
+  if (g_queue_get_length (self->active_pages) > 0)
+    bs_page_update_all_items (g_queue_peek_head (self->active_pages));
 
   g_queue_push_head (self->active_pages, g_object_ref (page));
 
