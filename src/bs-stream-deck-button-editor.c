@@ -298,7 +298,12 @@ on_file_chooser_native_response_cb (GtkNativeDialog          *native,
       g_autoptr (GFile) file = NULL;
 
       file = gtk_file_chooser_get_file (chooser);
-      icon = bs_icon_new_empty ();
+      icon = bs_stream_deck_button_get_custom_icon (self->button);
+
+      if (!icon)
+        icon = bs_icon_new_empty ();
+      else
+        g_object_ref (icon);
 
       bs_icon_set_file (icon, file, &error);
       if (error)
