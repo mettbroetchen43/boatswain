@@ -31,40 +31,97 @@
                     <property name="name">button</property>
                     <property name="child">
                       <object class="AdwPreferencesPage" id="button_preferences_page">
+
+                        <!-- Custom icon -->
                         <child>
                           <object class="AdwPreferencesGroup">
 
                             <child>
-                              <object class="AdwPreferencesRow">
+                              <object class="GtkOverlay">
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="margin-bottom">6</property>
+
                                 <child>
-                                  <object class="GtkButton">
-                                    <property name="margin-top">6</property>
-                                    <property name="margin-bottom">6</property>
-                                    <property name="margin-start">6</property>
-                                    <property name="margin-end">6</property>
-                                    <signal name="clicked" handler="on_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
-                                    <child>
-                                      <object class="GtkPicture" id="icon_picture">
-                                        <property name="can-shrink">False</property>
-                                      </object>
-                                    </child>
+                                  <object class="GtkImage" id="icon_image">
+                                    <property name="width-request">128</property>
+                                    <property name="height-request">128</property>
+                                    <property name="margin-top">12</property>
+                                    <property name="margin-bottom">12</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="overflow">hidden</property>
+                                    <style>
+                                      <class name="card" />
+                                    </style>
                                   </object>
                                 </child>
+
+                                <child type="overlay">
+                                  <object class="GtkButton" id="remove_custom_icon_button">
+                                    <property name="halign">end</property>
+                                    <property name="valign">start</property>
+                                    <property name="icon-name">window-close-symbolic</property>
+                                    <signal name="clicked" handler="on_remove_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                    <style>
+                                      <class name="circular" />
+                                      <class name="outline" />
+                                      <class name="circular" />
+                                    </style>
+                                  </object>
+                                </child>
+
+                                <child type="overlay">
+                                  <object class="GtkButton">
+                                    <property name="halign">end</property>
+                                    <property name="valign">end</property>
+                                    <property name="icon-name">document-edit-symbolic</property>
+                                    <signal name="clicked" handler="on_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                    <style>
+                                      <class name="circular" />
+                                      <class name="outline" />
+                                      <class name="circular" />
+                                    </style>
+                                  </object>
+                                </child>
+
                               </object>
                             </child>
 
                             <child>
-                              <object class="AdwActionRow" id="background_color_row">
-                                <property name="visible">False</property>
-                                <property name="title" translatable="yes">Background Color</property>
-                                <property name="activatable-widget">background_color_button</property>
+                              <object class="GtkListBox">
+                                <property name="selection-mode">none</property>
+                                <style>
+                                  <class name="boxed-list" />
+                                </style>
+
                                 <child>
-                                  <object class="GtkColorButton" id="background_color_button">
-                                    <property name="valign">center</property>
-                                    <property name="modal">True</property>
-                                    <signal name="color-set" handler="on_background_color_button_color_set_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                  <object class="AdwActionRow" id="custom_icon_text_row">
+                                    <property name="title" translatable="yes">Name</property>
+                                    <property name="activatable-widget">custom_icon_text_entry</property>
+                                    <child>
+                                      <object class="GtkEntry" id="custom_icon_text_entry">
+                                        <property name="valign">center</property>
+                                        <signal name="notify::text" handler="on_custom_icon_text_entry_text_changed_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
+
+                                <child>
+                                  <object class="AdwActionRow" id="background_color_row">
+                                    <property name="title" translatable="yes">Background Color</property>
+                                    <property name="activatable-widget">background_color_button</property>
+                                    <child>
+                                      <object class="GtkColorButton" id="background_color_button">
+                                        <property name="valign">center</property>
+                                        <property name="modal">True</property>
+                                        <signal name="color-set" handler="on_background_color_button_color_set_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
                               </object>
                             </child>
 
@@ -84,7 +141,7 @@
                             <child>
                               <object class="AdwActionRow">
                                 <property name="title" translatable="yes">Select action</property>
-                                <property name="activatable-widget">icon_picture</property>
+                                <property name="activatable">True</property>
                                 <signal name="activated" handler="on_select_action_row_activated_cb" object="BsStreamDeckButtonEditor" swapped="no" />
                                 <child>
                                   <object class="GtkImage">

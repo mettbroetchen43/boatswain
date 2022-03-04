@@ -38,11 +38,11 @@ struct _BsStreamDeckButtonEditor
   AdwPreferencesGroup *action_preferences_group;
   AdwPreferencesGroup *actions_group;
   GtkColorChooser *background_color_button;
-  GtkWidget *background_color_row;
   AdwPreferencesPage *button_preferences_page;
-  GtkPicture *icon_picture;
+  GtkImage *icon_image;
   AdwLeaflet *leaflet;
   GtkWidget *remove_action_button;
+  GtkWidget *remove_custom_icon_button;
   GtkStack *stack;
 
   BsStreamDeckButton *button;
@@ -130,7 +130,7 @@ setup_button (BsStreamDeckButtonEditor *self)
                             bs_stream_deck_button_get_position (self->button) != 0 ||
                             bs_page_get_parent (bs_stream_deck_get_active_page (stream_deck)) == NULL);
 
-  gtk_widget_set_visible (self->background_color_row, custom_icon != NULL);
+  gtk_widget_set_visible (self->remove_custom_icon_button, custom_icon != NULL);
 
   if (custom_icon)
     {
@@ -171,7 +171,30 @@ update_icon (BsStreamDeckButtonEditor *self)
 {
   BsIcon *icon = bs_stream_deck_button_get_icon (self->button);
 
-  gtk_picture_set_paintable (self->icon_picture, GDK_PAINTABLE (icon));
+  gtk_image_set_from_paintable (self->icon_image, GDK_PAINTABLE (icon));
+}
+
+static void
+maybe_remove_custom_icon (BsStreamDeckButtonEditor *self)
+{
+  BsIcon *custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+  GdkRGBA transparent = { 0.0, 0.0, 0.0, 0.0 };
+  const char *text;
+
+  if (!custom_icon)
+    return;
+
+  text = bs_icon_get_text (custom_icon);
+
+  if (gdk_rgba_equal (bs_icon_get_background_color (custom_icon), &transparent) &&
+      !bs_icon_get_file (custom_icon) &&
+      !bs_icon_get_icon_name (custom_icon) &&
+      !bs_icon_get_paintable (custom_icon) &&
+      (!text || strlen (text) == 0))
+    {
+      bs_stream_deck_button_set_custom_icon (self->button, NULL);
+    }
+
 }
 
 
@@ -235,9 +258,12 @@ on_background_color_button_color_set_cb (GtkColorButton           *color_button,
   BsIcon *icon;
 
   icon = bs_stream_deck_button_get_custom_icon (self->button);
+  if (!icon)
+    icon = bs_icon_new_empty ();
   gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (color_button), &background_color);
 
   bs_icon_set_background_color (icon, &background_color);
+  bs_stream_deck_button_set_custom_icon (self->button, icon);
 }
 
 static void
@@ -303,6 +329,32 @@ on_custom_icon_button_clicked_cb (AdwPreferencesRow        *row,
 }
 
 static void
+on_custom_icon_text_entry_text_changed_cb (GtkEditable              *entry,
+                                           GParamSpec               *pspec,
+                                           BsStreamDeckButtonEditor *self)
+{
+  BsIcon *custom_icon;
+  const char *text;
+
+  text = gtk_editable_get_text (entry);
+  custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+
+  if (strlen (text) > 0)
+    {
+      if (!custom_icon)
+        custom_icon = bs_icon_new_empty ();
+      bs_icon_set_text (custom_icon, text);
+      bs_stream_deck_button_set_custom_icon (self->button, custom_icon);
+    }
+  else
+    {
+      if (custom_icon)
+        bs_icon_set_text (custom_icon, text);
+      maybe_remove_custom_icon (self);
+    }
+}
+
+static void
 on_go_previous_button_clicked_cb (GtkButton                *button,
                                   BsStreamDeckButtonEditor *self)
 {
@@ -317,6 +369,14 @@ on_remove_action_button_clicked_cb (GtkButton                *button,
 
   empty_action = bs_empty_action_new (self->button);
   bs_stream_deck_button_set_action (self->button, empty_action);
+}
+
+static void
+on_remove_custom_icon_button_clicked_cb (GtkButton                *button,
+                                         BsStreamDeckButtonEditor *self)
+{
+  bs_stream_deck_button_set_custom_icon (self->button, NULL);
+  gtk_color_chooser_set_rgba (self->background_color_button, &(GdkRGBA) { 0.0, 0.0, 0.0, 0.0 });
 }
 
 static void
@@ -403,17 +463,19 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, action_preferences_group);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, actions_group);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_button);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_row);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, button_preferences_page);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, icon_picture);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, icon_image);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, leaflet);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, remove_action_button);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, remove_custom_icon_button);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, on_background_color_button_color_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_text_entry_text_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_go_previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_remove_action_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_remove_custom_icon_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_select_action_row_activated_cb);
 }
 
@@ -450,6 +512,7 @@ bs_stream_deck_button_editor_set_button (BsStreamDeckButtonEditor *self,
 {
   g_return_if_fail (BS_IS_STREAM_DECK_BUTTON_EDITOR (self));
 
+  g_clear_signal_handler (&self->action_changed_id, self->button);
   g_clear_signal_handler (&self->custom_icon_changed_id, self->button);
   g_clear_signal_handler (&self->icon_changed_id, self->button);
 
