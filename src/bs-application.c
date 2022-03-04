@@ -69,6 +69,27 @@ request_run_in_background (BsApplication *self)
                                  self);
 }
 
+static void
+load_plugin (PeasEngine  *engine,
+             PeasPluginInfo *plugin_info)
+{
+  g_autofree char *icons_dir = NULL;
+  GtkIconTheme *icon_theme;
+  const char *plugin_datadir;
+
+  peas_engine_load_plugin (engine, plugin_info);
+
+  /* Add icons */
+  plugin_datadir = peas_plugin_info_get_data_dir (plugin_info);
+
+  if (g_str_has_prefix (plugin_datadir, "resource://"))
+    plugin_datadir += strlen ("resource://");
+  icons_dir = g_strdup_printf ("%s/icons", plugin_datadir);
+
+  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
+  gtk_icon_theme_add_resource_path (icon_theme, icons_dir);
+}
+
 
 /*
  * Callbacks
@@ -165,7 +186,7 @@ bs_application_startup (GApplication *application)
                                    "resource:///com/feaneron/Boatswain/plugins",
                                    "resource:///com/feaneron/Boatswain/plugins");
   for (l = peas_engine_get_plugin_list (engine); l; l = l->next)
-    peas_engine_load_plugin (engine, l->data);
+    load_plugin (engine, l->data);
 
   self->action_factories_set = peas_extension_set_new (peas_engine_get_default (),
                                                        BS_TYPE_ACTION_FACTORY,
