@@ -76,6 +76,17 @@ update_page (BsStreamDeckButton *self)
 }
 
 static void
+update_relative_icon (BsStreamDeckButton *self)
+{
+
+  if (!self->custom_icon)
+    return;
+
+  bs_icon_set_relative (self->custom_icon,
+                        self->action ? bs_action_get_icon (self->action) : NULL);
+}
+
+static void
 update_icon (BsStreamDeckButton *self)
 {
   g_autoptr (GError) error = NULL;
@@ -112,6 +123,7 @@ static void
 on_icon_changed_cb (BsIcon             *icon,
                     BsStreamDeckButton *self)
 {
+  update_relative_icon (self);
   update_icon (self);
   g_signal_emit (self, signals[ICON_CHANGED], 0, icon);
 }
@@ -344,6 +356,7 @@ bs_stream_deck_button_set_custom_icon (BsStreamDeckButton  *self,
         g_signal_connect (icon, "invalidate-size", G_CALLBACK (on_icon_changed_cb), self);
     }
 
+  update_relative_icon (self);
   update_page (self);
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_CUSTOM_ICON]);
@@ -391,6 +404,7 @@ bs_stream_deck_button_set_action (BsStreamDeckButton *self,
   self->action_size_changed_id =
     g_signal_connect (action_icon, "invalidate-size", G_CALLBACK (on_icon_changed_cb), self);
 
+  update_relative_icon (self);
   update_icon (self);
   update_page (self);
 
