@@ -254,12 +254,14 @@ static void
 on_background_color_button_color_set_cb (GtkColorButton           *color_button,
                                          BsStreamDeckButtonEditor *self)
 {
+  g_autoptr (BsIcon) icon = NULL;
   GdkRGBA background_color;
-  BsIcon *icon;
 
   icon = bs_stream_deck_button_get_custom_icon (self->button);
   if (!icon)
     icon = bs_icon_new_empty ();
+  else
+    g_object_ref (icon);
   gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (color_button), &background_color);
 
   bs_icon_set_background_color (icon, &background_color);
@@ -333,16 +335,21 @@ on_custom_icon_text_entry_text_changed_cb (GtkEditable              *entry,
                                            GParamSpec               *pspec,
                                            BsStreamDeckButtonEditor *self)
 {
-  BsIcon *custom_icon;
+  g_autoptr (BsIcon) custom_icon = NULL;
   const char *text;
 
   text = gtk_editable_get_text (entry);
   custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
 
+  if (custom_icon)
+    g_object_ref (custom_icon);
+
   if (strlen (text) > 0)
     {
       if (!custom_icon)
         custom_icon = bs_icon_new_empty ();
+      else
+        g_object_ref (custom_icon);
       bs_icon_set_text (custom_icon, text);
       bs_stream_deck_button_set_custom_icon (self->button, custom_icon);
     }
