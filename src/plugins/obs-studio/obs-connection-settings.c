@@ -1,0 +1,375 @@
+/* obs-connection-settings.c
+ *
+ * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+#include "obs-connection-settings.h"
+
+struct _ObsConnectionSettings
+{
+  AdwPreferencesGroup parent_instance;
+
+  GtkEditable *host_entry;
+  GtkEditable *password_entry;
+  GtkWidget *password_row;
+  GtkAdjustment *port_adjustment;
+
+  guint authenticate_timeout_id;
+  guint update_connection_timeout_id;
+
+  ObsConnectionManager *connection_manager;
+  ObsConnection *connection;
+  gulong state_changed_id;
+};
+
+static void on_connection_authenticated_cb (GObject      *source_object,
+                                            GAsyncResult *result,
+                                            gpointer      user_data);
+
+static void on_connection_state_changed_cb (ObsConnection         *connection,
+                                            ObsConnectionState     old_state,
+                                            ObsConnectionState     new_state,
+                                            ObsConnectionSettings *self);
+
+G_DEFINE_FINAL_TYPE (ObsConnectionSettings, obs_connection_settings, ADW_TYPE_PREFERENCES_GROUP)
+
+enum
+{
+  PROP_0,
+  PROP_CONNECTION,
+  PROP_CONNECTION_MANAGER,
+  N_PROPS
+};
+
+static GParamSpec *properties [N_PROPS];
+
+
+/*
+ * Auxiliary methods
+ */
+
+static void
+authenticate_connection (ObsConnectionSettings *self)
+{
+  obs_connection_authenticate (self->connection,
+                               gtk_editable_get_text (self->password_entry),
+                               NULL,
+                               on_connection_authenticated_cb,
+                               self);
+}
+
+static void
+update_password_row (ObsConnectionSettings *self)
+{
+  switch (obs_connection_get_state (self->connection))
+    {
+    case OBS_CONNECTION_STATE_DISCONNECTED:
+    case OBS_CONNECTION_STATE_CONNECTING:
+    case OBS_CONNECTION_STATE_CONNECTED:
+      g_clear_handle_id (&self->authenticate_timeout_id, g_source_remove);
+      gtk_widget_hide (self->password_row);
+      break;
+
+    case OBS_CONNECTION_STATE_AUTHENTICATING:
+      break;
+
+    case OBS_CONNECTION_STATE_WAITING_FOR_CREDENTIALS:
+      gtk_widget_show (self->password_row);
+      break;
+    }
+}
+
+static void
+set_connection (ObsConnectionSettings *self,
+                ObsConnection         *connection)
+{
+  if (self->connection == connection)
+    return;
+
+  g_clear_signal_handler (&self->state_changed_id, self->connection);
+
+  g_set_object (&self->connection, connection);
+
+  self->state_changed_id = g_signal_connect (connection,
+                                             "state-changed",
+                                             G_CALLBACK (on_connection_state_changed_cb),
+                                             self);
+  update_password_row (self);
+}
+
+static void
+update_connection (ObsConnectionSettings *self)
+{
+  g_autoptr (ObsConnection) connection = NULL;
+  g_autoptr (GError) error = NULL;
+
+  connection = obs_connection_manager_get (self->connection_manager,
+                                           gtk_editable_get_text (self->host_entry),
+                                           gtk_adjustment_get_value (self->port_adjustment),
+                                           &error);
+
+  if (error)
+    {
+      g_warning ("Error creating new connection: %s", error->message);
+      return;
+    }
+
+  set_connection (self, connection);
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_CONNECTION]);
+}
+
+
+/*
+ * Callbacks
+ */
+
+static void
+on_connection_authenticated_cb (GObject      *source_object,
+                                GAsyncResult *result,
+                                gpointer      user_data)
+{
+  ObsConnectionSettings *self = OBS_CONNECTION_SETTINGS (user_data);
+  g_autoptr (GError) error = NULL;
+
+  obs_connection_authenticate_finish (OBS_CONNECTION (source_object), result, &error);
+
+  if (error)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_PROXY_AUTH_FAILED))
+        g_warning ("Error authenticating connection: %s", error->message);
+      gtk_widget_add_css_class (GTK_WIDGET (self->password_entry), "error");
+    }
+}
+
+static gboolean
+authenticate_after_timeout_cb (gpointer data)
+{
+  ObsConnectionSettings *self = OBS_CONNECTION_SETTINGS (data);
+
+  authenticate_connection (self);
+
+  self->authenticate_timeout_id = 0;
+  return G_SOURCE_REMOVE;
+}
+
+static gboolean
+update_connection_after_timeout_cb (gpointer data)
+{
+  ObsConnectionSettings *self = OBS_CONNECTION_SETTINGS (data);
+
+  update_connection (self);
+
+  self->update_connection_timeout_id = 0;
+  return G_SOURCE_REMOVE;
+}
+
+static void
+on_connection_state_changed_cb (ObsConnection         *connection,
+                                ObsConnectionState     old_state,
+                                ObsConnectionState     new_state,
+                                ObsConnectionSettings *self)
+{
+  update_password_row (self);
+}
+
+static void
+on_host_entry_text_changed_cb (GtkEditable           *host_entry,
+                               GParamSpec            *pspec,
+                               ObsConnectionSettings *self)
+{
+  g_clear_handle_id (&self->update_connection_timeout_id, g_source_remove);
+  self->update_connection_timeout_id = g_timeout_add_seconds (1,
+                                                              update_connection_after_timeout_cb,
+                                                              self);
+}
+
+static void
+on_password_entry_activated_cb (GtkEditable           *host_entry,
+                                ObsConnectionSettings *self)
+{
+  g_clear_handle_id (&self->authenticate_timeout_id, g_source_remove);
+  authenticate_connection (self);
+}
+
+static void
+on_password_entry_text_changed_cb (GtkEditable           *host_entry,
+                                   GParamSpec            *pspec,
+                                   ObsConnectionSettings *self)
+{
+  gtk_widget_remove_css_class (GTK_WIDGET (self->password_entry), "error");
+
+  g_clear_handle_id (&self->authenticate_timeout_id, g_source_remove);
+  self->authenticate_timeout_id = g_timeout_add_seconds (2, authenticate_after_timeout_cb, self);
+}
+
+static void
+on_port_adjustment_value_changed_cb (GtkAdjustment         *adjustment,
+                                     GParamSpec            *pspec,
+                                     ObsConnectionSettings *self)
+{
+  g_clear_handle_id (&self->update_connection_timeout_id, g_source_remove);
+  self->update_connection_timeout_id = g_timeout_add_seconds (1,
+                                                              update_connection_after_timeout_cb,
+                                                              self);
+}
+
+
+/*
+ * GObject overrides
+ */
+
+static void
+obs_connection_settings_finalize (GObject *object)
+{
+  ObsConnectionSettings *self = (ObsConnectionSettings *)object;
+
+  if (self->update_connection_timeout_id > 0)
+    update_connection (self);
+
+  if (self->authenticate_timeout_id > 0)
+    authenticate_connection (self);
+
+  g_clear_signal_handler (&self->state_changed_id, self->connection);
+  g_clear_handle_id (&self->update_connection_timeout_id, g_source_remove);
+  g_clear_handle_id (&self->authenticate_timeout_id, g_source_remove);
+  g_clear_object (&self->connection_manager);
+  g_clear_object (&self->connection);
+
+  G_OBJECT_CLASS (obs_connection_settings_parent_class)->finalize (object);
+}
+
+static void
+obs_connection_settings_constructed (GObject *object)
+{
+  ObsConnectionSettings *self = (ObsConnectionSettings *)object;
+
+  G_OBJECT_CLASS (obs_connection_settings_parent_class)->constructed (object);
+
+  g_signal_handlers_block_by_func (self->host_entry, on_host_entry_text_changed_cb, self);
+  gtk_editable_set_text (self->host_entry, obs_connection_get_host (self->connection));
+  g_signal_handlers_unblock_by_func (self->host_entry, on_host_entry_text_changed_cb, self);
+
+  g_signal_handlers_block_by_func (self->port_adjustment, on_port_adjustment_value_changed_cb, self);
+  gtk_adjustment_set_value (self->port_adjustment, obs_connection_get_port (self->connection));
+  g_signal_handlers_unblock_by_func (self->port_adjustment, on_port_adjustment_value_changed_cb, self);
+}
+
+static void
+obs_connection_settings_get_property (GObject    *object,
+                                      guint       prop_id,
+                                      GValue     *value,
+                                      GParamSpec *pspec)
+{
+  ObsConnectionSettings *self = OBS_CONNECTION_SETTINGS (object);
+
+  switch (prop_id)
+    {
+    case PROP_CONNECTION:
+      g_value_set_object (value, self->connection);
+      break;
+
+    case PROP_CONNECTION_MANAGER:
+      g_value_set_object (value, self->connection_manager);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+obs_connection_settings_set_property (GObject      *object,
+                                      guint         prop_id,
+                                      const GValue *value,
+                                      GParamSpec   *pspec)
+{
+  ObsConnectionSettings *self = OBS_CONNECTION_SETTINGS (object);
+
+  switch (prop_id)
+    {
+    case PROP_CONNECTION:
+      set_connection (self, g_value_get_object (value));
+      break;
+
+    case PROP_CONNECTION_MANAGER:
+      g_assert (self->connection_manager == NULL);
+      self->connection_manager = g_value_dup_object (value);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+obs_connection_settings_class_init (ObsConnectionSettingsClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->finalize = obs_connection_settings_finalize;
+  object_class->constructed = obs_connection_settings_constructed;
+  object_class->get_property = obs_connection_settings_get_property;
+  object_class->set_property = obs_connection_settings_set_property;
+
+  properties[PROP_CONNECTION] = g_param_spec_object ("connection", NULL, NULL,
+                                                     OBS_TYPE_CONNECTION,
+                                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_CONNECTION_MANAGER] = g_param_spec_object ("connection-manager", NULL, NULL,
+                                                             OBS_TYPE_CONNECTION_MANAGER,
+                                                             G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (object_class, N_PROPS, properties);
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/plugins/obs-studio/obs-connection-settings.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, ObsConnectionSettings, host_entry);
+  gtk_widget_class_bind_template_child (widget_class, ObsConnectionSettings, password_entry);
+  gtk_widget_class_bind_template_child (widget_class, ObsConnectionSettings, password_row);
+  gtk_widget_class_bind_template_child (widget_class, ObsConnectionSettings, port_adjustment);
+
+  gtk_widget_class_bind_template_callback (widget_class, on_host_entry_text_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_password_entry_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_password_entry_text_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_port_adjustment_value_changed_cb);
+}
+
+static void
+obs_connection_settings_init (ObsConnectionSettings *self)
+{
+  gtk_widget_init_template (GTK_WIDGET (self));
+}
+
+GtkWidget *
+obs_connection_settings_new (ObsConnectionManager *connection_manager,
+                             ObsConnection        *connection)
+{
+  return g_object_new (OBS_TYPE_CONNECTION_SETTINGS,
+                       "connection-manager", connection_manager,
+                       "connection", connection,
+                       NULL);
+}
+
+ObsConnection *
+obs_connection_settings_get_connection (ObsConnectionSettings *self)
+{
+  g_return_val_if_fail (OBS_IS_CONNECTION_SETTINGS (self), NULL);
+
+  return self->connection;
+}

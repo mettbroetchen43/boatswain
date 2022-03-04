@@ -9,6 +9,7 @@ plugins_libs = []
 plugins_confs = []
 
 subdir('default')
+subdir('obs-studio')
 subdir('soundboard')
 
 plugins_lib = static_library(

@@ -1,0 +1,33 @@
+plugins_ldflags += ['-Wl,--undefined=obs_studio_plugin_register_types']
+
+plugin_file = i18n.merge_file(
+  input: 'obs-studio.plugin.in',
+  output: 'obs-studio.plugin',
+  type: 'desktop',
+  po_dir: '../../po',
+)
+
+plugins_sources += files(
+  'obs-action.c',
+  'obs-action-factory.c',
+  'obs-connection.c',
+  'obs-connection-manager.c',
+  'obs-connection-settings.c',
+  'obs-record-action.c',
+  'obs-scene.c',
+  'obs-stream-action.c',
+  'obs-studio-plugin.c',
+  'obs-switch-scene-action.c',
+)
+
+plugins_deps += [
+  dependency('libsecret-1'),
+  dependency('libsoup-3.0'),
+]
+
+plugins_sources += gnome.compile_resources(
+  'obs-studio-resources',
+  'obs-studio.gresource.xml',
+  c_name: 'obs_studio_plugin',
+  dependencies: [ plugin_file ],
+)
