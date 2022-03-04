@@ -6,6 +6,7 @@ boatswain_sources = [
   'bs-empty-action.c',
   'bs-icon.c',
   'bs-icon-renderer.c',
+  'bs-omni-bar.c',
   'bs-page.c',
   'bs-page-item.c',
   'bs-profile.c',

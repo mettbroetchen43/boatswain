@@ -5,3 +5,7 @@ streamdeckeditor flowbox flowboxchild:selected {
 streamdeckeditor flowbox flowboxchild:selected > image {
   outline: 2px solid @accent_color;
 }
+
+splitbutton.omnibar {
+  background: alpha(currentColor, 0.075);
+}

@@ -73,59 +73,68 @@
         </child>
 
         <property name="title-widget">
-          <object class="GtkMenuButton" id="stream_deck_menubutton">
-            <property name="sensitive">False</property>
-            <property name="label" translatable="yes">No device selected</property>
-            <property name="always-show-arrow">True</property>
-            <property name="child">
-              <object class="GtkBox">
-                <property name="spacing">6</property>
-                <child>
-                  <object class="GtkImage" id="stream_deck_icon" />
-                </child>
-                <child>
-                  <object class="GtkLabel" id="stream_deck_name_label" />
-                </child>
-              </object>
-            </property>
-            <property name="popover">
-              <object class="GtkPopover">
-                <property name="width-request">200</property>
-                <style>
-                  <class name="menu" />
-                </style>
+          <object class="AdwClamp">
+            <property name="orientation">horizontal</property>
+            <property name="maximum-size">300</property>
+
+            <child>
+              <object class="BsOmniBar" id="omnibar">
+                <property name="sensitive">False</property>
 
                 <child>
                   <object class="GtkBox">
-                    <property name="margin-top">12</property>
-                    <property name="margin-bottom">12</property>
-                    <property name="margin-start">12</property>
-                    <property name="margin-end">12</property>
                     <property name="spacing">6</property>
-                    <property name="orientation">vertical</property>
-
                     <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="yes">Devices</property>
-                        <style>
-                          <class name="dim-label" />
-                          <class name="caption-heading" />
-                        </style>
-                      </object>
+                      <object class="GtkImage" id="stream_deck_icon" />
                     </child>
+                    <child>
+                      <object class="GtkLabel" id="stream_deck_name_label" />
+                    </child>
+                  </object>
+                </child>
+
+                <property name="menu-popover">
+                  <object class="GtkPopover">
+                    <property name="width-request">200</property>
+                    <style>
+                      <class name="menu" />
+                    </style>
 
                     <child>
-                      <object class="GtkListBox" id="stream_decks_listbox">
-                        <property name="selection-mode">none</property>
-                        <signal name="row-activated" handler="on_stream_decks_listbox_row_activated_cb" object="BsWindow" swapped="no" />
+                      <object class="GtkBox">
+                        <property name="margin-top">12</property>
+                        <property name="margin-bottom">12</property>
+                        <property name="margin-start">12</property>
+                        <property name="margin-end">12</property>
+                        <property name="spacing">6</property>
+                        <property name="orientation">vertical</property>
+
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label" translatable="yes">Devices</property>
+                            <style>
+                              <class name="dim-label" />
+                              <class name="caption-heading" />
+                            </style>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkListBox" id="stream_decks_listbox">
+                            <property name="selection-mode">none</property>
+                            <signal name="row-activated" handler="on_stream_decks_listbox_row_activated_cb" object="BsWindow" swapped="no" />
+                          </object>
+                        </child>
+
                       </object>
                     </child>
 
                   </object>
-                </child>
+                </property>
 
               </object>
-            </property>
+            </child>
+
           </object>
         </property>
 

@@ -19,6 +19,7 @@
 #include "bs-application.h"
 #include "bs-config.h"
 #include "bs-device-manager.h"
+#include "bs-omni-bar.h"
 #include "bs-profile.h"
 #include "bs-profiles-dialog.h"
 #include "bs-stream-deck.h"
@@ -35,12 +36,12 @@ struct _BsWindow
   GtkHeaderBar *header_bar;
   GtkWidget *empty_page;
   GtkStack *main_stack;
+  BsOmniBar *omnibar;
   GtkListBox *profiles_listbox;
   GtkEditable *new_profile_name_entry;
   GtkMenuButton *profiles_menu_button;
   GtkImage *stream_deck_icon;
   GtkLabel *stream_deck_name_label;
-  GtkMenuButton *stream_deck_menubutton;
   GtkListBox *stream_decks_listbox;
 
   BsStreamDeck *current_stream_deck;
@@ -143,7 +144,7 @@ select_stream_deck (BsWindow     *self,
   page_name = g_strdup_printf ("%p", stream_deck);
   gtk_stack_set_visible_child_name (self->main_stack, page_name);
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->stream_deck_menubutton), stream_deck != NULL);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->omnibar), stream_deck != NULL);
   gtk_image_set_from_gicon (self->stream_deck_icon, bs_stream_deck_get_icon (stream_deck));
   gtk_label_set_label (self->stream_deck_name_label, bs_stream_deck_get_name (stream_deck));
 
@@ -346,11 +347,14 @@ on_stream_decks_listbox_row_activated_cb (GtkListBox    *listbox,
                                           BsWindow      *self)
 {
   BsStreamDeck *stream_deck;
+  GtkWidget *menu_button;
 
   stream_deck = g_object_get_data (G_OBJECT (row), "stream-deck");
   select_stream_deck (self, stream_deck);
 
-  gtk_menu_button_popdown (self->stream_deck_menubutton);
+  menu_button = gtk_widget_get_ancestor (GTK_WIDGET (self->stream_decks_listbox),
+                                         GTK_TYPE_MENU_BUTTON);
+  gtk_menu_button_popdown (GTK_MENU_BUTTON (menu_button));
 }
 
 
@@ -428,6 +432,8 @@ bs_window_class_init (BsWindowClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  g_type_ensure (BS_TYPE_OMNI_BAR);
+
   object_class->finalize = bs_window_finalize;
   object_class->constructed = bs_window_constructed;
 
@@ -438,11 +444,11 @@ bs_window_class_init (BsWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsWindow, empty_page);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, main_stack);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, new_profile_name_entry);
+  gtk_widget_class_bind_template_child (widget_class, BsWindow, omnibar);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, profiles_listbox);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, profiles_menu_button);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_deck_icon);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_deck_name_label);
-  gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_deck_menubutton);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_decks_listbox);
 
   gtk_widget_class_bind_template_callback (widget_class, on_create_profile_button_clicked_cb);
