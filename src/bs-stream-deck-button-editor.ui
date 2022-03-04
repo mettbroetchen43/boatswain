@@ -187,10 +187,35 @@
                           <object class="AdwPreferencesGroup">
                             <child>
                               <object class="GtkButton">
-                                <property name="icon-name">go-previous-symbolic</property>
                                 <signal name="clicked" handler="on_go_previous_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                <style>
+                                  <class name="flat" />
+                                </style>
+
+                                <child>
+                                  <object class="GtkCenterBox">
+
+                                    <child type="start">
+                                      <object class="GtkImage">
+                                        <property name="icon-name">go-previous-symbolic</property>
+                                      </object>
+                                    </child>
+
+                                    <child type="center">
+                                      <object class="GtkLabel">
+                                        <property name="label" translatable="yes">Select action</property>
+                                        <style>
+                                          <class name="heading" />
+                                        </style>
+                                      </object>
+                                    </child>
+
+                                  </object>
+                                </child>
+
                               </object>
                             </child>
+
                           </object>
                         </child>
 
