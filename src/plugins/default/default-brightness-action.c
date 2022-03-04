@@ -83,6 +83,7 @@ set_brightness_mode (DefaultBrightnessAction *self,
                              "daytime-sunset-symbolic");
       break;
     }
+  bs_action_changed (BS_ACTION (self));
 }
 
 
@@ -253,6 +254,7 @@ default_brightness_action_set_property (GObject      *object,
 
     case PROP_VALUE:
       self->value = g_value_get_double (value);
+      bs_action_changed (BS_ACTION (self));
       break;
 
     default:

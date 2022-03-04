@@ -35,6 +35,7 @@ struct _SoundboardPlayAction
 
   SoundboardPlayBehavior behavior;
   GtkWidget *prefs;
+  gboolean deserializing;
 };
 
 static void on_media_stream_ended_changed_cb (GtkMediaStream       *media_stream,
@@ -105,6 +106,13 @@ get_media_stream (SoundboardPlayAction *self)
     }
 
   return NULL;
+}
+
+static void
+maybe_save_action (SoundboardPlayAction *self)
+{
+  if (!self->deserializing)
+    bs_action_changed (BS_ACTION (self));
 }
 
 
@@ -271,8 +279,10 @@ soundboard_play_action_deserialize_settings (BsAction   *action,
 {
   SoundboardPlayAction *self = SOUNDBOARD_PLAY_ACTION (action);
 
+  self->deserializing = TRUE;
   soundboard_play_action_prefs_deserialize_settings (SOUNDBOARD_PLAY_ACTION_PREFS (self->prefs),
                                                      settings);
+  self->deserializing = FALSE;
 }
 
 
@@ -343,6 +353,7 @@ soundboard_play_action_set_file (SoundboardPlayAction *self,
   g_queue_clear_full (self->media_streams_queue, g_object_unref);
 
   update_icon_from_state (self);
+  maybe_save_action (self);
 }
 
 void
@@ -354,6 +365,7 @@ soundboard_play_action_set_behavior (SoundboardPlayAction   *self,
   self->behavior = behavior;
 
   update_icon_from_state (self);
+  maybe_save_action (self);
 }
 
 void
@@ -372,4 +384,6 @@ soundboard_play_action_set_volume (SoundboardPlayAction *self,
 
   for (l = g_queue_peek_head_link (self->media_streams_queue); l; l = l->next)
     gtk_media_stream_set_volume (l->data, volume);
+
+  maybe_save_action (self);
 }

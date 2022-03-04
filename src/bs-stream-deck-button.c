@@ -38,6 +38,7 @@ struct _BsStreamDeckButton
   gulong action_contents_changed_id;
   gulong action_size_changed_id;
   gulong action_icon_changed_id;
+  gulong action_changed_id;
   int inhibit_page_updates_counter;
   gboolean pressed;
 };
@@ -126,6 +127,13 @@ remove_custom_icon (BsStreamDeckButton *self)
  */
 
 static void
+on_action_changed_cb (BsAction           *action,
+                      BsStreamDeckButton *self)
+{
+  bs_stream_deck_save (self->stream_deck);
+}
+
+static void
 on_icon_changed_cb (BsIcon             *icon,
                     BsStreamDeckButton *self)
 {
@@ -159,6 +167,7 @@ bs_stream_deck_button_finalize (GObject *object)
       g_clear_signal_handler (&self->action_contents_changed_id, bs_action_get_icon (self->action));
       g_clear_signal_handler (&self->action_size_changed_id, bs_action_get_icon (self->action));
       g_clear_signal_handler (&self->action_icon_changed_id, bs_action_get_icon (self->action));
+      g_clear_signal_handler (&self->action_changed_id, self->action);
       g_clear_object (&self->action);
     }
 
@@ -397,9 +406,13 @@ bs_stream_deck_button_set_action (BsStreamDeckButton *self,
       g_clear_signal_handler (&self->action_contents_changed_id, bs_action_get_icon (self->action));
       g_clear_signal_handler (&self->action_size_changed_id, bs_action_get_icon (self->action));
       g_clear_signal_handler (&self->action_icon_changed_id, bs_action_get_icon (self->action));
+      g_clear_signal_handler (&self->action_changed_id, self->action);
     }
 
   g_set_object (&self->action, action);
+
+  self->action_changed_id =
+    g_signal_connect (action, "changed", G_CALLBACK (on_action_changed_cb), self);
 
   action_icon = bs_action_get_icon (action);
   self->action_contents_changed_id =

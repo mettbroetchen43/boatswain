@@ -41,6 +41,13 @@ enum
   N_PROPS,
 };
 
+enum
+{
+  CHANGED,
+  N_SIGNALS,
+};
+
+static guint signals[N_SIGNALS];
 static GParamSpec* properties[N_PROPS];
 
 
@@ -130,6 +137,13 @@ bs_action_class_init (BsActionClass *klass)
                                                              G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
+
+  signals[CHANGED] = g_signal_new ("changed",
+                                   BS_TYPE_ACTION,
+                                   G_SIGNAL_RUN_LAST,
+                                   0, NULL, NULL, NULL,
+                                   G_TYPE_NONE,
+                                   0);
 }
 
 static void
@@ -297,4 +311,12 @@ bs_action_get_stream_deck_button (BsAction *self)
 
   priv = bs_action_get_instance_private (self);
   return priv->stream_deck_button;
+}
+
+void
+bs_action_changed (BsAction *self)
+{
+  g_return_if_fail (BS_IS_ACTION (self));
+
+  g_signal_emit (self, signals[CHANGED], 0);
 }

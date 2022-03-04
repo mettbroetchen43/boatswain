@@ -73,6 +73,7 @@ set_active_profile (DefaultSwitchProfileAction *self,
       BsIcon *icon = bs_action_get_icon (BS_ACTION (self));
 
       bs_icon_set_text (icon, bs_profile_get_name (profile));
+      bs_action_changed (BS_ACTION (self));
     }
 }
 
