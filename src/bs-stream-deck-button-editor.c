@@ -143,7 +143,7 @@ setup_button (BsStreamDeckButtonEditor *self)
 
   if (custom_icon)
     {
-      gtk_editable_set_text (self->custom_icon_text_entry, bs_icon_get_text (custom_icon));
+      gtk_editable_set_text (self->custom_icon_text_entry, bs_icon_get_text (custom_icon) ?: "");
       gtk_color_chooser_set_rgba (self->background_color_button,
                                   bs_icon_get_background_color (custom_icon));
     }
