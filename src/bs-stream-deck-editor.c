@@ -66,12 +66,8 @@ static void
 update_button_texture (BsStreamDeckEditor *self,
                        GtkFlowBoxChild    *child)
 {
-  g_autoptr (GdkTexture) texture = NULL;
-  g_autoptr (GError) error = NULL;
   BsStreamDeckButton *stream_deck_button;
-  BsIconRenderer *renderer;
-  GtkWidget *aspect_frame;
-  GtkWidget *picture;
+  GtkWidget *image;
   BsIcon *icon;
   int position;
 
@@ -79,21 +75,8 @@ update_button_texture (BsStreamDeckEditor *self,
   stream_deck_button = bs_stream_deck_get_button (self->stream_deck, position);
   icon = bs_stream_deck_button_get_icon (stream_deck_button);
 
-  renderer = bs_stream_deck_get_icon_renderer (self->stream_deck);
-  texture = bs_icon_renderer_compose_icon (renderer,
-                                           BS_ICON_COMPOSE_FLAG_IGNORE_TRANSFORMS,
-                                           icon,
-                                           &error);
-
-  if (error)
-    {
-      g_warning ("Error rendering button texture: %s", error->message);
-      return;
-    }
-
-  aspect_frame = gtk_flow_box_child_get_child (child);
-  picture = gtk_aspect_frame_get_child (GTK_ASPECT_FRAME (aspect_frame));
-  gtk_picture_set_paintable (GTK_PICTURE (picture), GDK_PAINTABLE (texture));
+  image = gtk_flow_box_child_get_child (child);
+  gtk_image_set_from_paintable (GTK_IMAGE (image), GDK_PAINTABLE (icon));
 }
 
 static void
@@ -109,23 +92,19 @@ build_button_grid (BsStreamDeckEditor *self)
   for (i = 0; i < layout->n_buttons; i++)
     {
       BsStreamDeckButton *stream_deck_button;
-      GtkWidget *aspect_frame;
       GtkWidget *button;
-      GtkWidget *picture;
+      GtkWidget *image;
 
       button = gtk_flow_box_child_new ();
       gtk_flow_box_append (self->buttons_flowbox, button);
 
-      aspect_frame = gtk_aspect_frame_new (0.5, 0.5, 1.0, FALSE);
-      gtk_widget_add_css_class (aspect_frame, "card");
-      gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (button), aspect_frame);
-
-      picture = gtk_picture_new ();
-      gtk_widget_set_halign (picture, GTK_ALIGN_CENTER);
-      gtk_widget_set_overflow (picture, GTK_OVERFLOW_HIDDEN);
-      gtk_picture_set_can_shrink (GTK_PICTURE (picture), FALSE);
-      gtk_picture_set_keep_aspect_ratio (GTK_PICTURE (picture), FALSE);
-      gtk_aspect_frame_set_child (GTK_ASPECT_FRAME (aspect_frame), picture);
+      image = gtk_image_new ();
+      gtk_widget_add_css_class (image, "card");
+      gtk_widget_set_size_request (image, 96, 96);
+      gtk_widget_set_halign (image, GTK_ALIGN_CENTER);
+      gtk_widget_set_valign (image, GTK_ALIGN_CENTER);
+      gtk_widget_set_overflow (image, GTK_OVERFLOW_HIDDEN);
+      gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (button), image);
 
       stream_deck_button = bs_stream_deck_get_button (self->stream_deck, i);
       g_signal_connect_object (stream_deck_button,
