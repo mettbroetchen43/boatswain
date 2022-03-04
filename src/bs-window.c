@@ -32,18 +32,22 @@ struct _BsWindow
 {
   GtkApplicationWindow  parent_instance;
 
+  GtkAdjustment *brightness_adjustment;
   GtkWidget *create_profile_button;
   GtkHeaderBar *header_bar;
   GtkWidget *empty_page;
+  GtkLabel *firmware_version_label;
   GtkStack *main_stack;
   BsOmniBar *omnibar;
   GtkListBox *profiles_listbox;
   GtkEditable *new_profile_name_entry;
   GtkMenuButton *profiles_menu_button;
+  GtkLabel *serial_number_label;
   GtkImage *stream_deck_icon;
   GtkLabel *stream_deck_name_label;
   GtkListBox *stream_decks_listbox;
 
+  GBinding *brightness_binding;
   BsStreamDeck *current_stream_deck;
   GBinding *profile_name_binding;
   GtkWindow *profiles_dialog;
@@ -145,15 +149,25 @@ select_stream_deck (BsWindow     *self,
   gtk_stack_set_visible_child_name (self->main_stack, page_name);
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->omnibar), stream_deck != NULL);
-  gtk_image_set_from_gicon (self->stream_deck_icon, bs_stream_deck_get_icon (stream_deck));
-  gtk_label_set_label (self->stream_deck_name_label, bs_stream_deck_get_name (stream_deck));
 
   g_clear_signal_handler (&self->active_profile_changed_id, self->current_stream_deck);
+  g_clear_pointer (&self->brightness_binding, g_binding_unbind);
 
   self->current_stream_deck = stream_deck;
 
   if (stream_deck)
     {
+      gtk_image_set_from_gicon (self->stream_deck_icon, bs_stream_deck_get_icon (stream_deck));
+      gtk_label_set_label (self->stream_deck_name_label, bs_stream_deck_get_name (stream_deck));
+      gtk_label_set_label (self->serial_number_label, bs_stream_deck_get_serial_number (stream_deck));
+      gtk_label_set_label (self->firmware_version_label, bs_stream_deck_get_firmware_version (stream_deck));
+
+      self->brightness_binding = g_object_bind_property (stream_deck,
+                                                         "brightness",
+                                                         self->brightness_adjustment,
+                                                         "value",
+                                                         G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+
       self->active_profile_changed_id = g_signal_connect (stream_deck,
                                                           "notify::active-profile",
                                                           G_CALLBACK (on_current_stream_deck_active_profile_changed_cb),
@@ -439,14 +453,17 @@ bs_window_class_init (BsWindowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-window.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, BsWindow, brightness_adjustment);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, create_profile_button);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, header_bar);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, empty_page);
+  gtk_widget_class_bind_template_child (widget_class, BsWindow, firmware_version_label);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, main_stack);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, new_profile_name_entry);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, omnibar);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, profiles_listbox);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, profiles_menu_button);
+  gtk_widget_class_bind_template_child (widget_class, BsWindow, serial_number_label);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_deck_icon);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_deck_name_label);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_decks_listbox);
