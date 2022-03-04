@@ -250,7 +250,7 @@ bs_stream_deck_button_new (BsStreamDeck *stream_deck,
   self->position = position;
 
   empty_icon = bs_icon_new_empty ();
-  bs_stream_deck_button_set_custom_icon (self, empty_icon, NULL);
+  bs_stream_deck_button_set_custom_icon (self, empty_icon);
 
   return self;
 }
@@ -322,26 +322,14 @@ bs_stream_deck_button_get_custom_icon (BsStreamDeckButton *self)
   return self->custom_icon;
 }
 
-gboolean
+void
 bs_stream_deck_button_set_custom_icon (BsStreamDeckButton  *self,
-                                       BsIcon              *icon,
-                                       GError             **error)
+                                       BsIcon              *icon)
 {
-  gboolean result;
-
-  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), FALSE);
-  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+  g_return_if_fail (BS_IS_STREAM_DECK_BUTTON (self));
 
   if (self->custom_icon == icon)
-    return TRUE;
-
-  result = bs_stream_deck_set_button_icon (self->stream_deck,
-                                           self->position,
-                                           icon,
-                                           error);
-
-  if (!result)
-    return FALSE;
+    return;
 
   remove_custom_icon (self);
 
@@ -358,12 +346,11 @@ bs_stream_deck_button_set_custom_icon (BsStreamDeckButton  *self,
 
   update_relative_icon (self);
   update_page (self);
+  update_icon (self);
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_CUSTOM_ICON]);
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ICON]);
   g_signal_emit (self, signals[ICON_CHANGED], 0, icon);
-
-  return TRUE;
 }
 
 

@@ -38,9 +38,8 @@ gboolean bs_stream_deck_button_get_pressed (BsStreamDeckButton *self);
 BsIcon * bs_stream_deck_button_get_icon (BsStreamDeckButton *self);
 
 BsIcon * bs_stream_deck_button_get_custom_icon (BsStreamDeckButton *self);
-gboolean bs_stream_deck_button_set_custom_icon (BsStreamDeckButton  *self,
-                                                BsIcon              *icon,
-                                                GError             **error);
+void bs_stream_deck_button_set_custom_icon (BsStreamDeckButton *self,
+                                            BsIcon             *icon);
 
 BsAction * bs_stream_deck_button_get_action (BsStreamDeckButton *self);
 void bs_stream_deck_button_set_action (BsStreamDeckButton *self,

@@ -287,10 +287,7 @@ load_active_page (BsStreamDeck *self)
       bs_stream_deck_button_inhibit_page_updates (stream_deck_button);
 
       bs_stream_deck_button_set_action (stream_deck_button, action);
-      bs_stream_deck_button_set_custom_icon (stream_deck_button, custom_icon, &error);
-
-      if (error)
-        g_warning ("Failed to set custom icon: %s", error->message);
+      bs_stream_deck_button_set_custom_icon (stream_deck_button, custom_icon);
 
       bs_stream_deck_button_uninhibit_page_updates (stream_deck_button);
     }

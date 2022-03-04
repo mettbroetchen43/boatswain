@@ -279,9 +279,7 @@ on_file_chooser_native_response_cb (GtkNativeDialog          *native,
           goto out;
         }
 
-      bs_stream_deck_button_set_custom_icon (self->button, icon, &error);
-      if (error)
-        g_warning ("Error setting custom icon: %s", error->message);
+      bs_stream_deck_button_set_custom_icon (self->button, icon);
     }
 
 out:
