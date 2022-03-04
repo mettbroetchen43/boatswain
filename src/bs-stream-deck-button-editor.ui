@@ -137,6 +137,7 @@
 
                         <child>
                           <object class="AdwPreferencesGroup">
+                            <property name="visible" bind-source="remove_action_button" bind-property="visible" bind-flags="default|sync-create|invert-boolean" />
 
                             <child>
                               <object class="AdwActionRow">
@@ -152,10 +153,15 @@
                               </object>
                             </child>
 
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="AdwPreferencesGroup">
+
                             <child>
                               <object class="GtkButton" id="remove_action_button">
                                 <property name="visible">False</property>
-                                <property name="margin-top">12</property>
                                 <property name="label" translatable="yes">Remove Action</property>
                                 <signal name="clicked" handler="on_remove_action_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
                                 <style>
