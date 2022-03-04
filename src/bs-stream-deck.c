@@ -67,6 +67,7 @@ struct _BsStreamDeck
   GListStore *profiles;
   BsProfile *active_profile;
   GQueue *active_pages;
+  guint save_timeout_id;
 
   const StreamDeckModelInfo *model_info;
   GUsbDevice *device;
@@ -300,6 +301,22 @@ swap_button_index_original (BsStreamDeck *self,
   int column = button_index % self->model_info->button_layout.columns;
   int actual_index = ((int) button_index - column) + ((int) self->model_info->button_layout.columns - 1 - column);
   return (uint8_t) actual_index;
+}
+
+
+/*
+ * Callbacks
+ */
+
+static gboolean
+save_after_timeout_cb (gpointer data)
+{
+  BsStreamDeck *self = BS_STREAM_DECK (data);
+
+  save_profiles (self);
+
+  self->save_timeout_id = 0;
+  return G_SOURCE_REMOVE;
 }
 
 
@@ -1006,6 +1023,7 @@ bs_stream_deck_finalize (GObject *object)
     g_source_destroy (self->poll_source);
   g_clear_pointer (&self->poll_source, g_source_unref);
 
+  g_clear_handle_id (&self->save_timeout_id, g_source_remove);
   g_clear_pointer (&self->serial_number, g_free);
   g_clear_pointer (&self->buttons, g_ptr_array_unref);
   g_clear_pointer (&self->handle, hid_close);
@@ -1383,4 +1401,15 @@ bs_stream_deck_pop_page (BsStreamDeck *self)
   bs_page_update_all_items (g_queue_peek_head (self->active_pages));
 
   load_active_page (self);
+}
+
+void
+bs_stream_deck_save (BsStreamDeck *self)
+{
+  g_return_if_fail (BS_IS_STREAM_DECK (self));
+
+  if (self->save_timeout_id > 0)
+    return;
+
+  self->save_timeout_id = g_timeout_add_seconds (5, save_after_timeout_cb, self);
 }
