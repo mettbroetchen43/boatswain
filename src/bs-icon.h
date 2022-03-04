@@ -63,4 +63,8 @@ int bs_icon_get_margin (BsIcon *self);
 void bs_icon_set_margin (BsIcon *self,
                          int     margin);
 
+BsIcon * bs_icon_get_relative (BsIcon *self);
+void  bs_icon_set_relative (BsIcon *self,
+                            BsIcon *relative);
+
 G_END_DECLS

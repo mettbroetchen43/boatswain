@@ -30,9 +30,13 @@ struct _BsIcon
   GFile *file;
   char *icon_name;
   int margin;
+  BsIcon *relative;
 
   GtkIconPaintable *icon_paintable;
   GdkTexture *file_texture;
+
+  gulong relative_size_changed_id;
+  gulong relative_content_changed_id;
 
   gulong size_changed_id;
   gulong content_changed_id;
@@ -51,6 +55,7 @@ enum
   PROP_ICON_NAME,
   PROP_MARGIN,
   PROP_PAINTABLE,
+  PROP_RELATIVE,
   PROP_TEXT,
   N_PROPS
 };
@@ -74,6 +79,72 @@ on_paintable_size_changed_cb (GdkPaintable *paintable,
                               BsIcon       *self)
 {
   gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
+}
+
+static gboolean
+snapshot_any_paintable (GdkSnapshot *snapshot,
+                        BsIcon      *icon,
+                        double       width,
+                        double       height)
+{
+  gboolean painted = FALSE;
+
+  gtk_snapshot_save (snapshot);
+  gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (icon->margin, icon->margin));
+
+  if (icon->paintable)
+    {
+      gdk_paintable_snapshot (icon->paintable,
+                              snapshot,
+                              width - icon->margin * 2,
+                              height - icon->margin * 2);
+      painted = TRUE;
+    }
+  else if (icon->file_texture)
+    {
+      gdk_paintable_snapshot (GDK_PAINTABLE (icon->file_texture),
+                              snapshot,
+                              width - icon->margin * 2,
+                              height - icon->margin * 2);
+      painted = TRUE;
+    }
+  else if (icon->icon_paintable)
+    {
+      gdk_paintable_snapshot (GDK_PAINTABLE (icon->icon_paintable),
+                              snapshot,
+                              width - icon->margin * 2,
+                              height - icon->margin * 2);
+
+      painted = TRUE;
+    }
+
+  gtk_snapshot_restore (snapshot);
+
+  return painted;
+}
+
+static gboolean
+snapshot_any_layout (GdkSnapshot *snapshot,
+                     BsIcon      *icon,
+                     double       width,
+                     double       height)
+{
+  if (icon->layout)
+    {
+      int text_width, text_height;
+      int x, y;
+
+      pango_layout_get_pixel_size (icon->layout, &text_width, &text_height);
+      x = (width - text_width) / 2.0;
+      y = height - text_height;
+
+      gtk_snapshot_save (snapshot);
+      gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (x, y));
+      gtk_snapshot_append_layout (snapshot, icon->layout, &(GdkRGBA) { 1.0, 1.0, 1.0, 1.0 });
+      gtk_snapshot_restore (snapshot);
+    }
+
+  return icon->layout != NULL;
 }
 
 
@@ -118,48 +189,11 @@ bs_icon_snapshot (GdkPaintable *paintable,
                              &self->background_color,
                              &GRAPHENE_RECT_INIT (0, 0, width, height));
 
-  gtk_snapshot_save (snapshot);
-  gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (self->margin, self->margin));
+  if (!snapshot_any_paintable (snapshot, self, width, height) && self->relative)
+    snapshot_any_paintable (snapshot, self->relative, width, height);
 
-
-  if (self->paintable)
-    {
-      gdk_paintable_snapshot (self->paintable,
-                              snapshot,
-                              width - self->margin * 2,
-                              height - self->margin * 2);
-    }
-  else if (self->file_texture)
-    {
-      gdk_paintable_snapshot (GDK_PAINTABLE (self->file_texture),
-                              snapshot,
-                              width - self->margin * 2,
-                              height - self->margin * 2);
-    }
-  else if (self->icon_paintable)
-    {
-      gdk_paintable_snapshot (GDK_PAINTABLE (self->icon_paintable),
-                              snapshot,
-                              width - self->margin * 2,
-                              height - self->margin * 2);
-    }
-
-  gtk_snapshot_restore (snapshot);
-
-  if (self->layout)
-    {
-      int text_width, text_height;
-      int x, y;
-
-      pango_layout_get_pixel_size (self->layout, &text_width, &text_height);
-      x = (width - text_width) / 2.0;
-      y = height - text_height;
-
-      gtk_snapshot_save (snapshot);
-      gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (x, y));
-      gtk_snapshot_append_layout (snapshot, self->layout, &(GdkRGBA) { 1.0, 1.0, 1.0, 1.0 });
-      gtk_snapshot_restore (snapshot);
-    }
+  if (!snapshot_any_layout (snapshot, self, width, height) && self->relative)
+    snapshot_any_layout (snapshot, self->relative, width, height);
 }
 
 static void
@@ -181,6 +215,8 @@ bs_icon_finalize (GObject *object)
 {
   BsIcon *self = (BsIcon *)object;
 
+  g_clear_signal_handler (&self->relative_content_changed_id, self->relative);
+  g_clear_signal_handler (&self->relative_size_changed_id, self->relative);
   g_clear_signal_handler (&self->content_changed_id, self->paintable);
   g_clear_signal_handler (&self->size_changed_id, self->paintable);
   g_clear_pointer (&self->icon_name, g_free);
@@ -222,6 +258,10 @@ bs_icon_get_property (GObject    *object,
       g_value_set_object (value, self->paintable);
       break;
 
+    case PROP_RELATIVE:
+      g_value_set_object (value, self->relative);
+      break;
+
     case PROP_TEXT:
       g_value_set_string (value, self->layout ? pango_layout_get_text (self->layout) : NULL);
       break;
@@ -261,6 +301,10 @@ bs_icon_set_property (GObject      *object,
       bs_icon_set_paintable (self, g_value_get_object (value));
       break;
 
+    case PROP_RELATIVE:
+      bs_icon_set_relative (self, g_value_get_object (value));
+      break;
+
     case PROP_TEXT:
       bs_icon_set_text (self, g_value_get_string (value));
       break;
@@ -297,6 +341,10 @@ bs_icon_class_init (BsIconClass *klass)
 
   properties[PROP_PAINTABLE] = g_param_spec_object ("paintable", NULL, NULL,
                                                     GDK_TYPE_PAINTABLE,
+                                                    G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_RELATIVE] = g_param_spec_object ("relative", NULL, NULL,
+                                                    BS_TYPE_ICON,
                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_TEXT] = g_param_spec_string ("text", NULL, NULL,
@@ -612,4 +660,48 @@ bs_icon_set_margin (BsIcon *self,
   gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_MARGIN]);
+}
+
+BsIcon *
+bs_icon_get_relative (BsIcon *self)
+{
+  g_return_val_if_fail (BS_IS_ICON (self), NULL);
+
+  return self->relative;
+}
+
+void
+bs_icon_set_relative (BsIcon *self,
+                      BsIcon *relative)
+{
+  g_return_if_fail (BS_IS_ICON (self));
+  g_return_if_fail (relative == NULL || BS_IS_ICON (relative));
+  g_return_if_fail (relative != self);
+
+  if (self->relative == relative)
+    return;
+
+  g_clear_signal_handler (&self->relative_content_changed_id, self->relative);
+  g_clear_signal_handler (&self->relative_size_changed_id, self->relative);
+
+  self->relative = relative;
+
+  if (relative)
+    {
+      self->relative_content_changed_id = g_signal_connect (relative,
+                                                            "invalidate-contents",
+                                                            G_CALLBACK (on_paintable_contents_changed_cb),
+                                                            self);
+
+      self->relative_size_changed_id = g_signal_connect (relative,
+                                                         "invalidate-contents",
+                                                         G_CALLBACK (on_paintable_size_changed_cb),
+                                                         self);
+
+    }
+
+  gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
+  gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_RELATIVE]);
 }
