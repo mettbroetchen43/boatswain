@@ -43,6 +43,9 @@ BsPage * bs_page_get_parent (BsPage *self);
 
 BsProfile * bs_page_get_profile (BsPage *self);
 
+BsPageItem * bs_page_get_item (BsPage  *self,
+                               uint8_t  position);
+
 void bs_page_update_item_from_button (BsPage             *self,
                                       BsStreamDeckButton *button);
 

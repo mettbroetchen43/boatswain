@@ -24,6 +24,7 @@
 #include "bs-empty-action.h"
 #include "bs-icon.h"
 #include "bs-page.h"
+#include "bs-page-item.h"
 #include "bs-stream-deck.h"
 #include "bs-stream-deck-button.h"
 #include "bs-stream-deck-button-editor.h"
@@ -113,6 +114,7 @@ add_action_factory (BsStreamDeckButtonEditor *self,
       gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
       g_object_set_data (G_OBJECT (row), "factory", action_factory);
       g_object_set_data (G_OBJECT (row), "action-info", (gpointer) info);
+      g_object_set_data (G_OBJECT (row), "plugin-info", (gpointer) plugin_info);
       g_signal_connect (row, "activated", G_CALLBACK (on_action_row_activated_cb), self);
 
       image = gtk_image_new_from_icon_name (info->icon_name);
@@ -226,16 +228,37 @@ static void
 on_action_row_activated_cb (GtkListBoxRow            *row,
                             BsStreamDeckButtonEditor *self)
 {
-  g_autoptr (BsAction) action = NULL;
-  BsActionFactory *action_factory;
-  BsActionInfo *info;
+  g_autoptr (BsAction) new_action = NULL;
+  g_autoptr (BsIcon) new_custom_icon = NULL;
+  g_autoptr (GError) error = NULL;
+  PeasPluginInfo *plugin_info;
+  BsActionInfo *action_info;
+  BsStreamDeck *stream_deck;
+  BsPageItem *item;
+  BsIcon *custom_icon;
+  BsPage *active_page;
 
-  action_factory = g_object_get_data (G_OBJECT (row), "factory");
-  info = g_object_get_data (G_OBJECT (row), "action-info");
-  action = bs_action_factory_create_action (action_factory, self->button, info);
+  stream_deck = bs_stream_deck_button_get_stream_deck (self->button);
+  active_page = bs_stream_deck_get_active_page (stream_deck);
+  plugin_info = g_object_get_data (G_OBJECT (row), "plugin-info");
+  action_info = g_object_get_data (G_OBJECT (row), "action-info");
 
-  bs_stream_deck_button_set_action (self->button, action);
+  item = bs_page_get_item (active_page, bs_stream_deck_button_get_position (self->button));
+  bs_page_item_set_item_type (item, BS_PAGE_ITEM_ACTION);
+  bs_page_item_set_factory (item, peas_plugin_info_get_module_name (plugin_info));
+  bs_page_item_set_action (item, action_info->id);
 
+  custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+  if (custom_icon)
+    bs_page_item_set_custom_icon (item, bs_icon_to_json (custom_icon));
+
+  bs_page_realize (active_page, self->button, &new_custom_icon, &new_action, &error);
+
+  if (error)
+    g_warning ("Error realizing action: %s", error->message);
+
+  bs_stream_deck_button_set_action (self->button, new_action);
+  bs_stream_deck_button_set_custom_icon (self->button, new_custom_icon);
   update_action_preferences_group (self);
 
   adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_BACK);

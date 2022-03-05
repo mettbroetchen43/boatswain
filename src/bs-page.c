@@ -259,6 +259,26 @@ bs_page_to_json (BsPage *self)
   return json_builder_get_root (builder);
 }
 
+
+BsPageItem *
+bs_page_get_item (BsPage  *self,
+                  uint8_t  position)
+{
+  BsPageItem *item;
+
+  g_return_val_if_fail (BS_IS_PAGE (self), NULL);
+
+  item = get_item (self, position);
+
+  if (!item)
+    {
+      item = bs_page_item_new (self);
+      g_ptr_array_insert (self->items, position, item);
+    }
+
+  return item;
+}
+
 BsPage *
 bs_page_get_parent (BsPage *self)
 {
