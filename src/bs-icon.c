@@ -158,6 +158,49 @@ get_real_opacity (BsIcon *self)
   return self->opacity;
 }
 
+static void
+premultiply_rgba (const GdkRGBA *rgba,
+                  GdkRGBA       *premultiplied_rgba)
+{
+  premultiplied_rgba->red = rgba->red * rgba->alpha;
+  premultiplied_rgba->green = rgba->green * rgba->alpha;
+  premultiplied_rgba->blue = rgba->blue * rgba->alpha;
+  premultiplied_rgba->alpha = 1.0;
+}
+
+static void
+snapshot_icon (BsIcon      *self,
+               GdkSnapshot *snapshot,
+               double       width,
+               double       height,
+               gboolean     premultiply)
+{
+  GdkRGBA background_color;
+  double opacity;
+
+  opacity = get_real_opacity (self);
+
+  background_color = self->background_color;
+  if (premultiply)
+    premultiply_rgba (&background_color, &background_color);
+
+  gtk_snapshot_append_color (snapshot,
+                             &background_color,
+                             &GRAPHENE_RECT_INIT (0, 0, width, height));
+
+  if (opacity != -1.0)
+    gtk_snapshot_push_opacity (snapshot, opacity);
+
+  if (!snapshot_any_paintable (snapshot, self, width, height) && self->relative)
+    snapshot_any_paintable (snapshot, self->relative, width, height);
+
+  if (!snapshot_any_layout (snapshot, self, width, height) && self->relative)
+    snapshot_any_layout (snapshot, self->relative, width, height);
+
+  if (opacity != -1.0)
+    gtk_snapshot_pop (snapshot);
+}
+
 
 /*
  * GdkPaintable interface
@@ -195,25 +238,8 @@ bs_icon_snapshot (GdkPaintable *paintable,
                   double        height)
 {
   BsIcon *self = BS_ICON (paintable);
-  double opacity;
 
-  opacity = get_real_opacity (self);
-
-  gtk_snapshot_append_color (snapshot,
-                             &self->background_color,
-                             &GRAPHENE_RECT_INIT (0, 0, width, height));
-
-  if (opacity != -1.0)
-    gtk_snapshot_push_opacity (snapshot, opacity);
-
-  if (!snapshot_any_paintable (snapshot, self, width, height) && self->relative)
-    snapshot_any_paintable (snapshot, self->relative, width, height);
-
-  if (!snapshot_any_layout (snapshot, self, width, height) && self->relative)
-    snapshot_any_layout (snapshot, self->relative, width, height);
-
-  if (opacity != -1.0)
-    gtk_snapshot_pop (snapshot);
+  snapshot_icon (self, snapshot, width, height, FALSE);
 }
 
 static void
@@ -484,6 +510,19 @@ bs_icon_to_json (BsIcon *self)
   json_builder_end_object (builder);
 
   return json_builder_get_root (builder);
+}
+
+void
+bs_icon_snapshot_premultiplied (BsIcon      *self,
+                                GdkSnapshot *snapshot,
+                                double       width,
+                                double       height)
+
+{
+  g_return_if_fail (BS_IS_ICON (self));
+  g_return_if_fail (GDK_IS_SNAPSHOT (snapshot));
+
+  snapshot_icon (self, snapshot, width, height, TRUE);
 }
 
 const GdkRGBA *

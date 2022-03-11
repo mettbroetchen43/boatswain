@@ -38,6 +38,11 @@ BsIcon * bs_icon_new_empty (void);
 
 JsonNode * bs_icon_to_json (BsIcon *self);
 
+void bs_icon_snapshot_premultiplied (BsIcon      *self,
+                                     GdkSnapshot *snapshot,
+                                     double       width,
+                                     double       height);
+
 const GdkRGBA * bs_icon_get_background_color (BsIcon *self);
 void bs_icon_set_background_color (BsIcon        *self,
                                    const GdkRGBA *background_color);
