@@ -30,6 +30,7 @@ struct _BsIcon
   GFile *file;
   char *icon_name;
   int margin;
+  double opacity;
   BsIcon *relative;
 
   GtkIconPaintable *icon_paintable;
@@ -54,6 +55,7 @@ enum
   PROP_FILE,
   PROP_ICON_NAME,
   PROP_MARGIN,
+  PROP_OPACITY,
   PROP_PAINTABLE,
   PROP_RELATIVE,
   PROP_TEXT,
@@ -147,6 +149,15 @@ snapshot_any_layout (GdkSnapshot *snapshot,
   return icon->layout != NULL;
 }
 
+static inline double
+get_real_opacity (BsIcon *self)
+{
+  if (self->opacity == -1.0 && self->relative)
+    return self->relative->opacity;
+
+  return self->opacity;
+}
+
 
 /*
  * GdkPaintable interface
@@ -184,16 +195,25 @@ bs_icon_snapshot (GdkPaintable *paintable,
                   double        height)
 {
   BsIcon *self = BS_ICON (paintable);
+  double opacity;
+
+  opacity = get_real_opacity (self);
 
   gtk_snapshot_append_color (snapshot,
                              &self->background_color,
                              &GRAPHENE_RECT_INIT (0, 0, width, height));
+
+  if (opacity != -1.0)
+    gtk_snapshot_push_opacity (snapshot, opacity);
 
   if (!snapshot_any_paintable (snapshot, self, width, height) && self->relative)
     snapshot_any_paintable (snapshot, self->relative, width, height);
 
   if (!snapshot_any_layout (snapshot, self, width, height) && self->relative)
     snapshot_any_layout (snapshot, self->relative, width, height);
+
+  if (opacity != -1.0)
+    gtk_snapshot_pop (snapshot);
 }
 
 static void
@@ -254,6 +274,10 @@ bs_icon_get_property (GObject    *object,
       g_value_set_int (value, self->margin);
       break;
 
+    case PROP_OPACITY:
+      g_value_set_double (value, self->opacity);
+      break;
+
     case PROP_PAINTABLE:
       g_value_set_object (value, self->paintable);
       break;
@@ -295,6 +319,10 @@ bs_icon_set_property (GObject      *object,
 
     case PROP_MARGIN:
       bs_icon_set_margin (self, g_value_get_int (value));
+      break;
+
+    case PROP_OPACITY:
+      bs_icon_set_opacity (self, g_value_get_double (value));
       break;
 
     case PROP_PAINTABLE:
@@ -339,6 +367,10 @@ bs_icon_class_init (BsIconClass *klass)
                                               0, G_MAXINT, 12,
                                               G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
+  properties[PROP_OPACITY] = g_param_spec_double ("opacity", NULL, NULL,
+                                                  -1.0, 1.0, -1.0,
+                                                  G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
   properties[PROP_PAINTABLE] = g_param_spec_object ("paintable", NULL, NULL,
                                                     GDK_TYPE_PAINTABLE,
                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
@@ -358,6 +390,7 @@ static void
 bs_icon_init (BsIcon *self)
 {
   self->margin = 12;
+  self->opacity = -1.0;
 }
 
 
@@ -660,6 +693,32 @@ bs_icon_set_margin (BsIcon *self,
   gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_MARGIN]);
+}
+
+double
+bs_icon_get_opacity (BsIcon *self)
+{
+  g_return_val_if_fail (BS_IS_ICON (self), -1.0);
+
+  return self->opacity;
+}
+
+void
+bs_icon_set_opacity (BsIcon *self,
+                     double  opacity)
+{
+  g_return_if_fail (BS_IS_ICON (self));
+  g_return_if_fail (opacity == -1.0 || (opacity >= 0.0 && opacity <= 1.0));
+
+  if (G_APPROX_VALUE (self->opacity, opacity, DBL_EPSILON))
+    return;
+
+  self->opacity = opacity;
+
+  gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
+  gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_OPACITY]);
 }
 
 BsIcon *

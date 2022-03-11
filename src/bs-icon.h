@@ -63,6 +63,10 @@ int bs_icon_get_margin (BsIcon *self);
 void bs_icon_set_margin (BsIcon *self,
                          int     margin);
 
+double bs_icon_get_opacity (BsIcon *self);
+void  bs_icon_set_opacity (BsIcon *self,
+                           double  opacity);
+
 BsIcon * bs_icon_get_relative (BsIcon *self);
 void  bs_icon_set_relative (BsIcon *self,
                             BsIcon *relative);
