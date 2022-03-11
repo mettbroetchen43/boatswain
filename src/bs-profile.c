@@ -62,6 +62,7 @@ bs_profile_finalize (GObject *object)
 
   g_clear_pointer (&self->id, g_free);
   g_clear_pointer (&self->name, g_free);
+  g_clear_object (&self->root_page);
 
   G_OBJECT_CLASS (bs_profile_parent_class)->finalize (object);
 }
