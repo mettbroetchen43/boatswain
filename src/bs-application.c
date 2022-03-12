@@ -174,9 +174,12 @@ request_background_cb (gpointer user_data)
 static void
 bs_application_startup (GApplication *application)
 {
-  BsApplication *self = BS_APPLICATION (application);
+  AdwStyleManager *style_manager;
+  BsApplication *self;
   PeasEngine *engine;
   const GList *l;
+
+  self = BS_APPLICATION (application);
 
   G_APPLICATION_CLASS (bs_application_parent_class)->startup (application);
 
@@ -196,6 +199,9 @@ bs_application_startup (GApplication *application)
   self->portal = xdp_portal_new ();
 
   self->request_background_timeout_id = g_timeout_add_seconds (1, request_background_cb, self);
+
+  style_manager = adw_application_get_style_manager (ADW_APPLICATION (application));
+  adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_PREFER_DARK);
 }
 
 static void
