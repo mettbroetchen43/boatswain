@@ -2,7 +2,7 @@
 Name = Launcher
 Module = launcher
 Description = Launcher plugin
-Icon=gtk3-demo-symbolic
+Icon=system-run-symbolic
 Authors = Emmanuele Bassi
 Copyright = Copyleft © The Boatswain maintainers
 Builtin = true
