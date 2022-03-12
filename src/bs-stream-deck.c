@@ -508,7 +508,7 @@ set_button_texture_original (BsStreamDeck  *self,
   /* payload[2] set in loop */
   payload[3] = 0;
   /* payload[4] set in loop */
-  payload[5] = button + 1;
+  payload[5] = swap_button_index_original (self, button) + 1;
   payload[6] = 0;
   payload[7] = 0;
   payload[8] = 0;
@@ -519,8 +519,6 @@ set_button_texture_original (BsStreamDeck  *self,
   payload[13] = 0;
   payload[14] = 0;
   payload[15] = 0;
-
-  // TODO: convert button index
 
   page = 0;
   bytes_remaining = buffer_size;
