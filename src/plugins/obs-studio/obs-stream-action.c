@@ -110,7 +110,7 @@ obs_stream_action_activate (BsAction *action)
   if (obs_connection_get_state (connection) != OBS_CONNECTION_STATE_CONNECTED)
     return;
 
-  obs_connection_toggle_recording (connection);
+  obs_connection_toggle_streaming (connection);
 }
 
 
