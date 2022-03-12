@@ -9,6 +9,13 @@
   <summary>Control your Elgato Stream Deck devices</summary>
 	<description>
 	  <p>Boatswain allows you to control Elgato Stream Deck devices.</p>
+	  <p>With Boatswain you will be able to:</p>
+    <ul>
+      <li>Organize your actions in pages and profiles</li>
+      <li>Set custom icons to actions</li>
+      <li>Play sound effects during your streams</li>
+      <li>Control OBS Studio using Stream Deck (requires the obs-websocket extension)</li>
+    </ul>
 	</description>
 
   <screenshots>

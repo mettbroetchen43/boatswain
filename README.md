@@ -1,3 +1,11 @@
+Control Elgato Stream Deck devices.
+
+## Features
+
+ * Organize your actions in pages and profiles
+ * Set custom icons to buttons
+ * Play sound effects during your streams
+ * Control OBS Studio using Stream Deck (requires the obs-websocket extension)
 
 ## udev rules
 
