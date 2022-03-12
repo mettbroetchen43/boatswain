@@ -47,6 +47,10 @@ const GdkRGBA * bs_icon_get_background_color (BsIcon *self);
 void bs_icon_set_background_color (BsIcon        *self,
                                    const GdkRGBA *background_color);
 
+const GdkRGBA * bs_icon_get_color (BsIcon *self);
+void bs_icon_set_color (BsIcon        *self,
+                        const GdkRGBA *color);
+
 GFile * bs_icon_get_file (BsIcon *self);
 void bs_icon_set_file (BsIcon  *self,
                        GFile   *file,

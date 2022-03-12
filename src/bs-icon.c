@@ -25,6 +25,7 @@ struct _BsIcon
   GObject parent_instance;
 
   GdkRGBA background_color;
+  GdkRGBA color;
   GdkPaintable *paintable;
   PangoLayout *layout;
   GFile *file;
@@ -52,6 +53,7 @@ enum
 {
   PROP_0,
   PROP_BACKGROUND_COLOR,
+  PROP_COLOR,
   PROP_FILE,
   PROP_ICON_NAME,
   PROP_MARGIN,
@@ -64,6 +66,9 @@ enum
 
 static GParamSpec *properties [N_PROPS];
 
+
+static GdkRGBA opaque_white = { 1.0, 1.0, 1.0, 1.0 };
+static GdkRGBA transparent_black = { 0.0, 0.0, 0.0, 0.0 };
 
 /*
  * Callbacks
@@ -112,10 +117,12 @@ snapshot_any_paintable (GdkSnapshot *snapshot,
     }
   else if (icon->icon_paintable)
     {
-      gdk_paintable_snapshot (GDK_PAINTABLE (icon->icon_paintable),
-                              snapshot,
-                              width - icon->margin * 2,
-                              height - icon->margin * 2);
+      gtk_symbolic_paintable_snapshot_symbolic (GTK_SYMBOLIC_PAINTABLE (icon->icon_paintable),
+                                                snapshot,
+                                                width - icon->margin * 2,
+                                                height - icon->margin * 2,
+                                                &icon->color,
+                                                1);
 
       painted = TRUE;
     }
@@ -142,7 +149,7 @@ snapshot_any_layout (GdkSnapshot *snapshot,
 
       gtk_snapshot_save (snapshot);
       gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (x, y));
-      gtk_snapshot_append_layout (snapshot, icon->layout, &(GdkRGBA) { 1.0, 1.0, 1.0, 1.0 });
+      gtk_snapshot_append_layout (snapshot, icon->layout, &opaque_white);
       gtk_snapshot_restore (snapshot);
     }
 
@@ -288,6 +295,10 @@ bs_icon_get_property (GObject    *object,
       g_value_set_boxed (value, &self->background_color);
       break;
 
+    case PROP_COLOR:
+      g_value_set_boxed (value, &self->color);
+      break;
+
     case PROP_FILE:
       g_value_set_object (value, self->file);
       break;
@@ -333,6 +344,10 @@ bs_icon_set_property (GObject      *object,
     {
     case PROP_BACKGROUND_COLOR:
       bs_icon_set_background_color (self, g_value_get_boxed (value));
+      break;
+
+    case PROP_COLOR:
+      bs_icon_set_color (self, g_value_get_boxed (value));
       break;
 
     case PROP_FILE:
@@ -381,6 +396,10 @@ bs_icon_class_init (BsIconClass *klass)
                                                           GDK_TYPE_RGBA,
                                                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
+  properties[PROP_COLOR] = g_param_spec_boxed ("color", NULL, NULL,
+                                               GDK_TYPE_RGBA,
+                                               G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
   properties[PROP_FILE] = g_param_spec_object ("file", NULL, NULL,
                                                G_TYPE_FILE,
                                                G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
@@ -415,6 +434,7 @@ bs_icon_class_init (BsIconClass *klass)
 static void
 bs_icon_init (BsIcon *self)
 {
+  self->color = opaque_white;
   self->margin = 12;
   self->opacity = -1.0;
 }
@@ -423,9 +443,7 @@ bs_icon_init (BsIcon *self)
 BsIcon *
 bs_icon_new_empty (void)
 {
-  GdkRGBA transparent = (GdkRGBA) { 0.0, 0.0, 0.0, 0.0 };
-
-  return bs_icon_new (&transparent, NULL);
+  return bs_icon_new (&transparent_black, NULL);
 }
 
 BsIcon *
@@ -542,7 +560,31 @@ bs_icon_set_background_color (BsIcon        *self,
   if (background_color)
     self->background_color = *background_color;
   else
-    self->background_color = (GdkRGBA) { 0.0, 0.0, 0.0, 0.0 };
+    self->background_color = transparent_black;
+
+  gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_BACKGROUND_COLOR]);
+}
+
+const GdkRGBA *
+bs_icon_get_color (BsIcon *self)
+{
+  g_return_val_if_fail (BS_IS_ICON (self), NULL);
+
+  return &self->color;
+}
+
+void
+bs_icon_set_color (BsIcon        *self,
+                   const GdkRGBA *color)
+{
+  g_return_if_fail (BS_IS_ICON (self));
+
+  if (color)
+    self->color = *color;
+  else
+    self->color = opaque_white;
 
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
 
