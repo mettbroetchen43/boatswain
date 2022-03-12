@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="LauncherLaunchPreferences" parent="AdwPreferencesGroup">
+
+    <child>
+      <object class="AdwActionRow" id="app_row">
+        <property name="title" translatable="yes">Choose Application</property>
+        <property name="activatable">true</property>
+        <signal name="activated" handler="on_app_row_activated_cb" object="LauncherLaunchPreferences" swapped="yes" />
+        <child>
+          <object class="GtkLabel" id="app_name">
+          </object>
+        </child>
+      </object>
+    </child>
+
+  </template>
+</interface>

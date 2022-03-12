@@ -1,0 +1,12 @@
+[Plugin]
+Name = Launcher
+Module = launcher
+Description = Launcher plugin
+Icon=gtk3-demo-symbolic
+Authors = Emmanuele Bassi
+Copyright = Copyleft © The Boatswain maintainers
+Builtin = true
+License = GPL
+Loader = C
+Embedded = launcher_plugin_register_types
+Depends =

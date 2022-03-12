@@ -9,6 +9,7 @@ plugins_libs = []
 plugins_confs = []
 
 subdir('default')
+subdir('launcher')
 subdir('obs-studio')
 subdir('soundboard')
 
