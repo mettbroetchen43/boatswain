@@ -151,7 +151,7 @@ set_streaming (ObsConnection *self,
   if (self->streaming == streaming)
     return;
 
-  self->recording_state = streaming;
+  self->streaming = streaming;
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_STREAMING]);
 }
 
