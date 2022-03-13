@@ -10,6 +10,13 @@
         <signal name="activated" handler="on_app_row_activated_cb" object="LauncherLaunchPreferences" swapped="yes" />
         <child>
           <object class="GtkLabel" id="app_name">
+            <property name="visible">False</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <property name="visible" bind-source="app_name" bind-property="visible" bind-flags="sync-create|invert-boolean" />
+            <property name="icon-name">go-next-symbolic</property>
           </object>
         </child>
       </object>

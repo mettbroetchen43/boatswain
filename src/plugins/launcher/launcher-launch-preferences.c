@@ -30,9 +30,38 @@ struct _LauncherLaunchPreferences
   GtkLabel *app_name;
 
   LauncherLaunchAction *launch_action;
+  GAppInfo *app_info;
 };
 
 G_DEFINE_FINAL_TYPE (LauncherLaunchPreferences, launcher_launch_preferences, ADW_TYPE_PREFERENCES_GROUP)
+
+
+/*
+ * Auxiliary methods
+ */
+
+static void
+update_app_info (LauncherLaunchPreferences *self)
+{
+  gtk_widget_set_visible (GTK_WIDGET (self->app_name), self->app_info != NULL);
+
+  if (self->app_info)
+    {
+      const char *display_name = g_app_info_get_display_name (self->app_info);
+
+      gtk_label_set_text (self->app_name, display_name);
+      gtk_widget_show (GTK_WIDGET (self->app_name));
+    }
+  else
+    {
+      gtk_label_set_text (self->app_name, "Unknown application");
+    }
+}
+
+
+/*
+ * Callbacks
+ */
 
 static void
 on_app_chooser_response (GtkDialog                 *dialog,
@@ -45,20 +74,8 @@ on_app_chooser_response (GtkDialog                 *dialog,
 
       launcher_launch_action_set_app (self->launch_action, app_info);
 
-      g_print ("Found app info: %s [%p]\n",
-               g_app_info_get_name (app_info),
-               app_info);
-
-      if (app_info)
-        {
-          const char *display_name = g_app_info_get_display_name (app_info);
-
-          gtk_label_set_text (GTK_LABEL (self->app_name), display_name);
-        }
-      else
-        {
-          gtk_label_set_text (GTK_LABEL (self->app_name), "Unknown application");
-        }
+      g_set_object (&self->app_info, app_info);
+      update_app_info (self);
     }
 
   gtk_window_close (GTK_WINDOW (dialog));
@@ -67,12 +84,15 @@ on_app_chooser_response (GtkDialog                 *dialog,
 static void
 on_app_row_activated_cb (LauncherLaunchPreferences *self)
 {
-  GtkWidget *window = gtk_widget_get_ancestor (GTK_WIDGET (self), GTK_TYPE_WINDOW);
+  GtkAppChooserDialog *dialog;
+  GtkWidget *window;
 
-  GtkAppChooserDialog *dialog = g_object_new (GTK_TYPE_APP_CHOOSER_DIALOG, NULL);
-
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
+  window = gtk_widget_get_ancestor (GTK_WIDGET (self), GTK_TYPE_WINDOW);
+  dialog = g_object_new (GTK_TYPE_APP_CHOOSER_DIALOG,
+                         "transient-for", window,
+                         "modal", TRUE,
+                         "destroy-with-parent", TRUE,
+                         NULL);
 
   g_signal_connect (dialog, "response", G_CALLBACK (on_app_chooser_response), self);
 
@@ -112,5 +132,8 @@ launcher_launch_preferences_update (LauncherLaunchPreferences *self,
                                     GAppInfo                  *app_info,
                                     GList                     *files)
 {
+  g_return_if_fail (LAUNCHER_IS_LAUNCH_PREFERENCES (self));
 
+  g_set_object (&self->app_info, app_info);
+  update_app_info (self);
 }

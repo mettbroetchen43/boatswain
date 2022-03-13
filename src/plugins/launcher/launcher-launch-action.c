@@ -62,22 +62,17 @@ launcher_launch_action_update_icon (LauncherLaunchAction *self)
 static void
 launcher_launch_action_activate (BsAction *action)
 {
-  LauncherLaunchAction *self = LAUNCHER_LAUNCH_ACTION (action);
-
-  GdkDisplay *display = gdk_display_get_default ();
-
-  g_autoptr (GdkAppLaunchContext) context = gdk_display_get_app_launch_context (display);
+  g_autoptr (GdkAppLaunchContext) context = NULL;
   g_autoptr (GError) error = NULL;
+  LauncherLaunchAction *self;
+  GdkDisplay *display;
+
+  self = LAUNCHER_LAUNCH_ACTION (action);
+  display = gdk_display_get_default ();
+  context = gdk_display_get_app_launch_context (display);
 
   if (!g_app_info_launch (self->app, self->files, G_APP_LAUNCH_CONTEXT (context), &error))
-    g_warning ("Unable to launch application %s: %s",
-               g_app_info_get_name (self->app),
-               error->message);
-}
-
-static void
-launcher_launch_action_deactivate (BsAction *action)
-{
+    g_warning ("Unable to launch application %s: %s", g_app_info_get_name (self->app), error->message);
 }
 
 static GtkWidget *
@@ -101,13 +96,9 @@ launcher_launch_action_serialize_settings (BsAction *action)
 
   json_builder_set_member_name (builder, "app");
   if (self->app != NULL)
-    {
-      json_builder_add_string_value (builder, g_app_info_get_name (self->app));
-    }
+    json_builder_add_string_value (builder, g_app_info_get_id (self->app));
   else
-    {
-      json_builder_add_null_value (builder);
-    }
+    json_builder_add_null_value (builder);
 
   json_builder_set_member_name (builder, "files");
 
@@ -140,32 +131,34 @@ launcher_launch_action_deserialize_settings (BsAction   *action,
                                              JsonObject *settings)
 {
   LauncherLaunchAction *self = LAUNCHER_LAUNCH_ACTION (action);
-
+  JsonArray *app_files;
   GAppInfo *app_info = NULL;
   GList *files = NULL;
+  const char *app_id;
 
-  const char *app_name = json_object_get_string_member (settings, "app");
-  if (app_name != NULL)
+  app_id = json_object_get_string_member (settings, "app");
+  if (app_id != NULL)
     {
       GList *apps = g_app_info_get_all ();
-      for (GList *iter = apps; iter != NULL; iter = iter->next)
+      GList *l;
+
+      for (l = apps; l; l = l->next)
         {
-          if (!g_app_info_should_show (iter->data))
+          if (!g_app_info_should_show (l->data))
             continue;
 
-          if (g_strcmp0 (app_name, g_app_info_get_name (iter->data)) == 0)
+          if (g_strcmp0 (app_id, g_app_info_get_id (l->data)) == 0)
             {
-              app_info = iter->data;
+              app_info = l->data;
               break;
             }
         }
     }
 
-  JsonArray *app_files = json_object_get_array_member (settings, "files");
+  app_files = json_object_get_array_member (settings, "files");
   json_array_foreach_element (app_files, build_files_list, &files);
 
-  g_clear_object (&self->app);
-  self->app = app_info != NULL ? g_object_ref (app_info) : NULL;
+  g_set_object (&self->app, app_info);
 
   g_list_free_full (self->files, g_object_unref);
   self->files = files;
@@ -195,7 +188,6 @@ launcher_launch_action_class_init (LauncherLaunchActionClass *klass)
   object_class->finalize = launcher_launch_action_finalize;
 
   action_class->activate = launcher_launch_action_activate;
-  action_class->deactivate = launcher_launch_action_deactivate;
   action_class->get_preferences = launcher_launch_action_get_preferences;
   action_class->serialize_settings = launcher_launch_action_serialize_settings;
   action_class->deserialize_settings = launcher_launch_action_deserialize_settings;
