@@ -79,6 +79,7 @@ struct _BsStreamDeck
   GIcon *icon;
   GPtrArray *buttons;
   GSource *poll_source;
+  gboolean initialized;
 };
 
 static void g_initable_iface_init (GInitableIface *iface);
@@ -991,6 +992,8 @@ bs_stream_deck_initable_init (GInitable     *initable,
 
   load_profiles (self);
 
+  self->initialized = TRUE;
+
   return TRUE;
 }
 
@@ -1009,7 +1012,7 @@ bs_stream_deck_finalize (GObject *object)
 {
   BsStreamDeck *self = (BsStreamDeck *)object;
 
-  if (self->model_info)
+  if (self->initialized)
     {
       save_profiles (self);
       bs_stream_deck_reset (self);
