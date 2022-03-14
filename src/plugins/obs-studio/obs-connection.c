@@ -379,54 +379,36 @@ static void
 scenes_changed_cb (ObsConnection *self,
                    JsonObject    *object)
 {
-  g_autoptr (GHashTable) new_scenes = NULL;
+  g_autoptr (GPtrArray) new_scenes = NULL;
+  JsonArray *scenes_array;
   JsonNode *scenes_node;
+  unsigned int old_size;
   unsigned int i;
 
   scenes_node = json_object_get_member (object, "scenes");
-  new_scenes = g_hash_table_new (g_str_hash, g_str_equal);
 
-  if (JSON_NODE_HOLDS_ARRAY (scenes_node))
-    {
-      JsonArray *scenes_array;
-      unsigned int i;
-
-      scenes_array = json_node_get_array (scenes_node);
-      for (i = 0; i < json_array_get_length (scenes_array); i++)
-        {
-          JsonObject *scene_object;
-
-          scene_object = json_array_get_object_element (scenes_array, i);
-          g_hash_table_add (new_scenes, (gpointer) json_object_get_string_member (scene_object, "name"));
-        }
-    }
-
-  for (i = g_list_model_get_n_items (G_LIST_MODEL (self->scenes)); i > 0; i--)
-    {
-      g_autoptr (ObsScene) scene = g_list_model_get_item (G_LIST_MODEL (self->scenes), i - 1);
-      const char *scene_name = obs_scene_get_name (scene);
-
-      if (g_hash_table_contains (new_scenes, (gpointer) scene_name))
-        g_hash_table_remove (new_scenes, (gpointer) scene_name);
-      else
-        g_list_store_remove (self->scenes, i - 1);
-    }
-}
-
-static void
-source_create_event_cb (ObsConnection *self,
-                        JsonObject    *object)
-{
-  g_autoptr (ObsScene) scene = NULL;
-  const char *source_kind;
-
-  source_kind = json_object_get_string_member_with_default (object, "sourceType", NULL);
-
-  if (g_strcmp0 (source_kind, "scene") != 0)
+  if (!JSON_NODE_HOLDS_ARRAY (scenes_node))
     return;
 
-  scene = obs_scene_new (json_object_get_string_member (object, "sourceName"));
-  g_list_store_insert_sorted (self->scenes, scene, compare_scenes_by_name_cb, NULL);
+  scenes_array = json_node_get_array (scenes_node);
+  new_scenes = g_ptr_array_new_full (json_array_get_length (scenes_array), g_object_unref);
+  for (i = 0; i < json_array_get_length (scenes_array); i++)
+    {
+      g_autoptr (ObsScene) new_scene = NULL;
+      JsonObject *scene_object;
+
+      scene_object = json_array_get_object_element (scenes_array, i);
+      new_scene = obs_scene_new (json_object_get_string_member (scene_object, "name"));
+      g_ptr_array_add (new_scenes, g_steal_pointer (&new_scene));
+    }
+
+  old_size = g_list_model_get_n_items (G_LIST_MODEL (self->scenes));
+
+  g_list_store_splice (self->scenes,
+                       0,
+                       old_size,
+                       new_scenes->pdata,
+                       new_scenes->len);
 }
 
 static void
@@ -481,7 +463,6 @@ struct {
   { "RecordingStarted", recording_started_cb },
   { "RecordingStopped", recording_stopped_cb },
   { "ScenesChanged", scenes_changed_cb },
-  { "SourceCreated", source_create_event_cb },
   { "SourceRenamed", source_renamed_event_cb },
   { "StreamStarted", stream_started_cb },
   { "StreamStopped", stream_stopped_cb },
@@ -754,10 +735,13 @@ on_websocket_get_scene_list_cb (GObject      *source_object,
   scenes_node = json_object_get_member (object, "scenes");
   if (JSON_NODE_HOLDS_ARRAY (scenes_node))
     {
+      g_autoptr (GPtrArray) new_scenes = NULL;
       JsonArray *scenes_array;
       unsigned int i;
 
       scenes_array = json_node_get_array (scenes_node);
+      new_scenes = g_ptr_array_new_full (json_array_get_length (scenes_array),
+                                         g_object_unref);
       for (i = 0; i < json_array_get_length (scenes_array); i++)
         {
           g_autoptr (ObsScene) scene = NULL;
@@ -765,8 +749,14 @@ on_websocket_get_scene_list_cb (GObject      *source_object,
 
           scene_object = json_array_get_object_element (scenes_array, i);
           scene = obs_scene_new (json_object_get_string_member (scene_object, "name"));
-          g_list_store_insert_sorted (self->scenes, scene, compare_scenes_by_name_cb, NULL);
+          g_ptr_array_add (new_scenes, g_steal_pointer (&scene));
         }
+
+        g_list_store_splice (self->scenes,
+                             0,
+                             0,
+                             new_scenes->pdata,
+                             new_scenes->len);
     }
 
   /* Fetch streaming state as well */
