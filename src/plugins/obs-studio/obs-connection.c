@@ -52,10 +52,6 @@ struct _ObsConnection
 	SoupWebsocketConnection *websocket_client;
 };
 
-static int compare_scenes_by_name_cb (gconstpointer a,
-                                      gconstpointer b,
-                                      gpointer      user_data);
-
 static void on_websocket_get_scene_list_cb (GObject      *source_object,
                                             GAsyncResult *result,
                                             gpointer      user_data);
@@ -433,7 +429,6 @@ source_renamed_event_cb (ObsConnection *self,
       if (g_strcmp0 (obs_scene_get_name (scene), previous_name) == 0)
         {
           obs_scene_set_name (scene, json_object_get_string_member (object, "newName"));
-          g_list_store_sort (self->scenes, compare_scenes_by_name_cb, NULL);
           break;
         }
     }
@@ -491,17 +486,6 @@ parse_event (ObsConnection *self,
 /*
  * Callbacks
  */
-
-static int
-compare_scenes_by_name_cb (gconstpointer a,
-                           gconstpointer b,
-                           gpointer      user_data)
-{
-  ObsScene *scene_a = OBS_SCENE ((gpointer) a);
-  ObsScene *scene_b = OBS_SCENE ((gpointer) b);
-
-  return g_strcmp0 (obs_scene_get_name (scene_a), obs_scene_get_name (scene_b));
-}
 
 static void
 on_connection_authenticated_cb (GObject      *source_object,
