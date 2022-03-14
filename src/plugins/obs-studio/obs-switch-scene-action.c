@@ -35,6 +35,7 @@ struct _ObsSwitchSceneAction
 
   gulong scenes_changed_id;
   gulong state_changed_id;
+  guint frozen_id;
 };
 
 G_DEFINE_FINAL_TYPE (ObsSwitchSceneAction, obs_switch_scene_action, OBS_TYPE_ACTION)
@@ -51,13 +52,13 @@ find_scene_from_model (ObsSwitchSceneAction *self)
   GListModel *scenes;
   unsigned int i;
 
+  self->scene = NULL;
+
   connection = obs_action_get_connection (OBS_ACTION (self));
   if (obs_connection_get_state (connection) != OBS_CONNECTION_STATE_CONNECTED)
-    return;
+    goto out;
 
   scenes = obs_connection_get_scenes (connection);
-
-  self->scene = NULL;
   for (i = 0; i < g_list_model_get_n_items (scenes); i++)
     {
       g_autoptr (ObsScene) scene = g_list_model_get_item (scenes, i);
@@ -69,8 +70,9 @@ find_scene_from_model (ObsSwitchSceneAction *self)
         }
     }
 
-  if (self->scene && self->scenes_row)
-    adw_combo_row_set_selected (self->scenes_row, i);
+out:
+  if (self->scenes_row)
+    adw_combo_row_set_selected (self->scenes_row, self->scene ? i : GTK_INVALID_LIST_POSITION);
 }
 
 static void
@@ -112,6 +114,17 @@ on_connection_state_changed_cb (ObsConnection        *connection,
     }
 }
 
+static gboolean
+unfreeze_cb (gpointer data)
+{
+  ObsSwitchSceneAction *self = OBS_SWITCH_SCENE_ACTION (data);
+
+  find_scene_from_model (self);
+
+  self->frozen_id = 0;
+  return G_SOURCE_REMOVE;
+}
+
 static void
 on_connection_scenes_items_changed_cb (GListModel           *list,
                                        unsigned int          position,
@@ -119,6 +132,9 @@ on_connection_scenes_items_changed_cb (GListModel           *list,
                                        unsigned int          added,
                                        ObsSwitchSceneAction *self)
 {
+  if (self->frozen_id == 0)
+    self->frozen_id = g_idle_add (unfreeze_cb, self);
+
   find_scene_from_model (self);
 }
 
@@ -129,14 +145,20 @@ on_scenes_row_selected_item_changed_cb (AdwComboRow          *scenes_row,
 {
   ObsConnection *connection;
 
+  if (self->frozen_id > 0)
+    return;
+
   connection = obs_action_get_connection (OBS_ACTION (self));
   if (obs_connection_get_state (connection) != OBS_CONNECTION_STATE_CONNECTED)
     return;
 
   self->scene = adw_combo_row_get_selected_item (scenes_row);
 
-  set_scene_name (self, obs_scene_get_name (self->scene));
-  bs_action_changed (BS_ACTION (self));
+  if (self->scene)
+    {
+      set_scene_name (self, obs_scene_get_name (self->scene));
+      bs_action_changed (BS_ACTION (self));
+    }
 }
 
 
@@ -273,6 +295,7 @@ obs_switch_scene_action_finalize (GObject *object)
   connection = obs_action_get_connection (OBS_ACTION (self));
   g_clear_signal_handler (&self->scenes_changed_id, obs_connection_get_scenes (connection));
   g_clear_signal_handler (&self->state_changed_id, connection);
+  g_clear_handle_id (&self->frozen_id, g_source_remove);
 
   G_OBJECT_CLASS (obs_switch_scene_action_parent_class)->finalize (object);
 }
