@@ -33,10 +33,15 @@ struct _ObsSwitchSceneAction
 
   AdwComboRow *scenes_row;
 
+  gulong scene_name_changed_id;
   gulong scenes_changed_id;
   gulong state_changed_id;
   guint frozen_id;
 };
+
+static void on_scene_name_changed_cb (ObsScene             *scene,
+                                      GParamSpec           *pspec,
+                                      ObsSwitchSceneAction *self);
 
 G_DEFINE_FINAL_TYPE (ObsSwitchSceneAction, obs_switch_scene_action, OBS_TYPE_ACTION)
 
@@ -46,13 +51,31 @@ G_DEFINE_FINAL_TYPE (ObsSwitchSceneAction, obs_switch_scene_action, OBS_TYPE_ACT
  */
 
 static void
+set_scene (ObsSwitchSceneAction *self,
+           ObsScene             *scene)
+{
+  g_clear_signal_handler (&self->scene_name_changed_id, self->scene);
+
+  g_set_object (&self->scene, scene);
+
+  if (scene)
+    {
+      self->scene_name_changed_id = g_signal_connect (scene,
+                                                      "notify::name",
+                                                      G_CALLBACK (on_scene_name_changed_cb),
+                                                      self);
+    }
+}
+
+static void
 find_scene_from_model (ObsSwitchSceneAction *self)
 {
   ObsConnection *connection;
   GListModel *scenes;
   unsigned int i;
 
-  self->scene = NULL;
+  g_clear_signal_handler (&self->scene_name_changed_id, self->scene);
+  g_clear_object (&self->scene);
 
   connection = obs_action_get_connection (OBS_ACTION (self));
   if (obs_connection_get_state (connection) != OBS_CONNECTION_STATE_CONNECTED)
@@ -65,7 +88,7 @@ find_scene_from_model (ObsSwitchSceneAction *self)
 
       if (g_strcmp0 (obs_scene_get_name (scene), self->scene_name) == 0)
         {
-          self->scene = scene;
+          set_scene (self, scene);
           break;
         }
     }
@@ -139,6 +162,15 @@ on_connection_scenes_items_changed_cb (GListModel           *list,
 }
 
 static void
+on_scene_name_changed_cb (ObsScene             *scene,
+                          GParamSpec           *pspec,
+                          ObsSwitchSceneAction *self)
+{
+  set_scene_name (self, obs_scene_get_name (self->scene));
+  bs_action_changed (BS_ACTION (self));
+}
+
+static void
 on_scenes_row_selected_item_changed_cb (AdwComboRow          *scenes_row,
                                         GParamSpec           *pspec,
                                         ObsSwitchSceneAction *self)
@@ -152,7 +184,7 @@ on_scenes_row_selected_item_changed_cb (AdwComboRow          *scenes_row,
   if (obs_connection_get_state (connection) != OBS_CONNECTION_STATE_CONNECTED)
     return;
 
-  self->scene = adw_combo_row_get_selected_item (scenes_row);
+  set_scene (self, adw_combo_row_get_selected_item (scenes_row));
 
   if (self->scene)
     {
@@ -291,6 +323,9 @@ obs_switch_scene_action_finalize (GObject *object)
 {
   ObsSwitchSceneAction *self = (ObsSwitchSceneAction *)object;
   ObsConnection *connection;
+
+  g_clear_signal_handler (&self->scene_name_changed_id, self->scene);
+  g_clear_object (&self->scene);
 
   connection = obs_action_get_connection (OBS_ACTION (self));
   g_clear_signal_handler (&self->scenes_changed_id, obs_connection_get_scenes (connection));
