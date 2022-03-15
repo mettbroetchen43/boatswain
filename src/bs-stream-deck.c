@@ -1065,6 +1065,8 @@ bs_stream_deck_finalize (GObject *object)
 {
   BsStreamDeck *self = (BsStreamDeck *)object;
 
+  BS_ENTRY;
+
   if (self->initialized)
     {
       save_profiles (self);
@@ -1086,6 +1088,8 @@ bs_stream_deck_finalize (GObject *object)
   g_clear_object (&self->profiles);
 
   G_OBJECT_CLASS (bs_stream_deck_parent_class)->finalize (object);
+
+  BS_EXIT;
 }
 
 static void

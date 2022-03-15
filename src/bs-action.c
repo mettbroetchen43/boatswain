@@ -18,8 +18,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#define G_LOG_DOMAIN "Action"
 
 #include "bs-action-private.h"
+#include "bs-debug.h"
 #include "bs-icon.h"
 #include "bs-stream-deck-button.h"
 
@@ -73,11 +75,17 @@ bs_action_finalize (GObject *object)
   BsAction *self = (BsAction *)object;
   BsActionPrivate *priv = bs_action_get_instance_private (self);
 
+  BS_ENTRY;
+
+  BS_TRACE_MSG ("Finalizing %s", G_OBJECT_TYPE_NAME (object));
+
   g_clear_object (&priv->icon);
   g_clear_pointer (&priv->id, g_free);
   g_clear_pointer (&priv->name, g_free);
 
   G_OBJECT_CLASS (bs_action_parent_class)->finalize (object);
+
+  BS_EXIT;
 }
 
 static void
@@ -242,8 +250,14 @@ bs_action_activate (BsAction *self)
 {
   g_return_if_fail (BS_IS_ACTION (self));
 
+  BS_ENTRY;
+
+  g_debug ("Activating %s", G_OBJECT_TYPE_NAME (self));
+
   if (BS_ACTION_GET_CLASS (self)->activate)
     BS_ACTION_GET_CLASS (self)->activate (self);
+
+  BS_EXIT;
 }
 
 void
@@ -251,8 +265,14 @@ bs_action_deactivate (BsAction *self)
 {
   g_return_if_fail (BS_IS_ACTION (self));
 
+  BS_ENTRY;
+
+  g_debug ("Dectivating %s", G_OBJECT_TYPE_NAME (self));
+
   if (BS_ACTION_GET_CLASS (self)->deactivate)
     BS_ACTION_GET_CLASS (self)->deactivate (self);
+
+  BS_EXIT;
 }
 
 GtkWidget *
@@ -271,6 +291,10 @@ bs_action_serialize_settings (BsAction *self)
 {
   g_return_val_if_fail (BS_IS_ACTION (self), NULL);
 
+  BS_ENTRY;
+
+  g_debug ("Serializing settings of %s", G_OBJECT_TYPE_NAME (self));
+
   if (BS_ACTION_GET_CLASS (self)->serialize_settings)
     {
       g_autoptr (JsonNode) node = NULL;
@@ -280,14 +304,14 @@ bs_action_serialize_settings (BsAction *self)
       if (!JSON_NODE_HOLDS_OBJECT (node))
         {
           g_warning ("Serialized action settings must be JsonObjects");
-          return NULL;
+          BS_RETURN (NULL);
         }
 
-      return g_steal_pointer (&node);
+      BS_RETURN (g_steal_pointer (&node));
     }
   else
     {
-      return NULL;
+      BS_RETURN (NULL);
     }
 }
 
@@ -298,8 +322,14 @@ bs_action_deserialize_settings (BsAction   *self,
   g_return_if_fail (BS_IS_ACTION (self));
   g_return_if_fail (settings != NULL);
 
+  BS_ENTRY;
+
+  g_debug ("Deserializing settings of %s", G_OBJECT_TYPE_NAME (self));
+
   if (BS_ACTION_GET_CLASS (self)->deserialize_settings)
     BS_ACTION_GET_CLASS (self)->deserialize_settings (self, settings);
+
+  BS_EXIT;
 }
 
 BsStreamDeckButton *

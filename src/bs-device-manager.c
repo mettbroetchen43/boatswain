@@ -18,8 +18,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#define G_LOG_DOMAIN "Device Manager"
+
 #include <gusb.h>
 
+#include "bs-debug.h"
 #include "bs-device-enums.h"
 #include "bs-device-manager.h"
 #include "bs-stream-deck.h"
@@ -72,7 +75,11 @@ enumerate_stream_decks (BsDeviceManager *self)
           continue;
         }
 
-      g_message ("Found %s", bs_stream_deck_get_name (stream_deck));
+      g_debug ("Found %s (%s) at bus %hu, port %hu",
+               bs_stream_deck_get_name (stream_deck),
+               bs_stream_deck_get_serial_number (stream_deck),
+               g_usb_device_get_bus (usb_device),
+               g_usb_device_get_port_number (usb_device));
 
       g_list_store_append (self->stream_decks, stream_deck);
     }
@@ -91,19 +98,21 @@ on_gusb_context_device_added_cb (GUsbContext     *gusb_context,
   g_autoptr (BsStreamDeck) stream_deck = NULL;
   g_autoptr (GError) error = NULL;
 
+  BS_ENTRY;
+
   stream_deck = bs_stream_deck_new (device, &error);
 
   if (error)
     {
       if (!g_error_matches (error, BS_STREAM_DECK_ERROR, BS_STREAM_DECK_ERROR_UNRECONIZED))
         g_warning ("Error opening Stream Deck device: %s", error->message);
-      return;
+      BS_RETURN ();
     }
-
-  g_message ("Adding %s", bs_stream_deck_get_name (stream_deck));
 
   g_list_store_append (self->stream_decks, g_object_ref (stream_deck));
   g_signal_emit (self, signals[STREAM_DECK_ADDED], 0, stream_deck);
+
+  BS_EXIT;
 }
 
 static void
@@ -112,6 +121,8 @@ on_gusb_context_device_removed_cb (GUsbContext     *gusb_context,
                                    BsDeviceManager *self)
 {
   unsigned int i = 0;
+
+  BS_ENTRY;
 
   while (i < g_list_model_get_n_items (G_LIST_MODEL (self->stream_decks)))
     {
@@ -131,6 +142,8 @@ on_gusb_context_device_removed_cb (GUsbContext     *gusb_context,
 
       i++;
     }
+
+  BS_EXIT;
 }
 
 
@@ -143,10 +156,14 @@ bs_device_manager_finalize (GObject *object)
 {
   BsDeviceManager *self = (BsDeviceManager *)object;
 
+  BS_ENTRY;
+
   g_clear_object (&self->stream_decks);
   g_clear_object (&self->gusb_context);
 
   G_OBJECT_CLASS (bs_device_manager_parent_class)->finalize (object);
+
+  BS_EXIT;
 }
 
 static void
