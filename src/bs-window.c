@@ -485,4 +485,7 @@ bs_window_init (BsWindow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_action_map_add_action_entries (G_ACTION_MAP (self), actions, G_N_ELEMENTS (actions), self);
+
+  if (g_strcmp0 (PROFILE, "development") == 0)
+  gtk_widget_add_css_class (GTK_WIDGET (self), "devel");
 }

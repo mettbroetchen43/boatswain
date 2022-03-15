@@ -18,6 +18,7 @@
 
 #include "bs-action-factory.h"
 #include "bs-application.h"
+#include "bs-config.h"
 #include "bs-device-manager.h"
 #include "bs-log.h"
 #include "bs-window.h"
@@ -308,8 +309,9 @@ BsApplication *
 bs_application_new (void)
 {
   return g_object_new (BS_TYPE_APPLICATION,
-                       "application-id", "com.feaneron.Boatswain",
+                       "application-id", APPLICATION_ID,
                        "flags", G_APPLICATION_FLAGS_NONE,
+                       "resource-base-path", "/com/feaneron/Boatswain",
                        NULL);
 }
 

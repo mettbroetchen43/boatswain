@@ -1,9 +1,12 @@
 {
-    "app-id" : "com.feaneron.Boatswain",
+    "app-id" : "com.feaneron.Boatswain.Devel",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
     "command" : "boatswain",
+    "tags" : [
+        "devel"
+    ],
     "finish-args" : [
         "--device=all",
         "--socket=pulseaudio",
@@ -107,7 +110,8 @@
             "builddir" : true,
             "buildsystem" : "meson",
             "config-opts" : [
-                "-Dtracing=true"
+                "-Dtracing=true",
+                "-Dprofile=development"
             ],
             "sources" : [
                 {
