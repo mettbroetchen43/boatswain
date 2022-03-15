@@ -1,0 +1,1 @@
+option('tracing', type: 'boolean', value: false, description: 'add extra debugging information')

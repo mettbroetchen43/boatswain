@@ -6,6 +6,7 @@ boatswain_sources = [
   'bs-empty-action.c',
   'bs-icon.c',
   'bs-icon-renderer.c',
+  'bs-log.c',
   'bs-omni-bar.c',
   'bs-page.c',
   'bs-page-item.c',
@@ -33,6 +34,16 @@ boatswain_deps = [
 subdir('plugins')
 
 gnome = import('gnome')
+
+debug_conf = configuration_data()
+debug_conf.set10('ENABLE_TRACING', get_option('tracing'))
+debug_conf.set('BUGREPORT_URL', 'https://gitlab.gnome.org/feaneron/boatswain/-/issues/new')
+
+boatswain_sources += configure_file(
+  input: 'bs-debug.h.in',
+  output: 'bs-debug.h',
+  configuration: debug_conf,
+)
 
 boatswain_sources += gnome.compile_resources(
   'boatswain-resources',

@@ -18,7 +18,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#define G_LOG_DOMAIN "Stream Deck"
+
 #include "bs-action.h"
+#include "bs-debug.h"
 #include "bs-device-enums.h"
 #include "bs-icon.h"
 #include "bs-icon-renderer.h"
@@ -134,6 +137,8 @@ update_pages (BsStreamDeck *self)
   GList *l;
   unsigned int i;
 
+  BS_ENTRY;
+
   active_page = bs_stream_deck_get_active_page (self);
 
   for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
@@ -144,6 +149,8 @@ update_pages (BsStreamDeck *self)
 
   for (l = g_queue_peek_head_link (self->active_pages); l; l = l->next)
     bs_page_update_all_items (l->data);
+
+  BS_EXIT;
 }
 
 static void
@@ -156,6 +163,8 @@ save_profiles (BsStreamDeck *self)
   g_autofree char *profile_path = NULL;
   g_autofree char *json_str = NULL;
   unsigned int i;
+
+  BS_ENTRY;
 
   /* Update the active profile */
   bs_profile_set_brightness (self->active_profile, self->brightness);
@@ -193,6 +202,8 @@ save_profiles (BsStreamDeck *self)
 
   if (error)
     g_warning ("Error saving profiles: %s", error->message);
+
+  BS_EXIT;
 }
 
 static void
@@ -208,6 +219,8 @@ load_profiles (BsStreamDeck  *self)
   unsigned int i;
   const char *active_profile_id;
 
+  BS_ENTRY;
+
   profile_path = get_profile_path (self);
 
   g_debug ("Loading %s", profile_path);
@@ -220,7 +233,7 @@ load_profiles (BsStreamDeck  *self)
       g_debug ("Error loading profile for device %s: %s",
                self->serial_number,
                local_error->message);
-      goto out;
+      BS_GOTO (out);
     }
 
   root = json_parser_get_root (parser);
@@ -259,6 +272,8 @@ out:
     }
 
   bs_stream_deck_load_profile (self, active_profile);
+
+  BS_EXIT;
 }
 
 static void
@@ -266,6 +281,8 @@ load_active_page (BsStreamDeck *self)
 {
   BsPage *active_page;
   uint8_t i;
+
+  BS_ENTRY;
 
   active_page = bs_stream_deck_get_active_page (self);
 
@@ -293,6 +310,8 @@ load_active_page (BsStreamDeck *self)
 
       bs_stream_deck_button_uninhibit_page_updates (stream_deck_button);
     }
+
+  BS_EXIT;
 }
 
 static inline uint8_t
@@ -314,10 +333,12 @@ save_after_timeout_cb (gpointer data)
 {
   BsStreamDeck *self = BS_STREAM_DECK (data);
 
+  BS_ENTRY;
+
   save_profiles (self);
 
   self->save_timeout_id = 0;
-  return G_SOURCE_REMOVE;
+  BS_RETURN (G_SOURCE_REMOVE);
 }
 
 
@@ -341,8 +362,10 @@ set_button_texture_mini (BsStreamDeck  *self,
   size_t buffer_size;
   size_t page;
 
+  BS_ENTRY;
+
   if (!bs_icon_renderer_convert_texture (self->icon_renderer, texture, (char **) &buffer, &buffer_size, error))
-    return FALSE;
+    BS_RETURN (FALSE);
 
   payload = g_malloc (sizeof (unsigned char) * package_size);
   payload[0] = 0x02;
@@ -388,7 +411,7 @@ set_button_texture_mini (BsStreamDeck  *self,
       page++;
     }
 
-  return TRUE;
+  BS_RETURN (TRUE);
 }
 
 static gboolean
@@ -437,7 +460,11 @@ reset_mini_original (BsStreamDeck *self)
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   };
 
+  BS_ENTRY;
+
   hid_send_feature_report (self->handle, reset_command, sizeof (reset_command));
+
+  BS_EXIT;
 }
 
 static char *
@@ -446,6 +473,8 @@ get_serial_number_mini_original (BsStreamDeck *self)
   unsigned char data[17];
   char *serial;
 
+  BS_ENTRY;
+
   data[0] = 0x03;
 
   hid_get_feature_report (self->handle, data, sizeof (data));
@@ -453,7 +482,7 @@ get_serial_number_mini_original (BsStreamDeck *self)
   serial = g_malloc0 (sizeof (char) * 17);
   memcpy (serial, &data[1], 16);
 
-  return serial;
+  BS_RETURN (serial);
 }
 
 static char *
@@ -462,6 +491,8 @@ get_firmware_version_mini_original (BsStreamDeck *self)
   unsigned char data[17];
   char *serial;
 
+  BS_ENTRY;
+
   data[0] = 0x04;
 
   hid_get_feature_report (self->handle, data, sizeof (data));
@@ -469,7 +500,7 @@ get_firmware_version_mini_original (BsStreamDeck *self)
   serial = g_malloc0 (sizeof (char) * 13);
   memcpy (serial, &data[5], 12);
 
-  return serial;
+  BS_RETURN (serial);
 }
 
 static void
@@ -483,7 +514,11 @@ set_brightness_mini_original (BsStreamDeck *self,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   };
 
+  BS_ENTRY;
+
   hid_send_feature_report (self->handle, data, sizeof (data));
+
+  BS_EXIT;
 }
 
 static gboolean
@@ -500,8 +535,10 @@ set_button_texture_original (BsStreamDeck  *self,
   size_t buffer_size;
   size_t page;
 
+  BS_ENTRY;
+
   if (!bs_icon_renderer_convert_texture (self->icon_renderer, texture, (char **) &buffer, &buffer_size, error))
-    return FALSE;
+    BS_RETURN (FALSE);
 
   payload = g_malloc (sizeof (unsigned char) * package_size);
   payload[0] = 0x02;
@@ -547,7 +584,7 @@ set_button_texture_original (BsStreamDeck  *self,
       page++;
     }
 
-  return TRUE;
+  BS_RETURN (TRUE);
 }
 
 static gboolean
@@ -601,7 +638,11 @@ reset_gen2 (BsStreamDeck *self)
       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   };
 
+  BS_ENTRY;
+
   hid_send_feature_report (self->handle, reset_command, sizeof (reset_command));
+
+  BS_EXIT;
 }
 
 static char *
@@ -610,6 +651,8 @@ get_serial_number_gen2 (BsStreamDeck *self)
   unsigned char data[32];
   char *serial;
 
+  BS_ENTRY;
+
   data[0] = 0x06;
 
   hid_get_feature_report (self->handle, data, sizeof (data));
@@ -617,7 +660,7 @@ get_serial_number_gen2 (BsStreamDeck *self)
   serial = g_malloc0 (sizeof (char) * 31);
   memcpy (serial, &data[2], 30);
 
-  return serial;
+  BS_RETURN (serial);
 }
 
 static char *
@@ -626,6 +669,8 @@ get_firmware_version_gen2 (BsStreamDeck *self)
   unsigned char data[32];
   char *serial;
 
+  BS_ENTRY;
+
   data[0] = 0x05;
 
   hid_get_feature_report (self->handle, data, sizeof (data));
@@ -633,7 +678,7 @@ get_firmware_version_gen2 (BsStreamDeck *self)
   serial = g_malloc0 (sizeof (char) * 27);
   memcpy (serial, &data[6], 26);
 
-  return serial;
+  BS_RETURN (serial);
 }
 
 static void
@@ -649,7 +694,11 @@ set_brightness_gen2 (BsStreamDeck *self,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
   };
 
+  BS_ENTRY;
+
   hid_send_feature_report (self->handle, data, sizeof (data));
+
+  BS_EXIT;
 }
 
 static gboolean
@@ -666,8 +715,10 @@ set_button_texture_gen2 (BsStreamDeck  *self,
   size_t buffer_size;
   size_t page;
 
+  BS_ENTRY;
+
   if (!bs_icon_renderer_convert_texture (self->icon_renderer, texture, (char **) &buffer, &buffer_size, error))
-    return FALSE;
+    BS_RETURN (FALSE);
 
   payload = g_malloc (package_size * sizeof (unsigned char));
   payload[0] = 0x02;
@@ -703,7 +754,7 @@ set_button_texture_gen2 (BsStreamDeck  *self,
       page++;
     }
 
-  return TRUE;
+  BS_RETURN (TRUE);
 }
 
 static gboolean
@@ -931,10 +982,12 @@ bs_stream_deck_initable_init (GInitable     *initable,
   BsStreamDeck *self = BS_STREAM_DECK (initable);
   size_t i;
 
+  BS_ENTRY;
+
   if (!self->device)
     {
       g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "No device");
-      return FALSE;
+      BS_RETURN (FALSE);
     }
 
   if (g_usb_device_get_vid (self->device) != ELGATO_SYSTEMS_VENDOR_ID)
@@ -943,7 +996,7 @@ bs_stream_deck_initable_init (GInitable     *initable,
                    BS_STREAM_DECK_ERROR,
                    BS_STREAM_DECK_ERROR_UNRECONIZED,
                    "Not an Elgato device");
-      return FALSE;
+      BS_RETURN (FALSE);
     }
 
   for (i = 0; i < G_N_ELEMENTS (models_vtable); i++)
@@ -961,7 +1014,7 @@ bs_stream_deck_initable_init (GInitable     *initable,
                    BS_STREAM_DECK_ERROR,
                    BS_STREAM_DECK_ERROR_UNRECONIZED,
                    "Not a recognized Stream Deck device");
-      return FALSE;
+      BS_RETURN (FALSE);
     }
 
   self->handle = hid_open (g_usb_device_get_vid (self->device),
@@ -974,7 +1027,7 @@ bs_stream_deck_initable_init (GInitable     *initable,
                    G_IO_ERROR,
                    G_IO_ERROR_FAILED,
                    "Failed to open Stream Deck device");
-      return FALSE;
+      BS_RETURN (FALSE);
     }
 
   hid_set_nonblocking (self->handle, TRUE);
@@ -994,7 +1047,7 @@ bs_stream_deck_initable_init (GInitable     *initable,
 
   self->initialized = TRUE;
 
-  return TRUE;
+  BS_RETURN (TRUE);
 }
 
 static void
@@ -1346,8 +1399,10 @@ bs_stream_deck_load_profile (BsStreamDeck *self,
   g_return_if_fail (BS_IS_STREAM_DECK (self));
   g_return_if_fail (g_list_store_find (self->profiles, profile, NULL));
 
+  BS_ENTRY;
+
   if (self->active_profile == profile)
-    return;
+    BS_RETURN ();
 
   g_queue_clear_full (self->active_pages, g_object_unref);
 
@@ -1357,6 +1412,8 @@ bs_stream_deck_load_profile (BsStreamDeck *self,
   bs_stream_deck_push_page (self, bs_profile_get_root_page (profile));
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ACTIVE_PROFILE]);
+
+  BS_EXIT;
 }
 
 BsPage *
@@ -1377,12 +1434,16 @@ bs_stream_deck_push_page (BsStreamDeck  *self,
   g_return_if_fail (g_queue_find (self->active_pages, page) == NULL);
   g_return_if_fail (bs_page_get_parent (page) == bs_stream_deck_get_active_page (self));
 
+  BS_ENTRY;
+
   if (g_queue_get_length (self->active_pages) > 0)
     bs_page_update_all_items (g_queue_peek_head (self->active_pages));
 
   g_queue_push_head (self->active_pages, g_object_ref (page));
 
   load_active_page (self);
+
+  BS_EXIT;
 }
 
 void
@@ -1394,6 +1455,8 @@ bs_stream_deck_pop_page (BsStreamDeck *self)
   g_return_if_fail (BS_IS_STREAM_DECK (self));
   g_return_if_fail (g_queue_get_length (self->active_pages) > 1);
 
+  BS_ENTRY;
+
   page = g_queue_pop_head (self->active_pages);
 
   for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
@@ -1402,6 +1465,8 @@ bs_stream_deck_pop_page (BsStreamDeck *self)
   bs_page_update_all_items (g_queue_peek_head (self->active_pages));
 
   load_active_page (self);
+
+  BS_EXIT;
 }
 
 void
@@ -1409,8 +1474,10 @@ bs_stream_deck_save (BsStreamDeck *self)
 {
   g_return_if_fail (BS_IS_STREAM_DECK (self));
 
-  if (self->save_timeout_id > 0)
-    return;
+  BS_ENTRY;
 
-  self->save_timeout_id = g_timeout_add_seconds (5, save_after_timeout_cb, self);
+  if (self->save_timeout_id == 0)
+    self->save_timeout_id = g_timeout_add_seconds (5, save_after_timeout_cb, self);
+
+  BS_EXIT;
 }

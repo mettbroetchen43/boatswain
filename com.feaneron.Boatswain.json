@@ -12,6 +12,9 @@
         "--socket=fallback-x11",
         "--socket=wayland"
     ],
+    "x-run-args" : [
+        "--debug"
+    ],
     "cleanup" : [
         "/include",
         "/lib/pkgconfig",
@@ -103,6 +106,9 @@
             "name" : "boatswain",
             "builddir" : true,
             "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dtracing=true"
+            ],
             "sources" : [
                 {
                     "type" : "git",

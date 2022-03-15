@@ -19,6 +19,7 @@
 #include "bs-action-factory.h"
 #include "bs-application.h"
 #include "bs-device-manager.h"
+#include "bs-log.h"
 #include "bs-window.h"
 
 #include <glib/gi18n.h>
@@ -42,6 +43,15 @@ static void on_request_background_called_cb (GObject      *object,
                                              gpointer      user_data);
 
 G_DEFINE_TYPE (BsApplication, bs_application, ADW_TYPE_APPLICATION)
+
+static GOptionEntry bs_application_options[] = {
+  {
+    "debug", 0, 0,
+    G_OPTION_ARG_NONE, NULL,
+    N_("Enable debug messages"), NULL
+  },
+  { NULL }
+};
 
 
 /*
@@ -233,6 +243,16 @@ bs_application_shutdown (GApplication *application)
   G_APPLICATION_CLASS (bs_application_parent_class)->shutdown (application);
 }
 
+static gint
+bs_application_handle_local_options (GApplication *app,
+                                     GVariantDict *options)
+{
+  if (g_variant_dict_contains (options, "debug"))
+    bs_log_init ();
+
+  return -1;
+}
+
 
 /*
  * GObject overrides
@@ -260,6 +280,7 @@ bs_application_class_init (BsApplicationClass *klass)
   app_class->startup = bs_application_startup;
   app_class->activate = bs_application_activate;
   app_class->shutdown = bs_application_shutdown;
+  app_class->handle_local_options = bs_application_handle_local_options;
 }
 
 static void
@@ -279,6 +300,8 @@ bs_application_init (BsApplication *self)
                                            "<primary>q",
                                            NULL,
                                          });
+
+  g_application_add_main_option_entries (G_APPLICATION (self), bs_application_options);
 }
 
 BsApplication *
