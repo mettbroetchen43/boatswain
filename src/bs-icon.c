@@ -409,7 +409,7 @@ bs_icon_class_init (BsIconClass *klass)
                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_MARGIN] = g_param_spec_int ("margin", NULL, NULL,
-                                              0, G_MAXINT, 12,
+                                              0, G_MAXINT, 18,
                                               G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_OPACITY] = g_param_spec_double ("opacity", NULL, NULL,
@@ -435,7 +435,7 @@ static void
 bs_icon_init (BsIcon *self)
 {
   self->color = opaque_white;
-  self->margin = 12;
+  self->margin = 18;
   self->opacity = -1.0;
 }
 
