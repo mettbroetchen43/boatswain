@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="DefaultMultiActionRow" parent="AdwActionRow">
+
+    <child type="prefix">
+      <object class="GtkImage" id="icon">
+        <property name="valign">center</property>
+      </object>
+    </child>
+
+    <child type="suffix">
+      <object class="GtkSpinButton" id="delay_spinbutton">
+        <property name="visible">False</property>
+        <property name="valign">center</property>
+        <property name="adjustment">
+          <object class="GtkAdjustment" id="delay_adjustment">
+            <property name="lower">100</property>
+            <property name="upper">99999999</property>
+            <property name="value">250</property>
+            <property name="step-increment">1</property>
+            <property name="page-increment">100</property>
+            <signal name="notify::value" handler="on_delay_adjustment_value_changed_cb" object="DefaultMultiActionRow" swapped="no" />
+          </object>
+        </property>
+      </object>
+    </child>
+
+    <child type="suffix">
+      <object class="GtkButton" id="edit_button">
+        <property name="visible">False</property>
+        <property name="valign">center</property>
+        <property name="icon-name">preferences-system-symbolic</property>
+        <signal name="clicked" handler="on_edit_button_clicked_cb" object="DefaultMultiActionRow" swapped="no" />
+        <style>
+          <class name="flat" />
+        </style>
+      </object>
+    </child>
+
+    <child type="suffix">
+      <object class="GtkButton">
+        <property name="valign">center</property>
+        <property name="icon-name">edit-delete-symbolic</property>
+        <signal name="clicked" handler="on_remove_button_clicked_cb" object="DefaultMultiActionRow" swapped="no" />
+        <style>
+          <class name="flat" />
+        </style>
+      </object>
+    </child>
+
+  </template>
+</interface>

@@ -10,6 +10,9 @@ plugin_file = i18n.merge_file(
 plugins_sources += files(
   'default-action-factory.c',
   'default-brightness-action.c',
+  'default-multi-action.c',
+  'default-multi-action-editor.c',
+  'default-multi-action-row.c',
   'default-plugin.c',
   'default-switch-page-action.c',
   'default-switch-profile-action.c',

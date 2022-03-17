@@ -21,6 +21,7 @@
 #include "bs-action-factory.h"
 #include "default-action-factory.h"
 #include "default-brightness-action.h"
+#include "default-multi-action.h"
 #include "default-switch-page-action.h"
 #include "default-switch-profile-action.h"
 
@@ -55,6 +56,12 @@ static const BsActionInfo actions[] = {
     .name = N_("Brightness"),
     .description = NULL,
   },
+  {
+    .id = "default-multi-action",
+    .icon_name = "stacked-plates-symbolic",
+    .name = N_("Multiple Actions"),
+    .description = NULL,
+  },
 };
 
 static GList *
@@ -80,6 +87,8 @@ default_action_factory_create_action (BsActionFactory    *action_factory,
     return default_brightness_action_new (stream_deck_button);
   else if (g_strcmp0 (action_info->id, "default-switch-page-action") == 0)
     return default_switch_page_action_new (stream_deck_button);
+  else if (g_strcmp0 (action_info->id, "default-multi-action") == 0)
+    return default_multi_action_new (stream_deck_button);
 
   return NULL;
 }
