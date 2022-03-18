@@ -284,8 +284,6 @@ on_preferences_dialog_close_request_cb (GtkDialog                *preferences_di
 static void
 default_multi_action_editor_finalize (GObject *object)
 {
-  DefaultMultiActionEditor *self = (DefaultMultiActionEditor *)object;
-
   G_OBJECT_CLASS (default_multi_action_editor_parent_class)->finalize (object);
 }
 
