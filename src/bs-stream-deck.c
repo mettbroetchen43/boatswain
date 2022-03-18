@@ -994,7 +994,7 @@ bs_stream_deck_initable_init (GInitable     *initable,
     {
       g_set_error (error,
                    BS_STREAM_DECK_ERROR,
-                   BS_STREAM_DECK_ERROR_UNRECONIZED,
+                   BS_STREAM_DECK_ERROR_UNRECOGNIZED,
                    "Not an Elgato device");
       BS_RETURN (FALSE);
     }
@@ -1012,7 +1012,7 @@ bs_stream_deck_initable_init (GInitable     *initable,
     {
       g_set_error (error,
                    BS_STREAM_DECK_ERROR,
-                   BS_STREAM_DECK_ERROR_UNRECONIZED,
+                   BS_STREAM_DECK_ERROR_UNRECOGNIZED,
                    "Not a recognized Stream Deck device");
       BS_RETURN (FALSE);
     }

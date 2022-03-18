@@ -70,7 +70,7 @@ enumerate_stream_decks (BsDeviceManager *self)
 
       if (error)
         {
-          if (!g_error_matches (error, BS_STREAM_DECK_ERROR, BS_STREAM_DECK_ERROR_UNRECONIZED))
+          if (!g_error_matches (error, BS_STREAM_DECK_ERROR, BS_STREAM_DECK_ERROR_UNRECOGNIZED))
             g_warning ("Error opening Stream Deck device: %s", error->message);
           continue;
         }
@@ -104,7 +104,7 @@ on_gusb_context_device_added_cb (GUsbContext     *gusb_context,
 
   if (error)
     {
-      if (!g_error_matches (error, BS_STREAM_DECK_ERROR, BS_STREAM_DECK_ERROR_UNRECONIZED))
+      if (!g_error_matches (error, BS_STREAM_DECK_ERROR, BS_STREAM_DECK_ERROR_UNRECOGNIZED))
         g_warning ("Error opening Stream Deck device: %s", error->message);
       BS_RETURN ();
     }

@@ -30,13 +30,13 @@ G_BEGIN_DECLS
 
 /**
  * BsStreamDeckError:
- * @BS_STREAM_DECK_ERROR_UNRECONIZED: not a recognized Stream Deck device
+ * @BS_STREAM_DECK_ERROR_UNRECOGNIZED: not a recognized Stream Deck device
  *
  * Errors that #BsStreamDeck can generate.
  */
 typedef enum
 {
-  BS_STREAM_DECK_ERROR_UNRECONIZED,
+  BS_STREAM_DECK_ERROR_UNRECOGNIZED,
 } BsStreamDeckError;
 
 #define BS_STREAM_DECK_ERROR (bs_stream_deck_error_quark ())
