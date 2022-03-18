@@ -72,7 +72,7 @@ find_scene_from_model (ObsSwitchSceneAction *self)
 {
   ObsConnection *connection;
   GListModel *scenes;
-  unsigned int i;
+  unsigned int i = 0;
 
   g_clear_signal_handler (&self->scene_name_changed_id, self->scene);
   g_clear_object (&self->scene);
