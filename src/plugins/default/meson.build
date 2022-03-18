@@ -4,7 +4,7 @@ plugin_file = i18n.merge_file(
   input: 'default.plugin.in',
   output: 'default.plugin',
   type: 'desktop',
-  po_dir: '../../po',
+  po_dir: meson.project_source_root() / 'po',
 )
 
 plugins_sources += files(

@@ -4,7 +4,7 @@ plugin_file = i18n.merge_file(
   input: 'launcher.plugin.in',
   output: 'launcher.plugin',
   type: 'desktop',
-  po_dir: '../../po',
+  po_dir: meson.project_source_root() / 'po',
 )
 
 plugins_sources += files(
