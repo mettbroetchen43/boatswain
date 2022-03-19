@@ -727,7 +727,7 @@ bs_icon_set_text (BsIcon     *self,
           g_autoptr (PangoFontDescription) font_description = NULL;
           PangoContext *pango_context;
 
-          font_description = pango_font_description_from_string ("Cantarell 10");
+          font_description = pango_font_description_from_string ("Cantarell Bold 8");
 
           pango_context = pango_font_map_create_context (pango_cairo_font_map_get_default ());
           pango_context_set_language (pango_context, gtk_get_default_language ());
