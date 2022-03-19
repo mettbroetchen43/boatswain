@@ -2,7 +2,7 @@ streamdeckeditor flowbox flowboxchild:selected {
   background-color: transparent;
 }
 
-streamdeckeditor flowbox flowboxchild:selected > image {
+streamdeckeditor flowbox flowboxchild:selected > picture {
   outline: 2px solid @accent_color;
 }
 

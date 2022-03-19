@@ -81,7 +81,7 @@ update_button_texture (BsStreamDeckEditor *self,
                        GtkFlowBoxChild    *child)
 {
   BsStreamDeckButton *stream_deck_button;
-  GtkWidget *image;
+  GtkWidget *picture;
   BsIcon *icon;
   int position;
 
@@ -89,8 +89,8 @@ update_button_texture (BsStreamDeckEditor *self,
   stream_deck_button = bs_stream_deck_get_button (self->stream_deck, position);
   icon = bs_stream_deck_button_get_icon (stream_deck_button);
 
-  image = gtk_flow_box_child_get_child (child);
-  gtk_image_set_from_paintable (GTK_IMAGE (image), GDK_PAINTABLE (icon));
+  picture = gtk_flow_box_child_get_child (child);
+  gtk_picture_set_paintable (GTK_PICTURE (picture), GDK_PAINTABLE (icon));
 }
 
 static void
@@ -107,18 +107,17 @@ build_button_grid (BsStreamDeckEditor *self)
     {
       BsStreamDeckButton *stream_deck_button;
       GtkWidget *button;
-      GtkWidget *image;
+      GtkWidget *picture;
 
       button = gtk_flow_box_child_new ();
       gtk_flow_box_append (self->buttons_flowbox, button);
 
-      image = gtk_image_new ();
-      gtk_widget_add_css_class (image, "card");
-      gtk_widget_set_size_request (image, layout->icon_size, layout->icon_size);
-      gtk_widget_set_halign (image, GTK_ALIGN_CENTER);
-      gtk_widget_set_valign (image, GTK_ALIGN_CENTER);
-      gtk_widget_set_overflow (image, GTK_OVERFLOW_HIDDEN);
-      gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (button), image);
+      picture = gtk_picture_new ();
+      gtk_widget_add_css_class (picture, "card");
+      gtk_widget_set_size_request (picture, layout->icon_size, layout->icon_size);
+      gtk_widget_set_halign (picture, GTK_ALIGN_CENTER);
+      gtk_widget_set_overflow (picture, GTK_OVERFLOW_HIDDEN);
+      gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (button), picture);
 
       stream_deck_button = bs_stream_deck_get_button (self->stream_deck, i);
       g_signal_connect_object (stream_deck_button,
