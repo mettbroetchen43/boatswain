@@ -54,7 +54,7 @@ static const BsActionInfo actions[] = {
   },
   {
     .id = "obs-stream-action",
-    .icon_name = "network-cellular-symbolic",
+    .icon_name = "transmit-symbolic",
     .name = N_("Stream"),
     .description = NULL,
   },
