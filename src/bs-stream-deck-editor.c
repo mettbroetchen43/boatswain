@@ -18,8 +18,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include "bs-debug.h"
 #include "bs-icon.h"
 #include "bs-icon-renderer.h"
+#include "bs-page.h"
 #include "bs-stream-deck.h"
 #include "bs-stream-deck-button.h"
 #include "bs-stream-deck-button-editor.h"
@@ -114,12 +116,6 @@ build_button_grid (BsStreamDeckEditor *self)
     }
 }
 
-static void
-setup_editor (BsStreamDeckEditor *self)
-{
-  build_button_grid (self);
-}
-
 
 /*
  * Callbacks
@@ -147,6 +143,27 @@ on_flowbox_selected_children_changed_cb (GtkFlowBox         *flowbox,
 
       bs_stream_deck_button_editor_set_button (self->button_editor, stream_deck_button);
     }
+}
+
+static void
+on_stream_deck_active_page_changed_cb (BsStreamDeck       *stream_deck,
+                                       GParamSpec         *pspec,
+                                       BsStreamDeckEditor *self)
+{
+  GtkFlowBoxChild *flowbox_child;
+  BsPage *active_page;
+  BsPage *parent;
+
+  BS_ENTRY;
+
+  active_page = bs_stream_deck_get_active_page (stream_deck);
+  parent = bs_page_get_parent (active_page);
+  flowbox_child = gtk_flow_box_get_child_at_index (self->buttons_flowbox, parent ? 1 : 0);
+  g_assert (flowbox_child != NULL);
+
+  gtk_flow_box_select_child (self->buttons_flowbox, flowbox_child);
+
+  BS_EXIT;
 }
 
 static void
@@ -210,7 +227,11 @@ bs_stream_deck_editor_set_property (GObject      *object,
     case PROP_STREAM_DECK:
       g_assert (self->stream_deck == NULL);
       self->stream_deck = g_value_dup_object (value);
-      setup_editor (self);
+      build_button_grid (self);
+      g_signal_connect (self->stream_deck,
+                        "notify::active-page",
+                        G_CALLBACK (on_stream_deck_active_page_changed_cb),
+                        self);
       break;
 
     default:
