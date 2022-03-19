@@ -587,6 +587,8 @@ bs_stream_deck_button_editor_set_button (BsStreamDeckButtonEditor *self,
       setup_button (self);
       update_icon (self);
 
+      adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_BACK);
+
       self->action_changed_id = g_signal_connect (button,
                                                   "notify::action",
                                                   G_CALLBACK (on_action_changed_cb),
