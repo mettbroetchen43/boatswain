@@ -137,30 +137,35 @@ bs_icon_renderer_convert_texture (BsIconRenderer  *self,
                                   size_t          *buffer_len,
                                   GError         **error)
 {
-
   g_autoptr (GdkPixbuf) pixbuf = NULL;
-  const char *image_format;
 
   g_return_val_if_fail (BS_IS_ICON_RENDERER (self), FALSE);
   g_return_val_if_fail (GDK_IS_TEXTURE (texture), FALSE);
   g_return_val_if_fail (buffer != NULL, FALSE);
   g_return_val_if_fail (buffer_len != NULL, FALSE);
 
+  pixbuf = gdk_pixbuf_get_from_texture (texture);
+
   switch (self->layout->format)
     {
     case BS_ICON_FORMAT_BMP:
-      image_format = "bmp";
-      break;
+      return gdk_pixbuf_save_to_buffer (pixbuf,
+                                        buffer,
+                                        buffer_len,
+                                        "bmp",
+                                        error,
+                                        NULL);
 
     case BS_ICON_FORMAT_JPEG:
-      image_format = "jpeg";
-      break;
+      return gdk_pixbuf_save_to_buffer (pixbuf,
+                                        buffer,
+                                        buffer_len,
+                                        "jpeg",
+                                        error,
+                                        "quality", "96",
+                                        NULL);
 
     default:
       g_assert_not_reached ();
     }
-
-  pixbuf = gdk_pixbuf_get_from_texture (texture);
-
-  return gdk_pixbuf_save_to_buffer (pixbuf, buffer, buffer_len, image_format, error, NULL);
 }
