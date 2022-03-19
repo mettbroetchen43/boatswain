@@ -12,7 +12,24 @@
   </gresource>
 
   <gresource prefix="/com/feaneron/Boatswain/icons/scalable/emblems">
+    <file alias="audio-mixer-symbolic.svg">icons/audio-mixer-symbolic.svg</file>
+    <file alias="camera-1-symbolic.svg">icons/camera-1-symbolic.svg</file>
+    <file alias="camera-2-symbolic.svg">icons/camera-2-symbolic.svg</file>
+    <file alias="camera-3-symbolic.svg">icons/camera-3-symbolic.svg</file>
+    <file alias="camera-4-symbolic.svg">icons/camera-4-symbolic.svg</file>
+    <file alias="chat-symbolic.svg">icons/chat-symbolic.svg</file>
     <file alias="dialpad-symbolic.svg">icons/dialpad-symbolic.svg</file>
+    <file alias="hdmi-symbolic.svg">icons/hdmi-symbolic.svg</file>
+    <file alias="image-symbolic.svg">icons/image-symbolic.svg</file>
+    <file alias="offline-symbolic.svg">icons/offline-symbolic.svg</file>
+    <file alias="phone-input-symbolic.svg">icons/phone-input-symbolic.svg</file>
+    <file alias="record-symbolic.svg">icons/record-symbolic.svg</file>
+    <file alias="screencast-record-symbolic.svg">icons/screencast-record-symbolic.svg</file>
+    <file alias="transmit-symbolic.svg">icons/transmit-symbolic.svg</file>
+    <file alias="twitch-symbolic.svg">icons/twitch-symbolic.svg</file>
+    <file alias="video-loop-symbolic.svg">icons/video-loop-symbolic.svg</file>
+    <file alias="wacom-symbolic.svg">icons/wacom-symbolic.svg</file>
+    <file alias="youtube-symbolic.svg">icons/youtube-symbolic.svg</file>
   </gresource>
 
 </gresources>
