@@ -114,7 +114,7 @@ build_button_grid (BsStreamDeckEditor *self)
 
       image = gtk_image_new ();
       gtk_widget_add_css_class (image, "card");
-      gtk_widget_set_size_request (image, 96, 96);
+      gtk_widget_set_size_request (image, layout->icon_size, layout->icon_size);
       gtk_widget_set_halign (image, GTK_ALIGN_CENTER);
       gtk_widget_set_valign (image, GTK_ALIGN_CENTER);
       gtk_widget_set_overflow (image, GTK_OVERFLOW_HIDDEN);

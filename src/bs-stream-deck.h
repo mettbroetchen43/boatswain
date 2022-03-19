@@ -47,6 +47,7 @@ typedef struct
   uint8_t n_buttons;
   uint8_t rows;
   uint8_t columns;
+  uint32_t icon_size;
 } BsStreamDeckButtonLayout;
 
 #define BS_TYPE_STREAM_DECK (bs_stream_deck_get_type())

@@ -807,6 +807,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .n_buttons = 6,
       .rows = 2,
       .columns = 3,
+      .icon_size = 80,
     },
     .icon_layout = {
       .width = 80,
@@ -832,6 +833,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .n_buttons = 15,
       .rows = 3,
       .columns = 5,
+      .icon_size = 72,
     },
     .icon_layout = {
       .width = 72,
@@ -857,6 +859,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .n_buttons = 15,
       .rows = 3,
       .columns = 5,
+      .icon_size = 72,
     },
     .icon_layout = {
       .width = 72,
@@ -882,6 +885,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .n_buttons = 32,
       .rows = 4,
       .columns = 8,
+      .icon_size = 96,
     },
     .icon_layout = {
       .width = 96,
@@ -907,6 +911,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .n_buttons = 15,
       .rows = 3,
       .columns = 5,
+      .icon_size = 72,
     },
     .icon_layout = {
       .width = 72,
