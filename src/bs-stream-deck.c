@@ -95,6 +95,7 @@ G_DEFINE_QUARK (BsStreamDeck, bs_stream_deck_error);
 enum
 {
   PROP_0,
+  PROP_ACTIVE_PAGE,
   PROP_ACTIVE_PROFILE,
   PROP_BRIGHTNESS,
   PROP_DEVICE,
@@ -1102,6 +1103,10 @@ bs_stream_deck_get_property (GObject    *object,
 
   switch (prop_id)
     {
+    case PROP_ACTIVE_PAGE:
+      g_value_set_object (value, bs_stream_deck_get_active_page (self));
+      break;
+
     case PROP_ACTIVE_PROFILE:
       g_value_set_object (value, self->active_profile);
       break;
@@ -1159,6 +1164,10 @@ bs_stream_deck_class_init (BsStreamDeckClass *klass)
   object_class->finalize = bs_stream_deck_finalize;
   object_class->get_property = bs_stream_deck_get_property;
   object_class->set_property = bs_stream_deck_set_property;
+
+  properties[PROP_ACTIVE_PAGE] = g_param_spec_object ("active-page", NULL, NULL,
+                                                      BS_TYPE_PAGE,
+                                                      G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_ACTIVE_PROFILE] = g_param_spec_object ("active-profile", NULL, NULL,
                                                          BS_TYPE_PROFILE,
@@ -1447,6 +1456,8 @@ bs_stream_deck_push_page (BsStreamDeck  *self,
 
   load_active_page (self);
 
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ACTIVE_PAGE]);
+
   BS_EXIT;
 }
 
@@ -1469,6 +1480,8 @@ bs_stream_deck_pop_page (BsStreamDeck *self)
   bs_page_update_all_items (g_queue_peek_head (self->active_pages));
 
   load_active_page (self);
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ACTIVE_PAGE]);
 
   BS_EXIT;
 }
