@@ -28,6 +28,7 @@
                     <property name="selection-mode">single</property>
                     <property name="column-spacing">18</property>
                     <property name="row-spacing">18</property>
+                    <signal name="child-activated" handler="on_flowbox_child_activated_cb" object="BsStreamDeckEditor" swapped="no" />
                     <signal name="selected-children-changed" handler="on_flowbox_selected_children_changed_cb" object="BsStreamDeckEditor" swapped="no" />
                   </object>
                 </child>

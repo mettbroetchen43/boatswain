@@ -18,6 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include "bs-action-private.h"
 #include "bs-debug.h"
 #include "bs-icon.h"
 #include "bs-icon-renderer.h"
@@ -28,6 +29,7 @@
 #include "bs-stream-deck-editor.h"
 
 #include <glib/gi18n.h>
+#include <libpeas/peas.h>
 
 struct _BsStreamDeckEditor
 {
@@ -60,6 +62,19 @@ static GParamSpec *properties [N_PROPS];
 /*
  * Auxiliary methods
  */
+
+static inline gboolean
+is_switch_page_action (BsAction *action)
+{
+  const PeasPluginInfo *plugin_info;
+  BsActionFactory *factory;
+
+  factory = bs_action_get_factory (action);
+  plugin_info = peas_extension_base_get_plugin_info (PEAS_EXTENSION_BASE (factory));
+
+  return g_strcmp0 (peas_plugin_info_get_module_name (plugin_info), "default") == 0 &&
+         g_strcmp0 (bs_action_get_id (action), "default-switch-page-action") == 0;
+}
 
 static void
 update_button_texture (BsStreamDeckEditor *self,
@@ -120,6 +135,23 @@ build_button_grid (BsStreamDeckEditor *self)
 /*
  * Callbacks
  */
+
+static void
+on_flowbox_child_activated_cb (GtkFlowBox         *flowbox,
+                               GtkFlowBoxChild    *child,
+                               BsStreamDeckEditor *self)
+{
+  BsStreamDeckButton *button;
+  BsAction *action;
+  int position;
+
+  position = gtk_flow_box_child_get_index (child);
+  button = bs_stream_deck_get_button (self->stream_deck, position);
+  action = bs_stream_deck_button_get_action (button);
+
+  if (action && is_switch_page_action (action))
+    bs_action_activate (action);
+}
 
 static void
 on_flowbox_selected_children_changed_cb (GtkFlowBox         *flowbox,
@@ -262,6 +294,7 @@ bs_stream_deck_editor_class_init (BsStreamDeckEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, button_editor);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, buttons_flowbox);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_flowbox_child_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_flowbox_selected_children_changed_cb);
 
   gtk_widget_class_set_css_name (widget_class, "streamdeckeditor");
