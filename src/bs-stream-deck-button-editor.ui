@@ -221,7 +221,16 @@
                         </child>
 
                         <child>
-                          <object class="AdwPreferencesGroup" id="actions_group" />
+                          <object class="AdwPreferencesGroup">
+                            <child>
+                              <object class="GtkListBox" id="actions_listbox">
+                                <property name="selection-mode">none</property>
+                                <style>
+                                  <class name="boxed-list" />
+                                </style>
+                              </object>
+                            </child>
+                          </object>
                         </child>
                       </object>
                     </property>

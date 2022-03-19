@@ -37,7 +37,7 @@ struct _BsStreamDeckButtonEditor
   AdwBin parent_instance;
 
   AdwPreferencesGroup *action_preferences_group;
-  AdwPreferencesGroup *actions_group;
+  GtkListBox *actions_listbox;
   GtkColorChooser *background_color_button;
   AdwPreferencesPage *button_preferences_page;
   GtkEditable *custom_icon_text_entry;
@@ -97,7 +97,7 @@ add_action_factory (BsStreamDeckButtonEditor *self,
   image = gtk_image_new_from_icon_name (peas_plugin_info_get_icon_name (plugin_info));
   adw_expander_row_add_prefix (ADW_EXPANDER_ROW (expander_row), image);
 
-  adw_preferences_group_add (self->actions_group, expander_row);
+  gtk_list_box_append (self->actions_listbox, expander_row);
 
   actions = bs_action_factory_list_actions (action_factory);
   for (l = actions; l; l = l->next)
@@ -438,6 +438,14 @@ static void
 on_select_action_row_activated_cb (GtkListBoxRow            *row,
                                    BsStreamDeckButtonEditor *self)
 {
+  /* Collapse all expander rows */
+  for (GtkWidget *child = gtk_widget_get_first_child (GTK_WIDGET (self->actions_listbox));
+       child;
+       child = gtk_widget_get_next_sibling (child))
+    {
+      adw_expander_row_set_expanded (ADW_EXPANDER_ROW (child), FALSE);
+    }
+
   adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_FORWARD);
 }
 
@@ -516,7 +524,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-stream-deck-button-editor.ui");
 
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, action_preferences_group);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, actions_group);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, actions_listbox);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_button);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, button_preferences_page);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_text_entry);
