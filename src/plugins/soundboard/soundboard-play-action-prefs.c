@@ -95,6 +95,7 @@ on_file_row_activated_cb (AdwActionRow              *row,
                                         GTK_FILE_CHOOSER_ACTION_OPEN,
                                         _("_Open"),
                                         _("_Cancel"));
+  gtk_native_dialog_set_modal (GTK_NATIVE_DIALOG (native), TRUE);
   gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (native), self->file_filter);
 
   g_signal_connect (native, "response", G_CALLBACK (on_file_chooser_native_response_cb), self);
