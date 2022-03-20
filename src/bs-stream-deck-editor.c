@@ -259,10 +259,11 @@ bs_stream_deck_editor_set_property (GObject      *object,
       g_assert (self->stream_deck == NULL);
       self->stream_deck = g_value_dup_object (value);
       build_button_grid (self);
-      g_signal_connect (self->stream_deck,
-                        "notify::active-page",
-                        G_CALLBACK (on_stream_deck_active_page_changed_cb),
-                        self);
+      g_signal_connect_object (self->stream_deck,
+                               "notify::active-page",
+                               G_CALLBACK (on_stream_deck_active_page_changed_cb),
+                               self,
+                               0);
       break;
 
     default:
