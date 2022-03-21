@@ -106,7 +106,7 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://gitlab.gnome.org/feaneron/boatswain.git"
+                    "url" : "https://gitlab.gnome.org/World/boatswain.git"
                 }
             ]
         }

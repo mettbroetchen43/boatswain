@@ -150,7 +150,7 @@ on_show_about_action_activated_cb (GSimpleAction *action,
   gtk_about_dialog_set_license_type (dialog, GTK_LICENSE_GPL_3_0);
   gtk_about_dialog_set_version (dialog, "0.1.0");
   gtk_about_dialog_set_program_name (dialog, "Boatswain");
-  gtk_about_dialog_set_website (dialog, "https://gitlab.gnome.org/feaneron/boatswain");
+  gtk_about_dialog_set_website (dialog, "https://gitlab.gnome.org/World/boatswain");
   gtk_about_dialog_set_website_label (dialog, _("Repository"));
 
   gtk_window_set_modal (GTK_WINDOW (dialog), true);

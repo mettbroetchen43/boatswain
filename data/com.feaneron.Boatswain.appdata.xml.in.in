@@ -4,8 +4,8 @@
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
   <name>Boatswain</name>
-  <url type="homepage">https://gitlab.gnome.org/feaneron/boatswain</url>
-  <url type="bugtracker">https://gitlab.gnome.org/feaneron/boatswain/issues</url>
+  <url type="homepage">https://gitlab.gnome.org/World/boatswain</url>
+  <url type="bugtracker">https://gitlab.gnome.org/World/boatswain/issues</url>
   <summary>Control your Elgato Stream Deck devices</summary>
 	<description>
 	  <p>Boatswain allows you to control Elgato Stream Deck devices.</p>
@@ -20,7 +20,7 @@
 
   <screenshots>
     <screenshot width="1018" height="774">
-      <image>https://gitlab.gnome.org/feaneron/boatswain/raw/main/data/screenshot.png</image>
+      <image>https://gitlab.gnome.org/World/boatswain/raw/main/data/screenshot.png</image>
     </screenshot>
   </screenshots>
 
