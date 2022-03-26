@@ -56,12 +56,4 @@
     </child>
 
   </template>
-
-  <object class="GtkFileFilter" id="file_filter">
-    <property name="name" translatable="yes">Audio Files</property>
-    <mime-types>
-      <mime-type>audio/*</mime-type>
-    </mime-types>
-  </object>
-
 </interface>

@@ -27,7 +27,6 @@ struct _SoundboardPlayActionPrefs
   AdwPreferencesGroup parent_instance;
 
   AdwComboRow *behavior_row;
-  GtkFileFilter *file_filter;
   GtkLabel *filename_label;
   GtkAdjustment *volume_adjustment;
 
@@ -88,6 +87,7 @@ static void
 on_file_row_activated_cb (AdwActionRow              *row,
                           SoundboardPlayActionPrefs *self)
 {
+  g_autoptr (GtkFileFilter) filter = NULL;
   GtkFileChooserNative *native;
 
   native = gtk_file_chooser_native_new (_("Select audio file"),
@@ -96,7 +96,11 @@ on_file_row_activated_cb (AdwActionRow              *row,
                                         _("_Open"),
                                         _("_Cancel"));
   gtk_native_dialog_set_modal (GTK_NATIVE_DIALOG (native), TRUE);
-  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (native), self->file_filter);
+
+  filter = gtk_file_filter_new ();
+  gtk_file_filter_set_name (filter, _("Audio Files"));
+  gtk_file_filter_add_mime_type (filter, "audio/*");
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (native), filter);
 
   g_signal_connect (native, "response", G_CALLBACK (on_file_chooser_native_response_cb), self);
   gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
@@ -123,7 +127,6 @@ soundboard_play_action_prefs_class_init (SoundboardPlayActionPrefsClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/plugins/soundboard/soundboard-play-action-prefs.ui");
 
   gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, behavior_row);
-  gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, file_filter);
   gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, filename_label);
   gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, volume_adjustment);
 
