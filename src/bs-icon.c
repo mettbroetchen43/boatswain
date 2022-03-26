@@ -653,8 +653,11 @@ bs_icon_set_file (BsIcon  *self,
                 continue;
 
               media_stream = gtk_media_file_new_for_file (file);
+              gtk_media_stream_set_volume (media_stream, 0.0);
+              gtk_media_stream_set_muted (media_stream, TRUE);
               gtk_media_stream_set_loop (media_stream, TRUE);
               gtk_media_stream_play (media_stream);
+              break;
             }
         }
       else
