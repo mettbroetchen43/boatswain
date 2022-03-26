@@ -535,9 +535,6 @@ on_websocket_client_message_cb (SoupWebsocketConnection *websocket_client,
 
   data = g_bytes_get_data (message, &length);
 
-  // Useful for debugging:
-  // g_message ("Message received: %s", data);
-
   parser = json_parser_new ();
   json_parser_load_from_data (parser, data, length, &error);
 
@@ -549,6 +546,18 @@ on_websocket_client_message_cb (SoupWebsocketConnection *websocket_client,
 
   root_object = json_node_get_object (json_parser_get_root (parser));
   uuid = json_object_get_string_member_with_default (root_object, "message-id", NULL);
+
+#if 0
+  // Useful for debugging:
+  {
+    g_autoptr (JsonGenerator) generator = json_generator_new ();
+    json_generator_set_root (generator, json_parser_get_root (parser));
+    json_generator_set_pretty (generator, TRUE);
+
+    g_autofree char *json_output = json_generator_to_data (generator, NULL);
+    g_debug ("Message received:\n%s", json_output);
+  }
+#endif
 
   if (uuid)
     {
