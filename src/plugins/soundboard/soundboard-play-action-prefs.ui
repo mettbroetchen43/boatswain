@@ -10,6 +10,8 @@
         <signal name="activated" handler="on_file_row_activated_cb" object="SoundboardPlayActionPrefs" swapped="no" />
         <child>
           <object class="GtkLabel" id="filename_label">
+            <property name="ellipsize">middle</property>
+            <property name="max-width-chars">35</property>
           </object>
         </child>
       </object>

@@ -27,6 +27,7 @@ struct _SoundboardPlayActionPrefs
   AdwPreferencesGroup parent_instance;
 
   AdwComboRow *behavior_row;
+  GtkWidget *file_row;
   GtkLabel *filename_label;
   GtkAdjustment *volume_adjustment;
 
@@ -48,6 +49,7 @@ set_file (SoundboardPlayActionPrefs *self,
 
   basename = g_file_get_basename (file);
   gtk_label_set_label (self->filename_label, basename);
+  gtk_widget_set_tooltip_text (self->file_row, basename);
 
   soundboard_play_action_set_file (self->play_action, file);
 }
@@ -127,6 +129,7 @@ soundboard_play_action_prefs_class_init (SoundboardPlayActionPrefsClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/plugins/soundboard/soundboard-play-action-prefs.ui");
 
   gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, behavior_row);
+  gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, file_row);
   gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, filename_label);
   gtk_widget_class_bind_template_child (widget_class, SoundboardPlayActionPrefs, volume_adjustment);
 
