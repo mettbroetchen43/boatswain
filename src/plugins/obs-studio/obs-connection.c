@@ -18,6 +18,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#define G_LOG_DOMAIN "OBS Studio"
+
 #include "obs-connection.h"
 
 #include <libsecret/secret.h>
