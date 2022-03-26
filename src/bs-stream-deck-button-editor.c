@@ -366,6 +366,7 @@ static void
 on_custom_icon_button_clicked_cb (AdwPreferencesRow        *row,
                                   BsStreamDeckButtonEditor *self)
 {
+  g_autoptr (GtkFileFilter) filter = NULL;
   GtkFileChooserNative *native;
 
   native = gtk_file_chooser_native_new (_("Select icon"),
@@ -374,6 +375,12 @@ on_custom_icon_button_clicked_cb (AdwPreferencesRow        *row,
                                         _("_Open"),
                                         _("_Cancel"));
   gtk_native_dialog_set_modal (GTK_NATIVE_DIALOG (native), TRUE);
+
+  filter = gtk_file_filter_new ();
+  gtk_file_filter_set_name (filter, _("All supported formats"));
+  gtk_file_filter_add_mime_type (filter, "image/*");
+  gtk_file_filter_add_mime_type (filter, "video/*");
+  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (native), filter);
 
   g_signal_connect (native, "response", G_CALLBACK (on_file_chooser_native_response_cb), self);
   gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
