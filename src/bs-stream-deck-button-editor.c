@@ -373,6 +373,7 @@ on_custom_icon_button_clicked_cb (AdwPreferencesRow        *row,
                                         GTK_FILE_CHOOSER_ACTION_OPEN,
                                         _("_Open"),
                                         _("_Cancel"));
+  gtk_native_dialog_set_modal (GTK_NATIVE_DIALOG (native), TRUE);
 
   g_signal_connect (native, "response", G_CALLBACK (on_file_chooser_native_response_cb), self);
   gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
