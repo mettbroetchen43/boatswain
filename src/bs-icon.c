@@ -18,6 +18,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#define G_LOG_DOMAIN "Icon"
+
 #include "bs-icon.h"
 
 struct _BsIcon
