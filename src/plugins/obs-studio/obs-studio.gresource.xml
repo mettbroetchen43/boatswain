@@ -3,7 +3,8 @@
   <gresource prefix="/com/feaneron/Boatswain/plugins/obs-studio">
     <file alias="icons/scalable/apps/com.obsproject.Studio.svg">icons/com.obsproject.Studio.svg</file>
     <file alias="icons/scalable/apps/dotted-box-symbolic.svg">icons/dotted-box-symbolic.svg</file>
-    <file alias="icons/scalable/apps/square-outline-thick-symbolic.svg">icons/square-outline-thick-symbolic.svg</file>
+    <file alias="icons/scalable/apps/eye-not-looking-symbolic.svg">icons/eye-not-looking-symbolic.svg</file>
+    <file alias="icons/scalable/apps/eye-open-negative-filled-symbolic.svg">icons/eye-open-negative-filled-symbolic.svg</file>
 
     <file>obs-studio.plugin</file>
 

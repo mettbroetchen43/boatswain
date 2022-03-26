@@ -18,7 +18,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include "obs-connection.h"
 #include "obs-scene.h"
+#include "obs-source.h"
 
 struct _ObsScene
 {
@@ -37,6 +39,11 @@ enum
 };
 
 static GParamSpec *properties [N_PROPS];
+
+
+/*
+ * GObject overrides
+ */
 
 static void
 obs_scene_finalize (GObject *object)
@@ -108,7 +115,8 @@ obs_scene_init (ObsScene *self)
 }
 
 ObsScene *
-obs_scene_new_from_json (JsonObject *scene_object)
+obs_scene_new_from_json (ObsConnection *connection,
+                         JsonObject    *scene_object)
 {
   g_autoptr (ObsScene) scene = NULL;
 

@@ -1,4 +1,4 @@
-/* obs-scene.h
+/* obs-source.h
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -24,14 +24,26 @@
 
 G_BEGIN_DECLS
 
-#define OBS_TYPE_SCENE (obs_scene_get_type())
-G_DECLARE_FINAL_TYPE (ObsScene, obs_scene, OBS, SCENE, GObject)
+#define OBS_TYPE_SOURCE (obs_source_get_type())
+G_DECLARE_FINAL_TYPE (ObsSource, obs_source, OBS, SOURCE, GObject)
 
-ObsScene * obs_scene_new_from_json (ObsConnection *connection,
-                                    JsonObject    *scene_object);
+ObsSource * obs_source_new (const char    *name,
+                            gboolean       muted,
+                            gboolean       visible,
+                            ObsSourceCaps  source_caps);
 
-const char * obs_scene_get_name (ObsScene *self);
-void obs_scene_set_name (ObsScene   *self,
-                         const char *name);
+const char * obs_source_get_name (ObsSource *self);
+void obs_source_set_name (ObsSource  *self,
+                          const char *name);
+
+gboolean obs_source_get_muted (ObsSource *self);
+void obs_source_set_muted (ObsSource *self,
+                           gboolean   muted);
+
+gboolean obs_source_get_visible (ObsSource *self);
+void obs_source_set_visible (ObsSource *self,
+                             gboolean   visible);
+
+ObsSourceCaps obs_source_get_caps (ObsSource *self);
 
 G_END_DECLS

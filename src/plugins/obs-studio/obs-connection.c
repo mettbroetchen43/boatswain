@@ -21,9 +21,12 @@
 #define G_LOG_DOMAIN "OBS Studio"
 
 #include "obs-connection.h"
+#include "obs-scene.h"
+#include "obs-source.h"
 
 #include <libsecret/secret.h>
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
 #include <json-glib/json-glib.h>
 #include <libsoup/soup.h>
 #include <stdint.h>
@@ -37,6 +40,9 @@ struct _ObsConnection
   ObsConnectionState state;
 
   GListStore *scenes;
+
+  GHashTable *source_types;
+  GListStore *sources;
 
   struct {
     char *challenge;
@@ -54,9 +60,9 @@ struct _ObsConnection
 	SoupWebsocketConnection *websocket_client;
 };
 
-static void on_websocket_get_scene_list_cb (GObject      *source_object,
-                                            GAsyncResult *result,
-                                            gpointer      user_data);
+static void on_websocket_get_source_types_list_cb (GObject      *source_object,
+                                                   GAsyncResult *result,
+                                                   gpointer      user_data);
 
 static void websocket_connected_cb (GObject      *source_object,
                                     GAsyncResult *result,
@@ -208,6 +214,7 @@ set_connection_state (ObsConnection      *self,
 
   if (state != OBS_CONNECTION_STATE_CONNECTED)
     {
+      g_list_store_remove_all (self->sources);
       g_list_store_remove_all (self->scenes);
       set_recording_state (self, OBS_RECORDING_STATE_STOPPED);
       set_streaming (self, FALSE);
@@ -306,7 +313,7 @@ connect_to_obs_websocket (ObsConnection *self)
 }
 
 static void
-fetch_scenes (ObsConnection *self)
+fetch_all_scenes (ObsConnection *self)
 {
   g_autoptr (JsonBuilder) builder = NULL;
 
@@ -315,9 +322,9 @@ fetch_scenes (ObsConnection *self)
   json_builder_begin_object (builder);
 
   json_builder_set_member_name (builder, "request-type");
-  json_builder_add_string_value (builder, "GetSceneList");
+  json_builder_add_string_value (builder, "GetSourceTypesList");
 
-  send_message (self, builder, self->cancellable, on_websocket_get_scene_list_cb, self);
+  send_message (self, builder, self->cancellable, on_websocket_get_source_types_list_cb, self);
 }
 
 static gboolean
@@ -338,6 +345,54 @@ reconnect_after_timeout (ObsConnection *self)
     return;
 
   self->reconnect_timeout_id = g_timeout_add_seconds (1, reconnect_after_timeout_cb, self);
+}
+
+static void
+update_source_from_json_object (GHashTable *sources_by_name,
+                                JsonObject *source_object)
+{
+  ObsSource *source;
+
+  source = g_hash_table_lookup (sources_by_name,
+                                json_object_get_string_member (source_object, "name"));
+
+  if (!source)
+    return;
+
+  obs_source_set_muted (source, json_object_get_boolean_member_with_default (source_object, "muted", FALSE));
+  obs_source_set_visible (source, json_object_get_boolean_member_with_default (source_object, "render", TRUE));
+
+  g_debug ("Source '%s' is muted=%d, visible=%d",
+           obs_source_get_name (source),
+           obs_source_get_muted (source),
+           obs_source_get_visible (source));
+
+  if (json_object_has_member (source_object, "groupChildren"))
+    {
+      JsonArray *children = json_object_get_array_member (source_object, "groupChildren");
+
+      for (unsigned int i = 0; i < json_array_get_length (children); i++)
+        update_source_from_json_object (sources_by_name, json_array_get_object_element (children, i));
+    }
+}
+
+static void
+update_sources_states_from_scene (ObsConnection *self,
+                                  JsonObject    *scene_object)
+{
+  g_autoptr (GHashTable) sources_by_name = NULL;
+  JsonArray *sources_array;
+
+  sources_by_name = g_hash_table_new (g_str_hash, g_str_equal);
+  for (unsigned int i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->sources)); i++)
+    {
+      g_autoptr (ObsSource) source = g_list_model_get_item (G_LIST_MODEL (self->sources), i);
+      g_hash_table_insert (sources_by_name, (gpointer) obs_source_get_name (source), source);
+    }
+
+  sources_array = json_object_get_array_member (scene_object, "sources");
+  for (unsigned int i = 0; i < json_array_get_length (sources_array); i++)
+    update_source_from_json_object (sources_by_name, json_array_get_object_element (sources_array, i));
 }
 
 
@@ -374,6 +429,28 @@ recording_stopped_cb (ObsConnection *self,
 }
 
 static void
+scene_item_visibility_changed_cb (ObsConnection *self,
+                                  JsonObject    *object)
+{
+  const char *source_name;
+  gboolean visible;
+
+  source_name = json_object_get_string_member (object, "item-name");
+  visible = json_object_get_boolean_member (object, "item-visible");
+
+  for (unsigned int i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->sources)); i++)
+    {
+      g_autoptr (ObsSource) source = g_list_model_get_item (G_LIST_MODEL (self->sources), i);
+
+      if (g_strcmp0 (obs_source_get_name (source), source_name) == 0)
+        {
+          obs_source_set_visible (source, visible);
+          break;
+        }
+    }
+}
+
+static void
 scenes_changed_cb (ObsConnection *self,
                    JsonObject    *object)
 {
@@ -396,7 +473,7 @@ scenes_changed_cb (ObsConnection *self,
       JsonObject *scene_object;
 
       scene_object = json_array_get_object_element (scenes_array, i);
-      new_scene = obs_scene_new_from_json (scene_object);
+      new_scene = obs_scene_new_from_json (self, scene_object);
       g_ptr_array_add (new_scenes, g_steal_pointer (&new_scene));
     }
 
@@ -410,28 +487,98 @@ scenes_changed_cb (ObsConnection *self,
 }
 
 static void
-source_renamed_event_cb (ObsConnection *self,
-                         JsonObject    *object)
+source_created_cb (ObsConnection *self,
+                   JsonObject    *object)
+{
+  g_autoptr (ObsSource) source = NULL;
+  ObsSourceCaps source_caps;
+  const char *name;
+
+  name = json_object_get_string_member (object, "sourceName");
+
+  source_caps = obs_connection_get_source_caps (self,
+                                                json_object_get_string_member (object, "sourceKind"));
+
+  source = obs_source_new (name, TRUE, TRUE, source_caps);
+  g_list_store_append (self->sources, source);
+}
+
+static void
+source_destroyed_cb (ObsConnection *self,
+                     JsonObject    *object)
+{
+  const char *source_name;
+
+  source_name = json_object_get_string_member (object, "sourceName");
+  for (unsigned int i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->sources)); i++)
+    {
+      g_autoptr (ObsSource) source = g_list_model_get_item (G_LIST_MODEL (self->sources), i);
+
+      if (g_strcmp0 (obs_source_get_name (source), source_name) == 0)
+        {
+          g_list_store_remove (self->sources, i);
+          break;
+        }
+    }
+}
+
+static void
+source_mute_state_changed_cb (ObsConnection *self,
+                              JsonObject    *object)
+{
+  const char *source_name;
+  gboolean muted;
+
+  source_name = json_object_get_string_member (object, "sourceName");
+  muted = json_object_get_boolean_member (object, "muted");
+
+  for (unsigned int i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->sources)); i++)
+    {
+      g_autoptr (ObsSource) source = g_list_model_get_item (G_LIST_MODEL (self->sources), i);
+
+      if (g_strcmp0 (obs_source_get_name (source), source_name) == 0)
+        {
+          obs_source_set_muted (source, muted);
+          break;
+        }
+    }
+}
+
+static void
+source_renamed_cb (ObsConnection *self,
+                   JsonObject    *object)
 {
   unsigned int i;
   const char *previous_name;
   const char *source_kind;
 
   source_kind = json_object_get_string_member_with_default (object, "sourceType", NULL);
-
-  if (g_strcmp0 (source_kind, "scene") != 0)
-    return;
-
   previous_name = json_object_get_string_member (object, "previousName");
 
-  for (i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->scenes)); i++)
+  if (g_strcmp0 (source_kind, "scene") == 0)
     {
-      g_autoptr (ObsScene) scene = g_list_model_get_item (G_LIST_MODEL (self->scenes), i);
-
-      if (g_strcmp0 (obs_scene_get_name (scene), previous_name) == 0)
+      for (i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->scenes)); i++)
         {
-          obs_scene_set_name (scene, json_object_get_string_member (object, "newName"));
-          break;
+          g_autoptr (ObsScene) scene = g_list_model_get_item (G_LIST_MODEL (self->scenes), i);
+
+          if (g_strcmp0 (obs_scene_get_name (scene), previous_name) == 0)
+            {
+              obs_scene_set_name (scene, json_object_get_string_member (object, "newName"));
+              break;
+            }
+        }
+    }
+  else
+    {
+      for (i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->sources)); i++)
+        {
+          g_autoptr (ObsSource) source = g_list_model_get_item (G_LIST_MODEL (self->sources), i);
+
+          if (g_strcmp0 (obs_source_get_name (source), previous_name) == 0)
+            {
+              obs_source_set_name (source, json_object_get_string_member (object, "newName"));
+              break;
+            }
         }
     }
 }
@@ -450,6 +597,13 @@ stream_stopped_cb (ObsConnection *self,
   set_streaming (self, FALSE);
 }
 
+static void
+switch_scenes_cb (ObsConnection *self,
+                  JsonObject    *object)
+{
+  update_sources_states_from_scene (self, object);
+}
+
 struct {
   const char *event_name;
   void (*trigger) (ObsConnection *self,
@@ -459,10 +613,15 @@ struct {
   { "RecordingResumed", recording_resumed_cb },
   { "RecordingStarted", recording_started_cb },
   { "RecordingStopped", recording_stopped_cb },
+  { "SceneItemVisibilityChanged", scene_item_visibility_changed_cb },
   { "ScenesChanged", scenes_changed_cb },
-  { "SourceRenamed", source_renamed_event_cb },
+  { "SourceCreated", source_created_cb },
+  { "SourceDestroyed", source_destroyed_cb },
+  { "SourceMuteStateChanged", source_mute_state_changed_cb },
+  { "SourceRenamed", source_renamed_cb },
   { "StreamStarted", stream_started_cb },
   { "StreamStopped", stream_stopped_cb },
+  { "SwitchScenes", switch_scenes_cb },
 };
 
 static void
@@ -547,7 +706,7 @@ on_websocket_client_message_cb (SoupWebsocketConnection *websocket_client,
   root_object = json_node_get_object (json_parser_get_root (parser));
   uuid = json_object_get_string_member_with_default (root_object, "message-id", NULL);
 
-#if 0
+//#if 0
   // Useful for debugging:
   {
     g_autoptr (JsonGenerator) generator = json_generator_new ();
@@ -557,7 +716,7 @@ on_websocket_client_message_cb (SoupWebsocketConnection *websocket_client,
     g_autofree char *json_output = json_generator_to_data (generator, NULL);
     g_debug ("Message received:\n%s", json_output);
   }
-#endif
+//#endif
 
   if (uuid)
     {
@@ -597,7 +756,7 @@ on_websocket_authenticated_cb (GObject      *source_object,
     {
       save_password (self, g_task_get_task_data (task));
       g_task_return_boolean (task, TRUE);
-      fetch_scenes (self);
+      fetch_all_scenes (self);
     }
   else
     {
@@ -693,8 +852,6 @@ on_websocket_get_streaming_status_cb (GObject      *source_object,
   recording_paused = json_object_get_boolean_member_with_default (object, "recording-paused", FALSE);
   streaming = json_object_get_boolean_member_with_default (object, "streaming", FALSE);
 
-  set_connection_state (self, OBS_CONNECTION_STATE_CONNECTED);
-
   set_streaming (self, streaming);
   if (!recording)
     set_recording_state (self, OBS_RECORDING_STATE_STOPPED);
@@ -702,6 +859,8 @@ on_websocket_get_streaming_status_cb (GObject      *source_object,
     set_recording_state (self, OBS_RECORDING_STATE_PAUSED);
   else
     set_recording_state (self, OBS_RECORDING_STATE_RECORDING);
+
+  set_connection_state (self, OBS_CONNECTION_STATE_CONNECTED);
 }
 
 static void
@@ -715,6 +874,7 @@ on_websocket_get_scene_list_cb (GObject      *source_object,
   ObsConnection *self;
   JsonObject *object;
   JsonNode *scenes_node;
+  const char *current_scene_name;
 
   node = parse_message_response (result, &error);
   object = json_node_get_object (node);
@@ -727,6 +887,7 @@ on_websocket_get_scene_list_cb (GObject      *source_object,
 
   self = OBS_CONNECTION (user_data);
 
+  current_scene_name = json_object_get_string_member (object, "current-scene");
   scenes_node = json_object_get_member (object, "scenes");
   if (JSON_NODE_HOLDS_ARRAY (scenes_node))
     {
@@ -743,8 +904,11 @@ on_websocket_get_scene_list_cb (GObject      *source_object,
           JsonObject *scene_object;
 
           scene_object = json_array_get_object_element (scenes_array, i);
-          scene = obs_scene_new_from_json (scene_object);
-          g_ptr_array_add (new_scenes, g_steal_pointer (&scene));
+          scene = obs_scene_new_from_json (self, scene_object);
+          g_ptr_array_add (new_scenes, g_object_ref (scene));
+
+          if (g_strcmp0 (obs_scene_get_name (scene), current_scene_name) == 0)
+            update_sources_states_from_scene (self, scene_object);
         }
 
         g_list_store_splice (self->scenes,
@@ -765,37 +929,226 @@ on_websocket_get_scene_list_cb (GObject      *source_object,
 }
 
 static void
-on_websocket_recording_toggled_cb (GObject      *source_object,
-                                   GAsyncResult *result,
-                                   gpointer      user_data)
+on_websocket_get_sources_list_cb (GObject      *source_object,
+                                  GAsyncResult *result,
+                                  gpointer      user_data)
 {
+  g_autoptr (JsonBuilder) builder = NULL;
+  g_autoptr (GHashTable) special_sources_names = NULL;
   g_autoptr (JsonNode) node = NULL;
   g_autoptr (GError) error = NULL;
+  ObsConnection *self;
+  JsonObject *object;
+  JsonArray *sources;
 
   node = parse_message_response (result, &error);
 
   if (error)
-    g_warning ("Error parsing message response: %s", error->message);
+    {
+      g_warning ("Error parsing message response: %s", error->message);
+      return;
+    }
+
+  self = OBS_CONNECTION (user_data);
+  object = json_node_get_object (node);
+
+  special_sources_names = g_hash_table_new (g_str_hash, g_str_equal);
+  for (unsigned int i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->sources)); i++)
+    {
+      g_autoptr (ObsSource) source = g_list_model_get_item (G_LIST_MODEL (self->sources), i);
+      g_hash_table_add (special_sources_names, (gpointer) obs_source_get_name (source));
+    }
+
+  sources = json_object_get_array_member (object, "sources");
+  for (unsigned int i = 0; i < json_array_get_length (sources); i++)
+    {
+      g_autoptr (ObsSource) source = NULL;
+      ObsSourceCaps source_caps;
+      JsonObject *source_object;
+      const char *name;
+
+      source_object = json_array_get_object_element (sources, i);
+      name = json_object_get_string_member (source_object, "name");
+
+      /* Ignore special sources, they're already added */
+      if (g_hash_table_contains (special_sources_names, name))
+        continue;
+
+      source_caps = obs_connection_get_source_caps (self,
+                                                    json_object_get_string_member (source_object, "typeId"));
+
+      source = obs_source_new (name, FALSE, FALSE, source_caps);
+      g_list_store_append (self->sources, source);
+    }
+
+  /* Fetch special sources */
+  builder = json_builder_new ();
+  json_builder_begin_object (builder);
+
+  json_builder_set_member_name (builder, "request-type");
+  json_builder_add_string_value (builder, "GetSceneList");
+
+  send_message (self, builder, self->cancellable, on_websocket_get_scene_list_cb, self);
 }
 
 static void
-on_websocket_scene_switched_cb (GObject      *source_object,
-                                GAsyncResult *result,
-                                gpointer      user_data)
+on_websocket_special_source_get_mute_cb (GObject      *source_object,
+                                         GAsyncResult *result,
+                                         gpointer      user_data)
 {
+  g_autoptr (ObsSource) special_source = NULL;
   g_autoptr (JsonNode) node = NULL;
   g_autoptr (GError) error = NULL;
+  JsonObject *object;
+
+  special_source = OBS_SOURCE (user_data);
 
   node = parse_message_response (result, &error);
 
   if (error)
-    g_warning ("Error parsing message response: %s", error->message);
+    {
+      g_warning ("Error parsing message response: %s", error->message);
+      return;
+    }
+
+  object = json_node_get_object (node);
+
+  obs_source_set_muted (special_source, json_object_get_boolean_member (object, "muted"));
+
+  g_debug ("Special source '%s' is muted: %d",
+           obs_source_get_name (special_source),
+           obs_source_get_muted (special_source));
 }
 
 static void
-on_websocket_streaming_toggled_cb (GObject      *source_object,
-                                   GAsyncResult *result,
-                                   gpointer      user_data)
+on_websocket_get_special_sources_cb (GObject      *source_object,
+                                     GAsyncResult *result,
+                                     gpointer      user_data)
+{
+  g_autoptr (JsonBuilder) builder = NULL;
+  g_autoptr (JsonNode) node = NULL;
+  g_autoptr (GError) error = NULL;
+  ObsConnection *self;
+  JsonObject *object;
+
+  const char *special_sources[] = {
+    "desktop-1",
+    "desktop-2",
+    "mic-1",
+    "mic-2",
+    "mic-3",
+  };
+
+  node = parse_message_response (result, &error);
+
+  if (error)
+    {
+      g_warning ("Error parsing message response: %s", error->message);
+      return;
+    }
+
+  self = OBS_CONNECTION (user_data);
+  object = json_node_get_object (node);
+
+  for (unsigned int i = 0; i < G_N_ELEMENTS (special_sources); i++)
+    {
+      g_autoptr (JsonBuilder) builder = NULL;
+      g_autoptr (ObsSource) special_source = NULL;
+      const char *name;
+
+      if (!json_object_has_member (object, special_sources[i]))
+        continue;
+
+      name = json_object_get_string_member (object, special_sources[i]);
+      special_source = obs_source_new (name, FALSE, FALSE, OBS_SOURCE_CAP_AUDIO);
+      g_list_store_append (self->sources, special_source);
+
+      /* Get special source mute state */
+      builder = json_builder_new ();
+      json_builder_begin_object (builder);
+      json_builder_set_member_name (builder, "request-type");
+      json_builder_add_string_value (builder, "GetMute");
+      json_builder_set_member_name (builder, "source");
+      json_builder_add_string_value (builder, name);
+      send_message (self, builder,
+                    self->cancellable,
+                    on_websocket_special_source_get_mute_cb,
+                    g_object_ref (special_source));
+    }
+
+  /* Fetch information about source */
+  builder = json_builder_new ();
+  json_builder_begin_object (builder);
+
+  json_builder_set_member_name (builder, "request-type");
+  json_builder_add_string_value (builder, "GetSourcesList");
+
+  send_message (self, builder, self->cancellable, on_websocket_get_sources_list_cb, self);
+}
+
+static void
+on_websocket_get_source_types_list_cb (GObject      *source_object,
+                                       GAsyncResult *result,
+                                       gpointer      user_data)
+{
+  g_autoptr (JsonBuilder) builder = NULL;
+  g_autoptr (JsonNode) node = NULL;
+  g_autoptr (GError) error = NULL;
+  ObsConnection *self;
+  JsonObject *object;
+  JsonArray *types;
+  unsigned int i;
+
+  node = parse_message_response (result, &error);
+
+  if (error)
+    {
+      g_warning ("Error parsing message response: %s", error->message);
+      return;
+    }
+
+  self = OBS_CONNECTION (user_data);
+  object = json_node_get_object (node);
+  types = json_object_get_array_member (object, "types");
+
+  for (i = 0; i < json_array_get_length (types); i++)
+    {
+      ObsSourceCaps source_caps;
+      JsonObject *type;
+      JsonObject *caps;
+
+      type = json_array_get_object_element (types, i);
+      caps = json_object_get_object_member (type, "caps");
+
+      source_caps = OBS_SOURCE_CAP_NONE;
+      if (json_object_get_boolean_member_with_default (caps, "hasAudio", FALSE))
+        source_caps |= OBS_SOURCE_CAP_AUDIO;
+      if (json_object_get_boolean_member_with_default (caps, "hasVideo", FALSE))
+        source_caps |= OBS_SOURCE_CAP_VIDEO;
+
+      g_hash_table_insert (self->source_types,
+                           g_strdup (json_object_get_string_member (type, "typeId")),
+                           GINT_TO_POINTER (source_caps));
+
+      g_debug ("Source type '%s' has caps = %d",
+               json_object_get_string_member (type, "typeId"),
+               source_caps);
+    }
+
+  /* Fetch information about source types */
+  builder = json_builder_new ();
+  json_builder_begin_object (builder);
+
+  json_builder_set_member_name (builder, "request-type");
+  json_builder_add_string_value (builder, "GetSpecialSources");
+
+  send_message (self, builder, self->cancellable, on_websocket_get_special_sources_cb, self);
+}
+
+static void
+on_websocket_generic_response_cb (GObject      *source_object,
+                                  GAsyncResult *result,
+                                  gpointer      user_data)
 {
   g_autoptr (JsonNode) node = NULL;
   g_autoptr (GError) error = NULL;
@@ -869,10 +1222,12 @@ obs_connection_finalize (GObject *object)
   g_clear_handle_id (&self->reconnect_timeout_id, g_source_remove);
   g_clear_pointer (&self->authentication.challenge, g_free);
   g_clear_pointer (&self->authentication.salt, g_free);
+  g_clear_pointer (&self->source_types, g_hash_table_destroy);
   g_clear_pointer (&self->host, g_free);
   g_clear_object (&self->websocket_client);
   g_clear_object (&self->cancellable);
   g_clear_object (&self->session);
+  g_clear_object (&self->sources);
   g_clear_object (&self->scenes);
 
   G_OBJECT_CLASS (obs_connection_parent_class)->finalize (object);
@@ -986,8 +1341,10 @@ obs_connection_init (ObsConnection *self)
 {
   self->session = soup_session_new ();
   self->cancellable = g_cancellable_new ();
+  self->source_types = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   self->uuid_to_task = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
   self->scenes = g_list_store_new (OBS_TYPE_SCENE);
+  self->sources = g_list_store_new (OBS_TYPE_SOURCE);
   self->recording_state = OBS_RECORDING_STATE_STOPPED;
 }
 
@@ -1103,6 +1460,14 @@ obs_connection_get_scenes (ObsConnection *self)
   return G_LIST_MODEL (self->scenes);
 }
 
+GListModel *
+obs_connection_get_sources (ObsConnection *self)
+{
+  g_return_val_if_fail (OBS_IS_CONNECTION (self), NULL);
+
+  return G_LIST_MODEL (self->sources);
+}
+
 void
 obs_connection_switch_to_scene (ObsConnection *self,
                                 ObsScene      *scene)
@@ -1122,7 +1487,7 @@ obs_connection_switch_to_scene (ObsConnection *self,
   json_builder_set_member_name (builder, "scene-name");
   json_builder_add_string_value (builder, obs_scene_get_name (scene));
 
-  send_message (self, builder, self->cancellable, on_websocket_scene_switched_cb, self);
+  send_message (self, builder, self->cancellable, on_websocket_generic_response_cb, self);
 }
 
 void
@@ -1139,7 +1504,7 @@ obs_connection_toggle_recording (ObsConnection *self)
   json_builder_set_member_name (builder, "request-type");
   json_builder_add_string_value (builder, "StartStopRecording");
 
-  send_message (self, builder, self->cancellable, on_websocket_recording_toggled_cb, self);
+  send_message (self, builder, self->cancellable, on_websocket_generic_response_cb, self);
 }
 
 void
@@ -1156,5 +1521,64 @@ obs_connection_toggle_streaming (ObsConnection *self)
   json_builder_set_member_name (builder, "request-type");
   json_builder_add_string_value (builder, "StartStopStreaming");
 
-  send_message (self, builder, self->cancellable, on_websocket_streaming_toggled_cb, self);
+  send_message (self, builder, self->cancellable, on_websocket_generic_response_cb, self);
+}
+
+void
+obs_connection_toggle_source_mute (ObsConnection *self,
+                                   ObsSource     *source)
+{
+  g_autoptr (JsonBuilder) builder = NULL;
+
+  g_return_if_fail (OBS_IS_CONNECTION (self));
+  g_return_if_fail (OBS_IS_SOURCE (source));
+  g_return_if_fail (self->state == OBS_CONNECTION_STATE_CONNECTED);
+  g_return_if_fail (obs_source_get_caps (source) & OBS_SOURCE_CAP_AUDIO);
+
+  builder = json_builder_new ();
+  json_builder_begin_object (builder);
+
+  json_builder_set_member_name (builder, "request-type");
+  json_builder_add_string_value (builder, "ToggleMute");
+
+  json_builder_set_member_name (builder, "source");
+  json_builder_add_string_value (builder, obs_source_get_name (source));
+
+  send_message (self, builder, self->cancellable, on_websocket_generic_response_cb, self);
+}
+
+void
+obs_connection_toggle_source_visible (ObsConnection *self,
+                                      ObsSource     *source)
+{
+  g_autoptr (JsonBuilder) builder = NULL;
+
+  g_return_if_fail (OBS_IS_CONNECTION (self));
+  g_return_if_fail (OBS_IS_SOURCE (source));
+  g_return_if_fail (self->state == OBS_CONNECTION_STATE_CONNECTED);
+  g_return_if_fail (obs_source_get_caps (source) & OBS_SOURCE_CAP_VIDEO);
+
+  builder = json_builder_new ();
+  json_builder_begin_object (builder);
+
+  json_builder_set_member_name (builder, "request-type");
+  json_builder_add_string_value (builder, "SetSceneItemRender");
+
+  json_builder_set_member_name (builder, "source");
+  json_builder_add_string_value (builder, obs_source_get_name (source));
+
+  json_builder_set_member_name (builder, "render");
+  json_builder_add_boolean_value (builder, !obs_source_get_visible (source));
+
+  send_message (self, builder, self->cancellable, on_websocket_generic_response_cb, self);
+}
+
+ObsSourceCaps
+obs_connection_get_source_caps (ObsConnection *self,
+                                const char    *source_id)
+{
+  g_return_val_if_fail (OBS_IS_CONNECTION (self), OBS_SOURCE_CAP_INVALID);
+  g_return_val_if_fail (source_id != NULL, OBS_SOURCE_CAP_INVALID);
+
+  return GPOINTER_TO_INT (g_hash_table_lookup (self->source_types, source_id));
 }

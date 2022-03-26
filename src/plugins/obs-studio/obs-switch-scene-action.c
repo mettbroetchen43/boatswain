@@ -20,6 +20,7 @@
 
 #include "bs-icon.h"
 #include "obs-connection-settings.h"
+#include "obs-scene.h"
 #include "obs-switch-scene-action.h"
 
 #include <glib/gi18n.h>

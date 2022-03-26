@@ -1,4 +1,4 @@
-/* obs-scene.h
+/* obs-toggle-source-action.h
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -20,18 +20,17 @@
 
 #pragma once
 
-#include "obs-types.h"
+#include <glib-object.h>
+
+#include "obs-action.h"
 
 G_BEGIN_DECLS
 
-#define OBS_TYPE_SCENE (obs_scene_get_type())
-G_DECLARE_FINAL_TYPE (ObsScene, obs_scene, OBS, SCENE, GObject)
+#define OBS_TYPE_TOGGLE_SOURCE_ACTION (obs_toggle_source_action_get_type())
+G_DECLARE_FINAL_TYPE (ObsToggleSourceAction, obs_toggle_source_action, OBS, TOGGLE_SOURCE_ACTION, ObsAction)
 
-ObsScene * obs_scene_new_from_json (ObsConnection *connection,
-                                    JsonObject    *scene_object);
-
-const char * obs_scene_get_name (ObsScene *self);
-void obs_scene_set_name (ObsScene   *self,
-                         const char *name);
+BsAction * obs_toggle_source_action_new (BsStreamDeckButton   *stream_deck_button,
+                                         ObsConnectionManager *connection_manager,
+                                         ObsSourceCaps         source_caps);
 
 G_END_DECLS

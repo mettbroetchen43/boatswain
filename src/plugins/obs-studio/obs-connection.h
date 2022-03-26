@@ -22,31 +22,10 @@
 
 #include <gio/gio.h>
 
-#include "obs-scene.h"
+#include "obs-types.h"
 
 G_BEGIN_DECLS
 
-typedef enum
-{
-  OBS_CONNECTION_STATE_DISCONNECTED,
-  OBS_CONNECTION_STATE_CONNECTING,
-  OBS_CONNECTION_STATE_AUTHENTICATING,
-  OBS_CONNECTION_STATE_WAITING_FOR_CREDENTIALS,
-  OBS_CONNECTION_STATE_CONNECTED,
-} ObsConnectionState;
-
-typedef enum
-{
-  OBS_RECORDING_STATE_STOPPED,
-  OBS_RECORDING_STATE_PAUSED,
-  OBS_RECORDING_STATE_RECORDING,
-} ObsRecordingState;
-
-typedef enum
-{
-  OBS_STREAMING_STATE_STOPPED,
-  OBS_STREAMING_STATE_STREAMING,
-} ObsStreamingState;
 
 #define OBS_TYPE_CONNECTION (obs_connection_get_type())
 G_DECLARE_FINAL_TYPE (ObsConnection, obs_connection, OBS, CONNECTION, GObject)
@@ -73,11 +52,19 @@ gboolean obs_connection_authenticate_finish (ObsConnection  *self,
                                              GError        **error);
 
 GListModel * obs_connection_get_scenes (ObsConnection *self);
+GListModel * obs_connection_get_sources (ObsConnection *self);
 
 void obs_connection_switch_to_scene (ObsConnection *self,
                                      ObsScene      *scene);
 
 void obs_connection_toggle_recording (ObsConnection *self);
 void obs_connection_toggle_streaming (ObsConnection *self);
+void obs_connection_toggle_source_mute (ObsConnection *self,
+                                        ObsSource     *source);
+void obs_connection_toggle_source_visible (ObsConnection *self,
+                                           ObsSource     *source);
+
+ObsSourceCaps obs_connection_get_source_caps (ObsConnection *self,
+                                              const char    *source_id);
 
 G_END_DECLS
