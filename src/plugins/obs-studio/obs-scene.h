@@ -21,13 +21,14 @@
 #pragma once
 
 #include <glib-object.h>
+#include <json-glib/json-glib.h>
 
 G_BEGIN_DECLS
 
 #define OBS_TYPE_SCENE (obs_scene_get_type())
 G_DECLARE_FINAL_TYPE (ObsScene, obs_scene, OBS, SCENE, GObject)
 
-ObsScene * obs_scene_new (const char *name);
+ObsScene * obs_scene_new_from_json (JsonObject  *scene_object);
 
 const char * obs_scene_get_name (ObsScene *self);
 void obs_scene_set_name (ObsScene   *self,

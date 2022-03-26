@@ -396,7 +396,7 @@ scenes_changed_cb (ObsConnection *self,
       JsonObject *scene_object;
 
       scene_object = json_array_get_object_element (scenes_array, i);
-      new_scene = obs_scene_new (json_object_get_string_member (scene_object, "name"));
+      new_scene = obs_scene_new_from_json (scene_object);
       g_ptr_array_add (new_scenes, g_steal_pointer (&new_scene));
     }
 
@@ -743,7 +743,7 @@ on_websocket_get_scene_list_cb (GObject      *source_object,
           JsonObject *scene_object;
 
           scene_object = json_array_get_object_element (scenes_array, i);
-          scene = obs_scene_new (json_object_get_string_member (scene_object, "name"));
+          scene = obs_scene_new_from_json (scene_object);
           g_ptr_array_add (new_scenes, g_steal_pointer (&scene));
         }
 

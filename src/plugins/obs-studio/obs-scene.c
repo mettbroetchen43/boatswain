@@ -108,11 +108,15 @@ obs_scene_init (ObsScene *self)
 }
 
 ObsScene *
-obs_scene_new (const char *name)
+obs_scene_new_from_json (JsonObject *scene_object)
 {
-  return g_object_new (OBS_TYPE_SCENE,
-                       "name", name,
-                       NULL);
+  g_autoptr (ObsScene) scene = NULL;
+
+  scene = g_object_new (OBS_TYPE_SCENE,
+                        "name", json_object_get_string_member (scene_object, "name"),
+                        NULL);
+
+  return g_steal_pointer (&scene);
 }
 
 const char *
