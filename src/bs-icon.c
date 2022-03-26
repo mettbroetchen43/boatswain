@@ -39,6 +39,9 @@ struct _BsIcon
   GtkIconPaintable *icon_paintable;
   GdkTexture *file_texture;
 
+  GtkMediaStream *file_media_stream;
+  gulong file_media_stream_content_changed_id;
+
   gulong relative_size_changed_id;
   gulong relative_content_changed_id;
 
@@ -104,6 +107,14 @@ snapshot_any_paintable (GdkSnapshot *snapshot,
   if (icon->paintable)
     {
       gdk_paintable_snapshot (icon->paintable,
+                              snapshot,
+                              width - icon->margin * 2,
+                              height - icon->margin * 2);
+      painted = TRUE;
+    }
+  else if (icon->file_media_stream)
+    {
+      gdk_paintable_snapshot (GDK_PAINTABLE (icon->file_media_stream),
                               snapshot,
                               width - icon->margin * 2,
                               height - icon->margin * 2);
@@ -270,12 +281,14 @@ bs_icon_finalize (GObject *object)
 {
   BsIcon *self = (BsIcon *)object;
 
+  g_clear_signal_handler (&self->file_media_stream_content_changed_id, self->file_media_stream);
   g_clear_signal_handler (&self->relative_content_changed_id, self->relative);
   g_clear_signal_handler (&self->relative_size_changed_id, self->relative);
   g_clear_signal_handler (&self->content_changed_id, self->paintable);
   g_clear_signal_handler (&self->size_changed_id, self->paintable);
   g_clear_pointer (&self->icon_name, g_free);
   g_clear_object (&self->paintable);
+  g_clear_object (&self->file_media_stream);
   g_clear_object (&self->file_texture);
   g_clear_object (&self->file);
   g_clear_object (&self->layout);
@@ -606,6 +619,7 @@ bs_icon_set_file (BsIcon  *self,
                   GFile   *file,
                   GError **error)
 {
+  g_autoptr (GtkMediaStream) media_stream = NULL;
   g_autoptr (GdkTexture) texture = NULL;
 
   g_return_if_fail (BS_IS_ICON (self));
@@ -615,13 +629,57 @@ bs_icon_set_file (BsIcon  *self,
 
   if (file)
     {
-      texture = gdk_texture_new_from_file (file, error);
-      if (!texture)
-        return;
+      g_autoptr (GFileInfo) file_info = NULL;
+      g_autoptr (GError) local_error = NULL;
+
+      file_info = g_file_query_info (file,
+                                     G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+                                     G_FILE_QUERY_INFO_NONE,
+                                     NULL,
+                                     &local_error);
+
+      if (file_info)
+        {
+          const char * const media_stream_content_types[] = {
+            "image/gif",
+            "video/*",
+          };
+          const char *content_type;
+
+          content_type = g_file_info_get_content_type (file_info);
+          for (size_t i = 0; i < G_N_ELEMENTS (media_stream_content_types); i++)
+            {
+              if (!g_content_type_is_mime_type (content_type, media_stream_content_types[i]))
+                continue;
+
+              media_stream = gtk_media_file_new_for_file (file);
+              gtk_media_stream_set_loop (media_stream, TRUE);
+              gtk_media_stream_play (media_stream);
+            }
+        }
+      else
+        {
+          g_warning ("Error querying file info: %s", local_error->message);
+        }
+
+      if (!media_stream)
+        {
+          texture = gdk_texture_new_from_file (file, error);
+          if (!texture)
+            return;
+        }
     }
 
+  g_clear_signal_handler (&self->file_media_stream_content_changed_id, self->file_media_stream);
+  g_set_object (&self->file_media_stream, media_stream);
   g_set_object (&self->file_texture, texture);
   g_set_object (&self->file, file);
+
+  if (media_stream)
+    self->file_media_stream_content_changed_id = g_signal_connect (media_stream,
+                                                                   "invalidate-contents",
+                                                                   G_CALLBACK (on_paintable_contents_changed_cb),
+                                                                   self);
 
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
   gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
