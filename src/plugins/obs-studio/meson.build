@@ -20,6 +20,7 @@ plugins_sources += files(
   'obs-studio-plugin.c',
   'obs-switch-scene-action.c',
   'obs-toggle-source-action.c',
+  'obs-utils.c',
 )
 
 plugins_deps += [

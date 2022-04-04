@@ -55,6 +55,16 @@ typedef enum
   OBS_SOURCE_CAP_VIDEO = 1 << 1,
 } ObsSourceCaps;
 
+typedef enum
+{
+  OBS_SOURCE_TYPE_UNKNOWN = -1,
+  OBS_SOURCE_TYPE_AUDIO,
+  OBS_SOURCE_TYPE_MICROPHONE,
+  OBS_SOURCE_TYPE_VIDEO,
+  OBS_SOURCE_TYPE_FILTER,
+  OBS_SOURCE_TYPE_TRANSITION,
+} ObsSourceType;
+
 typedef struct _ObsAction ObsAction;
 typedef struct _ObsConnection ObsConnection;
 typedef struct _ObsConnectionManager ObsConnectionManager;

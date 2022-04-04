@@ -30,6 +30,7 @@ struct _ObsSource
   gboolean muted;
   gboolean visible;
   ObsSourceCaps source_caps;
+  ObsSourceType source_type;
 };
 
 G_DEFINE_FINAL_TYPE (ObsSource, obs_source, G_TYPE_OBJECT)
@@ -40,6 +41,7 @@ enum
   PROP_MUTED,
   PROP_NAME,
   PROP_SOURCE_CAPS,
+  PROP_SOURCE_TYPE,
   PROP_VISIBLE,
   N_PROPS
 };
@@ -78,6 +80,10 @@ obs_source_get_property (GObject    *object,
       g_value_set_int (value, self->source_caps);
       break;
 
+    case PROP_SOURCE_TYPE:
+      g_value_set_int (value, self->source_type);
+      break;
+
     case PROP_VISIBLE:
       g_value_set_boolean (value, self->visible);
       break;
@@ -108,6 +114,10 @@ obs_source_set_property (GObject      *object,
     case PROP_SOURCE_CAPS:
       g_assert (self->source_caps == OBS_SOURCE_CAP_NONE);
       self->source_caps = g_value_get_int (value);
+      break;
+
+    case PROP_SOURCE_TYPE:
+      self->source_type = g_value_get_int (value);
       break;
 
     case PROP_VISIBLE:
@@ -144,6 +154,10 @@ obs_source_class_init (ObsSourceClass *klass)
                                                    OBS_SOURCE_CAP_NONE, G_MAXINT, OBS_SOURCE_CAP_NONE,
                                                    G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
+  properties[PROP_SOURCE_TYPE] = g_param_spec_int ("source-type", NULL, NULL,
+                                                   OBS_SOURCE_TYPE_UNKNOWN, G_MAXINT, OBS_SOURCE_TYPE_UNKNOWN,
+                                                   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
   g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
@@ -151,6 +165,7 @@ static void
 obs_source_init (ObsSource *self)
 {
   self->source_caps = OBS_SOURCE_CAP_NONE;
+  self->source_type = OBS_SOURCE_TYPE_UNKNOWN;
   self->visible = TRUE;
 }
 
@@ -159,6 +174,7 @@ ObsSource *
 obs_source_new (const char    *name,
                 gboolean       muted,
                 gboolean       visible,
+                ObsSourceType  source_type,
                 ObsSourceCaps  source_caps)
 {
   g_autoptr (ObsSource) source = NULL;
@@ -167,6 +183,7 @@ obs_source_new (const char    *name,
                          "name", name,
                          "muted", muted,
                          "visible", visible,
+                         "source-type", source_type,
                          "source-caps", source_caps,
                          NULL);
 
@@ -245,4 +262,12 @@ obs_source_get_caps (ObsSource *self)
   g_return_val_if_fail (OBS_IS_SOURCE (self), OBS_SOURCE_CAP_INVALID);
 
   return self->source_caps;
+}
+
+ObsSourceType
+obs_source_get_source_type (ObsSource *self)
+{
+  g_return_val_if_fail (OBS_IS_SOURCE (self), OBS_SOURCE_CAP_INVALID);
+
+  return self->source_type;
 }

@@ -64,7 +64,4 @@ void obs_connection_toggle_source_mute (ObsConnection *self,
 void obs_connection_toggle_source_visible (ObsConnection *self,
                                            ObsSource     *source);
 
-ObsSourceCaps obs_connection_get_source_caps (ObsConnection *self,
-                                              const char    *source_id);
-
 G_END_DECLS

@@ -23,6 +23,7 @@
 #include "obs-connection.h"
 #include "obs-scene.h"
 #include "obs-source.h"
+#include "obs-utils.h"
 
 #include <libsecret/secret.h>
 #include <glib/gi18n.h>
@@ -30,6 +31,12 @@
 #include <json-glib/json-glib.h>
 #include <libsoup/soup.h>
 #include <stdint.h>
+
+typedef struct
+{
+  ObsSourceCaps caps;
+  ObsSourceType type;
+} SourceInfo;
 
 struct _ObsConnection
 {
@@ -491,15 +498,15 @@ source_created_cb (ObsConnection *self,
                    JsonObject    *object)
 {
   g_autoptr (ObsSource) source = NULL;
-  ObsSourceCaps source_caps;
+  SourceInfo *source_info;
   const char *name;
 
   name = json_object_get_string_member (object, "sourceName");
 
-  source_caps = obs_connection_get_source_caps (self,
-                                                json_object_get_string_member (object, "sourceKind"));
+  source_info = g_hash_table_lookup (self->source_types,
+                                     json_object_get_string_member (object, "sourceKind"));
 
-  source = obs_source_new (name, TRUE, TRUE, source_caps);
+  source = obs_source_new (name, TRUE, TRUE, source_info->type, source_info->caps);
   g_list_store_append (self->sources, source);
 }
 
@@ -706,7 +713,7 @@ on_websocket_client_message_cb (SoupWebsocketConnection *websocket_client,
   root_object = json_node_get_object (json_parser_get_root (parser));
   uuid = json_object_get_string_member_with_default (root_object, "message-id", NULL);
 
-#if 0
+//#if 0
   // Useful for debugging:
   {
     g_autoptr (JsonGenerator) generator = json_generator_new ();
@@ -716,7 +723,7 @@ on_websocket_client_message_cb (SoupWebsocketConnection *websocket_client,
     g_autofree char *json_output = json_generator_to_data (generator, NULL);
     g_debug ("Message received:\n%s", json_output);
   }
-#endif
+//#endif
 
   if (uuid)
     {
@@ -963,8 +970,8 @@ on_websocket_get_sources_list_cb (GObject      *source_object,
   for (unsigned int i = 0; i < json_array_get_length (sources); i++)
     {
       g_autoptr (ObsSource) source = NULL;
-      ObsSourceCaps source_caps;
       JsonObject *source_object;
+      SourceInfo *source_info;
       const char *name;
 
       source_object = json_array_get_object_element (sources, i);
@@ -974,10 +981,10 @@ on_websocket_get_sources_list_cb (GObject      *source_object,
       if (g_hash_table_contains (special_sources_names, name))
         continue;
 
-      source_caps = obs_connection_get_source_caps (self,
-                                                    json_object_get_string_member (source_object, "typeId"));
+      source_info = g_hash_table_lookup (self->source_types,
+                                         json_object_get_string_member (source_object, "typeId"));
 
-      source = obs_source_new (name, FALSE, FALSE, source_caps);
+      source = obs_source_new (name, FALSE, FALSE,  source_info->type, source_info->caps);
       g_list_store_append (self->sources, source);
     }
 
@@ -1031,12 +1038,15 @@ on_websocket_get_special_sources_cb (GObject      *source_object,
   ObsConnection *self;
   JsonObject *object;
 
-  const char *special_sources[] = {
-    "desktop-1",
-    "desktop-2",
-    "mic-1",
-    "mic-2",
-    "mic-3",
+  const struct {
+    const char *name;
+    ObsSourceType source_type;
+  } special_sources[] = {
+    { "desktop-1", OBS_SOURCE_TYPE_AUDIO },
+    { "desktop-2", OBS_SOURCE_TYPE_AUDIO },
+    { "mic-1", OBS_SOURCE_TYPE_MICROPHONE },
+    { "mic-2", OBS_SOURCE_TYPE_MICROPHONE },
+    { "mic-3", OBS_SOURCE_TYPE_MICROPHONE },
   };
 
   node = parse_message_response (result, &error);
@@ -1056,11 +1066,13 @@ on_websocket_get_special_sources_cb (GObject      *source_object,
       g_autoptr (ObsSource) special_source = NULL;
       const char *name;
 
-      if (!json_object_has_member (object, special_sources[i]))
+      if (!json_object_has_member (object, special_sources[i].name))
         continue;
 
-      name = json_object_get_string_member (object, special_sources[i]);
-      special_source = obs_source_new (name, FALSE, FALSE, OBS_SOURCE_CAP_AUDIO);
+      name = json_object_get_string_member (object, special_sources[i].name);
+      special_source = obs_source_new (name, FALSE, FALSE,
+                                       special_sources[i].source_type,
+                                       OBS_SOURCE_CAP_AUDIO);
       g_list_store_append (self->sources, special_source);
 
       /* Get special source mute state */
@@ -1116,6 +1128,8 @@ on_websocket_get_source_types_list_cb (GObject      *source_object,
       ObsSourceCaps source_caps;
       JsonObject *type;
       JsonObject *caps;
+      SourceInfo *info;
+      const char *type_id;
 
       type = json_array_get_object_element (types, i);
       caps = json_object_get_object_member (type, "caps");
@@ -1126,13 +1140,17 @@ on_websocket_get_source_types_list_cb (GObject      *source_object,
       if (json_object_get_boolean_member_with_default (caps, "hasVideo", FALSE))
         source_caps |= OBS_SOURCE_CAP_VIDEO;
 
-      g_hash_table_insert (self->source_types,
-                           g_strdup (json_object_get_string_member (type, "typeId")),
-                           GINT_TO_POINTER (source_caps));
+      type_id = json_object_get_string_member (type, "typeId");
 
-      g_debug ("Source type '%s' has caps = %d",
-               json_object_get_string_member (type, "typeId"),
-               source_caps);
+      info = g_new0 (SourceInfo, 1);
+      info->caps = source_caps;
+      info->type = obs_parse_source_type (json_object_get_string_member (type, "type"),
+                                          type_id,
+                                          source_caps);
+
+      g_hash_table_insert (self->source_types, g_strdup (type_id), info);
+
+      g_debug ("Source type '%s' has caps = %d, type = %d", type_id, source_caps, info->type);
     }
 
   /* Fetch information about source types */
@@ -1341,7 +1359,7 @@ obs_connection_init (ObsConnection *self)
 {
   self->session = soup_session_new ();
   self->cancellable = g_cancellable_new ();
-  self->source_types = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  self->source_types = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
   self->uuid_to_task = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
   self->scenes = g_list_store_new (OBS_TYPE_SCENE);
   self->sources = g_list_store_new (OBS_TYPE_SOURCE);
@@ -1571,14 +1589,4 @@ obs_connection_toggle_source_visible (ObsConnection *self,
   json_builder_add_boolean_value (builder, !obs_source_get_visible (source));
 
   send_message (self, builder, self->cancellable, on_websocket_generic_response_cb, self);
-}
-
-ObsSourceCaps
-obs_connection_get_source_caps (ObsConnection *self,
-                                const char    *source_id)
-{
-  g_return_val_if_fail (OBS_IS_CONNECTION (self), OBS_SOURCE_CAP_INVALID);
-  g_return_val_if_fail (source_id != NULL, OBS_SOURCE_CAP_INVALID);
-
-  return GPOINTER_TO_INT (g_hash_table_lookup (self->source_types, source_id));
 }
