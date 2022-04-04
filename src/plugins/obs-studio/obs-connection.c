@@ -984,6 +984,9 @@ on_websocket_get_sources_list_cb (GObject      *source_object,
       source_info = g_hash_table_lookup (self->source_types,
                                          json_object_get_string_member (source_object, "typeId"));
 
+      if (!source_info)
+        continue;
+
       source = obs_source_new (name, FALSE, FALSE,  source_info->type, source_info->caps);
       g_list_store_append (self->sources, source);
     }
