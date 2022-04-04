@@ -718,7 +718,7 @@ bs_icon_set_icon_name (BsIcon     *self,
                                                      NULL,
                                                      96,
                                                      1,
-                                                     GTK_TEXT_DIR_RTL,
+                                                     gtk_get_locale_direction (),
                                                      0);
 
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
