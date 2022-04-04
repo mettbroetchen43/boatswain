@@ -67,19 +67,43 @@ update_icon (ObsToggleSourceAction *self)
 {
   BsIcon *icon = bs_action_get_icon (BS_ACTION (self));
 
-  if (self->source_caps & OBS_SOURCE_CAP_AUDIO)
+  if (!self->source)
     {
-      if (self->source && obs_source_get_muted (self->source))
+      if (self->source_caps & OBS_SOURCE_CAP_AUDIO)
+        bs_icon_set_icon_name (icon, "audio-volume-high-symbolic");
+      else
+        bs_icon_set_icon_name (icon, "eye-open-negative-filled-symbolic");
+      return;
+    }
+
+  switch (obs_source_get_source_type (self->source))
+    {
+    case OBS_SOURCE_TYPE_AUDIO:
+      if (obs_source_get_muted (self->source))
         bs_icon_set_icon_name (icon, "audio-volume-muted-symbolic");
       else
         bs_icon_set_icon_name (icon, "audio-volume-high-symbolic");
-    }
-  else
-    {
-      if (self->source && !obs_source_get_visible (self->source))
-        bs_icon_set_icon_name (icon, "eye-not-looking-symbolic");
+      break;
+
+    case OBS_SOURCE_TYPE_MICROPHONE:
+      if (obs_source_get_muted (self->source))
+        bs_icon_set_icon_name (icon, "microphone-disabled-symbolic");
       else
+        bs_icon_set_icon_name (icon, "audio-input-microphone-symbolic");
+      break;
+
+    case OBS_SOURCE_TYPE_VIDEO:
+      if (obs_source_get_visible (self->source))
         bs_icon_set_icon_name (icon, "eye-open-negative-filled-symbolic");
+      else
+        bs_icon_set_icon_name (icon, "eye-not-looking-symbolic");
+      break;
+
+    case OBS_SOURCE_TYPE_TRANSITION:
+    case OBS_SOURCE_TYPE_FILTER:
+    case OBS_SOURCE_TYPE_UNKNOWN:
+    default:
+      break;
     }
 }
 
