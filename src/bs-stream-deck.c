@@ -480,8 +480,8 @@ get_serial_number_mini_original (BsStreamDeck *self)
 
   hid_get_feature_report (self->handle, data, sizeof (data));
 
-  serial = g_malloc0 (sizeof (char) * 17);
-  memcpy (serial, &data[1], 16);
+  serial = g_malloc0 (sizeof (char) * 13);
+  memcpy (serial, &data[5], 12);
 
   BS_RETURN (serial);
 }
