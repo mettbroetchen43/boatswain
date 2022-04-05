@@ -533,6 +533,7 @@ set_button_texture_original (BsStreamDeck  *self,
   const size_t package_size = 8191;
   const size_t header_size = 16;
   size_t bytes_remaining;
+  size_t report_size;
   size_t buffer_size;
   size_t page;
 
@@ -540,6 +541,15 @@ set_button_texture_original (BsStreamDeck  *self,
 
   if (!bs_icon_renderer_convert_texture (self->icon_renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
+
+  report_size = buffer_size / 2;
+
+  /*
+   * BMP images have fixed byte sizes for a given width and height, and
+   * in this case, a 72x72 BMP image should have exactly 15606 bytes.
+   */
+  g_assert (buffer_size == 15606);
+  g_assert (package_size - header_size >= report_size);
 
   payload = g_malloc (sizeof (unsigned char) * package_size);
   payload[0] = 0x02;
@@ -567,12 +577,12 @@ set_button_texture_original (BsStreamDeck  *self,
       size_t chunk_size;
       size_t bytes_sent;
 
-      chunk_size = MIN (bytes_remaining, package_size - header_size);
+      chunk_size = MIN (bytes_remaining, report_size);
 
       payload[2] = page + 1;
       payload[4] = chunk_size == bytes_remaining ? 1 : 0;
 
-      bytes_sent = page * (package_size - header_size);
+      bytes_sent = page * report_size;
       memcpy (payload + header_size, buffer + bytes_sent, chunk_size);
 
       padding_size = package_size - header_size - chunk_size;
