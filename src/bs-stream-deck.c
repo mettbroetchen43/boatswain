@@ -357,7 +357,7 @@ set_button_texture_mini (BsStreamDeck  *self,
 {
   g_autofree unsigned char *payload = NULL;
   g_autofree unsigned char *buffer = NULL;
-  const size_t package_size = 8191;
+  const size_t package_size = 1024;
   const size_t header_size = 16;
   size_t bytes_remaining;
   size_t buffer_size;
