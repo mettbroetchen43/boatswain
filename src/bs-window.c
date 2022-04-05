@@ -416,7 +416,10 @@ bs_window_constructed (GObject *object)
       gtk_stack_add_named (self->main_stack, editor, page_name);
 
       if (first)
-        select_stream_deck (self, stream_deck);
+        {
+          select_stream_deck (self, stream_deck);
+          first = FALSE;
+        }
 
       gtk_widget_show (GTK_WIDGET (self->profiles_menu_button));
     }
