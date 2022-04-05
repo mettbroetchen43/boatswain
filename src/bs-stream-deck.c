@@ -610,7 +610,7 @@ read_button_states_original (BsStreamDeck *self)
     {
       uint8_t position = swap_button_index_original (self, i);
       BsStreamDeckButton *button = g_ptr_array_index (self->buttons, position);
-      gboolean pressed = (gboolean) states[position + 1];
+      gboolean pressed = (gboolean) states[i + 1];
 
       if (bs_stream_deck_button_get_pressed (button) == pressed)
         continue;
