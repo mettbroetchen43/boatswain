@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/feaneron/Boatswain/plugins/obs-studio">
-    <file alias="icons/scalable/apps/com.obsproject.Studio.svg">icons/com.obsproject.Studio.svg</file>
-    <file alias="icons/scalable/apps/dotted-box-symbolic.svg">icons/dotted-box-symbolic.svg</file>
-    <file alias="icons/scalable/apps/eye-not-looking-symbolic.svg">icons/eye-not-looking-symbolic.svg</file>
-    <file alias="icons/scalable/apps/eye-open-negative-filled-symbolic.svg">icons/eye-open-negative-filled-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/dotted-box-symbolic.svg">icons/dotted-box-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/eye-not-looking-symbolic.svg">icons/eye-not-looking-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/eye-open-negative-filled-symbolic.svg">icons/eye-open-negative-filled-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/obs-symbolic.svg">icons/obs-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/obs-window-symbolic.svg">icons/obs-window-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/record-symbolic.svg">icons/record-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/transmit-symbolic.svg">icons/transmit-symbolic.svg</file>
 
     <file>obs-studio.plugin</file>
 

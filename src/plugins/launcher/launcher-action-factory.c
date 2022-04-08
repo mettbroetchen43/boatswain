@@ -38,13 +38,13 @@ G_DEFINE_FINAL_TYPE_WITH_CODE (LauncherActionFactory, launcher_action_factory, P
 static const BsActionInfo actions[] = {
   {
     .id = "launch-action",
-    .icon_name = "application-x-executable-symbolic",
+    .icon_name = "app-launch-symbolic",
     .name = N_("Launch Application"),
     .description = NULL,
   },
   {
     .id = "launcher-open-url-action",
-    .icon_name = "web-browser-symbolic",
+    .icon_name = "open-link-symbolic",
     .name = N_("Open URL"),
     .description = NULL,
   },

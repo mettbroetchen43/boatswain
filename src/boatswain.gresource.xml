@@ -23,9 +23,7 @@
     <file alias="image-symbolic.svg">icons/image-symbolic.svg</file>
     <file alias="offline-symbolic.svg">icons/offline-symbolic.svg</file>
     <file alias="phone-input-symbolic.svg">icons/phone-input-symbolic.svg</file>
-    <file alias="record-symbolic.svg">icons/record-symbolic.svg</file>
     <file alias="screencast-record-symbolic.svg">icons/screencast-record-symbolic.svg</file>
-    <file alias="transmit-symbolic.svg">icons/transmit-symbolic.svg</file>
     <file alias="twitch-symbolic.svg">icons/twitch-symbolic.svg</file>
     <file alias="video-loop-symbolic.svg">icons/video-loop-symbolic.svg</file>
     <file alias="wacom-symbolic.svg">icons/wacom-symbolic.svg</file>

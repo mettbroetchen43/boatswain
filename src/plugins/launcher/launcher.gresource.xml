@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/feaneron/Boatswain/plugins/launcher">
+    <file alias="icons/scalable/emblems/app-launch-symbolic.svg">icons/app-launch-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/open-link-symbolic.svg">icons/open-link-symbolic.svg</file>
+
     <file preprocess="xml-stripblanks">launcher-launch-preferences.ui</file>
     <file>launcher.plugin</file>
   </gresource>
