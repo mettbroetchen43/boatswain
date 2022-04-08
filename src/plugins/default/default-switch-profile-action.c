@@ -18,6 +18,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include "bs-application.h"
+#include "bs-device-manager.h"
 #include "bs-icon.h"
 #include "bs-profile.h"
 #include "bs-stream-deck.h"
@@ -30,7 +32,15 @@ struct _DefaultSwitchProfileAction
 {
   BsAction parent_instance;
 
-  BsProfile *profile;
+  char *serial_number;
+  char *profile_id;
+
+  AdwComboRow *stream_decks_row;
+  AdwComboRow *profiles_row;
+
+  GBinding *binding;
+
+  gulong items_changed_id;
 };
 
 G_DEFINE_FINAL_TYPE (DefaultSwitchProfileAction, default_switch_profile_action, BS_TYPE_ACTION)
@@ -40,17 +50,44 @@ G_DEFINE_FINAL_TYPE (DefaultSwitchProfileAction, default_switch_profile_action, 
  * Auxiliary methods
  */
 
-static BsProfile *
-get_profile_from_stream_deck (DefaultSwitchProfileAction *self,
-                              const char                 *profile_id)
+static BsStreamDeck *
+find_stream_deck (const char   *serial_number,
+                  unsigned int *out_position)
 {
-  BsStreamDeckButton *stream_deck_button;
-  BsStreamDeck *stream_deck;
+  BsDeviceManager *device_manager;
+  BsApplication *application;
+  GListModel *stream_decks;
+
+  application = BS_APPLICATION (g_application_get_default ());
+  device_manager = bs_application_get_device_manager (application);
+  stream_decks = bs_device_manager_get_stream_decks (device_manager);
+
+  for (unsigned int i = 0; i < g_list_model_get_n_items (stream_decks); i++)
+    {
+      g_autoptr (BsStreamDeck) stream_deck = g_list_model_get_item (stream_decks, i);
+
+      if (g_strcmp0 (bs_stream_deck_get_serial_number (stream_deck), serial_number) == 0)
+        {
+          if (out_position)
+            *out_position = i;
+          return stream_deck;
+        }
+    }
+
+  if (out_position)
+    *out_position = GTK_INVALID_LIST_POSITION;
+
+  return NULL;
+}
+
+static BsProfile *
+get_profile_from_stream_deck (BsStreamDeck *stream_deck,
+                              const char   *profile_id,
+                              unsigned int *out_position)
+{
   GListModel *profiles;
   unsigned int i;
 
-  stream_deck_button = bs_action_get_stream_deck_button (BS_ACTION (self));
-  stream_deck = bs_stream_deck_button_get_stream_deck (stream_deck_button);
   profiles = bs_stream_deck_get_profiles (stream_deck);
 
   for (i = 0; i < g_list_model_get_n_items (profiles); i++)
@@ -58,22 +95,81 @@ get_profile_from_stream_deck (DefaultSwitchProfileAction *self,
       g_autoptr (BsProfile) profile = g_list_model_get_item (profiles, i);
 
       if (g_strcmp0 (bs_profile_get_id (profile), profile_id) == 0)
-        return profile;
+        {
+          if (out_position)
+            *out_position = i;
+          return profile;
+        }
     }
 
+  if (out_position)
+    *out_position = GTK_INVALID_LIST_POSITION;
+
   return bs_stream_deck_get_active_profile (stream_deck);
+}
+
+static gboolean
+find_stream_deck_and_profile (DefaultSwitchProfileAction  *self,
+                              BsStreamDeck               **out_stream_deck,
+                              BsProfile                  **out_profile)
+{
+  BsStreamDeck *stream_deck;
+  BsProfile *profile;
+
+  stream_deck = find_stream_deck (self->serial_number, NULL);
+
+  if (!stream_deck)
+    return FALSE;
+
+  profile = get_profile_from_stream_deck (stream_deck, self->profile_id, NULL);
+
+  if (!profile)
+    return FALSE;
+
+  *out_stream_deck = stream_deck;
+  *out_profile = profile;
+  return TRUE;
 }
 
 static void
 set_active_profile (DefaultSwitchProfileAction *self,
                     BsProfile                  *profile)
 {
-  if (g_set_object (&self->profile, profile))
-    {
-      BsIcon *icon = bs_action_get_icon (BS_ACTION (self));
+  BsIcon *icon;
 
-      bs_icon_set_text (icon, bs_profile_get_name (profile));
-      bs_action_changed (BS_ACTION (self));
+  g_clear_pointer (&self->binding, g_binding_unbind);
+
+  if (!profile)
+    return;
+
+  icon = bs_action_get_icon (BS_ACTION (self));
+
+  self->binding = g_object_bind_property (profile, "name",
+                                          icon, "text",
+                                          G_BINDING_SYNC_CREATE);
+  g_object_add_weak_pointer (G_OBJECT (self->binding), (gpointer *) &self->binding);
+
+  bs_icon_set_text (icon, bs_profile_get_name (profile));
+  bs_action_changed (BS_ACTION (self));
+}
+
+static void
+update_active_profile (DefaultSwitchProfileAction *self)
+{
+  BsStreamDeck *stream_deck;
+  BsProfile *profile;
+  BsIcon *icon;
+
+  icon = bs_action_get_icon (BS_ACTION (self));
+
+  if (find_stream_deck_and_profile (self, &stream_deck, &profile))
+    {
+      bs_icon_set_opacity (icon, -1.0);
+      set_active_profile (self, profile);
+    }
+  else
+    {
+      bs_icon_set_opacity (icon, 0.35);
     }
 }
 
@@ -83,11 +179,53 @@ set_active_profile (DefaultSwitchProfileAction *self,
  */
 
 static void
-on_combo_row_selected_changed_cb (AdwComboRow                *combo_row,
-                                  GParamSpec                 *pspec,
-                                  DefaultSwitchProfileAction *self)
+on_stream_decks_combo_row_selected_item_changed_cb (AdwComboRow                *combo_row,
+                                                    GParamSpec                 *pspec,
+                                                    DefaultSwitchProfileAction *self)
 {
-  set_active_profile (self, adw_combo_row_get_selected_item (combo_row));
+
+  BsStreamDeck *stream_deck = adw_combo_row_get_selected_item (combo_row);
+
+  g_clear_pointer (&self->serial_number, g_free);
+  self->serial_number = stream_deck ? g_strdup (bs_stream_deck_get_serial_number (stream_deck)) : NULL;
+
+  g_assert (self->profiles_row != NULL);
+
+  if (stream_deck)
+    adw_combo_row_set_model (self->profiles_row, bs_stream_deck_get_profiles (stream_deck));
+  else
+    adw_combo_row_set_model (self->profiles_row, NULL);
+
+  update_active_profile (self);
+}
+
+static void
+on_combo_row_selected_item_changed_cb (AdwComboRow                *combo_row,
+                                       GParamSpec                 *pspec,
+                                       DefaultSwitchProfileAction *self)
+{
+  BsProfile *profile = adw_combo_row_get_selected_item (combo_row);
+
+  g_clear_pointer (&self->profile_id, g_free);
+  self->profile_id = profile ? g_strdup (bs_profile_get_id (profile)) : NULL;
+
+  set_active_profile (self, profile);
+}
+
+static void
+on_device_manager_stream_deck_added_cb (BsDeviceManager            *device_manager,
+                                        BsStreamDeck               *stream_deck,
+                                        DefaultSwitchProfileAction *self)
+{
+  update_active_profile (self);
+}
+
+static void
+on_device_manager_stream_deck_removed_cb (BsDeviceManager            *device_manager,
+                                          BsStreamDeck               *stream_deck,
+                                          DefaultSwitchProfileAction *self)
+{
+  update_active_profile (self);
 }
 
 static void
@@ -97,9 +235,7 @@ on_profiles_items_changed_cb (GListModel                 *list,
                               unsigned int                added,
                               DefaultSwitchProfileAction *self)
 {
-  const char *profile_id = bs_profile_get_id (self->profile);
-
-  set_active_profile (self, get_profile_from_stream_deck (self, profile_id));
+  update_active_profile (self);
 }
 
 
@@ -111,43 +247,84 @@ static void
 default_switch_profile_action_activate (BsAction *action)
 {
   DefaultSwitchProfileAction *self;
-  BsStreamDeckButton *stream_deck_button;
   BsStreamDeck *stream_deck;
+  BsProfile *profile;
 
   self = DEFAULT_SWITCH_PROFILE_ACTION (action);
-  stream_deck_button = bs_action_get_stream_deck_button (BS_ACTION (self));
-  stream_deck = bs_stream_deck_button_get_stream_deck (stream_deck_button);
 
-  bs_stream_deck_load_profile (stream_deck, self->profile);
+  if (find_stream_deck_and_profile (self, &stream_deck, &profile))
+    bs_stream_deck_load_profile (stream_deck, profile);
 }
 
 static GtkWidget *
 default_switch_profile_action_get_preferences (BsAction *action)
 {
   DefaultSwitchProfileAction *self = DEFAULT_SWITCH_PROFILE_ACTION (action);
-  BsStreamDeckButton *stream_deck_button;
+  BsDeviceManager *device_manager;
+  BsApplication *application;
   BsStreamDeck *stream_deck;
+  GListModel *stream_decks;
   GListModel *profiles;
+  GtkWidget *group;
   GtkWidget *row;
   unsigned int position;
 
-  stream_deck_button = bs_action_get_stream_deck_button (BS_ACTION (self));
-  stream_deck = bs_stream_deck_button_get_stream_deck (stream_deck_button);
-  profiles = bs_stream_deck_get_profiles (stream_deck);
+  if (self->stream_decks_row)
+    g_object_remove_weak_pointer (G_OBJECT (self->stream_decks_row), (gpointer *) &self->stream_decks_row);
+  if (self->profiles_row)
+    g_object_remove_weak_pointer (G_OBJECT (self->profiles_row), (gpointer *) &self->profiles_row);
+
+  application = BS_APPLICATION (g_application_get_default ());
+  device_manager = bs_application_get_device_manager (application);
+  stream_decks = bs_device_manager_get_stream_decks (device_manager);
+
+  group = adw_preferences_group_new ();
+
+  /* Stream Decks */
+  row = adw_combo_row_new ();
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _("Stream Deck"));
+  adw_combo_row_set_expression (ADW_COMBO_ROW (row),
+                                gtk_property_expression_new (BS_TYPE_PROFILE, NULL, "name"));
+  adw_combo_row_set_model (ADW_COMBO_ROW (row), stream_decks);
+
+  if ((stream_deck = find_stream_deck (self->serial_number, &position)) != NULL)
+    adw_combo_row_set_selected (ADW_COMBO_ROW (row), position);
+  else
+    adw_combo_row_set_selected (ADW_COMBO_ROW (row), GTK_INVALID_LIST_POSITION);
+
+  self->stream_decks_row = ADW_COMBO_ROW (row);
+  g_object_add_weak_pointer (G_OBJECT (self->stream_decks_row), (gpointer *) &self->stream_decks_row);
+  adw_preferences_group_add (ADW_PREFERENCES_GROUP (group), row);
+
+  g_signal_connect (row,
+                    "notify::selected-item",
+                    G_CALLBACK (on_stream_decks_combo_row_selected_item_changed_cb),
+                    self);
+
+  /* Profiles */
+  profiles = stream_deck ? bs_stream_deck_get_profiles (stream_deck) : NULL;
 
   row = adw_combo_row_new ();
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _("Profile"));
   adw_combo_row_set_expression (ADW_COMBO_ROW (row),
                                 gtk_property_expression_new (BS_TYPE_PROFILE, NULL, "name"));
   adw_combo_row_set_model (ADW_COMBO_ROW (row), profiles);
-  g_signal_connect (row, "notify::selected", G_CALLBACK (on_combo_row_selected_changed_cb), self);
 
-  if (!self->profile || !g_list_store_find (G_LIST_STORE (profiles), self->profile, &position))
-    position = 0;
+  if (profiles && get_profile_from_stream_deck (stream_deck, self->profile_id, &position))
+    adw_combo_row_set_selected (ADW_COMBO_ROW (row), position);
+  else
+    adw_combo_row_set_selected (ADW_COMBO_ROW (row), GTK_INVALID_LIST_POSITION);
 
-  adw_combo_row_set_selected (ADW_COMBO_ROW (row), position);
+  self->profiles_row = ADW_COMBO_ROW (row);
+  g_object_add_weak_pointer (G_OBJECT (self->profiles_row), (gpointer *) &self->profiles_row);
+  adw_preferences_group_add (ADW_PREFERENCES_GROUP (group), row);
 
-  return row;
+  g_signal_connect (row,
+                    "notify::selected-item",
+                    G_CALLBACK (on_combo_row_selected_item_changed_cb),
+                    self);
+
+  return group;
 }
 
 static JsonNode *
@@ -160,11 +337,17 @@ default_switch_profile_action_serialize_settings (BsAction *action)
 
   json_builder_begin_object (builder);
 
-  json_builder_set_member_name (builder, "profile-id");
-  if (self->profile)
-    json_builder_add_string_value (builder, bs_profile_get_id (self->profile));
-  else
-    json_builder_add_null_value (builder);
+  if (self->serial_number)
+    {
+      json_builder_set_member_name (builder, "serial-number");
+      json_builder_add_string_value (builder, self->serial_number);
+    }
+
+  if (self->profile_id)
+    {
+      json_builder_set_member_name (builder, "profile-id");
+      json_builder_add_string_value (builder, self->profile_id);
+    }
 
   json_builder_end_object (builder);
 
@@ -176,11 +359,24 @@ default_switch_profile_action_deserialize_settings (BsAction   *action,
                                                     JsonObject *object)
 {
   DefaultSwitchProfileAction *self = DEFAULT_SWITCH_PROFILE_ACTION (action);
+  const char *serial_number;
   const char *profile_id;
 
-  profile_id = json_object_get_string_member (object, "profile-id");
+  serial_number = json_object_get_string_member_with_default (object, "serial-number", NULL);
+  if (serial_number)
+    {
+      g_clear_pointer (&self->serial_number, g_free);
+      self->serial_number = g_strdup (serial_number);
+    }
 
-  set_active_profile (self, get_profile_from_stream_deck (self, profile_id));
+  profile_id = json_object_get_string_member_with_default (object, "profile-id", NULL);
+  if (profile_id)
+    {
+      g_clear_pointer (&self->profile_id, g_free);
+      self->profile_id = g_strdup (profile_id);
+    }
+
+  update_active_profile (self);
 }
 
 
@@ -193,7 +389,9 @@ default_switch_profile_action_finalize (GObject *object)
 {
   DefaultSwitchProfileAction *self = (DefaultSwitchProfileAction *)object;
 
-  g_clear_object (&self->profile);
+  g_clear_pointer (&self->serial_number, g_free);
+  g_clear_pointer (&self->profile_id, g_free);
+  g_clear_pointer (&self->binding, g_binding_unbind);
 
   G_OBJECT_CLASS (default_switch_profile_action_parent_class)->finalize (object);
 }
@@ -211,6 +409,11 @@ default_switch_profile_action_constructed (GObject *object)
 
   stream_deck_button = bs_action_get_stream_deck_button (BS_ACTION (self));
   stream_deck = bs_stream_deck_button_get_stream_deck (stream_deck_button);
+
+  self->serial_number = g_strdup (bs_stream_deck_get_serial_number (stream_deck));
+  if (bs_stream_deck_get_active_profile (stream_deck))
+    self->profile_id = g_strdup (bs_profile_get_id (bs_stream_deck_get_active_profile (stream_deck)));
+
   profiles = bs_stream_deck_get_profiles (stream_deck);
   g_signal_connect_object (profiles,
                            "items-changed",
@@ -241,6 +444,19 @@ default_switch_profile_action_class_init (DefaultSwitchProfileActionClass *klass
 static void
 default_switch_profile_action_init (DefaultSwitchProfileAction *self)
 {
+  BsApplication *application = BS_APPLICATION (g_application_get_default ());
+  BsDeviceManager *device_manager = bs_application_get_device_manager (application);
+
+  g_signal_connect_object (device_manager,
+                           "stream-deck-added",
+                           G_CALLBACK (on_device_manager_stream_deck_added_cb),
+                           self,
+                           0);
+  g_signal_connect_object (device_manager,
+                           "stream-deck-removed",
+                           G_CALLBACK (on_device_manager_stream_deck_removed_cb),
+                           self,
+                           0);
 }
 
 BsAction *
@@ -249,12 +465,4 @@ default_switch_profile_action_new (BsStreamDeckButton *stream_deck_button)
   return g_object_new (DEFAULT_TYPE_SWITCH_PROFILE_ACTION,
                        "stream-deck-button", stream_deck_button,
                        NULL);
-}
-
-BsProfile *
-default_switch_profile_action_get_profile (DefaultSwitchProfileAction *self)
-{
-  g_return_val_if_fail (DEFAULT_IS_SWITCH_PROFILE_ACTION (self), NULL);
-
-  return self->profile;
 }
