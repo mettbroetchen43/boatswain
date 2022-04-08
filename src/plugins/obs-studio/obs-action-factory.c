@@ -43,7 +43,7 @@ G_DEFINE_FINAL_TYPE_WITH_CODE (ObsActionFactory, obs_action_factory, PEAS_TYPE_E
 static const BsActionInfo actions[] = {
   {
     .id = "obs-switch-scene-action",
-    .icon_name = "dotted-box-symbolic",
+    .icon_name = "obs-switch-scene-symbolic",
     .name = N_("Switch Scene"),
     .description = NULL,
   },
