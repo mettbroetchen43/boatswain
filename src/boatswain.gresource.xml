@@ -21,6 +21,9 @@
     <file alias="dialpad-symbolic.svg">icons/dialpad-symbolic.svg</file>
     <file alias="hdmi-symbolic.svg">icons/hdmi-symbolic.svg</file>
     <file alias="image-symbolic.svg">icons/image-symbolic.svg</file>
+    <file alias="obs-scene-symbolic.svg">icons/obs-scene-symbolic.svg</file>
+    <file alias="obs-scene-transition-symbolic.svg">icons/obs-scene-transition-symbolic.svg</file>
+    <file alias="obs-switch-scene-symbolic.svg">icons/obs-switch-scene-symbolic.svg</file>
     <file alias="offline-symbolic.svg">icons/offline-symbolic.svg</file>
     <file alias="phone-input-symbolic.svg">icons/phone-input-symbolic.svg</file>
     <file alias="screencast-record-symbolic.svg">icons/screencast-record-symbolic.svg</file>
