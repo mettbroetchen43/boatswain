@@ -159,7 +159,6 @@ obs_stream_action_init (ObsStreamAction *self)
   BsIcon *icon = bs_action_get_icon (BS_ACTION (self));
 
   bs_icon_set_icon_name (icon, "transmit-symbolic");
-  bs_icon_set_margin (icon, 18);
 }
 
 BsAction *

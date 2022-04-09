@@ -32,7 +32,7 @@ struct _BsIcon
   PangoLayout *layout;
   GFile *file;
   char *icon_name;
-  int margin;
+  int paintable_size;
   double opacity;
   BsIcon *relative;
 
@@ -61,9 +61,9 @@ enum
   PROP_COLOR,
   PROP_FILE,
   PROP_ICON_NAME,
-  PROP_MARGIN,
   PROP_OPACITY,
   PROP_PAINTABLE,
+  PROP_PAINTABLE_SIZE,
   PROP_RELATIVE,
   PROP_TEXT,
   N_PROPS
@@ -100,40 +100,45 @@ snapshot_any_paintable (GdkSnapshot *snapshot,
                         double       height)
 {
   gboolean painted = FALSE;
+  float hpadding;
+  float vpadding;
+
+  hpadding = (width - icon->paintable_size) / 2.0;
+  vpadding = (height - icon->paintable_size) / 2.0;
 
   gtk_snapshot_save (snapshot);
-  gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (icon->margin, icon->margin));
+  gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (hpadding, vpadding));
 
   if (icon->paintable)
     {
       gdk_paintable_snapshot (icon->paintable,
                               snapshot,
-                              width - icon->margin * 2,
-                              height - icon->margin * 2);
+                              icon->paintable_size,
+                              icon->paintable_size);
       painted = TRUE;
     }
   else if (icon->file_media_stream)
     {
       gdk_paintable_snapshot (GDK_PAINTABLE (icon->file_media_stream),
                               snapshot,
-                              width - icon->margin * 2,
-                              height - icon->margin * 2);
+                              icon->paintable_size,
+                              icon->paintable_size);
       painted = TRUE;
     }
   else if (icon->file_texture)
     {
       gdk_paintable_snapshot (GDK_PAINTABLE (icon->file_texture),
                               snapshot,
-                              width - icon->margin * 2,
-                              height - icon->margin * 2);
+                              icon->paintable_size,
+                              icon->paintable_size);
       painted = TRUE;
     }
   else if (icon->icon_paintable)
     {
       gtk_symbolic_paintable_snapshot_symbolic (GTK_SYMBOLIC_PAINTABLE (icon->icon_paintable),
                                                 snapshot,
-                                                width - icon->margin * 2,
-                                                height - icon->margin * 2,
+                                                icon->paintable_size,
+                                                icon->paintable_size,
                                                 &icon->color,
                                                 1);
 
@@ -322,16 +327,16 @@ bs_icon_get_property (GObject    *object,
       g_value_set_string (value, self->icon_name);
       break;
 
-    case PROP_MARGIN:
-      g_value_set_int (value, self->margin);
-      break;
-
     case PROP_OPACITY:
       g_value_set_double (value, self->opacity);
       break;
 
     case PROP_PAINTABLE:
       g_value_set_object (value, self->paintable);
+      break;
+
+    case PROP_PAINTABLE_SIZE:
+      g_value_set_int (value, self->paintable_size);
       break;
 
     case PROP_RELATIVE:
@@ -373,16 +378,16 @@ bs_icon_set_property (GObject      *object,
       bs_icon_set_icon_name (self, g_value_get_string (value));
       break;
 
-    case PROP_MARGIN:
-      bs_icon_set_margin (self, g_value_get_int (value));
-      break;
-
     case PROP_OPACITY:
       bs_icon_set_opacity (self, g_value_get_double (value));
       break;
 
     case PROP_PAINTABLE:
       bs_icon_set_paintable (self, g_value_get_object (value));
+      break;
+
+    case PROP_PAINTABLE_SIZE:
+      bs_icon_set_paintable_size (self, g_value_get_int (value));
       break;
 
     case PROP_RELATIVE:
@@ -423,10 +428,6 @@ bs_icon_class_init (BsIconClass *klass)
                                                     NULL,
                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
-  properties[PROP_MARGIN] = g_param_spec_int ("margin", NULL, NULL,
-                                              0, G_MAXINT, 18,
-                                              G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
-
   properties[PROP_OPACITY] = g_param_spec_double ("opacity", NULL, NULL,
                                                   -1.0, 1.0, -1.0,
                                                   G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
@@ -434,6 +435,10 @@ bs_icon_class_init (BsIconClass *klass)
   properties[PROP_PAINTABLE] = g_param_spec_object ("paintable", NULL, NULL,
                                                     GDK_TYPE_PAINTABLE,
                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_PAINTABLE_SIZE] = g_param_spec_int ("paintable-size", NULL, NULL,
+                                                      1, G_MAXINT, 32,
+                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_RELATIVE] = g_param_spec_object ("relative", NULL, NULL,
                                                     BS_TYPE_ICON,
@@ -450,8 +455,8 @@ static void
 bs_icon_init (BsIcon *self)
 {
   self->color = opaque_white;
-  self->margin = 18;
   self->opacity = -1.0;
+  self->paintable_size = 32;
 }
 
 
@@ -499,7 +504,6 @@ bs_icon_new_from_json (JsonNode  *node,
                        "file", file,
                        "icon-name", json_object_get_string_member_with_default (object, "icon-name", NULL),
                        "text", json_object_get_string_member_with_default (object, "text", NULL),
-                       "margin", json_object_get_int_member_with_default (object, "margin", 12),
                        NULL);
 }
 
@@ -519,9 +523,6 @@ bs_icon_to_json (BsIcon *self)
 
   json_builder_set_member_name (builder, "background-color");
   json_builder_add_string_value (builder, background_color);
-
-  json_builder_set_member_name (builder, "margin");
-  json_builder_add_int_value (builder, self->margin);
 
   json_builder_set_member_name (builder, "text");
   json_builder_add_string_value (builder, self->layout ? pango_layout_get_text (self->layout) : "");
@@ -815,28 +816,28 @@ bs_icon_set_text (BsIcon     *self,
 }
 
 int
-bs_icon_get_margin (BsIcon *self)
+bs_icon_get_paintable_size (BsIcon *self)
 {
-  g_return_val_if_fail (BS_IS_ICON (self), 0);
+  g_return_val_if_fail (BS_IS_ICON (self), 1);
 
-  return self->margin;
+  return self->paintable_size;
 }
 
 void
-bs_icon_set_margin (BsIcon *self,
-                    int     margin)
+bs_icon_set_paintable_size (BsIcon *self,
+                            int     paintable_size)
 {
   g_return_if_fail (BS_IS_ICON (self));
 
-  if (self->margin == margin)
+  if (self->paintable_size == paintable_size)
     return;
 
-  self->margin = margin;
+  self->paintable_size = paintable_size;
 
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
   gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
 
-  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_MARGIN]);
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_PAINTABLE_SIZE]);
 }
 
 double

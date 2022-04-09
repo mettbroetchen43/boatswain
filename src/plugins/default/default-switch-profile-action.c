@@ -219,7 +219,6 @@ default_switch_profile_action_constructed (GObject *object)
                            0);
 
   icon = bs_action_get_icon (BS_ACTION (self));
-  bs_icon_set_margin (icon, 18);
   bs_icon_set_icon_name (icon, "preferences-desktop-apps-symbolic");
 }
 

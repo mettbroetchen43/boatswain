@@ -208,8 +208,6 @@ default_brightness_action_constructed (GObject *object)
 
   G_OBJECT_CLASS (default_brightness_action_parent_class)->constructed (object);
 
-  bs_icon_set_margin (bs_action_get_icon (BS_ACTION (self)), 18);
-
   bs_icon_set_icon_name (bs_action_get_icon (BS_ACTION (self)),
                          "display-brightness-symbolic");
   set_brightness_mode (self, MODE_SET_VALUE);

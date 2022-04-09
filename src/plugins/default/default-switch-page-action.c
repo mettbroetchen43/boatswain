@@ -136,12 +136,8 @@ static void
 default_switch_page_action_constructed (GObject *object)
 {
   DefaultSwitchPageAction *self = (DefaultSwitchPageAction *)object;
-  BsIcon *icon;
 
   G_OBJECT_CLASS (default_switch_page_action_parent_class)->constructed (object);
-
-  icon = bs_action_get_icon (BS_ACTION (self));
-  bs_icon_set_margin (icon, 18);
 
   if (is_enter_folder_action (self))
     {

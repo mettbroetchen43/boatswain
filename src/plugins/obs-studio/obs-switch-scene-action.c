@@ -359,7 +359,6 @@ obs_switch_scene_action_init (ObsSwitchSceneAction *self)
   BsIcon *icon = bs_action_get_icon (BS_ACTION (self));
 
   bs_icon_set_icon_name (icon, "obs-scene-symbolic");
-  bs_icon_set_margin (icon, 18);
 }
 
 BsAction *
