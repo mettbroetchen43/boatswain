@@ -9,3 +9,16 @@ streamdeckeditor flowbox flowboxchild:selected > picture {
 splitbutton.omnibar {
   background: alpha(currentColor, 0.075);
 }
+
+popover.custom-icon-popover > contents {
+  padding: 0;
+}
+
+popover.custom-icon-popover gridview {
+  background-color: @popover_bg_color;
+}
+
+popover.custom-icon-popover gridview,
+popover.custom-icon-popover gridview image {
+  padding: 12px;
+}

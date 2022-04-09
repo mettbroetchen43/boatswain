@@ -20,10 +20,14 @@
     <file alias="chat-symbolic.svg">icons/chat-symbolic.svg</file>
     <file alias="dialpad-symbolic.svg">icons/dialpad-symbolic.svg</file>
     <file alias="hdmi-symbolic.svg">icons/hdmi-symbolic.svg</file>
+    <file alias="image-missing-symbolic.svg">icons/image-missing-symbolic.svg</file>
     <file alias="image-symbolic.svg">icons/image-symbolic.svg</file>
+    <file alias="movie-intro-symbolic.svg">icons/movie-intro-symbolic.svg</file>
     <file alias="offline-symbolic.svg">icons/offline-symbolic.svg</file>
+    <file alias="on-hold-symbolic.svg">icons/on-hold-symbolic.svg</file>
     <file alias="phone-input-symbolic.svg">icons/phone-input-symbolic.svg</file>
     <file alias="screencast-record-symbolic.svg">icons/screencast-record-symbolic.svg</file>
+    <file alias="technical-difficulties-symbolic.svg">icons/technical-difficulties-symbolic.svg</file>
     <file alias="twitch-symbolic.svg">icons/twitch-symbolic.svg</file>
     <file alias="video-loop-symbolic.svg">icons/video-loop-symbolic.svg</file>
     <file alias="wacom-symbolic.svg">icons/wacom-symbolic.svg</file>

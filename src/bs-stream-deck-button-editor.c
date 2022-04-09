@@ -39,7 +39,9 @@ struct _BsStreamDeckButtonEditor
   AdwPreferencesGroup *action_preferences_group;
   GtkListBox *actions_listbox;
   GtkColorChooser *background_color_button;
+  GtkStringList *builtin_icons_stringlist;
   AdwPreferencesPage *button_preferences_page;
+  GtkMenuButton *custom_icon_menubutton;
   GtkEditable *custom_icon_text_entry;
   GtkImage *icon_image;
   AdwLeaflet *leaflet;
@@ -369,6 +371,8 @@ on_custom_icon_button_clicked_cb (AdwPreferencesRow        *row,
   g_autoptr (GtkFileFilter) filter = NULL;
   GtkFileChooserNative *native;
 
+  gtk_menu_button_popdown (self->custom_icon_menubutton);
+
   native = gtk_file_chooser_native_new (_("Select icon"),
                                         GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
                                         GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -422,6 +426,30 @@ on_go_previous_button_clicked_cb (GtkButton                *button,
                                   BsStreamDeckButtonEditor *self)
 {
   adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_BACK);
+}
+
+static void
+on_icons_gridview_activate_cb (GtkGridView              *grid_view,
+                               unsigned int              position,
+                               BsStreamDeckButtonEditor *self)
+{
+  g_autoptr (GtkStringObject) string_object = NULL;
+  g_autoptr (BsIcon) custom_icon = NULL;
+  GtkSelectionModel *selection_model;
+
+  selection_model = gtk_grid_view_get_model (grid_view);
+  string_object = g_list_model_get_item (G_LIST_MODEL (selection_model), position);
+
+  custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+  if (!custom_icon)
+    custom_icon = bs_icon_new_empty ();
+  else
+    g_object_ref (custom_icon);
+
+  bs_icon_set_file (custom_icon, NULL, NULL);
+  bs_icon_set_paintable (custom_icon, NULL);
+  bs_icon_set_icon_name (custom_icon, gtk_string_object_get_string (string_object));
+  bs_stream_deck_button_set_custom_icon (self->button, custom_icon);
 }
 
 static void
@@ -534,7 +562,9 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, action_preferences_group);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, actions_listbox);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_button);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, builtin_icons_stringlist);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, button_preferences_page);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_menubutton);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_text_entry);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, icon_image);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, leaflet);
@@ -546,6 +576,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_text_entry_text_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_go_previous_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_icons_gridview_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_remove_action_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_remove_custom_icon_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_select_action_row_activated_cb);

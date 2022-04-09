@@ -68,10 +68,6 @@ const char * bs_icon_get_text (BsIcon *self);
 void bs_icon_set_text (BsIcon     *self,
                        const char *text);
 
-int bs_icon_get_paintable_size (BsIcon *self);
-void bs_icon_set_paintable_size (BsIcon *self,
-                                 int     paintable_size);
-
 double bs_icon_get_opacity (BsIcon *self);
 void  bs_icon_set_opacity (BsIcon *self,
                            double  opacity);

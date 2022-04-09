@@ -72,11 +72,99 @@
                                 </child>
 
                                 <child type="overlay">
-                                  <object class="GtkButton">
+                                  <object class="GtkMenuButton" id="custom_icon_menubutton">
                                     <property name="halign">end</property>
                                     <property name="valign">end</property>
                                     <property name="icon-name">document-edit-symbolic</property>
-                                    <signal name="clicked" handler="on_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+
+                                    <!-- Custom icon popover -->
+                                    <property name="popover">
+                                      <object class="GtkPopover">
+                                        <style>
+                                          <class name="custom-icon-popover" />
+                                        </style>
+                                        <child>
+                                          <object class="GtkBox">
+                                            <property name="orientation">vertical</property>
+
+                                            <child>
+                                              <object class="GtkBox">
+                                                <property name="margin-top">6</property>
+                                                <property name="margin-bottom">6</property>
+                                                <property name="margin-start">6</property>
+                                                <property name="margin-end">6</property>
+                                                <property name="spacing">6</property>
+
+                                                <child>
+                                                  <object class="GtkSearchEntry" id="builtin_icons_search_entry">
+                                                    <property name="hexpand">True</property>
+                                                  </object>
+                                                </child>
+
+                                                <child>
+                                                  <object class="GtkButton">
+                                                    <property name="icon-name">document-open-symbolic</property>
+                                                    <signal name="clicked" handler="on_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                                  </object>
+                                                </child>
+
+                                              </object>
+                                            </child>
+
+                                            <child>
+                                              <object class="GtkSeparator" />
+                                            </child>
+
+                                            <child>
+                                              <object class="GtkScrolledWindow">
+                                                <property name="hscrollbar-policy">never</property>
+                                                <property name="min-content-width">300</property>
+                                                <property name="min-content-height">300</property>
+
+                                                <property name="child">
+                                                  <object class="GtkGridView" id="icons_gridview">
+                                                    <property name="single-click-activate">True</property>
+                                                    <property name="model">
+                                                      <object class="GtkNoSelection">
+                                                        <property name="model">builtin_icons_model</property>
+                                                      </object>
+                                                    </property>
+                                                    <property name="factory">
+                                                      <object class="GtkBuilderListItemFactory">
+                                                        <property name="bytes"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GtkListItem">
+    <property name="child">
+      <object class="GtkImage">
+        <binding name="icon-name">
+          <lookup type="GtkStringObject" name="string">
+            <lookup name="item">GtkListItem</lookup>
+          </lookup>
+        </binding>
+        <binding name="tooltip-text">
+          <lookup type="GtkStringObject" name="string">
+            <lookup name="item">GtkListItem</lookup>
+          </lookup>
+        </binding>
+      </object>
+    </property>
+  </template>
+</interface>
+                                                        ]]></property>
+                                                      </object>
+                                                    </property>
+                                                    <signal name="activate" handler="on_icons_gridview_activate_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                                  </object>
+                                                </property>
+
+                                              </object>
+                                            </child>
+
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </property>
                                     <style>
                                       <class name="circular" />
                                       <class name="outline" />
@@ -245,4 +333,78 @@
     </child>
 
   </template>
+
+  <!-- Built-in icons model -->
+  <object class="GtkSortListModel" id="builtin_icons_model">
+    <property name="sorter">
+      <object class="GtkStringSorter">
+        <property name="expression">
+          <lookup type="GtkStringObject" name="string" />
+        </property>
+      </object>
+    </property>
+    <property name="model">
+      <object class="GtkFilterListModel">
+        <property name="filter">
+          <object class="GtkStringFilter">
+            <property name="match-mode">substring</property>
+            <property name="expression">
+              <lookup type="GtkStringObject" name="string" />
+            </property>
+            <binding name="search">
+              <lookup name="text">builtin_icons_search_entry</lookup>
+            </binding>
+          </object>
+        </property>
+        <property name="model">
+          <object class="GtkStringList" id="builtin_icons_stringlist">
+            <items>
+              <item>audio-mixer-symbolic</item>
+              <item>camera-1-symbolic</item>
+              <item>camera-2-symbolic</item>
+              <item>camera-3-symbolic</item>
+              <item>camera-4-symbolic</item>
+              <item>chat-symbolic</item>
+              <item>dialpad-symbolic</item>
+              <item>hdmi-symbolic</item>
+              <item>image-missing-symbolic</item>
+              <item>image-symbolic</item>
+              <item>movie-intro-symbolic</item>
+              <item>offline-symbolic</item>
+              <item>on-hold-symbolic</item>
+              <item>phone-input-symbolic</item>
+              <item>screencast-record-symbolic</item>
+              <item>technical-difficulties-symbolic</item>
+              <item>twitch-symbolic</item>
+              <item>video-loop-symbolic</item>
+              <item>wacom-symbolic</item>
+              <item>youtube-symbolic</item>
+
+              <!-- Default plugin -->
+              <item>stacked-plates-symbolic</item>
+
+              <!-- Default plugin -->
+              <item>app-launch-symbolic</item>
+              <item>open-link-symbolic</item>
+
+              <!-- OBS Studio plugin -->
+              <item>dotted-box-symbolic</item>
+              <item>eye-not-looking-symbolic</item>
+              <item>eye-open-negative-filled-symbolic</item>
+              <item>obs-scene-symbolic</item>
+              <item>obs-scene-transition-symbolic</item>
+              <item>obs-switch-scene-symbolic</item>
+              <item>obs-symbolic</item>
+              <item>obs-window-symbolic</item>
+              <item>record-symbolic</item>
+              <item>square-outline-thick-symbolic</item>
+              <item>transmit-symbolic</item>
+
+            </items>
+          </object>
+        </property>
+      </object>
+    </property>
+  </object>
+
 </interface>

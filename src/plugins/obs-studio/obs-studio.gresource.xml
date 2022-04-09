@@ -9,6 +9,7 @@
     <file alias="icons/scalable/emblems/obs-symbolic.svg">icons/obs-symbolic.svg</file>
     <file alias="icons/scalable/emblems/obs-window-symbolic.svg">icons/obs-window-symbolic.svg</file>
     <file alias="icons/scalable/emblems/record-symbolic.svg">icons/record-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/square-outline-thick-symbolic.svg">icons/square-outline-thick-symbolic.svg</file>
     <file alias="icons/scalable/emblems/transmit-symbolic.svg">icons/transmit-symbolic.svg</file>
 
     <file>obs-studio.plugin</file>
