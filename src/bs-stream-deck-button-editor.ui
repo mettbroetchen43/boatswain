@@ -67,7 +67,6 @@
                                     <style>
                                       <class name="circular" />
                                       <class name="outline" />
-                                      <class name="circular" />
                                     </style>
                                   </object>
                                 </child>
@@ -81,7 +80,6 @@
                                     <style>
                                       <class name="circular" />
                                       <class name="outline" />
-                                      <class name="circular" />
                                     </style>
                                   </object>
                                 </child>
