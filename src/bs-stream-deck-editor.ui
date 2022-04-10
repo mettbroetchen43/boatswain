@@ -23,6 +23,8 @@
 
                 <child>
                   <object class="GtkFlowBox" id="buttons_flowbox">
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
                     <property name="homogeneous">True</property>
                     <property name="activate-on-single-click">False</property>
                     <property name="selection-mode">single</property>
