@@ -12,7 +12,6 @@
   </gresource>
 
   <gresource prefix="/com/feaneron/Boatswain/icons/scalable/emblems">
-    <file alias="audio-mixer-symbolic.svg">icons/audio-mixer-symbolic.svg</file>
     <file alias="camera-1-symbolic.svg">icons/camera-1-symbolic.svg</file>
     <file alias="camera-2-symbolic.svg">icons/camera-2-symbolic.svg</file>
     <file alias="camera-3-symbolic.svg">icons/camera-3-symbolic.svg</file>

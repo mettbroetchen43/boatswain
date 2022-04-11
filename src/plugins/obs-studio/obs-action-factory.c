@@ -114,8 +114,21 @@ bs_action_factory_iface_init (BsActionFactoryInterface *iface)
 }
 
 static void
+obs_action_factory_finalize (GObject *object)
+{
+  ObsActionFactory *self = OBS_ACTION_FACTORY (object);
+
+  g_clear_object (&self->connection_manager);
+
+  G_OBJECT_CLASS (obs_action_factory_parent_class)->finalize (object);
+}
+
+static void
 obs_action_factory_class_init (ObsActionFactoryClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->finalize = obs_action_factory_finalize;
 }
 
 static void

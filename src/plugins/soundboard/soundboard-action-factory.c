@@ -21,6 +21,7 @@
 
 #include "bs-action-factory.h"
 #include "soundboard-action-factory.h"
+#include "soundboard-mpris-action.h"
 #include "soundboard-play-action.h"
 
 #include <glib/gi18n.h>
@@ -28,6 +29,8 @@
 struct _SoundboardActionFactory
 {
   PeasExtensionBase parent_instance;
+
+  MprisController *mpris_controller;
 };
 
 static void bs_action_factory_iface_init (BsActionFactoryInterface *iface);
@@ -36,6 +39,12 @@ G_DEFINE_FINAL_TYPE_WITH_CODE (SoundboardActionFactory, soundboard_action_factor
                                G_IMPLEMENT_INTERFACE (BS_TYPE_ACTION_FACTORY, bs_action_factory_iface_init));
 
 static const BsActionInfo actions[] = {
+  {
+    .id = "soundboard-mpris-action",
+    .icon_name = "audio-x-generic-symbolic",
+    .name = N_("Music Player"),
+    .description = N_("Control the active music player"),
+  },
   {
     .id = "soundboard-play-action",
     .icon_name = "media-playback-start-symbolic",
@@ -61,8 +70,12 @@ soundboard_action_factory_create_action (BsActionFactory    *action_factory,
                                          BsStreamDeckButton *stream_deck_button,
                                          const BsActionInfo *action_info)
 {
+  SoundboardActionFactory *self = SOUNDBOARD_ACTION_FACTORY (action_factory);
+
   if (g_strcmp0 (action_info->id, "soundboard-play-action") == 0)
     return soundboard_play_action_new (stream_deck_button);
+  else if (g_strcmp0 (action_info->id, "soundboard-mpris-action") == 0)
+    return soundboard_mpris_action_new (stream_deck_button, self->mpris_controller);
 
   return NULL;
 }
@@ -75,11 +88,25 @@ bs_action_factory_iface_init (BsActionFactoryInterface *iface)
 }
 
 static void
+soundboard_action_factory_finalize (GObject *object)
+{
+  SoundboardActionFactory *self = SOUNDBOARD_ACTION_FACTORY (object);
+
+  g_clear_object (&self->mpris_controller);
+
+  G_OBJECT_CLASS (soundboard_action_factory_parent_class)->finalize (object);
+}
+
+static void
 soundboard_action_factory_class_init (SoundboardActionFactoryClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->finalize = soundboard_action_factory_finalize;
 }
 
 static void
 soundboard_action_factory_init (SoundboardActionFactory *self)
 {
+  self->mpris_controller = mpris_controller_new ();
 }

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/feaneron/Boatswain/plugins/soundboard">
+    <file alias="icons/scalable/emblems/audio-mixer-symbolic.svg">icons/audio-mixer-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/audio-only-symbolic.svg">icons/audio-only-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/music-queue-symbolic.svg">icons/music-queue-symbolic.svg</file>
+    <file alias="icons/scalable/apps/org.gnome.Music-symbolic.svg">icons/org.gnome.Music-symbolic.svg</file>
+
     <file>soundboard.plugin</file>
     <file>soundboard-play-action-prefs.ui</file>
   </gresource>

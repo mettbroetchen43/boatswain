@@ -7,10 +7,17 @@ plugin_file = i18n.merge_file(
   po_dir: meson.project_source_root() / 'po',
 )
 
-plugins_sources += files(
+# Copied from gnome-settings-daemon
+gnome_settings_daemon_sources = files(
+  'bus-watch-namespace.c',
+  'mpris-controller.c',
+)
+
+plugins_sources += gnome_settings_daemon_sources + files(
+  'soundboard-action-factory.c',
+  'soundboard-mpris-action.c',
   'soundboard-play-action.c',
   'soundboard-play-action-prefs.c',
-  'soundboard-action-factory.c',
   'soundboard-plugin.c',
 )
 

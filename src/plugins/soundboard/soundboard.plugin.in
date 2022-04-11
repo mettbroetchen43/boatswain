@@ -2,7 +2,7 @@
 Name = Soundboard
 Module = soundboard
 Description = Play sound effects
-Icon=audio-x-generic-symbolic
+Icon=audio-mixer-symbolic
 Authors = Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
 Copyright = Copyleft © The Boatswain maintainers
 Builtin = true

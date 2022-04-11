@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
+  <requires lib="Gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
   <template class="BsStreamDeckButtonEditor" parent="AdwBin">
     <property name="width-request">300</property>
 
@@ -359,7 +360,6 @@
         <property name="model">
           <object class="GtkStringList" id="builtin_icons_stringlist">
             <items>
-              <item>audio-mixer-symbolic</item>
               <item>camera-1-symbolic</item>
               <item>camera-2-symbolic</item>
               <item>camera-3-symbolic</item>
@@ -383,7 +383,7 @@
               <!-- Default plugin -->
               <item>stacked-plates-symbolic</item>
 
-              <!-- Default plugin -->
+              <!-- Launcher plugin -->
               <item>app-launch-symbolic</item>
               <item>open-link-symbolic</item>
 
@@ -399,6 +399,12 @@
               <item>record-symbolic</item>
               <item>square-outline-thick-symbolic</item>
               <item>transmit-symbolic</item>
+
+              <!-- Soundboard plugin -->
+              <item>audio-mixer-symbolic</item>
+              <item>audio-only-symbolic</item>
+              <item>music-queue-symbolic</item>
+              <item>org.gnome.Music-symbolic</item>
 
             </items>
           </object>
