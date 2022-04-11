@@ -1569,8 +1569,48 @@ obs_connection_toggle_source_mute (ObsConnection *self,
 }
 
 void
+obs_connection_set_source_mute (ObsConnection *self,
+                                ObsSource     *source,
+                                gboolean       mute)
+{
+  g_autoptr (JsonBuilder) builder = NULL;
+
+  g_return_if_fail (OBS_IS_CONNECTION (self));
+  g_return_if_fail (OBS_IS_SOURCE (source));
+  g_return_if_fail (self->state == OBS_CONNECTION_STATE_CONNECTED);
+  g_return_if_fail (obs_source_get_caps (source) & OBS_SOURCE_CAP_AUDIO);
+
+  builder = json_builder_new ();
+  json_builder_begin_object (builder);
+
+  json_builder_set_member_name (builder, "request-type");
+  json_builder_add_string_value (builder, "SetMute");
+
+  json_builder_set_member_name (builder, "source");
+  json_builder_add_string_value (builder, obs_source_get_name (source));
+
+  json_builder_set_member_name (builder, "mute");
+  json_builder_add_boolean_value (builder, mute);
+
+  send_message (self, builder, self->cancellable, on_websocket_generic_response_cb, self);
+}
+
+void
 obs_connection_toggle_source_visible (ObsConnection *self,
                                       ObsSource     *source)
+{
+  g_return_if_fail (OBS_IS_CONNECTION (self));
+  g_return_if_fail (OBS_IS_SOURCE (source));
+  g_return_if_fail (self->state == OBS_CONNECTION_STATE_CONNECTED);
+  g_return_if_fail (obs_source_get_caps (source) & OBS_SOURCE_CAP_VIDEO);
+
+  obs_connection_set_source_visible (self, source, !obs_source_get_visible (source));
+}
+
+void
+obs_connection_set_source_visible (ObsConnection *self,
+                                   ObsSource     *source,
+                                   gboolean       visible)
 {
   g_autoptr (JsonBuilder) builder = NULL;
 
@@ -1589,7 +1629,8 @@ obs_connection_toggle_source_visible (ObsConnection *self,
   json_builder_add_string_value (builder, obs_source_get_name (source));
 
   json_builder_set_member_name (builder, "render");
-  json_builder_add_boolean_value (builder, !obs_source_get_visible (source));
+  json_builder_add_boolean_value (builder, visible);
 
   send_message (self, builder, self->cancellable, on_websocket_generic_response_cb, self);
 }
+

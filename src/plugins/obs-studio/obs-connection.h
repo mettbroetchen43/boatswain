@@ -61,7 +61,13 @@ void obs_connection_toggle_recording (ObsConnection *self);
 void obs_connection_toggle_streaming (ObsConnection *self);
 void obs_connection_toggle_source_mute (ObsConnection *self,
                                         ObsSource     *source);
+void obs_connection_set_source_mute (ObsConnection *self,
+                                     ObsSource     *source,
+                                     gboolean       mute);
 void obs_connection_toggle_source_visible (ObsConnection *self,
                                            ObsSource     *source);
+void obs_connection_set_source_visible (ObsConnection *self,
+                                        ObsSource     *source,
+                                        gboolean       visible);
 
 G_END_DECLS

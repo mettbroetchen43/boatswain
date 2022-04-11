@@ -25,12 +25,20 @@
 
 #include <glib/gi18n.h>
 
+typedef enum
+{
+  BEHAVIOR_TOGGLE,
+  BEHAVIOR_DISABLE,
+  BEHAVIOR_ENABLE,
+} Behavior;
+
 struct _ObsToggleSourceAction
 {
   ObsAction parent_instance;
 
   char *source_name;
   ObsSource *source;
+  Behavior behavior;
 
   AdwComboRow *sources_row;
 
@@ -61,6 +69,71 @@ static GParamSpec *properties [N_PROPS];
 /*
  * Auxiliary methods
  */
+
+static gboolean
+parse_behavior_from_string (const char *string,
+                            Behavior     *out_behavior)
+{
+  if (g_strcmp0 (string, "toggle") == 0)
+    {
+      *out_behavior = BEHAVIOR_TOGGLE;
+      return TRUE;
+    }
+  else if (g_strcmp0 (string, "disable") == 0)
+    {
+      *out_behavior = BEHAVIOR_ENABLE;
+      return TRUE;
+    }
+  else if (g_strcmp0 (string, "enable") == 0)
+    {
+      *out_behavior = BEHAVIOR_ENABLE;
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static const char *
+behavior_to_string (Behavior action)
+{
+  switch (action)
+    {
+    case BEHAVIOR_TOGGLE:
+      return "toggle";
+
+    case BEHAVIOR_DISABLE:
+      return "disable";
+
+    case BEHAVIOR_ENABLE:
+      return "enable";
+
+    default:
+      return NULL;
+    }
+}
+
+static GListModel *
+get_action_model_for_caps (ObsSourceCaps caps)
+{
+  g_autoptr (GtkStringList) string_list = NULL;
+
+  string_list = gtk_string_list_new (NULL);
+
+  if ((caps & OBS_SOURCE_CAP_AUDIO) == OBS_SOURCE_CAP_AUDIO)
+    {
+      gtk_string_list_append (string_list, _("Toggle mute"));
+      gtk_string_list_append (string_list, _("Mute"));
+      gtk_string_list_append (string_list, _("Unmute"));
+    }
+  else
+    {
+      gtk_string_list_append (string_list, _("Toggle visibility"));
+      gtk_string_list_append (string_list, _("Hide"));
+      gtk_string_list_append (string_list, _("Show"));
+    }
+
+  return G_LIST_MODEL (g_steal_pointer (&string_list));
+}
 
 static void
 update_icon (ObsToggleSourceAction *self)
@@ -204,6 +277,15 @@ filter_source_caps_cb (gpointer item,
 }
 
 static void
+on_action_row_selected_changed_cb (AdwComboRow           *action_row,
+                                   GParamSpec            *pspec,
+                                   ObsToggleSourceAction *self)
+{
+  self->behavior = adw_combo_row_get_selected (action_row);
+  bs_action_changed (BS_ACTION (self));
+}
+
+static void
 on_connection_state_changed_cb (ObsConnection         *connection,
                                 ObsConnectionState     old_state,
                                 ObsConnectionState     new_state,
@@ -297,6 +379,9 @@ obs_toggle_source_action_add_extra_settings (ObsAction   *obs_action,
 {
   ObsToggleSourceAction *self = OBS_TOGGLE_SOURCE_ACTION (obs_action);
 
+  json_builder_set_member_name (builder, "behavior");
+  json_builder_add_string_value (builder, behavior_to_string (self->behavior));
+
   if (self->source_name)
     {
       json_builder_set_member_name (builder, "source-name");
@@ -346,20 +431,40 @@ obs_toggle_source_action_activate (BsAction *action)
   if (obs_connection_get_state (connection) != OBS_CONNECTION_STATE_CONNECTED)
     return;
 
-  if (obs_source_get_caps (self->source) & OBS_SOURCE_CAP_AUDIO)
-    obs_connection_toggle_source_mute (connection, self->source);
+  switch (self->behavior)
+    {
+    case BEHAVIOR_TOGGLE:
+      if (obs_source_get_caps (self->source) & OBS_SOURCE_CAP_AUDIO)
+        obs_connection_toggle_source_mute (connection, self->source);
+      if (obs_source_get_caps (self->source) & OBS_SOURCE_CAP_VIDEO)
+        obs_connection_toggle_source_visible (connection, self->source);
+      break;
 
-  if (obs_source_get_caps (self->source) & OBS_SOURCE_CAP_VIDEO)
-    obs_connection_toggle_source_visible (connection, self->source);
+    case BEHAVIOR_DISABLE:
+      if (obs_source_get_caps (self->source) & OBS_SOURCE_CAP_AUDIO)
+        obs_connection_set_source_mute (connection, self->source, TRUE);
+      if (obs_source_get_caps (self->source) & OBS_SOURCE_CAP_VIDEO)
+        obs_connection_set_source_visible (connection, self->source, FALSE);
+      break;
+
+    case BEHAVIOR_ENABLE:
+      if (obs_source_get_caps (self->source) & OBS_SOURCE_CAP_AUDIO)
+        obs_connection_set_source_mute (connection, self->source, FALSE);
+      if (obs_source_get_caps (self->source) & OBS_SOURCE_CAP_VIDEO)
+        obs_connection_set_source_visible (connection, self->source, TRUE);
+      break;
+    }
 }
 
 static GtkWidget *
 obs_toggle_source_action_get_preferences (BsAction *action)
 {
   ObsToggleSourceAction *self = OBS_TOGGLE_SOURCE_ACTION (action);
+  g_autoptr (GListModel) action_model = NULL;
   GtkWidget *connection_settings;
   GtkWidget *group;
   GtkWidget *box;
+  GtkWidget *row;
   unsigned int position;
 
   box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 18);
@@ -367,8 +472,24 @@ obs_toggle_source_action_get_preferences (BsAction *action)
   group = adw_preferences_group_new ();
   gtk_box_append (GTK_BOX (box), group);
 
+  /* Action */
+  action_model = get_action_model_for_caps (self->source_caps);
+
+  row = adw_combo_row_new ();
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _("Behavior"));
+  adw_combo_row_set_model (ADW_COMBO_ROW (row), action_model);
+  adw_combo_row_set_selected (ADW_COMBO_ROW (row), self->behavior);
+  adw_preferences_group_add (ADW_PREFERENCES_GROUP (group), row);
+
+  g_signal_connect (row, "notify::selected", G_CALLBACK (on_action_row_selected_changed_cb), self);
+
+  /* Source */
   self->sources_row = ADW_COMBO_ROW (adw_combo_row_new ());
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->sources_row), _("Source"));
+
+  if ((self->source_caps & OBS_SOURCE_CAP_AUDIO) == OBS_SOURCE_CAP_AUDIO)
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->sources_row), _("Audio Source"));
+  else
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->sources_row), _("Source"));
   adw_combo_row_set_expression (self->sources_row,
                                 gtk_property_expression_new (OBS_TYPE_SOURCE, NULL, "name"));
   adw_combo_row_set_model (self->sources_row, self->filtered_sources);
@@ -397,6 +518,10 @@ obs_toggle_source_action_deserialize_settings (BsAction   *action,
   ObsToggleSourceAction *self = OBS_TOGGLE_SOURCE_ACTION (action);
 
   BS_ACTION_CLASS (obs_toggle_source_action_parent_class)->deserialize_settings (action, settings);
+
+  if (!parse_behavior_from_string (json_object_get_string_member_with_default (settings, "behavior", NULL),
+                                   &self->behavior))
+    self->behavior = BEHAVIOR_TOGGLE;
 
   set_source_name (self, json_object_get_string_member_with_default (settings, "source-name", NULL));
   find_source_from_model (self);
@@ -508,6 +633,7 @@ obs_toggle_source_action_init (ObsToggleSourceAction *self)
 
   filter = GTK_FILTER (gtk_custom_filter_new (filter_source_caps_cb, self, NULL));
 
+  self->behavior = BEHAVIOR_TOGGLE;
   self->source_caps = OBS_SOURCE_CAP_NONE;
   self->filtered_sources = G_LIST_MODEL (gtk_filter_list_model_new (NULL, filter));
 
