@@ -83,6 +83,7 @@ struct _BsStreamDeck
   GPtrArray *buttons;
   GSource *poll_source;
   gboolean initialized;
+  gboolean loaded;
 };
 
 static void g_initable_iface_init (GInitableIface *iface);
@@ -1057,9 +1058,6 @@ bs_stream_deck_initable_init (GInitable     *initable,
     g_ptr_array_add (self->buttons, bs_stream_deck_button_new (self, i));
 
   self->poll_source = stream_deck_source_new (self);
-  g_source_attach (self->poll_source, NULL);
-
-  load_profiles (self);
 
   self->initialized = TRUE;
 
@@ -1499,6 +1497,18 @@ bs_stream_deck_pop_page (BsStreamDeck *self)
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ACTIVE_PAGE]);
 
   BS_EXIT;
+}
+
+void
+bs_stream_deck_load (BsStreamDeck *self)
+{
+  g_return_if_fail (BS_IS_STREAM_DECK (self));
+  g_return_if_fail (!self->loaded);
+
+  g_source_attach (self->poll_source, NULL);
+  load_profiles (self);
+
+  self->loaded = TRUE;
 }
 
 void

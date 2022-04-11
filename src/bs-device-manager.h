@@ -29,6 +29,9 @@ G_DECLARE_FINAL_TYPE (BsDeviceManager, bs_device_manager, BS, DEVICE_MANAGER, GO
 
 BsDeviceManager * bs_device_manager_new (void);
 
+gboolean bs_device_manager_load (BsDeviceManager  *self,
+                                 GError          **error);
+
 GListModel * bs_device_manager_get_stream_decks (BsDeviceManager *self);
 
 G_END_DECLS

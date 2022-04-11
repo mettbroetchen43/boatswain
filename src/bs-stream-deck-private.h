@@ -29,6 +29,7 @@ gboolean bs_stream_deck_set_button_icon (BsStreamDeck  *self,
                                          BsIcon        *icon,
                                          GError       **error);
 
+void bs_stream_deck_load (BsStreamDeck *self);
 
 void bs_stream_deck_save (BsStreamDeck *self);
 

@@ -25,7 +25,7 @@
 #include "bs-debug.h"
 #include "bs-device-enums.h"
 #include "bs-device-manager.h"
-#include "bs-stream-deck.h"
+#include "bs-stream-deck-private.h"
 
 struct _BsDeviceManager
 {
@@ -33,6 +33,7 @@ struct _BsDeviceManager
 
   GUsbContext *gusb_context;
   GListStore *stream_decks;
+  gboolean loaded;
 };
 
 G_DEFINE_FINAL_TYPE (BsDeviceManager, bs_device_manager, G_TYPE_OBJECT)
@@ -80,6 +81,8 @@ enumerate_stream_decks (BsDeviceManager *self)
                bs_stream_deck_get_serial_number (stream_deck),
                g_usb_device_get_bus (usb_device),
                g_usb_device_get_port_number (usb_device));
+
+      bs_stream_deck_load (stream_deck);
 
       g_list_store_append (self->stream_decks, stream_deck);
     }
@@ -193,20 +196,31 @@ bs_device_manager_class_init (BsDeviceManagerClass *klass)
 static void
 bs_device_manager_init (BsDeviceManager *self)
 {
-  g_autoptr (GError) error = NULL;
-
   self->stream_decks = g_list_store_new (BS_TYPE_STREAM_DECK);
-
-  self->gusb_context = g_usb_context_new (&error);
-  enumerate_stream_decks (self);
-  g_signal_connect (self->gusb_context, "device-added", G_CALLBACK (on_gusb_context_device_added_cb), self);
-  g_signal_connect (self->gusb_context, "device-removed", G_CALLBACK (on_gusb_context_device_removed_cb), self);
 }
 
 BsDeviceManager *
 bs_device_manager_new (void)
 {
   return g_object_new (BS_TYPE_DEVICE_MANAGER, NULL);
+}
+
+gboolean
+bs_device_manager_load (BsDeviceManager  *self,
+                        GError          **error)
+{
+  g_return_val_if_fail (BS_IS_DEVICE_MANAGER (self), FALSE);
+  g_return_val_if_fail (!error || !*error, FALSE);
+  g_return_val_if_fail (!self->loaded, FALSE);
+
+  self->gusb_context = g_usb_context_new (error);
+  enumerate_stream_decks (self);
+  g_signal_connect (self->gusb_context, "device-added", G_CALLBACK (on_gusb_context_device_added_cb), self);
+  g_signal_connect (self->gusb_context, "device-removed", G_CALLBACK (on_gusb_context_device_removed_cb), self);
+
+  self->loaded = TRUE;
+
+  return self->gusb_context != NULL;
 }
 
 GListModel *

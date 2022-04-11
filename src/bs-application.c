@@ -185,6 +185,7 @@ request_background_cb (gpointer user_data)
 static void
 bs_application_startup (GApplication *application)
 {
+  g_autoptr (GError) error = NULL;
   AdwStyleManager *style_manager;
   BsApplication *self;
   PeasEngine *engine;
@@ -206,13 +207,18 @@ bs_application_startup (GApplication *application)
                                                        BS_TYPE_ACTION_FACTORY,
                                                        NULL);
 
-  self->device_manager = bs_device_manager_new ();
   self->portal = xdp_portal_new ();
 
   self->request_background_timeout_id = g_timeout_add_seconds (1, request_background_cb, self);
 
   style_manager = adw_application_get_style_manager (ADW_APPLICATION (application));
   adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_PREFER_DARK);
+
+  self->device_manager = bs_device_manager_new ();
+  bs_device_manager_load (self->device_manager, &error);
+
+  if (error)
+    g_warning ("Error loading device manager: %s", error->message);
 }
 
 static void
