@@ -502,7 +502,10 @@ bs_icon_to_json (BsIcon *self)
   json_builder_add_string_value (builder, background_color);
 
   json_builder_set_member_name (builder, "text");
-  json_builder_add_string_value (builder, self->layout ? pango_layout_get_text (self->layout) : "");
+  if (self->layout)
+    json_builder_add_string_value (builder, pango_layout_get_text (self->layout));
+  else
+    json_builder_add_null_value (builder);
 
   if (self->file)
     {
