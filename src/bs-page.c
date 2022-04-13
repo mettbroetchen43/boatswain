@@ -326,6 +326,9 @@ bs_page_update_item_from_button (BsPage             *self,
   if (action_type == BS_TYPE_EMPTY_ACTION)
     {
       bs_page_item_set_item_type (item, BS_PAGE_ITEM_EMPTY);
+      bs_page_item_set_factory (item, NULL);
+      bs_page_item_set_action (item, NULL);
+      bs_page_item_set_settings (item, NULL);
     }
   else
     {
