@@ -85,6 +85,7 @@ enumerate_stream_decks (BsDeviceManager *self)
       bs_stream_deck_load (stream_deck);
 
       g_list_store_append (self->stream_decks, stream_deck);
+      g_signal_emit (self, signals[STREAM_DECK_ADDED], 0, stream_deck);
     }
 }
 
