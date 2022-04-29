@@ -1,5 +1,5 @@
-data/com.feaneron.Boatswain.desktop.in
-data/com.feaneron.Boatswain.appdata.xml.in
+data/com.feaneron.Boatswain.desktop.in.in
+data/com.feaneron.Boatswain.appdata.xml.in.in
 data/com.feaneron.Boatswain.gschema.xml
 src/bs-application.c
 src/bs-profile.c
