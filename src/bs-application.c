@@ -24,6 +24,7 @@
 #include "bs-window.h"
 
 #include <glib/gi18n.h>
+#include <glib-unix.h>
 #include <libportal/portal.h>
 #include <libportal-gtk4/portal-gtk4.h>
 
@@ -105,6 +106,13 @@ load_plugin (PeasEngine  *engine,
 /*
  * Callbacks
  */
+
+static gboolean
+on_unix_signal_cb (GApplication *application)
+{
+  g_application_quit (application);
+  return G_SOURCE_REMOVE;
+}
 
 static void
 on_request_background_called_cb (GObject      *object,
@@ -309,6 +317,12 @@ bs_application_init (BsApplication *self)
                                          });
 
   g_application_add_main_option_entries (G_APPLICATION (self), bs_application_options);
+
+  g_unix_signal_add (SIGHUP, (GSourceFunc) on_unix_signal_cb, self);
+  g_unix_signal_add (SIGINT, (GSourceFunc) on_unix_signal_cb, self);
+  g_unix_signal_add (SIGTERM, (GSourceFunc) on_unix_signal_cb, self);
+  g_unix_signal_add (SIGUSR1, (GSourceFunc) on_unix_signal_cb, self);
+  g_unix_signal_add (SIGUSR2, (GSourceFunc) on_unix_signal_cb, self);
 }
 
 BsApplication *
