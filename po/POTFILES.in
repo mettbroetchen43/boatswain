@@ -1,3 +1,5 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
 data/com.feaneron.Boatswain.desktop.in.in
 data/com.feaneron.Boatswain.appdata.xml.in.in
 data/com.feaneron.Boatswain.gschema.xml
