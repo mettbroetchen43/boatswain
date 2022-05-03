@@ -8,8 +8,8 @@
   <name xml:lang="en">Boatswain</name>
   <shortdesc xml:lang="en">Control Elgato Stream Deck devices</shortdesc>
   <description xml:lang="en">Boatswain allows you to add actions and icons to Elgato Stream Deck buttons</description>
-  <homepage rdf:resource="https://wiki.gnome.org/Apps/Builder" />
-  <download-page rdf:resource="https://download.gnome.org/sources/gnome-builder/" />
+  <homepage rdf:resource="https://gitlab.gnome.org/World/boatswain" />
+  <download-page rdf:resource="https://download.gnome.org/sources/boatswain/" />
   <bug-database rdf:resource="https://gitlab.gnome.org/World/boatswain/issues" />
 
   <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
