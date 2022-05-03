@@ -1,0 +1,483 @@
+# Galician translation for boatswain.
+# Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
+# This file is distributed under the same license as the boatswain package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: boatswain main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2022-05-03 18:25+0000\n"
+"PO-Revision-Date: 2022-05-04 00:41+0200\n"
+"Last-Translator: \n"
+"Language-Team: Galician <gnome-gl-list@gnome.org>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: data/com.feaneron.Boatswain.desktop.in.in:3
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+msgid "Boatswain"
+msgstr "Boatswain"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
+msgid "stream deck;streaming;deck;elgato;"
+msgstr "stream deck;streaming;deck;elgato;"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+msgid "Control your Elgato Stream Deck devices"
+msgstr "Controle os seus dispositivos Elgato Stream Deck"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Boatswain allows you to control Elgato Stream Deck devices."
+msgstr ""
+"Boatswain permítelle controlar os seus dispositivos Elgato Stream Deck."
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+msgid "With Boatswain you will be able to:"
+msgstr "Con Boatswain poderá:"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+msgid "Organize your actions in pages and profiles"
+msgstr "Organizar as súas accións en páxinas e perfiles"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+msgid "Set custom icons to actions"
+msgstr "Estabelecer iconas personalizadas ás accións"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Play sound effects during your streams"
+msgstr "Reproducir efectos de son durante as súas retransmisións"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgstr ""
+"Controlar OBS Studio usando Stream Deck (require a extensión obs-"
+"websocket)."
+
+#: src/bs-application.c:53
+msgid "Enable debug messages"
+msgstr "Activar os mensaxes de depuración"
+
+#: src/bs-application.c:76
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr ""
+"Boatswain permítelle executalo en segundo plano para detectar e executar "
+"accións en Stream Deck."
+
+#: src/bs-profile.c:184
+msgid "Unnamed profile"
+msgstr "Perfil sen nome"
+
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+msgid "Rename"
+msgstr "Renomear"
+
+#: src/bs-profile-row.ui:14
+msgid "Move _up"
+msgstr "_Subir"
+
+#: src/bs-profile-row.ui:18
+msgid "Move _down"
+msgstr "_Baixar"
+
+#: src/bs-profiles-dialog.ui:26
+msgid "Profiles"
+msgstr "Perfiles"
+
+#: src/bs-stream-deck.c:272
+msgid "Default"
+msgstr "Predeterminado"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:815
+msgid "Stream Deck Mini"
+msgstr "Stream Deck Mini"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:841 src/bs-stream-deck.c:867
+#: src/plugins/default/default-switch-profile-action.c:285
+msgid "Stream Deck"
+msgstr "Stream Deck"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:893
+msgid "Stream Deck XL"
+msgstr "Stream Deck XL"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:919
+msgid "Stream Deck MK.2"
+msgstr "Stream Deck MK.2"
+
+#: src/bs-stream-deck-button-editor.c:376
+msgid "Select icon"
+msgstr "Seleccionar icona"
+
+#: src/bs-stream-deck-button-editor.c:379
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
+msgid "_Open"
+msgstr "_Abrir"
+
+#: src/bs-stream-deck-button-editor.c:380
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: src/bs-stream-deck-button-editor.c:384
+msgid "All supported formats"
+msgstr "Todos os formatos compatíbeis"
+
+#: src/bs-stream-deck-button-editor.ui:17
+msgid "Select a button"
+msgstr "Seleccionar un botón"
+
+#: src/bs-stream-deck-button-editor.ui:188
+msgid "Name"
+msgstr "Nome"
+
+#: src/bs-stream-deck-button-editor.ui:201
+msgid "Background Color"
+msgstr "Cor de fondo"
+
+#: src/bs-stream-deck-button-editor.ui:232
+#: src/bs-stream-deck-button-editor.ui:294
+msgid "Select action"
+msgstr "Seleccionar acción"
+
+#: src/bs-stream-deck-button-editor.ui:253
+msgid "Remove Action"
+msgstr "Quitar acción"
+
+#: src/bs-window.ui:13
+msgid "_New profile"
+msgstr "_Novo perfíl"
+
+#: src/bs-window.ui:19
+msgid "Manage profiles…"
+msgstr "Xestionar perfiles…"
+
+#: src/bs-window.ui:60
+msgid "Create"
+msgstr "Crear"
+
+#: src/bs-window.ui:112
+msgid "Power"
+msgstr "Enerxía"
+
+#: src/bs-window.ui:128 src/plugins/default/default-action-factory.c:56
+msgid "Brightness"
+msgstr "Brillo"
+
+#: src/bs-window.ui:164
+msgid "Device"
+msgstr "Dispositivo"
+
+#: src/bs-window.ui:180
+msgid "Serial Number"
+msgstr "Número serie"
+
+#: src/bs-window.ui:207
+msgid "Firmware"
+msgstr "Firmware"
+
+#: src/bs-window.ui:255
+msgid "Devices"
+msgstr "Dispositivos"
+
+#: src/bs-window.ui:299
+msgid "No Stream Deck Found"
+msgstr "Non se atopou un Stream Deck"
+
+#: src/bs-window.ui:300
+msgid "Plug in a Stream Deck device to use it."
+msgstr "Conecte un dispositivo Stream Deck para úsalo."
+
+#: src/bs-window.ui:311
+msgid "_Keyboard Shortcuts"
+msgstr "Atallos de _teclado"
+
+#: src/bs-window.ui:315
+msgid "_About Boatswain"
+msgstr "_Sobre Boatswain"
+
+#: src/bs-window.ui:319
+msgid "_Quit"
+msgstr "_Saír"
+
+#: src/bs-window.c:328
+msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
+
+#: src/bs-window.c:336
+msgid "Repository"
+msgstr "Repositorio"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Xeral"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Mostrar atallos"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Saír"
+
+#: src/plugins/default/default-action-factory.c:44
+msgid "Folder"
+msgstr "Cartafol"
+
+#: src/plugins/default/default-action-factory.c:50
+msgid "Switch Profile"
+msgstr "Trocar perfíl"
+
+#: src/plugins/default/default-action-factory.c:62
+msgid "Multiple Actions"
+msgstr "Varias accións"
+
+#: src/plugins/default/default-brightness-action.c:140
+msgid "Constant"
+msgstr "Constante"
+
+#: src/plugins/default/default-brightness-action.c:141
+msgid "Increase"
+msgstr "Incrementar"
+
+#: src/plugins/default/default-brightness-action.c:142
+msgid "Decrease"
+msgstr "Decrementar"
+
+#: src/plugins/default/default-brightness-action.c:145
+msgid "Mode"
+msgstr "Modo"
+
+#: src/plugins/default/default-brightness-action.c:152
+msgid "Value"
+msgstr "Valor"
+
+#: src/plugins/default/default-multi-action-editor.c:310
+#: src/plugins/default/default-multi-action-row.c:142
+msgid "Delay"
+msgstr "Atraso"
+
+#: src/plugins/default/default-multi-action-editor.ui:31
+msgid "Add action"
+msgstr "Engadir acción"
+
+#: src/plugins/default/default-multi-action-editor.ui:49
+msgid "Add Action"
+msgstr "Engadir acción"
+
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Accións"
+
+#: src/plugins/default/default-multi-action-editor.ui:73
+msgid "Others"
+msgstr "Outros"
+
+#: src/plugins/default/default-multi-action-editor.ui:83
+msgid "Settings"
+msgstr "Preferencias"
+
+#: src/plugins/default/default-switch-profile-action.c:308
+msgid "Profile"
+msgstr "Perfíl"
+
+#: src/plugins/launcher/launcher-action-factory.c:42
+msgid "Launch Application"
+msgstr "Iniciar aplicación"
+
+#: src/plugins/launcher/launcher-action-factory.c:48
+msgid "Open URL"
+msgstr "Abrir URL"
+
+#: src/plugins/launcher/launcher-launch-preferences.ui:8
+msgid "Choose Application"
+msgstr "Escoller aplicación"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
+msgid "URL"
+msgstr "URL"
+
+#: src/plugins/obs-studio/obs-action-factory.c:47
+msgid "Switch Scene"
+msgstr "Trocar escena"
+
+#: src/plugins/obs-studio/obs-action-factory.c:53
+msgid "Record"
+msgstr "Grabar"
+
+#: src/plugins/obs-studio/obs-action-factory.c:59
+msgid "Stream"
+msgstr "Retransmitir"
+
+#: src/plugins/obs-studio/obs-action-factory.c:65
+msgid "Toggle Mute"
+msgstr "Trocar silencio"
+
+#: src/plugins/obs-studio/obs-action-factory.c:71
+msgid "Show / Hide Source"
+msgstr "Mostra / ocultar orixe"
+
+#: src/plugins/obs-studio/obs-connection.c:770
+msgid "Invalid password"
+msgstr "Contrasinal non válido"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:8
+msgid "Connection Settings"
+msgstr "Preferencias de conexión"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:12
+msgid "Host"
+msgstr "Equipo"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:25
+msgid "Port"
+msgstr "Porto"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:50
+msgid "Password"
+msgstr "Contrasinal"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:51
+msgid "OBS Studio requires a password to be controlled by Boatswain"
+msgstr ""
+"OBS Studio require un contrasinal para que poida controlarse desde "
+"Boatswain"
+
+#: src/plugins/obs-studio/obs-switch-scene-action.c:283
+msgid "Scene"
+msgstr "Escena"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:124
+msgid "Toggle mute"
+msgstr "Trocar silencio"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:125
+msgid "Mute"
+msgstr "Silenciar"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:126
+msgid "Unmute"
+msgstr "Desilenciar"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:130
+msgid "Toggle visibility"
+msgstr "Trocar visibilidade"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:131
+msgid "Hide"
+msgstr "Ocultar"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:132
+msgid "Show"
+msgstr "Mostrar"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:479
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
+msgid "Behavior"
+msgstr "Comportamento"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:490
+msgid "Audio Source"
+msgstr "Orixe de son"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:492
+msgid "Source"
+msgstr "Orixe"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:45
+msgid "Music Player"
+msgstr "Reprodutor de música"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:46
+msgid "Control the active music player"
+msgstr "Controlar o reprodutor de música activo"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:51
+msgid "Play Audio"
+msgstr "Reproducir son"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:196
+msgid "Next"
+msgstr "Seguinte"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
+msgid "Pause"
+msgstr "Pausar"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
+msgid "Play"
+msgstr "Reproducir"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
+msgid "Previous"
+msgstr "Anterior"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
+msgid "Stop"
+msgstr "Deter"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
+msgid "Play / Pause"
+msgstr "Reproducir / Pausar"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:204
+msgid "Playback Action"
+msgstr "Acción de reprodución"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
+msgid "Select audio file"
+msgstr "Seleccionar un ficheiro de audio"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Audio Files"
+msgstr "Ficheiros de audio"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Ficheiro"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
+msgid "Play / Stop"
+msgstr "Reproducir / Deter"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
+msgid "Play / Overlap"
+msgstr "Reproducir / Solapar"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
+msgid "Play / Restart"
+msgstr "Reproducir / Reiniciar"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
+msgid "Loop / Stop"
+msgstr "Búcle / Stop"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
+msgid "Press & Hold"
+msgstr "Premer e manter"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
+msgid "Volume"
+msgstr "Volume"
