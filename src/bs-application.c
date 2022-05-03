@@ -134,40 +134,6 @@ on_request_background_called_cb (GObject      *object,
   g_application_hold (G_APPLICATION (self));
 }
 
-static void
-on_show_about_action_activated_cb (GSimpleAction *action,
-                                   GVariant      *parameter,
-                                   gpointer       user_data)
-{
-  BsApplication *self = BS_APPLICATION (user_data);
-  GtkAboutDialog *dialog;
-  const char *authors[] = {
-    "Georges Basile Stavracas Neto <georges.stavracas@gmail.com>",
-    NULL,
-  };
-
-  g_return_if_fail (BS_IS_APPLICATION (self));
-
-  if (!self->window)
-    return;
-
-  dialog = GTK_ABOUT_DIALOG (gtk_about_dialog_new ());
-
-  gtk_about_dialog_set_authors (dialog, authors);
-  gtk_about_dialog_set_copyright (dialog, _("Copyright \xc2\xa9 2022 Georges Basile Stavracas Neto"));
-  gtk_about_dialog_set_license_type (dialog, GTK_LICENSE_GPL_3_0);
-  gtk_about_dialog_set_version (dialog, "0.1.0");
-  gtk_about_dialog_set_program_name (dialog, "Boatswain");
-  gtk_about_dialog_set_website (dialog, "https://gitlab.gnome.org/World/boatswain");
-  gtk_about_dialog_set_website_label (dialog, _("Repository"));
-
-  gtk_window_set_modal (GTK_WINDOW (dialog), true);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), self->window);
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
-
-  gtk_window_present (GTK_WINDOW (dialog));
-}
-
 static gboolean
 request_background_cb (gpointer user_data)
 {
@@ -304,10 +270,6 @@ bs_application_init (BsApplication *self)
   g_autoptr (GSimpleAction) quit_action = g_simple_action_new ("quit", NULL);
   g_signal_connect_swapped (quit_action, "activate", G_CALLBACK (g_application_quit), self);
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (quit_action));
-
-  g_autoptr (GSimpleAction) about_action = g_simple_action_new ("about", NULL);
-  g_signal_connect (about_action, "activate", G_CALLBACK (on_show_about_action_activated_cb), self);
-  g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (about_action));
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (self),
                                          "app.quit",

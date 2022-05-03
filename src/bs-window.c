@@ -27,6 +27,7 @@
 #include "bs-window.h"
 
 #include <adwaita.h>
+#include <glib/gi18n.h>
 
 struct _BsWindow
 {
@@ -304,6 +305,39 @@ on_device_manager_stream_deck_removed_cb (BsDeviceManager *device_manager,
 }
 
 static void
+on_show_about_action_activated_cb (GSimpleAction *action,
+                                   GVariant      *parameter,
+                                   gpointer       user_data)
+{
+  BsWindow *self = BS_WINDOW (user_data);
+  const char *artists[] = {
+    "Jakub Steiner",
+    "Sam Hewitt",
+    NULL,
+  };
+  const char *authors[] = {
+    "Georges Basile Stavracas Neto <georges.stavracas@gmail.com>",
+    NULL,
+  };
+
+  g_assert (BS_IS_WINDOW (self));
+
+  gtk_show_about_dialog (GTK_WINDOW (self),
+                         "authors", authors,
+                         "artists", artists,
+                         "copyright", _("Copyright \xc2\xa9 2022 Georges Basile Stavracas Neto"),
+                         "license-type", GTK_LICENSE_GPL_3_0,
+                         "logo-icon-name", APPLICATION_ID,
+                         "modal", TRUE,
+                         "program-name", "Boatswain",
+                         "transient-for", GTK_WINDOW (self),
+                         "version", PACKAGE_VERSION,
+                         "website", "https://gitlab.gnome.org/World/boatswain",
+                         "website-label", _("Repository"),
+                         NULL);
+}
+
+static void
 on_manage_profiles_action_activated_cb (GSimpleAction *simple,
                                         GVariant      *parameter,
                                         gpointer       user_data)
@@ -482,6 +516,7 @@ static void
 bs_window_init (BsWindow *self)
 {
   const GActionEntry actions[] = {
+    { "about", on_show_about_action_activated_cb, },
     { "manage-profiles", on_manage_profiles_action_activated_cb, },
   };
 
