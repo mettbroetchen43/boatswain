@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-29 12:33-0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2022-05-03 15:03+0000\n"
 "PO-Revision-Date: 2022-04-29 13:09-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
@@ -24,7 +24,8 @@ msgstr ""
 msgid "Boatswain"
 msgstr "Boatswain"
 
-#: data/com.feaneron.Boatswain.desktop.in.in:10
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;transmissão;"
 
@@ -59,15 +60,11 @@ msgid ""
 msgstr ""
 "Controlar o OBS Studio usando Stream Deck (requer a extensão obs-websocket)"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:36
-msgid "Empty release"
-msgstr "Lançamento vazio"
-
-#: src/bs-application.c:52
+#: src/bs-application.c:53
 msgid "Enable debug messages"
 msgstr "Habilita mensagens de depuração"
 
-#: src/bs-application.c:75
+#: src/bs-application.c:76
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -75,13 +72,13 @@ msgstr ""
 "Boatswain precisa ser executado em segundo plano para detectar e executar "
 "ações do Stream Deck."
 
-#: src/bs-application.c:149
+#: src/bs-application.c:157
 msgid "Copyright © 2022 Georges Basile Stavracas Neto"
 msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
 
-#: src/bs-application.c:154
+#: src/bs-application.c:162
 msgid "Repository"
-msgstr "Repositórios"
+msgstr "Repositório"
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
@@ -483,3 +480,6 @@ msgstr "Pressionar e segurar"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Volume"
+
+#~ msgid "Empty release"
+#~ msgstr "Lançamento vazio"
