@@ -8,15 +8,10 @@
         <property name="title" translatable="yes">Connection Settings</property>
 
         <child>
-          <object class="AdwActionRow">
+          <object class="AdwEntryRow" id="host_row">
             <property name="title" translatable="yes">Host</property>
-            <property name="activatable-widget">host_entry</property>
-            <child>
-              <object class="GtkEntry" id="host_entry">
-                <property name="valign">center</property>
-                <signal name="notify::text" handler="on_host_entry_text_changed_cb" object="ObsConnectionSettings" swapped="no" />
-              </object>
-            </child>
+            <property name="show-apply-button" translatable="yes">True</property>
+            <signal name="apply" handler="on_host_row_applied_cb" object="ObsConnectionSettings" swapped="no" />
           </object>
         </child>
 
@@ -46,17 +41,10 @@
     </child>
 
     <child>
-      <object class="AdwActionRow" id="password_row">
+      <object class="AdwPasswordEntryRow" id="password_row">
         <property name="title" translatable="yes">Password</property>
-        <property name="subtitle" translatable="yes">OBS Studio requires a password to be controlled by Boatswain</property>
-        <property name="activatable-widget">password_entry</property>
-        <child>
-          <object class="GtkPasswordEntry" id="password_entry">
-            <property name="valign">center</property>
-            <signal name="activate" handler="on_password_entry_activated_cb" object="ObsConnectionSettings" swapped="no" />
-            <signal name="notify::text" handler="on_password_entry_text_changed_cb" object="ObsConnectionSettings" swapped="no" />
-          </object>
-        </child>
+        <property name="show-apply-button" translatable="yes">True</property>
+        <signal name="apply" handler="on_password_row_applied_cb" object="ObsConnectionSettings" swapped="no" />
       </object>
     </child>
 
