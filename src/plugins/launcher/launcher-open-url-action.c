@@ -52,9 +52,9 @@ on_uri_shown_cb (GObject      *source_object,
 }
 
 static void
-on_url_entry_text_changed_cb (GtkEditable           *editable,
-                              GParamSpec            *pspec,
-                              LauncherOpenUrlAction *self)
+on_url_row_text_changed_cb (GtkEditable           *editable,
+                            GParamSpec            *pspec,
+                            LauncherOpenUrlAction *self)
 {
   g_clear_pointer (&self->url, g_free);
   self->url = g_strdup (gtk_editable_get_text (editable));
@@ -90,21 +90,20 @@ static GtkWidget *
 launcher_open_url_action_get_preferences (BsAction *action)
 {
   LauncherOpenUrlAction *self;
-  GtkWidget *entry;
+  GtkWidget *group;
   GtkWidget *row;
 
   self = LAUNCHER_OPEN_URL_ACTION (action);
 
-  entry = gtk_entry_new ();
-  gtk_widget_set_valign (entry, GTK_ALIGN_CENTER);
-  gtk_editable_set_text (GTK_EDITABLE (entry), self->url ?: "");
-  g_signal_connect (entry, "notify::text", G_CALLBACK (on_url_entry_text_changed_cb), self);
+  group = adw_preferences_group_new ();
 
-  row = adw_action_row_new ();
+  row = adw_entry_row_new ();
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _("URL"));
-  adw_action_row_add_suffix (ADW_ACTION_ROW (row), entry);
+  gtk_editable_set_text (GTK_EDITABLE (row), self->url ?: "");
+  g_signal_connect (row, "notify::text", G_CALLBACK (on_url_row_text_changed_cb), self);
+  adw_preferences_group_add (ADW_PREFERENCES_GROUP (group), row);
 
-  return row;
+  return group;
 }
 
 static JsonNode *
