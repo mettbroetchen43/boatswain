@@ -1,0 +1,474 @@
+# Basque translation for boatswain.
+# Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
+# This file is distributed under the same license as the boatswain package.
+# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2022.
+#
+msgid ""
+msgstr "Project-Id-Version: boatswain main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2022-05-03 18:25+0000\n"
+"PO-Revision-Date: 2022-05-07 18:20+0000\n"
+"Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
+"Language-Team: Basque <librezale@librezale.eus>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/com.feaneron.Boatswain.desktop.in.in:3
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+msgid "Boatswain"
+msgstr "Boatswain"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
+msgid "stream deck;streaming;deck;elgato;"
+msgstr "stream-mahaia;stream;mahaia;elgato;"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+msgid "Control your Elgato Stream Deck devices"
+msgstr "Kontrolatu zure Elgato Stream Deck gailuak"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Boatswain allows you to control Elgato Stream Deck devices."
+msgstr "Boatswain bidez, Elgato Stream Deck gailuak kontrolatu daitezke."
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+msgid "With Boatswain you will be able to:"
+msgstr "Boatswain bidez, honakoak egin daitezke:"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+msgid "Organize your actions in pages and profiles"
+msgstr "Zure ekintzak orrietan eta profiletan antolatu"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+msgid "Set custom icons to actions"
+msgstr "Ikono pertsonalizatuak ezarri ekintzei"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Play sound effects during your streams"
+msgstr "Soinu-efektua erreproduzitu stream-saioetan"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgstr "OBS Studio kontrolatu Stream Deck erabilita (obs-websocket hedapena behar du)"
+
+#: src/bs-application.c:53
+msgid "Enable debug messages"
+msgstr "Arazketa-mezuak gaitu"
+
+#: src/bs-application.c:76
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr "Boatswain atzeko planoa exekutatu behar da Stream Deck ekintzak detektatu eta exekutatzeko."
+
+#: src/bs-profile.c:184
+msgid "Unnamed profile"
+msgstr "Izenik gabeko profila"
+
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+msgid "Rename"
+msgstr "Aldatu izena"
+
+#: src/bs-profile-row.ui:14
+msgid "Move _up"
+msgstr "Eraman _gorantz"
+
+#: src/bs-profile-row.ui:18
+msgid "Move _down"
+msgstr "Eraman _beherantz"
+
+#: src/bs-profiles-dialog.ui:26
+msgid "Profiles"
+msgstr "Profilak"
+
+#: src/bs-stream-deck.c:272
+msgid "Default"
+msgstr "Lehenetsia"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:815
+msgid "Stream Deck Mini"
+msgstr "Stream Deck Mini"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:841 src/bs-stream-deck.c:867
+#: src/plugins/default/default-switch-profile-action.c:285
+msgid "Stream Deck"
+msgstr "Stream Deck"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:893
+msgid "Stream Deck XL"
+msgstr "Stream Deck XL"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:919
+msgid "Stream Deck MK.2"
+msgstr "Stream Deck MK.2"
+
+#: src/bs-stream-deck-button-editor.c:376
+msgid "Select icon"
+msgstr "Hautatu ikonoa"
+
+#: src/bs-stream-deck-button-editor.c:379
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
+msgid "_Open"
+msgstr "_Ireki"
+
+#: src/bs-stream-deck-button-editor.c:380
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
+msgid "_Cancel"
+msgstr "_Utzi"
+
+#: src/bs-stream-deck-button-editor.c:384
+msgid "All supported formats"
+msgstr "Onartutako formatu guztiak"
+
+#: src/bs-stream-deck-button-editor.ui:17
+msgid "Select a button"
+msgstr "Hautatu botoi bat"
+
+#: src/bs-stream-deck-button-editor.ui:188
+msgid "Name"
+msgstr "Izena"
+
+#: src/bs-stream-deck-button-editor.ui:201
+msgid "Background Color"
+msgstr "Atzeko planoaren kolorea"
+
+#: src/bs-stream-deck-button-editor.ui:232
+#: src/bs-stream-deck-button-editor.ui:294
+msgid "Select action"
+msgstr "Hautatu ekintza"
+
+#: src/bs-stream-deck-button-editor.ui:253
+msgid "Remove Action"
+msgstr "Kendu ekintza"
+
+#: src/bs-window.ui:13
+msgid "_New profile"
+msgstr "Profil _berria"
+
+#: src/bs-window.ui:19
+msgid "Manage profiles…"
+msgstr "Kudeatu profilak…"
+
+#: src/bs-window.ui:60
+msgid "Create"
+msgstr "Sortu"
+
+#: src/bs-window.ui:112
+msgid "Power"
+msgstr "Energia"
+
+#: src/bs-window.ui:128 src/plugins/default/default-action-factory.c:56
+msgid "Brightness"
+msgstr "Distira"
+
+#: src/bs-window.ui:164
+msgid "Device"
+msgstr "Gailua"
+
+#: src/bs-window.ui:180
+msgid "Serial Number"
+msgstr "Serie-zenbakia"
+
+#: src/bs-window.ui:207
+msgid "Firmware"
+msgstr "Firmwarea"
+
+#: src/bs-window.ui:255
+msgid "Devices"
+msgstr "Gailuak"
+
+#: src/bs-window.ui:299
+msgid "No Stream Deck Found"
+msgstr "Ez da Stream Deck gailurik aurkitu"
+
+#: src/bs-window.ui:300
+msgid "Plug in a Stream Deck device to use it."
+msgstr "Konektatu Stream Deck gailu bat hura erabili ahal izateko."
+
+#: src/bs-window.ui:311
+msgid "_Keyboard Shortcuts"
+msgstr "Las_ter-teklak"
+
+#: src/bs-window.ui:315
+msgid "_About Boatswain"
+msgstr "Boatswain aplikazioari _buruz"
+
+#: src/bs-window.ui:319
+msgid "_Quit"
+msgstr "I_rten"
+
+#: src/bs-window.c:328
+msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
+
+#: src/bs-window.c:336
+msgid "Repository"
+msgstr "Biltegia"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Orokorra"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Erakutsi lasterbideak"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Irten"
+
+#: src/plugins/default/default-action-factory.c:44
+msgid "Folder"
+msgstr "Karpeta"
+
+#: src/plugins/default/default-action-factory.c:50
+msgid "Switch Profile"
+msgstr "Aldatu profila"
+
+#: src/plugins/default/default-action-factory.c:62
+msgid "Multiple Actions"
+msgstr "Ekintza anitz"
+
+#: src/plugins/default/default-brightness-action.c:140
+msgid "Constant"
+msgstr "Konstantea"
+
+#: src/plugins/default/default-brightness-action.c:141
+msgid "Increase"
+msgstr "Handiagotu"
+
+#: src/plugins/default/default-brightness-action.c:142
+msgid "Decrease"
+msgstr "Txikiagotu"
+
+#: src/plugins/default/default-brightness-action.c:145
+msgid "Mode"
+msgstr "Modua"
+
+#: src/plugins/default/default-brightness-action.c:152
+msgid "Value"
+msgstr "Balioa"
+
+#: src/plugins/default/default-multi-action-editor.c:310
+#: src/plugins/default/default-multi-action-row.c:142
+msgid "Delay"
+msgstr "Atzerapena"
+
+#: src/plugins/default/default-multi-action-editor.ui:31
+msgid "Add action"
+msgstr "Gehitu ekintza"
+
+#: src/plugins/default/default-multi-action-editor.ui:49
+msgid "Add Action"
+msgstr "Gehitu ekintza"
+
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Ekintzak"
+
+#: src/plugins/default/default-multi-action-editor.ui:73
+msgid "Others"
+msgstr "Beste batzuk"
+
+#: src/plugins/default/default-multi-action-editor.ui:83
+msgid "Settings"
+msgstr "Ezarpenak"
+
+#: src/plugins/default/default-switch-profile-action.c:308
+msgid "Profile"
+msgstr "Profila"
+
+#: src/plugins/launcher/launcher-action-factory.c:42
+msgid "Launch Application"
+msgstr "Abiarazi aplikazioa"
+
+#: src/plugins/launcher/launcher-action-factory.c:48
+msgid "Open URL"
+msgstr "Ireki URLa"
+
+#: src/plugins/launcher/launcher-launch-preferences.ui:8
+msgid "Choose Application"
+msgstr "Aukeratu aplikazioa"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
+msgid "URL"
+msgstr "URLa"
+
+#: src/plugins/obs-studio/obs-action-factory.c:47
+msgid "Switch Scene"
+msgstr "Aldatu eszena"
+
+#: src/plugins/obs-studio/obs-action-factory.c:53
+msgid "Record"
+msgstr "Grabatu"
+
+#: src/plugins/obs-studio/obs-action-factory.c:59
+msgid "Stream"
+msgstr "Stream-a"
+
+#: src/plugins/obs-studio/obs-action-factory.c:65
+msgid "Toggle Mute"
+msgstr "Aktibatu/desaktibatu mututzea"
+
+#: src/plugins/obs-studio/obs-action-factory.c:71
+msgid "Show / Hide Source"
+msgstr "Erakutsi/ezkutatu iturburua"
+
+#: src/plugins/obs-studio/obs-connection.c:770
+msgid "Invalid password"
+msgstr "Pasahitz baliogabea"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:8
+msgid "Connection Settings"
+msgstr "Konexio-ezarpenak"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:12
+msgid "Host"
+msgstr "Ostalaria"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:25
+msgid "Port"
+msgstr "Ataka"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:50
+msgid "Password"
+msgstr "Pasahitza"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:51
+msgid "OBS Studio requires a password to be controlled by Boatswain"
+msgstr "OBS Studio aplikazioak Boatswain-ek kontrolatutako pasahitz bat behar du"
+
+#: src/plugins/obs-studio/obs-switch-scene-action.c:283
+msgid "Scene"
+msgstr "Eszena"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:124
+msgid "Toggle mute"
+msgstr "Aktibatu/desaktibatu mututzea"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:125
+msgid "Mute"
+msgstr "Mututu"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:126
+msgid "Unmute"
+msgstr "Eten mututasuna"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:130
+msgid "Toggle visibility"
+msgstr "Aktibatu/desaktibatu ikusgaitasuna"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:131
+msgid "Hide"
+msgstr "Ezkutatu"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:132
+msgid "Show"
+msgstr "Erakutsi"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:479
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
+msgid "Behavior"
+msgstr "Portaera"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:490
+msgid "Audio Source"
+msgstr "Audio-iturburua"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:492
+msgid "Source"
+msgstr "Iturburua"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:45
+msgid "Music Player"
+msgstr "Musika-erreproduzigailua"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:46
+msgid "Control the active music player"
+msgstr "Kontrolatu musika-erreproduzigailu aktiboa"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:51
+msgid "Play Audio"
+msgstr "Erreproduzitu audioa"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:196
+msgid "Next"
+msgstr "Hurrengoa"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
+msgid "Pause"
+msgstr "Pausatu"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
+msgid "Play"
+msgstr "Erreproduzitu"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
+msgid "Previous"
+msgstr "Aurrekoa"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
+msgid "Stop"
+msgstr "Gelditu"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
+msgid "Play / Pause"
+msgstr "Erreproduzitu/pausatu"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:204
+msgid "Playback Action"
+msgstr "Erreprodukzio-ekintza"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
+msgid "Select audio file"
+msgstr "Hautatu audio-fitxategia"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Audio Files"
+msgstr "Audio-fitxategiak"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Fitxategia"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
+msgid "Play / Stop"
+msgstr "Erreproduzitu/gelditu"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
+msgid "Play / Overlap"
+msgstr "Erreproduzitu/gainjarri"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
+msgid "Play / Restart"
+msgstr "Erreproduzitu/berrabiarazi"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
+msgid "Loop / Stop"
+msgstr "Begiztan erreproduzitu/gelditu"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
+msgid "Press & Hold"
+msgstr "Sakatu eta eutsi"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
+msgid "Volume"
+msgstr "Bolumena"
