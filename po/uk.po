@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-05-03 17:34+0000\n"
-"PO-Revision-Date: 2022-05-03 21:25+0300\n"
+"POT-Creation-Date: 2022-05-07 14:46+0000\n"
+"PO-Revision-Date: 2022-05-07 19:20+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -37,8 +37,8 @@ msgstr "Керування вашими пристроями потокових 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
-"За допомогою «Боутсвейн» надає вам змогу керувати пристроями потокових дек"
-" Elgato."
+"За допомогою «Боутсвейн» надає вам змогу керувати пристроями потокових дек "
+"Elgato."
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:13
 msgid "With Boatswain you will be able to:"
@@ -60,8 +60,8 @@ msgstr "Відтворювати звукові ефекти під час ва�
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
-"Керувати OBS Studio за допомогою потокової деки (потребує розширення"
-" obs-websocket)"
+"Керувати OBS Studio за допомогою потокової деки (потребує розширення obs-"
+"websocket)"
 
 #: src/bs-application.c:53
 msgid "Enable debug messages"
@@ -72,8 +72,8 @@ msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
 msgstr ""
-"«Боутсвейн» має бути запущено у фоновому режимі для виявлення і виконання дій"
-" потокової деки."
+"«Боутсвейн» має бути запущено у фоновому режимі для виявлення і виконання "
+"дій потокової деки."
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
@@ -154,16 +154,16 @@ msgstr "Виберіть кнопку"
 msgid "Name"
 msgstr "Назва"
 
-#: src/bs-stream-deck-button-editor.ui:201
+#: src/bs-stream-deck-button-editor.ui:195
 msgid "Background Color"
 msgstr "Колір тла"
 
-#: src/bs-stream-deck-button-editor.ui:232
-#: src/bs-stream-deck-button-editor.ui:294
+#: src/bs-stream-deck-button-editor.ui:226
+#: src/bs-stream-deck-button-editor.ui:288
 msgid "Select action"
 msgstr "Вибрати дію"
 
-#: src/bs-stream-deck-button-editor.ui:253
+#: src/bs-stream-deck-button-editor.ui:247
 msgid "Remove Action"
 msgstr "Вилучити дію"
 
@@ -355,17 +355,18 @@ msgstr "Параметри з’єднання"
 msgid "Host"
 msgstr "Вузол"
 
-#: src/plugins/obs-studio/obs-connection-settings.ui:25
+#: src/plugins/obs-studio/obs-connection-settings.ui:13
+#: src/plugins/obs-studio/obs-connection-settings.ui:46
+msgid "True"
+msgstr "Істина"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
 msgid "Port"
 msgstr "Порт"
 
-#: src/plugins/obs-studio/obs-connection-settings.ui:50
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
 msgid "Password"
 msgstr "Пароль"
-
-#: src/plugins/obs-studio/obs-connection-settings.ui:51
-msgid "OBS Studio requires a password to be controlled by Boatswain"
-msgstr "OBS Studio потрібен пароль для керування з «Боутсвейн»"
 
 #: src/plugins/obs-studio/obs-switch-scene-action.c:283
 msgid "Scene"
@@ -483,3 +484,6 @@ msgstr "Натискання і утримування"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Гучність"
+
+#~ msgid "OBS Studio requires a password to be controlled by Boatswain"
+#~ msgstr "OBS Studio потрібен пароль для керування з «Боутсвейн»"
