@@ -42,7 +42,7 @@ struct _BsStreamDeckButtonEditor
   GtkStringList *builtin_icons_stringlist;
   AdwPreferencesPage *button_preferences_page;
   GtkMenuButton *custom_icon_menubutton;
-  GtkEditable *custom_icon_text_entry;
+  GtkEditable *custom_icon_text_row;
   GtkImage *icon_image;
   AdwLeaflet *leaflet;
   GtkWidget *remove_action_button;
@@ -60,9 +60,9 @@ struct _BsStreamDeckButtonEditor
 static void on_action_row_activated_cb (GtkListBoxRow            *row,
                                         BsStreamDeckButtonEditor *self);
 
-static void on_custom_icon_text_entry_text_changed_cb (GtkEditable              *entry,
-                                                       GParamSpec               *pspec,
-                                                       BsStreamDeckButtonEditor *self);
+static void on_custom_icon_text_row_text_changed_cb (GtkEditable              *entry,
+                                                     GParamSpec               *pspec,
+                                                     BsStreamDeckButtonEditor *self);
 
 G_DEFINE_FINAL_TYPE (BsStreamDeckButtonEditor, bs_stream_deck_button_editor, ADW_TYPE_BIN)
 
@@ -141,13 +141,13 @@ setup_button (BsStreamDeckButtonEditor *self)
 
   gtk_widget_set_visible (self->remove_custom_icon_button, custom_icon != NULL);
 
-  g_signal_handlers_block_by_func (self->custom_icon_text_entry,
-                                   on_custom_icon_text_entry_text_changed_cb,
+  g_signal_handlers_block_by_func (self->custom_icon_text_row,
+                                   on_custom_icon_text_row_text_changed_cb,
                                    self);
 
   if (custom_icon)
     {
-      gtk_editable_set_text (self->custom_icon_text_entry, bs_icon_get_text (custom_icon) ?: "");
+      gtk_editable_set_text (self->custom_icon_text_row, bs_icon_get_text (custom_icon) ?: "");
       gtk_color_chooser_set_rgba (self->background_color_button,
                                   bs_icon_get_background_color (custom_icon));
     }
@@ -155,11 +155,11 @@ setup_button (BsStreamDeckButtonEditor *self)
     {
       gtk_color_chooser_set_rgba (self->background_color_button,
                                   &(GdkRGBA) { 0.0, 0.0, 0.0, 0.0 });
-      gtk_editable_set_text (self->custom_icon_text_entry, "");
+      gtk_editable_set_text (self->custom_icon_text_row, "");
     }
 
-  g_signal_handlers_unblock_by_func (self->custom_icon_text_entry,
-                                     on_custom_icon_text_entry_text_changed_cb,
+  g_signal_handlers_unblock_by_func (self->custom_icon_text_row,
+                                     on_custom_icon_text_row_text_changed_cb,
                                      self);
 }
 
@@ -391,14 +391,14 @@ on_custom_icon_button_clicked_cb (AdwPreferencesRow        *row,
 }
 
 static void
-on_custom_icon_text_entry_text_changed_cb (GtkEditable              *entry,
-                                           GParamSpec               *pspec,
-                                           BsStreamDeckButtonEditor *self)
+on_custom_icon_text_row_text_changed_cb (GtkEditable              *row,
+                                         GParamSpec               *pspec,
+                                         BsStreamDeckButtonEditor *self)
 {
   g_autoptr (BsIcon) custom_icon = NULL;
   const char *text;
 
-  text = gtk_editable_get_text (entry);
+  text = gtk_editable_get_text (row);
   custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
 
   if (custom_icon)
@@ -565,7 +565,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, builtin_icons_stringlist);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, button_preferences_page);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_menubutton);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_text_entry);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_text_row);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, icon_image);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, leaflet);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, remove_action_button);
@@ -574,7 +574,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, on_background_color_button_color_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_text_entry_text_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_text_row_text_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_go_previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_icons_gridview_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_remove_action_button_clicked_cb);
