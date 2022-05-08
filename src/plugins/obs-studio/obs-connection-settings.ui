@@ -10,7 +10,7 @@
         <child>
           <object class="AdwEntryRow" id="host_row">
             <property name="title" translatable="yes">Host</property>
-            <property name="show-apply-button" translatable="yes">True</property>
+            <property name="show-apply-button">True</property>
             <signal name="apply" handler="on_host_row_applied_cb" object="ObsConnectionSettings" swapped="no" />
           </object>
         </child>
@@ -43,7 +43,7 @@
     <child>
       <object class="AdwPasswordEntryRow" id="password_row">
         <property name="title" translatable="yes">Password</property>
-        <property name="show-apply-button" translatable="yes">True</property>
+        <property name="show-apply-button">True</property>
         <signal name="apply" handler="on_password_row_applied_cb" object="ObsConnectionSettings" swapped="no" />
       </object>
     </child>
