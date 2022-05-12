@@ -2,13 +2,14 @@
 # Copyright © 2022 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
 # Anders Jonsson <anders.jonsson@norsjovallen.se>, 2022.
+# Luna Jernberg <droidbittin@gmail.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-05-03 18:25+0000\n"
-"PO-Revision-Date: 2022-05-06 13:02+0200\n"
+"POT-Creation-Date: 2022-05-12 20:44+0000\n"
+"PO-Revision-Date: 2022-05-12 23:23+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -49,13 +50,23 @@ msgid "Set custom icons to actions"
 msgstr "Ställa in anpassade ikoner till åtgärder"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Control your music player"
+msgstr "Styra din musikspelare"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Play sound effects during your streams"
 msgstr "Spela upp ljudeffekter under dina strömmar"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr "Styra OBS Studio med Stream Deck (kräver tillägget obs-websocket)"
+
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#| msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+msgid "Georges Basile Stavracas Neto"
+msgstr "Georges Basile Stavracas Neto"
 
 #: src/bs-application.c:53
 msgid "Enable debug messages"
@@ -122,21 +133,21 @@ msgstr "Stream Deck XL"
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck-button-editor.c:376
+#: src/bs-stream-deck-button-editor.c:380
 msgid "Select icon"
 msgstr "Välj ikon"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:383
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:98
 msgid "_Open"
 msgstr "Ö_ppna"
 
-#: src/bs-stream-deck-button-editor.c:380
+#: src/bs-stream-deck-button-editor.c:384
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:99
 msgid "_Cancel"
 msgstr "A_vbryt"
 
-#: src/bs-stream-deck-button-editor.c:384
+#: src/bs-stream-deck-button-editor.c:388
 msgid "All supported formats"
 msgstr "Alla format som stöds"
 
@@ -148,16 +159,16 @@ msgstr "Välj en knapp"
 msgid "Name"
 msgstr "Namn"
 
-#: src/bs-stream-deck-button-editor.ui:201
+#: src/bs-stream-deck-button-editor.ui:195
 msgid "Background Color"
 msgstr "Bakgrundsfärg"
 
-#: src/bs-stream-deck-button-editor.ui:232
-#: src/bs-stream-deck-button-editor.ui:294
+#: src/bs-stream-deck-button-editor.ui:226
+#: src/bs-stream-deck-button-editor.ui:288
 msgid "Select action"
 msgstr "Välj åtgärd"
 
-#: src/bs-stream-deck-button-editor.ui:253
+#: src/bs-stream-deck-button-editor.ui:247
 msgid "Remove Action"
 msgstr "Ta bort åtgärd"
 
@@ -313,7 +324,7 @@ msgstr "Öppna URL"
 msgid "Choose Application"
 msgstr "Välj program"
 
-#: src/plugins/launcher/launcher-open-url-action.c:104
+#: src/plugins/launcher/launcher-open-url-action.c:101
 msgid "URL"
 msgstr "URL"
 
@@ -349,17 +360,13 @@ msgstr "Anslutningsinställningar"
 msgid "Host"
 msgstr "Värd"
 
-#: src/plugins/obs-studio/obs-connection-settings.ui:25
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
 msgid "Port"
 msgstr "Port"
 
-#: src/plugins/obs-studio/obs-connection-settings.ui:50
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
 msgid "Password"
 msgstr "Lösenord"
-
-#: src/plugins/obs-studio/obs-connection-settings.ui:51
-msgid "OBS Studio requires a password to be controlled by Boatswain"
-msgstr "OBS Studio kräver ett lösenord för att styras av Boatswain"
 
 #: src/plugins/obs-studio/obs-switch-scene-action.c:283
 msgid "Scene"
@@ -477,3 +484,6 @@ msgstr "Tryck och håll"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Volym"
+
+#~ msgid "OBS Studio requires a password to be controlled by Boatswain"
+#~ msgstr "OBS Studio kräver ett lösenord för att styras av Boatswain"
