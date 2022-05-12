@@ -15,11 +15,9 @@ profile = get_option('profile')
 if profile == 'development'
   find_program('git')
   rev_txt = run_command('git','rev-parse','--short','HEAD').stdout().strip()
-  name_suffix = ' (Development)'
   rev = '-@0@'.format(rev_txt)
   application_id = 'com.feaneron.Boatswain.Devel'
 else
-  name_suffix = ''
   rev = ''
   application_id = 'com.feaneron.Boatswain'
 endif
