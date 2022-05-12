@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-	<id>com.feaneron.Boatswain</id>
+	<id>@appid@</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
   <name>Boatswain</name>
@@ -19,23 +19,27 @@
       <li>Control OBS Studio using Stream Deck (requires the obs-websocket extension)</li>
     </ul>
 	</description>
+  <!-- Translators: please do NOT translate this -->
+  <developer_name>Georges Basile Stavracas Neto</developer_name>
+  <update_contact>georges.stavracas_at_gmail.com</update_contact>
+  <translation type="gettext">boatswain</translation>
 
   <screenshots>
     <screenshot width="1322" height="842">
       <image>https://gitlab.gnome.org/World/boatswain/raw/main/data/stream-deck-original.png</image>
-    </screenshot>
-  </screenshots>
-
-  <screenshots>
-    <screenshot width="1322" height="842">
       <image>https://gitlab.gnome.org/World/boatswain/raw/main/data/stream-deck-mini.png</image>
     </screenshot>
   </screenshots>
 
   <kudos>
-    <kudo>AppMenu</kudo>
+    <kudo>HiDpiIcon</kudo>
+    <kudo>Notifications</kudo>
     <kudo>ModernToolkit</kudo>
   </kudos>
+
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+  </custom>
 
   <releases>
     <release date="2022-05-11" version="0.1.0">
