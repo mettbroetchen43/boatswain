@@ -1,5 +1,7 @@
 Control Elgato Stream Deck devices.
 
+[<img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png' />](https://flathub.org/apps/details/com.feaneron.Boatswain)
+
 ## Features
 
  * Organize your actions in pages and profiles
@@ -7,9 +9,13 @@ Control Elgato Stream Deck devices.
  * Play sound effects during your streams
  * Control OBS Studio using Stream Deck (requires the obs-websocket extension)
 
+![Boatswain Screenshot](https://gitlab.gnome.org/World/boatswain/-/raw/main/data/stream-deck-original.png)
+
 ## udev rules
 
-Add the following content to `/etc/udev/rules.d/50-elgato.rules`:
+Elgato Stream Deck devices should be compatible starting from udev v250. If your
+version of udev is older than that, add the following content to
+`/etc/udev/rules.d/50-elgato.rules`:
 
 ```
 # Elgato Stream Deck Mini
