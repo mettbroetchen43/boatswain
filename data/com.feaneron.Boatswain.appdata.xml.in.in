@@ -42,6 +42,7 @@
   </custom>
 
   <releases>
+    <release date="2022-05-12" version="0.1.1" />
     <release date="2022-05-11" version="0.1.0">
       <description>
         <p>
