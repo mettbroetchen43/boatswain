@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-05-07 14:46+0000\n"
-"PO-Revision-Date: 2022-05-07 19:20+0300\n"
+"POT-Creation-Date: 2022-05-11 22:50+0000\n"
+"PO-Revision-Date: 2022-05-12 14:43+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -53,10 +53,15 @@ msgid "Set custom icons to actions"
 msgstr "Встановити нетипові піктограми для дій"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#| msgid "Control the active music player"
+msgid "Control your music player"
+msgstr "Керування вашим звуковим програвачем"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Play sound effects during your streams"
 msgstr "Відтворювати звукові ефекти під час ваших трансляцій"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
@@ -319,7 +324,7 @@ msgstr "Відкрити адресу"
 msgid "Choose Application"
 msgstr "Виберіть програму"
 
-#: src/plugins/launcher/launcher-open-url-action.c:104
+#: src/plugins/launcher/launcher-open-url-action.c:101
 msgid "URL"
 msgstr "Адреса"
 
@@ -354,11 +359,6 @@ msgstr "Параметри з’єднання"
 #: src/plugins/obs-studio/obs-connection-settings.ui:12
 msgid "Host"
 msgstr "Вузол"
-
-#: src/plugins/obs-studio/obs-connection-settings.ui:13
-#: src/plugins/obs-studio/obs-connection-settings.ui:46
-msgid "True"
-msgstr "Істина"
 
 #: src/plugins/obs-studio/obs-connection-settings.ui:20
 msgid "Port"
@@ -484,6 +484,9 @@ msgstr "Натискання і утримування"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Гучність"
+
+#~ msgid "True"
+#~ msgstr "Істина"
 
 #~ msgid "OBS Studio requires a password to be controlled by Boatswain"
 #~ msgstr "OBS Studio потрібен пароль для керування з «Боутсвейн»"
