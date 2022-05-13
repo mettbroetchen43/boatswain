@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-05-11 22:50+0000\n"
-"PO-Revision-Date: 2022-05-12 14:43+0300\n"
+"POT-Creation-Date: 2022-05-12 20:44+0000\n"
+"PO-Revision-Date: 2022-05-13 09:07+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -53,7 +53,6 @@ msgid "Set custom icons to actions"
 msgstr "Встановити нетипові піктограми для дій"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:17
-#| msgid "Control the active music player"
 msgid "Control your music player"
 msgstr "Керування вашим звуковим програвачем"
 
@@ -67,6 +66,12 @@ msgid ""
 msgstr ""
 "Керувати OBS Studio за допомогою потокової деки (потребує розширення obs-"
 "websocket)"
+
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#| msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+msgid "Georges Basile Stavracas Neto"
+msgstr "Georges Basile Stavracas Neto"
 
 #: src/bs-application.c:53
 msgid "Enable debug messages"
@@ -133,21 +138,21 @@ msgstr "Stream Deck XL"
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck-button-editor.c:376
+#: src/bs-stream-deck-button-editor.c:380
 msgid "Select icon"
 msgstr "Вибір піктограми"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:383
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:98
 msgid "_Open"
 msgstr "_Відкрити"
 
-#: src/bs-stream-deck-button-editor.c:380
+#: src/bs-stream-deck-button-editor.c:384
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:99
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: src/bs-stream-deck-button-editor.c:384
+#: src/bs-stream-deck-button-editor.c:388
 msgid "All supported formats"
 msgstr "Усі підтримувані формати"
 
