@@ -1,0 +1,481 @@
+# Chinese (China) translation for boatswain.
+# Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
+# This file is distributed under the same license as the boatswain package.
+# D <afecr@foxmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: boatswain main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2022-05-12 23:05+0000\n"
+"PO-Revision-Date: 2022-05-13 13:59+0800\n"
+"Last-Translator: D <afecr@foxmail.com>\n"
+"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Gtranslator 40.0\n"
+
+#: data/com.feaneron.Boatswain.desktop.in.in:3
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+msgid "Boatswain"
+msgstr "Boatswain"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
+msgid "stream deck;streaming;deck;elgato;"
+msgstr "stream deck;streaming;deck;elgato;"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+msgid "Control your Elgato Stream Deck devices"
+msgstr "控制您的 Elgato Stream Deck 设备"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Boatswain allows you to control Elgato Stream Deck devices."
+msgstr "Boatswain 允许您控制 Elgato Stream Deck 设备。"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+msgid "With Boatswain you will be able to:"
+msgstr "使用 Boatswain，您将能够："
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+msgid "Organize your actions in pages and profiles"
+msgstr "在页面和配置文件中组织您的动作"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+msgid "Set custom icons to actions"
+msgstr "为动作设置自定义图标"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Control your music player"
+msgstr "控制您的音乐播放器"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+msgid "Play sound effects during your streams"
+msgstr "在您的流中播放声音效果"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgstr "使用 Stream Deck 控制 OBS Studio（需要 obs-websocket 扩展）"
+
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Georges Basile Stavracas Neto"
+msgstr "Georges Basile Stavracas Neto"
+
+#: src/bs-application.c:53
+msgid "Enable debug messages"
+msgstr "启用调试消息"
+
+#: src/bs-application.c:76
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr "Boatswain 需要在后台运行以检测和执行 Stream Deck 动作。"
+
+#: src/bs-profile.c:184
+msgid "Unnamed profile"
+msgstr "未命名配置文件"
+
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+msgid "Rename"
+msgstr "重命名"
+
+#: src/bs-profile-row.ui:14
+msgid "Move _up"
+msgstr "上移(_U)"
+
+#: src/bs-profile-row.ui:18
+msgid "Move _down"
+msgstr "下移(_D)"
+
+#: src/bs-profiles-dialog.ui:26
+msgid "Profiles"
+msgstr "配置文件"
+
+#: src/bs-stream-deck.c:272
+msgid "Default"
+msgstr "默认"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:815
+msgid "Stream Deck Mini"
+msgstr "Stream Deck Mini"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:841 src/bs-stream-deck.c:867
+#: src/plugins/default/default-switch-profile-action.c:285
+msgid "Stream Deck"
+msgstr "Stream Deck"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:893
+msgid "Stream Deck XL"
+msgstr "Stream Deck XL"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:919
+msgid "Stream Deck MK.2"
+msgstr "Stream Deck MK.2"
+
+#: src/bs-stream-deck-button-editor.c:380
+msgid "Select icon"
+msgstr "选择图标"
+
+#: src/bs-stream-deck-button-editor.c:383
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
+msgid "_Open"
+msgstr "打开(_O)"
+
+#: src/bs-stream-deck-button-editor.c:384
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: src/bs-stream-deck-button-editor.c:388
+msgid "All supported formats"
+msgstr "所有支持的格式"
+
+#: src/bs-stream-deck-button-editor.ui:17
+msgid "Select a button"
+msgstr "选择按钮"
+
+#: src/bs-stream-deck-button-editor.ui:188
+msgid "Name"
+msgstr "名称"
+
+#: src/bs-stream-deck-button-editor.ui:195
+msgid "Background Color"
+msgstr "背景颜色"
+
+#: src/bs-stream-deck-button-editor.ui:226
+#: src/bs-stream-deck-button-editor.ui:288
+msgid "Select action"
+msgstr "选择动作"
+
+#: src/bs-stream-deck-button-editor.ui:247
+msgid "Remove Action"
+msgstr "移除动作"
+
+#: src/bs-window.ui:13
+msgid "_New profile"
+msgstr "新建配置文件(_N)"
+
+#: src/bs-window.ui:19
+msgid "Manage profiles…"
+msgstr "管理配置文件…"
+
+#: src/bs-window.ui:60
+msgid "Create"
+msgstr "创建"
+
+#: src/bs-window.ui:112
+msgid "Power"
+msgstr "电源"
+
+#: src/bs-window.ui:128 src/plugins/default/default-action-factory.c:56
+msgid "Brightness"
+msgstr "亮度"
+
+#: src/bs-window.ui:164
+msgid "Device"
+msgstr "设备"
+
+#: src/bs-window.ui:180
+msgid "Serial Number"
+msgstr "序列号"
+
+#: src/bs-window.ui:207
+msgid "Firmware"
+msgstr "固件"
+
+#: src/bs-window.ui:255
+msgid "Devices"
+msgstr "设备"
+
+#: src/bs-window.ui:299
+msgid "No Stream Deck Found"
+msgstr "找不到 Stream Deck"
+
+#: src/bs-window.ui:300
+msgid "Plug in a Stream Deck device to use it."
+msgstr "插入 Stream Deck 设备以使用它。"
+
+#: src/bs-window.ui:311
+msgid "_Keyboard Shortcuts"
+msgstr "键盘快捷键(_K)"
+
+#: src/bs-window.ui:315
+msgid "_About Boatswain"
+msgstr "关于 Boatswain(_A)"
+
+#: src/bs-window.ui:319
+msgid "_Quit"
+msgstr "退出(_Q)"
+
+#: src/bs-window.c:328
+msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+msgstr "版权所有 © 2022 Georges Basile Stavracas Neto"
+
+#: src/bs-window.c:336
+msgid "Repository"
+msgstr "仓库"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "常规"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "显示快捷键"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "退出"
+
+#: src/plugins/default/default-action-factory.c:44
+msgid "Folder"
+msgstr "文件夹"
+
+#: src/plugins/default/default-action-factory.c:50
+msgid "Switch Profile"
+msgstr "切换配置文件"
+
+#: src/plugins/default/default-action-factory.c:62
+msgid "Multiple Actions"
+msgstr "多个动作"
+
+#: src/plugins/default/default-brightness-action.c:140
+msgid "Constant"
+msgstr "恒定"
+
+#: src/plugins/default/default-brightness-action.c:141
+msgid "Increase"
+msgstr "增加"
+
+#: src/plugins/default/default-brightness-action.c:142
+msgid "Decrease"
+msgstr "降低"
+
+#: src/plugins/default/default-brightness-action.c:145
+msgid "Mode"
+msgstr "模式"
+
+#: src/plugins/default/default-brightness-action.c:152
+msgid "Value"
+msgstr "值"
+
+#: src/plugins/default/default-multi-action-editor.c:310
+#: src/plugins/default/default-multi-action-row.c:142
+msgid "Delay"
+msgstr "延迟"
+
+#: src/plugins/default/default-multi-action-editor.ui:31
+msgid "Add action"
+msgstr "添加动作"
+
+#: src/plugins/default/default-multi-action-editor.ui:49
+msgid "Add Action"
+msgstr "添加动作"
+
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "动作"
+
+#: src/plugins/default/default-multi-action-editor.ui:73
+msgid "Others"
+msgstr "其他"
+
+#: src/plugins/default/default-multi-action-editor.ui:83
+msgid "Settings"
+msgstr "设置"
+
+#: src/plugins/default/default-switch-profile-action.c:308
+msgid "Profile"
+msgstr "配置文件"
+
+#: src/plugins/launcher/launcher-action-factory.c:42
+msgid "Launch Application"
+msgstr "启动应用程序"
+
+#: src/plugins/launcher/launcher-action-factory.c:48
+msgid "Open URL"
+msgstr "打开 URL"
+
+#: src/plugins/launcher/launcher-launch-preferences.ui:8
+msgid "Choose Application"
+msgstr "选择应用程序"
+
+#: src/plugins/launcher/launcher-open-url-action.c:101
+msgid "URL"
+msgstr "URL"
+
+#: src/plugins/obs-studio/obs-action-factory.c:47
+msgid "Switch Scene"
+msgstr "切换场景"
+
+#: src/plugins/obs-studio/obs-action-factory.c:53
+msgid "Record"
+msgstr "录制"
+
+#: src/plugins/obs-studio/obs-action-factory.c:59
+msgid "Stream"
+msgstr "流"
+
+#: src/plugins/obs-studio/obs-action-factory.c:65
+msgid "Toggle Mute"
+msgstr "切换静音"
+
+#: src/plugins/obs-studio/obs-action-factory.c:71
+msgid "Show / Hide Source"
+msgstr "显示 / 隐藏源"
+
+#: src/plugins/obs-studio/obs-connection.c:770
+msgid "Invalid password"
+msgstr "无效密码"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:8
+msgid "Connection Settings"
+msgstr "连接设置"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:12
+msgid "Host"
+msgstr "主机"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
+msgid "Port"
+msgstr "端口"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
+msgid "Password"
+msgstr "密码"
+
+#: src/plugins/obs-studio/obs-switch-scene-action.c:283
+msgid "Scene"
+msgstr "场景"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:124
+msgid "Toggle mute"
+msgstr "切换静音"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:125
+msgid "Mute"
+msgstr "静音"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:126
+msgid "Unmute"
+msgstr "取消静音"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:130
+msgid "Toggle visibility"
+msgstr "切换可见性"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:131
+msgid "Hide"
+msgstr "隐藏"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:132
+msgid "Show"
+msgstr "显示"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:479
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
+msgid "Behavior"
+msgstr "行为"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:490
+msgid "Audio Source"
+msgstr "音频源"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:492
+msgid "Source"
+msgstr "源"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:45
+msgid "Music Player"
+msgstr "音乐播放器"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:46
+msgid "Control the active music player"
+msgstr "控制活动的音乐播放器"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:51
+msgid "Play Audio"
+msgstr "播放音频"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:196
+msgid "Next"
+msgstr "下一个"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
+msgid "Pause"
+msgstr "暂停"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
+msgid "Play"
+msgstr "播放"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
+msgid "Previous"
+msgstr "上一个"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
+msgid "Stop"
+msgstr "停止"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
+msgid "Play / Pause"
+msgstr "播放 / 暂停"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:204
+msgid "Playback Action"
+msgstr "播放动作"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
+msgid "Select audio file"
+msgstr "选择音频文件"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Audio Files"
+msgstr "音频文件"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "文件"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
+msgid "Play / Stop"
+msgstr "播放 / 停止"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
+msgid "Play / Overlap"
+msgstr "播放 / 重叠"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
+msgid "Play / Restart"
+msgstr "播放 / 重新开始"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
+msgid "Loop / Stop"
+msgstr "循环 / 停止"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
+msgid "Press & Hold"
+msgstr "长按"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
+msgid "Volume"
+msgstr "音量"
