@@ -81,7 +81,7 @@ parse_behavior_from_string (const char *string,
     }
   else if (g_strcmp0 (string, "disable") == 0)
     {
-      *out_behavior = BEHAVIOR_ENABLE;
+      *out_behavior = BEHAVIOR_DISABLE;
       return TRUE;
     }
   else if (g_strcmp0 (string, "enable") == 0)
