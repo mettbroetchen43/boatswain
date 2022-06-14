@@ -42,6 +42,13 @@
   </custom>
 
   <releases>
+    <release date="2022-06-14" version="0.1.2">
+      <description>
+        <p>
+          This is a bugfix release, fixing the parsing of OBS Studio source actions.
+        </p>
+      </description>
+    </release>
     <release date="2022-05-12" version="0.1.1" />
     <release date="2022-05-11" version="0.1.0">
       <description>
