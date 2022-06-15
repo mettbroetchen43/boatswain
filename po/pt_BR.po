@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-05-03 15:03+0000\n"
-"PO-Revision-Date: 2022-04-29 13:09-0300\n"
+"POT-Creation-Date: 2022-05-12 20:44+0000\n"
+"PO-Revision-Date: 2022-06-15 05:27-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -51,14 +51,25 @@ msgid "Set custom icons to actions"
 msgstr "Definir ícones personalizados para ações"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#| msgid "Control the active music player"
+msgid "Control your music player"
+msgstr "Controla seu reprodutor de música"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Play sound effects during your streams"
 msgstr "Reproduzir efeitos de sons durante suas transmissões"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "Controlar o OBS Studio usando Stream Deck (requer a extensão obs-websocket)"
+
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#| msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+msgid "Georges Basile Stavracas Neto"
+msgstr "Georges Basile Stavracas Neto"
 
 #: src/bs-application.c:53
 msgid "Enable debug messages"
@@ -71,14 +82,6 @@ msgid ""
 msgstr ""
 "Boatswain precisa ser executado em segundo plano para detectar e executar "
 "ações do Stream Deck."
-
-#: src/bs-application.c:157
-msgid "Copyright © 2022 Georges Basile Stavracas Neto"
-msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
-
-#: src/bs-application.c:162
-msgid "Repository"
-msgstr "Repositório"
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
@@ -133,21 +136,21 @@ msgstr "Stream Deck XL"
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck-button-editor.c:376
+#: src/bs-stream-deck-button-editor.c:380
 msgid "Select icon"
 msgstr "Selecionar ícone"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:383
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:98
 msgid "_Open"
 msgstr "_Abrir"
 
-#: src/bs-stream-deck-button-editor.c:380
+#: src/bs-stream-deck-button-editor.c:384
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:99
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/bs-stream-deck-button-editor.c:384
+#: src/bs-stream-deck-button-editor.c:388
 msgid "All supported formats"
 msgstr "Todos os formatos suportados"
 
@@ -159,16 +162,16 @@ msgstr "Selecionar um botão"
 msgid "Name"
 msgstr "Nome"
 
-#: src/bs-stream-deck-button-editor.ui:201
+#: src/bs-stream-deck-button-editor.ui:195
 msgid "Background Color"
 msgstr "Cor de fundo"
 
-#: src/bs-stream-deck-button-editor.ui:232
-#: src/bs-stream-deck-button-editor.ui:294
+#: src/bs-stream-deck-button-editor.ui:226
+#: src/bs-stream-deck-button-editor.ui:288
 msgid "Select action"
 msgstr "Selecionar ação"
 
-#: src/bs-stream-deck-button-editor.ui:253
+#: src/bs-stream-deck-button-editor.ui:247
 msgid "Remove Action"
 msgstr "Remover ação"
 
@@ -227,6 +230,14 @@ msgstr "_Sobre Boatswain"
 #: src/bs-window.ui:319
 msgid "_Quit"
 msgstr "Sa_ir"
+
+#: src/bs-window.c:328
+msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
+
+#: src/bs-window.c:336
+msgid "Repository"
+msgstr "Repositório"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -316,7 +327,7 @@ msgstr "Abrir URL"
 msgid "Choose Application"
 msgstr "Escolher aplicativo"
 
-#: src/plugins/launcher/launcher-open-url-action.c:104
+#: src/plugins/launcher/launcher-open-url-action.c:101
 msgid "URL"
 msgstr "URL"
 
@@ -352,17 +363,13 @@ msgstr "Configurações de conexão"
 msgid "Host"
 msgstr "Host"
 
-#: src/plugins/obs-studio/obs-connection-settings.ui:25
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
 msgid "Port"
 msgstr "Porta"
 
-#: src/plugins/obs-studio/obs-connection-settings.ui:50
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
 msgid "Password"
 msgstr "Senha"
-
-#: src/plugins/obs-studio/obs-connection-settings.ui:51
-msgid "OBS Studio requires a password to be controlled by Boatswain"
-msgstr "OBS Studio requer uma senha para ser controlado pelo Boatswain"
 
 #: src/plugins/obs-studio/obs-switch-scene-action.c:283
 msgid "Scene"
@@ -480,6 +487,9 @@ msgstr "Pressionar e segurar"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Volume"
+
+#~ msgid "OBS Studio requires a password to be controlled by Boatswain"
+#~ msgstr "OBS Studio requer uma senha para ser controlado pelo Boatswain"
 
 #~ msgid "Empty release"
 #~ msgstr "Lançamento vazio"
