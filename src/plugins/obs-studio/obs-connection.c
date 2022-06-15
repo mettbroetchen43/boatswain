@@ -828,6 +828,7 @@ on_websocket_check_authentication_required_cb (GObject      *source_object,
   else
     {
       set_connection_state (self, OBS_CONNECTION_STATE_CONNECTED);
+      fetch_all_scenes (self);
     }
 }
 
