@@ -1,5 +1,5 @@
 project('boatswain', 'c',
-          version: '0.1.2',
+          version: '0.1.3',
     meson_version: '>= 0.59',
   default_options: [ 'warning_level=1', 'c_std=gnu11' ],
 )
