@@ -37,7 +37,6 @@ struct _BsApplication
   PeasExtensionSet *action_factories_set;
   BsDeviceManager *device_manager;
   XdpPortal *portal;
-  guint request_background_timeout_id;
 };
 
 static void on_request_background_called_cb (GObject      *object,
@@ -59,27 +58,6 @@ static GOptionEntry bs_application_options[] = {
 /*
  * Auxiliary methods
  */
-
-static void
-request_run_in_background (BsApplication *self)
-{
-  g_autoptr (XdpParent) parent = NULL;
-  XdpBackgroundFlags background_flags;
-
-  if (self->window)
-    parent = xdp_parent_new_gtk (self->window);
-
-  background_flags = XDP_BACKGROUND_FLAG_ACTIVATABLE;
-
-  xdp_portal_request_background (self->portal,
-                                 parent,
-                                 _("Boatswain needs to run in background to detect and execute Stream Deck actions."),
-                                 NULL,
-                                 background_flags,
-                                 NULL,
-                                 on_request_background_called_cb,
-                                 self);
-}
 
 static void
 load_plugin (PeasEngine  *engine,
@@ -132,23 +110,33 @@ on_request_background_called_cb (GObject      *object,
 
   /* Hold the application is we're allowed to run in background */
   g_application_hold (G_APPLICATION (self));
+
+  g_idle_add_once ((GSourceOnceFunc) gtk_window_destroy, self->window);
+  self->window = NULL;
 }
 
 static gboolean
-request_background_cb (gpointer user_data)
+on_window_close_requested_cb (GtkWindow     *window,
+                              BsApplication *self)
 {
-  BsApplication *self = BS_APPLICATION (user_data);
+  g_autoptr (XdpParent) parent = NULL;
+  XdpBackgroundFlags background_flags;
 
-  if (!self->window ||
-      !gtk_widget_get_mapped (GTK_WIDGET (self->window)) ||
-      !gtk_widget_get_realized (GTK_WIDGET (self->window)) ||
-      !gtk_window_is_active (self->window))
-    return G_SOURCE_CONTINUE;
+  g_assert (self->window != NULL);
 
-  request_run_in_background (self);
+  parent = xdp_parent_new_gtk (self->window);
+  background_flags = XDP_BACKGROUND_FLAG_ACTIVATABLE;
 
-  self->request_background_timeout_id = 0;
-  return G_SOURCE_REMOVE;
+  xdp_portal_request_background (self->portal,
+                                 parent,
+                                 _("Boatswain needs to run in background to detect and execute Stream Deck actions."),
+                                 NULL,
+                                 background_flags,
+                                 NULL,
+                                 on_request_background_called_cb,
+                                 self);
+
+  return TRUE;
 }
 
 
@@ -183,8 +171,6 @@ bs_application_startup (GApplication *application)
 
   self->portal = xdp_portal_new ();
 
-  self->request_background_timeout_id = g_timeout_add_seconds (1, request_background_cb, self);
-
   style_manager = adw_application_get_style_manager (ADW_APPLICATION (application));
   adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_PREFER_DARK);
 
@@ -205,7 +191,7 @@ bs_application_activate (GApplication *application)
       self->window = g_object_new (BS_TYPE_WINDOW,
                                    "application", application,
                                    NULL);
-      g_object_add_weak_pointer (G_OBJECT (self->window), (gpointer*) &self->window);
+      g_signal_connect (self->window, "close-request", G_CALLBACK (on_window_close_requested_cb), self);
     }
 
   gtk_window_present (self->window);
@@ -216,7 +202,6 @@ bs_application_shutdown (GApplication *application)
 {
   BsApplication *self = BS_APPLICATION (application);
 
-  g_clear_handle_id (&self->request_background_timeout_id, g_source_remove);
   g_clear_pointer (&self->window, gtk_window_destroy);
   g_clear_object (&self->device_manager);
   g_clear_object (&self->portal);
