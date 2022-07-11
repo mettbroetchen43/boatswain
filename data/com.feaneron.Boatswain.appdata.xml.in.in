@@ -7,7 +7,7 @@
   <url type="homepage">https://gitlab.gnome.org/World/boatswain</url>
   <url type="bugtracker">https://gitlab.gnome.org/World/boatswain/issues</url>
   <url type="donation">https://ko-fi.com/feaneron</url>
-  <summary>Control your Elgato Stream Deck devices</summary>
+  <summary>Control your Elgato Stream Decks</summary>
 	<description>
 	  <p>Boatswain allows you to control Elgato Stream Deck devices.</p>
 	  <p>With Boatswain you will be able to:</p>

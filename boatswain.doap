@@ -6,7 +6,7 @@
          xmlns="http://usefulinc.com/ns/doap#">
 
   <name xml:lang="en">Boatswain</name>
-  <shortdesc xml:lang="en">Control Elgato Stream Deck devices</shortdesc>
+  <shortdesc xml:lang="en">Control your Elgato Stream Decks</shortdesc>
   <description xml:lang="en">Boatswain allows you to add actions and icons to Elgato Stream Deck buttons</description>
   <homepage rdf:resource="https://gitlab.gnome.org/World/boatswain" />
   <download-page rdf:resource="https://download.gnome.org/sources/boatswain/" />
