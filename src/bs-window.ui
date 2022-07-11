@@ -32,6 +32,7 @@
 
         <child type="start">
           <object class="GtkMenuButton" id="profiles_menu_button">
+            <property name="visible">False</property>
             <property name="always-show-arrow">True</property>
             <property name="popover">
               <object class="GtkPopoverMenu">
