@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-05-12 20:44+0000\n"
-"PO-Revision-Date: 2022-05-13 09:07+0300\n"
+"POT-Creation-Date: 2022-07-11 16:08+0000\n"
+"PO-Revision-Date: 2022-07-12 09:47+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -31,8 +31,9 @@ msgstr ""
 "stream deck;streaming;deck;elgato;потокове відтворення;потік;дека;ельгато;"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:10
-msgid "Control your Elgato Stream Deck devices"
-msgstr "Керування вашими пристроями потокових дек Elgato"
+#| msgid "Control your Elgato Stream Deck devices"
+msgid "Control your Elgato Stream Decks"
+msgstr "Керування вашими пристроями дек Elgato"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
@@ -69,7 +70,6 @@ msgstr ""
 
 #. Translators: please do NOT translate this
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:23
-#| msgid "Copyright © 2022 Georges Basile Stavracas Neto"
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
