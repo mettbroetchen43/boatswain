@@ -83,15 +83,7 @@
                 <property name="sensitive">False</property>
 
                 <child>
-                  <object class="GtkBox">
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkImage" id="stream_deck_icon" />
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="stream_deck_name_label" />
-                    </child>
-                  </object>
+                  <object class="GtkLabel" id="stream_deck_name_label" />
                 </child>
 
                 <property name="popover">

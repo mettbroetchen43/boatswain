@@ -44,7 +44,6 @@ struct _BsWindow
   GtkEditable *new_profile_name_entry;
   GtkMenuButton *profiles_menu_button;
   GtkLabel *serial_number_label;
-  GtkImage *stream_deck_icon;
   GtkLabel *stream_deck_name_label;
   GtkListBox *stream_decks_listbox;
 
@@ -158,7 +157,6 @@ select_stream_deck (BsWindow     *self,
 
   if (stream_deck)
     {
-      gtk_image_set_from_gicon (self->stream_deck_icon, bs_stream_deck_get_icon (stream_deck));
       gtk_label_set_label (self->stream_deck_name_label, bs_stream_deck_get_name (stream_deck));
       gtk_label_set_label (self->serial_number_label, bs_stream_deck_get_serial_number (stream_deck));
       gtk_label_set_label (self->firmware_version_label, bs_stream_deck_get_firmware_version (stream_deck));
@@ -227,20 +225,16 @@ create_stream_deck_row_cb (gpointer item,
 {
   BsStreamDeck *stream_deck;
   GtkWidget *label;
-  GtkWidget *icon;
-  GtkWidget *box;
   GtkWidget *row;
 
   stream_deck = BS_STREAM_DECK (item);
-  label = gtk_label_new (bs_stream_deck_get_name (stream_deck));
-  icon = gtk_image_new_from_gicon (bs_stream_deck_get_icon (stream_deck));
-
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  gtk_box_append (GTK_BOX (box), icon);
-  gtk_box_append (GTK_BOX (box), label);
+  label = g_object_new (GTK_TYPE_LABEL,
+                        "label", bs_stream_deck_get_name (stream_deck),
+                        "xalign", 0.0,
+                        NULL);
 
   row = gtk_list_box_row_new ();
-  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), label);
   g_object_set_data (G_OBJECT (row), "stream-deck", item);
 
   return row;
@@ -501,7 +495,6 @@ bs_window_class_init (BsWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsWindow, profiles_listbox);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, profiles_menu_button);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, serial_number_label);
-  gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_deck_icon);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_deck_name_label);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_decks_listbox);
 
