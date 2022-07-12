@@ -102,14 +102,10 @@ on_request_background_called_cb (GObject      *object,
 
   xdp_portal_request_background_finish (XDP_PORTAL (object), result, &error);
 
-  if (error)
-    {
-      g_warning ("Error requesting background: %s", error->message);
-      return;
-    }
-
-  /* Hold the application is we're allowed to run in background */
-  g_application_hold (G_APPLICATION (self));
+  if (!error)
+    g_application_hold (G_APPLICATION (self));
+  else
+    g_warning ("Error requesting background: %s", error->message);
 
   g_idle_add_once ((GSourceOnceFunc) gtk_window_destroy, self->window);
   self->window = NULL;
