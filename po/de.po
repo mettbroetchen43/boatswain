@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-05-26 20:03+0000\n"
-"PO-Revision-Date: 2022-06-19 11:24+0200\n"
-"Last-Translator: Tim Sabsch <tim@sabsch.com>\n"
+"POT-Creation-Date: 2022-07-11 16:08+0000\n"
+"PO-Revision-Date: 2022-07-11 21:26+0200\n"
+"Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -33,8 +33,8 @@ msgstr ""
 "Elgato;"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:10
-msgid "Control your Elgato Stream Deck devices"
-msgstr "Steuern Sie Ihre Elgato Stream-Deck-Geräte"
+msgid "Control your Elgato Stream Decks"
+msgstr "Steuern Sie Ihre Elgato Stream Decks"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
@@ -296,7 +296,6 @@ msgstr "Wert"
 msgid "Delay"
 msgstr "Verzögerung"
 
-# Wieso das hier zweimal steht, ein mit klein, einmal mit groß geschriebenem "Action", weiß ich nicht. -jb
 #: src/plugins/default/default-multi-action-editor.ui:31
 msgid "Add action"
 msgstr "Aktion hinzufügen"
