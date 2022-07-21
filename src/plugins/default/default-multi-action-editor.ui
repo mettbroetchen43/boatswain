@@ -48,7 +48,7 @@
   <object class="GtkDialog" id="actions_dialog">
     <property name="title" translatable="yes">Add Action</property>
     <property name="modal">True</property>
-    <property name="use-header-bar">True</property>
+    <property name="use-header-bar">1</property>
     <property name="hide-on-close">True</property>
     <property name="default-width">450</property>
     <property name="default-height">450</property>
@@ -82,7 +82,7 @@
   <object class="GtkDialog" id="preferences_dialog">
     <property name="title" translatable="yes">Settings</property>
     <property name="modal">True</property>
-    <property name="use-header-bar">True</property>
+    <property name="use-header-bar">1</property>
     <property name="hide-on-close">True</property>
     <property name="default-width">450</property>
     <property name="default-height">450</property>
