@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-07-11 16:08+0000\n"
-"PO-Revision-Date: 2022-07-11 20:50+0200\n"
+"POT-Creation-Date: 2022-07-22 01:30+0000\n"
+"PO-Revision-Date: 2022-07-22 10:35+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -67,11 +67,11 @@ msgstr "Styra OBS Studio med Stream Deck (kräver tillägget obs-websocket)"
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
-#: src/bs-application.c:53
+#: src/bs-application.c:52
 msgid "Enable debug messages"
 msgstr "Aktivera felsökningsmeddelanden"
 
-#: src/bs-application.c:76
+#: src/bs-application.c:128
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -179,59 +179,55 @@ msgstr "_Ny profil"
 msgid "Manage profiles…"
 msgstr "Hantera profiler…"
 
-#: src/bs-window.ui:60
+#: src/bs-window.ui:61
 msgid "Create"
 msgstr "Skapa"
 
-#: src/bs-window.ui:112
+#: src/bs-window.ui:105
 msgid "Power"
 msgstr "Ström"
 
-#: src/bs-window.ui:128 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:121 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Ljusstyrka"
 
-#: src/bs-window.ui:164
+#: src/bs-window.ui:157
 msgid "Device"
 msgstr "Enhet"
 
-#: src/bs-window.ui:180
+#: src/bs-window.ui:173
 msgid "Serial Number"
 msgstr "Serienummer"
 
-#: src/bs-window.ui:207
+#: src/bs-window.ui:200
 msgid "Firmware"
 msgstr "Fast programvara"
 
-#: src/bs-window.ui:255
+#: src/bs-window.ui:248
 msgid "Devices"
 msgstr "Enheter"
 
-#: src/bs-window.ui:299
+#: src/bs-window.ui:292
 msgid "No Stream Deck Found"
 msgstr "Ingen Stream Deck-enhet hittades"
 
-#: src/bs-window.ui:300
+#: src/bs-window.ui:293
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Anslut en Stream Deck-enhet för att använda den."
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:304
 msgid "_Keyboard Shortcuts"
 msgstr "_Tangentbordsgenvägar"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:308
 msgid "_About Boatswain"
 msgstr "_Om Boatswain"
 
-#: src/bs-window.ui:319
+#: src/bs-window.ui:312
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: src/bs-window.c:328
-msgid "Copyright © 2022 Georges Basile Stavracas Neto"
-msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
-
-#: src/bs-window.c:336
+#: src/bs-window.c:329
 msgid "Repository"
 msgstr "Arkiv"
 
@@ -327,27 +323,31 @@ msgstr "Välj program"
 msgid "URL"
 msgstr "URL"
 
-#: src/plugins/obs-studio/obs-action-factory.c:47
+#: src/plugins/obs-studio/obs-action-factory.c:48
 msgid "Switch Scene"
 msgstr "Växla scen"
 
-#: src/plugins/obs-studio/obs-action-factory.c:53
+#: src/plugins/obs-studio/obs-action-factory.c:54
 msgid "Record"
 msgstr "Spela in"
 
-#: src/plugins/obs-studio/obs-action-factory.c:59
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "Strömma"
 
-#: src/plugins/obs-studio/obs-action-factory.c:65
+#: src/plugins/obs-studio/obs-action-factory.c:66
+msgid "Virtual Camera"
+msgstr "Virtuell kamera"
+
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "Tysta / Aktivera ljud"
 
-#: src/plugins/obs-studio/obs-action-factory.c:71
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "Visa / Dölj källa"
 
-#: src/plugins/obs-studio/obs-connection.c:770
+#: src/plugins/obs-studio/obs-connection.c:800
 msgid "Invalid password"
 msgstr "Ogiltigt lösenord"
 
@@ -483,6 +483,9 @@ msgstr "Tryck och håll"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Volym"
+
+#~ msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+#~ msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
 
 #~ msgid "OBS Studio requires a password to be controlled by Boatswain"
 #~ msgstr "OBS Studio kräver ett lösenord för att styras av Boatswain"
