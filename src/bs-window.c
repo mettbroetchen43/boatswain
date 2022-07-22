@@ -309,25 +309,25 @@ on_show_about_action_activated_cb (GSimpleAction *action,
     "Sam Hewitt",
     NULL,
   };
-  const char *authors[] = {
+  const char *developers[] = {
     "Georges Basile Stavracas Neto <georges.stavracas@gmail.com>",
     NULL,
   };
 
   g_assert (BS_IS_WINDOW (self));
 
-  gtk_show_about_dialog (GTK_WINDOW (self),
-                         "authors", authors,
-                         "artists", artists,
-                         "copyright", _("Copyright \xc2\xa9 2022 Georges Basile Stavracas Neto"),
-                         "license-type", GTK_LICENSE_GPL_3_0,
-                         "logo-icon-name", APPLICATION_ID,
-                         "modal", TRUE,
-                         "program-name", "Boatswain",
-                         "transient-for", GTK_WINDOW (self),
+  adw_show_about_window (GTK_WINDOW (self),
+                         "application-name", "Boatswain",
+                         "application-icon", APPLICATION_ID,
                          "version", PACKAGE_VERSION,
+                         "copyright", "\xc2\xa9 2022 Georges Basile Stavracas Neto",
+                         "developers", developers,
+                         "artists", artists,
+                         "license-type", GTK_LICENSE_GPL_3_0,
                          "website", "https://gitlab.gnome.org/World/boatswain",
+                         "issue-url", "https://gitlab.gnome.org/World/boatswain/issues",
                          "website-label", _("Repository"),
+                         "transient-for", GTK_WINDOW (self),
                          NULL);
 }
 
