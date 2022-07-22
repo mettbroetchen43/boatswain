@@ -49,6 +49,12 @@ typedef enum
 
 typedef enum
 {
+  OBS_VIRTUALCAM_STATE_STOPPED,
+  OBS_VIRTUALCAM_STATE_STREAMING,
+} ObsVirtualcamState;
+
+typedef enum
+{
   OBS_SOURCE_CAP_INVALID = -1,
   OBS_SOURCE_CAP_NONE = 0,
   OBS_SOURCE_CAP_AUDIO = 1 << 0,

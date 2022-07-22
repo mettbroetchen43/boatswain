@@ -25,6 +25,7 @@
 #include "obs-stream-action.h"
 #include "obs-switch-scene-action.h"
 #include "obs-toggle-source-action.h"
+#include "obs-virtualcam-action.h"
 
 #include <glib/gi18n.h>
 
@@ -57,6 +58,12 @@ static const BsActionInfo actions[] = {
     .id = "obs-stream-action",
     .icon_name = "transmit-symbolic",
     .name = N_("Stream"),
+    .description = NULL,
+  },
+  {
+    .id = "obs-virtualcam-action",
+    .icon_name = "cameras-symbolic",
+    .name = N_("Virtual Camera"),
     .description = NULL,
   },
   {
@@ -98,6 +105,8 @@ obs_action_factory_create_action (BsActionFactory    *action_factory,
     return obs_record_action_new (stream_deck_button, self->connection_manager);
   else if (g_strcmp0 (action_info->id, "obs-stream-action") == 0)
     return obs_stream_action_new (stream_deck_button, self->connection_manager);
+  else if (g_strcmp0 (action_info->id, "obs-virtualcam-action") == 0)
+    return obs_virtualcam_action_new (stream_deck_button, self->connection_manager);
   else if (g_strcmp0 (action_info->id, "obs-toggle-mute-action") == 0)
     return obs_toggle_source_action_new (stream_deck_button, self->connection_manager, OBS_SOURCE_CAP_AUDIO);
   else if (g_strcmp0 (action_info->id, "obs-toggle-source-action") == 0)

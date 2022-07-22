@@ -61,6 +61,7 @@ struct _ObsConnection
   GCancellable *cancellable;
 
   gboolean streaming;
+  gboolean virtualcam_enabled;
   ObsRecordingState recording_state;
 
   SoupSession *session;
@@ -84,6 +85,7 @@ enum
   PROP_PORT,
   PROP_RECORDING_STATE,
   PROP_STREAMING,
+  PROP_VIRTUALCAM_ENABLED,
   N_PROPS,
 };
 
@@ -166,6 +168,17 @@ set_streaming (ObsConnection *self,
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_STREAMING]);
 }
 
+static void
+set_virtualcam_enabled (ObsConnection *self,
+                        gboolean       virtualcam_enabled)
+{
+  if (self->virtualcam_enabled == virtualcam_enabled)
+    return;
+
+  self->virtualcam_enabled = virtualcam_enabled;
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_VIRTUALCAM_ENABLED]);
+}
+
 static char *
 generate_auth_string (const char *password,
                       const char *challenge,
@@ -223,6 +236,7 @@ set_connection_state (ObsConnection      *self,
     {
       g_list_store_remove_all (self->sources);
       g_list_store_remove_all (self->scenes);
+      set_virtualcam_enabled (self, FALSE);
       set_recording_state (self, OBS_RECORDING_STATE_STOPPED);
       set_streaming (self, FALSE);
     }
@@ -611,6 +625,20 @@ switch_scenes_cb (ObsConnection *self,
   update_sources_states_from_scene (self, object);
 }
 
+static void
+virtualcam_started_cb (ObsConnection *self,
+                       JsonObject    *object)
+{
+  set_virtualcam_enabled (self, TRUE);
+}
+
+static void
+virtualcam_stopped_cb (ObsConnection *self,
+                       JsonObject    *object)
+{
+  set_virtualcam_enabled (self, FALSE);
+}
+
 struct {
   const char *event_name;
   void (*trigger) (ObsConnection *self,
@@ -629,6 +657,8 @@ struct {
   { "StreamStarted", stream_started_cb },
   { "StreamStopped", stream_stopped_cb },
   { "SwitchScenes", switch_scenes_cb },
+  { "VirtualCamStarted", virtualcam_started_cb },
+  { "VirtualCamStopped", virtualcam_stopped_cb },
 };
 
 static void
@@ -841,6 +871,7 @@ on_websocket_get_streaming_status_cb (GObject      *source_object,
   g_autoptr (GError) error = NULL;
   ObsConnection *self;
   JsonObject *object;
+  gboolean virtualcam_enabled;
   gboolean recording_paused;
   gboolean recording;
   gboolean streaming;
@@ -859,7 +890,9 @@ on_websocket_get_streaming_status_cb (GObject      *source_object,
   recording = json_object_get_boolean_member_with_default (object, "recording", FALSE);
   recording_paused = json_object_get_boolean_member_with_default (object, "recording-paused", FALSE);
   streaming = json_object_get_boolean_member_with_default (object, "streaming", FALSE);
+  virtualcam_enabled = json_object_get_boolean_member_with_default (object, "virtualcam", FALSE);
 
+  set_virtualcam_enabled (self, virtualcam_enabled);
   set_streaming (self, streaming);
   if (!recording)
     set_recording_state (self, OBS_RECORDING_STATE_STOPPED);
@@ -1291,6 +1324,10 @@ obs_connection_get_property (GObject    *object,
       g_value_set_boolean (value, self->streaming);
       break;
 
+    case PROP_VIRTUALCAM_ENABLED:
+      g_value_set_boolean (value, self->virtualcam_enabled);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -1345,6 +1382,10 @@ obs_connection_class_init (ObsConnectionClass *klass)
   properties[PROP_STREAMING] = g_param_spec_boolean ("streaming", NULL, NULL,
                                                      FALSE,
                                                      G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_VIRTUALCAM_ENABLED] = g_param_spec_boolean ("virtualcam-enabled", NULL, NULL,
+                                                              FALSE,
+                                                              G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
@@ -1418,6 +1459,14 @@ obs_connection_get_streaming (ObsConnection *self)
   g_return_val_if_fail (OBS_IS_CONNECTION (self), FALSE);
 
   return self->streaming;
+}
+
+gboolean
+obs_connection_get_virtualcam_enabled (ObsConnection *self)
+{
+  g_return_val_if_fail (OBS_IS_CONNECTION (self), FALSE);
+
+  return self->virtualcam_enabled;
 }
 
 void
@@ -1542,6 +1591,23 @@ obs_connection_toggle_streaming (ObsConnection *self)
 
   json_builder_set_member_name (builder, "request-type");
   json_builder_add_string_value (builder, "StartStopStreaming");
+
+  send_message (self, builder, self->cancellable, on_websocket_generic_response_cb, self);
+}
+
+void
+obs_connection_toggle_virtualcam (ObsConnection *self)
+{
+  g_autoptr (JsonBuilder) builder = NULL;
+
+  g_return_if_fail (OBS_IS_CONNECTION (self));
+  g_return_if_fail (self->state == OBS_CONNECTION_STATE_CONNECTED);
+
+  builder = json_builder_new ();
+  json_builder_begin_object (builder);
+
+  json_builder_set_member_name (builder, "request-type");
+  json_builder_add_string_value (builder, "StartStopVirtualCam");
 
   send_message (self, builder, self->cancellable, on_websocket_generic_response_cb, self);
 }

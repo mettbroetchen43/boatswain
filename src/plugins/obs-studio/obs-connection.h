@@ -40,6 +40,7 @@ unsigned int obs_connection_get_port (ObsConnection *self);
 ObsConnectionState obs_connection_get_state (ObsConnection *self);
 ObsRecordingState obs_connection_get_recording_state (ObsConnection *self);
 gboolean obs_connection_get_streaming (ObsConnection *self);
+gboolean obs_connection_get_virtualcam_enabled (ObsConnection *self);
 
 void obs_connection_authenticate (ObsConnection       *self,
                                   const char          *password,
@@ -59,6 +60,7 @@ void obs_connection_switch_to_scene (ObsConnection *self,
 
 void obs_connection_toggle_recording (ObsConnection *self);
 void obs_connection_toggle_streaming (ObsConnection *self);
+void obs_connection_toggle_virtualcam (ObsConnection *self);
 void obs_connection_toggle_source_mute (ObsConnection *self,
                                         ObsSource     *source);
 void obs_connection_set_source_mute (ObsConnection *self,

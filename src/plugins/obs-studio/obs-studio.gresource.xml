@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/feaneron/Boatswain/plugins/obs-studio">
+    <file alias="icons/scalable/emblems/cameras-symbolic.svg">icons/cameras-symbolic.svg</file>
     <file alias="icons/scalable/emblems/dotted-box-symbolic.svg">icons/dotted-box-symbolic.svg</file>
     <file alias="icons/scalable/emblems/eye-not-looking-symbolic.svg">icons/eye-not-looking-symbolic.svg</file>
     <file alias="icons/scalable/emblems/eye-open-negative-filled-symbolic.svg">icons/eye-open-negative-filled-symbolic.svg</file>

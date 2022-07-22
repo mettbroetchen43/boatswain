@@ -21,6 +21,7 @@ plugins_sources += files(
   'obs-switch-scene-action.c',
   'obs-toggle-source-action.c',
   'obs-utils.c',
+  'obs-virtualcam-action.c',
 )
 
 plugins_deps += [
