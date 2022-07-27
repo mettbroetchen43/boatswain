@@ -17,7 +17,6 @@ stages:
 
 flatpak:master:
   extends: .flatpak
-  image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
   stage: flatpak
   variables:
     MANIFEST_PATH: "build-aux/com.feaneron.Boatswain.Devel.json"
