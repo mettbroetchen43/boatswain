@@ -22,6 +22,7 @@
 
 #include <gusb.h>
 
+#include "bs-config.h"
 #include "bs-debug.h"
 #include "bs-device-enums.h"
 #include "bs-device-manager.h"
@@ -33,6 +34,7 @@ struct _BsDeviceManager
 
   GUsbContext *gusb_context;
   GListStore *stream_decks;
+  gboolean emulate_devices;
   gboolean loaded;
 };
 
@@ -50,6 +52,36 @@ static guint signals[N_SIGNALS] = { 0, };
 /*
  * Auxiliary methods
  */
+
+static void
+enumerate_fake_stream_decks (BsDeviceManager *self)
+{
+  int n_devices = MAX (atoi (g_getenv ("BOATSWAIN_N_DEVICES") ?: "1"), 1);
+
+  for (int i = 0; i < n_devices; i++)
+    {
+      g_autoptr (BsStreamDeck) stream_deck = NULL;
+      g_autoptr (GError) error = NULL;
+
+      stream_deck = bs_stream_deck_new_fake (&error);
+
+      if (error)
+        {
+          if (!g_error_matches (error, BS_STREAM_DECK_ERROR, BS_STREAM_DECK_ERROR_UNRECOGNIZED))
+            g_warning ("Error opening Stream Deck device: %s", error->message);
+          continue;
+        }
+
+      g_debug ("Created fake device %s (%s)",
+               bs_stream_deck_get_name (stream_deck),
+               bs_stream_deck_get_serial_number (stream_deck));
+
+      bs_stream_deck_load (stream_deck);
+
+      g_list_store_append (self->stream_decks, stream_deck);
+      g_signal_emit (self, signals[STREAM_DECK_ADDED], 0, stream_deck);
+    }
+}
 
 static void
 enumerate_stream_decks (BsDeviceManager *self)
@@ -197,6 +229,12 @@ bs_device_manager_class_init (BsDeviceManagerClass *klass)
 static void
 bs_device_manager_init (BsDeviceManager *self)
 {
+  const char *emulate_devices = g_getenv ("BOATSWAIN_EMULATE_DEVICES");
+
+  self->emulate_devices = g_strcmp0 (PROFILE, "development") == 0 &&
+                          emulate_devices != NULL &&
+                          *emulate_devices == '1';
+
   self->stream_decks = g_list_store_new (BS_TYPE_STREAM_DECK);
 }
 
@@ -214,10 +252,17 @@ bs_device_manager_load (BsDeviceManager  *self,
   g_return_val_if_fail (!error || !*error, FALSE);
   g_return_val_if_fail (!self->loaded, FALSE);
 
-  self->gusb_context = g_usb_context_new (error);
-  enumerate_stream_decks (self);
-  g_signal_connect (self->gusb_context, "device-added", G_CALLBACK (on_gusb_context_device_added_cb), self);
-  g_signal_connect (self->gusb_context, "device-removed", G_CALLBACK (on_gusb_context_device_removed_cb), self);
+  if (!self->emulate_devices)
+    {
+      self->gusb_context = g_usb_context_new (error);
+      enumerate_stream_decks (self);
+      g_signal_connect (self->gusb_context, "device-added", G_CALLBACK (on_gusb_context_device_added_cb), self);
+      g_signal_connect (self->gusb_context, "device-removed", G_CALLBACK (on_gusb_context_device_removed_cb), self);
+    }
+  else
+    {
+      enumerate_fake_stream_decks (self);
+    }
 
   self->loaded = TRUE;
 

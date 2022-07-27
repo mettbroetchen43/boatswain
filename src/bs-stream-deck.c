@@ -84,6 +84,7 @@ struct _BsStreamDeck
   GSource *poll_source;
   gboolean initialized;
   gboolean loaded;
+  gboolean fake;
 };
 
 static void g_initable_iface_init (GInitableIface *iface);
@@ -100,6 +101,7 @@ enum
   PROP_ACTIVE_PROFILE,
   PROP_BRIGHTNESS,
   PROP_DEVICE,
+  PROP_FAKE,
   PROP_ICON,
   PROP_NAME,
   N_PROPS,
@@ -167,6 +169,9 @@ save_profiles (BsStreamDeck *self)
   unsigned int i;
 
   BS_ENTRY;
+
+  if (self->fake)
+    BS_RETURN ();
 
   /* Update the active profile */
   bs_profile_set_brightness (self->active_profile, self->brightness);
@@ -941,6 +946,97 @@ static const StreamDeckModelInfo models_vtable[] = {
 
 
 /*
+ * Fake device for testing
+ */
+
+static void
+reset_fake (BsStreamDeck *self)
+{
+}
+
+static char *
+get_serial_number_fake (BsStreamDeck *self)
+{
+  return g_strdup ("feaneron-hangar-xl-serial");
+}
+
+static char *
+get_firmware_version_fake (BsStreamDeck *self)
+{
+  return g_strdup ("feaneron-hangar-xl-firmware-version");
+}
+
+static void
+set_brightness_fake (BsStreamDeck *self,
+                     double        brightness)
+{
+}
+
+static gboolean
+set_button_texture_fake (BsStreamDeck  *self,
+                         uint8_t        button,
+                         GdkTexture    *texture,
+                         GError       **error)
+{
+  return TRUE;
+}
+
+static gboolean
+read_button_states_fake (BsStreamDeck *self)
+{
+  return TRUE;
+}
+
+static const StreamDeckModelInfo fake_models_vtable[] = {
+  {
+    .product_id = 0x0001,
+    .name = N_("Feaneron Hangar Original"),
+    .icon_name = "input-dialpad-symbolic",
+    .button_layout = {
+      .n_buttons = 15,
+      .rows = 3,
+      .columns = 5,
+      .icon_size = 72,
+    },
+    .icon_layout = {
+      .width = 72,
+      .height = 72,
+      .format = BS_ICON_FORMAT_JPEG,
+      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+    },
+    .reset = reset_fake,
+    .get_serial_number = get_serial_number_fake,
+    .get_firmware_version = get_firmware_version_fake,
+    .set_brightness = set_brightness_fake,
+    .set_button_texture = set_button_texture_fake,
+    .read_button_states = read_button_states_fake,
+  },
+  {
+    .product_id = 0x0001,
+    .name = N_("Feaneron Hangar XL"),
+    .icon_name = "input-dialpad-symbolic",
+    .button_layout = {
+      .n_buttons = 32,
+      .rows = 4,
+      .columns = 8,
+      .icon_size = 96,
+    },
+    .icon_layout = {
+      .width = 96,
+      .height = 96,
+      .format = BS_ICON_FORMAT_JPEG,
+      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+    },
+    .reset = reset_fake,
+    .get_serial_number = get_serial_number_fake,
+    .get_firmware_version = get_firmware_version_fake,
+    .set_brightness = set_brightness_fake,
+    .set_button_texture = set_button_texture_fake,
+    .read_button_states = read_button_states_fake,
+  },
+};
+
+/*
  * GSource
  */
 
@@ -1001,6 +1097,14 @@ bs_stream_deck_initable_init (GInitable     *initable,
 
   BS_ENTRY;
 
+  /* Short-circuit fake devices here */
+  if (self->fake)
+    {
+      static int fake_index = 0;
+      self->model_info = &fake_models_vtable[fake_index++ % G_N_ELEMENTS (fake_models_vtable)];
+      BS_GOTO (out);
+    }
+
   if (!self->device)
     {
       g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "No device");
@@ -1049,6 +1153,9 @@ bs_stream_deck_initable_init (GInitable     *initable,
 
   hid_set_nonblocking (self->handle, TRUE);
 
+  self->poll_source = stream_deck_source_new (self);
+
+out:
   self->serial_number = self->model_info->get_serial_number (self);
   self->firmware_version = self->model_info->get_firmware_version (self);
   self->icon_renderer = bs_icon_renderer_new (&self->model_info->icon_layout);
@@ -1056,8 +1163,6 @@ bs_stream_deck_initable_init (GInitable     *initable,
 
   for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
     g_ptr_array_add (self->buttons, bs_stream_deck_button_new (self, i));
-
-  self->poll_source = stream_deck_source_new (self);
 
   self->initialized = TRUE;
 
@@ -1087,7 +1192,8 @@ bs_stream_deck_finalize (GObject *object)
       bs_stream_deck_reset (self);
     }
 
-  g_usb_device_close (self->device, NULL);
+  if (self->device)
+    g_usb_device_close (self->device, NULL);
 
   if (self->poll_source)
     g_source_destroy (self->poll_source);
@@ -1164,6 +1270,10 @@ bs_stream_deck_set_property (GObject      *object,
       self->device = g_value_dup_object (value);
       break;
 
+    case PROP_FAKE:
+      self->fake = g_value_get_boolean (value);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -1193,6 +1303,10 @@ bs_stream_deck_class_init (BsStreamDeckClass *klass)
   properties[PROP_DEVICE] = g_param_spec_object ("device", NULL, NULL,
                                                  G_USB_TYPE_DEVICE,
                                                  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_FAKE] = g_param_spec_boolean ("fake", NULL, NULL,
+                                                FALSE,
+                                                G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_ICON] = g_param_spec_object ("icon", NULL, NULL,
                                                G_TYPE_ICON,
@@ -1236,6 +1350,16 @@ bs_stream_deck_new (GUsbDevice  *gusb_device,
                          NULL,
                          error,
                          "device", gusb_device,
+                         NULL);
+}
+
+BsStreamDeck *
+bs_stream_deck_new_fake (GError **error)
+{
+  return g_initable_new (BS_TYPE_STREAM_DECK,
+                         NULL,
+                         error,
+                         "fake", TRUE,
                          NULL);
 }
 
@@ -1505,7 +1629,9 @@ bs_stream_deck_load (BsStreamDeck *self)
   g_return_if_fail (BS_IS_STREAM_DECK (self));
   g_return_if_fail (!self->loaded);
 
-  g_source_attach (self->poll_source, NULL);
+  if (!self->fake)
+    g_source_attach (self->poll_source, NULL);
+
   load_profiles (self);
 
   self->loaded = TRUE;

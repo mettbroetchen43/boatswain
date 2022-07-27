@@ -56,6 +56,8 @@ G_DECLARE_FINAL_TYPE (BsStreamDeck, bs_stream_deck, BS, STREAM_DECK, GObject)
 BsStreamDeck * bs_stream_deck_new (GUsbDevice  *gusb_device,
                                    GError     **error);
 
+BsStreamDeck * bs_stream_deck_new_fake (GError **error);
+
 void bs_stream_deck_reset (BsStreamDeck *self);
 
 GUsbDevice * bs_stream_deck_get_device (BsStreamDeck *self);

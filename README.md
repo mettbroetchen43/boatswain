@@ -41,3 +41,18 @@ Then reload with:
 ```
 
 Finally, reboot your computer. You should be able to use Boatswain now.
+
+
+## Testing without devices
+
+Boatswain allows emulating an arbitrary number of devices. This might be helpful
+for designers and translators to test the application. To force Boatswain to use
+fake devices, you must build Boatswain with `-Dprofile=development`, and launch
+it as follows:
+
+```
+$ env BOATSWAIN_EMULATE_DEVICES=1 boatswain
+```
+
+You can have multiple fake devices by setting the `BOATSWAIN_N_DEVICES` variable
+to a number.
