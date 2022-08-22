@@ -1,0 +1,488 @@
+# Croatian translation for boatswain.
+# Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
+# This file is distributed under the same license as the boatswain package.
+# Milo Ivir <mail@milotype.de>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: boatswain main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2022-05-13 20:15+0000\n"
+"PO-Revision-Date: 2022-05-15 13:52+0200\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
+
+#: data/com.feaneron.Boatswain.desktop.in.in:3
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+msgid "Boatswain"
+msgstr "Boatswain"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
+msgid "stream deck;streaming;deck;elgato;"
+msgstr "stream deck;streaming;deck;elgato;"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+msgid "Control your Elgato Stream Deck devices"
+msgstr "Upravljajte vašim Elgato Stream Deck uređajima"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Boatswain allows you to control Elgato Stream Deck devices."
+msgstr "Boatswain omogućuje upravljajnje Elgato Stream Deck uređajima."
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+msgid "With Boatswain you will be able to:"
+msgstr "Pomoću Boatswaina možete:"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+msgid "Organize your actions in pages and profiles"
+msgstr "Organizirati vaše radnje u stranicama i profilima"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+msgid "Set custom icons to actions"
+msgstr "Radnjama odrediti prilagođene ikone"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Control your music player"
+msgstr "Upravljaj reproduktorom glazbe"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+msgid "Play sound effects during your streams"
+msgstr "Reproducirati zvučne efekte tijekom veših prijenosa"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgstr ""
+"Upravljati OBS Studiom koristeći Stream Deck uređajima (zahtijeva proširenje "
+"obs-websocket)"
+
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#| msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+msgid "Georges Basile Stavracas Neto"
+msgstr "Georges Basile Stavracas Neto"
+
+#: src/bs-application.c:53
+msgid "Enable debug messages"
+msgstr "Omogućiti poruke otklanjanja grešaka"
+
+#: src/bs-application.c:76
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr ""
+"Za otkrivanje i izvršavanje Stream Deck radnji, Boatswain mora raditi u "
+"pozadini."
+
+#: src/bs-profile.c:184
+msgid "Unnamed profile"
+msgstr "Neimenovani profil"
+
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+msgid "Rename"
+msgstr "Preimenuj"
+
+#: src/bs-profile-row.ui:14
+msgid "Move _up"
+msgstr "Pomakni prema _gore"
+
+#: src/bs-profile-row.ui:18
+msgid "Move _down"
+msgstr "Pomakni prema _dolje"
+
+#: src/bs-profiles-dialog.ui:26
+msgid "Profiles"
+msgstr "Profili"
+
+#: src/bs-stream-deck.c:272
+msgid "Default"
+msgstr "Zadano"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:815
+msgid "Stream Deck Mini"
+msgstr "Stream Deck Mini"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:841 src/bs-stream-deck.c:867
+#: src/plugins/default/default-switch-profile-action.c:285
+msgid "Stream Deck"
+msgstr "Stream Deck"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:893
+msgid "Stream Deck XL"
+msgstr "Stream Deck XL"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:919
+msgid "Stream Deck MK.2"
+msgstr "Stream Deck MK.2"
+
+#: src/bs-stream-deck-button-editor.c:380
+msgid "Select icon"
+msgstr "Odberi ikonu"
+
+#: src/bs-stream-deck-button-editor.c:383
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
+msgid "_Open"
+msgstr "_Otvori"
+
+#: src/bs-stream-deck-button-editor.c:384
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
+msgid "_Cancel"
+msgstr "Odu_stani"
+
+#: src/bs-stream-deck-button-editor.c:388
+msgid "All supported formats"
+msgstr "Svi podržani formati"
+
+#: src/bs-stream-deck-button-editor.ui:17
+msgid "Select a button"
+msgstr "Odaberi gumb"
+
+#: src/bs-stream-deck-button-editor.ui:188
+msgid "Name"
+msgstr "Ime"
+
+#: src/bs-stream-deck-button-editor.ui:195
+msgid "Background Color"
+msgstr "Boja pozadine"
+
+#: src/bs-stream-deck-button-editor.ui:226
+#: src/bs-stream-deck-button-editor.ui:288
+msgid "Select action"
+msgstr "Odaberi radnju"
+
+#: src/bs-stream-deck-button-editor.ui:247
+msgid "Remove Action"
+msgstr "Ukloni radnju"
+
+#: src/bs-window.ui:13
+msgid "_New profile"
+msgstr "_Novi profil"
+
+#: src/bs-window.ui:19
+msgid "Manage profiles…"
+msgstr "Upravljaj profilima …"
+
+#: src/bs-window.ui:60
+msgid "Create"
+msgstr "Stvori"
+
+#: src/bs-window.ui:112
+msgid "Power"
+msgstr "Energija"
+
+#: src/bs-window.ui:128 src/plugins/default/default-action-factory.c:56
+msgid "Brightness"
+msgstr "Svjetlina"
+
+#: src/bs-window.ui:164
+msgid "Device"
+msgstr "Uređaj"
+
+#: src/bs-window.ui:180
+msgid "Serial Number"
+msgstr "Serijski broj"
+
+#: src/bs-window.ui:207
+msgid "Firmware"
+msgstr "Firmver"
+
+#: src/bs-window.ui:255
+msgid "Devices"
+msgstr "Uređaji"
+
+#: src/bs-window.ui:299
+msgid "No Stream Deck Found"
+msgstr "Nijedan Stream Deck nije pronađen"
+
+#: src/bs-window.ui:300
+msgid "Plug in a Stream Deck device to use it."
+msgstr "Priključite jedan Stream Deck uređaj."
+
+#: src/bs-window.ui:311
+msgid "_Keyboard Shortcuts"
+msgstr "Tip_kovnički prečaci"
+
+#: src/bs-window.ui:315
+msgid "_About Boatswain"
+msgstr "O _aplikaciji Boatswain"
+
+#: src/bs-window.ui:319
+msgid "_Quit"
+msgstr "_Zatvori aplikaciju"
+
+#: src/bs-window.c:328
+msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+msgstr "Copyright © 2022. Georges Basile Stavracas Neto"
+
+#: src/bs-window.c:336
+msgid "Repository"
+msgstr "Repozitorij"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Opće"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Pokaži prečace"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Zatvori aplikaciju"
+
+#: src/plugins/default/default-action-factory.c:44
+msgid "Folder"
+msgstr "Mapa"
+
+#: src/plugins/default/default-action-factory.c:50
+msgid "Switch Profile"
+msgstr "Zamijeni profil"
+
+#: src/plugins/default/default-action-factory.c:62
+msgid "Multiple Actions"
+msgstr "Višestruke radnje"
+
+#: src/plugins/default/default-brightness-action.c:140
+msgid "Constant"
+msgstr "Konstantno"
+
+#: src/plugins/default/default-brightness-action.c:141
+msgid "Increase"
+msgstr "Povećaj"
+
+#: src/plugins/default/default-brightness-action.c:142
+msgid "Decrease"
+msgstr "Smanji"
+
+#: src/plugins/default/default-brightness-action.c:145
+msgid "Mode"
+msgstr "Način"
+
+#: src/plugins/default/default-brightness-action.c:152
+msgid "Value"
+msgstr "Vrijednost"
+
+#: src/plugins/default/default-multi-action-editor.c:310
+#: src/plugins/default/default-multi-action-row.c:142
+msgid "Delay"
+msgstr "Odgađanje"
+
+#: src/plugins/default/default-multi-action-editor.ui:31
+msgid "Add action"
+msgstr "Dodaj radnju"
+
+#: src/plugins/default/default-multi-action-editor.ui:49
+msgid "Add Action"
+msgstr "Dodaj radnju"
+
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Radnje"
+
+#: src/plugins/default/default-multi-action-editor.ui:73
+msgid "Others"
+msgstr "Ostalo"
+
+#: src/plugins/default/default-multi-action-editor.ui:83
+msgid "Settings"
+msgstr "Postavke"
+
+#: src/plugins/default/default-switch-profile-action.c:308
+msgid "Profile"
+msgstr "Profil"
+
+#: src/plugins/launcher/launcher-action-factory.c:42
+msgid "Launch Application"
+msgstr "Pokreni aplikaciju"
+
+#: src/plugins/launcher/launcher-action-factory.c:48
+msgid "Open URL"
+msgstr "Otvori URL"
+
+#: src/plugins/launcher/launcher-launch-preferences.ui:8
+msgid "Choose Application"
+msgstr "Odaberi aplikaciju"
+
+#: src/plugins/launcher/launcher-open-url-action.c:101
+msgid "URL"
+msgstr "URL"
+
+#: src/plugins/obs-studio/obs-action-factory.c:47
+msgid "Switch Scene"
+msgstr "Zamijeni scenu"
+
+#: src/plugins/obs-studio/obs-action-factory.c:53
+msgid "Record"
+msgstr "Snimanje"
+
+#: src/plugins/obs-studio/obs-action-factory.c:59
+msgid "Stream"
+msgstr "Prijenos"
+
+#: src/plugins/obs-studio/obs-action-factory.c:65
+msgid "Toggle Mute"
+msgstr "Uključi/isključi zvuk"
+
+#: src/plugins/obs-studio/obs-action-factory.c:71
+msgid "Show / Hide Source"
+msgstr "Prikaži / Sakrij izvor"
+
+#: src/plugins/obs-studio/obs-connection.c:770
+msgid "Invalid password"
+msgstr "Neispravna lozinka"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:8
+msgid "Connection Settings"
+msgstr "Postavke veze"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:12
+msgid "Host"
+msgstr "Glavno računalo"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
+msgid "Port"
+msgstr "Priključak"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
+msgid "Password"
+msgstr "Lozinka"
+
+#: src/plugins/obs-studio/obs-switch-scene-action.c:283
+msgid "Scene"
+msgstr "Scena"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:124
+msgid "Toggle mute"
+msgstr "Uključi/isključi zvuk"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:125
+msgid "Mute"
+msgstr "Isključi zvuk"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:126
+msgid "Unmute"
+msgstr "Uključi zvuk"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:130
+msgid "Toggle visibility"
+msgstr "Uključi/isključi vidljivost"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:131
+msgid "Hide"
+msgstr "Sakrij"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:132
+msgid "Show"
+msgstr "Prikaži"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:479
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
+msgid "Behavior"
+msgstr "Ponašanje"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:490
+msgid "Audio Source"
+msgstr "Izvor audiozapisa"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:492
+msgid "Source"
+msgstr "Izvor"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:45
+msgid "Music Player"
+msgstr "Reproduktor glazbe"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:46
+msgid "Control the active music player"
+msgstr "Upravljaj aktivnim reproduktorom glazbe"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:51
+msgid "Play Audio"
+msgstr "Pokreni audiozapis"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:196
+msgid "Next"
+msgstr "Sljedeći"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
+msgid "Pause"
+msgstr "Zaustavi"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
+msgid "Play"
+msgstr "Pokreni"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
+msgid "Previous"
+msgstr "Prethodni"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
+msgid "Stop"
+msgstr "Prekini"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
+msgid "Play / Pause"
+msgstr "Pokreni / Zaustavi"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:204
+msgid "Playback Action"
+msgstr "Radnja reprodukcije"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
+msgid "Select audio file"
+msgstr "Odaberi datoteku audiozapisa"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Audio Files"
+msgstr "Datoteke audiozapisa"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Datoteka"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
+msgid "Play / Stop"
+msgstr "Pokreni / Prekini"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
+msgid "Play / Overlap"
+msgstr "Pokreni / Preklapaj"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
+msgid "Play / Restart"
+msgstr "Pokreni / Pokreni ponovo"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
+msgid "Loop / Stop"
+msgstr "Ponavljaj / Prekini"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
+msgid "Press & Hold"
+msgstr "Pritisni i drži pritisnuto"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
+msgid "Volume"
+msgstr "Glasnoća"
