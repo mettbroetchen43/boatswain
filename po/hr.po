@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
 "POT-Creation-Date: 2022-08-03 11:07+0000\n"
-"PO-Revision-Date: 2022-08-22 23:41+0200\n"
+"PO-Revision-Date: 2022-08-22 23:46+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -39,7 +39,7 @@ msgstr "Boatswain vam omogućuje upravljanje Elgato Stream Deck uređajima."
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:13
 msgid "With Boatswain you will be able to:"
-msgstr "Pomoću Boatswain možete:"
+msgstr "Pomoću Boatswaina možete:"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "Organize your actions in pages and profiles"
@@ -464,7 +464,7 @@ msgstr "Odaberi zvučnu datoteku"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:103
 msgid "Audio Files"
-msgstr "Glazbene datoteke"
+msgstr "Zvučne datoteke"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
 msgid "File"
