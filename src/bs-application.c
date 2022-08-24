@@ -273,7 +273,7 @@ bs_application_new (void)
 {
   return g_object_new (BS_TYPE_APPLICATION,
                        "application-id", APPLICATION_ID,
-                       "flags", G_APPLICATION_FLAGS_NONE,
+                       "flags", G_APPLICATION_DEFAULT_FLAGS,
                        "resource-base-path", "/com/feaneron/Boatswain",
                        NULL);
 }
