@@ -42,7 +42,7 @@
                               <object class="GtkOverlay">
                                 <property name="halign">center</property>
                                 <property name="valign">center</property>
-                                <property name="margin-bottom">6</property>
+                                <property name="margin-bottom">24</property>
 
                                 <child>
                                   <object class="GtkImage" id="icon_image">
