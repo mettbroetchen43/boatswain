@@ -6,6 +6,10 @@ streamdeckeditor flowbox flowboxchild:selected > picture {
   outline: 2px solid @accent_color;
 }
 
+streamdeckeditor flowbox flowboxchild:selected:focus:focus-visible {
+  outline: none;
+}
+
 streamdeckbuttoneditor .cutout {
   background-color: @window_bg_color;
   border-radius: 9999px;
