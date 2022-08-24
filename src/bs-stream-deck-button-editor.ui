@@ -60,15 +60,25 @@
                                 </child>
 
                                 <child type="overlay">
-                                  <object class="GtkButton" id="remove_custom_icon_button">
+                                  <object class="AdwBin">
                                     <property name="halign">end</property>
                                     <property name="valign">start</property>
-                                    <property name="icon-name">window-close-symbolic</property>
-                                    <signal name="clicked" handler="on_remove_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                    <binding name="visible">
+                                      <lookup name="visible">remove_custom_icon_button</lookup>
+                                    </binding>
                                     <style>
-                                      <class name="circular" />
-                                      <class name="outline" />
+                                      <class name="cutout" />
                                     </style>
+                                    <child>
+                                      <object class="GtkButton" id="remove_custom_icon_button">
+                                        <property name="icon-name">window-close-symbolic</property>
+                                        <signal name="clicked" handler="on_remove_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                        <style>
+                                          <class name="circular" />
+                                          <class name="outline" />
+                                        </style>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
 
@@ -169,6 +179,7 @@
                                     <style>
                                       <class name="circular" />
                                       <class name="outline" />
+                                      <class name="cutout" />
                                     </style>
                                   </object>
                                 </child>

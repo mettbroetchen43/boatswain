@@ -6,6 +6,12 @@ streamdeckeditor flowbox flowboxchild:selected > picture {
   outline: 2px solid @accent_color;
 }
 
+streamdeckbuttoneditor .cutout {
+  background-color: @window_bg_color;
+  border-radius: 9999px;
+  padding: 2px;
+}
+
 splitbutton.omnibar {
   background: alpha(currentColor, 0.075);
 }

@@ -584,6 +584,8 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_remove_action_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_remove_custom_icon_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_select_action_row_activated_cb);
+
+  gtk_widget_class_set_css_name (widget_class, "streamdeckbuttoneditor");
 }
 
 static void
