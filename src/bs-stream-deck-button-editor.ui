@@ -259,6 +259,7 @@
                                 <signal name="clicked" handler="on_remove_action_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
                                 <style>
                                   <class name="destructive-action" />
+                                  <class name="remove-button" />
                                 </style>
                               </object>
                             </child>

@@ -16,6 +16,11 @@ streamdeckbuttoneditor .cutout {
   padding: 2px;
 }
 
+streamdeckbuttoneditor button.remove-button {
+  min-height: 44px;
+  border-radius: 12px;
+}
+
 splitbutton.omnibar {
   background: alpha(currentColor, 0.075);
 }
