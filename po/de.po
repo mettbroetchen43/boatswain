@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-07-11 16:08+0000\n"
-"PO-Revision-Date: 2022-07-11 21:26+0200\n"
+"POT-Creation-Date: 2022-07-22 01:30+0000\n"
+"PO-Revision-Date: 2022-07-22 12:00+0200\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -72,11 +72,11 @@ msgstr ""
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
-#: src/bs-application.c:53
+#: src/bs-application.c:52
 msgid "Enable debug messages"
 msgstr "Fehlermeldungen aktivieren"
 
-#: src/bs-application.c:76
+#: src/bs-application.c:128
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -187,59 +187,55 @@ msgstr "_Neues Profil"
 msgid "Manage profiles…"
 msgstr "Profile verwalten …"
 
-#: src/bs-window.ui:60
+#: src/bs-window.ui:61
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/bs-window.ui:112
+#: src/bs-window.ui:105
 msgid "Power"
 msgstr "Energie"
 
-#: src/bs-window.ui:128 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:121 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Helligkeit"
 
-#: src/bs-window.ui:164
+#: src/bs-window.ui:157
 msgid "Device"
 msgstr "Gerät"
 
-#: src/bs-window.ui:180
+#: src/bs-window.ui:173
 msgid "Serial Number"
 msgstr "Seriennummer"
 
-#: src/bs-window.ui:207
+#: src/bs-window.ui:200
 msgid "Firmware"
 msgstr "Firmware"
 
-#: src/bs-window.ui:255
+#: src/bs-window.ui:248
 msgid "Devices"
 msgstr "Geräte"
 
-#: src/bs-window.ui:299
+#: src/bs-window.ui:292
 msgid "No Stream Deck Found"
 msgstr "Kein Stream Deck gefunden"
 
-#: src/bs-window.ui:300
+#: src/bs-window.ui:293
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Schließen Sie ein Stream-Deck-Gerät an, um es zu verwenden."
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:304
 msgid "_Keyboard Shortcuts"
 msgstr "_Tastenkombinationen"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:308
 msgid "_About Boatswain"
 msgstr "_Info zu Boatswain"
 
-#: src/bs-window.ui:319
+#: src/bs-window.ui:312
 msgid "_Quit"
 msgstr "_Beenden"
 
-#: src/bs-window.c:328
-msgid "Copyright © 2022 Georges Basile Stavracas Neto"
-msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
-
-#: src/bs-window.c:336
+#: src/bs-window.c:329
 msgid "Repository"
 msgstr "Software-Depot"
 
@@ -337,29 +333,33 @@ msgstr "Anwendung auswählen"
 msgid "URL"
 msgstr "Adresse"
 
-#: src/plugins/obs-studio/obs-action-factory.c:47
+#: src/plugins/obs-studio/obs-action-factory.c:48
 msgid "Switch Scene"
 msgstr "Szene wechseln"
 
 # Als Verb gemeint
-#: src/plugins/obs-studio/obs-action-factory.c:53
+#: src/plugins/obs-studio/obs-action-factory.c:54
 msgid "Record"
 msgstr "Aufnehmen"
 
 # Als Verb gemeint - jb
-#: src/plugins/obs-studio/obs-action-factory.c:59
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "Streamen"
 
-#: src/plugins/obs-studio/obs-action-factory.c:65
+#: src/plugins/obs-studio/obs-action-factory.c:66
+msgid "Virtual Camera"
+msgstr "Virtuelle Kamera"
+
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "Stumm schalten / Stummschaltung aufheben"
 
-#: src/plugins/obs-studio/obs-action-factory.c:71
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "Quelle anzeigen / ausblenden"
 
-#: src/plugins/obs-studio/obs-connection.c:770
+#: src/plugins/obs-studio/obs-connection.c:800
 msgid "Invalid password"
 msgstr "Ungültiges Passwort"
 
@@ -496,3 +496,6 @@ msgstr "Drücken & Halten"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Lautstärke"
+
+#~ msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+#~ msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
