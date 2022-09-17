@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-07-22 01:30+0000\n"
-"PO-Revision-Date: 2022-07-22 12:00+0200\n"
+"POT-Creation-Date: 2022-09-16 11:15+0000\n"
+"PO-Revision-Date: 2022-09-17 13:02+0200\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -42,7 +42,7 @@ msgstr "Boatswain erlaubt es Ihnen, Elgato Stream-Deck-Geräte zu steuern."
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:13
 msgid "With Boatswain you will be able to:"
-msgstr "Mit Boatswain können Sie folgendes tun:"
+msgstr "Mit Boatswain können Sie Folgendes tun:"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "Organize your actions in pages and profiles"
@@ -104,7 +104,7 @@ msgstr "Hin_unter schieben"
 msgid "Profiles"
 msgstr "Profile"
 
-#: src/bs-stream-deck.c:272
+#: src/bs-stream-deck.c:277
 msgid "Default"
 msgstr "Vorgabe"
 
@@ -112,14 +112,14 @@ msgstr "Vorgabe"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:815
+#: src/bs-stream-deck.c:820
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:841 src/bs-stream-deck.c:867
+#: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
 #: src/plugins/default/default-switch-profile-action.c:285
 msgid "Stream Deck"
 msgstr "Stream Deck"
@@ -128,7 +128,7 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:893
+#: src/bs-stream-deck.c:898
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
@@ -136,9 +136,17 @@ msgstr "Stream Deck XL"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:919
+#: src/bs-stream-deck.c:924
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
+
+#: src/bs-stream-deck.c:993
+msgid "Feaneron Hangar Original"
+msgstr "Feaneron Hangar Original"
+
+#: src/bs-stream-deck.c:1016
+msgid "Feaneron Hangar XL"
+msgstr "Feaneron Hangar XL"
 
 #: src/bs-stream-deck-button-editor.c:380
 msgid "Select icon"
@@ -162,20 +170,20 @@ msgstr "Alle unterstützten Formate"
 msgid "Select a button"
 msgstr "Wählen Sie einen Knopf"
 
-#: src/bs-stream-deck-button-editor.ui:188
+#: src/bs-stream-deck-button-editor.ui:199
 msgid "Name"
 msgstr "Name"
 
-#: src/bs-stream-deck-button-editor.ui:195
+#: src/bs-stream-deck-button-editor.ui:206
 msgid "Background Color"
 msgstr "Hintergrundfarbe"
 
-#: src/bs-stream-deck-button-editor.ui:226
-#: src/bs-stream-deck-button-editor.ui:288
+#: src/bs-stream-deck-button-editor.ui:237
+#: src/bs-stream-deck-button-editor.ui:300
 msgid "Select action"
 msgstr "Aktion auswählen"
 
-#: src/bs-stream-deck-button-editor.ui:247
+#: src/bs-stream-deck-button-editor.ui:258
 msgid "Remove Action"
 msgstr "Aktion entfernen"
 
@@ -187,51 +195,51 @@ msgstr "_Neues Profil"
 msgid "Manage profiles…"
 msgstr "Profile verwalten …"
 
-#: src/bs-window.ui:61
+#: src/bs-window.ui:64
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/bs-window.ui:105
+#: src/bs-window.ui:108
 msgid "Power"
 msgstr "Energie"
 
-#: src/bs-window.ui:121 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Helligkeit"
 
-#: src/bs-window.ui:157
+#: src/bs-window.ui:160
 msgid "Device"
 msgstr "Gerät"
 
-#: src/bs-window.ui:173
+#: src/bs-window.ui:176
 msgid "Serial Number"
 msgstr "Seriennummer"
 
-#: src/bs-window.ui:200
+#: src/bs-window.ui:203
 msgid "Firmware"
 msgstr "Firmware"
 
-#: src/bs-window.ui:248
+#: src/bs-window.ui:251
 msgid "Devices"
 msgstr "Geräte"
 
-#: src/bs-window.ui:292
+#: src/bs-window.ui:295
 msgid "No Stream Deck Found"
 msgstr "Kein Stream Deck gefunden"
 
-#: src/bs-window.ui:293
+#: src/bs-window.ui:296
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Schließen Sie ein Stream-Deck-Gerät an, um es zu verwenden."
 
-#: src/bs-window.ui:304
+#: src/bs-window.ui:307
 msgid "_Keyboard Shortcuts"
 msgstr "_Tastenkombinationen"
 
-#: src/bs-window.ui:308
+#: src/bs-window.ui:311
 msgid "_About Boatswain"
 msgstr "_Info zu Boatswain"
 
-#: src/bs-window.ui:312
+#: src/bs-window.ui:315
 msgid "_Quit"
 msgstr "_Beenden"
 
