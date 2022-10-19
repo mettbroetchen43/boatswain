@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-07-27 01:02+0000\n"
-"PO-Revision-Date: 2022-07-27 18:24+0300\n"
+"POT-Creation-Date: 2022-10-19 14:21+0000\n"
+"PO-Revision-Date: 2022-10-19 19:57+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -120,6 +120,7 @@ msgstr "Stream Deck Mini"
 #.
 #: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
 #: src/plugins/default/default-switch-profile-action.c:285
+#: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
 
@@ -167,20 +168,20 @@ msgstr "Усі підтримувані формати"
 msgid "Select a button"
 msgstr "Виберіть кнопку"
 
-#: src/bs-stream-deck-button-editor.ui:188
+#: src/bs-stream-deck-button-editor.ui:199
 msgid "Name"
 msgstr "Назва"
 
-#: src/bs-stream-deck-button-editor.ui:195
+#: src/bs-stream-deck-button-editor.ui:206
 msgid "Background Color"
 msgstr "Колір тла"
 
-#: src/bs-stream-deck-button-editor.ui:226
-#: src/bs-stream-deck-button-editor.ui:288
+#: src/bs-stream-deck-button-editor.ui:237
+#: src/bs-stream-deck-button-editor.ui:300
 msgid "Select action"
 msgstr "Вибрати дію"
 
-#: src/bs-stream-deck-button-editor.ui:247
+#: src/bs-stream-deck-button-editor.ui:258
 msgid "Remove Action"
 msgstr "Вилучити дію"
 
@@ -192,51 +193,51 @@ msgstr "С_творити профіль"
 msgid "Manage profiles…"
 msgstr "Керування профілями…"
 
-#: src/bs-window.ui:61
+#: src/bs-window.ui:64
 msgid "Create"
 msgstr "Створити"
 
-#: src/bs-window.ui:105
+#: src/bs-window.ui:108
 msgid "Power"
 msgstr "Живлення"
 
-#: src/bs-window.ui:121 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Яскравість"
 
-#: src/bs-window.ui:157
+#: src/bs-window.ui:160
 msgid "Device"
 msgstr "Пристрій"
 
-#: src/bs-window.ui:173
+#: src/bs-window.ui:176
 msgid "Serial Number"
 msgstr "Серійний номер"
 
-#: src/bs-window.ui:200
+#: src/bs-window.ui:203
 msgid "Firmware"
 msgstr "Мікропрограма"
 
-#: src/bs-window.ui:248
+#: src/bs-window.ui:251
 msgid "Devices"
 msgstr "Пристрої"
 
-#: src/bs-window.ui:292
+#: src/bs-window.ui:295
 msgid "No Stream Deck Found"
 msgstr "Не знайдено потокової деки"
 
-#: src/bs-window.ui:293
+#: src/bs-window.ui:296
 msgid "Plug in a Stream Deck device to use it."
 msgstr "З'єднайте пристрій потокової деки, щоб скористатися ним."
 
-#: src/bs-window.ui:304
+#: src/bs-window.ui:307
 msgid "_Keyboard Shortcuts"
 msgstr "_Клавіатурні скорочення"
 
-#: src/bs-window.ui:308
+#: src/bs-window.ui:311
 msgid "_About Boatswain"
 msgstr "_Про «Боутсвейн»"
 
-#: src/bs-window.ui:312
+#: src/bs-window.ui:315
 msgid "_Quit"
 msgstr "Ви_йти"
 
@@ -336,6 +337,10 @@ msgstr "Виберіть програму"
 msgid "URL"
 msgstr "Адреса"
 
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "Засіб запуску"
+
 #: src/plugins/obs-studio/obs-action-factory.c:48
 msgid "Switch Scene"
 msgstr "Перемкнути сцену"
@@ -421,6 +426,10 @@ msgstr "Джерело звуку"
 msgid "Source"
 msgstr "Джерело"
 
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
 #: src/plugins/soundboard/soundboard-action-factory.c:45
 msgid "Music Player"
 msgstr "Програвач музики"
@@ -496,6 +505,10 @@ msgstr "Натискання і утримування"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Гучність"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr "Музична дека"
 
 #~ msgid "Copyright © 2022 Georges Basile Stavracas Neto"
 #~ msgstr "© Georges Basile Stavracas Neto, 2022"
