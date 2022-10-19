@@ -1,7 +1,7 @@
 plugins_ldflags += ['-Wl,--undefined=launcher_plugin_register_types']
 
 plugin_file = i18n.merge_file(
-  input: 'launcher.plugin.in',
+  input: 'launcher.plugin.desktop.in',
   output: 'launcher.plugin',
   type: 'desktop',
   po_dir: meson.project_source_root() / 'po',
