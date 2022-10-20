@@ -917,6 +917,32 @@ static const StreamDeckModelInfo models_vtable[] = {
     .read_button_states = read_button_states_gen2,
   },
   {
+    .product_id = STREAMDECK_XL_V2_PRODUCT_ID,
+    /* Translators: this is a product name. In most cases, it is not translated.
+     * Please verify if Elgato translates their product names on your locale.
+     */
+    .name = N_("Stream Deck XL"),
+    .icon_name = "input-dialpad-symbolic",
+    .button_layout = {
+      .n_buttons = 32,
+      .rows = 4,
+      .columns = 8,
+      .icon_size = 96,
+    },
+    .icon_layout = {
+      .width = 96,
+      .height = 96,
+      .format = BS_ICON_FORMAT_JPEG,
+      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+    },
+    .reset = reset_gen2,
+    .get_serial_number = get_serial_number_gen2,
+    .get_firmware_version = get_firmware_version_gen2,
+    .set_brightness = set_brightness_gen2,
+    .set_button_texture = set_button_texture_gen2,
+    .read_button_states = read_button_states_gen2,
+  },
+  {
     .product_id = STREAMDECK_MK2_PRODUCT_ID,
     /* Translators: this is a product name. In most cases, it is not translated.
      * Please verify if Elgato translates their product names on your locale.
