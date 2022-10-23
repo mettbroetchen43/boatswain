@@ -1,15 +1,15 @@
 # Serbian translation for boatswain.
 # Copyright © 2022 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
-# Мирослав Николић <miroslavnikolić@rocketmail.com>, 2022.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-06-15 12:44+0000\n"
-"PO-Revision-Date: 2022-06-19 08:24+0200\n"
-"Last-Translator: Мирослав Николић <miroslavnikolić@rocketmail.com>\n"
+"POT-Creation-Date: 2022-07-27 01:02+0000\n"
+"PO-Revision-Date: 2022-10-12 10:46+0200\n"
+"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <српски <gnome-sr@googlegroups.org>>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -29,8 +29,9 @@ msgid "stream deck;streaming;deck;elgato;"
 msgstr "ток;дек тока;дек;stream deck;streaming;deck;elgato;"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:10
-msgid "Control your Elgato Stream Deck devices"
-msgstr "Управљајте вашим „Elgato Stream Deck“ уређајем"
+#| msgid "Control your Elgato Stream Deck devices"
+msgid "Control your Elgato Stream Decks"
+msgstr "Управљајте вашим „Elgato Stream Deck“-овима"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
@@ -69,11 +70,11 @@ msgstr ""
 msgid "Georges Basile Stavracas Neto"
 msgstr "Џорџ Базиле Ставракас Нето"
 
-#: src/bs-application.c:53
+#: src/bs-application.c:52
 msgid "Enable debug messages"
 msgstr "Укључи поруке прочишћавања"
 
-#: src/bs-application.c:76
+#: src/bs-application.c:128
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -101,21 +102,21 @@ msgstr "Помери _доле"
 msgid "Profiles"
 msgstr "Профили"
 
-#: src/bs-stream-deck.c:272
+#: src/bs-stream-deck.c:277
 msgid "Default"
 msgstr "Основно"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:815
+#: src/bs-stream-deck.c:820
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:841 src/bs-stream-deck.c:867
+#: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
 #: src/plugins/default/default-switch-profile-action.c:285
 msgid "Stream Deck"
 msgstr "Stream Deck"
@@ -123,16 +124,24 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:893
+#: src/bs-stream-deck.c:898
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:919
+#: src/bs-stream-deck.c:924
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
+
+#: src/bs-stream-deck.c:993
+msgid "Feaneron Hangar Original"
+msgstr "Feaneron Hangar Original"
+
+#: src/bs-stream-deck.c:1016
+msgid "Feaneron Hangar XL"
+msgstr "Feaneron Hangar XL"
 
 #: src/bs-stream-deck-button-editor.c:380
 msgid "Select icon"
@@ -181,59 +190,55 @@ msgstr "_Нови профил"
 msgid "Manage profiles…"
 msgstr "Управљајте профилима…"
 
-#: src/bs-window.ui:60
+#: src/bs-window.ui:61
 msgid "Create"
 msgstr "Направи"
 
-#: src/bs-window.ui:112
+#: src/bs-window.ui:105
 msgid "Power"
 msgstr "Снага"
 
-#: src/bs-window.ui:128 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:121 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Осветљеност"
 
-#: src/bs-window.ui:164
+#: src/bs-window.ui:157
 msgid "Device"
 msgstr "Уређај"
 
-#: src/bs-window.ui:180
+#: src/bs-window.ui:173
 msgid "Serial Number"
 msgstr "Серијски број"
 
-#: src/bs-window.ui:207
+#: src/bs-window.ui:200
 msgid "Firmware"
 msgstr "Уграђени програм"
 
-#: src/bs-window.ui:255
+#: src/bs-window.ui:248
 msgid "Devices"
 msgstr "Уређаји"
 
-#: src/bs-window.ui:299
+#: src/bs-window.ui:292
 msgid "No Stream Deck Found"
 msgstr "Нисам нашао „Stream Deck“"
 
-#: src/bs-window.ui:300
+#: src/bs-window.ui:293
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Прикључите „Stream Deck“ уређај да бисте га користили."
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:304
 msgid "_Keyboard Shortcuts"
 msgstr "_Пречице тастатуре"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:308
 msgid "_About Boatswain"
 msgstr "_О Боатсвајну"
 
-#: src/bs-window.ui:319
+#: src/bs-window.ui:312
 msgid "_Quit"
 msgstr "_Изађи"
 
-#: src/bs-window.c:328
-msgid "Copyright © 2022 Georges Basile Stavracas Neto"
-msgstr "Ауторска права © 2022 Џорџ Базиле Ставракас Нето"
-
-#: src/bs-window.c:336
+#: src/bs-window.c:329
 msgid "Repository"
 msgstr "Ризница"
 
@@ -329,27 +334,31 @@ msgstr "Изабери програм"
 msgid "URL"
 msgstr "Адреса"
 
-#: src/plugins/obs-studio/obs-action-factory.c:47
+#: src/plugins/obs-studio/obs-action-factory.c:48
 msgid "Switch Scene"
 msgstr "Промени сцену"
 
-#: src/plugins/obs-studio/obs-action-factory.c:53
+#: src/plugins/obs-studio/obs-action-factory.c:54
 msgid "Record"
 msgstr "Сними"
 
-#: src/plugins/obs-studio/obs-action-factory.c:59
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "Стримуј"
 
-#: src/plugins/obs-studio/obs-action-factory.c:65
+#: src/plugins/obs-studio/obs-action-factory.c:66
+msgid "Virtual Camera"
+msgstr "Виртуелна камера"
+
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "Окини утишање"
 
-#: src/plugins/obs-studio/obs-action-factory.c:71
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "Прикажи / сакриј извор"
 
-#: src/plugins/obs-studio/obs-connection.c:770
+#: src/plugins/obs-studio/obs-connection.c:800
 msgid "Invalid password"
 msgstr "Неисправна лозинка"
 
@@ -485,3 +494,6 @@ msgstr "Притисни и држи"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Гласност"
+
+#~ msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+#~ msgstr "Ауторска права © 2022 Џорџ Базиле Ставракас Нето"
