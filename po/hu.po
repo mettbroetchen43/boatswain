@@ -1,0 +1,508 @@
+# Hungarian translation for boatswain.
+# Copyright (C) 2022 Free Software Foundation, Inc.
+# This file is distributed under the same license as the boatswain package.
+#
+# Balázs Úr <ur.balazs at fsf dot hu>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: boatswain main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2022-10-23 08:58+0000\n"
+"PO-Revision-Date: 2022-10-27 16:31+0200\n"
+"Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
+"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 19.12.3\n"
+
+#: data/com.feaneron.Boatswain.desktop.in.in:3
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+msgid "Boatswain"
+msgstr "Fedélzetmester"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
+msgid "stream deck;streaming;deck;elgato;"
+msgstr "stream deck;adatfolyam;műsorszórás;közvetítés;deck;elgato;"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+msgid "Control your Elgato Stream Decks"
+msgstr "Az Elgato Stream Deckek vezérlése"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Boatswain allows you to control Elgato Stream Deck devices."
+msgstr ""
+"A Fedélzetmester lehetővé teszi az Elgato Stream Deck eszközök vezérlését."
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+msgid "With Boatswain you will be able to:"
+msgstr "A Fedélzetmesterrel a következőkre lesz képes:"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+msgid "Organize your actions in pages and profiles"
+msgstr "Az oldalakon és profilokban lévő műveletek szervezése"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+msgid "Set custom icons to actions"
+msgstr "Egyéni ikonok beállítása a műveletekhez"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Control your music player"
+msgstr "Zenelejátszó vezérlése"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+msgid "Play sound effects during your streams"
+msgstr "Hanghatások lejátszása az adatfolyamok során"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgstr ""
+"OBS Studio vezérlése Stream Deck használatával (az obs-websocket "
+"kiterjesztést igényli)"
+
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Georges Basile Stavracas Neto"
+msgstr "Georges Basile Stavracas Neto"
+
+#: src/bs-application.c:52
+msgid "Enable debug messages"
+msgstr "Hibakeresési üzenetek engedélyezése"
+
+#: src/bs-application.c:128
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr ""
+"A Fedélzetmesternek futnia kell a háttérben a Stream Deck műveletek "
+"felismeréséhez és végrehajtásához."
+
+#: src/bs-profile.c:184
+msgid "Unnamed profile"
+msgstr "Névtelen profil"
+
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+msgid "Rename"
+msgstr "Átnevezés"
+
+#: src/bs-profile-row.ui:14
+msgid "Move _up"
+msgstr "Mozgatás _fel"
+
+#: src/bs-profile-row.ui:18
+msgid "Move _down"
+msgstr "Mozgatás _le"
+
+#: src/bs-profiles-dialog.ui:26
+msgid "Profiles"
+msgstr "Profilok"
+
+#: src/bs-stream-deck.c:277
+msgid "Default"
+msgstr "Alapértelmezett"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:820
+msgid "Stream Deck Mini"
+msgstr "Stream Deck Mini"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
+#: src/plugins/default/default-switch-profile-action.c:285
+#: src/plugins/default/default.plugin.desktop.in:3
+msgid "Stream Deck"
+msgstr "Stream Deck"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:898 src/bs-stream-deck.c:924
+msgid "Stream Deck XL"
+msgstr "Stream Deck XL"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:950
+msgid "Stream Deck MK.2"
+msgstr "Stream Deck MK.2"
+
+#: src/bs-stream-deck.c:1019
+msgid "Feaneron Hangar Original"
+msgstr "Feaneron Hangar Original"
+
+#: src/bs-stream-deck.c:1042
+msgid "Feaneron Hangar XL"
+msgstr "Feaneron Hangar XL"
+
+#: src/bs-stream-deck-button-editor.c:380
+msgid "Select icon"
+msgstr "Ikon kiválasztása"
+
+#: src/bs-stream-deck-button-editor.c:383
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
+msgid "_Open"
+msgstr "Me_gnyitás"
+
+#: src/bs-stream-deck-button-editor.c:384
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
+msgid "_Cancel"
+msgstr "_Mégse"
+
+#: src/bs-stream-deck-button-editor.c:388
+msgid "All supported formats"
+msgstr "Minden támogatott formátum"
+
+#: src/bs-stream-deck-button-editor.ui:17
+msgid "Select a button"
+msgstr "Válasszon egy gombot"
+
+#: src/bs-stream-deck-button-editor.ui:199
+msgid "Name"
+msgstr "Név"
+
+#: src/bs-stream-deck-button-editor.ui:206
+msgid "Background Color"
+msgstr "Háttérszín"
+
+#: src/bs-stream-deck-button-editor.ui:237
+#: src/bs-stream-deck-button-editor.ui:300
+msgid "Select action"
+msgstr "Művelet kiválasztása"
+
+#: src/bs-stream-deck-button-editor.ui:258
+msgid "Remove Action"
+msgstr "Művelet eltávolítása"
+
+#: src/bs-window.ui:13
+msgid "_New profile"
+msgstr "Ú_j profil"
+
+#: src/bs-window.ui:19
+msgid "Manage profiles…"
+msgstr "Profilok kezelése…"
+
+#: src/bs-window.ui:64
+msgid "Create"
+msgstr "Létrehozás"
+
+#: src/bs-window.ui:108
+msgid "Power"
+msgstr "Energiabeállítások"
+
+#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
+msgid "Brightness"
+msgstr "Fényerő"
+
+#: src/bs-window.ui:160
+msgid "Device"
+msgstr "Eszköz"
+
+#: src/bs-window.ui:176
+msgid "Serial Number"
+msgstr "Sorozatszám"
+
+#: src/bs-window.ui:203
+msgid "Firmware"
+msgstr "Belső vezérlőprogram"
+
+#: src/bs-window.ui:251
+msgid "Devices"
+msgstr "Eszközök"
+
+#: src/bs-window.ui:295
+msgid "No Stream Deck Found"
+msgstr "Nem található Stream Deck"
+
+#: src/bs-window.ui:296
+msgid "Plug in a Stream Deck device to use it."
+msgstr "Csatlakoztasson egy Stream Deck eszközt a használatához."
+
+#: src/bs-window.ui:307
+msgid "_Keyboard Shortcuts"
+msgstr "_Gyorsbillentyűk"
+
+#: src/bs-window.ui:311
+msgid "_About Boatswain"
+msgstr "A Fedélzetmester _névjegye"
+
+#: src/bs-window.ui:315
+msgid "_Quit"
+msgstr "_Kilépés"
+
+#: src/bs-window.c:329
+msgid "Repository"
+msgstr "Tároló"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Általános"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Gyorsbillentyűk megjelenítése"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Kilépés"
+
+#: src/plugins/default/default-action-factory.c:44
+msgid "Folder"
+msgstr "Mappa"
+
+#: src/plugins/default/default-action-factory.c:50
+msgid "Switch Profile"
+msgstr "Profil váltása"
+
+#: src/plugins/default/default-action-factory.c:62
+msgid "Multiple Actions"
+msgstr "Több művelet"
+
+#: src/plugins/default/default-brightness-action.c:140
+msgid "Constant"
+msgstr "Állandó"
+
+#: src/plugins/default/default-brightness-action.c:141
+msgid "Increase"
+msgstr "Növelés"
+
+#: src/plugins/default/default-brightness-action.c:142
+msgid "Decrease"
+msgstr "Csökkentés"
+
+#: src/plugins/default/default-brightness-action.c:145
+msgid "Mode"
+msgstr "Mód"
+
+#: src/plugins/default/default-brightness-action.c:152
+msgid "Value"
+msgstr "Érték"
+
+#: src/plugins/default/default-multi-action-editor.c:310
+#: src/plugins/default/default-multi-action-row.c:142
+msgid "Delay"
+msgstr "Késleltetés"
+
+#: src/plugins/default/default-multi-action-editor.ui:31
+msgid "Add action"
+msgstr "Művelet hozzáadása"
+
+#: src/plugins/default/default-multi-action-editor.ui:49
+msgid "Add Action"
+msgstr "Művelet hozzáadása"
+
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Műveletek"
+
+#: src/plugins/default/default-multi-action-editor.ui:73
+msgid "Others"
+msgstr "Egyebek"
+
+#: src/plugins/default/default-multi-action-editor.ui:83
+msgid "Settings"
+msgstr "Beállítások"
+
+#: src/plugins/default/default-switch-profile-action.c:308
+msgid "Profile"
+msgstr "Profil"
+
+#: src/plugins/launcher/launcher-action-factory.c:42
+msgid "Launch Application"
+msgstr "Alkalmazás indítása"
+
+#: src/plugins/launcher/launcher-action-factory.c:48
+msgid "Open URL"
+msgstr "URL megnyitása"
+
+#: src/plugins/launcher/launcher-launch-preferences.ui:8
+msgid "Choose Application"
+msgstr "Alkalmazás kiválasztása"
+
+#: src/plugins/launcher/launcher-open-url-action.c:101
+msgid "URL"
+msgstr "URL"
+
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "Indító"
+
+#: src/plugins/obs-studio/obs-action-factory.c:48
+msgid "Switch Scene"
+msgstr "Jelenet váltása"
+
+#: src/plugins/obs-studio/obs-action-factory.c:54
+msgid "Record"
+msgstr "Rögzítés"
+
+#: src/plugins/obs-studio/obs-action-factory.c:60
+msgid "Stream"
+msgstr "Adatfolyam"
+
+#: src/plugins/obs-studio/obs-action-factory.c:66
+msgid "Virtual Camera"
+msgstr "Virtuális kamera"
+
+#: src/plugins/obs-studio/obs-action-factory.c:72
+msgid "Toggle Mute"
+msgstr "Némítás ki- és bekapcsolása"
+
+#: src/plugins/obs-studio/obs-action-factory.c:78
+msgid "Show / Hide Source"
+msgstr "Forrás megjelenítése vagy elrejtése"
+
+#: src/plugins/obs-studio/obs-connection.c:800
+msgid "Invalid password"
+msgstr "Érvénytelen jelszó"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:8
+msgid "Connection Settings"
+msgstr "Kapcsolódási beállítások"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:12
+msgid "Host"
+msgstr "Kiszolgáló"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
+msgid "Port"
+msgstr "Port"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
+msgid "Password"
+msgstr "Jelszó"
+
+#: src/plugins/obs-studio/obs-switch-scene-action.c:283
+msgid "Scene"
+msgstr "Jelenet"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:124
+msgid "Toggle mute"
+msgstr "Némítás ki- és bekapcsolása"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:125
+msgid "Mute"
+msgstr "Némítás"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:126
+msgid "Unmute"
+msgstr "Visszahangosítás"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:130
+msgid "Toggle visibility"
+msgstr "Láthatóság ki- és bekapcsolása"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:131
+msgid "Hide"
+msgstr "Elrejtés"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:132
+msgid "Show"
+msgstr "Megjelenítés"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:479
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
+msgid "Behavior"
+msgstr "Viselkedés"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:490
+msgid "Audio Source"
+msgstr "Hangforrás"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:492
+msgid "Source"
+msgstr "Forrás"
+
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:45
+msgid "Music Player"
+msgstr "Zenelejátszó"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:46
+msgid "Control the active music player"
+msgstr "Az aktív zenelejátszó vezérlése"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:51
+msgid "Play Audio"
+msgstr "Hang lejátszása"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:196
+msgid "Next"
+msgstr "Következő"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
+msgid "Pause"
+msgstr "Szüneteltetés"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
+msgid "Play"
+msgstr "Lejátszás"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
+msgid "Previous"
+msgstr "Előző"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
+msgid "Stop"
+msgstr "Leállítás"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
+msgid "Play / Pause"
+msgstr "Lejátszás vagy szüneteltetés"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:204
+msgid "Playback Action"
+msgstr "Visszajátszási művelet"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
+msgid "Select audio file"
+msgstr "Hangfájl kiválasztása"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Audio Files"
+msgstr "Hangfájlok"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Fájl"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
+msgid "Play / Stop"
+msgstr "Lejátszás vagy leállítás"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
+msgid "Play / Overlap"
+msgstr "Lejátszás vagy átfedés"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
+msgid "Play / Restart"
+msgstr "Lejátszás vagy újraindítás"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
+msgid "Loop / Stop"
+msgstr "Folyamatos ismétlés vagy leállítás"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
+msgid "Press & Hold"
+msgstr "Nyomja le és tartsa lenyomva"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
+msgid "Volume"
+msgstr "Hangerő"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr "Hangfal"
