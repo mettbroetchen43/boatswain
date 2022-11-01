@@ -10,6 +10,16 @@ streamdeckeditor flowbox flowboxchild:selected:focus:focus-visible {
   outline: none;
 }
 
+streamdeckeditor flowbox flowboxchild:drop(active) {
+  box-shadow: none;
+}
+
+streamdeckeditor flowbox flowboxchild:drop(active) picture {
+  background-color: alpha(@card_bg_color, 2.0);
+  filter: brightness(125%);
+  transition: 250ms;
+}
+
 streamdeckbuttoneditor .cutout {
   background-color: @window_bg_color;
   border-radius: 9999px;
