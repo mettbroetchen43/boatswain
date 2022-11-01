@@ -42,6 +42,23 @@
   </custom>
 
   <releases>
+    <release date="2022-11-01" version="0.2.0">
+      <description>
+        <p>
+          Boatswain 0.2.0 comes packed with polish, quality of life improvements,
+          and bugfixes:
+        </p>
+        <p>
+          <ul>
+            <li>The user interface style was polished, various details were corrected</li>
+            <li>Mark some untranslatable user-visible strings as translatable</li>
+            <li>Properly detect Stream Deck XL v2</li>
+            <li>Fix various crashes with custom icons</li>
+            <li>Add drag n' drop to move button actions and icons</li>
+          </ul>
+        </p>
+      </description>
+    </release>
     <release date="2022-06-15" version="0.1.3" />
     <release date="2022-06-14" version="0.1.2">
       <description>
