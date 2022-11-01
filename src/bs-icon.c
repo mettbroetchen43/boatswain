@@ -276,9 +276,15 @@ bs_icon_finalize (GObject *object)
 {
   BsIcon *self = (BsIcon *)object;
 
+  if (self->relative)
+    {
+      g_clear_signal_handler (&self->relative_content_changed_id, self->relative);
+      g_clear_signal_handler (&self->relative_size_changed_id, self->relative);
+      g_object_remove_weak_pointer (G_OBJECT (self->relative), (gpointer) &self->relative);
+      self->relative = NULL;
+    }
+
   g_clear_signal_handler (&self->file_media_stream_content_changed_id, self->file_media_stream);
-  g_clear_signal_handler (&self->relative_content_changed_id, self->relative);
-  g_clear_signal_handler (&self->relative_size_changed_id, self->relative);
   g_clear_signal_handler (&self->content_changed_id, self->paintable);
   g_clear_signal_handler (&self->size_changed_id, self->paintable);
   g_clear_pointer (&self->icon_name, g_free);
@@ -840,8 +846,12 @@ bs_icon_set_relative (BsIcon *self,
   if (self->relative == relative)
     return;
 
-  g_clear_signal_handler (&self->relative_content_changed_id, self->relative);
-  g_clear_signal_handler (&self->relative_size_changed_id, self->relative);
+  if (self->relative)
+    {
+      g_clear_signal_handler (&self->relative_content_changed_id, self->relative);
+      g_clear_signal_handler (&self->relative_size_changed_id, self->relative);
+      g_object_remove_weak_pointer (G_OBJECT (self->relative), (gpointer) &self->relative);
+    }
 
   self->relative = relative;
 
@@ -857,6 +867,7 @@ bs_icon_set_relative (BsIcon *self,
                                                          G_CALLBACK (on_paintable_size_changed_cb),
                                                          self);
 
+      g_object_add_weak_pointer (G_OBJECT (self->relative), (gpointer) &self->relative);
     }
 
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
