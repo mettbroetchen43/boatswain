@@ -168,23 +168,20 @@ on_drop_target_drop_cb (GtkDropTarget      *drop_target,
   /* Swap actions */
   dragged_button_action = bs_stream_deck_button_get_action (dragged_stream_deck_button);
   dropped_button_action = bs_stream_deck_button_get_action (dropped_stream_deck_button);
+  dragged_button_icon = bs_stream_deck_button_get_custom_icon (dragged_stream_deck_button);
+  dropped_button_icon = bs_stream_deck_button_get_custom_icon (dropped_stream_deck_button);
 
   if (dragged_button_action)
     g_object_ref (dragged_button_action);
   if (dropped_button_action)
     g_object_ref (dropped_button_action);
-
-  bs_stream_deck_button_set_action (dragged_stream_deck_button, dropped_button_action);
-  bs_stream_deck_button_set_action (dropped_stream_deck_button, dragged_button_action);
-
-  /* Swap custom icons */
-  dragged_button_icon = bs_stream_deck_button_get_custom_icon (dragged_stream_deck_button);
-  dropped_button_icon = bs_stream_deck_button_get_custom_icon (dropped_stream_deck_button);
-
   if (dragged_button_icon)
     g_object_ref (dragged_button_icon);
   if (dropped_button_icon)
     g_object_ref (dropped_button_icon);
+
+  bs_stream_deck_button_set_action (dragged_stream_deck_button, dropped_button_action);
+  bs_stream_deck_button_set_action (dropped_stream_deck_button, dragged_button_action);
 
   bs_stream_deck_button_set_custom_icon (dragged_stream_deck_button, dropped_button_icon);
   bs_stream_deck_button_set_custom_icon (dropped_stream_deck_button, dragged_button_icon);
