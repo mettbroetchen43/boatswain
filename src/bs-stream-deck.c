@@ -811,6 +811,30 @@ read_button_states_gen2 (BsStreamDeck *self)
   return TRUE;
 }
 
+/* noops for devices without visual feedback */
+
+static void
+set_brightness_noop (BsStreamDeck *self,
+                     gdouble       brightness)
+{
+  BS_EXIT;
+}
+
+static gboolean
+set_button_texture_noop (BsStreamDeck  *self,
+                         uint8_t        button,
+                         GdkTexture    *texture,
+                         GError       **error)
+{
+  BS_RETURN (TRUE);
+}
+
+static void
+reset_noop (BsStreamDeck *self)
+{
+  BS_EXIT;
+}
+
 static const StreamDeckModelInfo models_vtable[] = {
   {
     .product_id = STREAMDECK_MINI_PRODUCT_ID,
@@ -966,6 +990,32 @@ static const StreamDeckModelInfo models_vtable[] = {
     .get_firmware_version = get_firmware_version_gen2,
     .set_brightness = set_brightness_gen2,
     .set_button_texture = set_button_texture_gen2,
+    .read_button_states = read_button_states_gen2,
+  },
+  {
+    .product_id = STREAMDECK_PEDAL_PRODUCT_ID,
+    /* Translators: this is a product name. In most cases, it is not translated.
+     * Please verify if Elgato translates their product names on your locale.
+     */
+    .name = N_("Stream Pedal"),
+    .icon_name = "input-dialpad-symbolic",
+    .button_layout = {
+      .n_buttons = 3,
+      .rows = 1,
+      .columns = 3,
+      .icon_size = 72,
+    },
+    .icon_layout = {
+      .width = 72,
+      .height = 72,
+      .format = BS_ICON_FORMAT_JPEG,
+      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+    },
+    .reset = reset_noop,
+    .get_serial_number = get_serial_number_gen2,
+    .get_firmware_version = get_firmware_version_gen2,
+    .set_brightness = set_brightness_noop,
+    .set_button_texture = set_button_texture_noop,
     .read_button_states = read_button_states_gen2,
   },
 };

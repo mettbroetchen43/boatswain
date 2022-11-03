@@ -1,24 +1,25 @@
-Boatswain uses HID to control Stream Decks. The varius commands are documented
+Boatswain uses HID to control Stream Decks. The various commands are documented
 around the internet, but centralizing that here too is helpful.
 
 # Models
 
-As of today (08-03-2022) there are 5 known Stream Deck models: Original (v1 and
-v2), Mini, XL, and MK.2.
+As of today (03-10-2022) there are 6 known Stream Deck models: Original (v1 and
+v2), Mini, XL, MK.2 and Pedal
 
 These are the specs of each device and its buttons:
 
 | Model         | Product ID | Layout     | Format | Size  | Transform             |
 |---------------|------------|------------|--------|-------|-----------------------|
-| Mini          | 0x0063     | 6 (2 x 3)  | BMP    | 80x80 | Y-flipped, rotated 90 |
+| Mini          | 0x0063     | 6  (2 x 3) | BMP    | 80x80 | Y-flipped, rotated 90 |
 | Original (v1) | 0x0060     | 15 (3 x 5) | BMP    | 72x72 | X-flipped, Y-flipped  |
 | Original (v2) | 0x006d     | 15 (3 x 5) | JPEG   | 72x72 | X-flipped, Y-flipped  |
 | XL            | 0x006c     | 32 (4 x 8) | JPEG   | 96x96 | X-flipped, Y-flipped  |
 | MK.2          | 0x0080     | 15 (3 x 5) | JPEG   | 72x72 | X-flipped, Y-flipped  |
+| Pedal         | 0x0086     | 3  (1 x 3) | none   | none  | none                  |
 
 # Commands
 
-All Stream Deck models implement the following commands:
+All Stream Deck models (except Pedal) implement the following commands:
 
  * **Get Serial Number**: retrieves the serial number of the device
  * **Get Firmware Version**: retrieves the firmware version of the device
@@ -300,4 +301,8 @@ Stream Deck Original (v2), XL, and MK.2 all seem to share the same USB protocol.
          
          device.write(packet)
      ```
+## Stream Deck Pedal
 
+Stream Deck Pedal seem to share the USB protocol with recent versions:
+Original (v2), XL and MK.2. Difference is it only has 3 buttons which cannot
+be changed visually (as it don't have a display)
