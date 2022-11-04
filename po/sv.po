@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-07-27 01:02+0000\n"
-"PO-Revision-Date: 2022-07-27 11:56+0200\n"
+"POT-Creation-Date: 2022-10-19 14:21+0000\n"
+"PO-Revision-Date: 2022-10-19 17:52+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -115,6 +115,7 @@ msgstr "Stream Deck Mini"
 #.
 #: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
 #: src/plugins/default/default-switch-profile-action.c:285
+#: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
 
@@ -162,20 +163,20 @@ msgstr "Alla format som stöds"
 msgid "Select a button"
 msgstr "Välj en knapp"
 
-#: src/bs-stream-deck-button-editor.ui:188
+#: src/bs-stream-deck-button-editor.ui:199
 msgid "Name"
 msgstr "Namn"
 
-#: src/bs-stream-deck-button-editor.ui:195
+#: src/bs-stream-deck-button-editor.ui:206
 msgid "Background Color"
 msgstr "Bakgrundsfärg"
 
-#: src/bs-stream-deck-button-editor.ui:226
-#: src/bs-stream-deck-button-editor.ui:288
+#: src/bs-stream-deck-button-editor.ui:237
+#: src/bs-stream-deck-button-editor.ui:300
 msgid "Select action"
 msgstr "Välj åtgärd"
 
-#: src/bs-stream-deck-button-editor.ui:247
+#: src/bs-stream-deck-button-editor.ui:258
 msgid "Remove Action"
 msgstr "Ta bort åtgärd"
 
@@ -187,51 +188,51 @@ msgstr "_Ny profil"
 msgid "Manage profiles…"
 msgstr "Hantera profiler…"
 
-#: src/bs-window.ui:61
+#: src/bs-window.ui:64
 msgid "Create"
 msgstr "Skapa"
 
-#: src/bs-window.ui:105
+#: src/bs-window.ui:108
 msgid "Power"
 msgstr "Ström"
 
-#: src/bs-window.ui:121 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Ljusstyrka"
 
-#: src/bs-window.ui:157
+#: src/bs-window.ui:160
 msgid "Device"
 msgstr "Enhet"
 
-#: src/bs-window.ui:173
+#: src/bs-window.ui:176
 msgid "Serial Number"
 msgstr "Serienummer"
 
-#: src/bs-window.ui:200
+#: src/bs-window.ui:203
 msgid "Firmware"
 msgstr "Fast programvara"
 
-#: src/bs-window.ui:248
+#: src/bs-window.ui:251
 msgid "Devices"
 msgstr "Enheter"
 
-#: src/bs-window.ui:292
+#: src/bs-window.ui:295
 msgid "No Stream Deck Found"
 msgstr "Ingen Stream Deck-enhet hittades"
 
-#: src/bs-window.ui:293
+#: src/bs-window.ui:296
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Anslut en Stream Deck-enhet för att använda den."
 
-#: src/bs-window.ui:304
+#: src/bs-window.ui:307
 msgid "_Keyboard Shortcuts"
 msgstr "_Tangentbordsgenvägar"
 
-#: src/bs-window.ui:308
+#: src/bs-window.ui:311
 msgid "_About Boatswain"
 msgstr "_Om Boatswain"
 
-#: src/bs-window.ui:312
+#: src/bs-window.ui:315
 msgid "_Quit"
 msgstr "_Avsluta"
 
@@ -331,6 +332,10 @@ msgstr "Välj program"
 msgid "URL"
 msgstr "URL"
 
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "Programstartare"
+
 #: src/plugins/obs-studio/obs-action-factory.c:48
 msgid "Switch Scene"
 msgstr "Växla scen"
@@ -416,6 +421,10 @@ msgstr "Ljudkälla"
 msgid "Source"
 msgstr "Källa"
 
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
 #: src/plugins/soundboard/soundboard-action-factory.c:45
 msgid "Music Player"
 msgstr "Musikspelare"
@@ -491,6 +500,10 @@ msgstr "Tryck och håll"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Volym"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr "Mixerbord"
 
 #~ msgid "Copyright © 2022 Georges Basile Stavracas Neto"
 #~ msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
