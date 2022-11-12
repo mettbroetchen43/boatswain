@@ -23,15 +23,22 @@
 
 #include "bs-stream-deck-button-widget.h"
 
-#include "bs-action.h"
+#include "bs-action-private.h"
 #include "bs-debug.h"
+#include "bs-empty-action.h"
 #include "bs-icon.h"
+#include "bs-page.h"
+#include "bs-stream-deck.h"
 #include "bs-stream-deck-button.h"
+
+#include <libpeas/peas.h>
 
 struct _BsStreamDeckButtonWidget
 {
   GtkFlowBoxChild parent_instance;
 
+  GtkDragSource *drag_source;
+  GtkDropTarget *drop_target;
   GtkPicture *picture;
 
   BsStreamDeckButton *button;
@@ -54,6 +61,30 @@ static GParamSpec *properties [N_PROPS];
 /*
  * Auxiliary methods
  */
+
+static inline gboolean
+is_move_page_up_action (BsStreamDeckButtonWidget *self)
+{
+  const PeasPluginInfo *plugin_info;
+  BsActionFactory *factory;
+  BsStreamDeck *stream_deck;
+  BsAction *action;
+  BsPage *active_page;
+
+  action = bs_stream_deck_button_get_action (self->button);
+  if (!action || BS_IS_EMPTY_ACTION (action))
+    return FALSE;
+
+  factory = bs_action_get_factory (action);
+  plugin_info = peas_extension_base_get_plugin_info (PEAS_EXTENSION_BASE (factory));
+  stream_deck = bs_stream_deck_button_get_stream_deck (self->button);
+  active_page = bs_stream_deck_get_active_page (stream_deck);
+
+  return bs_stream_deck_button_get_position (self->button) == 0 &&
+         bs_page_get_parent (active_page) != NULL &&
+         g_strcmp0 (peas_plugin_info_get_module_name (plugin_info), "default") == 0 &&
+         g_strcmp0 (bs_action_get_id (action), "default-switch-page-action") == 0;
+}
 
 static void
 update_button_texture (BsStreamDeckButtonWidget *self)
@@ -143,6 +174,25 @@ on_drop_target_drop_cb (GtkDropTarget            *drop_target,
 }
 
 static void
+on_stream_deck_button_action_changed_cb (BsStreamDeckButton       *stream_deck_button,
+                                         GParamSpec               *pspec,
+                                         BsStreamDeckButtonWidget *self)
+{
+  if (is_move_page_up_action (self))
+    {
+      gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (self->drag_source),
+                                                  GTK_PHASE_NONE);
+      gtk_drop_target_set_actions (self->drop_target, 0);
+    }
+  else
+    {
+      gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (self->drag_source),
+                                                  GTK_PHASE_BUBBLE);
+      gtk_drop_target_set_actions (self->drop_target, GDK_ACTION_MOVE);
+    }
+}
+
+static void
 on_stream_deck_button_icon_changed_cb (BsStreamDeckButton       *stream_deck_button,
                                        BsIcon                   *icon,
                                        BsStreamDeckButtonWidget *self)
@@ -192,6 +242,11 @@ bs_stream_deck_button_widget_set_property (GObject      *object,
       g_assert (self->button == NULL);
       self->button = g_value_get_object (value);
       g_signal_connect_object (self->button,
+                               "notify::action",
+                               G_CALLBACK (on_stream_deck_button_action_changed_cb),
+                               self,
+                               0);
+      g_signal_connect_object (self->button,
                                "icon-changed",
                                G_CALLBACK (on_stream_deck_button_icon_changed_cb),
                                self,
@@ -230,6 +285,7 @@ bs_stream_deck_button_widget_class_init (BsStreamDeckButtonWidgetClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-stream-deck-button-widget.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonWidget, drag_source);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonWidget, picture);
 
   gtk_widget_class_bind_template_callback (widget_class, on_drag_prepare_cb);
@@ -239,16 +295,14 @@ bs_stream_deck_button_widget_class_init (BsStreamDeckButtonWidgetClass *klass)
 static void
 bs_stream_deck_button_widget_init (BsStreamDeckButtonWidget *self)
 {
-  GtkDropTarget *drop_target;
-
   self->icon_size = -1;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  drop_target = gtk_drop_target_new (BS_TYPE_STREAM_DECK_BUTTON, GDK_ACTION_MOVE);
-  gtk_drop_target_set_preload (drop_target, TRUE);
-  g_signal_connect (drop_target, "drop", G_CALLBACK (on_drop_target_drop_cb), self);
-  gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (drop_target));
+  self->drop_target = gtk_drop_target_new (BS_TYPE_STREAM_DECK_BUTTON, GDK_ACTION_MOVE);
+  gtk_drop_target_set_preload (self->drop_target, TRUE);
+  g_signal_connect (self->drop_target, "drop", G_CALLBACK (on_drop_target_drop_cb), self);
+  gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (self->drop_target));
 }
 
 GtkWidget *
