@@ -87,6 +87,15 @@ is_move_page_up_action (BsStreamDeckButtonWidget *self)
 }
 
 static void
+select_myself_in_parent_flowbox (BsStreamDeckButtonWidget *self)
+{
+  GtkWidget *flowbox;
+
+  flowbox = gtk_widget_get_ancestor (GTK_WIDGET (self), GTK_TYPE_FLOW_BOX);
+  gtk_flow_box_select_child (GTK_FLOW_BOX (flowbox), GTK_FLOW_BOX_CHILD (self));
+}
+
+static void
 update_button_texture (BsStreamDeckButtonWidget *self)
 {
   BsIcon *icon = bs_stream_deck_button_get_icon (self->button);
@@ -168,7 +177,7 @@ on_drop_target_drop_cb (GtkDropTarget            *drop_target,
   bs_stream_deck_button_set_custom_icon (dragged_stream_deck_button, dropped_button_icon);
   bs_stream_deck_button_set_custom_icon (dropped_stream_deck_button, dragged_button_icon);
 
-  gtk_widget_activate (GTK_WIDGET (self));
+  select_myself_in_parent_flowbox (self);
 
   BS_RETURN (TRUE);
 }
