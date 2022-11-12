@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="BsStreamDeckButtonWidget" parent="GtkFlowBoxChild">
+
+    <child>
+      <object class="GtkDragSource" id="drag_source">
+        <property name="actions">move</property>
+        <signal name="prepare" handler="on_drag_prepare_cb" object="BsStreamDeckButtonWidget" swapped="no" />
+        <signal name="drag-begin" handler="on_drag_begin_cb" object="BsStreamDeckButtonWidget" swapped="no" />
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkPicture" id="picture">
+        <property name="halign">center</property>
+        <property name="overflow">hidden</property>
+        <binding name="width-request">
+          <lookup name="icon-size">BsStreamDeckButtonWidget</lookup>
+        </binding>
+        <binding name="height-request">
+          <lookup name="icon-size">BsStreamDeckButtonWidget</lookup>
+        </binding>"
+        <style>
+          <class name="card" />
+        </style>
+      </object>
+    </child>
+
+  </template>
+</interface>

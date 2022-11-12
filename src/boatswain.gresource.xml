@@ -6,6 +6,7 @@
     <file>bs-profiles-dialog.ui</file>
     <file>bs-stream-deck-editor.ui</file>
     <file>bs-stream-deck-button-editor.ui</file>
+    <file>bs-stream-deck-button-widget.ui</file>
     <file>bs-window.ui</file>
     <file>gtk/help-overlay.ui</file>
     <file>style.css</file>

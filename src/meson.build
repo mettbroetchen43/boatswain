@@ -16,6 +16,7 @@ boatswain_sources = [
   'bs-stream-deck.c',
   'bs-stream-deck-button.c',
   'bs-stream-deck-button-editor.c',
+  'bs-stream-deck-button-widget.c',
   'bs-stream-deck-editor.c',
   'bs-window.c',
   'main.c',

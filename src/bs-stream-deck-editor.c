@@ -28,6 +28,7 @@
 #include "bs-stream-deck.h"
 #include "bs-stream-deck-button.h"
 #include "bs-stream-deck-button-editor.h"
+#include "bs-stream-deck-button-widget.h"
 #include "bs-stream-deck-editor.h"
 
 #include <glib/gi18n.h>
@@ -44,25 +45,6 @@ struct _BsStreamDeckEditor
 
   BsStreamDeck *stream_deck;
 };
-
-static GdkContentProvider * on_drag_prepare_cb (GtkDragSource      *drag_source,
-                                                double              x,
-                                                double              y,
-                                                BsStreamDeckEditor *self);
-
-static void on_drag_begin_cb (GtkDragSource      *drag_source,
-                              GdkDrag            *drag,
-                              BsStreamDeckEditor *self);
-
-static gboolean on_drop_target_drop_cb (GtkDropTarget      *drop_target,
-                                        const GValue       *value,
-                                        double              x,
-                                        double              y,
-                                        BsStreamDeckEditor *self);
-
-static void on_stream_deck_button_icon_changed_cb (BsStreamDeckButton *stream_deck_button,
-                                                   BsIcon             *icon,
-                                                   BsStreamDeckEditor *self);
 
 G_DEFINE_FINAL_TYPE (BsStreamDeckEditor, bs_stream_deck_editor, ADW_TYPE_BIN)
 
@@ -94,23 +76,6 @@ is_switch_page_action (BsAction *action)
 }
 
 static void
-update_button_texture (BsStreamDeckEditor *self,
-                       GtkFlowBoxChild    *child)
-{
-  BsStreamDeckButton *stream_deck_button;
-  GtkWidget *picture;
-  BsIcon *icon;
-  int position;
-
-  position = gtk_flow_box_child_get_index (child);
-  stream_deck_button = bs_stream_deck_get_button (self->stream_deck, position);
-  icon = bs_stream_deck_button_get_icon (stream_deck_button);
-
-  picture = gtk_flow_box_child_get_child (child);
-  gtk_picture_set_paintable (GTK_PICTURE (picture), GDK_PAINTABLE (icon));
-}
-
-static void
 build_button_grid (BsStreamDeckEditor *self)
 {
   const BsStreamDeckButtonLayout *layout;
@@ -123,40 +88,12 @@ build_button_grid (BsStreamDeckEditor *self)
   for (i = 0; i < layout->n_buttons; i++)
     {
       BsStreamDeckButton *stream_deck_button;
-      GtkDragSource *drag_source;
-      GtkDropTarget *drop_target;
       GtkWidget *button;
-      GtkWidget *picture;
-
-      button = gtk_flow_box_child_new ();
-      gtk_flow_box_append (self->buttons_flowbox, button);
-
-      picture = gtk_picture_new ();
-      gtk_widget_add_css_class (picture, "card");
-      gtk_widget_set_size_request (picture, layout->icon_size, layout->icon_size);
-      gtk_widget_set_halign (picture, GTK_ALIGN_CENTER);
-      gtk_widget_set_overflow (picture, GTK_OVERFLOW_HIDDEN);
-      gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (button), picture);
 
       stream_deck_button = bs_stream_deck_get_button (self->stream_deck, i);
-      g_signal_connect_object (stream_deck_button,
-                               "icon-changed",
-                               G_CALLBACK (on_stream_deck_button_icon_changed_cb),
-                               self,
-                               0);
 
-      update_button_texture (self, GTK_FLOW_BOX_CHILD (button));
-
-      drag_source = gtk_drag_source_new ();
-      gtk_drag_source_set_actions (drag_source, GDK_ACTION_MOVE);
-      g_signal_connect (drag_source, "prepare", G_CALLBACK (on_drag_prepare_cb), self);
-      g_signal_connect (drag_source, "drag-begin", G_CALLBACK (on_drag_begin_cb), self);
-      gtk_widget_add_controller (GTK_WIDGET (button), GTK_EVENT_CONTROLLER (drag_source));
-
-      drop_target = gtk_drop_target_new (BS_TYPE_STREAM_DECK_BUTTON, GDK_ACTION_MOVE);
-      gtk_drop_target_set_preload (drop_target, TRUE);
-      g_signal_connect (drop_target, "drop", G_CALLBACK (on_drop_target_drop_cb), self);
-      gtk_widget_add_controller (GTK_WIDGET (button), GTK_EVENT_CONTROLLER (drop_target));
+      button = bs_stream_deck_button_widget_new (stream_deck_button, layout->icon_size);
+      gtk_flow_box_append (self->buttons_flowbox, button);
     }
 }
 
@@ -164,102 +101,6 @@ build_button_grid (BsStreamDeckEditor *self)
 /*
  * Callbacks
  */
-
-static GdkContentProvider *
-on_drag_prepare_cb (GtkDragSource      *drag_source,
-                    double              x,
-                    double              y,
-                    BsStreamDeckEditor *self)
-{
-  BsStreamDeckButton *stream_deck_button;
-  GtkWidget *flowbox_child;
-  int position;
-
-  BS_ENTRY;
-
-  flowbox_child = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (drag_source));
-  position = gtk_flow_box_child_get_index (GTK_FLOW_BOX_CHILD (flowbox_child));
-  stream_deck_button = bs_stream_deck_get_button (self->stream_deck, position);
-
-  BS_RETURN (gdk_content_provider_new_typed (BS_TYPE_STREAM_DECK_BUTTON, stream_deck_button));
-}
-
-static void
-on_drag_begin_cb (GtkDragSource      *drag_source,
-                  GdkDrag            *drag,
-                  BsStreamDeckEditor *self)
-{
-  BsStreamDeckButton *stream_deck_button;
-  GtkWidget *flowbox_child;
-  BsIcon *icon;
-  int position;
-
-  BS_ENTRY;
-
-  flowbox_child = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (drag_source));
-  position = gtk_flow_box_child_get_index (GTK_FLOW_BOX_CHILD (flowbox_child));
-  stream_deck_button = bs_stream_deck_get_button (self->stream_deck, position);
-  icon = bs_stream_deck_button_get_icon (stream_deck_button);
-
-  gtk_drag_source_set_icon (drag_source, GDK_PAINTABLE (icon), 0, 0);
-
-  BS_EXIT;
-}
-
-static gboolean
-on_drop_target_drop_cb (GtkDropTarget      *drop_target,
-                        const GValue       *value,
-                        double              x,
-                        double              y,
-                        BsStreamDeckEditor *self)
-{
-  g_autoptr (BsAction) dragged_button_action = NULL;
-  g_autoptr (BsAction) dropped_button_action = NULL;
-  BsStreamDeckButton *dragged_stream_deck_button;
-  BsStreamDeckButton *dropped_stream_deck_button;
-  g_autoptr (BsIcon) dragged_button_icon = NULL;
-  g_autoptr (BsIcon) dropped_button_icon = NULL;
-  GtkWidget *flowbox_child;
-  int position;
-
-  BS_ENTRY;
-
-  if (!G_VALUE_HOLDS (value, BS_TYPE_STREAM_DECK_BUTTON))
-    BS_RETURN (FALSE);
-
-  flowbox_child = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (drop_target));
-  position = gtk_flow_box_child_get_index (GTK_FLOW_BOX_CHILD (flowbox_child));
-  dropped_stream_deck_button = bs_stream_deck_get_button (self->stream_deck, position);
-  dragged_stream_deck_button = g_value_get_object (value);
-
-  if (dragged_stream_deck_button == dropped_stream_deck_button)
-    BS_RETURN (FALSE);
-
-  /* Swap actions */
-  dragged_button_action = bs_stream_deck_button_get_action (dragged_stream_deck_button);
-  dropped_button_action = bs_stream_deck_button_get_action (dropped_stream_deck_button);
-  dragged_button_icon = bs_stream_deck_button_get_custom_icon (dragged_stream_deck_button);
-  dropped_button_icon = bs_stream_deck_button_get_custom_icon (dropped_stream_deck_button);
-
-  if (dragged_button_action)
-    g_object_ref (dragged_button_action);
-  if (dropped_button_action)
-    g_object_ref (dropped_button_action);
-  if (dragged_button_icon)
-    g_object_ref (dragged_button_icon);
-  if (dropped_button_icon)
-    g_object_ref (dropped_button_icon);
-
-  bs_stream_deck_button_set_action (dragged_stream_deck_button, dropped_button_action);
-  bs_stream_deck_button_set_action (dropped_stream_deck_button, dragged_button_action);
-
-  bs_stream_deck_button_set_custom_icon (dragged_stream_deck_button, dropped_button_icon);
-  bs_stream_deck_button_set_custom_icon (dropped_stream_deck_button, dragged_button_icon);
-
-  gtk_widget_activate (flowbox_child);
-
-  BS_RETURN (TRUE);
-}
 
 static void
 on_flowbox_child_activated_cb (GtkFlowBox         *flowbox,
@@ -321,20 +162,6 @@ on_stream_deck_active_page_changed_cb (BsStreamDeck       *stream_deck,
   gtk_flow_box_select_child (self->buttons_flowbox, flowbox_child);
 
   BS_EXIT;
-}
-
-static void
-on_stream_deck_button_icon_changed_cb (BsStreamDeckButton *stream_deck_button,
-                                       BsIcon             *icon,
-                                       BsStreamDeckEditor *self)
-{
-  GtkFlowBoxChild *child;
-  uint8_t position;
-
-  position = bs_stream_deck_button_get_position (stream_deck_button);
-  child = gtk_flow_box_get_child_at_index (self->buttons_flowbox, position);
-
-  update_button_texture (self, child);
 }
 
 
