@@ -11,6 +11,12 @@ Control Elgato Stream Deck devices.
 
 ![Boatswain Screenshot](https://gitlab.gnome.org/World/boatswain/-/raw/main/data/stream-deck-original.png)
 
+## Code of conduct
+
+Boatswain follows the GNOME project [Code of Conduct](./code-of-conduct.md). All
+communications in project spaces, such as the issue tracker or
+[Discourse](https://discourse.gnome.org) are expected to follow it.
+
 ## udev rules
 
 Elgato Stream Deck devices should be compatible starting from udev v250. If your
