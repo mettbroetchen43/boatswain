@@ -23,6 +23,7 @@
 #include "bs-icon.h"
 
 #define ICON_SIZE 32
+#define INTENSITY(c)  ((c.red) * 0.30 + (c.green) * 0.59 + (c.blue) * 0.11)
 
 struct _BsIcon
 {
@@ -48,6 +49,8 @@ struct _BsIcon
 
   gulong size_changed_id;
   gulong content_changed_id;
+
+  gboolean foreground_color_set;
 };
 
 static void gdk_paintable_iface_init (GdkPaintableInterface *iface);
@@ -93,6 +96,29 @@ on_paintable_size_changed_cb (GdkPaintable *paintable,
   gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
 }
 
+static void
+premultiply_rgba (const GdkRGBA *rgba,
+                  GdkRGBA       *premultiplied_rgba)
+{
+  premultiplied_rgba->red = rgba->red * rgba->alpha;
+  premultiplied_rgba->green = rgba->green * rgba->alpha;
+  premultiplied_rgba->blue = rgba->blue * rgba->alpha;
+  premultiplied_rgba->alpha = 1.0;
+}
+
+static GdkRGBA
+generate_foreground_color (BsIcon *self)
+{
+  GdkRGBA background_color;
+
+  premultiply_rgba (&self->background_color, &background_color);
+
+  if (INTENSITY (background_color) > 0.5)
+    return (GdkRGBA) { 0.0, 0.0, 0.0, 1.0 };
+  else
+    return (GdkRGBA) { 1.0, 1.0, 1.0, 1.0 };
+}
+
 static gboolean
 snapshot_any_paintable (GdkSnapshot *snapshot,
                         BsIcon      *icon,
@@ -123,6 +149,12 @@ snapshot_any_paintable (GdkSnapshot *snapshot,
     {
       float hpadding = (width - ICON_SIZE) / 2.0;
       float vpadding = (height - ICON_SIZE) / 2.0;
+      GdkRGBA color;
+
+      if (icon->foreground_color_set)
+        color = icon->color;
+      else
+        color = generate_foreground_color (icon);
 
       gtk_snapshot_save (snapshot);
       gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (hpadding, vpadding));
@@ -130,7 +162,7 @@ snapshot_any_paintable (GdkSnapshot *snapshot,
                                                 snapshot,
                                                 ICON_SIZE,
                                                 ICON_SIZE,
-                                                &icon->color,
+                                                &color,
                                                 1);
       gtk_snapshot_restore (snapshot);
 
@@ -148,8 +180,11 @@ snapshot_any_layout (GdkSnapshot *snapshot,
 {
   if (icon->layout)
     {
+      GdkRGBA color;
       int text_width, text_height;
       int x, y;
+
+      color = generate_foreground_color (icon);
 
       pango_layout_get_pixel_size (icon->layout, &text_width, &text_height);
       x = (width - text_width) / 2.0;
@@ -157,7 +192,7 @@ snapshot_any_layout (GdkSnapshot *snapshot,
 
       gtk_snapshot_save (snapshot);
       gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (x, y));
-      gtk_snapshot_append_layout (snapshot, icon->layout, &opaque_white);
+      gtk_snapshot_append_layout (snapshot, icon->layout, &color);
       gtk_snapshot_restore (snapshot);
     }
 
@@ -171,16 +206,6 @@ get_real_opacity (BsIcon *self)
     return self->relative->opacity;
 
   return self->opacity;
-}
-
-static void
-premultiply_rgba (const GdkRGBA *rgba,
-                  GdkRGBA       *premultiplied_rgba)
-{
-  premultiplied_rgba->red = rgba->red * rgba->alpha;
-  premultiplied_rgba->green = rgba->green * rgba->alpha;
-  premultiplied_rgba->blue = rgba->blue * rgba->alpha;
-  premultiplied_rgba->alpha = 1.0;
 }
 
 static void
@@ -438,6 +463,7 @@ bs_icon_class_init (BsIconClass *klass)
 static void
 bs_icon_init (BsIcon *self)
 {
+  self->foreground_color_set = FALSE;
   self->color = opaque_white;
   self->opacity = -1.0;
 }
@@ -587,6 +613,8 @@ bs_icon_set_color (BsIcon        *self,
     self->color = *color;
   else
     self->color = opaque_white;
+
+  self->foreground_color_set = color != NULL;
 
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
 
