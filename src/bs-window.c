@@ -503,6 +503,8 @@ bs_window_class_init (BsWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_new_profile_name_entry_text_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_profiles_listbox_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_stream_decks_listbox_row_activated_cb);
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_w, GDK_CONTROL_MASK, "window.close", NULL);
 }
 
 static void
