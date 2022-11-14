@@ -1,20 +1,20 @@
-streamdeckeditor flowbox flowboxchild:selected {
+streamdeckbuttonwidget:selected {
   background-color: transparent;
 }
 
-streamdeckeditor flowbox flowboxchild:selected > picture {
+streamdeckbuttonwidget:selected > picture {
   outline: 2px solid @accent_color;
 }
 
-streamdeckeditor flowbox flowboxchild:selected:focus:focus-visible {
+streamdeckbuttonwidget:selected:focus:focus-visible {
   outline: none;
 }
 
-streamdeckeditor flowbox flowboxchild:drop(active) {
+streamdeckbuttonwidget:drop(active) {
   box-shadow: none;
 }
 
-streamdeckeditor flowbox flowboxchild:drop(active) picture {
+streamdeckbuttonwidget:drop(active) picture {
   background-color: alpha(@card_bg_color, 2.0);
   filter: brightness(125%);
   transition: 250ms;

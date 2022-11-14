@@ -299,6 +299,8 @@ bs_stream_deck_button_widget_class_init (BsStreamDeckButtonWidgetClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, on_drag_prepare_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_drag_begin_cb);
+
+  gtk_widget_class_set_css_name (widget_class, "streamdeckbuttonwidget");
 }
 
 static void
