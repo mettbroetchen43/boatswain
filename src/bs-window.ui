@@ -231,7 +231,7 @@
                 </property>
 
                 <property name="menu-popover">
-                  <object class="GtkPopover">
+                  <object class="GtkPopover" id="devices_popover">
                     <property name="width-request">200</property>
                     <style>
                       <class name="menu" />

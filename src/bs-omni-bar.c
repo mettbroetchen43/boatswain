@@ -30,6 +30,8 @@ struct _BsOmniBar
   GtkBox *center;
   GtkBox *suffix;
   GtkPopover *popover;
+
+  GBinding *menu_button_visibility_binding;
 };
 
 static void buildable_iface_init  (GtkBuildableIface      *iface);
@@ -164,6 +166,8 @@ bs_omni_bar_set_property (GObject      *object,
 
     case PROP_MENU_POPOVER:
       gtk_menu_button_set_popover (self->menu_button, g_value_get_object (value));
+      gtk_widget_set_visible (GTK_WIDGET (self->menu_button),
+                              g_value_get_object (value) != NULL);
       break;
 
     default:
@@ -225,6 +229,7 @@ bs_omni_bar_init (BsOmniBar *self)
   self->menu_button = g_object_new (GTK_TYPE_MENU_BUTTON,
                                     NULL);
   gtk_widget_set_parent (GTK_WIDGET (self->menu_button), GTK_WIDGET (self));
+  g_object_bind_property (self->menu_button, "visible", separator, "visible", G_BINDING_DEFAULT);
 
   self->prefix = g_object_new (GTK_TYPE_BOX, NULL);
   self->center = g_object_new (GTK_TYPE_BOX,

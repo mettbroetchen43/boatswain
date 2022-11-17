@@ -35,6 +35,7 @@ struct _BsWindow
 
   GtkAdjustment *brightness_adjustment;
   GtkWidget *create_profile_button;
+  GtkPopover *devices_popover;
   GtkHeaderBar *header_bar;
   GtkWidget *empty_page;
   GtkLabel *firmware_version_label;
@@ -182,6 +183,24 @@ select_stream_deck (BsWindow     *self,
   update_active_profile (self);
 }
 
+static void
+update_omni_bar_menu_popover (BsWindow *self)
+{
+  BsDeviceManager *device_manager;
+  GApplication *application;
+  GListModel *stream_decks;
+  guint n_stream_decks;
+
+  application = g_application_get_default ();
+  device_manager = bs_application_get_device_manager (BS_APPLICATION (application));
+  stream_decks = bs_device_manager_get_stream_decks (device_manager);
+  n_stream_decks = g_list_model_get_n_items (stream_decks);
+
+  g_object_set (self->omnibar,
+                "menu-popover", n_stream_decks > 1 ? self->devices_popover : NULL,
+                NULL);
+}
+
 
 /*
  * Callbacks
@@ -273,6 +292,7 @@ on_device_manager_stream_deck_added_cb (BsDeviceManager *device_manager,
     select_stream_deck (self, stream_deck);
 
   gtk_widget_show (GTK_WIDGET (self->profiles_menu_button));
+  update_omni_bar_menu_popover (self);
 }
 
 static void
@@ -296,6 +316,7 @@ on_device_manager_stream_deck_removed_cb (BsDeviceManager *device_manager,
 
   if (n_stream_decks == 0)
     gtk_stack_set_visible_child (self->main_stack, self->empty_page);
+  update_omni_bar_menu_popover (self);
 }
 
 static void
@@ -469,6 +490,7 @@ bs_window_constructed (GObject *object)
                            G_CALLBACK (on_device_manager_stream_deck_removed_cb),
                            self,
                            0);
+  update_omni_bar_menu_popover (self);
 }
 
 static void
@@ -486,6 +508,7 @@ bs_window_class_init (BsWindowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, BsWindow, brightness_adjustment);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, create_profile_button);
+  gtk_widget_class_bind_template_child (widget_class, BsWindow, devices_popover);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, header_bar);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, empty_page);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, firmware_version_label);
