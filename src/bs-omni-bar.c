@@ -274,8 +274,8 @@ bs_omni_bar_get_popover (BsOmniBar *self)
 }
 
 void
-bs_omni_bar_set_popover (BsOmniBar *self,
-                            GtkPopover   *popover)
+bs_omni_bar_set_popover (BsOmniBar  *self,
+                         GtkPopover *popover)
 {
 
   g_return_if_fail (BS_IS_OMNI_BAR (self));
