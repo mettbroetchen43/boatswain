@@ -10,6 +10,7 @@
     <file>bs-window.ui</file>
     <file>gtk/help-overlay.ui</file>
     <file>style.css</file>
+    <file>style-hc.css</file>
   </gresource>
 
   <gresource prefix="/com/feaneron/Boatswain/icons/scalable/emblems">
