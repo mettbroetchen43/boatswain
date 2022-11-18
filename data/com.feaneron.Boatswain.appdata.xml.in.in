@@ -42,6 +42,18 @@
   </custom>
 
   <releases>
+    <release date="2022-11-18" version="0.2.2">
+      <description>
+        <p>
+          <ul>
+            <li>Show hundreds of extra icons in the icon selection menu</li>
+            <li>Change symbolic icon color depending on the background color</li>
+            <li>Improved high contrast theme support</li>
+            <li>More improvements to dragging buttons</li>
+          </ul>
+        </p>
+      </description>
+    </release>
     <release date="2022-11-02" version="0.2.1" />
     <release date="2022-11-01" version="0.2.0">
       <description>
