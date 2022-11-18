@@ -190,6 +190,7 @@ soundboard_mpris_action_get_preferences (BsAction *action)
 {
   SoundboardMprisAction *self = SOUNDBOARD_MPRIS_ACTION (action);
   g_autoptr (GtkStringList) options = NULL;
+  GtkWidget *group;
   GtkWidget *row;
 
   options = gtk_string_list_new (NULL);
@@ -206,7 +207,10 @@ soundboard_mpris_action_get_preferences (BsAction *action)
   adw_combo_row_set_selected (ADW_COMBO_ROW (row), self->action);
   g_signal_connect (row, "notify::selected", G_CALLBACK (on_combo_row_selected_changed_cb), self);
 
-  return row;
+  group = adw_preferences_group_new ();
+  adw_preferences_group_add (ADW_PREFERENCES_GROUP (group), row);
+
+  return group;
 }
 
 static JsonNode *
