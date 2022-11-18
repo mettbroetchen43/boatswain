@@ -11,11 +11,11 @@
         </item>
       </submenu>
       <item>
-        <attribute name="label" translatable="yes">Move _up</attribute>
+        <attribute name="label" translatable="yes">Move up</attribute>
         <attribute name="action">profile-row.move-up</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Move _down</attribute>
+        <attribute name="label" translatable="yes">Move down</attribute>
         <attribute name="action">profile-row.move-down</attribute>
       </item>
     </section>

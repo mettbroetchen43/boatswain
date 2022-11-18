@@ -10,7 +10,7 @@
     </section>
     <section>
       <submenu>
-        <attribute name="label" translatable="yes">_New profile</attribute>
+        <attribute name="label" translatable="yes">New profile</attribute>
         <item>
           <attribute name="custom">new-profile</attribute>
         </item>
