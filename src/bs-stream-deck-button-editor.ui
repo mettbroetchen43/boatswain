@@ -365,56 +365,6 @@
         </property>
         <property name="model">
           <object class="GtkStringList" id="builtin_icons_stringlist">
-            <items>
-              <item>camera-1-symbolic</item>
-              <item>camera-2-symbolic</item>
-              <item>camera-3-symbolic</item>
-              <item>camera-4-symbolic</item>
-              <item>chat-symbolic</item>
-              <item>dialpad-symbolic</item>
-              <item>hdmi-symbolic</item>
-              <item>image-missing-symbolic</item>
-              <item>image-symbolic</item>
-              <item>movie-intro-symbolic</item>
-              <item>offline-symbolic</item>
-              <item>on-hold-symbolic</item>
-              <item>phone-input-symbolic</item>
-              <item>screencast-record-symbolic</item>
-              <item>technical-difficulties-symbolic</item>
-              <item>twitch-symbolic</item>
-              <item>video-loop-symbolic</item>
-              <item>wacom-symbolic</item>
-              <item>youtube-symbolic</item>
-
-              <!-- Default plugin -->
-              <item>stacked-plates-symbolic</item>
-
-              <!-- Launcher plugin -->
-              <item>app-launch-symbolic</item>
-              <item>open-link-symbolic</item>
-
-              <!-- OBS Studio plugin -->
-              <item>cameras-symbolic</item>
-              <item>dotted-box-symbolic</item>
-              <item>eye-not-looking-symbolic</item>
-              <item>eye-open-negative-filled-symbolic</item>
-              <item>obs-scene-symbolic</item>
-              <item>obs-scene-transition-symbolic</item>
-              <item>obs-switch-scene-symbolic</item>
-              <item>obs-symbolic</item>
-              <item>obs-window-symbolic</item>
-              <item>record-symbolic</item>
-              <item>square-outline-thick-symbolic</item>
-              <item>transmit-symbolic</item>
-
-              <!-- Soundboard plugin -->
-              <item>audio-mixer-symbolic</item>
-              <item>audio-only-symbolic</item>
-              <item>music-queue-symbolic</item>
-              <item>org.gnome.Music-symbolic</item>
-
-            </items>
-          </object>
         </property>
       </object>
     </property>

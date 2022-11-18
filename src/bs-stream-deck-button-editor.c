@@ -592,7 +592,9 @@ static void
 bs_stream_deck_button_editor_init (BsStreamDeckButtonEditor *self)
 {
   PeasExtensionSet *extension_set;
+  g_auto (GStrv) icon_names = NULL;
   GApplication *application;
+  GtkIconTheme *icon_theme;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -605,6 +607,15 @@ bs_stream_deck_button_editor_init (BsStreamDeckButtonEditor *self)
 
   g_signal_connect (extension_set, "extension-added", G_CALLBACK (on_action_factory_added_cb), self);
   g_signal_connect (extension_set, "extension-removed", G_CALLBACK (on_action_factory_removed_cb), self);
+
+  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
+  icon_names = gtk_icon_theme_get_icon_names (icon_theme);
+
+  for (size_t i = 0; icon_names && icon_names[i]; i++)
+    {
+      if (g_str_has_suffix (icon_names[i], "-symbolic"))
+        gtk_string_list_append (self->builtin_icons_stringlist, icon_names[i]);
+    }
 }
 
 BsStreamDeckButton *
