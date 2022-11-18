@@ -125,27 +125,21 @@ snapshot_any_paintable (GdkSnapshot *snapshot,
                         double       width,
                         double       height)
 {
-  gboolean painted = FALSE;
+  GdkPaintable *paintable = NULL;
 
   if (icon->paintable)
-    {
-      gdk_paintable_snapshot (icon->paintable, snapshot, width, height);
-      painted = TRUE;
-    }
+    paintable = icon->paintable;
   else if (icon->file_media_stream)
-    {
-      gdk_paintable_snapshot (GDK_PAINTABLE (icon->file_media_stream),
-                              snapshot,
-                              width,
-                              height);
-      painted = TRUE;
-    }
+    paintable = GDK_PAINTABLE (icon->file_media_stream);
   else if (icon->file_texture)
-    {
-      gdk_paintable_snapshot (GDK_PAINTABLE (icon->file_texture), snapshot, width, height);
-      painted = TRUE;
-    }
+    paintable = GDK_PAINTABLE (icon->file_texture);
   else if (icon->icon_paintable)
+    paintable = GDK_PAINTABLE (icon->icon_paintable);
+
+  if (!paintable)
+    return FALSE;
+
+  if (GTK_IS_SYMBOLIC_PAINTABLE (paintable))
     {
       float hpadding = (width - ICON_SIZE) / 2.0;
       float vpadding = (height - ICON_SIZE) / 2.0;
@@ -165,11 +159,21 @@ snapshot_any_paintable (GdkSnapshot *snapshot,
                                                 &color,
                                                 1);
       gtk_snapshot_restore (snapshot);
+    }
+  else
+    {
+      double paintable_width = MIN (width, gdk_paintable_get_intrinsic_width (paintable));
+      double paintable_height = MIN (height, gdk_paintable_get_intrinsic_height (paintable));
+      float hpadding = (width - paintable_width) / 2.0;
+      float vpadding = (height - paintable_height) / 2.0;
 
-      painted = TRUE;
+      gtk_snapshot_save (snapshot);
+      gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (hpadding, vpadding));
+      gdk_paintable_snapshot (paintable, snapshot, paintable_width, paintable_height);
+      gtk_snapshot_restore (snapshot);
     }
 
-  return painted;
+  return paintable != NULL;
 }
 
 static gboolean
