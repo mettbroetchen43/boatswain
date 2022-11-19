@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-10-19 14:21+0000\n"
-"PO-Revision-Date: 2022-10-19 17:52+0200\n"
+"POT-Creation-Date: 2022-11-18 13:09+0000\n"
+"PO-Revision-Date: 2022-11-18 16:24+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -58,8 +58,7 @@ msgid "Play sound effects during your streams"
 msgstr "Spela upp ljudeffekter under dina strömmar"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:19
-msgid ""
-"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgid "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr "Styra OBS Studio med Stream Deck (kräver tillägget obs-websocket)"
 
 #. Translators: please do NOT translate this
@@ -72,12 +71,8 @@ msgid "Enable debug messages"
 msgstr "Aktivera felsökningsmeddelanden"
 
 #: src/bs-application.c:128
-msgid ""
-"Boatswain needs to run in background to detect and execute Stream Deck "
-"actions."
-msgstr ""
-"Boatswain behöver köras i bakgrunden för att upptäcka och köra Stream Deck-"
-"åtgärder."
+msgid "Boatswain needs to run in background to detect and execute Stream Deck actions."
+msgstr "Boatswain behöver köras i bakgrunden för att upptäcka och köra Stream Deck-åtgärder."
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
@@ -88,12 +83,12 @@ msgid "Rename"
 msgstr "Byt namn"
 
 #: src/bs-profile-row.ui:14
-msgid "Move _up"
-msgstr "Flytta _uppåt"
+msgid "Move up"
+msgstr "Flytta uppåt"
 
 #: src/bs-profile-row.ui:18
-msgid "Move _down"
-msgstr "Flytta _nedåt"
+msgid "Move down"
+msgstr "Flytta nedåt"
 
 #: src/bs-profiles-dialog.ui:26
 msgid "Profiles"
@@ -122,22 +117,22 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:898
+#: src/bs-stream-deck.c:898 src/bs-stream-deck.c:924
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:924
+#: src/bs-stream-deck.c:950
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck.c:993
+#: src/bs-stream-deck.c:1019
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1016
+#: src/bs-stream-deck.c:1042
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -181,8 +176,8 @@ msgid "Remove Action"
 msgstr "Ta bort åtgärd"
 
 #: src/bs-window.ui:13
-msgid "_New profile"
-msgstr "_Ny profil"
+msgid "New profile"
+msgstr "Ny profil"
 
 #: src/bs-window.ui:19
 msgid "Manage profiles…"
@@ -216,27 +211,27 @@ msgstr "Fast programvara"
 msgid "Devices"
 msgstr "Enheter"
 
-#: src/bs-window.ui:295
+#: src/bs-window.ui:296
 msgid "No Stream Deck Found"
 msgstr "Ingen Stream Deck-enhet hittades"
 
-#: src/bs-window.ui:296
+#: src/bs-window.ui:297
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Anslut en Stream Deck-enhet för att använda den."
 
-#: src/bs-window.ui:307
+#: src/bs-window.ui:308
 msgid "_Keyboard Shortcuts"
 msgstr "_Tangentbordsgenvägar"
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:312
 msgid "_About Boatswain"
 msgstr "_Om Boatswain"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:316
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: src/bs-window.c:329
+#: src/bs-window.c:350
 msgid "Repository"
 msgstr "Arkiv"
 
