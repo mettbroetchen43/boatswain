@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-10-19 14:21+0000\n"
-"PO-Revision-Date: 2022-10-19 19:57+0300\n"
+"POT-Creation-Date: 2022-11-18 15:37+0000\n"
+"PO-Revision-Date: 2022-11-19 06:50+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -93,12 +93,14 @@ msgid "Rename"
 msgstr "Перейменувати"
 
 #: src/bs-profile-row.ui:14
-msgid "Move _up"
-msgstr "Перемістити в_гору"
+#| msgid "Move _up"
+msgid "Move up"
+msgstr "Пересунути вище"
 
 #: src/bs-profile-row.ui:18
-msgid "Move _down"
-msgstr "Пересунути _нижче"
+#| msgid "Move _down"
+msgid "Move down"
+msgstr "Пересунути нижче"
 
 #: src/bs-profiles-dialog.ui:26
 msgid "Profiles"
@@ -127,22 +129,22 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:898
+#: src/bs-stream-deck.c:898 src/bs-stream-deck.c:924
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:924
+#: src/bs-stream-deck.c:950
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck.c:993
+#: src/bs-stream-deck.c:1019
 msgid "Feaneron Hangar Original"
 msgstr "Оригінальний Feaneron Hangar"
 
-#: src/bs-stream-deck.c:1016
+#: src/bs-stream-deck.c:1042
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -186,8 +188,9 @@ msgid "Remove Action"
 msgstr "Вилучити дію"
 
 #: src/bs-window.ui:13
-msgid "_New profile"
-msgstr "С_творити профіль"
+#| msgid "_New profile"
+msgid "New profile"
+msgstr "Створити профіль"
 
 #: src/bs-window.ui:19
 msgid "Manage profiles…"
@@ -221,27 +224,27 @@ msgstr "Мікропрограма"
 msgid "Devices"
 msgstr "Пристрої"
 
-#: src/bs-window.ui:295
+#: src/bs-window.ui:296
 msgid "No Stream Deck Found"
 msgstr "Не знайдено потокової деки"
 
-#: src/bs-window.ui:296
+#: src/bs-window.ui:297
 msgid "Plug in a Stream Deck device to use it."
 msgstr "З'єднайте пристрій потокової деки, щоб скористатися ним."
 
-#: src/bs-window.ui:307
+#: src/bs-window.ui:308
 msgid "_Keyboard Shortcuts"
 msgstr "_Клавіатурні скорочення"
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:312
 msgid "_About Boatswain"
 msgstr "_Про «Боутсвейн»"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:316
 msgid "_Quit"
 msgstr "Ви_йти"
 
-#: src/bs-window.c:329
+#: src/bs-window.c:350
 msgid "Repository"
 msgstr "Сховище"
 
