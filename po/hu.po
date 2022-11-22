@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-10-23 08:58+0000\n"
-"PO-Revision-Date: 2022-10-27 16:31+0200\n"
+"POT-Creation-Date: 2022-11-18 15:37+0000\n"
+"PO-Revision-Date: 2022-11-23 00:44+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -90,12 +90,14 @@ msgid "Rename"
 msgstr "Átnevezés"
 
 #: src/bs-profile-row.ui:14
-msgid "Move _up"
-msgstr "Mozgatás _fel"
+#| msgid "Move _up"
+msgid "Move up"
+msgstr "Mozgatás fel"
 
 #: src/bs-profile-row.ui:18
-msgid "Move _down"
-msgstr "Mozgatás _le"
+#| msgid "Move _down"
+msgid "Move down"
+msgstr "Mozgatás le"
 
 #: src/bs-profiles-dialog.ui:26
 msgid "Profiles"
@@ -183,8 +185,9 @@ msgid "Remove Action"
 msgstr "Művelet eltávolítása"
 
 #: src/bs-window.ui:13
-msgid "_New profile"
-msgstr "Ú_j profil"
+#| msgid "_New profile"
+msgid "New profile"
+msgstr "Új profil"
 
 #: src/bs-window.ui:19
 msgid "Manage profiles…"
@@ -218,27 +221,27 @@ msgstr "Belső vezérlőprogram"
 msgid "Devices"
 msgstr "Eszközök"
 
-#: src/bs-window.ui:295
+#: src/bs-window.ui:296
 msgid "No Stream Deck Found"
 msgstr "Nem található Stream Deck"
 
-#: src/bs-window.ui:296
+#: src/bs-window.ui:297
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Csatlakoztasson egy Stream Deck eszközt a használatához."
 
-#: src/bs-window.ui:307
+#: src/bs-window.ui:308
 msgid "_Keyboard Shortcuts"
 msgstr "_Gyorsbillentyűk"
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:312
 msgid "_About Boatswain"
 msgstr "A Fedélzetmester _névjegye"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:316
 msgid "_Quit"
 msgstr "_Kilépés"
 
-#: src/bs-window.c:329
+#: src/bs-window.c:350
 msgid "Repository"
 msgstr "Tároló"
 
