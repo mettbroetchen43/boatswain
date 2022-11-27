@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-10-19 14:21+0000\n"
-"PO-Revision-Date: 2022-10-22 14:17+0200\n"
+"POT-Creation-Date: 2022-11-24 21:59+0000\n"
+"PO-Revision-Date: 2022-11-27 13:44+0100\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -93,12 +93,12 @@ msgid "Rename"
 msgstr "Umbenennen"
 
 #: src/bs-profile-row.ui:14
-msgid "Move _up"
-msgstr "Hin_auf schieben"
+msgid "Move up"
+msgstr "Hinaufschieben"
 
 #: src/bs-profile-row.ui:18
-msgid "Move _down"
-msgstr "Hin_unter schieben"
+msgid "Move down"
+msgstr "Hinunterschieben"
 
 #: src/bs-profiles-dialog.ui:26
 msgid "Profiles"
@@ -129,7 +129,7 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:898
+#: src/bs-stream-deck.c:898 src/bs-stream-deck.c:924
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
@@ -137,15 +137,15 @@ msgstr "Stream Deck XL"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:924
+#: src/bs-stream-deck.c:950
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck.c:993
+#: src/bs-stream-deck.c:1019
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1016
+#: src/bs-stream-deck.c:1042
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -189,8 +189,8 @@ msgid "Remove Action"
 msgstr "Aktion entfernen"
 
 #: src/bs-window.ui:13
-msgid "_New profile"
-msgstr "_Neues Profil"
+msgid "New profile"
+msgstr "Neues Profil"
 
 #: src/bs-window.ui:19
 msgid "Manage profiles…"
@@ -224,27 +224,27 @@ msgstr "Firmware"
 msgid "Devices"
 msgstr "Geräte"
 
-#: src/bs-window.ui:295
+#: src/bs-window.ui:296
 msgid "No Stream Deck Found"
 msgstr "Kein Stream Deck gefunden"
 
-#: src/bs-window.ui:296
+#: src/bs-window.ui:297
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Schließen Sie ein Stream-Deck-Gerät an, um es zu verwenden."
 
-#: src/bs-window.ui:307
+#: src/bs-window.ui:308
 msgid "_Keyboard Shortcuts"
 msgstr "_Tastenkombinationen"
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:312
 msgid "_About Boatswain"
 msgstr "_Info zu Boatswain"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:316
 msgid "_Quit"
 msgstr "_Beenden"
 
-#: src/bs-window.c:329
+#: src/bs-window.c:350
 msgid "Repository"
 msgstr "Software-Depot"
 
@@ -449,31 +449,31 @@ msgstr "Die laufende Musikwiedergabe steuern"
 msgid "Play Audio"
 msgstr "Audio wiedergeben"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:196
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
 msgid "Next"
 msgstr "Weiter"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:197
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
 msgid "Pause"
 msgstr "Pause"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:198
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
 msgid "Play"
 msgstr "Wiedergabe"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:199
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
 msgid "Previous"
 msgstr "Vorherige"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:200
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
 msgid "Stop"
 msgstr "Stopp"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:201
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
 msgid "Play / Pause"
 msgstr "Wiedergabe / Pause"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:204
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
 msgid "Playback Action"
 msgstr "Wiedergabe-Aktion"
 
