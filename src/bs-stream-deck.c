@@ -1011,7 +1011,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .icon_layout = {
       .width = 96,
       .height = 96,
-      .format = BS_ICON_FORMAT_PNG,
+      .format = BS_ICON_FORMAT_JPEG,
       .flags = BS_ICON_RENDERER_FLAG_NONE,
     },
     .reset = reset_pedal,
