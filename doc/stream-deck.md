@@ -4,7 +4,7 @@ around the internet, but centralizing that here too is helpful.
 # Models
 
 As of today (03-10-2022) there are 6 known Stream Deck models: Original (v1 and
-v2), Mini, XL, MK.2 and Pedal
+v2), Mini, XL, MK.2, and Pedal.
 
 These are the specs of each device and its buttons:
 
@@ -306,3 +306,4 @@ Stream Deck Original (v2), XL, and MK.2 all seem to share the same USB protocol.
 Stream Deck Pedal seem to share the USB protocol with recent versions:
 Original (v2), XL and MK.2. Difference is it only has 3 buttons which cannot
 be changed visually (as it don't have a display)
+
