@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-11-24 21:59+0000\n"
-"PO-Revision-Date: 2022-11-27 13:44+0100\n"
+"POT-Creation-Date: 2022-12-03 16:49+0000\n"
+"PO-Revision-Date: 2022-12-03 23:17+0100\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -112,14 +112,14 @@ msgstr "Vorgabe"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:820
+#: src/bs-stream-deck.c:847
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
+#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
 #: src/plugins/default/default-switch-profile-action.c:285
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -129,7 +129,7 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:898 src/bs-stream-deck.c:924
+#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
@@ -137,15 +137,22 @@ msgstr "Stream Deck XL"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:950
+#: src/bs-stream-deck.c:977
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck.c:1019
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1003
+msgid "Stream Deck Pedal"
+msgstr "Stream Deck Pedal"
+
+#: src/bs-stream-deck.c:1072
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1042
+#: src/bs-stream-deck.c:1095
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
