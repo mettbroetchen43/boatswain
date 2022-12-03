@@ -1,0 +1,502 @@
+# Georgian translation for boatswain.
+# Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
+# This file is distributed under the same license as the boatswain package.
+# Ekaterine Papava <papava.e@gtu.ge>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: boatswain main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2022-11-28 04:48+0000\n"
+"PO-Revision-Date: 2022-12-03 17:48+0100\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
+"Language-Team: Georgian <ka@li.org>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: data/com.feaneron.Boatswain.desktop.in.in:3
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+msgid "Boatswain"
+msgstr "Boatswain"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
+msgid "stream deck;streaming;deck;elgato;"
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+msgid "Control your Elgato Stream Decks"
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Boatswain allows you to control Elgato Stream Deck devices."
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+msgid "With Boatswain you will be able to:"
+msgstr "Boatswain -თან ერთად თქვენ შეგეძლებათ:"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+msgid "Organize your actions in pages and profiles"
+msgstr "დააორგანიზოთ თქვენი ქმედებები გვერდებში და პროფილებში"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+msgid "Set custom icons to actions"
+msgstr "ქმედებებზე ხატულების ხელით მითითება"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Control your music player"
+msgstr "აკონტროლეთ თქვენი მუსიკის დამკვრელი"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+msgid "Play sound effects during your streams"
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgstr ""
+
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Georges Basile Stavracas Neto"
+msgstr "Georges Basile Stavracas Neto"
+
+#: src/bs-application.c:52
+msgid "Enable debug messages"
+msgstr "გამართვის შეტყობინებების ჩართვა"
+
+#: src/bs-application.c:128
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr ""
+
+#: src/bs-profile.c:184
+msgid "Unnamed profile"
+msgstr "უსახელო პროფილი"
+
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+msgid "Rename"
+msgstr "გადარქმევა"
+
+#: src/bs-profile-row.ui:14
+msgid "Move up"
+msgstr "აწევა"
+
+#: src/bs-profile-row.ui:18
+msgid "Move down"
+msgstr "ქვემოთ ჩამოწევა"
+
+#: src/bs-profiles-dialog.ui:26
+msgid "Profiles"
+msgstr "პროფილები"
+
+#: src/bs-stream-deck.c:277
+msgid "Default"
+msgstr "ნაგულისხმები"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:820
+msgid "Stream Deck Mini"
+msgstr ""
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
+#: src/plugins/default/default-switch-profile-action.c:285
+#: src/plugins/default/default.plugin.desktop.in:3
+msgid "Stream Deck"
+msgstr ""
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:898 src/bs-stream-deck.c:924
+msgid "Stream Deck XL"
+msgstr ""
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:950
+msgid "Stream Deck MK.2"
+msgstr ""
+
+#: src/bs-stream-deck.c:1019
+msgid "Feaneron Hangar Original"
+msgstr ""
+
+#: src/bs-stream-deck.c:1042
+msgid "Feaneron Hangar XL"
+msgstr ""
+
+#: src/bs-stream-deck-button-editor.c:380
+msgid "Select icon"
+msgstr "არჩიეთ ხატულა"
+
+#: src/bs-stream-deck-button-editor.c:383
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
+msgid "_Open"
+msgstr "_გახსნა"
+
+#: src/bs-stream-deck-button-editor.c:384
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
+msgid "_Cancel"
+msgstr "_შეწყვეტა"
+
+#: src/bs-stream-deck-button-editor.c:388
+msgid "All supported formats"
+msgstr "ყველა მხარდაჭერილი ფორმატი"
+
+#: src/bs-stream-deck-button-editor.ui:17
+msgid "Select a button"
+msgstr "აირჩიეთ ღილაკი"
+
+#: src/bs-stream-deck-button-editor.ui:199
+msgid "Name"
+msgstr "სახელი"
+
+#: src/bs-stream-deck-button-editor.ui:206
+msgid "Background Color"
+msgstr "ფონის ფერი"
+
+#: src/bs-stream-deck-button-editor.ui:237
+#: src/bs-stream-deck-button-editor.ui:300
+msgid "Select action"
+msgstr "აირჩიეთ ქმედება"
+
+#: src/bs-stream-deck-button-editor.ui:258
+msgid "Remove Action"
+msgstr "ქმედების წაშლა"
+
+#: src/bs-window.ui:13
+msgid "New profile"
+msgstr "ახალი პროფილი"
+
+#: src/bs-window.ui:19
+msgid "Manage profiles…"
+msgstr "პროფილების მართვა…"
+
+#: src/bs-window.ui:64
+msgid "Create"
+msgstr "შექმნა"
+
+#: src/bs-window.ui:108
+msgid "Power"
+msgstr "კვება"
+
+#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
+msgid "Brightness"
+msgstr "სიკაშკაშე"
+
+#: src/bs-window.ui:160
+msgid "Device"
+msgstr "მოწყობილობა"
+
+#: src/bs-window.ui:176
+msgid "Serial Number"
+msgstr "სერიული ნომერი"
+
+#: src/bs-window.ui:203
+msgid "Firmware"
+msgstr "მიკროკოდი"
+
+#: src/bs-window.ui:251
+msgid "Devices"
+msgstr "მოწყობილობა"
+
+#: src/bs-window.ui:296
+msgid "No Stream Deck Found"
+msgstr ""
+
+#: src/bs-window.ui:297
+msgid "Plug in a Stream Deck device to use it."
+msgstr ""
+
+#: src/bs-window.ui:308
+msgid "_Keyboard Shortcuts"
+msgstr "_კლავიატურის მალსახმობები"
+
+#: src/bs-window.ui:312
+msgid "_About Boatswain"
+msgstr "Boatswain-ის _შესახებ"
+
+#: src/bs-window.ui:316
+msgid "_Quit"
+msgstr "დატოვება"
+
+#: src/bs-window.c:350
+msgid "Repository"
+msgstr "საცავი"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "ძირითადი"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "მალსახმობების ჩვენება"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "გასვლა"
+
+#: src/plugins/default/default-action-factory.c:44
+msgid "Folder"
+msgstr "საქაღალდე"
+
+#: src/plugins/default/default-action-factory.c:50
+msgid "Switch Profile"
+msgstr "პროფილის გადართვა"
+
+#: src/plugins/default/default-action-factory.c:62
+msgid "Multiple Actions"
+msgstr "მრავალი ქმედება"
+
+#: src/plugins/default/default-brightness-action.c:140
+msgid "Constant"
+msgstr "კონსტანტა"
+
+#: src/plugins/default/default-brightness-action.c:141
+msgid "Increase"
+msgstr "გაზრდა"
+
+#: src/plugins/default/default-brightness-action.c:142
+msgid "Decrease"
+msgstr "შემცირება"
+
+#: src/plugins/default/default-brightness-action.c:145
+msgid "Mode"
+msgstr "რეჟიმი"
+
+#: src/plugins/default/default-brightness-action.c:152
+msgid "Value"
+msgstr "მნიშვნელობა"
+
+#: src/plugins/default/default-multi-action-editor.c:310
+#: src/plugins/default/default-multi-action-row.c:142
+msgid "Delay"
+msgstr "დაყოვნება"
+
+#: src/plugins/default/default-multi-action-editor.ui:31
+msgid "Add action"
+msgstr "ქმედების დამატება"
+
+#: src/plugins/default/default-multi-action-editor.ui:49
+msgid "Add Action"
+msgstr "ქმედების დამატება"
+
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "ქმედებები"
+
+#: src/plugins/default/default-multi-action-editor.ui:73
+msgid "Others"
+msgstr "სხვები"
+
+#: src/plugins/default/default-multi-action-editor.ui:83
+msgid "Settings"
+msgstr "მორგება"
+
+#: src/plugins/default/default-switch-profile-action.c:308
+msgid "Profile"
+msgstr "პროფილი"
+
+#: src/plugins/launcher/launcher-action-factory.c:42
+msgid "Launch Application"
+msgstr "აპლიკაციის გაშვება"
+
+#: src/plugins/launcher/launcher-action-factory.c:48
+msgid "Open URL"
+msgstr "URL-ის გახსნა"
+
+#: src/plugins/launcher/launcher-launch-preferences.ui:8
+msgid "Choose Application"
+msgstr "აირჩიეთ აპლიკაცია"
+
+#: src/plugins/launcher/launcher-open-url-action.c:101
+msgid "URL"
+msgstr "ბმული"
+
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "გამშვები"
+
+#: src/plugins/obs-studio/obs-action-factory.c:48
+msgid "Switch Scene"
+msgstr "სცენის გადართვა"
+
+#: src/plugins/obs-studio/obs-action-factory.c:54
+msgid "Record"
+msgstr "ჩაწერა"
+
+#: src/plugins/obs-studio/obs-action-factory.c:60
+msgid "Stream"
+msgstr "ნაკადი"
+
+#: src/plugins/obs-studio/obs-action-factory.c:66
+msgid "Virtual Camera"
+msgstr "ვირტუალური კამერა"
+
+#: src/plugins/obs-studio/obs-action-factory.c:72
+msgid "Toggle Mute"
+msgstr "დადუმების გადართვა"
+
+#: src/plugins/obs-studio/obs-action-factory.c:78
+msgid "Show / Hide Source"
+msgstr "წყაროს ჩვენება/დამალვა"
+
+#: src/plugins/obs-studio/obs-connection.c:800
+msgid "Invalid password"
+msgstr "არასწორი პაროლი"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:8
+msgid "Connection Settings"
+msgstr "შეერთების მორგება"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:12
+msgid "Host"
+msgstr "ჰოსტი"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
+msgid "Port"
+msgstr "პორტი"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
+msgid "Password"
+msgstr "პაროლი"
+
+#: src/plugins/obs-studio/obs-switch-scene-action.c:283
+msgid "Scene"
+msgstr "სცენა"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:124
+msgid "Toggle mute"
+msgstr "დადუმების გადართვა"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:125
+msgid "Mute"
+msgstr "დადუმება"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:126
+msgid "Unmute"
+msgstr "დადუმების გამორთვა"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:130
+msgid "Toggle visibility"
+msgstr "ხილულობის გადართვა"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:131
+msgid "Hide"
+msgstr "დამალვა"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:132
+msgid "Show"
+msgstr "ჩვენება"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:479
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
+msgid "Behavior"
+msgstr "ქცევა"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:490
+msgid "Audio Source"
+msgstr "აუდიოს წყარო"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:492
+msgid "Source"
+msgstr "წყარო"
+
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:45
+msgid "Music Player"
+msgstr "მედია დამკვრელი"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:46
+msgid "Control the active music player"
+msgstr "აკონტროლეთ თქვენი მუსიკის დამკვრელი"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:51
+msgid "Play Audio"
+msgstr "ხმის დაკვრა"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
+msgid "Next"
+msgstr "შემდეგი"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
+msgid "Pause"
+msgstr "პაუზა"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
+msgid "Play"
+msgstr "დაკვრა"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
+msgid "Previous"
+msgstr "წინა"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
+msgid "Stop"
+msgstr "შეჩერება"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
+msgid "Play / Pause"
+msgstr "დაკვრა/პაუზა"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
+msgid "Playback Action"
+msgstr "ხმის დაკვრის ქმედება"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
+msgid "Select audio file"
+msgstr "აირჩიეთ აუდიო ფაილი"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Audio Files"
+msgstr "აუდიო ფაილები"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "ფაილი"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
+msgid "Play / Stop"
+msgstr "დაკვრა / გაჩერება"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
+msgid "Play / Overlap"
+msgstr "დაკვრა / გადაფარვა"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
+msgid "Play / Restart"
+msgstr "დაკვრა / თავიდან დაკვრა"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
+msgid "Loop / Stop"
+msgstr "მარყუჟი / გაჩერება"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
+msgid "Press & Hold"
+msgstr "დააწექით და გეჭიროთ"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
+msgid "Volume"
+msgstr "ხმის სიმაღლე"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr ""
