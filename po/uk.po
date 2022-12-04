@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-11-18 15:37+0000\n"
-"PO-Revision-Date: 2022-11-19 06:50+0200\n"
+"POT-Creation-Date: 2022-12-03 16:49+0000\n"
+"PO-Revision-Date: 2022-12-04 09:05+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -93,12 +93,10 @@ msgid "Rename"
 msgstr "Перейменувати"
 
 #: src/bs-profile-row.ui:14
-#| msgid "Move _up"
 msgid "Move up"
 msgstr "Пересунути вище"
 
 #: src/bs-profile-row.ui:18
-#| msgid "Move _down"
 msgid "Move down"
 msgstr "Пересунути нижче"
 
@@ -113,14 +111,14 @@ msgstr "Типовий"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:820
+#: src/bs-stream-deck.c:847
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
+#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
 #: src/plugins/default/default-switch-profile-action.c:285
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -129,22 +127,30 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:898 src/bs-stream-deck.c:924
+#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:950
+#: src/bs-stream-deck.c:977
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck.c:1019
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1003
+#| msgid "Stream Deck"
+msgid "Stream Deck Pedal"
+msgstr "Stream Deck Pedal"
+
+#: src/bs-stream-deck.c:1072
 msgid "Feaneron Hangar Original"
 msgstr "Оригінальний Feaneron Hangar"
 
-#: src/bs-stream-deck.c:1042
+#: src/bs-stream-deck.c:1095
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -188,7 +194,6 @@ msgid "Remove Action"
 msgstr "Вилучити дію"
 
 #: src/bs-window.ui:13
-#| msgid "_New profile"
 msgid "New profile"
 msgstr "Створити профіль"
 
@@ -445,31 +450,31 @@ msgstr "Керування активним звуковим програвач�
 msgid "Play Audio"
 msgstr "Відтворити звук"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:196
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
 msgid "Next"
 msgstr "Далі"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:197
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
 msgid "Pause"
 msgstr "Пауза"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:198
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
 msgid "Play"
 msgstr "Відтворити"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:199
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
 msgid "Previous"
 msgstr "Назад"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:200
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
 msgid "Stop"
 msgstr "Зупинити"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:201
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
 msgid "Play / Pause"
 msgstr "Відтворення / Пауза"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:204
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
 msgid "Playback Action"
 msgstr "Дія з відтворення"
 
