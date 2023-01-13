@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-08-03 11:07+0000\n"
-"PO-Revision-Date: 2022-08-22 23:48+0200\n"
+"POT-Creation-Date: 2022-12-03 16:49+0000\n"
+"PO-Revision-Date: 2023-01-13 12:31+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -90,12 +90,12 @@ msgid "Rename"
 msgstr "Preimenuj"
 
 #: src/bs-profile-row.ui:14
-msgid "Move _up"
-msgstr "Pomakni _gore"
+msgid "Move up"
+msgstr "Pomakni gore"
 
 #: src/bs-profile-row.ui:18
-msgid "Move _down"
-msgstr "Pomakni _dolje"
+msgid "Move down"
+msgstr "Pomakni dolje"
 
 #: src/bs-profiles-dialog.ui:26
 msgid "Profiles"
@@ -108,37 +108,45 @@ msgstr "Zadano"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:820
+#: src/bs-stream-deck.c:847
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
+#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
 #: src/plugins/default/default-switch-profile-action.c:285
+#: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:898
+#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:924
+#: src/bs-stream-deck.c:977
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck.c:993
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1003
+msgid "Stream Deck Pedal"
+msgstr "Stream Deck Pedal"
+
+#: src/bs-stream-deck.c:1072
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1016
+#: src/bs-stream-deck.c:1095
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -164,80 +172,80 @@ msgstr "Svi podržani formati"
 msgid "Select a button"
 msgstr "Odaberi tipku"
 
-#: src/bs-stream-deck-button-editor.ui:188
+#: src/bs-stream-deck-button-editor.ui:199
 msgid "Name"
 msgstr "Naziv"
 
-#: src/bs-stream-deck-button-editor.ui:195
+#: src/bs-stream-deck-button-editor.ui:206
 msgid "Background Color"
 msgstr "Boja pozadine"
 
-#: src/bs-stream-deck-button-editor.ui:226
-#: src/bs-stream-deck-button-editor.ui:288
+#: src/bs-stream-deck-button-editor.ui:237
+#: src/bs-stream-deck-button-editor.ui:300
 msgid "Select action"
 msgstr "Odaberi radnju"
 
-#: src/bs-stream-deck-button-editor.ui:247
+#: src/bs-stream-deck-button-editor.ui:258
 msgid "Remove Action"
 msgstr "Ukloni radnju"
 
 #: src/bs-window.ui:13
-msgid "_New profile"
-msgstr "_Novi profil"
+msgid "New profile"
+msgstr "Novi profil"
 
 #: src/bs-window.ui:19
 msgid "Manage profiles…"
 msgstr "Upravljanje profilima…"
 
-#: src/bs-window.ui:61
+#: src/bs-window.ui:64
 msgid "Create"
 msgstr "Stvori"
 
-#: src/bs-window.ui:105
+#: src/bs-window.ui:108
 msgid "Power"
 msgstr "Energija"
 
-#: src/bs-window.ui:121 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Svjetlina"
 
-#: src/bs-window.ui:157
+#: src/bs-window.ui:160
 msgid "Device"
 msgstr "Uređaj"
 
-#: src/bs-window.ui:173
+#: src/bs-window.ui:176
 msgid "Serial Number"
 msgstr "Serijski broj"
 
-#: src/bs-window.ui:200
+#: src/bs-window.ui:203
 msgid "Firmware"
 msgstr "Firmver"
 
-#: src/bs-window.ui:248
+#: src/bs-window.ui:251
 msgid "Devices"
 msgstr "Uređaji"
 
-#: src/bs-window.ui:292
+#: src/bs-window.ui:296
 msgid "No Stream Deck Found"
 msgstr "Nema pronađenog Stream Decka"
 
-#: src/bs-window.ui:293
+#: src/bs-window.ui:297
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Priključite Stream Deck uređaj za korištenje."
 
-#: src/bs-window.ui:304
+#: src/bs-window.ui:308
 msgid "_Keyboard Shortcuts"
 msgstr "_Prečaci tipkovnice"
 
-#: src/bs-window.ui:308
+#: src/bs-window.ui:312
 msgid "_About Boatswain"
 msgstr "_O Boatswainu"
 
-#: src/bs-window.ui:312
+#: src/bs-window.ui:316
 msgid "_Quit"
 msgstr "_Zatvori"
 
-#: src/bs-window.c:329
+#: src/bs-window.c:350
 msgid "Repository"
 msgstr "Repozitorij"
 
@@ -333,6 +341,10 @@ msgstr "Odaberi aplikaciju"
 msgid "URL"
 msgstr "URL"
 
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "Pokretač"
+
 #: src/plugins/obs-studio/obs-action-factory.c:48
 msgid "Switch Scene"
 msgstr "Prebaci scenu"
@@ -418,6 +430,10 @@ msgstr "Izvor zvuka"
 msgid "Source"
 msgstr "Izvor"
 
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
 #: src/plugins/soundboard/soundboard-action-factory.c:45
 msgid "Music Player"
 msgstr "Glazbeni reproduktor"
@@ -430,31 +446,31 @@ msgstr "Upravljaj aktivnim reproduktorom glazbe"
 msgid "Play Audio"
 msgstr "Reproduciraj zvuk"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:196
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
 msgid "Next"
 msgstr "Sljedeći"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:197
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
 msgid "Pause"
 msgstr "Pauziraj"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:198
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
 msgid "Play"
 msgstr "Pokreni"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:199
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
 msgid "Previous"
 msgstr "Prijašnji"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:200
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
 msgid "Stop"
 msgstr "Zaustavi"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:201
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
 msgid "Play / Pause"
 msgstr "Pokreni / Pauziraj"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:204
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
 msgid "Playback Action"
 msgstr "Radnja reprodukcije"
 
@@ -493,3 +509,7 @@ msgstr "Pritisni i drži pritisnuto"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Glasnoća zvuka"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr "Soundboard"
