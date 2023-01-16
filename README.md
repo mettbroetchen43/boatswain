@@ -19,9 +19,10 @@ communications in project spaces, such as the issue tracker or
 
 ## udev rules
 
-Elgato Stream Deck devices should be compatible starting from udev v250. If your
-version of udev is older than that, add the following content to
-`/etc/udev/rules.d/50-elgato.rules`:
+Most Elgato Stream Deck devices should be compatible starting from udev v250. 
+Stream Deck Pedal is not yet in any udev release. Stream Deck XL v2 is only
+available with udev v252. If your version of udev is older than that, add the
+following content to `/etc/udev/rules.d/50-elgato.rules`:
 
 ```
 # Elgato Stream Deck Mini
