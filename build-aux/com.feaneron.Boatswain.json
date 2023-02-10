@@ -28,9 +28,6 @@
         {
             "name" : "libusb",
             "buildsystem" : "autotools",
-            "config-opts" : [
-                "--disable-udev"
-            ],
             "sources" : [
                 {
                     "type" : "git",
