@@ -255,6 +255,9 @@ bs_device_manager_load (BsDeviceManager  *self,
   if (!self->emulate_devices)
     {
       self->gusb_context = g_usb_context_new (error);
+      if (!self->gusb_context)
+        goto out;
+
       enumerate_stream_decks (self);
       g_signal_connect (self->gusb_context, "device-added", G_CALLBACK (on_gusb_context_device_added_cb), self);
       g_signal_connect (self->gusb_context, "device-removed", G_CALLBACK (on_gusb_context_device_removed_cb), self);
@@ -264,6 +267,7 @@ bs_device_manager_load (BsDeviceManager  *self,
       enumerate_fake_stream_decks (self);
     }
 
+out:
   self->loaded = TRUE;
 
   return self->gusb_context != NULL;
