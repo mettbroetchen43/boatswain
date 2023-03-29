@@ -152,7 +152,7 @@ on_action_row_activated_cb (AdwActionRow             *row,
 static void
 on_action_factory_added_cb (PeasExtensionSet *extension_set,
                             PeasPluginInfo   *plugin_info,
-                            PeasExtension    *extension,
+                            GObject          *extension,
                             gpointer          user_data)
 {
   DefaultMultiActionEditor *self;

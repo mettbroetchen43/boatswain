@@ -27,7 +27,7 @@
 #include "default-multi-action-editor.h"
 #include "default-multi-action-private.h"
 
-#include <libpeas/peas.h>
+#include <libpeas.h>
 
 struct _DefaultMultiAction
 {
@@ -58,7 +58,7 @@ typedef struct
 static void
 find_action_factory_cb (PeasExtensionSet *set,
                         PeasPluginInfo   *info,
-                        PeasExtension    *extension,
+                        GObject          *extension,
                         gpointer          data)
 {
   FindFactoryData *find_data = data;

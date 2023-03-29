@@ -60,7 +60,7 @@ static GOptionEntry bs_application_options[] = {
  */
 
 static void
-load_plugin (PeasEngine  *engine,
+load_plugin (PeasEngine     *engine,
              PeasPluginInfo *plugin_info)
 {
   g_autofree char *icons_dir = NULL;
@@ -147,7 +147,6 @@ bs_application_startup (GApplication *application)
   AdwStyleManager *style_manager;
   BsApplication *self;
   PeasEngine *engine;
-  const GList *l;
 
   self = BS_APPLICATION (application);
 
@@ -155,11 +154,17 @@ bs_application_startup (GApplication *application)
 
   /* All plugins must be loaded before profiles and Stream Decks */
   engine = peas_engine_get_default ();
-  peas_engine_prepend_search_path (engine,
-                                   "resource:///com/feaneron/Boatswain/plugins",
-                                   "resource:///com/feaneron/Boatswain/plugins");
-  for (l = peas_engine_get_plugin_list (engine); l; l = l->next)
-    load_plugin (engine, l->data);
+  peas_engine_add_search_path (engine,
+                               "resource:///com/feaneron/Boatswain/plugins",
+                               "resource:///com/feaneron/Boatswain/plugins");
+
+  for (uint32_t i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (engine)); i++)
+    {
+      g_autoptr (PeasPluginInfo) plugin_info = NULL;
+
+      plugin_info = g_list_model_get_item (G_LIST_MODEL (engine), i);
+      load_plugin (engine, plugin_info);
+    }
 
   self->action_factories_set = peas_extension_set_new (peas_engine_get_default (),
                                                        BS_TYPE_ACTION_FACTORY,

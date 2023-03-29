@@ -69,14 +69,14 @@
                 "/lib/peas-demo"
             ],
             "config-opts" : [
-                "-Ddemos=false",
                 "-Dgtk_doc=false",
-                "-Dwidgetry=false"
+                "-Dlua51=false"
             ],
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/libpeas.git"
+                    "url" : "https://gitlab.gnome.org/GNOME/libpeas.git",
+                    "branch" : "main"
                 }
             ]
         },

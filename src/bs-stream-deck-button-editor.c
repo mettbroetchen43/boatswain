@@ -30,7 +30,7 @@
 #include "bs-stream-deck-button-editor.h"
 
 #include <glib/gi18n.h>
-#include <libpeas/peas.h>
+#include <libpeas.h>
 
 struct _BsStreamDeckButtonEditor
 {
@@ -273,7 +273,7 @@ on_action_row_activated_cb (GtkListBoxRow            *row,
 static void
 on_action_factory_added_cb (PeasExtensionSet *extension_set,
                             PeasPluginInfo   *plugin_info,
-                            PeasExtension    *extension,
+                            GObject          *extension,
                             gpointer          user_data)
 {
   BsStreamDeckButtonEditor *self = BS_STREAM_DECK_BUTTON_EDITOR (user_data);
@@ -284,7 +284,7 @@ on_action_factory_added_cb (PeasExtensionSet *extension_set,
 static void
 on_action_factory_removed_cb (PeasExtensionSet *extension_set,
                               PeasPluginInfo   *plugin_info,
-                              PeasExtension    *extension,
+                              GObject          *extension,
                               gpointer          user_data)
 {
 }

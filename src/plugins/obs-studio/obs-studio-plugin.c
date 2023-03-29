@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include <libpeas/peas.h>
+#include <libpeas.h>
 
 #include "bs-action-factory.h"
 #include "obs-action-factory.h"

@@ -31,7 +31,7 @@
 #include "bs-stream-deck.h"
 #include "bs-stream-deck-button.h"
 
-#include <libpeas/peas.h>
+#include <libpeas.h>
 
 struct _BsStreamDeckButtonWidget
 {

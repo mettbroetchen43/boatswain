@@ -27,7 +27,7 @@
 #include "bs-page.h"
 #include "bs-page-item.h"
 
-#include <libpeas/peas.h>
+#include <libpeas.h>
 
 struct _BsPageItem
 {
@@ -74,7 +74,7 @@ typedef struct
 static void
 find_action_factory_cb (PeasExtensionSet *set,
                         PeasPluginInfo   *info,
-                        PeasExtension    *extension,
+                        GObject          *extension,
                         gpointer          data)
 {
   FindFactoryData *find_data = data;

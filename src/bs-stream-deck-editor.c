@@ -32,7 +32,7 @@
 #include "bs-stream-deck-editor.h"
 
 #include <glib/gi18n.h>
-#include <libpeas/peas.h>
+#include <libpeas.h>
 
 struct _BsStreamDeckEditor
 {
