@@ -85,6 +85,45 @@ load_plugin (PeasEngine     *engine,
  * Callbacks
  */
 
+static void
+on_background_status_set_cb (GObject      *object,
+                             GAsyncResult *result,
+                             gpointer      user_data)
+{
+  g_autoptr (GError) error = NULL;
+
+  xdp_portal_set_background_status_finish (XDP_PORTAL (object), result, &error);
+
+  if (error)
+    g_warning ("Error requesting background: %s", error->message);
+}
+
+static void
+on_device_manager_items_changed_cb (GListModel    *model,
+                                    unsigned int   position,
+                                    unsigned int   removed,
+                                    unsigned int   added,
+                                    BsApplication *self)
+{
+  g_autofree char *message = NULL;
+  uint32_t n_devices;
+
+  n_devices = g_list_model_get_n_items (model);
+
+  /* Translators: "device" refers to Elgato Stream Deck devices */
+  message = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
+                                          "Connected to %d device",
+                                          "Connected to %d devices",
+                                          n_devices),
+                             n_devices);
+
+  xdp_portal_set_background_status (self->portal,
+                                    message,
+                                    NULL,
+                                    on_background_status_set_cb,
+                                    NULL);
+}
+
 static gboolean
 on_unix_signal_cb (GApplication *application)
 {
@@ -176,6 +215,11 @@ bs_application_startup (GApplication *application)
   adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_PREFER_DARK);
 
   self->device_manager = bs_device_manager_new ();
+  g_signal_connect (self->device_manager,
+                    "items-changed",
+                    G_CALLBACK (on_device_manager_items_changed_cb),
+                    self);
+
   bs_device_manager_load (self->device_manager, &error);
 
   if (error)

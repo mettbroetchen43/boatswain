@@ -90,7 +90,9 @@
             "name" : "libportal",
             "buildsystem" : "meson",
             "config-opts" : [
-                "-Dbackends=gtk4",
+                "-Dbackend-gtk3=disabled",
+                "-Dbackend-gtk4=enabled",
+                "-Dbackend-qt5=disabled",
                 "-Ddocs=false",
                 "-Dtests=false",
                 "-Dvapi=false"
@@ -99,7 +101,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/flatpak/libportal.git",
-                    "tag" : "0.6"
+                    "commit" : "f84a5606f15dfff6771a12d2ce75699d2c7a3d8f"
                 }
             ]
         },
