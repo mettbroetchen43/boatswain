@@ -56,15 +56,15 @@ find_stream_deck (const char   *serial_number,
 {
   BsDeviceManager *device_manager;
   BsApplication *application;
-  GListModel *stream_decks;
 
   application = BS_APPLICATION (g_application_get_default ());
   device_manager = bs_application_get_device_manager (application);
-  stream_decks = bs_device_manager_get_stream_decks (device_manager);
 
-  for (unsigned int i = 0; i < g_list_model_get_n_items (stream_decks); i++)
+  for (unsigned int i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (device_manager)); i++)
     {
-      g_autoptr (BsStreamDeck) stream_deck = g_list_model_get_item (stream_decks, i);
+      g_autoptr (BsStreamDeck) stream_deck = NULL;
+
+      stream_deck = g_list_model_get_item (G_LIST_MODEL (device_manager), i);
 
       if (g_strcmp0 (bs_stream_deck_get_serial_number (stream_deck), serial_number) == 0)
         {
@@ -263,7 +263,6 @@ default_switch_profile_action_get_preferences (BsAction *action)
   BsDeviceManager *device_manager;
   BsApplication *application;
   BsStreamDeck *stream_deck;
-  GListModel *stream_decks;
   GListModel *profiles;
   GtkWidget *group;
   GtkWidget *row;
@@ -276,7 +275,6 @@ default_switch_profile_action_get_preferences (BsAction *action)
 
   application = BS_APPLICATION (g_application_get_default ());
   device_manager = bs_application_get_device_manager (application);
-  stream_decks = bs_device_manager_get_stream_decks (device_manager);
 
   group = adw_preferences_group_new ();
 
@@ -285,7 +283,7 @@ default_switch_profile_action_get_preferences (BsAction *action)
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _("Stream Deck"));
   adw_combo_row_set_expression (ADW_COMBO_ROW (row),
                                 gtk_property_expression_new (BS_TYPE_PROFILE, NULL, "name"));
-  adw_combo_row_set_model (ADW_COMBO_ROW (row), stream_decks);
+  adw_combo_row_set_model (ADW_COMBO_ROW (row), G_LIST_MODEL (device_manager));
 
   if ((stream_deck = find_stream_deck (self->serial_number, &position)) != NULL)
     adw_combo_row_set_selected (ADW_COMBO_ROW (row), position);

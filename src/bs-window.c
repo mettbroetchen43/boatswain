@@ -188,13 +188,11 @@ update_omni_bar_menu_popover (BsWindow *self)
 {
   BsDeviceManager *device_manager;
   GApplication *application;
-  GListModel *stream_decks;
   guint n_stream_decks;
 
   application = g_application_get_default ();
   device_manager = bs_application_get_device_manager (BS_APPLICATION (application));
-  stream_decks = bs_device_manager_get_stream_decks (device_manager);
-  n_stream_decks = g_list_model_get_n_items (stream_decks);
+  n_stream_decks = g_list_model_get_n_items (G_LIST_MODEL (device_manager));
 
   g_object_set (self->omnibar,
                 "menu-popover", n_stream_decks > 1 ? self->devices_popover : NULL,
@@ -280,15 +278,13 @@ on_device_manager_stream_deck_added_cb (BsDeviceManager *device_manager,
                                         BsWindow        *self)
 {
   g_autofree char *page_name = NULL;
-  GListModel *stream_decks;
   GtkWidget *editor;
 
   editor = bs_stream_deck_editor_new (stream_deck);
   page_name = g_strdup_printf ("%p", stream_deck);
   gtk_stack_add_named (self->main_stack, editor, page_name);
 
-  stream_decks = bs_device_manager_get_stream_decks (device_manager);
-  if (g_list_model_get_n_items (stream_decks) == 1)
+  if (g_list_model_get_n_items (G_LIST_MODEL (device_manager)) == 1)
     select_stream_deck (self, stream_deck);
 
   gtk_widget_show (GTK_WIDGET (self->profiles_menu_button));
@@ -301,7 +297,6 @@ on_device_manager_stream_deck_removed_cb (BsDeviceManager *device_manager,
                                           BsWindow        *self)
 {
   g_autofree char *page_name = NULL;
-  GListModel *stream_decks;
   GtkWidget *child;
   unsigned int n_stream_decks;
 
@@ -310,8 +305,7 @@ on_device_manager_stream_deck_removed_cb (BsDeviceManager *device_manager,
 
   gtk_stack_remove (self->main_stack, child);
 
-  stream_decks = bs_device_manager_get_stream_decks (device_manager);
-  n_stream_decks = g_list_model_get_n_items (stream_decks);
+  n_stream_decks = g_list_model_get_n_items (G_LIST_MODEL (device_manager));
   gtk_widget_set_visible (GTK_WIDGET (self->profiles_menu_button), n_stream_decks > 0);
 
   if (n_stream_decks == 0)
@@ -440,7 +434,6 @@ bs_window_constructed (GObject *object)
 {
   BsDeviceManager *device_manager;
   GApplication *application;
-  GListModel *stream_decks;
   BsWindow *self;
   gboolean first;
   size_t i;
@@ -451,15 +444,14 @@ bs_window_constructed (GObject *object)
   first = TRUE;
   application = g_application_get_default ();
   device_manager = bs_application_get_device_manager (BS_APPLICATION (application));
-  stream_decks = bs_device_manager_get_stream_decks (device_manager);
 
-  for (i = 0; i < g_list_model_get_n_items (stream_decks); i++)
+  for (i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (device_manager)); i++)
     {
       g_autoptr (BsStreamDeck) stream_deck = NULL;
       g_autofree char *page_name = NULL;
       GtkWidget *editor;
 
-      stream_deck = g_list_model_get_item (stream_decks, i);
+      stream_deck = g_list_model_get_item (G_LIST_MODEL (device_manager), i);
       editor = bs_stream_deck_editor_new (stream_deck);
       page_name = g_strdup_printf ("%p", stream_deck);
       gtk_stack_add_named (self->main_stack, editor, page_name);
@@ -474,7 +466,7 @@ bs_window_constructed (GObject *object)
     }
 
   gtk_list_box_bind_model (self->stream_decks_listbox,
-                           stream_decks,
+                           G_LIST_MODEL (device_manager),
                            create_stream_deck_row_cb,
                            self,
                            NULL);

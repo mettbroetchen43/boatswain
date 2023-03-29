@@ -38,7 +38,10 @@ struct _BsDeviceManager
   gboolean loaded;
 };
 
-G_DEFINE_FINAL_TYPE (BsDeviceManager, bs_device_manager, G_TYPE_OBJECT)
+static void g_list_model_interface_init (GListModelInterface *iface);
+
+G_DEFINE_FINAL_TYPE_WITH_CODE (BsDeviceManager, bs_device_manager, G_TYPE_OBJECT,
+                               G_IMPLEMENT_INTERFACE (G_TYPE_LIST_MODEL, g_list_model_interface_init))
 
 enum
 {
@@ -182,6 +185,50 @@ on_gusb_context_device_removed_cb (GUsbContext     *gusb_context,
   BS_EXIT;
 }
 
+static void
+on_stream_decks_items_changed_cb (GListModel      *model,
+                                  unsigned int     position,
+                                  unsigned int     removed,
+                                  unsigned int     added,
+                                  BsDeviceManager *self)
+{
+  g_list_model_items_changed (G_LIST_MODEL (self), position, removed, added);
+}
+
+
+/*
+ * GListModel interface
+ */
+
+static GType
+bs_device_manager_get_item_type (GListModel *model)
+{
+  return BS_TYPE_STREAM_DECK;
+}
+
+static gpointer
+bs_device_manager_get_item (GListModel *model,
+                            guint       i)
+{
+  BsDeviceManager *self = BS_DEVICE_MANAGER (model);
+  return g_list_model_get_item (G_LIST_MODEL (self->stream_decks), i);
+}
+
+static guint
+bs_device_manager_get_n_items (GListModel *model)
+{
+  BsDeviceManager *self = BS_DEVICE_MANAGER (model);
+  return g_list_model_get_n_items (G_LIST_MODEL (self->stream_decks));
+}
+
+static void
+g_list_model_interface_init (GListModelInterface *iface)
+{
+  iface->get_item_type = bs_device_manager_get_item_type;
+  iface->get_item = bs_device_manager_get_item;
+  iface->get_n_items = bs_device_manager_get_n_items;
+}
+
 
 /*
  * GObject overrides
@@ -236,6 +283,10 @@ bs_device_manager_init (BsDeviceManager *self)
                           *emulate_devices == '1';
 
   self->stream_decks = g_list_store_new (BS_TYPE_STREAM_DECK);
+  g_signal_connect (self->stream_decks,
+                    "items-changed",
+                    G_CALLBACK (on_stream_decks_items_changed_cb),
+                    self);
 }
 
 BsDeviceManager *
@@ -273,10 +324,3 @@ out:
   return self->gusb_context != NULL;
 }
 
-GListModel *
-bs_device_manager_get_stream_decks (BsDeviceManager *self)
-{
-  g_return_val_if_fail (BS_IS_DEVICE_MANAGER (self), NULL);
-
-  return G_LIST_MODEL (self->stream_decks);
-}
