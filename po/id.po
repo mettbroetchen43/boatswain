@@ -2,19 +2,21 @@
 # Copyright (C) 2023 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
 # Andika Triwidada <atriwidada@gnome.org>, 2023.
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-02-10 23:16+0000\n"
-"PO-Revision-Date: 2023-02-17 11:11+0700\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"POT-Creation-Date: 2023-03-29 16:41+0000\n"
+"PO-Revision-Date: 2023-03-31 07:46+0700\n"
+"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.2.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
@@ -28,43 +30,35 @@ msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:10
-#, fuzzy
 msgid "Control your Elgato Stream Decks"
 msgstr "Kontrol Elgato Stream Deck Anda"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:12
-#, fuzzy
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
 "Boatswain memungkinkan Anda untuk mengontrol perangkat Elgato Stream Deck."
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:13
-#, fuzzy
 msgid "With Boatswain you will be able to:"
 msgstr "Dengan Boatswain Anda akan dapat:"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:15
-#, fuzzy
 msgid "Organize your actions in pages and profiles"
-msgstr "Mengatur tindakan Anda di halaman dan profil"
+msgstr "Atur tindakan Anda di halaman dan profil"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:16
-#, fuzzy
 msgid "Set custom icons to actions"
-msgstr "Mengatur ikon kustom ke tindakan"
+msgstr "Atur ikon ubahan ke tindakan"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:17
-#, fuzzy
 msgid "Control your music player"
 msgstr "Kontrol pemutar musik Anda"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:18
-#, fuzzy
 msgid "Play sound effects during your streams"
-msgstr "Memutar efek suara selama streaming Anda"
+msgstr "Putar efek suara selama streaming Anda"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:19
-#, fuzzy
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
@@ -73,31 +67,32 @@ msgstr ""
 
 #. Translators: please do NOT translate this
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:23
-#, fuzzy
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
 #: src/bs-application.c:52
-#, fuzzy
 msgid "Enable debug messages"
 msgstr "Aktifkan pesan awakutu"
 
-#: src/bs-application.c:128
-#, fuzzy
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "Terhubung ke perangkat %d"
+
+#: src/bs-application.c:167
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
 msgstr ""
-"Boatswain perlu berjalan di latar belakang untuk mendeteksi dan "
-"menjalankan tindakan Stream Deck."
+"Boatswain perlu berjalan di latar belakang untuk mendeteksi dan menjalankan "
+"tindakan Stream Deck."
 
 #: src/bs-profile.c:184
-#, fuzzy
 msgid "Unnamed profile"
 msgstr "Profil tanpa nama"
 
 #: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
-#, fuzzy
 msgid "Rename"
 msgstr "Ganti Nama"
 
@@ -128,7 +123,7 @@ msgstr "Stream Deck Mini"
 #. * Please verify if Elgato translates their product names on your locale.
 #.
 #: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
-#: src/plugins/default/default-switch-profile-action.c:285
+#: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
@@ -155,7 +150,6 @@ msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
 #: src/bs-stream-deck.c:1072
-#, fuzzy
 msgid "Feaneron Hangar Original"
 msgstr "Hanggar Feaneron Asli"
 
@@ -232,37 +226,33 @@ msgstr "Nomor Seri"
 
 #: src/bs-window.ui:203
 msgid "Firmware"
-msgstr "Firmware"
+msgstr "Perangkat Tegar (Firmware)"
 
 #: src/bs-window.ui:251
 msgid "Devices"
 msgstr "Perangkat"
 
 #: src/bs-window.ui:296
-#, fuzzy
 msgid "No Stream Deck Found"
 msgstr "Tidak Ada Stream Deck yang Ditemukan"
 
 #: src/bs-window.ui:297
-#, fuzzy
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Colokkan perangkat Stream Deck untuk menggunakannya."
 
 #: src/bs-window.ui:308
-#, fuzzy
 msgid "_Keyboard Shortcuts"
-msgstr "_Pintasan Papan Tik"
+msgstr "Pintasan Papan Ti_k"
 
 #: src/bs-window.ui:312
-#, fuzzy
 msgid "_About Boatswain"
-msgstr "_About Boatswain"
+msgstr "Tent_ang Boatswain"
 
 #: src/bs-window.ui:316
 msgid "_Quit"
 msgstr "_Keluar"
 
-#: src/bs-window.c:350
+#: src/bs-window.c:344
 msgid "Repository"
 msgstr "Repositori"
 
@@ -298,12 +288,10 @@ msgid "Constant"
 msgstr "Konstant"
 
 #: src/plugins/default/default-brightness-action.c:141
-#, fuzzy
 msgid "Increase"
 msgstr "Diperbesar"
 
 #: src/plugins/default/default-brightness-action.c:142
-#, fuzzy
 msgid "Decrease"
 msgstr "Diperkecil"
 
@@ -317,22 +305,18 @@ msgstr "Nilai"
 
 #: src/plugins/default/default-multi-action-editor.c:310
 #: src/plugins/default/default-multi-action-row.c:142
-#, fuzzy
 msgid "Delay"
 msgstr "Tunda"
 
 #: src/plugins/default/default-multi-action-editor.ui:31
-#, fuzzy
 msgid "Add action"
-msgstr "Menambahkan "
+msgstr "Tambah aksi"
 
 #: src/plugins/default/default-multi-action-editor.ui:49
-#, fuzzy
 msgid "Add Action"
-msgstr "Tambahkan Aksi"
+msgstr "Tambah Aksi"
 
 #: src/plugins/default/default-multi-action-editor.ui:67
-#, fuzzy
 msgid "Actions"
 msgstr "Aksi"
 
@@ -344,7 +328,7 @@ msgstr "Lainnya"
 msgid "Settings"
 msgstr "Pengaturan"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Profil"
 
@@ -369,7 +353,6 @@ msgid "Launcher"
 msgstr "Peluncur"
 
 #: src/plugins/obs-studio/obs-action-factory.c:48
-#, fuzzy
 msgid "Switch Scene"
 msgstr "Beralih Adegan"
 
@@ -386,12 +369,10 @@ msgid "Virtual Camera"
 msgstr "Kamera Virtual"
 
 #: src/plugins/obs-studio/obs-action-factory.c:72
-#, fuzzy
 msgid "Toggle Mute"
 msgstr "Jungkitkan Bisu"
 
 #: src/plugins/obs-studio/obs-action-factory.c:78
-#, fuzzy
 msgid "Show / Hide Source"
 msgstr "Tampilkan / Sembunyikan Sumber"
 
@@ -416,24 +397,20 @@ msgid "Password"
 msgstr "Kata Sandi"
 
 #: src/plugins/obs-studio/obs-switch-scene-action.c:283
-#, fuzzy
 msgid "Scene"
-msgstr "Scene"
+msgstr "Adegan"
 
 #: src/plugins/obs-studio/obs-toggle-source-action.c:124
-#, fuzzy
 msgid "Toggle mute"
-msgstr "Jungkitkan Bisu"
+msgstr "Jungkitkan bisu"
 
 #: src/plugins/obs-studio/obs-toggle-source-action.c:125
-#, fuzzy
 msgid "Mute"
 msgstr "Bisu"
 
 #: src/plugins/obs-studio/obs-toggle-source-action.c:126
-#, fuzzy
 msgid "Unmute"
-msgstr "Bersuara"
+msgstr "Bunyikan"
 
 #: src/plugins/obs-studio/obs-toggle-source-action.c:130
 msgid "Toggle visibility"
@@ -453,9 +430,8 @@ msgid "Behavior"
 msgstr "Perilaku"
 
 #: src/plugins/obs-studio/obs-toggle-source-action.c:490
-#, fuzzy
 msgid "Audio Source"
-msgstr "Sumber Audio WWW"
+msgstr "Sumber Audio"
 
 #: src/plugins/obs-studio/obs-toggle-source-action.c:492
 msgid "Source"
@@ -470,7 +446,6 @@ msgid "Music Player"
 msgstr "Pemutar Musik"
 
 #: src/plugins/soundboard/soundboard-action-factory.c:46
-#, fuzzy
 msgid "Control the active music player"
 msgstr "Kontrol pemutar musik yang aktif"
 
@@ -503,17 +478,14 @@ msgid "Play / Pause"
 msgstr "Putar / Jeda"
 
 #: src/plugins/soundboard/soundboard-mpris-action.c:205
-#, fuzzy
 msgid "Playback Action"
 msgstr "Tindakan Pemutaran"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:95
-#, fuzzy
 msgid "Select audio file"
-msgstr "Pilih file audio"
+msgstr "Pilih berkas audio"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:103
-#, fuzzy
 msgid "Audio Files"
 msgstr "Berkas Audio"
 
@@ -522,27 +494,22 @@ msgid "File"
 msgstr "Berkas"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
-#, fuzzy
 msgid "Play / Stop"
-msgstr "Mainkan / Berhenti"
+msgstr "Putar / Berhenti"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
-#, fuzzy
 msgid "Play / Overlap"
-msgstr "Mainkan / Tumpang Tindih"
+msgstr "Putar / Tumpang Tindih"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
-#, fuzzy
 msgid "Play / Restart"
 msgstr "Putar / Mulai Ulang"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
-#, fuzzy
 msgid "Loop / Stop"
 msgstr "Loop / Berhenti"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
-#, fuzzy
 msgid "Press & Hold"
 msgstr "Tekan & Tahan"
 
@@ -551,6 +518,5 @@ msgid "Volume"
 msgstr "Volume"
 
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
-#, fuzzy
 msgid "Soundboard"
 msgstr "Papan suara"
