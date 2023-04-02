@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-09-17 11:06+0000\n"
-"PO-Revision-Date: 2022-09-29 22:39+0200\n"
-"Last-Translator: Matej Urbančič <mateju@src.gnome.org>\n"
+"POT-Creation-Date: 2023-03-29 16:41+0000\n"
+"PO-Revision-Date: 2023-04-02 11:20+0200\n"
+"Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups."
 "com>\n"
 "Language: sl_SI\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -76,7 +76,16 @@ msgstr "Georges Basile Stavracas Neto"
 msgid "Enable debug messages"
 msgstr "Omogoči sporočila za razhroščevanje"
 
-#: src/bs-application.c:128
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "%d povezanih naprav"
+msgstr[1] "%d povezana naprava"
+msgstr[2] "%d povezani napravi"
+msgstr[3] "%d povezane naprave"
+
+#: src/bs-application.c:167
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -93,12 +102,12 @@ msgid "Rename"
 msgstr "Preimenuj"
 
 #: src/bs-profile-row.ui:14
-msgid "Move _up"
-msgstr "Premakni _navzgor"
+msgid "Move up"
+msgstr "Premakni navzgor"
 
 #: src/bs-profile-row.ui:18
-msgid "Move _down"
-msgstr "Premakni navz_dol"
+msgid "Move down"
+msgstr "Premakni navzdol"
 
 #: src/bs-profiles-dialog.ui:26
 msgid "Profiles"
@@ -111,37 +120,45 @@ msgstr "Privzeto"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:820
+#: src/bs-stream-deck.c:847
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
-#: src/plugins/default/default-switch-profile-action.c:285
+#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
+#: src/plugins/default/default-switch-profile-action.c:283
+#: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:898
+#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:924
+#: src/bs-stream-deck.c:977
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck.c:993
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1003
+msgid "Stream Deck Pedal"
+msgstr "Pedal Stream Deck"
+
+#: src/bs-stream-deck.c:1072
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1016
+#: src/bs-stream-deck.c:1095
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -185,8 +202,8 @@ msgid "Remove Action"
 msgstr "Odstrani dejanje"
 
 #: src/bs-window.ui:13
-msgid "_New profile"
-msgstr "_Nov profil"
+msgid "New profile"
+msgstr "Nov profil"
 
 #: src/bs-window.ui:19
 msgid "Manage profiles…"
@@ -220,27 +237,27 @@ msgstr "Strojna programska oprema"
 msgid "Devices"
 msgstr "Naprave"
 
-#: src/bs-window.ui:295
+#: src/bs-window.ui:296
 msgid "No Stream Deck Found"
 msgstr "Ni zaznane nobene naprave Stream Deck"
 
-#: src/bs-window.ui:296
+#: src/bs-window.ui:297
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Priklopite napravo Stream Deck za uporabo."
 
-#: src/bs-window.ui:307
+#: src/bs-window.ui:308
 msgid "_Keyboard Shortcuts"
 msgstr "_Tipkovne bližnjice"
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:312
 msgid "_About Boatswain"
 msgstr "_O programu"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:316
 msgid "_Quit"
 msgstr "_Končaj"
 
-#: src/bs-window.c:329
+#: src/bs-window.c:344
 msgid "Repository"
 msgstr "Skladišče"
 
@@ -316,7 +333,7 @@ msgstr "Drugo"
 msgid "Settings"
 msgstr "Nastavitve"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Profil"
 
@@ -335,6 +352,10 @@ msgstr "Izbor programa"
 #: src/plugins/launcher/launcher-open-url-action.c:101
 msgid "URL"
 msgstr "Naslov URL"
+
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "Zaganjalnik"
 
 #: src/plugins/obs-studio/obs-action-factory.c:48
 msgid "Switch Scene"
@@ -421,6 +442,10 @@ msgstr "Vir zvoka"
 msgid "Source"
 msgstr "Vir"
 
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
 #: src/plugins/soundboard/soundboard-action-factory.c:45
 msgid "Music Player"
 msgstr "Predvajalnik glasbe"
@@ -433,31 +458,31 @@ msgstr "Nadzornik predvajalnika glasbe"
 msgid "Play Audio"
 msgstr "Predvajanje zvoka"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:196
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
 msgid "Next"
 msgstr "Naslednji"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:197
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
 msgid "Pause"
 msgstr "Premor"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:198
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
 msgid "Play"
 msgstr "Predvajaj"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:199
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
 msgid "Previous"
 msgstr "Predhodni"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:200
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
 msgid "Stop"
 msgstr "Zaustavi"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:201
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
 msgid "Play / Pause"
 msgstr "Predvajaj / Premor"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:204
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
 msgid "Playback Action"
 msgstr "Dejanje predvajanja"
 
@@ -497,5 +522,7 @@ msgstr "Pritisni in zadrži"
 msgid "Volume"
 msgstr "Glasnost"
 
-#~ msgid "Copyright © 2022 Georges Basile Stavracas Neto"
-#~ msgstr "Avtorske pravice © 2022 Georges Basile Stavracas Neto"
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+#, fuzzy
+msgid "Soundboard"
+msgstr "Zvočna plošča/Soundboard"
