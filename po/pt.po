@@ -1,14 +1,14 @@
 # Portuguese translation for boatswain.
 # Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-12-03 16:49+0000\n"
-"PO-Revision-Date: 2022-12-08 18:06+0000\n"
+"POT-Creation-Date: 2023-03-29 16:41+0000\n"
+"PO-Revision-Date: 2023-04-03 11:03+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -72,7 +72,14 @@ msgstr "Georges Basile Stavracas Neto"
 msgid "Enable debug messages"
 msgstr "Ativar mensagens de depuração"
 
-#: src/bs-application.c:128
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "Ligado a %d dispositivo"
+msgstr[1] "Ligado a %d dispositivos"
+
+#: src/bs-application.c:167
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -115,7 +122,7 @@ msgstr "Stream Deck Mini"
 #. * Please verify if Elgato translates their product names on your locale.
 #.
 #: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
-#: src/plugins/default/default-switch-profile-action.c:285
+#: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
@@ -244,7 +251,7 @@ msgstr "_Sobre o Boatswain"
 msgid "_Quit"
 msgstr "_Sair"
 
-#: src/bs-window.c:350
+#: src/bs-window.c:344
 msgid "Repository"
 msgstr "Repositório"
 
@@ -320,7 +327,7 @@ msgstr "Outros"
 msgid "Settings"
 msgstr "Preferências"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Perfil"
 
