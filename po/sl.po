@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the boatswain package.
 #
 # Matej Urbančič <mateju@src.gnome.org>, 2022–.
+# Martin Srebotnjak <miles@filmsi.net>, 2022-.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-03-29 16:41+0000\n"
-"PO-Revision-Date: 2023-04-02 11:20+0200\n"
+"POT-Creation-Date: 2023-04-02 09:22+0000\n"
+"PO-Revision-Date: 2023-04-12 21:16+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups."
 "com>\n"
@@ -523,6 +524,5 @@ msgid "Volume"
 msgstr "Glasnost"
 
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
-#, fuzzy
 msgid "Soundboard"
-msgstr "Zvočna plošča/Soundboard"
+msgstr "Zvokovni vmesnik"
