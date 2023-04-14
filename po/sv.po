@@ -1,15 +1,15 @@
 # Swedish translation for boatswain.
-# Copyright © 2022 boatswain's COPYRIGHT HOLDER
+# Copyright © 2022, 2023 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2022.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2022, 2023.
 # Luna Jernberg <droidbittin@gmail.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-12-03 16:49+0000\n"
-"PO-Revision-Date: 2022-12-03 23:20+0100\n"
+"POT-Creation-Date: 2023-03-29 16:41+0000\n"
+"PO-Revision-Date: 2023-03-29 20:44+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -58,7 +58,8 @@ msgid "Play sound effects during your streams"
 msgstr "Spela upp ljudeffekter under dina strömmar"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:19
-msgid "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr "Styra OBS Studio med Stream Deck (kräver tillägget obs-websocket)"
 
 #. Translators: please do NOT translate this
@@ -70,9 +71,20 @@ msgstr "Georges Basile Stavracas Neto"
 msgid "Enable debug messages"
 msgstr "Aktivera felsökningsmeddelanden"
 
-#: src/bs-application.c:128
-msgid "Boatswain needs to run in background to detect and execute Stream Deck actions."
-msgstr "Boatswain behöver köras i bakgrunden för att upptäcka och köra Stream Deck-åtgärder."
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "Ansluten till %d enhet"
+msgstr[1] "Ansluten till %d enheter"
+
+#: src/bs-application.c:167
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr ""
+"Boatswain behöver köras i bakgrunden för att upptäcka och köra Stream Deck-"
+"åtgärder."
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
@@ -109,7 +121,7 @@ msgstr "Stream Deck Mini"
 #. * Please verify if Elgato translates their product names on your locale.
 #.
 #: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
-#: src/plugins/default/default-switch-profile-action.c:285
+#: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
@@ -238,7 +250,7 @@ msgstr "_Om Boatswain"
 msgid "_Quit"
 msgstr "_Avsluta"
 
-#: src/bs-window.c:350
+#: src/bs-window.c:344
 msgid "Repository"
 msgstr "Arkiv"
 
@@ -314,7 +326,7 @@ msgstr "Övriga"
 msgid "Settings"
 msgstr "Inställningar"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Profil"
 
@@ -506,9 +518,3 @@ msgstr "Volym"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Mixerbord"
-
-#~ msgid "Copyright © 2022 Georges Basile Stavracas Neto"
-#~ msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
-
-#~ msgid "OBS Studio requires a password to be controlled by Boatswain"
-#~ msgstr "OBS Studio kräver ett lösenord för att styras av Boatswain"
