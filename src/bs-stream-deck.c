@@ -867,6 +867,32 @@ static const StreamDeckModelInfo models_vtable[] = {
     .read_button_states = read_button_states_mini,
   },
   {
+    .product_id = STREAMDECK_MINI_V2_PRODUCT_ID,
+    /* Translators: this is a product name. In most cases, it is not translated.
+     * Please verify if Elgato translates their product names on your locale.
+     */
+    .name = N_("Stream Deck Mini"),
+    .icon_name = "input-dialpad-symbolic",
+    .button_layout = {
+      .n_buttons = 6,
+      .rows = 2,
+      .columns = 3,
+      .icon_size = 80,
+    },
+    .icon_layout = {
+      .width = 80,
+      .height = 80,
+      .format = BS_ICON_FORMAT_BMP,
+      .flags = BS_ICON_RENDERER_FLAG_FLIP_Y | BS_ICON_RENDERER_FLAG_ROTATE_90,
+    },
+    .reset = reset_mini_original,
+    .get_serial_number = get_serial_number_mini_original,
+    .get_firmware_version = get_firmware_version_mini_original,
+    .set_brightness = set_brightness_mini_original,
+    .set_button_texture = set_button_texture_mini,
+    .read_button_states = read_button_states_mini,
+  },
+  {
     .product_id = STREAMDECK_ORIGINAL_PRODUCT_ID,
     /* Translators: this is a product name. In most cases, it is not translated.
      * Please verify if Elgato translates their product names on your locale.
