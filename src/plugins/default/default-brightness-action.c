@@ -137,6 +137,7 @@ default_brightness_action_get_preferences (BsAction *action)
   gtk_widget_add_css_class (listbox, "boxed-list");
 
   strings = gtk_string_list_new (NULL);
+  /* Translators: "Constant" as in "Constant value of brightness" */
   gtk_string_list_append (strings, _("Constant"));
   gtk_string_list_append (strings, _("Increase"));
   gtk_string_list_append (strings, _("Decrease"));
