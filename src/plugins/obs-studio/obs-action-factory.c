@@ -51,12 +51,14 @@ static const BsActionInfo actions[] = {
   {
     .id = "obs-record-action",
     .icon_name = "media-record-symbolic",
+    /* Translators: "Record" is a verb here */
     .name = N_("Record"),
     .description = NULL,
   },
   {
     .id = "obs-stream-action",
     .icon_name = "transmit-symbolic",
+    /* Translators: "Stream" is a verb here */
     .name = N_("Stream"),
     .description = NULL,
   },
