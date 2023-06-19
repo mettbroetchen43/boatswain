@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-11-28 04:48+0000\n"
-"PO-Revision-Date: 2022-12-03 17:48+0100\n"
+"POT-Creation-Date: 2023-03-29 16:41+0000\n"
+"PO-Revision-Date: 2023-06-19 20:31+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -25,15 +26,16 @@ msgstr "Boatswain"
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/com.feaneron.Boatswain.desktop.in.in:11
 msgid "stream deck;streaming;deck;elgato;"
-msgstr ""
+msgstr "stream deck;streaming;deck;elgato;"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:10
 msgid "Control your Elgato Stream Decks"
-msgstr ""
+msgstr "აკონტროლეთ თქვენი Elgato Stream Deck-ები"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
+"Boatswain საშუალებას გაძლევთ აკონტროლოთ Elgato Stream Deck მოწყობილობები."
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:13
 msgid "With Boatswain you will be able to:"
@@ -53,12 +55,14 @@ msgstr "აკონტროლეთ თქვენი მუსიკის 
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Play sound effects during your streams"
-msgstr ""
+msgstr "ითამაშეთ ხმოვანი ეფექტები თქვენი ვიდეონაკადების დროს"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
+"აკონტროლეთ OBS Studio-ი Stream Deck-ის გამოყენებით (მოითხოვს obs-websocket "
+"გაფართოებას)"
 
 #. Translators: please do NOT translate this
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:23
@@ -69,11 +73,20 @@ msgstr "Georges Basile Stavracas Neto"
 msgid "Enable debug messages"
 msgstr "გამართვის შეტყობინებების ჩართვა"
 
-#: src/bs-application.c:128
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "დაკავშირებულია %d მოწყობილობასთან"
+msgstr[1] "დაკავშირებულია %d მოწყობილობასთან"
+
+#: src/bs-application.c:167
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
 msgstr ""
+"Stream Deck-ის ქმედებების აღმოსაჩენად და შესასრულებლად Boatswain ფონურ "
+"რეჟიმში უნდა იყოს გაშვებული."
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
@@ -102,40 +115,47 @@ msgstr "ნაგულისხმები"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:820
+#: src/bs-stream-deck.c:847
 msgid "Stream Deck Mini"
-msgstr ""
+msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
-#: src/plugins/default/default-switch-profile-action.c:285
+#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
+#: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
-msgstr ""
+msgstr "Stream Deck"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:898 src/bs-stream-deck.c:924
+#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
 msgid "Stream Deck XL"
-msgstr ""
+msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:950
+#: src/bs-stream-deck.c:977
 msgid "Stream Deck MK.2"
-msgstr ""
+msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck.c:1019
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1003
+msgid "Stream Deck Pedal"
+msgstr "Stream Deck Pedal"
+
+#: src/bs-stream-deck.c:1072
 msgid "Feaneron Hangar Original"
-msgstr ""
+msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1042
+#: src/bs-stream-deck.c:1095
 msgid "Feaneron Hangar XL"
-msgstr ""
+msgstr "Feaneron Hangar XL"
 
 #: src/bs-stream-deck-button-editor.c:380
 msgid "Select icon"
@@ -214,11 +234,11 @@ msgstr "მოწყობილობა"
 
 #: src/bs-window.ui:296
 msgid "No Stream Deck Found"
-msgstr ""
+msgstr "Stream Deck აღმოჩენილი არაა"
 
 #: src/bs-window.ui:297
 msgid "Plug in a Stream Deck device to use it."
-msgstr ""
+msgstr "შეაერთეთ Stream Deck მოწყობილობა მის გამოსაყენებლად."
 
 #: src/bs-window.ui:308
 msgid "_Keyboard Shortcuts"
@@ -232,7 +252,7 @@ msgstr "Boatswain-ის _შესახებ"
 msgid "_Quit"
 msgstr "დატოვება"
 
-#: src/bs-window.c:350
+#: src/bs-window.c:344
 msgid "Repository"
 msgstr "საცავი"
 
@@ -308,7 +328,7 @@ msgstr "სხვები"
 msgid "Settings"
 msgstr "მორგება"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "პროფილი"
 
@@ -499,4 +519,4 @@ msgstr "ხმის სიმაღლე"
 
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
-msgstr ""
+msgstr "Soundboard"
