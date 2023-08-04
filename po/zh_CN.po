@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-05-12 23:05+0000\n"
-"PO-Revision-Date: 2022-05-13 13:59+0800\n"
+"POT-Creation-Date: 2023-03-29 16:41+0000\n"
+"PO-Revision-Date: 2023-08-04 16:27-0400\n"
 "Last-Translator: D <afecr@foxmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 40.0\n"
+"X-Generator: Poedit 2.4.3\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -28,7 +29,7 @@ msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:10
-msgid "Control your Elgato Stream Deck devices"
+msgid "Control your Elgato Stream Decks"
 msgstr "控制您的 Elgato Stream Deck 设备"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:12
@@ -65,11 +66,17 @@ msgstr "使用 Stream Deck 控制 OBS Studio（需要 obs-websocket 扩展）"
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
-#: src/bs-application.c:53
+#: src/bs-application.c:52
 msgid "Enable debug messages"
 msgstr "启用调试消息"
 
-#: src/bs-application.c:76
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "已连接到 %d 个设备"
+
+#: src/bs-application.c:167
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -84,49 +91,65 @@ msgid "Rename"
 msgstr "重命名"
 
 #: src/bs-profile-row.ui:14
-msgid "Move _up"
-msgstr "上移(_U)"
+msgid "Move up"
+msgstr "上移"
 
 #: src/bs-profile-row.ui:18
-msgid "Move _down"
-msgstr "下移(_D)"
+msgid "Move down"
+msgstr "下移"
 
 #: src/bs-profiles-dialog.ui:26
 msgid "Profiles"
 msgstr "配置文件"
 
-#: src/bs-stream-deck.c:272
+#: src/bs-stream-deck.c:277
 msgid "Default"
 msgstr "默认"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:815
+#: src/bs-stream-deck.c:847
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:841 src/bs-stream-deck.c:867
-#: src/plugins/default/default-switch-profile-action.c:285
+#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
+#: src/plugins/default/default-switch-profile-action.c:283
+#: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:893
+#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:919
+#: src/bs-stream-deck.c:977
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1003
+msgid "Stream Deck Pedal"
+msgstr "Stream Deck Pedal"
+
+#: src/bs-stream-deck.c:1072
+msgid "Feaneron Hangar Original"
+msgstr "Feaneron Hangar Original"
+
+#: src/bs-stream-deck.c:1095
+msgid "Feaneron Hangar XL"
+msgstr "Feaneron Hangar XL"
 
 #: src/bs-stream-deck-button-editor.c:380
 msgid "Select icon"
@@ -150,84 +173,80 @@ msgstr "所有支持的格式"
 msgid "Select a button"
 msgstr "选择按钮"
 
-#: src/bs-stream-deck-button-editor.ui:188
+#: src/bs-stream-deck-button-editor.ui:199
 msgid "Name"
 msgstr "名称"
 
-#: src/bs-stream-deck-button-editor.ui:195
+#: src/bs-stream-deck-button-editor.ui:206
 msgid "Background Color"
 msgstr "背景颜色"
 
-#: src/bs-stream-deck-button-editor.ui:226
-#: src/bs-stream-deck-button-editor.ui:288
+#: src/bs-stream-deck-button-editor.ui:237
+#: src/bs-stream-deck-button-editor.ui:300
 msgid "Select action"
 msgstr "选择动作"
 
-#: src/bs-stream-deck-button-editor.ui:247
+#: src/bs-stream-deck-button-editor.ui:258
 msgid "Remove Action"
 msgstr "移除动作"
 
 #: src/bs-window.ui:13
-msgid "_New profile"
-msgstr "新建配置文件(_N)"
+msgid "New profile"
+msgstr "新建配置文件"
 
 #: src/bs-window.ui:19
 msgid "Manage profiles…"
 msgstr "管理配置文件…"
 
-#: src/bs-window.ui:60
+#: src/bs-window.ui:64
 msgid "Create"
 msgstr "创建"
 
-#: src/bs-window.ui:112
+#: src/bs-window.ui:108
 msgid "Power"
 msgstr "电源"
 
-#: src/bs-window.ui:128 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "亮度"
 
-#: src/bs-window.ui:164
+#: src/bs-window.ui:160
 msgid "Device"
 msgstr "设备"
 
-#: src/bs-window.ui:180
+#: src/bs-window.ui:176
 msgid "Serial Number"
 msgstr "序列号"
 
-#: src/bs-window.ui:207
+#: src/bs-window.ui:203
 msgid "Firmware"
 msgstr "固件"
 
-#: src/bs-window.ui:255
+#: src/bs-window.ui:251
 msgid "Devices"
 msgstr "设备"
 
-#: src/bs-window.ui:299
+#: src/bs-window.ui:296
 msgid "No Stream Deck Found"
 msgstr "找不到 Stream Deck"
 
-#: src/bs-window.ui:300
+#: src/bs-window.ui:297
 msgid "Plug in a Stream Deck device to use it."
 msgstr "插入 Stream Deck 设备以使用它。"
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:308
 msgid "_Keyboard Shortcuts"
 msgstr "键盘快捷键(_K)"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:312
 msgid "_About Boatswain"
 msgstr "关于 Boatswain(_A)"
 
-#: src/bs-window.ui:319
+#: src/bs-window.ui:316
 msgid "_Quit"
 msgstr "退出(_Q)"
 
-#: src/bs-window.c:328
-msgid "Copyright © 2022 Georges Basile Stavracas Neto"
-msgstr "版权所有 © 2022 Georges Basile Stavracas Neto"
-
-#: src/bs-window.c:336
+#: src/bs-window.c:344
 msgid "Repository"
 msgstr "仓库"
 
@@ -303,7 +322,7 @@ msgstr "其他"
 msgid "Settings"
 msgstr "设置"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "配置文件"
 
@@ -323,27 +342,35 @@ msgstr "选择应用程序"
 msgid "URL"
 msgstr "URL"
 
-#: src/plugins/obs-studio/obs-action-factory.c:47
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "启动器"
+
+#: src/plugins/obs-studio/obs-action-factory.c:48
 msgid "Switch Scene"
 msgstr "切换场景"
 
-#: src/plugins/obs-studio/obs-action-factory.c:53
+#: src/plugins/obs-studio/obs-action-factory.c:54
 msgid "Record"
 msgstr "录制"
 
-#: src/plugins/obs-studio/obs-action-factory.c:59
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "流"
 
-#: src/plugins/obs-studio/obs-action-factory.c:65
+#: src/plugins/obs-studio/obs-action-factory.c:66
+msgid "Virtual Camera"
+msgstr "虚拟摄像头"
+
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "切换静音"
 
-#: src/plugins/obs-studio/obs-action-factory.c:71
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "显示 / 隐藏源"
 
-#: src/plugins/obs-studio/obs-connection.c:770
+#: src/plugins/obs-studio/obs-connection.c:800
 msgid "Invalid password"
 msgstr "无效密码"
 
@@ -404,6 +431,10 @@ msgstr "音频源"
 msgid "Source"
 msgstr "源"
 
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
 #: src/plugins/soundboard/soundboard-action-factory.c:45
 msgid "Music Player"
 msgstr "音乐播放器"
@@ -416,31 +447,31 @@ msgstr "控制活动的音乐播放器"
 msgid "Play Audio"
 msgstr "播放音频"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:196
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
 msgid "Next"
 msgstr "下一个"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:197
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
 msgid "Pause"
 msgstr "暂停"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:198
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
 msgid "Play"
 msgstr "播放"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:199
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
 msgid "Previous"
 msgstr "上一个"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:200
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
 msgid "Stop"
 msgstr "停止"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:201
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
 msgid "Play / Pause"
 msgstr "播放 / 暂停"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:204
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
 msgid "Playback Action"
 msgstr "播放动作"
 
@@ -479,3 +510,10 @@ msgstr "长按"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "音量"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr "Soundboard"
+
+#~ msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+#~ msgstr "版权所有 © 2022 Georges Basile Stavracas Neto"
