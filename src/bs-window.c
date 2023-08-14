@@ -26,12 +26,11 @@
 #include "bs-stream-deck-editor.h"
 #include "bs-window.h"
 
-#include <adwaita.h>
 #include <glib/gi18n.h>
 
 struct _BsWindow
 {
-  GtkApplicationWindow  parent_instance;
+  AdwApplicationWindow  parent_instance;
 
   GtkAdjustment *brightness_adjustment;
   GtkWidget *create_profile_button;
@@ -62,7 +61,7 @@ static void on_current_stream_deck_active_profile_changed_cb (BsStreamDeck *stre
                                                               GParamSpec   *pspec,
                                                               BsWindow     *self);
 
-G_DEFINE_FINAL_TYPE (BsWindow, bs_window, GTK_TYPE_APPLICATION_WINDOW)
+G_DEFINE_FINAL_TYPE (BsWindow, bs_window, ADW_TYPE_APPLICATION_WINDOW)
 
 
 /*

@@ -18,11 +18,11 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define BS_TYPE_WINDOW (bs_window_get_type())
-G_DECLARE_FINAL_TYPE (BsWindow, bs_window, BS, WINDOW, GtkApplicationWindow)
+G_DECLARE_FINAL_TYPE (BsWindow, bs_window, BS, WINDOW, AdwApplicationWindow)
 
 G_END_DECLS
