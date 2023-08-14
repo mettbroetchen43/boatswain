@@ -287,7 +287,7 @@ on_device_manager_stream_deck_added_cb (BsDeviceManager *device_manager,
   if (g_list_model_get_n_items (G_LIST_MODEL (device_manager)) == 1)
     select_stream_deck (self, stream_deck);
 
-  gtk_widget_show (GTK_WIDGET (self->profiles_menu_button));
+  gtk_widget_set_visible (GTK_WIDGET (self->profiles_menu_button), TRUE);
   update_omni_bar_menu_popover (self);
 }
 
@@ -462,7 +462,7 @@ bs_window_constructed (GObject *object)
           first = FALSE;
         }
 
-      gtk_widget_show (GTK_WIDGET (self->profiles_menu_button));
+      gtk_widget_set_visible (GTK_WIDGET (self->profiles_menu_button), TRUE);
     }
 
   gtk_list_box_bind_model (self->stream_decks_listbox,

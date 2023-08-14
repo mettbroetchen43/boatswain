@@ -140,7 +140,7 @@ default_multi_action_row_new (MultiActionEntry *entry)
     case MULTI_ACTION_ENTRY_DELAY:
       gtk_image_set_from_icon_name (self->icon, "preferences-system-time-symbolic");
       adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), _("Delay"));
-      gtk_widget_show (self->delay_spinbutton);
+      gtk_widget_set_visible (self->delay_spinbutton, TRUE);
       g_signal_handlers_block_by_func (self->delay_adjustment,
                                        on_delay_adjustment_value_changed_cb,
                                        self);
@@ -162,7 +162,7 @@ default_multi_action_row_new (MultiActionEntry *entry)
         adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
                                        bs_action_get_name (entry->v.action));
 
-        gtk_widget_show (self->edit_button);
+        gtk_widget_set_visible (self->edit_button, TRUE);
       }
       break;
     }

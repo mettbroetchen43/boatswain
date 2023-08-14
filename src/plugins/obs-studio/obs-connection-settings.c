@@ -79,14 +79,14 @@ update_password_row (ObsConnectionSettings *self)
     case OBS_CONNECTION_STATE_DISCONNECTED:
     case OBS_CONNECTION_STATE_CONNECTING:
     case OBS_CONNECTION_STATE_CONNECTED:
-      gtk_widget_hide (GTK_WIDGET (self->password_row));
+      gtk_widget_set_visible (GTK_WIDGET (self->password_row), FALSE);
       break;
 
     case OBS_CONNECTION_STATE_AUTHENTICATING:
       break;
 
     case OBS_CONNECTION_STATE_WAITING_FOR_CREDENTIALS:
-      gtk_widget_show (GTK_WIDGET (self->password_row));
+      gtk_widget_set_visible (GTK_WIDGET (self->password_row), TRUE);
       break;
     }
 }

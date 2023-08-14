@@ -50,7 +50,7 @@ update_app_info (LauncherLaunchPreferences *self)
       const char *display_name = g_app_info_get_display_name (self->app_info);
 
       gtk_label_set_text (self->app_name, display_name);
-      gtk_widget_show (GTK_WIDGET (self->app_name));
+      gtk_widget_set_visible (GTK_WIDGET (self->app_name), TRUE);
     }
   else
     {
