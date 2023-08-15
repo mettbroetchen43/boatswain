@@ -44,7 +44,7 @@ struct _BsStreamDeckButtonEditor
   GtkMenuButton *custom_icon_menubutton;
   GtkEditable *custom_icon_text_row;
   GtkImage *icon_image;
-  AdwLeaflet *leaflet;
+  AdwNavigationView *navigation_view;
   GtkWidget *remove_action_button;
   GtkWidget *remove_custom_icon_button;
   GtkStack *stack;
@@ -267,7 +267,7 @@ on_action_row_activated_cb (GtkListBoxRow            *row,
   bs_stream_deck_button_set_custom_icon (self->button, new_custom_icon);
   update_action_preferences_group (self);
 
-  adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_BACK);
+  adw_navigation_view_pop (self->navigation_view);
 }
 
 static void
@@ -426,13 +426,6 @@ on_custom_icon_text_row_text_changed_cb (GtkEditable              *row,
 }
 
 static void
-on_go_previous_button_clicked_cb (GtkButton                *button,
-                                  BsStreamDeckButtonEditor *self)
-{
-  adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_BACK);
-}
-
-static void
 on_icons_gridview_activate_cb (GtkGridView              *grid_view,
                                unsigned int              position,
                                BsStreamDeckButtonEditor *self)
@@ -486,7 +479,7 @@ on_select_action_row_activated_cb (GtkListBoxRow            *row,
       adw_expander_row_set_expanded (ADW_EXPANDER_ROW (child), FALSE);
     }
 
-  adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_FORWARD);
+  adw_navigation_view_push_by_tag (self->navigation_view, "actions");
 }
 
 
@@ -571,7 +564,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_menubutton);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_text_row);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, icon_image);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, leaflet);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, navigation_view);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, remove_action_button);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, remove_custom_icon_button);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, stack);
@@ -579,7 +572,6 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_background_color_button_color_set_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_text_row_text_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_go_previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_icons_gridview_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_remove_action_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_remove_custom_icon_button_clicked_cb);
@@ -643,7 +635,7 @@ bs_stream_deck_button_editor_set_button (BsStreamDeckButtonEditor *self,
       setup_button (self);
       update_icon (self);
 
-      adw_leaflet_navigate (self->leaflet, ADW_NAVIGATION_DIRECTION_BACK);
+      adw_navigation_view_pop (self->navigation_view);
 
       self->action_changed_id = g_signal_connect (button,
                                                   "notify::action",

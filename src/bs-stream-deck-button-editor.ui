@@ -13,8 +13,21 @@
           <object class="GtkStackPage">
             <property name="name">empty</property>
             <property name="child">
-              <object class="AdwStatusPage">
-                <property name="title" translatable="yes">Select a button</property>
+              <object class="AdwToolbarView">
+                <property name="top-bar-style">flat</property>
+
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="show-start-title-buttons">False</property>
+                  </object>
+                </child>
+
+                <property name="content">
+                  <object class="AdwStatusPage">
+                    <property name="title" translatable="yes">Select a button</property>
+                  </object>
+                </property>
+
               </object>
             </property>
           </object>
@@ -24,192 +37,232 @@
           <object class="GtkStackPage">
             <property name="name">button</property>
             <property name="child">
-              <object class="AdwLeaflet" id="leaflet">
-                <property name="can-unfold">False</property>
-
+              <object class="AdwNavigationView" id="navigation_view">
 
                 <child>
-                  <object class="AdwLeafletPage">
-                    <property name="name">button</property>
+                  <object class="AdwNavigationPage">
+                    <property name="tag">button</property>
+                    <property name="title" translatable="yes">Button Properties</property>
                     <property name="child">
-                      <object class="AdwPreferencesPage" id="button_preferences_page">
+                      <object class="AdwToolbarView">
+                        <property name="top-bar-style">flat</property>
 
-                        <!-- Custom icon -->
-                        <child>
-                          <object class="AdwPreferencesGroup">
+                        <child type="top">
+                          <object class="AdwHeaderBar">
+                            <property name="show-start-title-buttons">False</property>
+                          </object>
+                        </child>
 
+                        <property name="content">
+                          <object class="AdwPreferencesPage" id="button_preferences_page">
+
+                            <!-- Custom icon -->
                             <child>
-                              <object class="GtkOverlay">
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
-                                <property name="margin-bottom">24</property>
+                              <object class="AdwPreferencesGroup">
 
                                 <child>
-                                  <object class="GtkImage" id="icon_image">
-                                    <property name="width-request">128</property>
-                                    <property name="height-request">128</property>
-                                    <property name="margin-top">12</property>
-                                    <property name="margin-bottom">12</property>
-                                    <property name="margin-start">12</property>
-                                    <property name="margin-end">12</property>
-                                    <property name="overflow">hidden</property>
-                                    <style>
-                                      <class name="card" />
-                                    </style>
-                                  </object>
-                                </child>
+                                  <object class="GtkOverlay">
+                                    <property name="halign">center</property>
+                                    <property name="valign">center</property>
+                                    <property name="margin-bottom">24</property>
 
-                                <child type="overlay">
-                                  <object class="AdwBin">
-                                    <property name="halign">end</property>
-                                    <property name="valign">start</property>
-                                    <binding name="visible">
-                                      <lookup name="visible">remove_custom_icon_button</lookup>
-                                    </binding>
-                                    <style>
-                                      <class name="cutout" />
-                                    </style>
                                     <child>
-                                      <object class="GtkButton" id="remove_custom_icon_button">
-                                        <property name="icon-name">window-close-symbolic</property>
-                                        <signal name="clicked" handler="on_remove_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                      <object class="GtkImage" id="icon_image">
+                                        <property name="width-request">128</property>
+                                        <property name="height-request">128</property>
+                                        <property name="margin-top">12</property>
+                                        <property name="margin-bottom">12</property>
+                                        <property name="margin-start">12</property>
+                                        <property name="margin-end">12</property>
+                                        <property name="overflow">hidden</property>
                                         <style>
-                                          <class name="circular" />
-                                          <class name="outline" />
+                                          <class name="card" />
                                         </style>
                                       </object>
                                     </child>
-                                  </object>
-                                </child>
 
-                                <child type="overlay">
-                                  <object class="GtkMenuButton" id="custom_icon_menubutton">
-                                    <property name="halign">end</property>
-                                    <property name="valign">end</property>
-                                    <property name="icon-name">document-edit-symbolic</property>
-
-                                    <!-- Custom icon popover -->
-                                    <property name="popover">
-                                      <object class="GtkPopover">
+                                    <child type="overlay">
+                                      <object class="AdwBin">
+                                        <property name="halign">end</property>
+                                        <property name="valign">start</property>
+                                        <binding name="visible">
+                                          <lookup name="visible">remove_custom_icon_button</lookup>
+                                        </binding>
                                         <style>
-                                          <class name="custom-icon-popover" />
+                                          <class name="cutout" />
                                         </style>
                                         <child>
-                                          <object class="GtkBox">
-                                            <property name="orientation">vertical</property>
-
-                                            <child>
-                                              <object class="GtkBox">
-                                                <property name="margin-top">6</property>
-                                                <property name="margin-bottom">6</property>
-                                                <property name="margin-start">6</property>
-                                                <property name="margin-end">6</property>
-                                                <property name="spacing">6</property>
-
-                                                <child>
-                                                  <object class="GtkSearchEntry" id="builtin_icons_search_entry">
-                                                    <property name="hexpand">True</property>
-                                                  </object>
-                                                </child>
-
-                                                <child>
-                                                  <object class="GtkButton">
-                                                    <property name="icon-name">document-open-symbolic</property>
-                                                    <signal name="clicked" handler="on_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
-                                                  </object>
-                                                </child>
-
-                                              </object>
-                                            </child>
-
-                                            <child>
-                                              <object class="GtkSeparator" />
-                                            </child>
-
-                                            <child>
-                                              <object class="GtkScrolledWindow">
-                                                <property name="hscrollbar-policy">never</property>
-                                                <property name="min-content-width">300</property>
-                                                <property name="min-content-height">300</property>
-
-                                                <property name="child">
-                                                  <object class="GtkGridView" id="icons_gridview">
-                                                    <property name="single-click-activate">True</property>
-                                                    <property name="model">
-                                                      <object class="GtkNoSelection">
-                                                        <property name="model">builtin_icons_model</property>
-                                                      </object>
-                                                    </property>
-                                                    <property name="factory">
-                                                      <object class="GtkBuilderListItemFactory">
-                                                        <property name="bytes"><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<interface>
-  <template class="GtkListItem">
-    <property name="child">
-      <object class="GtkImage">
-        <binding name="icon-name">
-          <lookup type="GtkStringObject" name="string">
-            <lookup name="item">GtkListItem</lookup>
-          </lookup>
-        </binding>
-        <binding name="tooltip-text">
-          <lookup type="GtkStringObject" name="string">
-            <lookup name="item">GtkListItem</lookup>
-          </lookup>
-        </binding>
-      </object>
-    </property>
-  </template>
-</interface>
-                                                        ]]></property>
-                                                      </object>
-                                                    </property>
-                                                    <signal name="activate" handler="on_icons_gridview_activate_cb" object="BsStreamDeckButtonEditor" swapped="no" />
-                                                  </object>
-                                                </property>
-
-                                              </object>
-                                            </child>
-
+                                          <object class="GtkButton" id="remove_custom_icon_button">
+                                            <property name="icon-name">window-close-symbolic</property>
+                                            <signal name="clicked" handler="on_remove_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                            <style>
+                                              <class name="circular" />
+                                              <class name="outline" />
+                                            </style>
                                           </object>
                                         </child>
                                       </object>
-                                    </property>
+                                    </child>
+
+                                    <child type="overlay">
+                                      <object class="GtkMenuButton" id="custom_icon_menubutton">
+                                        <property name="halign">end</property>
+                                        <property name="valign">end</property>
+                                        <property name="icon-name">document-edit-symbolic</property>
+
+                                        <!-- Custom icon popover -->
+                                        <property name="popover">
+                                          <object class="GtkPopover">
+                                            <style>
+                                              <class name="custom-icon-popover" />
+                                            </style>
+                                            <child>
+                                              <object class="GtkBox">
+                                                <property name="orientation">vertical</property>
+
+                                                <child>
+                                                  <object class="GtkBox">
+                                                    <property name="margin-top">6</property>
+                                                    <property name="margin-bottom">6</property>
+                                                    <property name="margin-start">6</property>
+                                                    <property name="margin-end">6</property>
+                                                    <property name="spacing">6</property>
+
+                                                    <child>
+                                                      <object class="GtkSearchEntry" id="builtin_icons_search_entry">
+                                                        <property name="hexpand">True</property>
+                                                      </object>
+                                                    </child>
+
+                                                    <child>
+                                                      <object class="GtkButton">
+                                                        <property name="icon-name">document-open-symbolic</property>
+                                                        <signal name="clicked" handler="on_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                                      </object>
+                                                    </child>
+
+                                                  </object>
+                                                </child>
+
+                                                <child>
+                                                  <object class="GtkSeparator" />
+                                                </child>
+
+                                                <child>
+                                                  <object class="GtkScrolledWindow">
+                                                    <property name="hscrollbar-policy">never</property>
+                                                    <property name="min-content-width">300</property>
+                                                    <property name="min-content-height">300</property>
+
+                                                    <property name="child">
+                                                      <object class="GtkGridView" id="icons_gridview">
+                                                        <property name="single-click-activate">True</property>
+                                                        <property name="model">
+                                                          <object class="GtkNoSelection">
+                                                            <property name="model">builtin_icons_model</property>
+                                                          </object>
+                                                        </property>
+                                                        <property name="factory">
+                                                          <object class="GtkBuilderListItemFactory">
+                                                            <property name="bytes"><![CDATA[
+    <?xml version="1.0" encoding="UTF-8"?>
+    <interface>
+      <template class="GtkListItem">
+        <property name="child">
+          <object class="GtkImage">
+            <binding name="icon-name">
+              <lookup type="GtkStringObject" name="string">
+                <lookup name="item">GtkListItem</lookup>
+              </lookup>
+            </binding>
+            <binding name="tooltip-text">
+              <lookup type="GtkStringObject" name="string">
+                <lookup name="item">GtkListItem</lookup>
+              </lookup>
+            </binding>
+          </object>
+        </property>
+      </template>
+    </interface>
+                                                            ]]></property>
+                                                          </object>
+                                                        </property>
+                                                        <signal name="activate" handler="on_icons_gridview_activate_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                                      </object>
+                                                    </property>
+
+                                                  </object>
+                                                </child>
+
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </property>
+                                        <style>
+                                          <class name="circular" />
+                                          <class name="outline" />
+                                          <class name="cutout" />
+                                        </style>
+                                      </object>
+                                    </child>
+
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkListBox">
+                                    <property name="selection-mode">none</property>
                                     <style>
-                                      <class name="circular" />
-                                      <class name="outline" />
-                                      <class name="cutout" />
+                                      <class name="boxed-list" />
                                     </style>
+
+                                    <child>
+                                      <object class="AdwEntryRow" id="custom_icon_text_row">
+                                        <property name="title" translatable="yes">Name</property>
+                                        <signal name="notify::text" handler="on_custom_icon_text_row_text_changed_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                      </object>
+                                    </child>
+
+                                    <child>
+                                      <object class="AdwActionRow" id="background_color_row">
+                                        <property name="title" translatable="yes">Background Color</property>
+                                        <property name="activatable-widget">background_color_button</property>
+                                        <child>
+                                          <object class="GtkColorButton" id="background_color_button">
+                                            <property name="valign">center</property>
+                                            <property name="modal">True</property>
+                                            <signal name="color-set" handler="on_background_color_button_color_set_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+
                                   </object>
                                 </child>
 
                               </object>
                             </child>
 
+                            <!-- Action preferences -->
                             <child>
-                              <object class="GtkListBox">
-                                <property name="selection-mode">none</property>
-                                <style>
-                                  <class name="boxed-list" />
-                                </style>
+                              <object class="AdwPreferencesGroup" id="action_preferences_group">
+                                <property name="visible">False</property>
+                              </object>
+                            </child>
+
+                            <child>
+                              <object class="AdwPreferencesGroup">
+                                <property name="visible" bind-source="remove_action_button" bind-property="visible" bind-flags="default|sync-create|invert-boolean" />
 
                                 <child>
-                                  <object class="AdwEntryRow" id="custom_icon_text_row">
-                                    <property name="title" translatable="yes">Name</property>
-                                    <signal name="notify::text" handler="on_custom_icon_text_row_text_changed_cb" object="BsStreamDeckButtonEditor" swapped="no" />
-                                  </object>
-                                </child>
-
-                                <child>
-                                  <object class="AdwActionRow" id="background_color_row">
-                                    <property name="title" translatable="yes">Background Color</property>
-                                    <property name="activatable-widget">background_color_button</property>
+                                  <object class="AdwActionRow">
+                                    <property name="title" translatable="yes">Select action</property>
+                                    <property name="activatable">True</property>
+                                    <signal name="activated" handler="on_select_action_row_activated_cb" object="BsStreamDeckButtonEditor" swapped="no" />
                                     <child>
-                                      <object class="GtkColorButton" id="background_color_button">
+                                      <object class="GtkImage">
                                         <property name="valign">center</property>
-                                        <property name="modal">True</property>
-                                        <signal name="color-set" handler="on_background_color_button_color_set_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                        <property name="icon-name">go-next-symbolic</property>
                                       </object>
                                     </child>
                                   </object>
@@ -218,115 +271,66 @@
                               </object>
                             </child>
 
-                          </object>
-                        </child>
-
-                        <!-- Action preferences -->
-                        <child>
-                          <object class="AdwPreferencesGroup" id="action_preferences_group">
-                            <property name="visible">False</property>
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="AdwPreferencesGroup">
-                            <property name="visible" bind-source="remove_action_button" bind-property="visible" bind-flags="default|sync-create|invert-boolean" />
-
                             <child>
-                              <object class="AdwActionRow">
-                                <property name="title" translatable="yes">Select action</property>
-                                <property name="activatable">True</property>
-                                <signal name="activated" handler="on_select_action_row_activated_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                              <object class="AdwPreferencesGroup">
+
                                 <child>
-                                  <object class="GtkImage">
-                                    <property name="valign">center</property>
-                                    <property name="icon-name">go-next-symbolic</property>
+                                  <object class="GtkButton" id="remove_action_button">
+                                    <property name="visible">False</property>
+                                    <property name="label" translatable="yes">Remove Action</property>
+                                    <signal name="clicked" handler="on_remove_action_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                    <style>
+                                      <class name="destructive-action" />
+                                      <class name="remove-button" />
+                                    </style>
                                   </object>
                                 </child>
+
                               </object>
                             </child>
-
                           </object>
-                        </child>
+                        </property>
 
-                        <child>
-                          <object class="AdwPreferencesGroup">
-
-                            <child>
-                              <object class="GtkButton" id="remove_action_button">
-                                <property name="visible">False</property>
-                                <property name="label" translatable="yes">Remove Action</property>
-                                <signal name="clicked" handler="on_remove_action_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
-                                <style>
-                                  <class name="destructive-action" />
-                                  <class name="remove-button" />
-                                </style>
-                              </object>
-                            </child>
-
-                          </object>
-                        </child>
                       </object>
                     </property>
+
                   </object>
                 </child>
 
                 <child>
-                  <object class="AdwLeafletPage">
-                    <property name="name">actions</property>
+                  <object class="AdwNavigationPage">
+                    <property name="tag">actions</property>
+                    <property name="title" translatable="yes">Actions</property>
                     <property name="child">
-                      <object class="AdwPreferencesPage">
+                      <object class="AdwToolbarView">
+                        <property name="top-bar-style">flat</property>
 
-                        <child>
-                          <object class="AdwPreferencesGroup">
+                        <child type="top">
+                          <object class="AdwHeaderBar">
+                            <property name="show-start-title-buttons">False</property>
+                          </object>
+                        </child>
+
+                        <property name="content">
+                          <object class="AdwPreferencesPage">
                             <child>
-                              <object class="GtkButton">
-                                <signal name="clicked" handler="on_go_previous_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
-                                <style>
-                                  <class name="flat" />
-                                </style>
-
+                              <object class="AdwPreferencesGroup">
                                 <child>
-                                  <object class="GtkCenterBox">
-
-                                    <child type="start">
-                                      <object class="GtkImage">
-                                        <property name="icon-name">go-previous-symbolic</property>
-                                      </object>
-                                    </child>
-
-                                    <child type="center">
-                                      <object class="GtkLabel">
-                                        <property name="label" translatable="yes">Select action</property>
-                                        <style>
-                                          <class name="heading" />
-                                        </style>
-                                      </object>
-                                    </child>
-
+                                  <object class="GtkListBox" id="actions_listbox">
+                                    <property name="selection-mode">none</property>
+                                    <style>
+                                      <class name="boxed-list" />
+                                    </style>
                                   </object>
                                 </child>
-
-                              </object>
-                            </child>
-
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="AdwPreferencesGroup">
-                            <child>
-                              <object class="GtkListBox" id="actions_listbox">
-                                <property name="selection-mode">none</property>
-                                <style>
-                                  <class name="boxed-list" />
-                                </style>
                               </object>
                             </child>
                           </object>
-                        </child>
+                        </property>
+
                       </object>
                     </property>
+
                   </object>
                 </child>
 
