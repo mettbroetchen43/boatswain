@@ -20,6 +20,7 @@
 #include "bs-config.h"
 #include "bs-device-manager.h"
 #include "bs-profile.h"
+#include "bs-profile-row.h"
 #include "bs-profiles-dialog.h"
 #include "bs-stream-deck.h"
 #include "bs-stream-deck-editor.h"
@@ -189,33 +190,42 @@ select_stream_deck (BsWindow     *self,
  * Callbacks
  */
 
+static void
+on_profile_row_move_cb (BsProfileRow *profile_row,
+                        unsigned int  new_position,
+                        BsWindow     *self)
+{
+  GListModel *profiles;
+  BsProfile *profile;
+  unsigned int position;
+
+  profiles = bs_stream_deck_get_profiles (self->current_stream_deck);
+  profile = bs_profile_row_get_profile (profile_row);
+
+  g_object_ref (profile);
+  g_list_store_find (G_LIST_STORE (profiles), profile, &position);
+  g_list_store_remove (G_LIST_STORE (profiles), position);
+  g_list_store_insert (G_LIST_STORE (profiles), new_position, profile);
+  g_object_unref (profile);
+}
+
 static GtkWidget *
 create_profile_row_cb (gpointer item,
                        gpointer user_data)
 {
   BsProfile *profile;
   GtkWidget *image;
-  GtkWidget *label;
-  GtkWidget *box;
   GtkWidget *row;
   BsWindow *self;
 
   self = BS_WINDOW (user_data);
   profile = BS_PROFILE (item);
 
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-
-  label = gtk_label_new (NULL);
-  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-  g_object_bind_property (profile, "name", label, "label", G_BINDING_SYNC_CREATE);
-  gtk_box_append (GTK_BOX (box), label);
-
   image = gtk_image_new_from_icon_name ("object-select-symbolic");
   gtk_widget_set_visible (image, profile == bs_stream_deck_get_active_profile (self->current_stream_deck));
-  gtk_box_append (GTK_BOX (box), image);
 
-  row = gtk_list_box_row_new ();
-  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
+  row = bs_profile_row_new (self->current_stream_deck, profile);
+  g_signal_connect (row, "move", G_CALLBACK (on_profile_row_move_cb), self);
   g_object_set_data (G_OBJECT (row), "selected-icon", image);
 
   return row;
