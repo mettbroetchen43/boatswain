@@ -41,7 +41,6 @@ struct _BsWindow
   GtkListBox *profiles_listbox;
   GtkEditable *new_profile_name_entry;
   GtkMenuButton *profiles_menu_button;
-  GtkLabel *serial_number_label;
   GtkListBox *stream_decks_listbox;
 
   GBinding *brightness_binding;
@@ -160,7 +159,6 @@ select_stream_deck (BsWindow     *self,
 
   if (stream_deck)
     {
-      gtk_label_set_label (self->serial_number_label, bs_stream_deck_get_serial_number (stream_deck));
       gtk_label_set_label (self->firmware_version_label, bs_stream_deck_get_firmware_version (stream_deck));
 
       self->brightness_binding = g_object_bind_property (stream_deck,
@@ -536,7 +534,6 @@ bs_window_class_init (BsWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsWindow, new_profile_name_entry);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, profiles_listbox);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, profiles_menu_button);
-  gtk_widget_class_bind_template_child (widget_class, BsWindow, serial_number_label);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_decks_listbox);
 
   gtk_widget_class_bind_template_callback (widget_class, on_create_profile_button_clicked_cb);
