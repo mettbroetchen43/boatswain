@@ -4,55 +4,63 @@
   <template class="BsStreamDeckEditor" parent="AdwBin">
 
     <child>
-      <object class="GtkBox">
+      <object class="AdwOverlaySplitView">
+        <property name="sidebar-position">end</property>
 
-        <child>
-          <object class="AdwClamp">
-            <property name="hexpand">True</property>
-            <property name="margin-top">24</property>
-            <property name="margin-bottom">24</property>
-            <property name="margin-start">24</property>
-            <property name="margin-end">24</property>
-            <property name="maximum-size">700</property>
-            <property name="tightening-threshold">500</property>
+        <property name="content">
+          <object class="AdwToolbarView">
+            <property name="top-bar-style">flat</property>
 
-            <child>
-              <object class="GtkAspectFrame">
-                <property name="obey-child">False</property>
-                <property name="ratio">1.8</property>
+            <child type="top">
+              <object class="AdwHeaderBar">
+                <property name="show-start-title-buttons">False</property>
+                <property name="show-end-title-buttons">False</property>
+              </object>
+            </child>
+
+            <property name="content">
+              <object class="AdwClamp">
+                <property name="hexpand">True</property>
+                <property name="margin-top">24</property>
+                <property name="margin-bottom">24</property>
+                <property name="margin-start">24</property>
+                <property name="margin-end">24</property>
+                <property name="maximum-size">700</property>
+                <property name="tightening-threshold">500</property>
 
                 <child>
-                  <object class="GtkFlowBox" id="buttons_flowbox">
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="homogeneous">True</property>
-                    <property name="activate-on-single-click">False</property>
-                    <property name="selection-mode">single</property>
-                    <property name="column-spacing">18</property>
-                    <property name="row-spacing">18</property>
-                    <signal name="child-activated" handler="on_flowbox_child_activated_cb" object="BsStreamDeckEditor" swapped="no" />
-                    <signal name="selected-children-changed" handler="on_flowbox_selected_children_changed_cb" object="BsStreamDeckEditor" swapped="no" />
+                  <object class="GtkAspectFrame">
+                    <property name="obey-child">False</property>
+                    <property name="ratio">1.8</property>
+
+                    <child>
+                      <object class="GtkFlowBox" id="buttons_flowbox">
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="homogeneous">True</property>
+                        <property name="activate-on-single-click">False</property>
+                        <property name="selection-mode">single</property>
+                        <property name="column-spacing">18</property>
+                        <property name="row-spacing">18</property>
+                        <signal name="child-activated" handler="on_flowbox_child_activated_cb" object="BsStreamDeckEditor" swapped="no" />
+                        <signal name="selected-children-changed" handler="on_flowbox_selected_children_changed_cb" object="BsStreamDeckEditor" swapped="no" />
+                      </object>
+                    </child>
+
                   </object>
                 </child>
 
               </object>
-            </child>
+            </property>
 
           </object>
-        </child>
+        </property>
 
-        <child>
-          <object class="GtkSeparator">
-            <property name="orientation">vertical</property>
-          </object>
-        </child>
-
-
-        <child>
+        <property name="sidebar">
           <object class="BsStreamDeckButtonEditor" id="button_editor">
             <property name="hexpand">True</property>
           </object>
-        </child>
+        </property>
 
       </object>
     </child>
