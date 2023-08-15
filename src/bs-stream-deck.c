@@ -104,6 +104,7 @@ enum
   PROP_FAKE,
   PROP_ICON,
   PROP_NAME,
+  PROP_SERIAL_NUMBER,
   N_PROPS,
 };
 
@@ -1325,6 +1326,10 @@ bs_stream_deck_get_property (GObject    *object,
       g_value_set_string (value, bs_stream_deck_get_name (self));
       break;
 
+    case PROP_SERIAL_NUMBER:
+      g_value_set_string (value, bs_stream_deck_get_serial_number (self));
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -1393,6 +1398,9 @@ bs_stream_deck_class_init (BsStreamDeckClass *klass)
 
   properties[PROP_NAME] = g_param_spec_string ("name", NULL, NULL, NULL,
                                                G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_SERIAL_NUMBER] = g_param_spec_string ("serial-number", NULL, NULL, NULL,
+                                                        G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
