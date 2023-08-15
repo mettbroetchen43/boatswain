@@ -160,7 +160,6 @@ select_stream_deck (BsWindow     *self,
 
   if (stream_deck)
     {
-      gtk_menu_button_set_label (self->devices_menu_button, bs_stream_deck_get_name (stream_deck));
       gtk_label_set_label (self->serial_number_label, bs_stream_deck_get_serial_number (stream_deck));
       gtk_label_set_label (self->firmware_version_label, bs_stream_deck_get_firmware_version (stream_deck));
 

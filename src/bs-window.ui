@@ -37,6 +37,34 @@
 
                     <property name="title-widget">
                       <object class="GtkMenuButton" id="devices_menu_button">
+                        <style>
+                          <class name="flat" />
+                        </style>
+
+                        <property name="child">
+                          <object class="GtkBox">
+                            <child>
+                              <object class="AdwWindowTitle">
+                                <binding name="title">
+                                  <lookup type="BsStreamDeck" name="name">
+                                    <lookup name="device">BsWindow</lookup>
+                                  </lookup>
+                                </binding>
+                                <binding name="subtitle">
+                                  <lookup type="BsStreamDeck" name="serial-number">
+                                    <lookup name="device">BsWindow</lookup>
+                                  </lookup>
+                                </binding>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">pan-down-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                        </property>
+
                         <property name="popover">
                           <object class="GtkPopover" id="devices_popover">
                             <property name="width-request">200</property>

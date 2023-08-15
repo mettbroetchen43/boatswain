@@ -1,3 +1,7 @@
+button windowtitle label.subtitle {
+    font-weight: normal;
+}
+
 streamdeckbuttonwidget:selected {
   background-color: transparent;
 }
