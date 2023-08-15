@@ -169,17 +169,40 @@ create_stream_deck_row_cb (gpointer item,
                            gpointer user_data)
 {
   BsStreamDeck *stream_deck;
-  GtkWidget *label;
+  GtkWidget *subtitle;
+  GtkWidget *title;
+  GtkWidget *box;
   GtkWidget *row;
 
   stream_deck = BS_STREAM_DECK (item);
-  label = g_object_new (GTK_TYPE_LABEL,
+
+  box = g_object_new (GTK_TYPE_BOX,
+                      "orientation", GTK_ORIENTATION_VERTICAL,
+                      "spacing", 0,
+                      "margin-top", 3,
+                      "margin-bottom", 3,
+                      NULL);
+
+  title = g_object_new (GTK_TYPE_LABEL,
+                        "hexpand", TRUE,
+                        "halign", GTK_ALIGN_START,
                         "label", bs_stream_deck_get_name (stream_deck),
                         "xalign", 0.0,
                         NULL);
+  gtk_box_append (GTK_BOX (box), title);
+
+  subtitle = g_object_new (GTK_TYPE_LABEL,
+                           "hexpand", TRUE,
+                           "halign", GTK_ALIGN_START,
+                           "label", bs_stream_deck_get_serial_number (stream_deck),
+                           "xalign", 0.0,
+                           NULL);
+  gtk_widget_add_css_class (subtitle, "caption");
+  gtk_widget_add_css_class (subtitle, "dim-label");
+  gtk_box_append (GTK_BOX (box), subtitle);
 
   row = gtk_list_box_row_new ();
-  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), label);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
   g_object_set_data (G_OBJECT (row), "stream-deck", item);
 
   return row;
