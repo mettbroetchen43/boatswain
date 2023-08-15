@@ -34,17 +34,15 @@ struct _BsWindow
 
   GtkAdjustment *brightness_adjustment;
   GtkWidget *create_profile_button;
+  GtkMenuButton *devices_menu_button;
   GtkPopover *devices_popover;
-  GtkHeaderBar *header_bar;
   GtkWidget *empty_page;
   GtkLabel *firmware_version_label;
   GtkStack *main_stack;
-  BsOmniBar *omnibar;
   GtkListBox *profiles_listbox;
   GtkEditable *new_profile_name_entry;
   GtkMenuButton *profiles_menu_button;
   GtkLabel *serial_number_label;
-  GtkLabel *stream_deck_name_label;
   GtkListBox *stream_decks_listbox;
 
   GBinding *brightness_binding;
@@ -120,7 +118,7 @@ update_active_profile (BsWindow *self)
       row = gtk_list_box_get_row_at_index (self->profiles_listbox, i);
       image = g_object_get_data (G_OBJECT (row), "selected-icon");
 
-      gtk_widget_set_child_visible (image, profile == active_profile);
+      gtk_widget_set_visible (image, profile == active_profile);
     }
 }
 
@@ -148,8 +146,6 @@ select_stream_deck (BsWindow     *self,
   page_name = g_strdup_printf ("%p", stream_deck);
   gtk_stack_set_visible_child_name (self->main_stack, page_name);
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->omnibar), stream_deck != NULL);
-
   g_clear_signal_handler (&self->active_profile_changed_id, self->current_stream_deck);
   g_clear_pointer (&self->brightness_binding, g_binding_unbind);
 
@@ -157,7 +153,7 @@ select_stream_deck (BsWindow     *self,
 
   if (stream_deck)
     {
-      gtk_label_set_label (self->stream_deck_name_label, bs_stream_deck_get_name (stream_deck));
+      gtk_menu_button_set_label (self->devices_menu_button, bs_stream_deck_get_name (stream_deck));
       gtk_label_set_label (self->serial_number_label, bs_stream_deck_get_serial_number (stream_deck));
       gtk_label_set_label (self->firmware_version_label, bs_stream_deck_get_firmware_version (stream_deck));
 
@@ -180,22 +176,6 @@ select_stream_deck (BsWindow     *self,
                            NULL);
 
   update_active_profile (self);
-}
-
-static void
-update_omni_bar_menu_popover (BsWindow *self)
-{
-  BsDeviceManager *device_manager;
-  GApplication *application;
-  guint n_stream_decks;
-
-  application = g_application_get_default ();
-  device_manager = bs_application_get_device_manager (BS_APPLICATION (application));
-  n_stream_decks = g_list_model_get_n_items (G_LIST_MODEL (device_manager));
-
-  g_object_set (self->omnibar,
-                "menu-popover", n_stream_decks > 1 ? self->devices_popover : NULL,
-                NULL);
 }
 
 
@@ -225,7 +205,7 @@ create_profile_row_cb (gpointer item,
   gtk_box_append (GTK_BOX (box), label);
 
   image = gtk_image_new_from_icon_name ("object-select-symbolic");
-  gtk_widget_set_child_visible (image, profile == bs_stream_deck_get_active_profile (self->current_stream_deck));
+  gtk_widget_set_visible (image, profile == bs_stream_deck_get_active_profile (self->current_stream_deck));
   gtk_box_append (GTK_BOX (box), image);
 
   row = gtk_list_box_row_new ();
@@ -287,7 +267,6 @@ on_device_manager_stream_deck_added_cb (BsDeviceManager *device_manager,
     select_stream_deck (self, stream_deck);
 
   gtk_widget_set_visible (GTK_WIDGET (self->profiles_menu_button), TRUE);
-  update_omni_bar_menu_popover (self);
 }
 
 static void
@@ -309,7 +288,6 @@ on_device_manager_stream_deck_removed_cb (BsDeviceManager *device_manager,
 
   if (n_stream_decks == 0)
     gtk_stack_set_visible_child (self->main_stack, self->empty_page);
-  update_omni_bar_menu_popover (self);
 }
 
 static void
@@ -481,7 +459,6 @@ bs_window_constructed (GObject *object)
                            G_CALLBACK (on_device_manager_stream_deck_removed_cb),
                            self,
                            0);
-  update_omni_bar_menu_popover (self);
 }
 
 static void
@@ -499,17 +476,15 @@ bs_window_class_init (BsWindowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, BsWindow, brightness_adjustment);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, create_profile_button);
+  gtk_widget_class_bind_template_child (widget_class, BsWindow, devices_menu_button);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, devices_popover);
-  gtk_widget_class_bind_template_child (widget_class, BsWindow, header_bar);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, empty_page);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, firmware_version_label);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, main_stack);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, new_profile_name_entry);
-  gtk_widget_class_bind_template_child (widget_class, BsWindow, omnibar);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, profiles_listbox);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, profiles_menu_button);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, serial_number_label);
-  gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_deck_name_label);
   gtk_widget_class_bind_template_child (widget_class, BsWindow, stream_decks_listbox);
 
   gtk_widget_class_bind_template_callback (widget_class, on_create_profile_button_clicked_cb);
