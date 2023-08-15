@@ -67,16 +67,6 @@
                                 <property name="orientation">vertical</property>
 
                                 <child>
-                                  <object class="GtkLabel">
-                                    <property name="label" translatable="yes">Devices</property>
-                                    <style>
-                                      <class name="dim-label" />
-                                      <class name="caption-heading" />
-                                    </style>
-                                  </object>
-                                </child>
-
-                                <child>
                                   <object class="GtkListBox" id="stream_decks_listbox">
                                     <property name="selection-mode">none</property>
                                     <signal name="row-activated" handler="on_stream_decks_listbox_row_activated_cb" object="BsWindow" swapped="no" />
