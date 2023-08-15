@@ -6,7 +6,6 @@ data/com.feaneron.Boatswain.gschema.xml
 src/bs-application.c
 src/bs-profile.c
 src/bs-profile-row.ui
-src/bs-profiles-dialog.ui
 src/bs-stream-deck.c
 src/bs-stream-deck-button-editor.c
 src/bs-stream-deck-button-editor.ui

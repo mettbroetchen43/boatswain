@@ -3,7 +3,6 @@
 
   <gresource prefix="/com/feaneron/Boatswain">
     <file>bs-profile-row.ui</file>
-    <file>bs-profiles-dialog.ui</file>
     <file>bs-stream-deck-editor.ui</file>
     <file>bs-stream-deck-button-editor.ui</file>
     <file>bs-stream-deck-button-widget.ui</file>

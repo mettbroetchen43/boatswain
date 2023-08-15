@@ -11,7 +11,6 @@ boatswain_sources = [
   'bs-page-item.c',
   'bs-profile.c',
   'bs-profile-row.c',
-  'bs-profiles-dialog.c',
   'bs-stream-deck.c',
   'bs-stream-deck-button.c',
   'bs-stream-deck-button-editor.c',

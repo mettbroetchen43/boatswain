@@ -21,7 +21,6 @@
 #include "bs-device-manager.h"
 #include "bs-profile.h"
 #include "bs-profile-row.h"
-#include "bs-profiles-dialog.h"
 #include "bs-stream-deck.h"
 #include "bs-stream-deck-editor.h"
 #include "bs-window.h"
