@@ -60,6 +60,14 @@ static void on_current_stream_deck_active_profile_changed_cb (BsStreamDeck *stre
 
 G_DEFINE_FINAL_TYPE (BsWindow, bs_window, ADW_TYPE_APPLICATION_WINDOW)
 
+enum
+{
+  PROP_0,
+  PROP_DEVICE,
+  N_PROPS,
+};
+
+static GParamSpec *properties [N_PROPS] = { NULL, };
 
 /*
  * Auxiliary methods
@@ -175,6 +183,8 @@ select_stream_deck (BsWindow     *self,
                            NULL);
 
   update_active_profile (self);
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_DEVICE]);
 }
 
 
@@ -461,6 +471,44 @@ bs_window_constructed (GObject *object)
 }
 
 static void
+bs_window_get_property (GObject    *object,
+                        guint       prop_id,
+                        GValue     *value,
+                        GParamSpec *pspec)
+{
+  BsWindow *self = BS_WINDOW (object);
+
+  switch (prop_id)
+    {
+    case PROP_DEVICE:
+      g_value_set_object (value, self->current_stream_deck);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+bs_window_set_property (GObject      *object,
+                        guint         prop_id,
+                        const GValue *value,
+                        GParamSpec   *pspec)
+{
+  BsWindow *self = BS_WINDOW (object);
+
+  switch (prop_id)
+    {
+    case PROP_DEVICE:
+      select_stream_deck (self, g_value_get_object (value));
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
 bs_window_class_init (BsWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -468,6 +516,14 @@ bs_window_class_init (BsWindowClass *klass)
 
   object_class->finalize = bs_window_finalize;
   object_class->constructed = bs_window_constructed;
+  object_class->get_property = bs_window_get_property;
+  object_class->set_property = bs_window_set_property;
+
+  properties[PROP_DEVICE] = g_param_spec_object ("device", NULL, NULL,
+                                                 BS_TYPE_STREAM_DECK,
+                                                 G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-window.ui");
 
