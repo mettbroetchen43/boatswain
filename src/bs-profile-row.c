@@ -29,6 +29,7 @@ struct _BsProfileRow
   GtkMenuButton *menu_button;
   GtkWidget *rename_button;
   GtkEditable *rename_entry;
+  GtkWidget *selected_icon;
 
   GSimpleActionGroup *action_group;
 
@@ -93,6 +94,15 @@ rename_profile (BsProfileRow *self)
   bs_profile_set_name (self->profile, g_strstrip (new_name));
 
   gtk_menu_button_popdown (self->menu_button);
+}
+
+static void
+update_selected_icon_visibility (BsProfileRow *self)
+{
+  gboolean visible;
+
+  visible = bs_stream_deck_get_active_profile (self->stream_deck) == self->profile;
+  gtk_widget_set_visible (self->selected_icon, visible);
 }
 
 static void
@@ -204,6 +214,14 @@ on_rename_entry_text_changed_cb (GtkEntry     *entry,
   validate_rename_entry (self);
 }
 
+static void
+on_stream_deck_active_profile_changed_cb (BsStreamDeck *stream_deck,
+                                          GParamSpec   *pspec,
+                                          BsProfileRow *self)
+{
+  update_selected_icon_visibility (self);
+}
+
 
 
 /*
@@ -224,7 +242,14 @@ bs_profile_row_constructed (GObject *object)
   profiles = bs_stream_deck_get_profiles (self->stream_deck);
   g_signal_connect_object (profiles, "items-changed", G_CALLBACK (on_profiles_items_changed_cb), self, 0);
 
+  g_signal_connect_object (self->stream_deck,
+                           "notify::active-profile",
+                           G_CALLBACK (on_stream_deck_active_profile_changed_cb),
+                           self,
+                           0);
+
   update_actions (self);
+  update_selected_icon_visibility (self);
 }
 
 static void
@@ -308,6 +333,7 @@ bs_profile_row_class_init (BsProfileRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsProfileRow, menu_button);
   gtk_widget_class_bind_template_child (widget_class, BsProfileRow, rename_button);
   gtk_widget_class_bind_template_child (widget_class, BsProfileRow, rename_entry);
+  gtk_widget_class_bind_template_child (widget_class, BsProfileRow, selected_icon);
 
   gtk_widget_class_bind_template_callback (widget_class, on_rename_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_rename_entry_activate_cb);

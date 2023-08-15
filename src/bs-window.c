@@ -43,15 +43,10 @@ struct _BsWindow
 
   GBinding *brightness_binding;
   BsStreamDeck *current_stream_deck;
-  gulong active_profile_changed_id;
 };
 
 static GtkWidget * create_profile_row_cb (gpointer item,
                                           gpointer user_data);
-
-static void on_current_stream_deck_active_profile_changed_cb (BsStreamDeck *stream_deck,
-                                                              GParamSpec   *pspec,
-                                                              BsWindow     *self);
 
 G_DEFINE_FINAL_TYPE (BsWindow, bs_window, ADW_TYPE_APPLICATION_WINDOW)
 
@@ -95,29 +90,6 @@ append_new_profile (BsWindow *self)
 }
 
 static void
-update_active_profile (BsWindow *self)
-{
-  GListModel *profiles;
-  BsProfile *active_profile;
-  unsigned int i;
-
-  active_profile = bs_stream_deck_get_active_profile (self->current_stream_deck);
-  profiles = bs_stream_deck_get_profiles (self->current_stream_deck);
-  for (i = 0; i < g_list_model_get_n_items (profiles); i++)
-    {
-      g_autoptr (BsProfile) profile = NULL;
-      GtkListBoxRow *row;
-      GtkWidget *image;
-
-      profile = g_list_model_get_item (profiles, i);
-      row = gtk_list_box_get_row_at_index (self->profiles_listbox, i);
-      image = g_object_get_data (G_OBJECT (row), "selected-icon");
-
-      gtk_widget_set_visible (image, profile == active_profile);
-    }
-}
-
-static void
 select_stream_deck (BsWindow     *self,
                     BsStreamDeck *stream_deck)
 {
@@ -129,7 +101,6 @@ select_stream_deck (BsWindow     *self,
   page_name = g_strdup_printf ("%p", stream_deck);
   gtk_stack_set_visible_child_name (self->main_stack, page_name);
 
-  g_clear_signal_handler (&self->active_profile_changed_id, self->current_stream_deck);
   g_clear_pointer (&self->brightness_binding, g_binding_unbind);
 
   self->current_stream_deck = stream_deck;
@@ -143,11 +114,6 @@ select_stream_deck (BsWindow     *self,
                                                          self->brightness_adjustment,
                                                          "value",
                                                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
-
-      self->active_profile_changed_id = g_signal_connect (stream_deck,
-                                                          "notify::active-profile",
-                                                          G_CALLBACK (on_current_stream_deck_active_profile_changed_cb),
-                                                          self);
     }
 
   gtk_list_box_bind_model (self->profiles_listbox,
@@ -155,8 +121,6 @@ select_stream_deck (BsWindow     *self,
                            create_profile_row_cb,
                            self,
                            NULL);
-
-  update_active_profile (self);
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_DEVICE]);
 }
@@ -189,20 +153,13 @@ static GtkWidget *
 create_profile_row_cb (gpointer item,
                        gpointer user_data)
 {
-  BsProfile *profile;
-  GtkWidget *image;
   GtkWidget *row;
   BsWindow *self;
 
   self = BS_WINDOW (user_data);
-  profile = BS_PROFILE (item);
 
-  image = gtk_image_new_from_icon_name ("object-select-symbolic");
-  gtk_widget_set_visible (image, profile == bs_stream_deck_get_active_profile (self->current_stream_deck));
-
-  row = bs_profile_row_new (self->current_stream_deck, profile);
+  row = bs_profile_row_new (self->current_stream_deck, BS_PROFILE (item));
   g_signal_connect (row, "move", G_CALLBACK (on_profile_row_move_cb), self);
-  g_object_set_data (G_OBJECT (row), "selected-icon", image);
 
   return row;
 }
@@ -226,14 +183,6 @@ create_stream_deck_row_cb (gpointer item,
   g_object_set_data (G_OBJECT (row), "stream-deck", item);
 
   return row;
-}
-
-static void
-on_current_stream_deck_active_profile_changed_cb (BsStreamDeck *stream_deck,
-                                                  GParamSpec   *pspec,
-                                                  BsWindow     *self)
-{
-  update_active_profile (self);
 }
 
 static void
@@ -321,8 +270,6 @@ on_profiles_listbox_row_activated_cb (GtkListBox    *listbox,
   profile = g_list_model_get_item (profiles, gtk_list_box_row_get_index (row));
 
   bs_stream_deck_load_profile (self->current_stream_deck, profile);
-
-  update_active_profile (self);
 }
 
 static void
@@ -345,16 +292,6 @@ on_stream_decks_listbox_row_activated_cb (GtkListBox    *listbox,
 /*
  * GObject overrides
  */
-
-static void
-bs_window_finalize (GObject *object)
-{
-  BsWindow *self = (BsWindow *)object;
-
-  g_clear_signal_handler (&self->active_profile_changed_id, self->current_stream_deck);
-
-  G_OBJECT_CLASS (bs_window_parent_class)->finalize (object);
-}
 
 static void
 bs_window_constructed (GObject *object)
@@ -453,7 +390,6 @@ bs_window_class_init (BsWindowClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize = bs_window_finalize;
   object_class->constructed = bs_window_constructed;
   object_class->get_property = bs_window_get_property;
   object_class->set_property = bs_window_set_property;
