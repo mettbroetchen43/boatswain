@@ -2,21 +2,6 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
 
-  <menu id="profiles_menu">
-    <section>
-      <submenu>
-        <attribute name="label" translatable="yes">New profile</attribute>
-        <item>
-          <attribute name="custom">new-profile</attribute>
-        </item>
-      </submenu>
-      <item>
-        <attribute name='label' translatable='yes'>Manage profiles…</attribute>
-        <attribute name='action'>win.manage-profiles</attribute>
-      </item>
-    </section>
-  </menu>
-
   <template class="BsWindow" parent="AdwApplicationWindow">
     <property name="title">Boatswain</property>
     <property name="default-width">1200</property>
@@ -121,12 +106,33 @@
                   <object class="GtkScrolledWindow">
                     <property name="vscrollbar-policy">never</property>
                     <child>
-                      <object class="GtkListBox" id="profiles_listbox">
-                        <property name="selection-mode">browse</property>
-                        <signal name="row-activated" handler="on_profiles_listbox_row_activated_cb" object="BsWindow" swapped="no" />
-                        <style>
-                          <class name="navigation-sidebar" />
-                        </style>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">2</property>
+
+                        <child>
+                          <object class="GtkListBox" id="profiles_listbox">
+                            <property name="selection-mode">browse</property>
+                            <signal name="row-activated" handler="on_profiles_listbox_row_activated_cb" object="BsWindow" swapped="no" />
+                            <style>
+                              <class name="navigation-sidebar" />
+                            </style>>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="GtkEntry" id="new_profile_name_entry">
+                            <property name="margin-bottom">6</property>
+                            <property name="margin-start">6</property>
+                            <property name="margin-end">6</property>
+                            <property name="placeholder-text" translatable="yes">New profile…</property>
+                            <signal name="activate" handler="on_new_profile_name_entry_activate_cb" object="BsWindow" swapped="no" />
+                            <style>
+                              <class name="new-profile-entry" />
+                            </style>
+                          </object>
+                        </child>
+
                       </object>
                     </child>
                   </object>
@@ -201,51 +207,6 @@
                           <property name="row">4</property>
                           <property name="column">1</property>
                         </layout>
-                      </object>
-                    </child>
-
-                    <!-- FIXME: Profiles -->
-                    <child>
-                      <object class="GtkMenuButton" id="profiles_menu_button">
-                        <property name="visible">False</property>
-                        <property name="always-show-arrow">True</property>
-                        <layout>
-                          <property name="row">5</property>
-                          <property name="column">0</property>
-                        </layout>
-                        <property name="popover">
-                          <object class="GtkPopoverMenu">
-                            <property name="menu-model">profiles_menu</property>
-                            <child type="new-profile">
-                              <object class="GtkBox">
-                                <property name="margin-top">24</property>
-                                <property name="margin-bottom">12</property>
-                                <property name="margin-start">12</property>
-                                <property name="margin-end">12</property>
-                                <property name="spacing">6</property>
-
-                                <child>
-                                  <object class="GtkEntry" id="new_profile_name_entry">
-                                    <signal name="activate" handler="on_new_profile_name_entry_activate_cb" object="BsWindow" swapped="no" />
-                                    <signal name="notify::text" handler="on_new_profile_name_entry_text_changed_cb" object="BsWindow" swapped="no" />
-                                  </object>
-                                </child>
-
-                                <child>
-                                  <object class="GtkButton" id="create_profile_button">
-                                    <property name="sensitive">False</property>
-                                    <property name="label" translatable="yes">Create</property>
-                                    <signal name="clicked" handler="on_create_profile_button_clicked_cb" object="BsWindow" swapped="no" />
-                                    <style>
-                                      <class name="suggested-action" />
-                                    </style>
-                                  </object>
-                                </child>
-
-                              </object>
-                            </child>
-                          </object>
-                        </property>
                       </object>
                     </child>
 

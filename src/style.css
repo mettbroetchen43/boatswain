@@ -11,6 +11,10 @@ list.navigation-sidebar row:not(:selected) menubutton button image {
   color: alpha(currentColor, 0.33);
 }
 
+entry.new-profile-entry {
+  background-color: transparent;
+}
+
 streamdeckbuttonwidget:selected {
   background-color: transparent;
 }
