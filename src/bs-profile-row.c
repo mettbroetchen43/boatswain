@@ -24,7 +24,7 @@
 
 struct _BsProfileRow
 {
-  AdwActionRow parent_instance;
+  AdwPreferencesRow parent_instance;
 
   GtkMenuButton *menu_button;
   GtkWidget *rename_button;
@@ -36,7 +36,7 @@ struct _BsProfileRow
   BsStreamDeck *stream_deck;
 };
 
-G_DEFINE_FINAL_TYPE (BsProfileRow, bs_profile_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (BsProfileRow, bs_profile_row, ADW_TYPE_PREFERENCES_ROW)
 
 enum
 {
