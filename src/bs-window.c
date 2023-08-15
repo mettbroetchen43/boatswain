@@ -19,7 +19,6 @@
 #include "bs-application.h"
 #include "bs-config.h"
 #include "bs-device-manager.h"
-#include "bs-omni-bar.h"
 #include "bs-profile.h"
 #include "bs-profiles-dialog.h"
 #include "bs-stream-deck.h"
@@ -466,8 +465,6 @@ bs_window_class_init (BsWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-  g_type_ensure (BS_TYPE_OMNI_BAR);
 
   object_class->finalize = bs_window_finalize;
   object_class->constructed = bs_window_constructed;

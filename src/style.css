@@ -31,10 +31,6 @@ streamdeckbuttoneditor button.remove-button {
   border-radius: 12px;
 }
 
-splitbutton.omnibar {
-  background: alpha(currentColor, 0.075);
-}
-
 popover.custom-icon-popover > contents {
   padding: 0;
 }
