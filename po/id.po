@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-03-29 16:41+0000\n"
-"PO-Revision-Date: 2023-03-31 07:46+0700\n"
+"POT-Creation-Date: 2023-08-15 18:37+0000\n"
+"PO-Revision-Date: 2023-08-18 21:21+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -29,36 +29,36 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Kontrol Elgato Stream Deck Anda"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
 "Boatswain memungkinkan Anda untuk mengontrol perangkat Elgato Stream Deck."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "Dengan Boatswain Anda akan dapat:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Atur tindakan Anda di halaman dan profil"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Atur ikon ubahan ke tindakan"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid "Control your music player"
 msgstr "Kontrol pemutar musik Anda"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Putar efek suara selama streaming Anda"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
@@ -66,7 +66,7 @@ msgstr ""
 "websocket)"
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Unnamed profile"
 msgstr "Profil tanpa nama"
 
-#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
 msgid "Rename"
 msgstr "Ganti Nama"
 
@@ -104,25 +104,25 @@ msgstr "Naikkan"
 msgid "Move down"
 msgstr "Turunkan"
 
-#: src/bs-profiles-dialog.ui:26
-msgid "Profiles"
-msgstr "Profil"
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Hapus"
 
-#: src/bs-stream-deck.c:277
+#: src/bs-stream-deck.c:278
 msgid "Default"
 msgstr "Baku"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:847
+#: src/bs-stream-deck.c:848
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
+#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -131,29 +131,29 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
+#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:977
+#: src/bs-stream-deck.c:978
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1003
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1072
+#: src/bs-stream-deck.c:1073
 msgid "Feaneron Hangar Original"
 msgstr "Hanggar Feaneron Asli"
 
-#: src/bs-stream-deck.c:1095
+#: src/bs-stream-deck.c:1096
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -175,84 +175,68 @@ msgstr "Ba_tal"
 msgid "All supported formats"
 msgstr "Semua format yang didukung"
 
-#: src/bs-stream-deck-button-editor.ui:17
+#: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
 msgstr "Pilih tombol"
 
-#: src/bs-stream-deck-button-editor.ui:199
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Properti Tombol"
+
+#: src/bs-stream-deck-button-editor.ui:221
 msgid "Name"
 msgstr "Nama"
 
-#: src/bs-stream-deck-button-editor.ui:206
+#: src/bs-stream-deck-button-editor.ui:228
 msgid "Background Color"
 msgstr "Warna Latar"
 
-#: src/bs-stream-deck-button-editor.ui:237
-#: src/bs-stream-deck-button-editor.ui:300
+#: src/bs-stream-deck-button-editor.ui:259
 msgid "Select action"
 msgstr "Pilih aksi"
 
-#: src/bs-stream-deck-button-editor.ui:258
+#: src/bs-stream-deck-button-editor.ui:280
 msgid "Remove Action"
 msgstr "Hapus Aksi"
 
-#: src/bs-window.ui:13
-msgid "New profile"
-msgstr "Profil baru"
+#: src/bs-stream-deck-button-editor.ui:303
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Aksi"
 
-#: src/bs-window.ui:19
-msgid "Manage profiles…"
-msgstr "Kelola profil…"
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "Profil baru…"
 
-#: src/bs-window.ui:64
-msgid "Create"
-msgstr "Buat"
-
-#: src/bs-window.ui:108
-msgid "Power"
-msgstr "Daya"
-
-#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Kecerahan"
 
-#: src/bs-window.ui:160
-msgid "Device"
-msgstr "Peranti"
-
-#: src/bs-window.ui:176
-msgid "Serial Number"
-msgstr "Nomor Seri"
-
-#: src/bs-window.ui:203
+#: src/bs-window.ui:174
 msgid "Firmware"
 msgstr "Perangkat Tegar (Firmware)"
 
-#: src/bs-window.ui:251
-msgid "Devices"
-msgstr "Perangkat"
-
-#: src/bs-window.ui:296
+#: src/bs-window.ui:232
 msgid "No Stream Deck Found"
 msgstr "Tidak Ada Stream Deck yang Ditemukan"
 
-#: src/bs-window.ui:297
+#: src/bs-window.ui:233
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Colokkan perangkat Stream Deck untuk menggunakannya."
 
-#: src/bs-window.ui:308
+#: src/bs-window.ui:256
 msgid "_Keyboard Shortcuts"
 msgstr "Pintasan Papan Ti_k"
 
-#: src/bs-window.ui:312
+#: src/bs-window.ui:260
 msgid "_About Boatswain"
 msgstr "Tent_ang Boatswain"
 
-#: src/bs-window.ui:316
+#: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "_Keluar"
 
-#: src/bs-window.c:344
+#: src/bs-window.c:272
 msgid "Repository"
 msgstr "Repositori"
 
@@ -283,23 +267,24 @@ msgstr "Ganti Profil"
 msgid "Multiple Actions"
 msgstr "Beberapa Tindakan"
 
-#: src/plugins/default/default-brightness-action.c:140
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
 msgid "Constant"
 msgstr "Konstant"
 
-#: src/plugins/default/default-brightness-action.c:141
+#: src/plugins/default/default-brightness-action.c:142
 msgid "Increase"
 msgstr "Diperbesar"
 
-#: src/plugins/default/default-brightness-action.c:142
+#: src/plugins/default/default-brightness-action.c:143
 msgid "Decrease"
 msgstr "Diperkecil"
 
-#: src/plugins/default/default-brightness-action.c:145
+#: src/plugins/default/default-brightness-action.c:146
 msgid "Mode"
 msgstr "Modus"
 
-#: src/plugins/default/default-brightness-action.c:152
+#: src/plugins/default/default-brightness-action.c:153
 msgid "Value"
 msgstr "Nilai"
 
@@ -315,10 +300,6 @@ msgstr "Tambah aksi"
 #: src/plugins/default/default-multi-action-editor.ui:49
 msgid "Add Action"
 msgstr "Tambah Aksi"
-
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Aksi"
 
 #: src/plugins/default/default-multi-action-editor.ui:73
 msgid "Others"
@@ -356,23 +337,25 @@ msgstr "Peluncur"
 msgid "Switch Scene"
 msgstr "Beralih Adegan"
 
-#: src/plugins/obs-studio/obs-action-factory.c:54
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:55
 msgid "Record"
 msgstr "Rekam"
 
-#: src/plugins/obs-studio/obs-action-factory.c:60
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:62
 msgid "Stream"
 msgstr "Stream"
 
-#: src/plugins/obs-studio/obs-action-factory.c:66
+#: src/plugins/obs-studio/obs-action-factory.c:68
 msgid "Virtual Camera"
 msgstr "Kamera Virtual"
 
-#: src/plugins/obs-studio/obs-action-factory.c:72
+#: src/plugins/obs-studio/obs-action-factory.c:74
 msgid "Toggle Mute"
 msgstr "Jungkitkan Bisu"
 
-#: src/plugins/obs-studio/obs-action-factory.c:78
+#: src/plugins/obs-studio/obs-action-factory.c:80
 msgid "Show / Hide Source"
 msgstr "Tampilkan / Sembunyikan Sumber"
 
@@ -520,3 +503,24 @@ msgstr "Volume"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Papan suara"
+
+#~ msgid "Profiles"
+#~ msgstr "Profil"
+
+#~ msgid "Manage profiles…"
+#~ msgstr "Kelola profil…"
+
+#~ msgid "Create"
+#~ msgstr "Buat"
+
+#~ msgid "Power"
+#~ msgstr "Daya"
+
+#~ msgid "Device"
+#~ msgstr "Peranti"
+
+#~ msgid "Serial Number"
+#~ msgstr "Nomor Seri"
+
+#~ msgid "Devices"
+#~ msgstr "Perangkat"
