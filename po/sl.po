@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-04-02 09:22+0000\n"
-"PO-Revision-Date: 2023-04-12 21:16+0200\n"
+"POT-Creation-Date: 2023-08-15 18:37+0000\n"
+"PO-Revision-Date: 2023-08-19 17:04+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups."
 "com>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -33,35 +33,35 @@ msgstr "Krmar"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;pretakanje;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Upravljanje naprave Elgato Stream Deck"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Program omogoča upravljanje naprav Elgato Stream Deck."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "S programom je mogoče:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "organizirati dejanja na straneh in profilih"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "nastaviti ikone po meri za dejanja"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid "Control your music player"
 msgstr "nadzirati delovanje predvajalnika glasbe"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "predvajati zvočne učinke med pretokom"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
@@ -69,7 +69,7 @@ msgstr ""
 "razširitev obs-websocket)"
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
@@ -98,7 +98,7 @@ msgstr ""
 msgid "Unnamed profile"
 msgstr "Neimenovan profil"
 
-#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
 msgid "Rename"
 msgstr "Preimenuj"
 
@@ -110,25 +110,25 @@ msgstr "Premakni navzgor"
 msgid "Move down"
 msgstr "Premakni navzdol"
 
-#: src/bs-profiles-dialog.ui:26
-msgid "Profiles"
-msgstr "Profili"
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Izbriši"
 
-#: src/bs-stream-deck.c:277
+#: src/bs-stream-deck.c:278
 msgid "Default"
 msgstr "Privzeto"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:847
+#: src/bs-stream-deck.c:848
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
+#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -137,29 +137,29 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
+#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:977
+#: src/bs-stream-deck.c:978
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1003
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck Pedal"
 msgstr "Pedal Stream Deck"
 
-#: src/bs-stream-deck.c:1072
+#: src/bs-stream-deck.c:1073
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1095
+#: src/bs-stream-deck.c:1096
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -181,84 +181,68 @@ msgstr "_Prekliči"
 msgid "All supported formats"
 msgstr "Vse podprte vrste datotek"
 
-#: src/bs-stream-deck-button-editor.ui:17
+#: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
 msgstr "Izbor gumba"
 
-#: src/bs-stream-deck-button-editor.ui:199
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Lastnosti gumba"
+
+#: src/bs-stream-deck-button-editor.ui:221
 msgid "Name"
 msgstr "Ime"
 
-#: src/bs-stream-deck-button-editor.ui:206
+#: src/bs-stream-deck-button-editor.ui:228
 msgid "Background Color"
 msgstr "Barva ozadja"
 
-#: src/bs-stream-deck-button-editor.ui:237
-#: src/bs-stream-deck-button-editor.ui:300
+#: src/bs-stream-deck-button-editor.ui:259
 msgid "Select action"
 msgstr "Izbor dejanja"
 
-#: src/bs-stream-deck-button-editor.ui:258
+#: src/bs-stream-deck-button-editor.ui:280
 msgid "Remove Action"
 msgstr "Odstrani dejanje"
 
-#: src/bs-window.ui:13
-msgid "New profile"
-msgstr "Nov profil"
+#: src/bs-stream-deck-button-editor.ui:303
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Dejanja"
 
-#: src/bs-window.ui:19
-msgid "Manage profiles…"
-msgstr "Upravljanje profilov …"
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "Nov profil …"
 
-#: src/bs-window.ui:64
-msgid "Create"
-msgstr "Ustvari"
-
-#: src/bs-window.ui:108
-msgid "Power"
-msgstr "Napajanje"
-
-#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Svetlost"
 
-#: src/bs-window.ui:160
-msgid "Device"
-msgstr "Naprava"
-
-#: src/bs-window.ui:176
-msgid "Serial Number"
-msgstr "Zaporedna številka"
-
-#: src/bs-window.ui:203
+#: src/bs-window.ui:174
 msgid "Firmware"
 msgstr "Strojna programska oprema"
 
-#: src/bs-window.ui:251
-msgid "Devices"
-msgstr "Naprave"
-
-#: src/bs-window.ui:296
+#: src/bs-window.ui:232
 msgid "No Stream Deck Found"
 msgstr "Ni zaznane nobene naprave Stream Deck"
 
-#: src/bs-window.ui:297
+#: src/bs-window.ui:233
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Priklopite napravo Stream Deck za uporabo."
 
-#: src/bs-window.ui:308
+#: src/bs-window.ui:256
 msgid "_Keyboard Shortcuts"
 msgstr "_Tipkovne bližnjice"
 
-#: src/bs-window.ui:312
+#: src/bs-window.ui:260
 msgid "_About Boatswain"
 msgstr "_O programu"
 
-#: src/bs-window.ui:316
+#: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "_Končaj"
 
-#: src/bs-window.c:344
+#: src/bs-window.c:272
 msgid "Repository"
 msgstr "Skladišče"
 
@@ -289,23 +273,24 @@ msgstr "Preklopi profil"
 msgid "Multiple Actions"
 msgstr "Več dejanj"
 
-#: src/plugins/default/default-brightness-action.c:140
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
 msgid "Constant"
 msgstr "Konstantno"
 
-#: src/plugins/default/default-brightness-action.c:141
+#: src/plugins/default/default-brightness-action.c:142
 msgid "Increase"
 msgstr "Povečaj"
 
-#: src/plugins/default/default-brightness-action.c:142
+#: src/plugins/default/default-brightness-action.c:143
 msgid "Decrease"
 msgstr "Pomanjšaj "
 
-#: src/plugins/default/default-brightness-action.c:145
+#: src/plugins/default/default-brightness-action.c:146
 msgid "Mode"
 msgstr "Način"
 
-#: src/plugins/default/default-brightness-action.c:152
+#: src/plugins/default/default-brightness-action.c:153
 msgid "Value"
 msgstr "Vrednost"
 
@@ -321,10 +306,6 @@ msgstr "Dodaj dejanje"
 #: src/plugins/default/default-multi-action-editor.ui:49
 msgid "Add Action"
 msgstr "Dodaj dejanje"
-
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Dejanja"
 
 #: src/plugins/default/default-multi-action-editor.ui:73
 msgid "Others"
@@ -362,23 +343,25 @@ msgstr "Zaganjalnik"
 msgid "Switch Scene"
 msgstr "Preklopi sceno"
 
-#: src/plugins/obs-studio/obs-action-factory.c:54
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:55
 msgid "Record"
 msgstr "Začne snemanje"
 
-#: src/plugins/obs-studio/obs-action-factory.c:60
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:62
 msgid "Stream"
 msgstr "Začni pretakanje"
 
-#: src/plugins/obs-studio/obs-action-factory.c:66
+#: src/plugins/obs-studio/obs-action-factory.c:68
 msgid "Virtual Camera"
 msgstr "Navidezna kamera"
 
-#: src/plugins/obs-studio/obs-action-factory.c:72
+#: src/plugins/obs-studio/obs-action-factory.c:74
 msgid "Toggle Mute"
 msgstr "Preklopi nemost"
 
-#: src/plugins/obs-studio/obs-action-factory.c:78
+#: src/plugins/obs-studio/obs-action-factory.c:80
 msgid "Show / Hide Source"
 msgstr "Pokaži / Skrij vir"
 
