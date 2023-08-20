@@ -28,6 +28,9 @@ following content to `/etc/udev/rules.d/50-elgato.rules`:
 # Elgato Stream Deck Mini
 SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0063", TAG+="uaccess"
 
+# Elgato Stream Deck Mini (v2)
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0090", TAG+="uaccess"
+
 # Elgato Stream Deck Original
 SUBSYSTEM=="usb", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0060", TAG+="uaccess"
 
