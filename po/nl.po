@@ -2,21 +2,22 @@
 # Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
 # Philip Goto <Philip.goto@gmail.com>, 2022.
+# Nathan Follens <nfollens@gnome.org>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-11-04 21:52+0000\n"
-"PO-Revision-Date: 2022-11-09 20:04+0100\n"
+"POT-Creation-Date: 2023-08-15 18:37+0000\n"
+"PO-Revision-Date: 2023-08-27 14:32+0200\n"
 "Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
-"Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
+"Language-Team: GNOME-NL https://matrix.to/#/#nl:gnome.org\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -28,42 +29,42 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;streamen;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Beheer uw Elgato Stream Decks"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Boatswain laat u uw Elgato Stream Deck-apparaten beheren."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "Met Boatswain kunt u:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Uw acties in pagina’s en profielen ordenen"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Aangepaste pictogrammen instellen voor acties"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid "Control your music player"
 msgstr "Uw muziekspeler beheren"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Geluidseffecten spelen tijdens uw streams"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "OBS Studio beheren via de Stream Deck (vereist de uitbruiding obs-websocket)"
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
@@ -71,7 +72,14 @@ msgstr "Georges Basile Stavracas Neto"
 msgid "Enable debug messages"
 msgstr "Foutopsporingsberichten inschakelen"
 
-#: src/bs-application.c:128
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "Verbonden met %d apparaat"
+msgstr[1] "Verbonden met %d apparaten"
+
+#: src/bs-application.c:167
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -83,38 +91,38 @@ msgstr ""
 msgid "Unnamed profile"
 msgstr "Naamloos profiel"
 
-#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
 msgid "Rename"
 msgstr "Hernoemen"
 
 #: src/bs-profile-row.ui:14
-msgid "Move _up"
-msgstr "Om_hoog verplaatsen"
+msgid "Move up"
+msgstr "Omhoog verplaatsen"
 
 #: src/bs-profile-row.ui:18
-msgid "Move _down"
-msgstr "Om_laag verplaatsen"
+msgid "Move down"
+msgstr "Omlaag verplaatsen"
 
-#: src/bs-profiles-dialog.ui:26
-msgid "Profiles"
-msgstr "Profielen"
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Verwijderen"
 
-#: src/bs-stream-deck.c:277
+#: src/bs-stream-deck.c:278
 msgid "Default"
 msgstr "Standaard"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:820
+#: src/bs-stream-deck.c:848
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:846 src/bs-stream-deck.c:872
-#: src/plugins/default/default-switch-profile-action.c:285
+#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
+#: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
@@ -122,22 +130,29 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:898 src/bs-stream-deck.c:924
+#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:950
+#: src/bs-stream-deck.c:978
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck.c:1019
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1004
+msgid "Stream Deck Pedal"
+msgstr "Stream Deck Pedal"
+
+#: src/bs-stream-deck.c:1073
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1042
+#: src/bs-stream-deck.c:1096
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -159,85 +174,69 @@ msgstr "_Annuleren"
 msgid "All supported formats"
 msgstr "Alle ondersteunde formaten"
 
-#: src/bs-stream-deck-button-editor.ui:17
+#: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
 msgstr "Selecteer een knop"
 
-#: src/bs-stream-deck-button-editor.ui:199
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Knopeigenschappen"
+
+#: src/bs-stream-deck-button-editor.ui:221
 msgid "Name"
 msgstr "Naam"
 
-#: src/bs-stream-deck-button-editor.ui:206
+#: src/bs-stream-deck-button-editor.ui:228
 msgid "Background Color"
 msgstr "Achtergrondkleur"
 
-#: src/bs-stream-deck-button-editor.ui:237
-#: src/bs-stream-deck-button-editor.ui:300
+#: src/bs-stream-deck-button-editor.ui:259
 msgid "Select action"
 msgstr "Selecteer actie"
 
-#: src/bs-stream-deck-button-editor.ui:258
+#: src/bs-stream-deck-button-editor.ui:280
 msgid "Remove Action"
 msgstr "Actie verwijderen"
 
-#: src/bs-window.ui:13
-msgid "_New profile"
-msgstr "_Nieuw profiel"
+#: src/bs-stream-deck-button-editor.ui:303
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Acties"
 
-#: src/bs-window.ui:19
-msgid "Manage profiles…"
-msgstr "Profielen beheren…"
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "Nieuw profiel…"
 
-#: src/bs-window.ui:64
-msgid "Create"
-msgstr "Maken"
-
-#: src/bs-window.ui:108
-msgid "Power"
-msgstr "Energie"
-
-#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Helderheid"
 
-#: src/bs-window.ui:160
-msgid "Device"
-msgstr "Apparaat"
-
-#: src/bs-window.ui:176
-msgid "Serial Number"
-msgstr "Serienummer"
-
-#: src/bs-window.ui:203
+#: src/bs-window.ui:174
 msgid "Firmware"
 msgstr "Firmware"
 
-#: src/bs-window.ui:251
-msgid "Devices"
-msgstr "Apparaten"
-
-#: src/bs-window.ui:295
+#: src/bs-window.ui:232
 msgid "No Stream Deck Found"
 msgstr "Geen Stream Deck gevonden"
 
-#: src/bs-window.ui:296
+#: src/bs-window.ui:233
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Sluit een Stream Deck-apparaat aan om deze te gebruiken."
 
-#: src/bs-window.ui:307
+#: src/bs-window.ui:256
 msgid "_Keyboard Shortcuts"
 msgstr "Snel_toetsen"
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:260
 msgid "_About Boatswain"
 msgstr "_over Boatswain"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "_Sluiten"
 
 # Wat voor repository wordt hier bedoeld? - Nathan
-#: src/bs-window.c:329
+#: src/bs-window.c:272
 msgid "Repository"
 msgstr "Repository"
 
@@ -268,23 +267,24 @@ msgstr "Profiel omschakelen"
 msgid "Multiple Actions"
 msgstr "Meerdere acties"
 
-#: src/plugins/default/default-brightness-action.c:140
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
 msgid "Constant"
 msgstr "Constant"
 
-#: src/plugins/default/default-brightness-action.c:141
+#: src/plugins/default/default-brightness-action.c:142
 msgid "Increase"
 msgstr "Verhogen"
 
-#: src/plugins/default/default-brightness-action.c:142
+#: src/plugins/default/default-brightness-action.c:143
 msgid "Decrease"
 msgstr "Verlagen"
 
-#: src/plugins/default/default-brightness-action.c:145
+#: src/plugins/default/default-brightness-action.c:146
 msgid "Mode"
 msgstr "Modus"
 
-#: src/plugins/default/default-brightness-action.c:152
+#: src/plugins/default/default-brightness-action.c:153
 msgid "Value"
 msgstr "Waarde"
 
@@ -301,10 +301,6 @@ msgstr "Actie toevoegen"
 msgid "Add Action"
 msgstr "Actie toevoegen"
 
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Acties"
-
 #: src/plugins/default/default-multi-action-editor.ui:73
 msgid "Others"
 msgstr "Overige"
@@ -313,7 +309,7 @@ msgstr "Overige"
 msgid "Settings"
 msgstr "Instellingen"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Profiel"
 
@@ -341,23 +337,25 @@ msgstr "Launcher"
 msgid "Switch Scene"
 msgstr "Scène wisselen"
 
-#: src/plugins/obs-studio/obs-action-factory.c:54
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:55
 msgid "Record"
 msgstr "Opnemen"
 
-#: src/plugins/obs-studio/obs-action-factory.c:60
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:62
 msgid "Stream"
 msgstr "Streamen"
 
-#: src/plugins/obs-studio/obs-action-factory.c:66
+#: src/plugins/obs-studio/obs-action-factory.c:68
 msgid "Virtual Camera"
 msgstr "Virtuele camera"
 
-#: src/plugins/obs-studio/obs-action-factory.c:72
+#: src/plugins/obs-studio/obs-action-factory.c:74
 msgid "Toggle Mute"
 msgstr "Dempen omschakelen"
 
-#: src/plugins/obs-studio/obs-action-factory.c:78
+#: src/plugins/obs-studio/obs-action-factory.c:80
 msgid "Show / Hide Source"
 msgstr "Bron tonen / verbergen"
 
@@ -438,31 +436,31 @@ msgstr "Beheer de actieve muziekspeler"
 msgid "Play Audio"
 msgstr "Audio afspelen"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:196
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
 msgid "Next"
 msgstr "Volgende"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:197
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
 msgid "Pause"
 msgstr "Pauzeren"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:198
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
 msgid "Play"
 msgstr "Spelen"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:199
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
 msgid "Previous"
 msgstr "Vorige"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:200
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
 msgid "Stop"
 msgstr "Stoppen"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:201
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
 msgid "Play / Pause"
 msgstr "Afspelen / pauzeren"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:204
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
 msgid "Playback Action"
 msgstr "Afspeelactie"
 
@@ -505,3 +503,24 @@ msgstr "Volume"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Klankbord"
+
+#~ msgid "Profiles"
+#~ msgstr "Profielen"
+
+#~ msgid "Manage profiles…"
+#~ msgstr "Profielen beheren…"
+
+#~ msgid "Create"
+#~ msgstr "Maken"
+
+#~ msgid "Power"
+#~ msgstr "Energie"
+
+#~ msgid "Device"
+#~ msgstr "Apparaat"
+
+#~ msgid "Serial Number"
+#~ msgstr "Serienummer"
+
+#~ msgid "Devices"
+#~ msgstr "Apparaten"
