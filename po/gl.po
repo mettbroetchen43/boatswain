@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-03-29 16:41+0000\n"
-"PO-Revision-Date: 2023-08-13 12:13+0200\n"
+"POT-Creation-Date: 2023-08-15 18:37+0000\n"
+"PO-Revision-Date: 2023-08-29 00:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: Galician <gnome-gl-list@gnome.org>\n"
 "Language: gl\n"
@@ -28,43 +28,43 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Controle o seu Elgato Stream Deck"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
 "Boatswain permítelle controlar os seus dispositivos Elgato Stream Deck."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "Con Boatswain poderá:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Organizar as súas accións en páxinas e perfiles"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Estabelecer iconas personalizadas ás accións"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid "Control your music player"
 msgstr "Controlar o seu reprodutor de música"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Reproducir efectos de son durante as súas retransmisións"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "Controlar OBS Studio usando Stream Deck (require a extensión obs-websocket)."
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Unnamed profile"
 msgstr "Perfil sen nome"
 
-#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
 msgid "Rename"
 msgstr "Renomear"
 
@@ -103,25 +103,25 @@ msgstr "Subir"
 msgid "Move down"
 msgstr "Baixar"
 
-#: src/bs-profiles-dialog.ui:26
-msgid "Profiles"
-msgstr "Perfiles"
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Eliminar"
 
-#: src/bs-stream-deck.c:277
+#: src/bs-stream-deck.c:278
 msgid "Default"
 msgstr "Predeterminado"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:847
+#: src/bs-stream-deck.c:848
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
+#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -130,29 +130,29 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
+#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:977
+#: src/bs-stream-deck.c:978
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1003
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck Pedal"
 msgstr "Pedal de Stream Deck"
 
-#: src/bs-stream-deck.c:1072
+#: src/bs-stream-deck.c:1073
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1095
+#: src/bs-stream-deck.c:1096
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -174,84 +174,68 @@ msgstr "_Cancelar"
 msgid "All supported formats"
 msgstr "Todos os formatos compatíbeis"
 
-#: src/bs-stream-deck-button-editor.ui:17
+#: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
 msgstr "Seleccionar un botón"
 
-#: src/bs-stream-deck-button-editor.ui:199
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Propiedades do botón"
+
+#: src/bs-stream-deck-button-editor.ui:221
 msgid "Name"
 msgstr "Nome"
 
-#: src/bs-stream-deck-button-editor.ui:206
+#: src/bs-stream-deck-button-editor.ui:228
 msgid "Background Color"
 msgstr "Cor de fondo"
 
-#: src/bs-stream-deck-button-editor.ui:237
-#: src/bs-stream-deck-button-editor.ui:300
+#: src/bs-stream-deck-button-editor.ui:259
 msgid "Select action"
 msgstr "Seleccionar acción"
 
-#: src/bs-stream-deck-button-editor.ui:258
+#: src/bs-stream-deck-button-editor.ui:280
 msgid "Remove Action"
 msgstr "Quitar acción"
 
-#: src/bs-window.ui:13
-msgid "New profile"
-msgstr "Novo perfil"
+#: src/bs-stream-deck-button-editor.ui:303
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Accións"
 
-#: src/bs-window.ui:19
-msgid "Manage profiles…"
-msgstr "Xestionar perfiles…"
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "Novo perfil…"
 
-#: src/bs-window.ui:64
-msgid "Create"
-msgstr "Crear"
-
-#: src/bs-window.ui:108
-msgid "Power"
-msgstr "Enerxía"
-
-#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Brillo"
 
-#: src/bs-window.ui:160
-msgid "Device"
-msgstr "Dispositivo"
-
-#: src/bs-window.ui:176
-msgid "Serial Number"
-msgstr "Número serie"
-
-#: src/bs-window.ui:203
+#: src/bs-window.ui:174
 msgid "Firmware"
 msgstr "Firmware"
 
-#: src/bs-window.ui:251
-msgid "Devices"
-msgstr "Dispositivos"
-
-#: src/bs-window.ui:296
+#: src/bs-window.ui:232
 msgid "No Stream Deck Found"
 msgstr "Non se atopou un Stream Deck"
 
-#: src/bs-window.ui:297
+#: src/bs-window.ui:233
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Conecte un dispositivo Stream Deck para úsalo."
 
-#: src/bs-window.ui:308
+#: src/bs-window.ui:256
 msgid "_Keyboard Shortcuts"
 msgstr "Atallos de _teclado"
 
-#: src/bs-window.ui:312
+#: src/bs-window.ui:260
 msgid "_About Boatswain"
 msgstr "_Sobre Boatswain"
 
-#: src/bs-window.ui:316
+#: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "_Saír"
 
-#: src/bs-window.c:344
+#: src/bs-window.c:272
 msgid "Repository"
 msgstr "Repositorio"
 
@@ -282,23 +266,24 @@ msgstr "Trocar perfíl"
 msgid "Multiple Actions"
 msgstr "Varias accións"
 
-#: src/plugins/default/default-brightness-action.c:140
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
 msgid "Constant"
 msgstr "Constante"
 
-#: src/plugins/default/default-brightness-action.c:141
+#: src/plugins/default/default-brightness-action.c:142
 msgid "Increase"
 msgstr "Incrementar"
 
-#: src/plugins/default/default-brightness-action.c:142
+#: src/plugins/default/default-brightness-action.c:143
 msgid "Decrease"
 msgstr "Decrementar"
 
-#: src/plugins/default/default-brightness-action.c:145
+#: src/plugins/default/default-brightness-action.c:146
 msgid "Mode"
 msgstr "Modo"
 
-#: src/plugins/default/default-brightness-action.c:152
+#: src/plugins/default/default-brightness-action.c:153
 msgid "Value"
 msgstr "Valor"
 
@@ -314,10 +299,6 @@ msgstr "Engadir acción"
 #: src/plugins/default/default-multi-action-editor.ui:49
 msgid "Add Action"
 msgstr "Engadir acción"
-
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Accións"
 
 #: src/plugins/default/default-multi-action-editor.ui:73
 msgid "Others"
@@ -355,23 +336,25 @@ msgstr "Lanzador"
 msgid "Switch Scene"
 msgstr "Trocar escena"
 
-#: src/plugins/obs-studio/obs-action-factory.c:54
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:55
 msgid "Record"
 msgstr "Grabar"
 
-#: src/plugins/obs-studio/obs-action-factory.c:60
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:62
 msgid "Stream"
 msgstr "Retransmitir"
 
-#: src/plugins/obs-studio/obs-action-factory.c:66
+#: src/plugins/obs-studio/obs-action-factory.c:68
 msgid "Virtual Camera"
 msgstr "Cámara virtual"
 
-#: src/plugins/obs-studio/obs-action-factory.c:72
+#: src/plugins/obs-studio/obs-action-factory.c:74
 msgid "Toggle Mute"
 msgstr "Trocar silencio"
 
-#: src/plugins/obs-studio/obs-action-factory.c:78
+#: src/plugins/obs-studio/obs-action-factory.c:80
 msgid "Show / Hide Source"
 msgstr "Mostra / ocultar orixe"
 
@@ -519,6 +502,27 @@ msgstr "Volume"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Tarxeta de son"
+
+#~ msgid "Profiles"
+#~ msgstr "Perfiles"
+
+#~ msgid "Manage profiles…"
+#~ msgstr "Xestionar perfiles…"
+
+#~ msgid "Create"
+#~ msgstr "Crear"
+
+#~ msgid "Power"
+#~ msgstr "Enerxía"
+
+#~ msgid "Device"
+#~ msgstr "Dispositivo"
+
+#~ msgid "Serial Number"
+#~ msgstr "Número serie"
+
+#~ msgid "Devices"
+#~ msgstr "Dispositivos"
 
 #~ msgid "OBS Studio requires a password to be controlled by Boatswain"
 #~ msgstr ""
