@@ -1,65 +1,66 @@
 # Basque translation for boatswain.
 # Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
-# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2022.
+# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2022, 2023.
 #
 msgid ""
 msgstr "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-12-03 16:49+0000\n"
-"PO-Revision-Date: 2022-12-07 18:20+0000\n"
+"POT-Creation-Date: 2023-08-15 18:37+0000\n"
+"PO-Revision-Date: 2023-09-02 18:20+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
 msgid "Boatswain"
-msgstr "Boatswain"
+msgstr "dBoatswain"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/com.feaneron.Boatswain.desktop.in.in:11
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream-mahaia;stream;mahaia;elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Kontrolatu zure Elgato Stream Deck gailuak"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Boatswain bidez, Elgato Stream Deck gailuak kontrolatu daitezke."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "Boatswain bidez, honakoak egin daitezke:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Zure ekintzak orrietan eta profiletan antolatu"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Ikono pertsonalizatuak ezarri ekintzei"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid "Control your music player"
 msgstr "Kontrolatu musika-erreproduzigailua"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Soinu-efektua erreproduzitu stream-saioetan"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr "OBS Studio kontrolatu Stream Deck erabilita (obs-websocket hedapena behar du)"
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
@@ -67,7 +68,14 @@ msgstr "Georges Basile Stavracas Neto"
 msgid "Enable debug messages"
 msgstr "Arazketa-mezuak gaitu"
 
-#: src/bs-application.c:128
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "Gailu %dekin konektatuta"
+msgstr[1] "%d gailurekin konektatuta"
+
+#: src/bs-application.c:167
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -77,7 +85,7 @@ msgstr "Boatswain atzeko planoa exekutatu behar da Stream Deck ekintzak detektat
 msgid "Unnamed profile"
 msgstr "Izenik gabeko profila"
 
-#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
 msgid "Rename"
 msgstr "Aldatu izena"
 
@@ -89,26 +97,26 @@ msgstr "Eraman gora"
 msgid "Move down"
 msgstr "Eraman behera"
 
-#: src/bs-profiles-dialog.ui:26
-msgid "Profiles"
-msgstr "Profilak"
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Ezabatu"
 
-#: src/bs-stream-deck.c:277
+#: src/bs-stream-deck.c:278
 msgid "Default"
 msgstr "Lehenetsia"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:847
+#: src/bs-stream-deck.c:848
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
-#: src/plugins/default/default-switch-profile-action.c:285
+#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
+#: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
@@ -116,29 +124,29 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
+#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:977
+#: src/bs-stream-deck.c:978
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1003
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1072
+#: src/bs-stream-deck.c:1073
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1095
+#: src/bs-stream-deck.c:1096
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -160,84 +168,68 @@ msgstr "_Utzi"
 msgid "All supported formats"
 msgstr "Onartutako formatu guztiak"
 
-#: src/bs-stream-deck-button-editor.ui:17
+#: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
 msgstr "Hautatu botoi bat"
 
-#: src/bs-stream-deck-button-editor.ui:199
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Botoi-propietateak"
+
+#: src/bs-stream-deck-button-editor.ui:221
 msgid "Name"
 msgstr "Izena"
 
-#: src/bs-stream-deck-button-editor.ui:206
+#: src/bs-stream-deck-button-editor.ui:228
 msgid "Background Color"
 msgstr "Atzeko planoaren kolorea"
 
-#: src/bs-stream-deck-button-editor.ui:237
-#: src/bs-stream-deck-button-editor.ui:300
+#: src/bs-stream-deck-button-editor.ui:259
 msgid "Select action"
 msgstr "Hautatu ekintza"
 
-#: src/bs-stream-deck-button-editor.ui:258
+#: src/bs-stream-deck-button-editor.ui:280
 msgid "Remove Action"
 msgstr "Kendu ekintza"
 
-#: src/bs-window.ui:13
-msgid "New profile"
-msgstr "Profil berria"
+#: src/bs-stream-deck-button-editor.ui:303
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Ekintzak"
 
-#: src/bs-window.ui:19
-msgid "Manage profiles…"
-msgstr "Kudeatu profilak…"
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "Profil berria…"
 
-#: src/bs-window.ui:64
-msgid "Create"
-msgstr "Sortu"
-
-#: src/bs-window.ui:108
-msgid "Power"
-msgstr "Energia"
-
-#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Distira"
 
-#: src/bs-window.ui:160
-msgid "Device"
-msgstr "Gailua"
-
-#: src/bs-window.ui:176
-msgid "Serial Number"
-msgstr "Serie-zenbakia"
-
-#: src/bs-window.ui:203
+#: src/bs-window.ui:174
 msgid "Firmware"
 msgstr "Firmwarea"
 
-#: src/bs-window.ui:251
-msgid "Devices"
-msgstr "Gailuak"
-
-#: src/bs-window.ui:296
+#: src/bs-window.ui:232
 msgid "No Stream Deck Found"
 msgstr "Ez da Stream Deck gailurik aurkitu"
 
-#: src/bs-window.ui:297
+#: src/bs-window.ui:233
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Konektatu Stream Deck gailu bat hura erabili ahal izateko."
 
-#: src/bs-window.ui:308
+#: src/bs-window.ui:256
 msgid "_Keyboard Shortcuts"
 msgstr "Las_ter-teklak"
 
-#: src/bs-window.ui:312
+#: src/bs-window.ui:260
 msgid "_About Boatswain"
 msgstr "Boatswain aplikazioari _buruz"
 
-#: src/bs-window.ui:316
+#: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "I_rten"
 
-#: src/bs-window.c:350
+#: src/bs-window.c:272
 msgid "Repository"
 msgstr "Biltegia"
 
@@ -268,23 +260,24 @@ msgstr "Aldatu profila"
 msgid "Multiple Actions"
 msgstr "Ekintza anitz"
 
-#: src/plugins/default/default-brightness-action.c:140
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
 msgid "Constant"
 msgstr "Konstantea"
 
-#: src/plugins/default/default-brightness-action.c:141
+#: src/plugins/default/default-brightness-action.c:142
 msgid "Increase"
 msgstr "Handiagotu"
 
-#: src/plugins/default/default-brightness-action.c:142
+#: src/plugins/default/default-brightness-action.c:143
 msgid "Decrease"
 msgstr "Txikiagotu"
 
-#: src/plugins/default/default-brightness-action.c:145
+#: src/plugins/default/default-brightness-action.c:146
 msgid "Mode"
 msgstr "Modua"
 
-#: src/plugins/default/default-brightness-action.c:152
+#: src/plugins/default/default-brightness-action.c:153
 msgid "Value"
 msgstr "Balioa"
 
@@ -301,10 +294,6 @@ msgstr "Gehitu ekintza"
 msgid "Add Action"
 msgstr "Gehitu ekintza"
 
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Ekintzak"
-
 #: src/plugins/default/default-multi-action-editor.ui:73
 msgid "Others"
 msgstr "Beste batzuk"
@@ -313,7 +302,7 @@ msgstr "Beste batzuk"
 msgid "Settings"
 msgstr "Ezarpenak"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Profila"
 
@@ -341,23 +330,25 @@ msgstr "Abiarazlea"
 msgid "Switch Scene"
 msgstr "Aldatu eszena"
 
-#: src/plugins/obs-studio/obs-action-factory.c:54
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:55
 msgid "Record"
 msgstr "Grabatu"
 
-#: src/plugins/obs-studio/obs-action-factory.c:60
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:62
 msgid "Stream"
 msgstr "Stream-a"
 
-#: src/plugins/obs-studio/obs-action-factory.c:66
+#: src/plugins/obs-studio/obs-action-factory.c:68
 msgid "Virtual Camera"
 msgstr "Kamera birtuala"
 
-#: src/plugins/obs-studio/obs-action-factory.c:72
+#: src/plugins/obs-studio/obs-action-factory.c:74
 msgid "Toggle Mute"
 msgstr "Aktibatu/desaktibatu mututzea"
 
-#: src/plugins/obs-studio/obs-action-factory.c:78
+#: src/plugins/obs-studio/obs-action-factory.c:80
 msgid "Show / Hide Source"
 msgstr "Erakutsi/ezkutatu iturburua"
 
@@ -505,6 +496,27 @@ msgstr "Bolumena"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Soinu-panela"
+
+#~ msgid "Profiles"
+#~ msgstr "Profilak"
+
+#~ msgid "Manage profiles…"
+#~ msgstr "Kudeatu profilak…"
+
+#~ msgid "Create"
+#~ msgstr "Sortu"
+
+#~ msgid "Power"
+#~ msgstr "Energia"
+
+#~ msgid "Device"
+#~ msgstr "Gailua"
+
+#~ msgid "Serial Number"
+#~ msgstr "Serie-zenbakia"
+
+#~ msgid "Devices"
+#~ msgstr "Gailuak"
 
 #~ msgid "OBS Studio requires a password to be controlled by Boatswain"
 #~ msgstr ""
