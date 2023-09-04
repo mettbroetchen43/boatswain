@@ -1,0 +1,504 @@
+# Czech translation for boatswain.
+# Copyright (C) 2023 boatswain's COPYRIGHT HOLDER
+# This file is distributed under the same license as the boatswain package.
+# Daniel Rusek <mail@asciiwolf.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: boatswain main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2023-09-02 15:48+0000\n"
+"PO-Revision-Date: 2023-09-03 15:14+0200\n"
+"Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: data/com.feaneron.Boatswain.desktop.in.in:3
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+msgid "Boatswain"
+msgstr "Boatswain"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
+msgid "stream deck;streaming;deck;elgato;"
+msgstr "stream deck;streamování;deck;elgato;"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Control your Elgato Stream Decks"
+msgstr "Ovládejte své Elgato Stream Deck"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
+msgid "Boatswain allows you to control Elgato Stream Deck devices."
+msgstr "Boatswain vám umožňuje ovládat zařízení Elgato Stream Deck."
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+msgid "With Boatswain you will be able to:"
+msgstr "Pomocí aplikace Boatswain budete moci:"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Organize your actions in pages and profiles"
+msgstr "Uspořádat si své akce na stránkách a profilech"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+msgid "Set custom icons to actions"
+msgstr "Nastavit vlastní ikony na akce"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+msgid "Control your music player"
+msgstr "Ovládat svůj hudební přehrávač"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
+msgid "Play sound effects during your streams"
+msgstr "Přehrávat zvukové efekty během streamování"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgstr ""
+"Ovládat OBS Studio pomocí Stream Deck (vyžaduje rozšíření obs-websocket)"
+
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
+msgid "Georges Basile Stavracas Neto"
+msgstr "Georges Basile Stavracas Neto"
+
+#: src/bs-application.c:52
+msgid "Enable debug messages"
+msgstr "Povolit ladicí zprávy"
+
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "Připojeno k %d zařízení"
+msgstr[1] "Připojeno ke %d zařízením"
+msgstr[2] "Připojeno k %d zařízením"
+
+#: src/bs-application.c:167
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr ""
+"Boatswain musí běžet na pozadí, aby mohl detekovat a provádět akce Stream "
+"Deck."
+
+#: src/bs-profile.c:184
+msgid "Unnamed profile"
+msgstr "Nepojmenovaný profil"
+
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
+msgid "Rename"
+msgstr "Přejmenovat"
+
+#: src/bs-profile-row.ui:14
+msgid "Move up"
+msgstr "Posunout nahoru"
+
+#: src/bs-profile-row.ui:18
+msgid "Move down"
+msgstr "Posunout dolů"
+
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Smazat"
+
+#: src/bs-stream-deck.c:278
+msgid "Default"
+msgstr "Výchozí"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
+msgid "Stream Deck Mini"
+msgstr "Stream Deck Mini"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/plugins/default/default-switch-profile-action.c:283
+#: src/plugins/default/default.plugin.desktop.in:3
+msgid "Stream Deck"
+msgstr "Stream Deck"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
+msgid "Stream Deck XL"
+msgstr "Stream Deck XL"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1004
+msgid "Stream Deck MK.2"
+msgstr "Stream Deck MK.2"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1030
+msgid "Stream Deck Pedal"
+msgstr "Stream Deck Pedal"
+
+#: src/bs-stream-deck.c:1099
+msgid "Feaneron Hangar Original"
+msgstr "Feaneron Hangar Original"
+
+#: src/bs-stream-deck.c:1122
+msgid "Feaneron Hangar XL"
+msgstr "Feaneron Hangar XL"
+
+#: src/bs-stream-deck-button-editor.c:380
+msgid "Select icon"
+msgstr "Vybrat ikonu"
+
+#: src/bs-stream-deck-button-editor.c:383
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
+msgid "_Open"
+msgstr "_Otevřít"
+
+#: src/bs-stream-deck-button-editor.c:384
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
+msgid "_Cancel"
+msgstr "_Zrušit"
+
+#: src/bs-stream-deck-button-editor.c:388
+msgid "All supported formats"
+msgstr "Všechny podporované formáty"
+
+#: src/bs-stream-deck-button-editor.ui:27
+msgid "Select a button"
+msgstr "Vybrat tlačítko"
+
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Vlastnosti tlačítka"
+
+#: src/bs-stream-deck-button-editor.ui:221
+msgid "Name"
+msgstr "Název"
+
+#: src/bs-stream-deck-button-editor.ui:228
+msgid "Background Color"
+msgstr "Barva pozadí"
+
+#: src/bs-stream-deck-button-editor.ui:259
+msgid "Select action"
+msgstr "Vybrat akci"
+
+#: src/bs-stream-deck-button-editor.ui:280
+msgid "Remove Action"
+msgstr "Odebrat akci"
+
+#: src/bs-stream-deck-button-editor.ui:303
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Akce"
+
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "Nový profil…"
+
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
+msgid "Brightness"
+msgstr "Jas"
+
+#: src/bs-window.ui:174
+msgid "Firmware"
+msgstr "Firmware"
+
+#: src/bs-window.ui:232
+msgid "No Stream Deck Found"
+msgstr "Nebyla nalezena žádná zařízení Stream Deck"
+
+#: src/bs-window.ui:233
+msgid "Plug in a Stream Deck device to use it."
+msgstr "Připojte zařízení Stream Deck, chcete-li jej používat."
+
+#: src/bs-window.ui:256
+msgid "_Keyboard Shortcuts"
+msgstr "_Klávesové zkratky"
+
+#: src/bs-window.ui:260
+msgid "_About Boatswain"
+msgstr "O _aplikaci Boatswain"
+
+#: src/bs-window.ui:264
+msgid "_Quit"
+msgstr "U_končit"
+
+#: src/bs-window.c:272
+msgid "Repository"
+msgstr "Repozitář"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Obecné"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Zobrazit zkratky"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Ukončit"
+
+#: src/plugins/default/default-action-factory.c:44
+msgid "Folder"
+msgstr "Složka"
+
+#: src/plugins/default/default-action-factory.c:50
+msgid "Switch Profile"
+msgstr "Přepnout profil"
+
+#: src/plugins/default/default-action-factory.c:62
+msgid "Multiple Actions"
+msgstr "Více akcí"
+
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
+msgid "Constant"
+msgstr "Konstantní"
+
+#: src/plugins/default/default-brightness-action.c:142
+msgid "Increase"
+msgstr "Zvýšení"
+
+#: src/plugins/default/default-brightness-action.c:143
+msgid "Decrease"
+msgstr "Snížení"
+
+#: src/plugins/default/default-brightness-action.c:146
+msgid "Mode"
+msgstr "Režim"
+
+#: src/plugins/default/default-brightness-action.c:153
+msgid "Value"
+msgstr "Hodnota"
+
+#: src/plugins/default/default-multi-action-editor.c:310
+#: src/plugins/default/default-multi-action-row.c:142
+msgid "Delay"
+msgstr "Zpoždění"
+
+#: src/plugins/default/default-multi-action-editor.ui:31
+msgid "Add action"
+msgstr "Přidat akci"
+
+#: src/plugins/default/default-multi-action-editor.ui:49
+msgid "Add Action"
+msgstr "Přidat akci"
+
+#: src/plugins/default/default-multi-action-editor.ui:73
+msgid "Others"
+msgstr "Ostatní"
+
+#: src/plugins/default/default-multi-action-editor.ui:83
+msgid "Settings"
+msgstr "Nastavení"
+
+#: src/plugins/default/default-switch-profile-action.c:306
+msgid "Profile"
+msgstr "Profil"
+
+#: src/plugins/launcher/launcher-action-factory.c:42
+msgid "Launch Application"
+msgstr "Spustit aplikaci"
+
+#: src/plugins/launcher/launcher-action-factory.c:48
+msgid "Open URL"
+msgstr "Otevřít adresu URL"
+
+#: src/plugins/launcher/launcher-launch-preferences.ui:8
+msgid "Choose Application"
+msgstr "Vybrat aplikaci"
+
+#: src/plugins/launcher/launcher-open-url-action.c:101
+msgid "URL"
+msgstr "Adresa URL"
+
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "Spouštěč"
+
+#: src/plugins/obs-studio/obs-action-factory.c:48
+msgid "Switch Scene"
+msgstr "Přepnout scénu"
+
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:55
+msgid "Record"
+msgstr "Nahrát"
+
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:62
+msgid "Stream"
+msgstr "Streamovat"
+
+#: src/plugins/obs-studio/obs-action-factory.c:68
+msgid "Virtual Camera"
+msgstr "Virtuální kamera"
+
+#: src/plugins/obs-studio/obs-action-factory.c:74
+msgid "Toggle Mute"
+msgstr "Přepnout ztlumení"
+
+#: src/plugins/obs-studio/obs-action-factory.c:80
+msgid "Show / Hide Source"
+msgstr "Zobrazit / skrýt zdroj"
+
+#: src/plugins/obs-studio/obs-connection.c:800
+msgid "Invalid password"
+msgstr "Neplatné heslo"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:8
+msgid "Connection Settings"
+msgstr "Nastavení připojení"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:12
+msgid "Host"
+msgstr "Hostitel"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
+msgid "Port"
+msgstr "Port"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
+msgid "Password"
+msgstr "Heslo"
+
+#: src/plugins/obs-studio/obs-switch-scene-action.c:283
+msgid "Scene"
+msgstr "Scéna"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:124
+msgid "Toggle mute"
+msgstr "Přepnout ztlumení"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:125
+msgid "Mute"
+msgstr "Ztlumit"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:126
+msgid "Unmute"
+msgstr "Zrušit ztlumení"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:130
+msgid "Toggle visibility"
+msgstr "Přepnout viditelnost"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:131
+msgid "Hide"
+msgstr "Skrýt"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:132
+msgid "Show"
+msgstr "Zobrazit"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:479
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
+msgid "Behavior"
+msgstr "Chování"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:490
+msgid "Audio Source"
+msgstr "Zdroj zvuku"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:492
+msgid "Source"
+msgstr "Zdroj"
+
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:45
+msgid "Music Player"
+msgstr "Hudební přehrávač"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:46
+msgid "Control the active music player"
+msgstr "Ovládat aktivní hudební přehrávač"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:51
+msgid "Play Audio"
+msgstr "Přehrát zvuk"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
+msgid "Next"
+msgstr "Následující"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
+msgid "Pause"
+msgstr "Pozastavit"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
+msgid "Play"
+msgstr "Přehrát"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
+msgid "Previous"
+msgstr "Předchozí"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
+msgid "Stop"
+msgstr "Zastavit"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
+msgid "Play / Pause"
+msgstr "Přehrát / pozastavit"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
+msgid "Playback Action"
+msgstr "Akce přehrávání"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
+msgid "Select audio file"
+msgstr "Vybrat zvukový soubor"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Audio Files"
+msgstr "Zvukové soubory"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Soubor"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
+msgid "Play / Stop"
+msgstr "Přehrát / zastavit"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
+msgid "Play / Overlap"
+msgstr "Přehrát / překrýt"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
+msgid "Play / Restart"
+msgstr "Přehrát / restartovat"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
+msgid "Loop / Stop"
+msgstr "Smyčka / zastavit"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
+msgid "Press & Hold"
+msgstr "Stisknout a podržet"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
+msgid "Volume"
+msgstr "Hlasitost"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr "Soundboard"
