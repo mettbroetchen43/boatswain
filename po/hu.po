@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-03-29 16:41+0000\n"
-"PO-Revision-Date: 2023-04-13 23:27+0200\n"
+"POT-Creation-Date: 2023-08-15 18:37+0000\n"
+"PO-Revision-Date: 2023-09-05 18:52+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -28,36 +28,36 @@ msgstr "Fedélzetmester"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;adatfolyam;műsorszórás;közvetítés;deck;elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Az Elgato Stream Deckek vezérlése"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
 "A Fedélzetmester lehetővé teszi az Elgato Stream Deck eszközök vezérlését."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "A Fedélzetmesterrel a következőkre lesz képes:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Az oldalakon és profilokban lévő műveletek szervezése"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Egyéni ikonok beállítása a műveletekhez"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid "Control your music player"
 msgstr "Zenelejátszó vezérlése"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Hanghatások lejátszása az adatfolyamok során"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
@@ -65,7 +65,7 @@ msgstr ""
 "kiterjesztést igényli)"
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Unnamed profile"
 msgstr "Névtelen profil"
 
-#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
 msgid "Rename"
 msgstr "Átnevezés"
 
@@ -104,25 +104,25 @@ msgstr "Mozgatás fel"
 msgid "Move down"
 msgstr "Mozgatás le"
 
-#: src/bs-profiles-dialog.ui:26
-msgid "Profiles"
-msgstr "Profilok"
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Törlés"
 
-#: src/bs-stream-deck.c:277
+#: src/bs-stream-deck.c:278
 msgid "Default"
 msgstr "Alapértelmezett"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:847
+#: src/bs-stream-deck.c:848
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
+#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -131,29 +131,29 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
+#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:977
+#: src/bs-stream-deck.c:978
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1003
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1072
+#: src/bs-stream-deck.c:1073
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1095
+#: src/bs-stream-deck.c:1096
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -175,84 +175,69 @@ msgstr "_Mégse"
 msgid "All supported formats"
 msgstr "Minden támogatott formátum"
 
-#: src/bs-stream-deck-button-editor.ui:17
+#: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
 msgstr "Válasszon egy gombot"
 
-#: src/bs-stream-deck-button-editor.ui:199
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Gomb tulajdonságai"
+
+#: src/bs-stream-deck-button-editor.ui:221
 msgid "Name"
 msgstr "Név"
 
-#: src/bs-stream-deck-button-editor.ui:206
+#: src/bs-stream-deck-button-editor.ui:228
 msgid "Background Color"
 msgstr "Háttérszín"
 
-#: src/bs-stream-deck-button-editor.ui:237
-#: src/bs-stream-deck-button-editor.ui:300
+#: src/bs-stream-deck-button-editor.ui:259
 msgid "Select action"
 msgstr "Művelet kiválasztása"
 
-#: src/bs-stream-deck-button-editor.ui:258
+#: src/bs-stream-deck-button-editor.ui:280
 msgid "Remove Action"
 msgstr "Művelet eltávolítása"
 
-#: src/bs-window.ui:13
-msgid "New profile"
-msgstr "Új profil"
+#: src/bs-stream-deck-button-editor.ui:303
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Műveletek"
 
-#: src/bs-window.ui:19
-msgid "Manage profiles…"
-msgstr "Profilok kezelése…"
+#: src/bs-window.ui:113
+#| msgid "New profile"
+msgid "New profile…"
+msgstr "Új profil…"
 
-#: src/bs-window.ui:64
-msgid "Create"
-msgstr "Létrehozás"
-
-#: src/bs-window.ui:108
-msgid "Power"
-msgstr "Energiabeállítások"
-
-#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Fényerő"
 
-#: src/bs-window.ui:160
-msgid "Device"
-msgstr "Eszköz"
-
-#: src/bs-window.ui:176
-msgid "Serial Number"
-msgstr "Sorozatszám"
-
-#: src/bs-window.ui:203
+#: src/bs-window.ui:174
 msgid "Firmware"
 msgstr "Belső vezérlőprogram"
 
-#: src/bs-window.ui:251
-msgid "Devices"
-msgstr "Eszközök"
-
-#: src/bs-window.ui:296
+#: src/bs-window.ui:232
 msgid "No Stream Deck Found"
 msgstr "Nem található Stream Deck"
 
-#: src/bs-window.ui:297
+#: src/bs-window.ui:233
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Csatlakoztasson egy Stream Deck eszközt a használatához."
 
-#: src/bs-window.ui:308
+#: src/bs-window.ui:256
 msgid "_Keyboard Shortcuts"
 msgstr "_Gyorsbillentyűk"
 
-#: src/bs-window.ui:312
+#: src/bs-window.ui:260
 msgid "_About Boatswain"
 msgstr "A Fedélzetmester _névjegye"
 
-#: src/bs-window.ui:316
+#: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "_Kilépés"
 
-#: src/bs-window.c:344
+#: src/bs-window.c:272
 msgid "Repository"
 msgstr "Tároló"
 
@@ -283,23 +268,24 @@ msgstr "Profil váltása"
 msgid "Multiple Actions"
 msgstr "Több művelet"
 
-#: src/plugins/default/default-brightness-action.c:140
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
 msgid "Constant"
 msgstr "Állandó"
 
-#: src/plugins/default/default-brightness-action.c:141
+#: src/plugins/default/default-brightness-action.c:142
 msgid "Increase"
 msgstr "Növelés"
 
-#: src/plugins/default/default-brightness-action.c:142
+#: src/plugins/default/default-brightness-action.c:143
 msgid "Decrease"
 msgstr "Csökkentés"
 
-#: src/plugins/default/default-brightness-action.c:145
+#: src/plugins/default/default-brightness-action.c:146
 msgid "Mode"
 msgstr "Mód"
 
-#: src/plugins/default/default-brightness-action.c:152
+#: src/plugins/default/default-brightness-action.c:153
 msgid "Value"
 msgstr "Érték"
 
@@ -315,10 +301,6 @@ msgstr "Művelet hozzáadása"
 #: src/plugins/default/default-multi-action-editor.ui:49
 msgid "Add Action"
 msgstr "Művelet hozzáadása"
-
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Műveletek"
 
 #: src/plugins/default/default-multi-action-editor.ui:73
 msgid "Others"
@@ -356,23 +338,25 @@ msgstr "Indító"
 msgid "Switch Scene"
 msgstr "Jelenet váltása"
 
-#: src/plugins/obs-studio/obs-action-factory.c:54
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:55
 msgid "Record"
 msgstr "Rögzítés"
 
-#: src/plugins/obs-studio/obs-action-factory.c:60
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:62
 msgid "Stream"
 msgstr "Adatfolyam"
 
-#: src/plugins/obs-studio/obs-action-factory.c:66
+#: src/plugins/obs-studio/obs-action-factory.c:68
 msgid "Virtual Camera"
 msgstr "Virtuális kamera"
 
-#: src/plugins/obs-studio/obs-action-factory.c:72
+#: src/plugins/obs-studio/obs-action-factory.c:74
 msgid "Toggle Mute"
 msgstr "Némítás ki- és bekapcsolása"
 
-#: src/plugins/obs-studio/obs-action-factory.c:78
+#: src/plugins/obs-studio/obs-action-factory.c:80
 msgid "Show / Hide Source"
 msgstr "Forrás megjelenítése vagy elrejtése"
 
