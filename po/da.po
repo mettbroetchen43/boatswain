@@ -1,15 +1,15 @@
 # Danish translation for boatswain.
-# Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
+# Copyright (C) 2022-23 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
 #
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2022.
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2022-23.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-05-07 18:12+0000\n"
-"PO-Revision-Date: 2022-05-13 22:14+0200\n"
+"POT-Creation-Date: 2023-08-15 18:37+0000\n"
+"PO-Revision-Date: 2023-09-09 17:32+0200\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -28,198 +28,212 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;strøm;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
-msgid "Control your Elgato Stream Deck devices"
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Control your Elgato Stream Decks"
 msgstr "Styr dine Elgato Stream Deck-enheder"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Boatswain lader dig styre Elgato Stream Deck-enheder."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "Med Boatswain kan du:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Organisere dine handlinger i sider og profiler"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Tilpasse ikoner for handlinger"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+msgid "Control your music player"
+msgstr "Styr din musikafspiller"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Afspille lydeffekter, mens du streamer"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr "Styr OBS Studio med Stream Deck (kræver udvidelsen obs-websocket)"
 
-#: src/bs-application.c:53
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
+msgid "Georges Basile Stavracas Neto"
+msgstr "Georges Basile Stavracas Neto"
+
+#: src/bs-application.c:52
 msgid "Enable debug messages"
 msgstr "Slå fejlsøgningsmeddelelser til"
 
-#: src/bs-application.c:76
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "Forbundet til %d enhed"
+msgstr[1] "Forbundet til %d enheder"
+
+#: src/bs-application.c:167
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
-msgstr "Boatswain skal køre i baggrunden for at kunne finde og afvikle Stream Deck-handlinger."
+msgstr ""
+"Boatswain skal køre i baggrunden for at kunne finde og afvikle Stream Deck-"
+"handlinger."
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
 msgstr "Unavngivet profil"
 
-#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
 msgid "Rename"
 msgstr "Omdøb"
 
 #: src/bs-profile-row.ui:14
-msgid "Move _up"
-msgstr "Flyt _op"
+msgid "Move up"
+msgstr "Flyt op"
 
 #: src/bs-profile-row.ui:18
-msgid "Move _down"
-msgstr "Flyt _ned"
+msgid "Move down"
+msgstr "Flyt ned"
 
-#: src/bs-profiles-dialog.ui:26
-msgid "Profiles"
-msgstr "Profiler"
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Slet"
 
-#: src/bs-stream-deck.c:272
+#: src/bs-stream-deck.c:278
 msgid "Default"
 msgstr "Standard"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:815
+#: src/bs-stream-deck.c:848
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:841 src/bs-stream-deck.c:867
-#: src/plugins/default/default-switch-profile-action.c:285
+#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
+#: src/plugins/default/default-switch-profile-action.c:283
+#: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:893
+#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:919
+#: src/bs-stream-deck.c:978
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck-button-editor.c:376
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1004
+msgid "Stream Deck Pedal"
+msgstr "Stream Deck Pedal"
+
+#: src/bs-stream-deck.c:1073
+msgid "Feaneron Hangar Original"
+msgstr "Feaneron Hangar Original"
+
+#: src/bs-stream-deck.c:1096
+msgid "Feaneron Hangar XL"
+msgstr "Feaneron Hangar XL"
+
+#: src/bs-stream-deck-button-editor.c:380
 msgid "Select icon"
 msgstr "Vælg ikon"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:383
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:98
 msgid "_Open"
 msgstr "_Åbn"
 
-#: src/bs-stream-deck-button-editor.c:380
+#: src/bs-stream-deck-button-editor.c:384
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:99
 msgid "_Cancel"
 msgstr "_Annullér"
 
-#: src/bs-stream-deck-button-editor.c:384
+#: src/bs-stream-deck-button-editor.c:388
 msgid "All supported formats"
 msgstr "Alle understøttede formater"
 
-#: src/bs-stream-deck-button-editor.ui:17
+#: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
 msgstr "Vælg en knap"
 
-#: src/bs-stream-deck-button-editor.ui:188
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Egenskaber for knap"
+
+#: src/bs-stream-deck-button-editor.ui:221
 msgid "Name"
 msgstr "Navn"
 
-#: src/bs-stream-deck-button-editor.ui:195
+#: src/bs-stream-deck-button-editor.ui:228
 msgid "Background Color"
 msgstr "Baggrundsfarve"
 
-#: src/bs-stream-deck-button-editor.ui:226
-#: src/bs-stream-deck-button-editor.ui:288
+#: src/bs-stream-deck-button-editor.ui:259
 msgid "Select action"
 msgstr "Vælg handling"
 
-#: src/bs-stream-deck-button-editor.ui:247
+#: src/bs-stream-deck-button-editor.ui:280
 msgid "Remove Action"
 msgstr "Fjern handling"
 
-#: src/bs-window.ui:13
-msgid "_New profile"
-msgstr "_Ny profil"
+#: src/bs-stream-deck-button-editor.ui:303
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Handlinger"
 
-#: src/bs-window.ui:19
-msgid "Manage profiles…"
-msgstr "Håndtér profiler …"
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "Ny profil …"
 
-#: src/bs-window.ui:60
-msgid "Create"
-msgstr "Opret"
-
-#: src/bs-window.ui:112
-msgid "Power"
-msgstr "Strøm"
-
-#: src/bs-window.ui:128 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
 msgid "Brightness"
 msgstr "Lysstyrke"
 
-#: src/bs-window.ui:164
-msgid "Device"
-msgstr "Enhed"
-
-#: src/bs-window.ui:180
-msgid "Serial Number"
-msgstr "Serienummer"
-
-#: src/bs-window.ui:207
+#: src/bs-window.ui:174
 msgid "Firmware"
 msgstr "Firmware"
 
-#: src/bs-window.ui:255
-msgid "Devices"
-msgstr "Enheder"
-
-#: src/bs-window.ui:299
+#: src/bs-window.ui:232
 msgid "No Stream Deck Found"
 msgstr "Ingen Stream Deck fundet"
 
-#: src/bs-window.ui:300
+#: src/bs-window.ui:233
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Tilslut en Stream Deck-enhed for at bruge den."
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:256
 msgid "_Keyboard Shortcuts"
 msgstr "_Tastaturgenveje"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:260
 msgid "_About Boatswain"
 msgstr "_Om Boatswain"
 
-#: src/bs-window.ui:319
+#: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "_Afslut"
 
-#: src/bs-window.c:328
-msgid "Copyright © 2022 Georges Basile Stavracas Neto"
-msgstr "Ophavsret © 2022 Georges Basile Stavracas Neto"
-
-#: src/bs-window.c:336
+#: src/bs-window.c:272
 msgid "Repository"
 msgstr "Arkiv"
 
@@ -250,23 +264,24 @@ msgstr "Skift profil"
 msgid "Multiple Actions"
 msgstr "Flere handlinger"
 
-#: src/plugins/default/default-brightness-action.c:140
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
 msgid "Constant"
 msgstr "Konstant"
 
-#: src/plugins/default/default-brightness-action.c:141
+#: src/plugins/default/default-brightness-action.c:142
 msgid "Increase"
 msgstr "Forøg"
 
-#: src/plugins/default/default-brightness-action.c:142
+#: src/plugins/default/default-brightness-action.c:143
 msgid "Decrease"
 msgstr "Dæmp"
 
-#: src/plugins/default/default-brightness-action.c:145
+#: src/plugins/default/default-brightness-action.c:146
 msgid "Mode"
 msgstr "Tilstand"
 
-#: src/plugins/default/default-brightness-action.c:152
+#: src/plugins/default/default-brightness-action.c:153
 msgid "Value"
 msgstr "Værdi"
 
@@ -283,10 +298,6 @@ msgstr "Tilføj handling"
 msgid "Add Action"
 msgstr "Tilføj handling"
 
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Handlinger"
-
 #: src/plugins/default/default-multi-action-editor.ui:73
 msgid "Others"
 msgstr "Andre"
@@ -295,7 +306,7 @@ msgstr "Andre"
 msgid "Settings"
 msgstr "Indstillinger"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Profil"
 
@@ -315,27 +326,37 @@ msgstr "Vælg program"
 msgid "URL"
 msgstr "URL"
 
-#: src/plugins/obs-studio/obs-action-factory.c:47
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "Opstartsprogram"
+
+#: src/plugins/obs-studio/obs-action-factory.c:48
 msgid "Switch Scene"
 msgstr "Skift scene"
 
-#: src/plugins/obs-studio/obs-action-factory.c:53
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:55
 msgid "Record"
 msgstr "Optag"
 
-#: src/plugins/obs-studio/obs-action-factory.c:59
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:62
 msgid "Stream"
 msgstr "Stream"
 
-#: src/plugins/obs-studio/obs-action-factory.c:65
+#: src/plugins/obs-studio/obs-action-factory.c:68
+msgid "Virtual Camera"
+msgstr "Virtuelt kamera"
+
+#: src/plugins/obs-studio/obs-action-factory.c:74
 msgid "Toggle Mute"
 msgstr "Slå lyd til/fra"
 
-#: src/plugins/obs-studio/obs-action-factory.c:71
+#: src/plugins/obs-studio/obs-action-factory.c:80
 msgid "Show / Hide Source"
 msgstr "Vis/skjul kilde"
 
-#: src/plugins/obs-studio/obs-connection.c:770
+#: src/plugins/obs-studio/obs-connection.c:800
 msgid "Invalid password"
 msgstr "Ugyldig adgangskode"
 
@@ -346,11 +367,6 @@ msgstr "Indstillinger for forbindelse"
 #: src/plugins/obs-studio/obs-connection-settings.ui:12
 msgid "Host"
 msgstr "Vært"
-
-#: src/plugins/obs-studio/obs-connection-settings.ui:13
-#: src/plugins/obs-studio/obs-connection-settings.ui:46
-msgid "True"
-msgstr "Sand"
 
 #: src/plugins/obs-studio/obs-connection-settings.ui:20
 msgid "Port"
@@ -401,6 +417,10 @@ msgstr "Lydkilde"
 msgid "Source"
 msgstr "Kilde"
 
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
 #: src/plugins/soundboard/soundboard-action-factory.c:45
 msgid "Music Player"
 msgstr "Musikafspiller"
@@ -413,31 +433,31 @@ msgstr "Styr den aktive musikafspiller"
 msgid "Play Audio"
 msgstr "Afspil lyd"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:196
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
 msgid "Next"
 msgstr "Næste"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:197
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
 msgid "Pause"
 msgstr "Pause"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:198
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
 msgid "Play"
 msgstr "Afspil"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:199
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
 msgid "Previous"
 msgstr "Forrige"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:200
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
 msgid "Stop"
 msgstr "Stop"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:201
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
 msgid "Play / Pause"
 msgstr "Afspil/pause"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:204
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
 msgid "Playback Action"
 msgstr "Afspilningshandling"
 
@@ -476,3 +496,31 @@ msgstr "Tryk og hold nede"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Lydstyrke"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr "Soundboard"
+
+#~ msgid "Profiles"
+#~ msgstr "Profiler"
+
+#~ msgid "Manage profiles…"
+#~ msgstr "Håndtér profiler …"
+
+#~ msgid "Create"
+#~ msgstr "Opret"
+
+#~ msgid "Power"
+#~ msgstr "Strøm"
+
+#~ msgid "Device"
+#~ msgstr "Enhed"
+
+#~ msgid "Serial Number"
+#~ msgstr "Serienummer"
+
+#~ msgid "Devices"
+#~ msgstr "Enheder"
+
+#~ msgid "True"
+#~ msgstr "Sand"
