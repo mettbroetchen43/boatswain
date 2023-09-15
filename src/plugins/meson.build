@@ -10,6 +10,7 @@ plugins_confs = []
 
 subdir('default')
 subdir('launcher')
+subdir('network')
 subdir('obs-studio')
 subdir('soundboard')
 

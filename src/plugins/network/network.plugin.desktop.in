@@ -1,0 +1,12 @@
+[Plugin]
+Name = Network
+Module = network
+Description = Send GET and POST requests to a webserver
+Icon = org.gnome.Settings-network-symbolic
+Authors = Lorenzo Prosseda
+Copyright = Copyleft © The Boatswain maintainers
+Builtin = true
+License = GPL
+Loader = C
+Embedded = network_plugin_register_types
+Depends =

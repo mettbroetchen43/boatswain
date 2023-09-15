@@ -47,7 +47,7 @@ static const BsActionInfo actions[] = {
     .icon_name = "open-link-symbolic",
     .name = N_("Open URL"),
     .description = NULL,
-  },
+  }
 };
 
 static GList *

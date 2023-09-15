@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/feaneron/Boatswain/plugins/network">
+    <file alias="icons/scalable/emblems/org.gnome.Settings-network-symbolic.svg">icons/org.gnome.Settings-network-symbolic.svg</file>
+
+    <file>network.plugin</file>
+    <file>network-http-action-prefs.ui</file>
+  </gresource>
+</gresources>

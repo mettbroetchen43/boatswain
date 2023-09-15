@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="NetworkHttpActionPrefs" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="spacing">24</property>
+
+    <child>
+      <object class="AdwPreferencesGroup">
+
+        <!-- URI text field with AdwEntryRow -->
+        <child>
+          <object class="AdwEntryRow" id="uri_row">
+            <property name="title" translatable="yes">URI</property>
+            <signal name="notify::text" handler="on_uri_row_text_changed_cb" object="NetworkHttpActionPrefs" swapped="no" />
+          </object>
+        </child>
+
+        <!-- Method drop-down with AdwComboRow -->
+        <child>
+          <object class="AdwComboRow" id="method_row">
+            <property name="title" translatable="yes">Method</property>
+            <signal name="notify::selected-item" handler="on_method_row_selected_changed_cb" object="NetworkHttpActionPrefs" swapped="no" />
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item translatable="no">GET</item>
+                  <item translatable="no">POST</item>
+                </items>
+              </object>
+            </property>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <!-- Payload -->
+    <child>
+      <object class="AdwPreferencesGroup" id="post_group">
+
+        <!-- Payload source drop-down with AdwComboRow -->
+        <child>
+          <object class="AdwComboRow" id="payload_src_row">
+            <property name="title" translatable="yes">Payload source</property>
+            <signal name="notify::selected-item" handler="on_payload_src_row_selected_changed_cb" object="NetworkHttpActionPrefs" swapped="no" />
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item translatable="no">Text</item>
+                  <item translatable="no">File</item>
+                </items>
+              </object>
+            </property>
+          </object>
+        </child>"
+
+        <!-- Payload file chooser with AdwActionRow -->
+        <child>
+          <object class="AdwActionRow" id="file_row">
+            <property name="title" translatable="yes">File</property>
+            <property name="activatable">True</property>
+            <signal name="activated" handler="on_file_row_activated_cb" object="NetworkHttpActionPrefs" swapped="no" />
+            <child>
+              <object class="GtkLabel" id="filename_label">
+                <property name="ellipsize">middle</property>
+                <property name="max-width-chars">35</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="valign">center</property>
+                <property name="icon-name">document-open-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <!-- Payload text edit with AdwActionRow -->
+        <child>
+          <object class="AdwActionRow" id="edit_row">
+            <property name="title" translatable="yes">Edit payload</property>
+            <property name="activatable">True</property>
+            <signal name="activated" handler="on_edit_row_activated_cb" object="NetworkHttpActionPrefs" swapped="no" />
+            <child>
+              <object class="GtkImage" id="edit_row_icon">
+                <property name="icon-name">text-editor-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+  </template>
+
+  <object class="AdwWindow" id="text_edit_dialog">
+    <property name="title" translatable="yes">HTTP Request Payload</property>
+    <property name="hide-on-close">True</property>
+    <property name="default-width">500</property>
+    <property name="default-height">500</property>
+
+    <child>
+      <object class="AdwToolbarView">
+
+        <child type="top">
+          <object class="AdwHeaderBar" />
+        </child>
+
+        <property name="content">
+          <object class="GtkScrolledWindow">
+
+            <child>
+              <object class="GtkTextView">
+                <property name="bottom-margin">12</property>
+                <property name="left-margin">12</property>
+                <property name="right-margin">12</property>
+                <property name="top-margin">12</property>
+                <property name="buffer">
+                  <object class="GtkTextBuffer" id="payload_text_buffer" />
+                </property>
+              </object>
+            </child>
+
+          </object>
+        </property>
+
+      </object>
+    </child>
+
+  </object>
+</interface>
