@@ -192,7 +192,7 @@ snapshot_any_layout (GdkSnapshot *snapshot,
 
       pango_layout_get_pixel_size (icon->layout, &text_width, &text_height);
       x = (width - text_width) / 2.0;
-      y = height - text_height;
+      y = height - text_height - 3.0;
 
       gtk_snapshot_save (snapshot);
       gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (x, y));
