@@ -1,0 +1,500 @@
+# Greek translation for boatswain.
+# Copyright (C) 2023 boatswain's COPYRIGHT HOLDER
+# This file is distributed under the same license as the boatswain package.
+# Efstathios Iosifidis <eiosifidis@gnome.org>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: boatswain main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2023-09-11 15:20+0000\n"
+"PO-Revision-Date: 2023-09-24 21:15+0300\n"
+"Last-Translator: Efstathios Iosifidis <eiosifidis@gnome.org>\n"
+"Language-Team: Greek <gnome-el-list@gnome.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#: data/com.feaneron.Boatswain.desktop.in.in:3
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+msgid "Boatswain"
+msgstr ""
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
+msgid "stream deck;streaming;deck;elgato;"
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Control your Elgato Stream Decks"
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
+msgid "Boatswain allows you to control Elgato Stream Deck devices."
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+msgid "With Boatswain you will be able to:"
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Organize your actions in pages and profiles"
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+msgid "Set custom icons to actions"
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+msgid "Control your music player"
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
+msgid "Play sound effects during your streams"
+msgstr ""
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgstr ""
+
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
+msgid "Georges Basile Stavracas Neto"
+msgstr ""
+
+#: src/bs-application.c:52
+msgid "Enable debug messages"
+msgstr ""
+
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/bs-application.c:167
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr ""
+
+#: src/bs-profile.c:184
+msgid "Unnamed profile"
+msgstr ""
+
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
+msgid "Rename"
+msgstr "Μετονομασία"
+
+#: src/bs-profile-row.ui:14
+msgid "Move up"
+msgstr "Μετακίνηση προς τα πάνω"
+
+#: src/bs-profile-row.ui:18
+msgid "Move down"
+msgstr "Μετακίνηση προς τα κάτω"
+
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: src/bs-stream-deck.c:278
+msgid "Default"
+msgstr "Προεπιλεγμένη"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
+msgid "Stream Deck Mini"
+msgstr ""
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/plugins/default/default-switch-profile-action.c:283
+#: src/plugins/default/default.plugin.desktop.in:3
+msgid "Stream Deck"
+msgstr ""
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
+msgid "Stream Deck XL"
+msgstr ""
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1004
+msgid "Stream Deck MK.2"
+msgstr ""
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1030
+msgid "Stream Deck Pedal"
+msgstr ""
+
+#: src/bs-stream-deck.c:1099
+msgid "Feaneron Hangar Original"
+msgstr ""
+
+#: src/bs-stream-deck.c:1122
+msgid "Feaneron Hangar XL"
+msgstr ""
+
+#: src/bs-stream-deck-button-editor.c:380
+msgid "Select icon"
+msgstr "Επιλογή εικονιδίου"
+
+#: src/bs-stream-deck-button-editor.c:383
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
+msgid "_Open"
+msgstr "Άνοι_γμα"
+
+#: src/bs-stream-deck-button-editor.c:384
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
+msgid "_Cancel"
+msgstr "_Ακύρωση"
+
+#: src/bs-stream-deck-button-editor.c:388
+msgid "All supported formats"
+msgstr ""
+
+#: src/bs-stream-deck-button-editor.ui:27
+msgid "Select a button"
+msgstr "Επιλογή κουμπιού"
+
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr ""
+
+#: src/bs-stream-deck-button-editor.ui:221
+msgid "Name"
+msgstr "Όνομα"
+
+#: src/bs-stream-deck-button-editor.ui:228
+msgid "Background Color"
+msgstr ""
+
+#: src/bs-stream-deck-button-editor.ui:259
+msgid "Select action"
+msgstr "Επιλογή ενέργειας"
+
+#: src/bs-stream-deck-button-editor.ui:280
+msgid "Remove Action"
+msgstr ""
+
+#: src/bs-stream-deck-button-editor.ui:303
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Ενέργειες"
+
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "Νέο προφίλ…"
+
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
+msgid "Brightness"
+msgstr "Φωτεινότητα"
+
+#: src/bs-window.ui:174
+msgid "Firmware"
+msgstr "Υλικολογισμικό"
+
+#: src/bs-window.ui:232
+msgid "No Stream Deck Found"
+msgstr ""
+
+#: src/bs-window.ui:233
+msgid "Plug in a Stream Deck device to use it."
+msgstr ""
+
+#: src/bs-window.ui:256
+msgid "_Keyboard Shortcuts"
+msgstr "Συντομεύσεις _πληκτρολογίου"
+
+#: src/bs-window.ui:260
+msgid "_About Boatswain"
+msgstr ""
+
+#: src/bs-window.ui:264
+msgid "_Quit"
+msgstr "_Έξοδος"
+
+#: src/bs-window.c:272
+msgid "Repository"
+msgstr "Αποθετήριο"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Γενικά"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Εμφάνιση συντομεύσεων"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Έξοδος"
+
+#: src/plugins/default/default-action-factory.c:44
+msgid "Folder"
+msgstr "Φάκελος"
+
+#: src/plugins/default/default-action-factory.c:50
+msgid "Switch Profile"
+msgstr ""
+
+#: src/plugins/default/default-action-factory.c:62
+msgid "Multiple Actions"
+msgstr ""
+
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
+msgid "Constant"
+msgstr "Σταθερά"
+
+#: src/plugins/default/default-brightness-action.c:142
+msgid "Increase"
+msgstr "Αύξηση"
+
+#: src/plugins/default/default-brightness-action.c:143
+msgid "Decrease"
+msgstr "Μείωση"
+
+#: src/plugins/default/default-brightness-action.c:146
+msgid "Mode"
+msgstr "Κατάσταση"
+
+#: src/plugins/default/default-brightness-action.c:153
+msgid "Value"
+msgstr "Τιμή"
+
+#: src/plugins/default/default-multi-action-editor.c:310
+#: src/plugins/default/default-multi-action-row.c:142
+msgid "Delay"
+msgstr "Καθυστέρηση"
+
+#: src/plugins/default/default-multi-action-editor.ui:31
+msgid "Add action"
+msgstr ""
+
+#: src/plugins/default/default-multi-action-editor.ui:49
+msgid "Add Action"
+msgstr ""
+
+#: src/plugins/default/default-multi-action-editor.ui:73
+msgid "Others"
+msgstr "Άλλοι"
+
+#: src/plugins/default/default-multi-action-editor.ui:83
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: src/plugins/default/default-switch-profile-action.c:306
+msgid "Profile"
+msgstr "Προφίλ"
+
+#: src/plugins/launcher/launcher-action-factory.c:42
+msgid "Launch Application"
+msgstr "Έναρξη εφαρμογής"
+
+#: src/plugins/launcher/launcher-action-factory.c:48
+msgid "Open URL"
+msgstr ""
+
+#: src/plugins/launcher/launcher-launch-preferences.ui:8
+msgid "Choose Application"
+msgstr "Επιλογή εφαρμογής"
+
+#: src/plugins/launcher/launcher-open-url-action.c:101
+msgid "URL"
+msgstr "URL"
+
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "Εκκινητής"
+
+#: src/plugins/obs-studio/obs-action-factory.c:48
+msgid "Switch Scene"
+msgstr ""
+
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:55
+msgid "Record"
+msgstr "Εγγραφή"
+
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:62
+msgid "Stream"
+msgstr ""
+
+#: src/plugins/obs-studio/obs-action-factory.c:68
+msgid "Virtual Camera"
+msgstr ""
+
+#: src/plugins/obs-studio/obs-action-factory.c:74
+msgid "Toggle Mute"
+msgstr ""
+
+#: src/plugins/obs-studio/obs-action-factory.c:80
+msgid "Show / Hide Source"
+msgstr ""
+
+#: src/plugins/obs-studio/obs-connection.c:800
+msgid "Invalid password"
+msgstr "Μη έγκυρο συνθηματικό"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:8
+msgid "Connection Settings"
+msgstr ""
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:12
+msgid "Host"
+msgstr "Διακομιστής"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
+msgid "Port"
+msgstr "Θύρα"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
+msgid "Password"
+msgstr "Συνθηματικό"
+
+#: src/plugins/obs-studio/obs-switch-scene-action.c:283
+msgid "Scene"
+msgstr "Σκηνή"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:124
+msgid "Toggle mute"
+msgstr ""
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:125
+msgid "Mute"
+msgstr "Σίγαση"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:126
+msgid "Unmute"
+msgstr "Αναίρεση σίγασης"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:130
+msgid "Toggle visibility"
+msgstr "Εναλλαγή ορατότητας"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:131
+msgid "Hide"
+msgstr "Απόκρυψη"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:132
+msgid "Show"
+msgstr "Προβολή"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:479
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
+msgid "Behavior"
+msgstr "Συμπεριφορά"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:490
+msgid "Audio Source"
+msgstr "Πηγή ήχου"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:492
+msgid "Source"
+msgstr "Πηγή"
+
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:45
+msgid "Music Player"
+msgstr "Αναπαραγωγή μουσικής"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:46
+msgid "Control the active music player"
+msgstr ""
+
+#: src/plugins/soundboard/soundboard-action-factory.c:51
+msgid "Play Audio"
+msgstr "Αναπαραγωγή ήχου"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
+msgid "Next"
+msgstr "Επόμενο"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
+msgid "Pause"
+msgstr "Παύση"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
+msgid "Play"
+msgstr "Αναπαραγωγή"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
+msgid "Previous"
+msgstr "Προηγούμενο"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
+msgid "Stop"
+msgstr "Διακοπή"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
+msgid "Play / Pause"
+msgstr "Αναπαραγωγή / Παύση"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
+msgid "Playback Action"
+msgstr ""
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
+msgid "Select audio file"
+msgstr "Επιλογή αρχείου ήχου"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Audio Files"
+msgstr "Αρχεία ήχου"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Αρχείο"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
+msgid "Play / Stop"
+msgstr ""
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
+msgid "Play / Overlap"
+msgstr ""
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
+msgid "Play / Restart"
+msgstr ""
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
+msgid "Loop / Stop"
+msgstr ""
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
+msgid "Press & Hold"
+msgstr ""
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
+msgid "Volume"
+msgstr "Ένταση"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr ""
