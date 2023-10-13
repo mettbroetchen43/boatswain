@@ -18,7 +18,6 @@ boatswain_sources = [
   'bs-stream-deck-button-widget.c',
   'bs-stream-deck-editor.c',
   'bs-window.c',
-  'main.c',
 ]
 
 boatswain_deps = [
@@ -58,9 +57,21 @@ boatswain_sources += gnome.mkenums(
   c_template: 'bs-enum-types.c.in',
 )
 
+libboatswain_private = static_library('boatswain-private',
+  boatswain_sources,
+  install: false,
+  dependencies: [boatswain_deps, plugins_dep],
+)
+
+libboatswain_private_dep = declare_dependency(
+  sources: boatswain_sources,
+  dependencies: [boatswain_deps, plugins_dep],
+  link_with: libboatswain_private,
+)
+
 executable(
   'boatswain',
-  boatswain_sources,
-  dependencies: [boatswain_deps, plugins_dep],
+  files('main.c'),
+  dependencies: [libboatswain_private_dep],
   install: true,
 )
