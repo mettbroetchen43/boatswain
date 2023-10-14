@@ -1,3 +1,5 @@
+generated_sources = []
+
 boatswain_sources = [
   'bs-action.c',
   'bs-action-factory.c',
@@ -38,19 +40,19 @@ debug_conf = configuration_data()
 debug_conf.set10('ENABLE_TRACING', get_option('tracing'))
 debug_conf.set('BUGREPORT_URL', 'https://gitlab.gnome.org/World/boatswain/-/issues/new')
 
-boatswain_sources += configure_file(
+generated_sources += configure_file(
   input: 'bs-debug.h.in',
   output: 'bs-debug.h',
   configuration: debug_conf,
 )
 
-boatswain_sources += gnome.compile_resources(
+generated_sources += gnome.compile_resources(
   'boatswain-resources',
   'boatswain.gresource.xml',
   c_name: 'boatswain'
 )
 
-boatswain_sources += gnome.mkenums(
+generated_sources += gnome.mkenums(
   'boatswain-enum-types',
   sources: [ 'bs-page-item.h' ],
   h_template: 'bs-enum-types.h.in',
@@ -58,13 +60,13 @@ boatswain_sources += gnome.mkenums(
 )
 
 libboatswain_private = static_library('boatswain-private',
-  boatswain_sources,
+  boatswain_sources + generated_sources,
   install: false,
   dependencies: [boatswain_deps, plugins_dep],
 )
 
 libboatswain_private_dep = declare_dependency(
-  sources: boatswain_sources,
+  sources: generated_sources,
   dependencies: [boatswain_deps, plugins_dep],
   link_with: libboatswain_private,
 )
