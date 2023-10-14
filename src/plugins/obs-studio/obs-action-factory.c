@@ -19,6 +19,7 @@
  */
 
 #include "bs-action-factory.h"
+#include "bs-action-info.h"
 #include "obs-action-factory.h"
 #include "obs-connection-manager.h"
 #include "obs-record-action.h"
@@ -31,17 +32,14 @@
 
 struct _ObsActionFactory
 {
-  PeasExtensionBase parent_instance;
+  BsActionFactory parent_instance;
 
   ObsConnectionManager *connection_manager;
 };
 
-static void bs_action_factory_iface_init (BsActionFactoryInterface *iface);
+G_DEFINE_FINAL_TYPE (ObsActionFactory, obs_action_factory, BS_TYPE_ACTION_FACTORY);
 
-G_DEFINE_FINAL_TYPE_WITH_CODE (ObsActionFactory, obs_action_factory, PEAS_TYPE_EXTENSION_BASE,
-                               G_IMPLEMENT_INTERFACE (BS_TYPE_ACTION_FACTORY, bs_action_factory_iface_init));
-
-static const BsActionInfo actions[] = {
+static const BsActionEntry entries[] = {
   {
     .id = "obs-switch-scene-action",
     .icon_name = "obs-switch-scene-symbolic",
@@ -82,46 +80,27 @@ static const BsActionInfo actions[] = {
   },
 };
 
-static GList *
-obs_action_factory_list_actions (BsActionFactory *action_factory)
-{
-  GList *list = NULL;
-  size_t i;
-
-  for (i = 0; i < G_N_ELEMENTS (actions); i++)
-    list = g_list_prepend (list, (gpointer) &actions[i]);
-
-  return g_list_reverse (list);
-}
-
 static BsAction *
 obs_action_factory_create_action (BsActionFactory    *action_factory,
                                   BsStreamDeckButton *stream_deck_button,
-                                  const BsActionInfo *action_info)
+                                  BsActionInfo       *action_info)
 {
   ObsActionFactory *self = OBS_ACTION_FACTORY (action_factory);
 
-  if (g_strcmp0 (action_info->id, "obs-switch-scene-action") == 0)
+  if (g_strcmp0 (bs_action_info_get_id (action_info), "obs-switch-scene-action") == 0)
     return obs_switch_scene_action_new (stream_deck_button, self->connection_manager);
-  else if (g_strcmp0 (action_info->id, "obs-record-action") == 0)
+  else if (g_strcmp0 (bs_action_info_get_id (action_info), "obs-record-action") == 0)
     return obs_record_action_new (stream_deck_button, self->connection_manager);
-  else if (g_strcmp0 (action_info->id, "obs-stream-action") == 0)
+  else if (g_strcmp0 (bs_action_info_get_id (action_info), "obs-stream-action") == 0)
     return obs_stream_action_new (stream_deck_button, self->connection_manager);
-  else if (g_strcmp0 (action_info->id, "obs-virtualcam-action") == 0)
+  else if (g_strcmp0 (bs_action_info_get_id (action_info), "obs-virtualcam-action") == 0)
     return obs_virtualcam_action_new (stream_deck_button, self->connection_manager);
-  else if (g_strcmp0 (action_info->id, "obs-toggle-mute-action") == 0)
+  else if (g_strcmp0 (bs_action_info_get_id (action_info), "obs-toggle-mute-action") == 0)
     return obs_toggle_source_action_new (stream_deck_button, self->connection_manager, OBS_SOURCE_CAP_AUDIO);
-  else if (g_strcmp0 (action_info->id, "obs-toggle-source-action") == 0)
+  else if (g_strcmp0 (bs_action_info_get_id (action_info), "obs-toggle-source-action") == 0)
     return obs_toggle_source_action_new (stream_deck_button, self->connection_manager, OBS_SOURCE_CAP_VIDEO);
 
   return NULL;
-}
-
-static void
-bs_action_factory_iface_init (BsActionFactoryInterface *iface)
-{
-  iface->list_actions = obs_action_factory_list_actions;
-  iface->create_action = obs_action_factory_create_action;
 }
 
 static void
@@ -138,12 +117,19 @@ static void
 obs_action_factory_class_init (ObsActionFactoryClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  BsActionFactoryClass *action_factory_class = BS_ACTION_FACTORY_CLASS (klass);
 
   object_class->finalize = obs_action_factory_finalize;
+
+  action_factory_class->create_action = obs_action_factory_create_action;
 }
 
 static void
 obs_action_factory_init (ObsActionFactory *self)
 {
   self->connection_manager = obs_connection_manager_new ();
+
+  bs_action_factory_add_action_entries (BS_ACTION_FACTORY (self),
+                                        entries,
+                                        G_N_ELEMENTS (entries));
 }

@@ -20,14 +20,14 @@
 
 #pragma once
 
-#include <glib-object.h>
+#include <libpeas.h>
 
 #include "bs-types.h"
 
 G_BEGIN_DECLS
 
-#define BS_TYPE_ACTION_FACTORY (bs_action_factory_get_type ())
-G_DECLARE_INTERFACE (BsActionFactory, bs_action_factory, BS, ACTION_FACTORY, GObject)
+#define BS_TYPE_ACTION_FACTORY (bs_action_factory_get_type())
+G_DECLARE_DERIVABLE_TYPE (BsActionFactory, bs_action_factory, BS, ACTION_FACTORY, PeasExtensionBase)
 
 typedef struct
 {
@@ -35,25 +35,30 @@ typedef struct
   const char *icon_name;
   const char *name;
   const char *description;
-} BsActionInfo;
+} BsActionEntry;
 
-struct _BsActionFactoryInterface
+struct _BsActionFactoryClass
 {
-  GTypeInterface parent;
+  PeasExtensionBaseClass parent_class;
 
-  GList * (*list_actions) (BsActionFactory *self);
   BsAction * (*create_action) (BsActionFactory    *self,
                                BsStreamDeckButton *stream_deck_button,
-                               const BsActionInfo *action_info);
+                               BsActionInfo       *action_info);
 };
 
-GList * bs_action_factory_list_actions (BsActionFactory *self);
-
-const BsActionInfo * bs_action_factory_get_info (BsActionFactory *self,
-                                                 const char      *id);
+BsActionInfo * bs_action_factory_get_info (BsActionFactory *self,
+                                           const char      *id);
 
 BsAction * bs_action_factory_create_action (BsActionFactory    *self,
                                             BsStreamDeckButton *stream_deck_button,
-                                            const BsActionInfo *action_info);
+                                            BsActionInfo       *action_info);
+
+
+void bs_action_factory_add_action (BsActionFactory *self,
+                                   BsActionInfo    *info);
+
+void bs_action_factory_add_action_entries (BsActionFactory     *self,
+                                           const BsActionEntry *entries,
+                                           size_t               n_entries);
 
 G_END_DECLS

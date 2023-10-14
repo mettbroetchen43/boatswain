@@ -20,11 +20,11 @@
 
 #pragma once
 
-#include <libpeas.h>
+#include "bs-action-factory.h"
 
 G_BEGIN_DECLS
 
 #define DEFAULT_TYPE_ACTION_FACTORY (default_action_factory_get_type())
-G_DECLARE_FINAL_TYPE (DefaultActionFactory, default_action_factory, DEFAULT, ACTION_FACTORY, PeasExtensionBase)
+G_DECLARE_FINAL_TYPE (DefaultActionFactory, default_action_factory, DEFAULT, ACTION_FACTORY, BsActionFactory)
 
 G_END_DECLS

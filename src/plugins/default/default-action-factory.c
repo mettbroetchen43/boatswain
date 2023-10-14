@@ -19,6 +19,7 @@
  */
 
 #include "bs-action-factory.h"
+#include "bs-action-info.h"
 #include "default-action-factory.h"
 #include "default-brightness-action.h"
 #include "default-multi-action.h"
@@ -29,15 +30,12 @@
 
 struct _DefaultActionFactory
 {
-  PeasExtensionBase parent_instance;
+  BsActionFactory parent_instance;
 };
 
-static void bs_action_factory_iface_init (BsActionFactoryInterface *iface);
+G_DEFINE_FINAL_TYPE (DefaultActionFactory, default_action_factory, BS_TYPE_ACTION_FACTORY);
 
-G_DEFINE_FINAL_TYPE_WITH_CODE (DefaultActionFactory, default_action_factory, PEAS_TYPE_EXTENSION_BASE,
-                               G_IMPLEMENT_INTERFACE (BS_TYPE_ACTION_FACTORY, bs_action_factory_iface_init));
-
-static const BsActionInfo actions[] = {
+static const BsActionEntry entries[] = {
   {
     .id = "default-switch-page-action",
     .icon_name = "folder-symbolic",
@@ -64,48 +62,35 @@ static const BsActionInfo actions[] = {
   },
 };
 
-static GList *
-default_action_factory_list_actions (BsActionFactory *action_factory)
-{
-  GList *list = NULL;
-  size_t i;
-
-  for (i = 0; i < G_N_ELEMENTS (actions); i++)
-    list = g_list_prepend (list, (gpointer) &actions[i]);
-
-  return list;
-}
-
 static BsAction *
 default_action_factory_create_action (BsActionFactory    *action_factory,
                                       BsStreamDeckButton *stream_deck_button,
-                                      const BsActionInfo *action_info)
+                                      BsActionInfo       *action_info)
 {
-  if (g_strcmp0 (action_info->id, "default-switch-profile-action") == 0)
+  if (g_strcmp0 (bs_action_info_get_id (action_info), "default-switch-profile-action") == 0)
     return default_switch_profile_action_new (stream_deck_button);
-  else if (g_strcmp0 (action_info->id, "default-brightness-action") == 0)
+  else if (g_strcmp0 (bs_action_info_get_id (action_info), "default-brightness-action") == 0)
     return default_brightness_action_new (stream_deck_button);
-  else if (g_strcmp0 (action_info->id, "default-switch-page-action") == 0)
+  else if (g_strcmp0 (bs_action_info_get_id (action_info), "default-switch-page-action") == 0)
     return default_switch_page_action_new (stream_deck_button);
-  else if (g_strcmp0 (action_info->id, "default-multi-action") == 0)
+  else if (g_strcmp0 (bs_action_info_get_id (action_info), "default-multi-action") == 0)
     return default_multi_action_new (stream_deck_button);
 
   return NULL;
 }
 
 static void
-bs_action_factory_iface_init (BsActionFactoryInterface *iface)
-{
-  iface->list_actions = default_action_factory_list_actions;
-  iface->create_action = default_action_factory_create_action;
-}
-
-static void
 default_action_factory_class_init (DefaultActionFactoryClass *klass)
 {
+  BsActionFactoryClass *action_factory_class = BS_ACTION_FACTORY_CLASS (klass);
+
+  action_factory_class->create_action = default_action_factory_create_action;
 }
 
 static void
 default_action_factory_init (DefaultActionFactory *self)
 {
+  bs_action_factory_add_action_entries (BS_ACTION_FACTORY (self),
+                                        entries,
+                                        G_N_ELEMENTS (entries));
 }

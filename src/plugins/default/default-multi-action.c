@@ -297,9 +297,9 @@ default_multi_action_deserialize_settings (BsAction   *action,
         }
       else if (g_strcmp0 (type, "action") == 0)
         {
-          const BsActionInfo *action_info;
           BsStreamDeckButton *button;
           BsActionFactory *factory;
+          BsActionInfo *action_info;
           JsonNode *settings;
 
           button = bs_action_get_stream_deck_button (action);

@@ -20,6 +20,7 @@
 
 #include "bs-action.h"
 #include "bs-action-factory.h"
+#include "bs-action-info.h"
 #include "bs-action-private.h"
 #include "bs-application.h"
 #include "bs-empty-action.h"
@@ -85,11 +86,9 @@ static void
 add_action_factory (BsStreamDeckButtonEditor *self,
                     BsActionFactory          *action_factory)
 {
-  g_autoptr (GList) actions = NULL;
   PeasPluginInfo *plugin_info;
   GtkWidget *expander_row;
   GtkWidget *image;
-  GList *l;
 
   plugin_info = peas_extension_base_get_plugin_info (PEAS_EXTENSION_BASE (action_factory));
 
@@ -102,25 +101,24 @@ add_action_factory (BsStreamDeckButtonEditor *self,
 
   gtk_list_box_append (self->actions_listbox, expander_row);
 
-  actions = bs_action_factory_list_actions (action_factory);
-  for (l = actions; l; l = l->next)
+  for (uint32_t i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (action_factory)); i++)
     {
-      const BsActionInfo *info;
+      g_autoptr (BsActionInfo) info = NULL;
       GtkWidget *image;
       GtkWidget *row;
 
-      info = l->data;
+      info = g_list_model_get_item (G_LIST_MODEL (action_factory), i);
 
       row = adw_action_row_new ();
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), info->name);
-      adw_action_row_set_subtitle (ADW_ACTION_ROW (row), info->description);
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), bs_action_info_get_name (info));
+      adw_action_row_set_subtitle (ADW_ACTION_ROW (row), bs_action_info_get_description (info));
       gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
       g_object_set_data (G_OBJECT (row), "factory", action_factory);
       g_object_set_data (G_OBJECT (row), "action-info", (gpointer) info);
       g_object_set_data (G_OBJECT (row), "plugin-info", (gpointer) plugin_info);
       g_signal_connect (row, "activated", G_CALLBACK (on_action_row_activated_cb), self);
 
-      image = gtk_image_new_from_icon_name (info->icon_name);
+      image = gtk_image_new_from_icon_name (bs_action_info_get_icon_name (info));
       adw_action_row_add_prefix (ADW_ACTION_ROW (row), image);
 
       adw_expander_row_add_row (ADW_EXPANDER_ROW (expander_row), row);
@@ -253,7 +251,7 @@ on_action_row_activated_cb (GtkListBoxRow            *row,
   item = bs_page_get_item (active_page, bs_stream_deck_button_get_position (self->button));
   bs_page_item_set_item_type (item, BS_PAGE_ITEM_ACTION);
   bs_page_item_set_factory (item, peas_plugin_info_get_module_name (plugin_info));
-  bs_page_item_set_action (item, action_info->id);
+  bs_page_item_set_action (item, bs_action_info_get_id (action_info));
 
   custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
   if (custom_icon)

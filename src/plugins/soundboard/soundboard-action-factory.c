@@ -18,8 +18,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-
 #include "bs-action-factory.h"
+#include "bs-action-info.h"
 #include "soundboard-action-factory.h"
 #include "soundboard-mpris-action.h"
 #include "soundboard-play-action.h"
@@ -28,17 +28,14 @@
 
 struct _SoundboardActionFactory
 {
-  PeasExtensionBase parent_instance;
+  BsActionFactory parent_instance;
 
   MprisController *mpris_controller;
 };
 
-static void bs_action_factory_iface_init (BsActionFactoryInterface *iface);
+G_DEFINE_FINAL_TYPE (SoundboardActionFactory, soundboard_action_factory, BS_TYPE_ACTION_FACTORY);
 
-G_DEFINE_FINAL_TYPE_WITH_CODE (SoundboardActionFactory, soundboard_action_factory, PEAS_TYPE_EXTENSION_BASE,
-                               G_IMPLEMENT_INTERFACE (BS_TYPE_ACTION_FACTORY, bs_action_factory_iface_init));
-
-static const BsActionInfo actions[] = {
+static const BsActionEntry entries[] = {
   {
     .id = "soundboard-mpris-action",
     .icon_name = "audio-x-generic-symbolic",
@@ -53,39 +50,30 @@ static const BsActionInfo actions[] = {
   },
 };
 
-static GList *
-soundboard_action_factory_list_actions (BsActionFactory *action_factory)
-{
-  GList *list = NULL;
-  size_t i;
 
-  for (i = 0; i < G_N_ELEMENTS (actions); i++)
-    list = g_list_prepend (list, (gpointer) &actions[i]);
-
-  return list;
-}
+/*
+ * BsActionFactory overrides
+ */
 
 static BsAction *
 soundboard_action_factory_create_action (BsActionFactory    *action_factory,
                                          BsStreamDeckButton *stream_deck_button,
-                                         const BsActionInfo *action_info)
+                                         BsActionInfo       *action_info)
 {
   SoundboardActionFactory *self = SOUNDBOARD_ACTION_FACTORY (action_factory);
 
-  if (g_strcmp0 (action_info->id, "soundboard-play-action") == 0)
+  if (g_strcmp0 (bs_action_info_get_id (action_info), "soundboard-play-action") == 0)
     return soundboard_play_action_new (stream_deck_button);
-  else if (g_strcmp0 (action_info->id, "soundboard-mpris-action") == 0)
+  else if (g_strcmp0 (bs_action_info_get_id (action_info), "soundboard-mpris-action") == 0)
     return soundboard_mpris_action_new (stream_deck_button, self->mpris_controller);
 
   return NULL;
 }
 
-static void
-bs_action_factory_iface_init (BsActionFactoryInterface *iface)
-{
-  iface->list_actions = soundboard_action_factory_list_actions;
-  iface->create_action = soundboard_action_factory_create_action;
-}
+
+/*
+ * GObject overrides
+ */
 
 static void
 soundboard_action_factory_finalize (GObject *object)
@@ -101,12 +89,19 @@ static void
 soundboard_action_factory_class_init (SoundboardActionFactoryClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  BsActionFactoryClass *action_factory_class = BS_ACTION_FACTORY_CLASS (klass);
 
   object_class->finalize = soundboard_action_factory_finalize;
+
+  action_factory_class->create_action = soundboard_action_factory_create_action;
 }
 
 static void
 soundboard_action_factory_init (SoundboardActionFactory *self)
 {
   self->mpris_controller = mpris_controller_new ();
+
+  bs_action_factory_add_action_entries (BS_ACTION_FACTORY (self),
+                                        entries,
+                                        G_N_ELEMENTS (entries));
 }

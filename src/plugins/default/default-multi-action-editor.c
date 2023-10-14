@@ -19,6 +19,7 @@
  */
 
 #include "bs-action-factory.h"
+#include "bs-action-info.h"
 #include "bs-action-private.h"
 #include "bs-application.h"
 #include "bs-stream-deck.h"
@@ -73,7 +74,7 @@ static GParamSpec *properties [N_PROPS];
 
 static gboolean
 can_add_action (const PeasPluginInfo *plugin_info,
-                const BsActionInfo   *info)
+                BsActionInfo         *info)
 {
   const struct {
     const char *factory;
@@ -87,8 +88,9 @@ can_add_action (const PeasPluginInfo *plugin_info,
   for (i = 0; i < G_N_ELEMENTS (denylist); i++)
     {
       const char *module_name = peas_plugin_info_get_module_name (plugin_info);
+      const char *id = bs_action_info_get_id (info);
 
-      if (g_strcmp0 (module_name, denylist[i].factory) == 0 && g_strcmp0 (info->id, denylist[i].id) == 0)
+      if (g_strcmp0 (module_name, denylist[i].factory) == 0 && g_strcmp0 (id, denylist[i].id) == 0)
         return FALSE;
     }
 
@@ -157,11 +159,9 @@ on_action_factory_added_cb (PeasExtensionSet *extension_set,
                             gpointer          user_data)
 {
   DefaultMultiActionEditor *self;
-  g_autoptr (GList) actions = NULL;
   BsActionFactory *action_factory;
   GtkWidget *expander_row;
   GtkWidget *image;
-  GList *l;
 
   self = DEFAULT_MULTI_ACTION_EDITOR (user_data);
   action_factory = BS_ACTION_FACTORY (extension);
@@ -177,28 +177,27 @@ on_action_factory_added_cb (PeasExtensionSet *extension_set,
 
   adw_preferences_group_add (self->actions_group, expander_row);
 
-  actions = bs_action_factory_list_actions (action_factory);
-  for (l = actions; l; l = l->next)
+  for (uint32_t i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (action_factory)); i++)
     {
-      const BsActionInfo *info;
+      g_autoptr (BsActionInfo) info = NULL;
       GtkWidget *image;
       GtkWidget *row;
 
-      info = l->data;
+      info = g_list_model_get_item (G_LIST_MODEL (action_factory), i);
 
       if (!can_add_action (plugin_info, info))
         continue;
 
       row = adw_action_row_new ();
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), info->name);
-      adw_action_row_set_subtitle (ADW_ACTION_ROW (row), info->description);
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), bs_action_info_get_name (info));
+      adw_action_row_set_subtitle (ADW_ACTION_ROW (row), bs_action_info_get_description (info));
       gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
       g_object_set_data (G_OBJECT (row), "factory", action_factory);
       g_object_set_data (G_OBJECT (row), "action-info", (gpointer) info);
       g_object_set_data (G_OBJECT (row), "plugin-info", (gpointer) plugin_info);
       g_signal_connect (row, "activated", G_CALLBACK (on_action_row_activated_cb), self);
 
-      image = gtk_image_new_from_icon_name (info->icon_name);
+      image = gtk_image_new_from_icon_name (bs_action_info_get_icon_name (info));
       adw_action_row_add_prefix (ADW_ACTION_ROW (row), image);
 
       adw_expander_row_add_row (ADW_EXPANDER_ROW (expander_row), row);

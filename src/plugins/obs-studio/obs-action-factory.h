@@ -20,11 +20,11 @@
 
 #pragma once
 
-#include <libpeas.h>
+#include "bs-action-factory.h"
 
 G_BEGIN_DECLS
 
 #define OBS_TYPE_ACTION_FACTORY (obs_action_factory_get_type())
-G_DECLARE_FINAL_TYPE (ObsActionFactory, obs_action_factory, OBS, ACTION_FACTORY, PeasExtensionBase)
+G_DECLARE_FINAL_TYPE (ObsActionFactory, obs_action_factory, OBS, ACTION_FACTORY, BsActionFactory)
 
 G_END_DECLS

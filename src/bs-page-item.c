@@ -495,8 +495,8 @@ bs_page_item_realize (BsPageItem          *self,
 
   if (!self->cached_action)
     {
-      const BsActionInfo *action_info;
       BsActionFactory *action_factory;
+      BsActionInfo *action_info;
 
       switch (self->item_type)
         {

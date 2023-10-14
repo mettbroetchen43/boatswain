@@ -30,6 +30,7 @@ typedef enum _BsIconRendererFlags BsIconRendererFlags;
 
 typedef struct _BsAction BsAction;
 typedef struct _BsActionFactory BsActionFactory;
+typedef struct _BsActionInfo BsActionInfo;
 typedef struct _BsApplication BsApplication;
 typedef struct _BsDeviceManager BsDeviceManager;
 typedef struct _BsEmptyAction BsEmptyAction;

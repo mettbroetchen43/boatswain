@@ -20,11 +20,11 @@
 
 #pragma once
 
-#include <libpeas.h>
+#include "bs-action-factory.h"
 
 G_BEGIN_DECLS
 
 #define LAUNCHER_TYPE_ACTION_FACTORY (launcher_action_factory_get_type())
-G_DECLARE_FINAL_TYPE (LauncherActionFactory, launcher_action_factory, LAUNCHER, ACTION_FACTORY, PeasExtensionBase)
+G_DECLARE_FINAL_TYPE (LauncherActionFactory, launcher_action_factory, LAUNCHER, ACTION_FACTORY, BsActionFactory)
 
 G_END_DECLS

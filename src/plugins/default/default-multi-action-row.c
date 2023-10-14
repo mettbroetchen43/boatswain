@@ -19,6 +19,7 @@
  */
 
 #include "bs-action-factory.h"
+#include "bs-action-info.h"
 #include "bs-action-private.h"
 #include "default-multi-action-row.h"
 
@@ -152,13 +153,13 @@ default_multi_action_row_new (MultiActionEntry *entry)
 
     case MULTI_ACTION_ENTRY_ACTION:
       {
-        const BsActionInfo *info;
+        g_autoptr (BsActionInfo) info = NULL;
         BsActionFactory *factory;
 
         factory = bs_action_get_factory (entry->v.action);
         info = bs_action_factory_get_info (factory, bs_action_get_id (entry->v.action));
 
-        gtk_image_set_from_icon_name (self->icon, info->icon_name);
+        gtk_image_set_from_icon_name (self->icon, bs_action_info_get_icon_name (info));
         adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
                                        bs_action_get_name (entry->v.action));
 
