@@ -77,3 +77,29 @@ executable(
   dependencies: [libboatswain_private_dep],
   install: true,
 )
+
+gir_headers = [
+  'bs-action.h',
+  'bs-action-factory.h',
+  'bs-action-info.h',
+  'bs-empty-action.h',
+  'bs-icon.h',
+  'bs-icon-renderer.h',
+  'bs-page.h',
+  'bs-page-item.h',
+  'bs-profile.h',
+  'bs-stream-deck.h',
+  'bs-stream-deck-button.h',
+]
+
+gnome.generate_gir(
+  libboatswain_private,
+  sources: boatswain_sources + gir_headers,
+  nsversion: '0',
+  namespace: 'Bs',
+  symbol_prefix: 'bs',
+  identifier_prefix: 'Bs',
+  includes: ['Gtk-4.0', 'Json-1.0', 'Peas-2'],
+  install: true,
+  export_packages: ['libboatswain_private'],
+)
