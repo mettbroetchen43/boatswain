@@ -193,6 +193,7 @@ bs_application_startup (GApplication *application)
 
   /* All plugins must be loaded before profiles and Stream Decks */
   engine = peas_engine_get_default ();
+  peas_engine_enable_loader (engine, "gjs");
   peas_engine_add_search_path (engine,
                                "resource:///com/feaneron/Boatswain/plugins",
                                "resource:///com/feaneron/Boatswain/plugins");
