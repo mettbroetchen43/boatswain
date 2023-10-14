@@ -38,4 +38,6 @@ JsonNode * bs_action_serialize_settings (BsAction *self);
 void bs_action_deserialize_settings (BsAction   *self,
                                      JsonObject *settings);
 
+GtkWidget * bs_action_get_preferences (BsAction *self);
+
 G_END_DECLS

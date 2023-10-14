@@ -51,7 +51,6 @@ void bs_action_activate (BsAction *self);
 void bs_action_deactivate (BsAction *self);
 const char * bs_action_get_id (BsAction *self);
 const char * bs_action_get_name (BsAction *self);
-GtkWidget * bs_action_get_preferences (BsAction *self);
 BsStreamDeckButton * bs_action_get_stream_deck_button (BsAction *self);
 void bs_action_changed (BsAction *self);
 

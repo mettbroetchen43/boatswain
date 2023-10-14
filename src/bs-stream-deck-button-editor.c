@@ -20,6 +20,7 @@
 
 #include "bs-action.h"
 #include "bs-action-factory.h"
+#include "bs-action-private.h"
 #include "bs-application.h"
 #include "bs-empty-action.h"
 #include "bs-icon.h"

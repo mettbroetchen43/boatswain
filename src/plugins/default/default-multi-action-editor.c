@@ -19,6 +19,7 @@
  */
 
 #include "bs-action-factory.h"
+#include "bs-action-private.h"
 #include "bs-application.h"
 #include "bs-stream-deck.h"
 #include "bs-stream-deck-button.h"
