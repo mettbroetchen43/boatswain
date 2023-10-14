@@ -187,6 +187,14 @@ bs_action_set_factory (BsAction        *self,
   priv->factory = factory;
 }
 
+/**
+ * bs_action_get_id:
+ * @self: a #BsAction
+ *
+ * Retrieves the action id.
+ *
+ * Returns: (transfer none): id of @self
+ */
 const char *
 bs_action_get_id (BsAction *self)
 {
@@ -235,7 +243,14 @@ bs_action_set_name (BsAction   *self,
   priv->name = g_strdup (name);
 }
 
-
+/**
+ * bs_action_get_icon:
+ * @self: a #BsAction
+ *
+ * Retrieves the #BsIcon of @self.
+ *
+ * Returns: (transfer none)(nullable): a #BsIcon
+ */
 BsIcon *
 bs_action_get_icon (BsAction *self)
 {
@@ -332,6 +347,15 @@ bs_action_deserialize_settings (BsAction   *self,
   BS_EXIT;
 }
 
+/**
+ * bs_action_get_stream_deck_button:
+ * @self: a #BsAction
+ *
+ * Retrieves the #BsStreamDeckButton that @self is attached
+ * to, or %NULL if it's not attached to any physical button.
+ *
+ * Returns: (transfer none)(nullable): a #BsStreamDeckButton
+ */
 BsStreamDeckButton *
 bs_action_get_stream_deck_button (BsAction *self)
 {
@@ -343,6 +367,12 @@ bs_action_get_stream_deck_button (BsAction *self)
   return priv->stream_deck_button;
 }
 
+/**
+ * bs_action_changed:
+ * @self: a #BsAction
+ *
+ * Emits the 'changed' signal.
+ */
 void
 bs_action_changed (BsAction *self)
 {
