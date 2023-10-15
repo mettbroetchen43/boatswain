@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-08-15 18:37+0000\n"
-"PO-Revision-Date: 2023-08-16 14:38+0300\n"
+"POT-Creation-Date: 2023-10-14 21:13+0000\n"
+"PO-Revision-Date: 2023-10-15 08:54+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -120,14 +120,14 @@ msgstr "Типовий"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:848
+#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
+#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -136,47 +136,47 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
+#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:978
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1004
+#: src/bs-stream-deck.c:1030
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1073
+#: src/bs-stream-deck.c:1099
 msgid "Feaneron Hangar Original"
 msgstr "Оригінальний Feaneron Hangar"
 
-#: src/bs-stream-deck.c:1096
+#: src/bs-stream-deck.c:1122
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:380
+#: src/bs-stream-deck-button-editor.c:379
 msgid "Select icon"
 msgstr "Вибір піктограми"
 
-#: src/bs-stream-deck-button-editor.c:383
+#: src/bs-stream-deck-button-editor.c:382
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:98
 msgid "_Open"
 msgstr "_Відкрити"
 
-#: src/bs-stream-deck-button-editor.c:384
+#: src/bs-stream-deck-button-editor.c:383
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:99
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: src/bs-stream-deck-button-editor.c:388
+#: src/bs-stream-deck-button-editor.c:387
 msgid "All supported formats"
 msgstr "Усі підтримувані формати"
 
@@ -210,11 +210,10 @@ msgid "Actions"
 msgstr "Дії"
 
 #: src/bs-window.ui:113
-#| msgid "New profile"
 msgid "New profile…"
 msgstr "Створити профіль…"
 
-#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:54
 msgid "Brightness"
 msgstr "Яскравість"
 
@@ -261,15 +260,15 @@ msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Вийти з програми"
 
-#: src/plugins/default/default-action-factory.c:44
+#: src/plugins/default/default-action-factory.c:42
 msgid "Folder"
 msgstr "Тека"
 
-#: src/plugins/default/default-action-factory.c:50
+#: src/plugins/default/default-action-factory.c:48
 msgid "Switch Profile"
 msgstr "Перемкнути профіль"
 
-#: src/plugins/default/default-action-factory.c:62
+#: src/plugins/default/default-action-factory.c:60
 msgid "Multiple Actions"
 msgstr "Декілька дій"
 
@@ -295,7 +294,7 @@ msgid "Value"
 msgstr "Значення"
 
 #: src/plugins/default/default-multi-action-editor.c:310
-#: src/plugins/default/default-multi-action-row.c:142
+#: src/plugins/default/default-multi-action-row.c:143
 msgid "Delay"
 msgstr "Затримка"
 
@@ -319,11 +318,11 @@ msgstr "Параметри"
 msgid "Profile"
 msgstr "Профіль"
 
-#: src/plugins/launcher/launcher-action-factory.c:42
+#: src/plugins/launcher/launcher-action-factory.c:40
 msgid "Launch Application"
 msgstr "Запустити програму"
 
-#: src/plugins/launcher/launcher-action-factory.c:48
+#: src/plugins/launcher/launcher-action-factory.c:46
 msgid "Open URL"
 msgstr "Відкрити адресу"
 
@@ -339,29 +338,69 @@ msgstr "Адреса"
 msgid "Launcher"
 msgstr "Засіб запуску"
 
-#: src/plugins/obs-studio/obs-action-factory.c:48
+#: src/plugins/network/network-http-action-prefs.c:146
+#| msgid "Select audio file"
+msgid "Select payload file"
+msgstr "Виберіть файл вмісту"
+
+#: src/plugins/network/network-http-action-prefs.c:147
+#| msgid "_Open"
+msgid "Open"
+msgstr "Відкрити"
+
+#: src/plugins/network/network-http-action-prefs.ui:14
+#| msgid "URL"
+msgid "URI"
+msgstr "Адреса"
+
+#: src/plugins/network/network-http-action-prefs.ui:22
+msgid "Method"
+msgstr "Спосіб"
+
+#: src/plugins/network/network-http-action-prefs.ui:45
+msgid "Payload source"
+msgstr "Джерело вмісту"
+
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Файл"
+
+#: src/plugins/network/network-http-action-prefs.ui:82
+msgid "Edit payload"
+msgstr "Редагувати вміст"
+
+#: src/plugins/network/network-http-action-prefs.ui:99
+msgid "HTTP Request Payload"
+msgstr "Вміст запиту HTTP"
+
+#: src/plugins/network/network.plugin.desktop.in:3
+msgid "Network"
+msgstr "Мережа"
+
+#: src/plugins/obs-studio/obs-action-factory.c:46
 msgid "Switch Scene"
 msgstr "Перемкнути сцену"
 
 #. Translators: "Record" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:55
+#: src/plugins/obs-studio/obs-action-factory.c:53
 msgid "Record"
 msgstr "Запис"
 
 #. Translators: "Stream" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:62
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "Потік"
 
-#: src/plugins/obs-studio/obs-action-factory.c:68
+#: src/plugins/obs-studio/obs-action-factory.c:66
 msgid "Virtual Camera"
 msgstr "Віртуальна камера"
 
-#: src/plugins/obs-studio/obs-action-factory.c:74
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "Увімкнути або вимкнути звук"
 
-#: src/plugins/obs-studio/obs-action-factory.c:80
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "Показати / Приховати джерело"
 
@@ -430,15 +469,15 @@ msgstr "Джерело"
 msgid "OBS Studio"
 msgstr "OBS Studio"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:45
+#: src/plugins/soundboard/soundboard-action-factory.c:42
 msgid "Music Player"
 msgstr "Програвач музики"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:46
+#: src/plugins/soundboard/soundboard-action-factory.c:43
 msgid "Control the active music player"
 msgstr "Керування активним звуковим програвачем"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:51
+#: src/plugins/soundboard/soundboard-action-factory.c:48
 msgid "Play Audio"
 msgstr "Відтворити звук"
 
@@ -477,10 +516,6 @@ msgstr "Виберіть звуковий файл"
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:103
 msgid "Audio Files"
 msgstr "звукові файли"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "Файл"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
