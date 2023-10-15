@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-08-15 18:37+0000\n"
-"PO-Revision-Date: 2023-08-16 05:32+0200\n"
-"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
+"POT-Creation-Date: 2023-10-14 21:13+0000\n"
+"PO-Revision-Date: 2023-10-15 05:47+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -115,14 +115,14 @@ msgstr "ნაგულისხმები"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:848
+#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
+#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -131,47 +131,47 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
+#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:978
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1004
+#: src/bs-stream-deck.c:1030
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1073
+#: src/bs-stream-deck.c:1099
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1096
+#: src/bs-stream-deck.c:1122
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:380
+#: src/bs-stream-deck-button-editor.c:379
 msgid "Select icon"
 msgstr "არჩიეთ ხატულა"
 
-#: src/bs-stream-deck-button-editor.c:383
+#: src/bs-stream-deck-button-editor.c:382
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:98
 msgid "_Open"
 msgstr "_გახსნა"
 
-#: src/bs-stream-deck-button-editor.c:384
+#: src/bs-stream-deck-button-editor.c:383
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:99
 msgid "_Cancel"
 msgstr "_შეწყვეტა"
 
-#: src/bs-stream-deck-button-editor.c:388
+#: src/bs-stream-deck-button-editor.c:387
 msgid "All supported formats"
 msgstr "ყველა მხარდაჭერილი ფორმატი"
 
@@ -208,7 +208,7 @@ msgstr "ქმედებები"
 msgid "New profile…"
 msgstr "ახალი პროფილი…"
 
-#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:54
 msgid "Brightness"
 msgstr "სიკაშკაშე"
 
@@ -255,15 +255,15 @@ msgctxt "shortcut window"
 msgid "Quit"
 msgstr "გასვლა"
 
-#: src/plugins/default/default-action-factory.c:44
+#: src/plugins/default/default-action-factory.c:42
 msgid "Folder"
 msgstr "საქაღალდე"
 
-#: src/plugins/default/default-action-factory.c:50
+#: src/plugins/default/default-action-factory.c:48
 msgid "Switch Profile"
 msgstr "პროფილის გადართვა"
 
-#: src/plugins/default/default-action-factory.c:62
+#: src/plugins/default/default-action-factory.c:60
 msgid "Multiple Actions"
 msgstr "მრავალი ქმედება"
 
@@ -289,7 +289,7 @@ msgid "Value"
 msgstr "მნიშვნელობა"
 
 #: src/plugins/default/default-multi-action-editor.c:310
-#: src/plugins/default/default-multi-action-row.c:142
+#: src/plugins/default/default-multi-action-row.c:143
 msgid "Delay"
 msgstr "დაყოვნება"
 
@@ -313,11 +313,11 @@ msgstr "მორგება"
 msgid "Profile"
 msgstr "პროფილი"
 
-#: src/plugins/launcher/launcher-action-factory.c:42
+#: src/plugins/launcher/launcher-action-factory.c:40
 msgid "Launch Application"
 msgstr "აპლიკაციის გაშვება"
 
-#: src/plugins/launcher/launcher-action-factory.c:48
+#: src/plugins/launcher/launcher-action-factory.c:46
 msgid "Open URL"
 msgstr "URL-ის გახსნა"
 
@@ -333,29 +333,67 @@ msgstr "ბმული"
 msgid "Launcher"
 msgstr "გამშვები"
 
-#: src/plugins/obs-studio/obs-action-factory.c:48
+#: src/plugins/network/network-http-action-prefs.c:146
+msgid "Select payload file"
+msgstr "აირჩიეთ სასარგებლო შემცველობის ფაილი"
+
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "გახსნა"
+
+#: src/plugins/network/network-http-action-prefs.ui:14
+#| msgid "URL"
+msgid "URI"
+msgstr "URI"
+
+#: src/plugins/network/network-http-action-prefs.ui:22
+msgid "Method"
+msgstr "მეთოდი"
+
+#: src/plugins/network/network-http-action-prefs.ui:45
+msgid "Payload source"
+msgstr "სასარგებლო შემცველობის წყარო"
+
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "ფაილი"
+
+#: src/plugins/network/network-http-action-prefs.ui:82
+msgid "Edit payload"
+msgstr "სასარგებლო შემცველობის ჩასწორება"
+
+#: src/plugins/network/network-http-action-prefs.ui:99
+msgid "HTTP Request Payload"
+msgstr "HTTP მოთხოვნის სასარგებლო დატვირთვა"
+
+#: src/plugins/network/network.plugin.desktop.in:3
+msgid "Network"
+msgstr "ქსელი"
+
+#: src/plugins/obs-studio/obs-action-factory.c:46
 msgid "Switch Scene"
 msgstr "სცენის გადართვა"
 
 #. Translators: "Record" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:55
+#: src/plugins/obs-studio/obs-action-factory.c:53
 msgid "Record"
 msgstr "ჩაწერა"
 
 #. Translators: "Stream" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:62
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "ნაკადი"
 
-#: src/plugins/obs-studio/obs-action-factory.c:68
+#: src/plugins/obs-studio/obs-action-factory.c:66
 msgid "Virtual Camera"
 msgstr "ვირტუალური კამერა"
 
-#: src/plugins/obs-studio/obs-action-factory.c:74
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "დადუმების გადართვა"
 
-#: src/plugins/obs-studio/obs-action-factory.c:80
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "წყაროს ჩვენება/დამალვა"
 
@@ -424,15 +462,15 @@ msgstr "წყარო"
 msgid "OBS Studio"
 msgstr "OBS Studio"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:45
+#: src/plugins/soundboard/soundboard-action-factory.c:42
 msgid "Music Player"
 msgstr "მედია დამკვრელი"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:46
+#: src/plugins/soundboard/soundboard-action-factory.c:43
 msgid "Control the active music player"
 msgstr "აკონტროლეთ თქვენი მუსიკის დამკვრელი"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:51
+#: src/plugins/soundboard/soundboard-action-factory.c:48
 msgid "Play Audio"
 msgstr "ხმის დაკვრა"
 
@@ -471,10 +509,6 @@ msgstr "აირჩიეთ აუდიო ფაილი"
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:103
 msgid "Audio Files"
 msgstr "აუდიო ფაილები"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "ფაილი"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
