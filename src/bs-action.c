@@ -290,6 +290,14 @@ bs_action_deactivate (BsAction *self)
   BS_EXIT;
 }
 
+/**
+ * bs_action_get_preferences:
+ * @self: a #BsAction
+ *
+ * Retrieves the preferences controls of @self.
+ *
+ * Returns: (transfer none)(nullable): a #GtkWidget
+ */
 GtkWidget *
 bs_action_get_preferences (BsAction *self)
 {
