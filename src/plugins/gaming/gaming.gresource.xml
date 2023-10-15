@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/feaneron/Boatswain/plugins/gaming">
+    <file alias="icons/scalable/apps/gamepad-symbolic.svg">icons/gamepad-symbolic.svg</file>
+    <file alias="icons/scalable/apps/speedometer-symbolic.svg">icons/speedometer-symbolic.svg</file>
+
+    <file>gaming.js</file>
+    <file>score.js</file>
+
+    <file>gaming.plugin</file>
+  </gresource>
+</gresources>

@@ -19,6 +19,9 @@ src/plugins/default/default-multi-action-editor.ui
 src/plugins/default/default-multi-action-row.c
 src/plugins/default/default-switch-profile-action.c
 src/plugins/default/default.plugin.desktop.in
+src/plugins/gaming/gaming.js
+src/plugins/gaming/gaming.plugin.desktop.in
+src/plugins/gaming/score.js
 src/plugins/launcher/launcher-action-factory.c
 src/plugins/launcher/launcher-launch-preferences.ui
 src/plugins/launcher/launcher-open-url-action.c

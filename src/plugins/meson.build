@@ -9,6 +9,7 @@ plugins_libs = []
 plugins_confs = []
 
 subdir('default')
+subdir('gaming')
 subdir('launcher')
 subdir('network')
 subdir('obs-studio')
