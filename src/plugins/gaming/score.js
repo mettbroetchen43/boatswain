@@ -166,30 +166,6 @@ export const GamingScoreAction = GObject.registerClass({
         }
     }
 
-    async _selectOutputFile() {
-        const filter = new Gtk.FileFilter({name: _('Text File (.txt)')});
-        filter.add_suffix('txt');
-
-        const filters = new Gio.ListStore({item_type: Gtk.FileFilter});
-        filters.append(filter);
-
-        const initialFile = this.file ? this.file : getDefaultFile();
-
-        const dialog = new Gtk.FileDialog({
-            modal: true,
-            initialFile,
-            filters,
-        });
-
-        try {
-            return await dialog.save(fileRow.get_root(), null);
-            this._saveToFile();
-        } catch(e) {
-            console.logError(e);
-            return null;
-        }
-    }
-
     _setState(state) {
         console.debug(`New state: ${state}`);
         this._state = state;
