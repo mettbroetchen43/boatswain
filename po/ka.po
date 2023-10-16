@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-10-14 21:13+0000\n"
-"PO-Revision-Date: 2023-10-15 05:47+0200\n"
-"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"POT-Creation-Date: 2023-10-15 22:57+0000\n"
+"PO-Revision-Date: 2023-10-16 05:08+0200\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
@@ -313,6 +313,52 @@ msgstr "მორგება"
 msgid "Profile"
 msgstr "პროფილი"
 
+#: src/plugins/gaming/gaming.js:43
+msgid "Score"
+msgstr "ქულები"
+
+#: src/plugins/gaming/gaming.js:44
+msgid "Keep track of your score. Reset with a long press."
+msgstr "იცოდეთ თქვენი ქულები. ჩამოყრა დიდხანს დაწოლით."
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "თამაშები"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "score.txt"
+
+#: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
+msgid "Text File (.txt)"
+msgstr "ტექსტური ფაილი (*.txt)"
+
+#. Restore score
+#: src/plugins/gaming/score.js:346
+msgid "Restore Score"
+msgstr "ქულების აღდგენა"
+
+#: src/plugins/gaming/score.js:365
+msgid "Text Color"
+msgstr "ტექსტის ფერი"
+
+#: src/plugins/gaming/score.js:378
+msgid "Save to File"
+msgstr "ფაილში შენახვა"
+
+#: src/plugins/gaming/score.js:379
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr ""
+"ქულების ტექსტურ ფაილში შენახვა. ისეთი აპებს, როგორიცაა, მაგალითად OBS "
+"Studio, მისი წაკითხვა შეუძლიათ."
+
+#: src/plugins/gaming/score.js:388
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "ფაილი"
+
 #: src/plugins/launcher/launcher-action-factory.c:40
 msgid "Launch Application"
 msgstr "აპლიკაციის გაშვება"
@@ -333,6 +379,14 @@ msgstr "ბმული"
 msgid "Launcher"
 msgstr "გამშვები"
 
+#: src/plugins/network/network-action-factory.c:41
+msgid "HTTP Request"
+msgstr "HTTP მოთხოვნა"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "ვებსერვერისთვის GET და POST მოთხოვნების გაგზავნა"
+
 #: src/plugins/network/network-http-action-prefs.c:146
 msgid "Select payload file"
 msgstr "აირჩიეთ სასარგებლო შემცველობის ფაილი"
@@ -342,7 +396,6 @@ msgid "Open"
 msgstr "გახსნა"
 
 #: src/plugins/network/network-http-action-prefs.ui:14
-#| msgid "URL"
 msgid "URI"
 msgstr "URI"
 
@@ -353,11 +406,6 @@ msgstr "მეთოდი"
 #: src/plugins/network/network-http-action-prefs.ui:45
 msgid "Payload source"
 msgstr "სასარგებლო შემცველობის წყარო"
-
-#: src/plugins/network/network-http-action-prefs.ui:61
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "ფაილი"
 
 #: src/plugins/network/network-http-action-prefs.ui:82
 msgid "Edit payload"
