@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-10-14 21:13+0000\n"
-"PO-Revision-Date: 2023-10-15 12:39+0800\n"
+"POT-Creation-Date: 2023-10-15 22:57+0000\n"
+"PO-Revision-Date: 2023-10-16 19:12+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -308,6 +308,50 @@ msgstr "设置"
 msgid "Profile"
 msgstr "配置文件"
 
+#: src/plugins/gaming/gaming.js:43
+msgid "Score"
+msgstr "分数"
+
+#: src/plugins/gaming/gaming.js:44
+msgid "Keep track of your score. Reset with a long press."
+msgstr "保持对您分数的追踪。长按可重置。"
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "游戏"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "分数.txt"
+
+#: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
+msgid "Text File (.txt)"
+msgstr "文本文件（.txt）"
+
+#. Restore score
+#: src/plugins/gaming/score.js:346
+msgid "Restore Score"
+msgstr "恢复分数"
+
+#: src/plugins/gaming/score.js:365
+msgid "Text Color"
+msgstr "文字颜色"
+
+#: src/plugins/gaming/score.js:378
+msgid "Save to File"
+msgstr "保存到文件"
+
+#: src/plugins/gaming/score.js:379
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr "保存分数到文本文件。其它应用比如 OBS Studio 可以读取它。"
+
+#: src/plugins/gaming/score.js:388
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "文件"
+
 #: src/plugins/launcher/launcher-action-factory.c:40
 msgid "Launch Application"
 msgstr "启动应用程序"
@@ -328,6 +372,14 @@ msgstr "URL"
 msgid "Launcher"
 msgstr "启动器"
 
+#: src/plugins/network/network-action-factory.c:41
+msgid "HTTP Request"
+msgstr "HTTP 请求"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "向网络服务器发送 GET 和 POST 请求"
+
 #: src/plugins/network/network-http-action-prefs.c:146
 msgid "Select payload file"
 msgstr "选择载荷文件"
@@ -347,11 +399,6 @@ msgstr "方式"
 #: src/plugins/network/network-http-action-prefs.ui:45
 msgid "Payload source"
 msgstr "载荷源"
-
-#: src/plugins/network/network-http-action-prefs.ui:61
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "文件"
 
 #: src/plugins/network/network-http-action-prefs.ui:82
 msgid "Edit payload"
