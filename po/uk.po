@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-10-14 21:13+0000\n"
-"PO-Revision-Date: 2023-10-15 08:54+0300\n"
+"POT-Creation-Date: 2023-10-15 22:57+0000\n"
+"PO-Revision-Date: 2023-10-16 09:30+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -318,6 +318,52 @@ msgstr "Параметри"
 msgid "Profile"
 msgstr "Профіль"
 
+#: src/plugins/gaming/gaming.js:43
+msgid "Score"
+msgstr "Рейтинг"
+
+#: src/plugins/gaming/gaming.js:44
+msgid "Keep track of your score. Reset with a long press."
+msgstr "Стежте за власним рейтингом. Скидання довгим натисканням."
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "Ігри"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "рейтинг.txt"
+
+#: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
+msgid "Text File (.txt)"
+msgstr "текстовий файл (.txt)"
+
+#. Restore score
+#: src/plugins/gaming/score.js:346
+msgid "Restore Score"
+msgstr "Відновити рейтинг"
+
+#: src/plugins/gaming/score.js:365
+msgid "Text Color"
+msgstr "Колір тексту"
+
+#: src/plugins/gaming/score.js:378
+msgid "Save to File"
+msgstr "Зберегти до файла"
+
+#: src/plugins/gaming/score.js:379
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr ""
+"Зберегти рейтинг до файла. Його зможуть читати інші програми, наприклад OBS"
+" Studio."
+
+#: src/plugins/gaming/score.js:388
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Файл"
+
 #: src/plugins/launcher/launcher-action-factory.c:40
 msgid "Launch Application"
 msgstr "Запустити програму"
@@ -338,18 +384,24 @@ msgstr "Адреса"
 msgid "Launcher"
 msgstr "Засіб запуску"
 
+#: src/plugins/network/network-action-factory.c:41
+#| msgid "HTTP Request Payload"
+msgid "HTTP Request"
+msgstr "HTTP-запит"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "Надіслати запити GET і POST до вебсервера"
+
 #: src/plugins/network/network-http-action-prefs.c:146
-#| msgid "Select audio file"
 msgid "Select payload file"
 msgstr "Виберіть файл вмісту"
 
 #: src/plugins/network/network-http-action-prefs.c:147
-#| msgid "_Open"
 msgid "Open"
 msgstr "Відкрити"
 
 #: src/plugins/network/network-http-action-prefs.ui:14
-#| msgid "URL"
 msgid "URI"
 msgstr "Адреса"
 
@@ -360,11 +412,6 @@ msgstr "Спосіб"
 #: src/plugins/network/network-http-action-prefs.ui:45
 msgid "Payload source"
 msgstr "Джерело вмісту"
-
-#: src/plugins/network/network-http-action-prefs.ui:61
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "Файл"
 
 #: src/plugins/network/network-http-action-prefs.ui:82
 msgid "Edit payload"
