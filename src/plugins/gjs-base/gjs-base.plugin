@@ -1,11 +1,11 @@
 [Plugin]
-Name = Gaming
-Module = gaming
-Description = Gaming-related actions
+Name = GJS Base
+Module = gjs-base
+Description = Plugin that prepares the GJS environment. Has no actions.
 Icon=gamepad-symbolic
 Authors = Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
 Copyright = Copyleft © The Boatswain maintainers
 Builtin = true
 License = GPL
 Loader = gjs
-Depends = gjs-base
+Depends =

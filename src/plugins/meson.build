@@ -10,6 +10,7 @@ plugins_confs = []
 
 subdir('default')
 subdir('gaming')
+subdir('gjs-base')
 subdir('launcher')
 subdir('network')
 subdir('obs-studio')

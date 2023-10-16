@@ -20,15 +20,9 @@
  */
 
 import Bs from 'gi://Bs';
-import * as Gettext from 'gettext';
 import GObject from 'gi://GObject';
 
 import { GamingScoreAction } from './score.js';
-
-globalThis._ = Gettext.gettext;
-globalThis.C_ = Gettext.pgettext;
-globalThis.ngettext = Gettext.ngettext;
-globalThis.N_ = s => s;
 
 export const GamingActionFactory = GObject.registerClass({
     GTypeName: 'GamingActionFactory',

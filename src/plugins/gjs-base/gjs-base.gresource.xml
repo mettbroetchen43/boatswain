@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/feaneron/Boatswain/plugins/gjs-base">
+    <file>gjs-base.js</file>
+    <file>gjs-base.plugin</file>
+  </gresource>
+</gresources>
