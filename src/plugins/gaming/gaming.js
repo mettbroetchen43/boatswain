@@ -33,7 +33,7 @@ export const GamingActionFactory = GObject.registerClass({
         const entries = [
             {
                 id: 'gaming-score-action',
-                icon_name: 'speedometer-symbolic',
+                icon_name: 'score-symbolic',
                 name: _('Score'),
                 description: _('Keep track of your score. Reset with a long press.'),
             },
