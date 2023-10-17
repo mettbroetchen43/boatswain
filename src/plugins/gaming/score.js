@@ -80,11 +80,11 @@ const GamingScorePaintable = GObject.registerClass({
     }
 
     vfunc_get_intrinsic_width() {
-        return 96;
+        return 72;
     }
 
     vfunc_get_intrinsic_height() {
-        return 96;
+        return 72;
     }
 
     vfunc_snapshot(snapshot, width, height) {
