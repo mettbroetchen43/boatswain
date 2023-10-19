@@ -1,0 +1,508 @@
+# Romanian translation for boatswain.
+# Copyright (C) 2023 boatswain's COPYRIGHT HOLDER
+# This file is distributed under the same license as the boatswain package.
+# Florentina Mușat <florentina.musat.28@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: boatswain main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2023-09-25 16:10+0000\n"
+"PO-Revision-Date: 2023-10-12 12:39+0300\n"
+"Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
+"gmail [dot] com>\n"
+"Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 "
+"< 20)) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4\n"
+
+#: data/com.feaneron.Boatswain.desktop.in.in:3
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+msgid "Boatswain"
+msgstr "Boatswain"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
+msgid "stream deck;streaming;deck;elgato;"
+msgstr "stream deck;streaming;deck;elgato;punte stream;punte;"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Control your Elgato Stream Decks"
+msgstr "Controlați punțile de stream Elgato"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
+msgid "Boatswain allows you to control Elgato Stream Deck devices."
+msgstr ""
+"Boatswain vă permite să controlați dispozitivele punte de stream Elgato."
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+msgid "With Boatswain you will be able to:"
+msgstr "Cu Boatswain veți putea să:"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Organize your actions in pages and profiles"
+msgstr "Organizați acțiunile în pagini și profile"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+msgid "Set custom icons to actions"
+msgstr "Stabiliți iconițe personalizate la acțiuni"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+msgid "Control your music player"
+msgstr "Controlați playerul de muzică"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
+msgid "Play sound effects during your streams"
+msgstr "Redați efecte sonore în timpul stream-urilor"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgstr ""
+"Controlați Studio OBS utilizând puntea de stream (necesită extensia obs-"
+"websocket)"
+
+#. Translators: please do NOT translate this
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
+msgid "Georges Basile Stavracas Neto"
+msgstr "Georges Basile Stavracas Neto"
+
+#: src/bs-application.c:52
+msgid "Enable debug messages"
+msgstr "Activează mesajele de depanare"
+
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "Conectat la %d dispozitiv"
+msgstr[1] "Conectat la %d dispozitive"
+msgstr[2] "Conectat la %d de dispozitive"
+
+#: src/bs-application.c:167
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr ""
+"Boatswain trebuie să ruleze pe fundal pentru a detecta și executa acțiuni "
+"punte de stream."
+
+#: src/bs-profile.c:184
+msgid "Unnamed profile"
+msgstr "Profil nedenumit"
+
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
+msgid "Rename"
+msgstr "Redenumește"
+
+#: src/bs-profile-row.ui:14
+msgid "Move up"
+msgstr "Mută în sus"
+
+#: src/bs-profile-row.ui:18
+msgid "Move down"
+msgstr "Mută în jos"
+
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Șterge"
+
+#: src/bs-stream-deck.c:278
+msgid "Default"
+msgstr "Implicit"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
+msgid "Stream Deck Mini"
+msgstr "Punte de stream mini"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/plugins/default/default-switch-profile-action.c:283
+#: src/plugins/default/default.plugin.desktop.in:3
+msgid "Stream Deck"
+msgstr "Punte de stream"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
+msgid "Stream Deck XL"
+msgstr "Punte de stream XL"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1004
+msgid "Stream Deck MK.2"
+msgstr "Punte de stream MK.2"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1030
+msgid "Stream Deck Pedal"
+msgstr "Pedală punte de stream"
+
+#: src/bs-stream-deck.c:1099
+msgid "Feaneron Hangar Original"
+msgstr "Hangar Feaneron original"
+
+#: src/bs-stream-deck.c:1122
+msgid "Feaneron Hangar XL"
+msgstr "Hangar Feaneron XL"
+
+#: src/bs-stream-deck-button-editor.c:380
+msgid "Select icon"
+msgstr "Selectează iconița"
+
+#: src/bs-stream-deck-button-editor.c:383
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
+msgid "_Open"
+msgstr "D_eschide"
+
+#: src/bs-stream-deck-button-editor.c:384
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
+msgid "_Cancel"
+msgstr "Anulează"
+
+#: src/bs-stream-deck-button-editor.c:388
+msgid "All supported formats"
+msgstr "Toate formatele suportate"
+
+#: src/bs-stream-deck-button-editor.ui:27
+msgid "Select a button"
+msgstr "Selectați un buton"
+
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Proprietăți buton"
+
+#: src/bs-stream-deck-button-editor.ui:221
+msgid "Name"
+msgstr "Nume"
+
+#: src/bs-stream-deck-button-editor.ui:228
+msgid "Background Color"
+msgstr "Culoare de fundal"
+
+#: src/bs-stream-deck-button-editor.ui:259
+msgid "Select action"
+msgstr "Selectează acțiunea"
+
+#: src/bs-stream-deck-button-editor.ui:280
+msgid "Remove Action"
+msgstr "Elimină acțiunea"
+
+#: src/bs-stream-deck-button-editor.ui:303
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Acțiuni"
+
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "Profil nou…"
+
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
+msgid "Brightness"
+msgstr "Luminozitate"
+
+#: src/bs-window.ui:174
+msgid "Firmware"
+msgstr "Firmware"
+
+#: src/bs-window.ui:232
+msgid "No Stream Deck Found"
+msgstr "Nu s-a găsit niciun flux de stream"
+
+#: src/bs-window.ui:233
+msgid "Plug in a Stream Deck device to use it."
+msgstr "Conectați un dispozitiv punte de stream pentru a îl utiliza."
+
+#: src/bs-window.ui:256
+msgid "_Keyboard Shortcuts"
+msgstr "Scurtături de _tastatură"
+
+#: src/bs-window.ui:260
+msgid "_About Boatswain"
+msgstr "_Despre Boatswain"
+
+#: src/bs-window.ui:264
+msgid "_Quit"
+msgstr "_Ieși"
+
+#: src/bs-window.c:272
+msgid "Repository"
+msgstr "Depozit"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Generale"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Arată scurtăturile"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Ieși"
+
+#: src/plugins/default/default-action-factory.c:44
+msgid "Folder"
+msgstr "Dosar"
+
+#: src/plugins/default/default-action-factory.c:50
+msgid "Switch Profile"
+msgstr "Comută profilul"
+
+#: src/plugins/default/default-action-factory.c:62
+msgid "Multiple Actions"
+msgstr "Acțiuni multiple"
+
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
+msgid "Constant"
+msgstr "Constantă"
+
+#: src/plugins/default/default-brightness-action.c:142
+msgid "Increase"
+msgstr "Mărește"
+
+#: src/plugins/default/default-brightness-action.c:143
+msgid "Decrease"
+msgstr "Micșorează"
+
+#: src/plugins/default/default-brightness-action.c:146
+msgid "Mode"
+msgstr "Mod"
+
+#: src/plugins/default/default-brightness-action.c:153
+msgid "Value"
+msgstr "Valoare"
+
+#: src/plugins/default/default-multi-action-editor.c:310
+#: src/plugins/default/default-multi-action-row.c:142
+msgid "Delay"
+msgstr "Amânare"
+
+#: src/plugins/default/default-multi-action-editor.ui:31
+msgid "Add action"
+msgstr "Adaugă acțiunea"
+
+#: src/plugins/default/default-multi-action-editor.ui:49
+msgid "Add Action"
+msgstr "Adaugă acțiunea"
+
+#: src/plugins/default/default-multi-action-editor.ui:73
+msgid "Others"
+msgstr "Altele"
+
+#: src/plugins/default/default-multi-action-editor.ui:83
+msgid "Settings"
+msgstr "Configurări"
+
+#: src/plugins/default/default-switch-profile-action.c:306
+msgid "Profile"
+msgstr "Profil"
+
+#: src/plugins/launcher/launcher-action-factory.c:42
+msgid "Launch Application"
+msgstr "Lansează aplicația"
+
+#: src/plugins/launcher/launcher-action-factory.c:48
+msgid "Open URL"
+msgstr "Deschide URL-ul"
+
+#: src/plugins/launcher/launcher-launch-preferences.ui:8
+msgid "Choose Application"
+msgstr "Alege aplicația"
+
+#: src/plugins/launcher/launcher-open-url-action.c:101
+msgid "URL"
+msgstr "URL"
+
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "Lansator"
+
+#: src/plugins/obs-studio/obs-action-factory.c:48
+msgid "Switch Scene"
+msgstr "Comută scena"
+
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:55
+msgid "Record"
+msgstr "Înregistrează"
+
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:62
+msgid "Stream"
+msgstr "Stream"
+
+#: src/plugins/obs-studio/obs-action-factory.c:68
+msgid "Virtual Camera"
+msgstr "Cameră virtuală"
+
+#: src/plugins/obs-studio/obs-action-factory.c:74
+msgid "Toggle Mute"
+msgstr "Comută mut"
+
+#: src/plugins/obs-studio/obs-action-factory.c:80
+msgid "Show / Hide Source"
+msgstr "Arată / ascunde sursa"
+
+#: src/plugins/obs-studio/obs-connection.c:800
+msgid "Invalid password"
+msgstr "Parolă nevalidă"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:8
+msgid "Connection Settings"
+msgstr "Configurări de conexiune"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:12
+msgid "Host"
+msgstr "Gazdă"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
+msgid "Port"
+msgstr "Port"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
+msgid "Password"
+msgstr "Parolă"
+
+#: src/plugins/obs-studio/obs-switch-scene-action.c:283
+msgid "Scene"
+msgstr "Scenă"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:124
+msgid "Toggle mute"
+msgstr "Comută mut"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:125
+msgid "Mute"
+msgstr "Dezactivare sunet"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:126
+msgid "Unmute"
+msgstr "Activare sunet"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:130
+msgid "Toggle visibility"
+msgstr "Comută vizibilitatea"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:131
+msgid "Hide"
+msgstr "Ascunde"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:132
+msgid "Show"
+msgstr "Arată"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:479
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
+msgid "Behavior"
+msgstr "Comportament"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:490
+msgid "Audio Source"
+msgstr "Sursă audio"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:492
+msgid "Source"
+msgstr "Sursă"
+
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "Studio OBS"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:45
+msgid "Music Player"
+msgstr "Player de muzică"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:46
+msgid "Control the active music player"
+msgstr "Controlează playerul de muzică activ"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:51
+msgid "Play Audio"
+msgstr "Redă audio"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
+msgid "Next"
+msgstr "Următorul"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
+msgid "Pause"
+msgstr "Pauză"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
+msgid "Play"
+msgstr "Redare"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
+msgid "Previous"
+msgstr "Anteriorul"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
+msgid "Stop"
+msgstr "Oprește"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
+msgid "Play / Pause"
+msgstr "Redare / pauză"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
+msgid "Playback Action"
+msgstr "Acțiuni redare"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
+msgid "Select audio file"
+msgstr "Selectați fișierul audio"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Audio Files"
+msgstr "Fișiere audio"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Fișier"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
+msgid "Play / Stop"
+msgstr "Redare / Oprește"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
+msgid "Play / Overlap"
+msgstr "Redare / suprapune"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
+msgid "Play / Restart"
+msgstr "Redare / repornește"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
+msgid "Loop / Stop"
+msgstr "Buclă / oprește"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
+msgid "Press & Hold"
+msgstr "Apasă și menține apăsat"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
+msgid "Volume"
+msgstr "Volum"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr "Placă de sunet"
