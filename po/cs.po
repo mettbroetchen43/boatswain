@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-09-02 15:48+0000\n"
-"PO-Revision-Date: 2023-09-03 15:14+0200\n"
+"POT-Creation-Date: 2023-10-15 22:57+0000\n"
+"PO-Revision-Date: 2023-10-21 01:28+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -156,21 +156,21 @@ msgstr "Feaneron Hangar Original"
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:380
+#: src/bs-stream-deck-button-editor.c:379
 msgid "Select icon"
 msgstr "Vybrat ikonu"
 
-#: src/bs-stream-deck-button-editor.c:383
+#: src/bs-stream-deck-button-editor.c:382
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:98
 msgid "_Open"
 msgstr "_Otevřít"
 
-#: src/bs-stream-deck-button-editor.c:384
+#: src/bs-stream-deck-button-editor.c:383
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:99
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: src/bs-stream-deck-button-editor.c:388
+#: src/bs-stream-deck-button-editor.c:387
 msgid "All supported formats"
 msgstr "Všechny podporované formáty"
 
@@ -207,7 +207,7 @@ msgstr "Akce"
 msgid "New profile…"
 msgstr "Nový profil…"
 
-#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:54
 msgid "Brightness"
 msgstr "Jas"
 
@@ -254,15 +254,15 @@ msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: src/plugins/default/default-action-factory.c:44
+#: src/plugins/default/default-action-factory.c:42
 msgid "Folder"
 msgstr "Složka"
 
-#: src/plugins/default/default-action-factory.c:50
+#: src/plugins/default/default-action-factory.c:48
 msgid "Switch Profile"
 msgstr "Přepnout profil"
 
-#: src/plugins/default/default-action-factory.c:62
+#: src/plugins/default/default-action-factory.c:60
 msgid "Multiple Actions"
 msgstr "Více akcí"
 
@@ -288,7 +288,7 @@ msgid "Value"
 msgstr "Hodnota"
 
 #: src/plugins/default/default-multi-action-editor.c:310
-#: src/plugins/default/default-multi-action-row.c:142
+#: src/plugins/default/default-multi-action-row.c:143
 msgid "Delay"
 msgstr "Zpoždění"
 
@@ -312,11 +312,57 @@ msgstr "Nastavení"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/plugins/launcher/launcher-action-factory.c:42
+#: src/plugins/gaming/gaming.js:43
+msgid "Score"
+msgstr "Skóre"
+
+#: src/plugins/gaming/gaming.js:44
+msgid "Keep track of your score. Reset with a long press."
+msgstr "Sledujte své skóre. Resetujte dlouhým stisknutím."
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "Hraní"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "score.txt"
+
+#: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
+msgid "Text File (.txt)"
+msgstr "Textový soubor (.txt)"
+
+#. Restore score
+#: src/plugins/gaming/score.js:346
+msgid "Restore Score"
+msgstr "Obnovit skóre"
+
+#: src/plugins/gaming/score.js:365
+msgid "Text Color"
+msgstr "Barva textu"
+
+#: src/plugins/gaming/score.js:378
+msgid "Save to File"
+msgstr "Uložit do souboru"
+
+#: src/plugins/gaming/score.js:379
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr ""
+"Uložte skóre do textového souboru. Mohou z něj číst další aplikace, jako "
+"je OBS Studio."
+
+#: src/plugins/gaming/score.js:388
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Soubor"
+
+#: src/plugins/launcher/launcher-action-factory.c:40
 msgid "Launch Application"
 msgstr "Spustit aplikaci"
 
-#: src/plugins/launcher/launcher-action-factory.c:48
+#: src/plugins/launcher/launcher-action-factory.c:46
 msgid "Open URL"
 msgstr "Otevřít adresu URL"
 
@@ -332,29 +378,69 @@ msgstr "Adresa URL"
 msgid "Launcher"
 msgstr "Spouštěč"
 
-#: src/plugins/obs-studio/obs-action-factory.c:48
+#: src/plugins/network/network-action-factory.c:41
+msgid "HTTP Request"
+msgstr "HTTP požadavek"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "Posílat požadavky GET a POST na webový server"
+
+#: src/plugins/network/network-http-action-prefs.c:146
+msgid "Select payload file"
+msgstr "Vybrat soubor s datovým obsahem"
+
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Otevřít"
+
+#: src/plugins/network/network-http-action-prefs.ui:14
+msgid "URI"
+msgstr "Adresa URI"
+
+#: src/plugins/network/network-http-action-prefs.ui:22
+msgid "Method"
+msgstr "Metoda"
+
+#: src/plugins/network/network-http-action-prefs.ui:45
+msgid "Payload source"
+msgstr "Zdroj datového obsahu"
+
+#: src/plugins/network/network-http-action-prefs.ui:82
+msgid "Edit payload"
+msgstr "Upravit datový obsah"
+
+#: src/plugins/network/network-http-action-prefs.ui:99
+msgid "HTTP Request Payload"
+msgstr "Datový obsah HTTP požadavku"
+
+#: src/plugins/network/network.plugin.desktop.in:3
+msgid "Network"
+msgstr "Síť"
+
+#: src/plugins/obs-studio/obs-action-factory.c:46
 msgid "Switch Scene"
 msgstr "Přepnout scénu"
 
 #. Translators: "Record" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:55
+#: src/plugins/obs-studio/obs-action-factory.c:53
 msgid "Record"
 msgstr "Nahrát"
 
 #. Translators: "Stream" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:62
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "Streamovat"
 
-#: src/plugins/obs-studio/obs-action-factory.c:68
+#: src/plugins/obs-studio/obs-action-factory.c:66
 msgid "Virtual Camera"
 msgstr "Virtuální kamera"
 
-#: src/plugins/obs-studio/obs-action-factory.c:74
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "Přepnout ztlumení"
 
-#: src/plugins/obs-studio/obs-action-factory.c:80
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "Zobrazit / skrýt zdroj"
 
@@ -423,15 +509,15 @@ msgstr "Zdroj"
 msgid "OBS Studio"
 msgstr "OBS Studio"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:45
+#: src/plugins/soundboard/soundboard-action-factory.c:42
 msgid "Music Player"
 msgstr "Hudební přehrávač"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:46
+#: src/plugins/soundboard/soundboard-action-factory.c:43
 msgid "Control the active music player"
 msgstr "Ovládat aktivní hudební přehrávač"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:51
+#: src/plugins/soundboard/soundboard-action-factory.c:48
 msgid "Play Audio"
 msgstr "Přehrát zvuk"
 
@@ -470,10 +556,6 @@ msgstr "Vybrat zvukový soubor"
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:103
 msgid "Audio Files"
 msgstr "Zvukové soubory"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "Soubor"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
