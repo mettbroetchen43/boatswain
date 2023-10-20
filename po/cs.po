@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
 "POT-Creation-Date: 2023-10-15 22:57+0000\n"
-"PO-Revision-Date: 2023-10-21 01:28+0200\n"
+"PO-Revision-Date: 2023-10-21 01:34+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -326,7 +326,7 @@ msgstr "Hraní"
 
 #: src/plugins/gaming/score.js:39
 msgid "score.txt"
-msgstr "score.txt"
+msgstr "skóre.txt"
 
 #: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
 msgid "Text File (.txt)"
