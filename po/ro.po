@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-09-25 16:10+0000\n"
-"PO-Revision-Date: 2023-10-12 12:39+0300\n"
+"POT-Creation-Date: 2023-10-19 17:01+0000\n"
+"PO-Revision-Date: 2023-10-21 14:07+0300\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 "
-"< 20)) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2);\n"
 "X-Generator: Poedit 3.4\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
@@ -160,21 +160,21 @@ msgstr "Hangar Feaneron original"
 msgid "Feaneron Hangar XL"
 msgstr "Hangar Feaneron XL"
 
-#: src/bs-stream-deck-button-editor.c:380
+#: src/bs-stream-deck-button-editor.c:379
 msgid "Select icon"
 msgstr "Selectează iconița"
 
-#: src/bs-stream-deck-button-editor.c:383
+#: src/bs-stream-deck-button-editor.c:382
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:98
 msgid "_Open"
 msgstr "D_eschide"
 
-#: src/bs-stream-deck-button-editor.c:384
+#: src/bs-stream-deck-button-editor.c:383
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:99
 msgid "_Cancel"
 msgstr "Anulează"
 
-#: src/bs-stream-deck-button-editor.c:388
+#: src/bs-stream-deck-button-editor.c:387
 msgid "All supported formats"
 msgstr "Toate formatele suportate"
 
@@ -211,7 +211,7 @@ msgstr "Acțiuni"
 msgid "New profile…"
 msgstr "Profil nou…"
 
-#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:54
 msgid "Brightness"
 msgstr "Luminozitate"
 
@@ -258,15 +258,15 @@ msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Ieși"
 
-#: src/plugins/default/default-action-factory.c:44
+#: src/plugins/default/default-action-factory.c:42
 msgid "Folder"
 msgstr "Dosar"
 
-#: src/plugins/default/default-action-factory.c:50
+#: src/plugins/default/default-action-factory.c:48
 msgid "Switch Profile"
 msgstr "Comută profilul"
 
-#: src/plugins/default/default-action-factory.c:62
+#: src/plugins/default/default-action-factory.c:60
 msgid "Multiple Actions"
 msgstr "Acțiuni multiple"
 
@@ -292,7 +292,7 @@ msgid "Value"
 msgstr "Valoare"
 
 #: src/plugins/default/default-multi-action-editor.c:310
-#: src/plugins/default/default-multi-action-row.c:142
+#: src/plugins/default/default-multi-action-row.c:143
 msgid "Delay"
 msgstr "Amânare"
 
@@ -316,11 +316,57 @@ msgstr "Configurări"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/plugins/launcher/launcher-action-factory.c:42
+#: src/plugins/gaming/gaming.js:37
+msgid "Score"
+msgstr "Scor"
+
+#: src/plugins/gaming/gaming.js:38
+msgid "Keep track of your score. Reset with a long press."
+msgstr "Urmăriți scorul. Restabiliți cu o apăsare lungă."
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "Jocuri"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "score.txt"
+
+#. Restore score
+#: src/plugins/gaming/score.js:322
+msgid "Restore Score"
+msgstr "Restaurează scorul"
+
+#: src/plugins/gaming/score.js:341
+msgid "Text Color"
+msgstr "Culoare text"
+
+#: src/plugins/gaming/score.js:354
+msgid "Save to File"
+msgstr "Salvează în fișier"
+
+#: src/plugins/gaming/score.js:355
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr ""
+"Salvează scorul într-un fișier text. Alte aplicații, cum ar fi Studio OBS, "
+"pot citi din acesta."
+
+#: src/plugins/gaming/score.js:364
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Fișier"
+
+#: src/plugins/gaming/score.js:383
+msgid "Text File (.txt)"
+msgstr "Fișier text (.txt)"
+
+#: src/plugins/launcher/launcher-action-factory.c:40
 msgid "Launch Application"
 msgstr "Lansează aplicația"
 
-#: src/plugins/launcher/launcher-action-factory.c:48
+#: src/plugins/launcher/launcher-action-factory.c:46
 msgid "Open URL"
 msgstr "Deschide URL-ul"
 
@@ -336,29 +382,69 @@ msgstr "URL"
 msgid "Launcher"
 msgstr "Lansator"
 
-#: src/plugins/obs-studio/obs-action-factory.c:48
+#: src/plugins/network/network-action-factory.c:41
+msgid "HTTP Request"
+msgstr "Cerere HTTP"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "Trimite cereri de GET și POST către un server web"
+
+#: src/plugins/network/network-http-action-prefs.c:146
+msgid "Select payload file"
+msgstr "Selectați fișierul de sarcină utilă"
+
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Deschide"
+
+#: src/plugins/network/network-http-action-prefs.ui:14
+msgid "URI"
+msgstr "URI"
+
+#: src/plugins/network/network-http-action-prefs.ui:22
+msgid "Method"
+msgstr "Metodă"
+
+#: src/plugins/network/network-http-action-prefs.ui:45
+msgid "Payload source"
+msgstr "Sursă sarcină utilă"
+
+#: src/plugins/network/network-http-action-prefs.ui:82
+msgid "Edit payload"
+msgstr "Editează sarcina utilă"
+
+#: src/plugins/network/network-http-action-prefs.ui:99
+msgid "HTTP Request Payload"
+msgstr "Sarcina utilă a cererii HTTP"
+
+#: src/plugins/network/network.plugin.desktop.in:3
+msgid "Network"
+msgstr "Rețea"
+
+#: src/plugins/obs-studio/obs-action-factory.c:46
 msgid "Switch Scene"
 msgstr "Comută scena"
 
 #. Translators: "Record" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:55
+#: src/plugins/obs-studio/obs-action-factory.c:53
 msgid "Record"
 msgstr "Înregistrează"
 
 #. Translators: "Stream" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:62
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "Stream"
 
-#: src/plugins/obs-studio/obs-action-factory.c:68
+#: src/plugins/obs-studio/obs-action-factory.c:66
 msgid "Virtual Camera"
 msgstr "Cameră virtuală"
 
-#: src/plugins/obs-studio/obs-action-factory.c:74
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "Comută mut"
 
-#: src/plugins/obs-studio/obs-action-factory.c:80
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "Arată / ascunde sursa"
 
@@ -427,15 +513,15 @@ msgstr "Sursă"
 msgid "OBS Studio"
 msgstr "Studio OBS"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:45
+#: src/plugins/soundboard/soundboard-action-factory.c:42
 msgid "Music Player"
 msgstr "Player de muzică"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:46
+#: src/plugins/soundboard/soundboard-action-factory.c:43
 msgid "Control the active music player"
 msgstr "Controlează playerul de muzică activ"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:51
+#: src/plugins/soundboard/soundboard-action-factory.c:48
 msgid "Play Audio"
 msgstr "Redă audio"
 
@@ -474,10 +560,6 @@ msgstr "Selectați fișierul audio"
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:103
 msgid "Audio Files"
 msgstr "Fișiere audio"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "Fișier"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
