@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-10-14 21:13+0000\n"
-"PO-Revision-Date: 2023-10-15 11:47+0300\n"
+"POT-Creation-Date: 2023-10-16 12:18+0000\n"
+"PO-Revision-Date: 2023-10-16 17:40+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -314,6 +314,52 @@ msgstr "Настройки"
 msgid "Profile"
 msgstr "Профиль"
 
+#: src/plugins/gaming/gaming.js:43
+msgid "Score"
+msgstr "Счет"
+
+#: src/plugins/gaming/gaming.js:44
+msgid "Keep track of your score. Reset with a long press."
+msgstr "Следите за своим счетом. Сброс при длительном нажатии."
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "Игры"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "score.txt"
+
+#: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
+msgid "Text File (.txt)"
+msgstr "Текстовый файл (.txt)"
+
+#. Restore score
+#: src/plugins/gaming/score.js:346
+msgid "Restore Score"
+msgstr "Восстановить счет"
+
+#: src/plugins/gaming/score.js:365
+msgid "Text Color"
+msgstr "Цвет текста"
+
+#: src/plugins/gaming/score.js:378
+msgid "Save to File"
+msgstr "Сохранить в файл"
+
+#: src/plugins/gaming/score.js:379
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr ""
+"Сохраните результат в текстовом файле. Другие приложения, такие как OBS "
+"Studio, смогут прочитать его."
+
+#: src/plugins/gaming/score.js:388
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Файл"
+
 #: src/plugins/launcher/launcher-action-factory.c:40
 msgid "Launch Application"
 msgstr "Запуск приложения"
@@ -334,6 +380,14 @@ msgstr "URL"
 msgid "Launcher"
 msgstr "Средство запуска"
 
+#: src/plugins/network/network-action-factory.c:41
+msgid "HTTP Request"
+msgstr "HTTP-запрос"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "Отправить GET и POST запросы на веб-сервер"
+
 #: src/plugins/network/network-http-action-prefs.c:146
 msgid "Select payload file"
 msgstr "Выбрать файл полезной нагрузки"
@@ -353,11 +407,6 @@ msgstr "Метод"
 #: src/plugins/network/network-http-action-prefs.ui:45
 msgid "Payload source"
 msgstr "Источник полезной нагрузки"
-
-#: src/plugins/network/network-http-action-prefs.ui:61
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "Файл"
 
 #: src/plugins/network/network-http-action-prefs.ui:82
 msgid "Edit payload"
