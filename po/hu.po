@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the boatswain package.
 #
 # Balázs Úr <ur.balazs at fsf dot hu>, 2022, 2023.
+# Balázs Meskó <mesko.balazs at fsf dot hu>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-08-15 18:37+0000\n"
-"PO-Revision-Date: 2023-09-05 18:52+0200\n"
-"Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
+"POT-Creation-Date: 2023-10-15 22:57+0000\n"
+"PO-Revision-Date: 2023-10-23 21:18+0200\n"
+"Last-Translator: Balázs Meskó <mesko.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -115,14 +116,14 @@ msgstr "Alapértelmezett"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:848
+#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
+#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -131,47 +132,47 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
+#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:978
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1004
+#: src/bs-stream-deck.c:1030
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1073
+#: src/bs-stream-deck.c:1099
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1096
+#: src/bs-stream-deck.c:1122
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:380
+#: src/bs-stream-deck-button-editor.c:379
 msgid "Select icon"
 msgstr "Ikon kiválasztása"
 
-#: src/bs-stream-deck-button-editor.c:383
+#: src/bs-stream-deck-button-editor.c:382
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:98
 msgid "_Open"
 msgstr "Me_gnyitás"
 
-#: src/bs-stream-deck-button-editor.c:384
+#: src/bs-stream-deck-button-editor.c:383
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:99
 msgid "_Cancel"
 msgstr "_Mégse"
 
-#: src/bs-stream-deck-button-editor.c:388
+#: src/bs-stream-deck-button-editor.c:387
 msgid "All supported formats"
 msgstr "Minden támogatott formátum"
 
@@ -205,11 +206,10 @@ msgid "Actions"
 msgstr "Műveletek"
 
 #: src/bs-window.ui:113
-#| msgid "New profile"
 msgid "New profile…"
 msgstr "Új profil…"
 
-#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:54
 msgid "Brightness"
 msgstr "Fényerő"
 
@@ -256,15 +256,15 @@ msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Kilépés"
 
-#: src/plugins/default/default-action-factory.c:44
+#: src/plugins/default/default-action-factory.c:42
 msgid "Folder"
 msgstr "Mappa"
 
-#: src/plugins/default/default-action-factory.c:50
+#: src/plugins/default/default-action-factory.c:48
 msgid "Switch Profile"
 msgstr "Profil váltása"
 
-#: src/plugins/default/default-action-factory.c:62
+#: src/plugins/default/default-action-factory.c:60
 msgid "Multiple Actions"
 msgstr "Több művelet"
 
@@ -290,7 +290,7 @@ msgid "Value"
 msgstr "Érték"
 
 #: src/plugins/default/default-multi-action-editor.c:310
-#: src/plugins/default/default-multi-action-row.c:142
+#: src/plugins/default/default-multi-action-row.c:143
 msgid "Delay"
 msgstr "Késleltetés"
 
@@ -314,11 +314,57 @@ msgstr "Beállítások"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/plugins/launcher/launcher-action-factory.c:42
+#: src/plugins/gaming/gaming.js:43
+msgid "Score"
+msgstr "Pontszám"
+
+#: src/plugins/gaming/gaming.js:44
+msgid "Keep track of your score. Reset with a long press."
+msgstr "Kövesse a pontszámát. Hosszú lenyomással állíthatja vissza."
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "Játék"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "pontszam.txt"
+
+#: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
+msgid "Text File (.txt)"
+msgstr "Szövegfájl (.txt)"
+
+#. Restore score
+#: src/plugins/gaming/score.js:346
+msgid "Restore Score"
+msgstr "Pontszám helyreállítása"
+
+#: src/plugins/gaming/score.js:365
+msgid "Text Color"
+msgstr "Szövegszín"
+
+#: src/plugins/gaming/score.js:378
+msgid "Save to File"
+msgstr "Mentés fájlba"
+
+#: src/plugins/gaming/score.js:379
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr ""
+"A pontszám mentése szövegfájlba. Más alkalmazások, mint például az OBS"
+" Studio, olvashatnak belőle."
+
+#: src/plugins/gaming/score.js:388
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Fájl"
+
+#: src/plugins/launcher/launcher-action-factory.c:40
 msgid "Launch Application"
 msgstr "Alkalmazás indítása"
 
-#: src/plugins/launcher/launcher-action-factory.c:48
+#: src/plugins/launcher/launcher-action-factory.c:46
 msgid "Open URL"
 msgstr "URL megnyitása"
 
@@ -334,29 +380,72 @@ msgstr "URL"
 msgid "Launcher"
 msgstr "Indító"
 
-#: src/plugins/obs-studio/obs-action-factory.c:48
+#: src/plugins/network/network-action-factory.c:41
+msgid "HTTP Request"
+msgstr "HTTP-kérés"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "GET és POST kérések küldése egy webkiszolgálónak"
+
+#: src/plugins/network/network-http-action-prefs.c:146
+#| msgid "Select audio file"
+msgid "Select payload file"
+msgstr "Tartalomfájl kiválasztása"
+
+#: src/plugins/network/network-http-action-prefs.c:147
+#| msgid "_Open"
+msgid "Open"
+msgstr "Megnyitás"
+
+#: src/plugins/network/network-http-action-prefs.ui:14
+#| msgid "URL"
+msgid "URI"
+msgstr "URI"
+
+#: src/plugins/network/network-http-action-prefs.ui:22
+msgid "Method"
+msgstr "Metódus"
+
+#: src/plugins/network/network-http-action-prefs.ui:45
+msgid "Payload source"
+msgstr "Tartalom forrása"
+
+#: src/plugins/network/network-http-action-prefs.ui:82
+msgid "Edit payload"
+msgstr "Tartalom szerkesztése"
+
+#: src/plugins/network/network-http-action-prefs.ui:99
+msgid "HTTP Request Payload"
+msgstr "HTTP-kérés tartalma"
+
+#: src/plugins/network/network.plugin.desktop.in:3
+msgid "Network"
+msgstr "Hálózat"
+
+#: src/plugins/obs-studio/obs-action-factory.c:46
 msgid "Switch Scene"
 msgstr "Jelenet váltása"
 
 #. Translators: "Record" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:55
+#: src/plugins/obs-studio/obs-action-factory.c:53
 msgid "Record"
 msgstr "Rögzítés"
 
 #. Translators: "Stream" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:62
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "Adatfolyam"
 
-#: src/plugins/obs-studio/obs-action-factory.c:68
+#: src/plugins/obs-studio/obs-action-factory.c:66
 msgid "Virtual Camera"
 msgstr "Virtuális kamera"
 
-#: src/plugins/obs-studio/obs-action-factory.c:74
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "Némítás ki- és bekapcsolása"
 
-#: src/plugins/obs-studio/obs-action-factory.c:80
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "Forrás megjelenítése vagy elrejtése"
 
@@ -425,15 +514,15 @@ msgstr "Forrás"
 msgid "OBS Studio"
 msgstr "OBS Studio"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:45
+#: src/plugins/soundboard/soundboard-action-factory.c:42
 msgid "Music Player"
 msgstr "Zenelejátszó"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:46
+#: src/plugins/soundboard/soundboard-action-factory.c:43
 msgid "Control the active music player"
 msgstr "Az aktív zenelejátszó vezérlése"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:51
+#: src/plugins/soundboard/soundboard-action-factory.c:48
 msgid "Play Audio"
 msgstr "Hang lejátszása"
 
@@ -472,10 +561,6 @@ msgstr "Hangfájl kiválasztása"
 #: src/plugins/soundboard/soundboard-play-action-prefs.c:103
 msgid "Audio Files"
 msgstr "Hangfájlok"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "Fájl"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
