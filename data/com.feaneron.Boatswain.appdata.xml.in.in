@@ -21,14 +21,19 @@
       <li>Control OBS Studio using Stream Deck (requires the obs-websocket extension)</li>
     </ul>
 	</description>
-  <!-- Translators: please do NOT translate this -->
-  <developer_name>Georges Basile Stavracas Neto</developer_name>
+  <developer_name translatable="no">Georges Basile Stavracas Neto</developer_name>
   <update_contact>georges.stavracas_at_gmail.com</update_contact>
   <translation type="gettext">boatswain</translation>
-
+  <provides>
+    <binary>boatswain</binary>
+  </provides>
+  <launchable type="desktop-id">com.feaneron.Boatswain.desktop</launchable>
+  
   <screenshots>
-    <screenshot width="1322" height="842">
+    <screenshot type="default" width="1322" height="842">
       <image>https://gitlab.gnome.org/World/boatswain/raw/main/data/stream-deck-original.png</image>
+    </screenshot>
+    <screenshot type="default" width="1322" height="842">
       <image>https://gitlab.gnome.org/World/boatswain/raw/main/data/stream-deck-mini.png</image>
     </screenshot>
   </screenshots>
@@ -46,24 +51,20 @@
   <releases>
     <release date="2023-02-10" version="0.3.0">
       <description>
-        <p>
-          <ul>
-            <li>Polished application icon</li>
-            <li>Support for Elgato Stream Deck Pedal</li>
-          </ul>
-        </p>
+        <ul>
+          <li>Polished application icon</li>
+          <li>Support for Elgato Stream Deck Pedal</li>
+        </ul>
       </description>
     </release>
     <release date="2022-11-18" version="0.2.2">
       <description>
-        <p>
-          <ul>
-            <li>Show hundreds of extra icons in the icon selection menu</li>
-            <li>Change symbolic icon color depending on the background color</li>
-            <li>Improved high contrast theme support</li>
-            <li>More improvements to dragging buttons</li>
-          </ul>
-        </p>
+        <ul>
+          <li>Show hundreds of extra icons in the icon selection menu</li>
+          <li>Change symbolic icon color depending on the background color</li>
+          <li>Improved high contrast theme support</li>
+          <li>More improvements to dragging buttons</li>
+        </ul>
       </description>
     </release>
     <release date="2022-11-02" version="0.2.1" />
@@ -73,15 +74,13 @@
           Boatswain 0.2.0 comes packed with polish, quality of life improvements,
           and bugfixes:
         </p>
-        <p>
-          <ul>
-            <li>The user interface style was polished, various details were corrected</li>
-            <li>Mark some untranslatable user-visible strings as translatable</li>
-            <li>Properly detect Stream Deck XL v2</li>
-            <li>Fix various crashes with custom icons</li>
-            <li>Add drag n' drop to move button actions and icons</li>
-          </ul>
-        </p>
+        <ul>
+          <li>The user interface style was polished, various details were corrected</li>
+          <li>Mark some untranslatable user-visible strings as translatable</li>
+          <li>Properly detect Stream Deck XL v2</li>
+          <li>Fix various crashes with custom icons</li>
+          <li>Add drag n' drop to move button actions and icons</li>
+        </ul>
       </description>
     </release>
     <release date="2022-06-15" version="0.1.3" />
