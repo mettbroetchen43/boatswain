@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-24 15:58+0000\n"
-"PO-Revision-Date: 2023-11-24 21:38+0100\n"
+"POT-Creation-Date: 2023-11-24 20:42+0000\n"
+"PO-Revision-Date: 2023-11-24 21:46+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -374,7 +374,7 @@ msgstr "Není vybrán žádný soubor"
 
 #: src/plugins/launcher/launcher-open-file-action.c:156
 msgid "Select File"
-msgstr "Výběr souboru"
+msgstr "Vybrat soubor"
 
 #: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
