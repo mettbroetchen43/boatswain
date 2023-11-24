@@ -139,7 +139,8 @@ launcher_open_url_action_deserialize_settings (BsAction   *action,
 
   g_clear_pointer (&self->url, g_free);
   self->url = g_strdup (json_object_get_string_member_with_default (settings, "url", NULL));
-  g_strstrip (self->url);
+  if (self->url)
+    self->url = g_strstrip (self->url);
 }
 
 
