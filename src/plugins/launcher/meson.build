@@ -11,6 +11,7 @@ plugins_sources += files(
   'launcher-action-factory.c',
   'launcher-launch-action.c',
   'launcher-launch-preferences.c',
+  'launcher-open-file-action.c',
   'launcher-open-url-action.c',
   'launcher-plugin.c',
 )

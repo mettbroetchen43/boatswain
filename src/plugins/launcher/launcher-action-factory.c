@@ -22,6 +22,7 @@
 #include "bs-action-info.h"
 #include "launcher-action-factory.h"
 #include "launcher-launch-action.h"
+#include "launcher-open-file-action.h"
 #include "launcher-open-url-action.h"
 
 #include <glib/gi18n.h>
@@ -41,6 +42,12 @@ static const BsActionEntry entries[] = {
     .description = NULL,
   },
   {
+    .id = "launcher-open-file-action",
+    .icon_name = "folder-documents-symbolic",
+    .name = N_("Open File"),
+    .description = NULL,
+  },
+  {
     .id = "launcher-open-url-action",
     .icon_name = "open-link-symbolic",
     .name = N_("Open URL"),
@@ -55,6 +62,8 @@ launcher_action_factory_create_action (BsActionFactory    *action_factory,
 {
   if (g_strcmp0 (bs_action_info_get_id (action_info), "launch-action") == 0)
     return launcher_launch_action_new (stream_deck_button);
+  else if (g_strcmp0 (bs_action_info_get_id (action_info), "launcher-open-file-action") == 0)
+    return launcher_open_file_action_new (stream_deck_button);
   else if (g_strcmp0 (bs_action_info_get_id (action_info), "launcher-open-url-action") == 0)
     return launcher_open_url_action_new (stream_deck_button);
 
