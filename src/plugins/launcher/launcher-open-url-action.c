@@ -39,13 +39,13 @@ G_DEFINE_FINAL_TYPE (LauncherOpenUrlAction, launcher_open_url_action, BS_TYPE_AC
  */
 
 static void
-on_uri_shown_cb (GObject      *source_object,
-                 GAsyncResult *result,
-                 gpointer      user_data)
+on_uri_launched_cb (GObject      *source_object,
+                    GAsyncResult *result,
+                    gpointer      user_data)
 {
   g_autoptr (GError) error = NULL;
 
-  gtk_show_uri_full_finish (GTK_WINDOW (source_object), result, &error);
+  gtk_uri_launcher_launch_finish (GTK_URI_LAUNCHER (source_object), result, &error);
 
   if (error && !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     g_warning ("Error showing URL: %s", error->message);
@@ -68,9 +68,12 @@ on_url_row_text_changed_cb (GtkEditable           *editable,
 static void
 launcher_open_url_action_activate (BsAction *action)
 {
-  LauncherOpenUrlAction *self = LAUNCHER_OPEN_URL_ACTION (action);
+  g_autoptr(GtkUriLauncher) uri_launcher = NULL;
+  LauncherOpenUrlAction *self;
   GApplication *application;
   GtkWindow *window;
+
+  self = LAUNCHER_OPEN_URL_ACTION (action);
 
   if (!self->url || self->url[0] == '\0')
     return;
@@ -78,12 +81,12 @@ launcher_open_url_action_activate (BsAction *action)
   application = g_application_get_default ();
   window = gtk_application_get_active_window (GTK_APPLICATION (application));
 
-  gtk_show_uri_full (window,
-                     self->url,
-                     GDK_CURRENT_TIME,
-                     self->cancellable,
-                     on_uri_shown_cb,
-                     self);
+  uri_launcher = gtk_uri_launcher_new (self->url);
+  gtk_uri_launcher_launch (uri_launcher,
+                           window,
+                           self->cancellable,
+                           on_uri_launched_cb,
+                           self);
 }
 
 static GtkWidget *
