@@ -68,7 +68,7 @@ on_url_row_text_changed_cb (GtkEditable           *editable,
 static void
 launcher_open_url_action_activate (BsAction *action)
 {
-  g_autoptr(GtkUriLauncher) uri_launcher = NULL;
+  g_autoptr (GtkUriLauncher) uri_launcher = NULL;
   LauncherOpenUrlAction *self;
   GApplication *application;
   GtkWindow *window;
