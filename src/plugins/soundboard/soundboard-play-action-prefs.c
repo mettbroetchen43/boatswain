@@ -32,6 +32,8 @@ struct _SoundboardPlayActionPrefs
   GtkAdjustment *volume_adjustment;
 
   SoundboardPlayAction *play_action;
+
+  GCancellable *cancellable;
 };
 
 G_DEFINE_FINAL_TYPE (SoundboardPlayActionPrefs, soundboard_play_action_prefs, ADW_TYPE_PREFERENCES_GROUP)
@@ -69,43 +71,44 @@ on_behavior_row_selected_changed_cb (AdwComboRow               *behavior_row,
 }
 
 static void
-on_file_chooser_native_response_cb (GtkNativeDialog           *native,
-                                    int                        response,
-                                    SoundboardPlayActionPrefs *self)
+on_file_dialog_opened_cb (GObject      *source,
+                          GAsyncResult *result,
+                          gpointer      user_data)
 {
-  if (response == GTK_RESPONSE_ACCEPT)
-    {
-      GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
-      g_autoptr (GFile) file = NULL;
+  SoundboardPlayActionPrefs *self = SOUNDBOARD_PLAY_ACTION_PREFS (user_data);
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GFile) file = NULL;
 
-      file = gtk_file_chooser_get_file (chooser);
-      set_file (self, file);
-    }
-
-  g_object_unref (native);
+  file = gtk_file_dialog_open_finish (GTK_FILE_DIALOG (source), result, &error);
+  if (file)
+    set_file (self, file);
 }
 
 static void
 on_file_row_activated_cb (AdwActionRow              *row,
                           SoundboardPlayActionPrefs *self)
 {
+  g_autoptr (GtkFileDialog) file_dialog = NULL;
   g_autoptr (GtkFileFilter) filter = NULL;
-  GtkFileChooserNative *native;
-
-  native = gtk_file_chooser_native_new (_("Select audio file"),
-                                        GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
-                                        GTK_FILE_CHOOSER_ACTION_OPEN,
-                                        _("_Open"),
-                                        _("_Cancel"));
-  gtk_native_dialog_set_modal (GTK_NATIVE_DIALOG (native), TRUE);
+  g_autoptr (GListStore) filters = NULL;
 
   filter = gtk_file_filter_new ();
   gtk_file_filter_set_name (filter, _("Audio Files"));
   gtk_file_filter_add_mime_type (filter, "audio/*");
-  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (native), filter);
 
-  g_signal_connect (native, "response", G_CALLBACK (on_file_chooser_native_response_cb), self);
-  gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
+  filters = g_list_store_new (GTK_TYPE_FILE_FILTER);
+  g_list_store_append (filters, filter);
+
+  file_dialog = gtk_file_dialog_new ();
+  gtk_file_dialog_set_title (file_dialog, _("Select audio file"));
+  gtk_file_dialog_set_modal (file_dialog, TRUE);
+  gtk_file_dialog_set_filters (file_dialog, G_LIST_MODEL (filters));
+
+  gtk_file_dialog_open (file_dialog,
+                        GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
+                        self->cancellable,
+                        on_file_dialog_opened_cb,
+                        self);
 }
 
 static void
@@ -122,9 +125,23 @@ on_volume_adjustment_value_changed_cb (GtkAdjustment             *adjustment,
  */
 
 static void
+soundboard_play_action_prefs_dispose (GObject *object)
+{
+  SoundboardPlayActionPrefs *self = (SoundboardPlayActionPrefs *)object;
+
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
+
+  G_OBJECT_CLASS (soundboard_play_action_prefs_parent_class)->dispose (object);
+}
+
+static void
 soundboard_play_action_prefs_class_init (SoundboardPlayActionPrefsClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->dispose = soundboard_play_action_prefs_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/plugins/soundboard/soundboard-play-action-prefs.ui");
 
@@ -142,6 +159,8 @@ static void
 soundboard_play_action_prefs_init (SoundboardPlayActionPrefs *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  self->cancellable = g_cancellable_new ();
 }
 
 GtkWidget *
