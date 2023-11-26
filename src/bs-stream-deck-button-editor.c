@@ -334,64 +334,76 @@ on_button_icon_changed_cb (BsStreamDeckButton       *stream_deck_button,
   update_icon (self);
 }
 
+
 static void
-on_file_chooser_native_response_cb (GtkNativeDialog          *native,
-                                    int                       response,
-                                    BsStreamDeckButtonEditor *self)
+on_file_dialog_file_opened_cb (GObject      *source,
+                               GAsyncResult *result,
+                               gpointer      user_data)
 {
-  if (response == GTK_RESPONSE_ACCEPT)
+  BsStreamDeckButtonEditor *self;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (BsIcon) icon = NULL;
+  g_autoptr (GFile) file = NULL;
+
+  file = gtk_file_dialog_open_finish (GTK_FILE_DIALOG (source), result, &error);
+
+  if (error)
     {
-      GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
-      g_autoptr (GError) error = NULL;
-      g_autoptr (BsIcon) icon = NULL;
-      g_autoptr (GFile) file = NULL;
-
-      file = gtk_file_chooser_get_file (chooser);
-      icon = bs_stream_deck_button_get_custom_icon (self->button);
-
-      if (!icon)
-        icon = bs_icon_new_empty ();
-      else
-        g_object_ref (icon);
-
-      bs_icon_set_file (icon, file, &error);
-      if (error)
+      if (!g_error_matches (error, GTK_DIALOG_ERROR, GTK_DIALOG_ERROR_CANCELLED) &&
+          !g_error_matches (error, GTK_DIALOG_ERROR, GTK_DIALOG_ERROR_DISMISSED))
         {
-          g_warning ("Error setting custom icon: %s", error->message);
-          goto out;
+          g_warning ("Error opening file: %s", error->message);
         }
-
-      bs_stream_deck_button_set_custom_icon (self->button, icon);
+      return;
     }
 
-out:
-  g_object_unref (native);
+  self = BS_STREAM_DECK_BUTTON_EDITOR (user_data);
+  icon = bs_stream_deck_button_get_custom_icon (self->button);
+
+  if (!icon)
+    icon = bs_icon_new_empty ();
+  else
+    g_object_ref (icon);
+
+  bs_icon_set_file (icon, file, &error);
+  if (error)
+    {
+      g_warning ("Error setting custom icon: %s", error->message);
+      return;
+    }
+
+  bs_stream_deck_button_set_custom_icon (self->button, icon);
 }
 
 static void
 on_custom_icon_button_clicked_cb (AdwPreferencesRow        *row,
                                   BsStreamDeckButtonEditor *self)
 {
+  g_autoptr (GtkFileDialog) dialog = NULL;
   g_autoptr (GtkFileFilter) filter = NULL;
-  GtkFileChooserNative *native;
+  g_autoptr (GListStore) filters = NULL;
 
   gtk_menu_button_popdown (self->custom_icon_menubutton);
-
-  native = gtk_file_chooser_native_new (_("Select icon"),
-                                        GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
-                                        GTK_FILE_CHOOSER_ACTION_OPEN,
-                                        _("_Open"),
-                                        _("_Cancel"));
-  gtk_native_dialog_set_modal (GTK_NATIVE_DIALOG (native), TRUE);
 
   filter = gtk_file_filter_new ();
   gtk_file_filter_set_name (filter, _("All supported formats"));
   gtk_file_filter_add_mime_type (filter, "image/*");
   gtk_file_filter_add_mime_type (filter, "video/*");
-  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (native), filter);
 
-  g_signal_connect (native, "response", G_CALLBACK (on_file_chooser_native_response_cb), self);
-  gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
+  filters = g_list_store_new (GTK_TYPE_FILE_FILTER);
+  g_list_store_append (filters, filter);
+
+  dialog = gtk_file_dialog_new ();
+  gtk_file_dialog_set_modal (dialog, TRUE);
+  gtk_file_dialog_set_title (dialog, _("Select icon"));
+  gtk_file_dialog_set_accept_label (dialog, _("Open"));
+  gtk_file_dialog_set_filters (dialog, G_LIST_MODEL (filters));
+
+  gtk_file_dialog_open (dialog,
+                        GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
+                        NULL,
+                        on_file_dialog_file_opened_cb,
+                        self);
 }
 
 static void
