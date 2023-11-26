@@ -19,6 +19,9 @@
       <li>Control your music player</li>
       <li>Play sound effects during your streams</li>
       <li>Control OBS Studio using Stream Deck (requires the obs-websocket extension)</li>
+      <li>Send network requests</li>
+      <li>Keep track of your gaming score</li>
+      <li>Open files and launch applications</li>
     </ul>
 	</description>
   <developer_name translatable="no">Georges Basile Stavracas Neto</developer_name>
@@ -52,6 +55,21 @@
   </custom>
 
   <releases>
+    <release date="2023-11-26" version="0.4.0">
+      <description>
+        <p>
+          Boatswain 0.4.0 is here! This release comes with new actions, polished
+          and more modern visuals, and various quality of life improvements and
+          bugfixes:
+        </p>
+        <ul>
+          <li>The new HTTP Request action allows sending HTTP requests to URLs</li>
+          <li>Keep track of your score with the new Score action</li>
+          <li>Open files with a single press of a button with the new Open File action</li>
+          <li>Update interface to more modern visuals</li>
+        </ul>
+      </description>
+    </release>
     <release date="2023-02-10" version="0.3.0">
       <description>
         <ul>
