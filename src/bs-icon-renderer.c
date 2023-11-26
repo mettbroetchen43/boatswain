@@ -144,7 +144,9 @@ bs_icon_renderer_convert_texture (BsIconRenderer  *self,
   g_return_val_if_fail (buffer != NULL, FALSE);
   g_return_val_if_fail (buffer_len != NULL, FALSE);
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   pixbuf = gdk_pixbuf_get_from_texture (texture);
+G_GNUC_END_IGNORE_DEPRECATIONS
 
   switch (self->layout->format)
     {
