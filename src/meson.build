@@ -27,7 +27,7 @@ boatswain_deps = [
   dependency('libpeas-2'),
   dependency('libportal-gtk4'),
   dependency('gusb', version: '>= 0.3.0'),
-  dependency('gtk4'),
+  dependency('gtk4', version: '>= 4.12'),
   dependency('hidapi-libusb'),
   dependency('json-glib-1.0'),
 ]
