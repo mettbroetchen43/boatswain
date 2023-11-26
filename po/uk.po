@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-10-15 22:57+0000\n"
-"PO-Revision-Date: 2023-10-16 09:30+0300\n"
+"POT-Creation-Date: 2023-11-26 15:32+0000\n"
+"PO-Revision-Date: 2023-11-26 21:39+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -67,10 +67,19 @@ msgstr ""
 "Керувати OBS Studio за допомогою потокової деки (потребує розширення obs-"
 "websocket)"
 
-#. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
-msgid "Georges Basile Stavracas Neto"
-msgstr "Georges Basile Stavracas Neto"
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "Надсилати запити мережею"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#| msgid "Keep track of your score. Reset with a long press."
+msgid "Keep track of your gaming score"
+msgstr "Стежити за вашим ігровим рейтингом"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+#| msgid "Launch Application"
+msgid "Open files and launch applications"
+msgstr "Відкрити файли і запустити програми"
 
 #: src/bs-application.c:52
 msgid "Enable debug messages"
@@ -162,23 +171,18 @@ msgstr "Оригінальний Feaneron Hangar"
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:389
+msgid "All supported formats"
+msgstr "Усі підтримувані формати"
+
+#: src/bs-stream-deck-button-editor.c:398
 msgid "Select icon"
 msgstr "Вибір піктограми"
 
-#: src/bs-stream-deck-button-editor.c:382
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
-msgid "_Open"
-msgstr "_Відкрити"
-
-#: src/bs-stream-deck-button-editor.c:383
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
-msgid "_Cancel"
-msgstr "_Скасувати"
-
-#: src/bs-stream-deck-button-editor.c:387
-msgid "All supported formats"
-msgstr "Усі підтримувані формати"
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Відкрити"
 
 #: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
@@ -196,15 +200,15 @@ msgstr "Назва"
 msgid "Background Color"
 msgstr "Колір тла"
 
-#: src/bs-stream-deck-button-editor.ui:259
+#: src/bs-stream-deck-button-editor.ui:264
 msgid "Select action"
 msgstr "Вибрати дію"
 
-#: src/bs-stream-deck-button-editor.ui:280
+#: src/bs-stream-deck-button-editor.ui:285
 msgid "Remove Action"
 msgstr "Вилучити дію"
 
-#: src/bs-stream-deck-button-editor.ui:303
+#: src/bs-stream-deck-button-editor.ui:308
 #: src/plugins/default/default-multi-action-editor.ui:67
 msgid "Actions"
 msgstr "Дії"
@@ -318,11 +322,11 @@ msgstr "Параметри"
 msgid "Profile"
 msgstr "Профіль"
 
-#: src/plugins/gaming/gaming.js:43
+#: src/plugins/gaming/gaming.js:37
 msgid "Score"
 msgstr "Рейтинг"
 
-#: src/plugins/gaming/gaming.js:44
+#: src/plugins/gaming/gaming.js:38
 msgid "Keep track of your score. Reset with a long press."
 msgstr "Стежте за власним рейтингом. Скидання довгим натисканням."
 
@@ -334,41 +338,47 @@ msgstr "Ігри"
 msgid "score.txt"
 msgstr "рейтинг.txt"
 
-#: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
-msgid "Text File (.txt)"
-msgstr "текстовий файл (.txt)"
-
 #. Restore score
-#: src/plugins/gaming/score.js:346
+#: src/plugins/gaming/score.js:322
 msgid "Restore Score"
 msgstr "Відновити рейтинг"
 
-#: src/plugins/gaming/score.js:365
+#: src/plugins/gaming/score.js:341
 msgid "Text Color"
 msgstr "Колір тексту"
 
-#: src/plugins/gaming/score.js:378
+#: src/plugins/gaming/score.js:354
 msgid "Save to File"
 msgstr "Зберегти до файла"
 
-#: src/plugins/gaming/score.js:379
+#: src/plugins/gaming/score.js:355
 msgid ""
 "Save score to a text file. Other apps such as OBS Studio may read from it."
 msgstr ""
-"Зберегти рейтинг до файла. Його зможуть читати інші програми, наприклад OBS"
-" Studio."
+"Зберегти рейтинг до файла. Його зможуть читати інші програми, наприклад OBS "
+"Studio."
 
-#: src/plugins/gaming/score.js:388
+#: src/plugins/gaming/score.js:364
+#: src/plugins/launcher/launcher-open-file-action.c:209
 #: src/plugins/network/network-http-action-prefs.ui:61
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
 msgid "File"
 msgstr "Файл"
 
-#: src/plugins/launcher/launcher-action-factory.c:40
+#: src/plugins/gaming/score.js:383
+msgid "Text File (.txt)"
+msgstr "текстовий файл (.txt)"
+
+#: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
 msgstr "Запустити програму"
 
-#: src/plugins/launcher/launcher-action-factory.c:46
+#: src/plugins/launcher/launcher-action-factory.c:47
+#| msgid "File"
+msgid "Open File"
+msgstr "Відкрити файл"
+
+#: src/plugins/launcher/launcher-action-factory.c:53
 msgid "Open URL"
 msgstr "Відкрити адресу"
 
@@ -376,7 +386,16 @@ msgstr "Відкрити адресу"
 msgid "Choose Application"
 msgstr "Виберіть програму"
 
-#: src/plugins/launcher/launcher-open-url-action.c:101
+#: src/plugins/launcher/launcher-open-file-action.c:68
+msgid "No file selected"
+msgstr "Не вибрано файлів"
+
+#: src/plugins/launcher/launcher-open-file-action.c:156
+#| msgid "Select icon"
+msgid "Select File"
+msgstr "Виберіть файл"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
 msgstr "Адреса"
 
@@ -385,7 +404,6 @@ msgid "Launcher"
 msgstr "Засіб запуску"
 
 #: src/plugins/network/network-action-factory.c:41
-#| msgid "HTTP Request Payload"
 msgid "HTTP Request"
 msgstr "HTTP-запит"
 
@@ -396,10 +414,6 @@ msgstr "Надіслати запити GET і POST до вебсервера"
 #: src/plugins/network/network-http-action-prefs.c:146
 msgid "Select payload file"
 msgstr "Виберіть файл вмісту"
-
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Відкрити"
 
 #: src/plugins/network/network-http-action-prefs.ui:14
 msgid "URI"
@@ -556,13 +570,13 @@ msgstr "Відтворення / Пауза"
 msgid "Playback Action"
 msgstr "Дія з відтворення"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
-msgid "Select audio file"
-msgstr "Виберіть звуковий файл"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:96
 msgid "Audio Files"
 msgstr "звукові файли"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Select audio file"
+msgstr "Виберіть звуковий файл"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
@@ -591,6 +605,15 @@ msgstr "Гучність"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Музична дека"
+
+#~ msgid "Georges Basile Stavracas Neto"
+#~ msgstr "Georges Basile Stavracas Neto"
+
+#~ msgid "_Open"
+#~ msgstr "_Відкрити"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Скасувати"
 
 #~ msgid "Profiles"
 #~ msgstr "Профілі"
