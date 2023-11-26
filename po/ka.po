@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-24 15:58+0000\n"
-"PO-Revision-Date: 2023-11-26 09:21+0100\n"
+"POT-Creation-Date: 2023-11-26 15:32+0000\n"
+"PO-Revision-Date: 2023-11-26 18:00+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "Language: ka\n"
@@ -63,6 +63,18 @@ msgid ""
 msgstr ""
 "აკონტროლეთ OBS Studio-ი Stream Deck-ის გამოყენებით (მოითხოვს obs-websocket "
 "გაფართოებას)"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "ქსელის მოთხოვნების გაგზავნა"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Keep track of your gaming score"
+msgstr "იცოდეთ თქვენი ქულები"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+msgid "Open files and launch applications"
+msgstr "ფაილების გახსნა და აპლიკაციების გაშვება"
 
 #: src/bs-application.c:52
 msgid "Enable debug messages"
@@ -152,21 +164,18 @@ msgstr "Feaneron Hangar Original"
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:389
+msgid "All supported formats"
+msgstr "ყველა მხარდაჭერილი ფორმატი"
+
+#: src/bs-stream-deck-button-editor.c:398
 msgid "Select icon"
 msgstr "არჩიეთ ხატულა"
 
-#: src/bs-stream-deck-button-editor.c:382
-msgid "_Open"
-msgstr "_გახსნა"
-
-#: src/bs-stream-deck-button-editor.c:383
-msgid "_Cancel"
-msgstr "_შეწყვეტა"
-
-#: src/bs-stream-deck-button-editor.c:387
-msgid "All supported formats"
-msgstr "ყველა მხარდაჭერილი ფორმატი"
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "გახსნა"
 
 #: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
@@ -184,15 +193,15 @@ msgstr "სახელი"
 msgid "Background Color"
 msgstr "ფონის ფერი"
 
-#: src/bs-stream-deck-button-editor.ui:259
+#: src/bs-stream-deck-button-editor.ui:264
 msgid "Select action"
 msgstr "აირჩიეთ ქმედება"
 
-#: src/bs-stream-deck-button-editor.ui:280
+#: src/bs-stream-deck-button-editor.ui:285
 msgid "Remove Action"
 msgstr "ქმედების წაშლა"
 
-#: src/bs-stream-deck-button-editor.ui:303
+#: src/bs-stream-deck-button-editor.ui:308
 #: src/plugins/default/default-multi-action-editor.ui:67
 msgid "Actions"
 msgstr "ქმედებები"
@@ -397,10 +406,6 @@ msgstr "ვებსერვერისთვის GET და POST მოთ�
 msgid "Select payload file"
 msgstr "აირჩიეთ სასარგებლო შემცველობის ფაილი"
 
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "გახსნა"
-
 #: src/plugins/network/network-http-action-prefs.ui:14
 msgid "URI"
 msgstr "URI"
@@ -591,6 +596,12 @@ msgstr "ხმის სიმაღლე"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Soundboard"
+
+#~ msgid "_Open"
+#~ msgstr "_გახსნა"
+
+#~ msgid "_Cancel"
+#~ msgstr "_შეწყვეტა"
 
 #~ msgid "Georges Basile Stavracas Neto"
 #~ msgstr "Georges Basile Stavracas Neto"
