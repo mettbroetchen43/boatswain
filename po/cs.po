@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-24 20:42+0000\n"
-"PO-Revision-Date: 2023-11-24 21:46+0100\n"
+"POT-Creation-Date: 2023-11-26 15:32+0000\n"
+"PO-Revision-Date: 2023-11-26 23:36+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -61,6 +61,18 @@ msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "Ovládat OBS Studio pomocí Stream Deck (vyžaduje rozšíření obs-websocket)"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "Odesílat síťové požadavky"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Keep track of your gaming score"
+msgstr "Sledovat své herní skóre"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+msgid "Open files and launch applications"
+msgstr "Otevírat soubory a spouštět aplikace"
 
 #: src/bs-application.c:52
 msgid "Enable debug messages"
@@ -151,21 +163,18 @@ msgstr "Feaneron Hangar Original"
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:389
+msgid "All supported formats"
+msgstr "Všechny podporované formáty"
+
+#: src/bs-stream-deck-button-editor.c:398
 msgid "Select icon"
 msgstr "Vybrat ikonu"
 
-#: src/bs-stream-deck-button-editor.c:382
-msgid "_Open"
-msgstr "_Otevřít"
-
-#: src/bs-stream-deck-button-editor.c:383
-msgid "_Cancel"
-msgstr "_Zrušit"
-
-#: src/bs-stream-deck-button-editor.c:387
-msgid "All supported formats"
-msgstr "Všechny podporované formáty"
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Otevřít"
 
 #: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
@@ -183,15 +192,15 @@ msgstr "Název"
 msgid "Background Color"
 msgstr "Barva pozadí"
 
-#: src/bs-stream-deck-button-editor.ui:259
+#: src/bs-stream-deck-button-editor.ui:264
 msgid "Select action"
 msgstr "Vybrat akci"
 
-#: src/bs-stream-deck-button-editor.ui:280
+#: src/bs-stream-deck-button-editor.ui:285
 msgid "Remove Action"
 msgstr "Odebrat akci"
 
-#: src/bs-stream-deck-button-editor.ui:303
+#: src/bs-stream-deck-button-editor.ui:308
 #: src/plugins/default/default-multi-action-editor.ui:67
 msgid "Actions"
 msgstr "Akce"
@@ -396,10 +405,6 @@ msgstr "Posílat požadavky GET a POST na webový server"
 msgid "Select payload file"
 msgstr "Vybrat soubor s datovým obsahem"
 
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Otevřít"
-
 #: src/plugins/network/network-http-action-prefs.ui:14
 msgid "URI"
 msgstr "Adresa URI"
@@ -590,6 +595,12 @@ msgstr "Hlasitost"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Soundboard"
+
+#~ msgid "_Open"
+#~ msgstr "_Otevřít"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Zrušit"
 
 #~ msgid "Georges Basile Stavracas Neto"
 #~ msgstr "Georges Basile Stavracas Neto"
