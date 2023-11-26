@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-11 11:19+0000\n"
-"PO-Revision-Date: 2023-11-21 15:02+0700\n"
+"POT-Creation-Date: 2023-11-26 15:32+0000\n"
+"PO-Revision-Date: 2023-11-26 22:52+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -64,6 +64,18 @@ msgid ""
 msgstr ""
 "Kontrol OBS Studio menggunakan Stream Deck (memerlukan ekstensi obs-"
 "websocket)"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "Kirim permintaan jaringan"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Keep track of your gaming score"
+msgstr "Pantau skor permainan Anda"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+msgid "Open files and launch applications"
+msgstr "Buka berkas dan luncurkan aplikasi"
 
 #: src/bs-application.c:52
 msgid "Enable debug messages"
@@ -152,23 +164,18 @@ msgstr "Hanggar Feaneron Asli"
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:389
+msgid "All supported formats"
+msgstr "Semua format yang didukung"
+
+#: src/bs-stream-deck-button-editor.c:398
 msgid "Select icon"
 msgstr "Pilih ikon"
 
-#: src/bs-stream-deck-button-editor.c:382
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
-msgid "_Open"
-msgstr "_Buka"
-
-#: src/bs-stream-deck-button-editor.c:383
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
-msgid "_Cancel"
-msgstr "Ba_tal"
-
-#: src/bs-stream-deck-button-editor.c:387
-msgid "All supported formats"
-msgstr "Semua format yang didukung"
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Buka"
 
 #: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
@@ -186,15 +193,15 @@ msgstr "Nama"
 msgid "Background Color"
 msgstr "Warna Latar"
 
-#: src/bs-stream-deck-button-editor.ui:259
+#: src/bs-stream-deck-button-editor.ui:264
 msgid "Select action"
 msgstr "Pilih aksi"
 
-#: src/bs-stream-deck-button-editor.ui:280
+#: src/bs-stream-deck-button-editor.ui:285
 msgid "Remove Action"
 msgstr "Hapus Aksi"
 
-#: src/bs-stream-deck-button-editor.ui:303
+#: src/bs-stream-deck-button-editor.ui:308
 #: src/plugins/default/default-multi-action-editor.ui:67
 msgid "Actions"
 msgstr "Aksi"
@@ -345,6 +352,7 @@ msgstr ""
 "membacanya."
 
 #: src/plugins/gaming/score.js:364
+#: src/plugins/launcher/launcher-open-file-action.c:209
 #: src/plugins/network/network-http-action-prefs.ui:61
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
 msgid "File"
@@ -354,11 +362,15 @@ msgstr "Berkas"
 msgid "Text File (.txt)"
 msgstr "Berkas Teks (.txt)"
 
-#: src/plugins/launcher/launcher-action-factory.c:40
+#: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
 msgstr "Luncurkan Aplikasi"
 
-#: src/plugins/launcher/launcher-action-factory.c:46
+#: src/plugins/launcher/launcher-action-factory.c:47
+msgid "Open File"
+msgstr "Buka Berkas"
+
+#: src/plugins/launcher/launcher-action-factory.c:53
 msgid "Open URL"
 msgstr "Buka URL"
 
@@ -366,7 +378,15 @@ msgstr "Buka URL"
 msgid "Choose Application"
 msgstr "Pilih aplikasi"
 
-#: src/plugins/launcher/launcher-open-url-action.c:101
+#: src/plugins/launcher/launcher-open-file-action.c:68
+msgid "No file selected"
+msgstr "Tak ada berkas yang dipilih"
+
+#: src/plugins/launcher/launcher-open-file-action.c:156
+msgid "Select File"
+msgstr "Pilih Berkas"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
 msgstr "URL"
 
@@ -385,10 +405,6 @@ msgstr "Kirim permintaan GET dan POST ke peladen web"
 #: src/plugins/network/network-http-action-prefs.c:146
 msgid "Select payload file"
 msgstr "Pilih berkas muatan"
-
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Buka"
 
 #: src/plugins/network/network-http-action-prefs.ui:14
 msgid "URI"
@@ -545,13 +561,13 @@ msgstr "Putar / Jeda"
 msgid "Playback Action"
 msgstr "Tindakan Pemutaran"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
-msgid "Select audio file"
-msgstr "Pilih berkas audio"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:96
 msgid "Audio Files"
 msgstr "Berkas Audio"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Select audio file"
+msgstr "Pilih berkas audio"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
@@ -580,6 +596,12 @@ msgstr "Volume"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Papan suara"
+
+#~ msgid "_Open"
+#~ msgstr "_Buka"
+
+#~ msgid "_Cancel"
+#~ msgstr "Ba_tal"
 
 #~ msgid "Georges Basile Stavracas Neto"
 #~ msgstr "Georges Basile Stavracas Neto"
