@@ -226,12 +226,17 @@
                                     <child>
                                       <object class="AdwActionRow" id="background_color_row">
                                         <property name="title" translatable="yes">Background Color</property>
-                                        <property name="activatable-widget">background_color_button</property>
+                                        <property name="activatable-widget">background_color_dialog_button</property>
                                         <child>
-                                          <object class="GtkColorButton" id="background_color_button">
+                                          <object class="GtkColorDialogButton" id="background_color_dialog_button">
                                             <property name="valign">center</property>
-                                            <property name="modal">True</property>
-                                            <signal name="color-set" handler="on_background_color_button_color_set_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                            <property name="dialog">
+                                              <object class="GtkColorDialog">
+                                                <property name="modal">True</property>
+                                                <property name="with-alpha">False</property>
+                                              </object>
+                                            </property>
+                                            <signal name="notify::rgba" handler="on_background_color_dialog_button_rgba_changed_cb" object="BsStreamDeckButtonEditor" swapped="no" />
                                           </object>
                                         </child>
                                       </object>

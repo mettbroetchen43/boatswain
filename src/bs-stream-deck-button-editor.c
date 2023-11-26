@@ -40,7 +40,7 @@ struct _BsStreamDeckButtonEditor
 
   AdwPreferencesGroup *action_preferences_group;
   GtkListBox *actions_listbox;
-  GtkColorChooser *background_color_button;
+  GtkColorDialogButton *background_color_dialog_button;
   GtkStringList *builtin_icons_stringlist;
   AdwPreferencesPage *button_preferences_page;
   GtkMenuButton *custom_icon_menubutton;
@@ -151,13 +151,13 @@ setup_button (BsStreamDeckButtonEditor *self)
       if (g_strcmp0 (gtk_editable_get_text (self->custom_icon_text_row), icon_text) != 0)
         gtk_editable_set_text (self->custom_icon_text_row, icon_text ?: "");
 
-      gtk_color_chooser_set_rgba (self->background_color_button,
-                                  bs_icon_get_background_color (custom_icon));
+      gtk_color_dialog_button_set_rgba (self->background_color_dialog_button,
+                                        bs_icon_get_background_color (custom_icon));
     }
   else
     {
-      gtk_color_chooser_set_rgba (self->background_color_button,
-                                  &(GdkRGBA) { 0.0, 0.0, 0.0, 0.0 });
+      gtk_color_dialog_button_set_rgba (self->background_color_dialog_button,
+                                        &(GdkRGBA) { 0.0, 0.0, 0.0, 0.0 });
       gtk_editable_set_text (self->custom_icon_text_row, "");
     }
 
@@ -299,20 +299,21 @@ on_action_changed_cb (BsStreamDeckButton       *stream_deck_button,
 }
 
 static void
-on_background_color_button_color_set_cb (GtkColorButton           *color_button,
-                                         BsStreamDeckButtonEditor *self)
+on_background_color_dialog_button_rgba_changed_cb (GtkColorDialogButton     *button,
+                                                   GParamSpec               *pspec,
+                                                   BsStreamDeckButtonEditor *self)
 {
   g_autoptr (BsIcon) icon = NULL;
-  GdkRGBA background_color;
+  const GdkRGBA *background_color;
 
   icon = bs_stream_deck_button_get_custom_icon (self->button);
   if (!icon)
     icon = bs_icon_new_empty ();
   else
     g_object_ref (icon);
-  gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (color_button), &background_color);
+  background_color = gtk_color_dialog_button_get_rgba (button);
 
-  bs_icon_set_background_color (icon, &background_color);
+  bs_icon_set_background_color (icon, background_color);
   bs_stream_deck_button_set_custom_icon (self->button, icon);
 }
 
@@ -463,7 +464,8 @@ on_remove_custom_icon_button_clicked_cb (GtkButton                *button,
                                          BsStreamDeckButtonEditor *self)
 {
   bs_stream_deck_button_set_custom_icon (self->button, NULL);
-  gtk_color_chooser_set_rgba (self->background_color_button, &(GdkRGBA) { 0.0, 0.0, 0.0, 0.0 });
+  gtk_color_dialog_button_set_rgba (self->background_color_dialog_button,
+                                    &(GdkRGBA) { 0.0, 0.0, 0.0, 0.0 });
 }
 
 static void
@@ -557,7 +559,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, action_preferences_group);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, actions_listbox);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_button);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_dialog_button);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, builtin_icons_stringlist);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, button_preferences_page);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_menubutton);
@@ -568,7 +570,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, remove_custom_icon_button);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, stack);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_background_color_button_color_set_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_background_color_dialog_button_rgba_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_text_row_text_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_icons_gridview_activate_cb);
