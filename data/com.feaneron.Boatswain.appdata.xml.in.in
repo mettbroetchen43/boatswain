@@ -30,11 +30,14 @@
   <launchable type="desktop-id">com.feaneron.Boatswain.desktop</launchable>
   
   <screenshots>
-    <screenshot type="default" width="1322" height="842">
-      <image>https://gitlab.gnome.org/World/boatswain/raw/main/data/stream-deck-original.png</image>
+    <screenshot type="default" width="2644" height="1692">
+      <image>https://gitlab.gnome.org/World/boatswain/raw/main/data/screenshots/stream-deck-mini.png</image>
     </screenshot>
-    <screenshot type="default" width="1322" height="842">
-      <image>https://gitlab.gnome.org/World/boatswain/raw/main/data/stream-deck-mini.png</image>
+    <screenshot type="default" width="646" height="1276">
+      <image>https://gitlab.gnome.org/World/boatswain/raw/main/data/screenshots/boatswain-actions.png</image>
+    </screenshot>
+    <screenshot type="default" width="2644" height="1684">
+      <image>https://gitlab.gnome.org/World/boatswain/raw/main/data/screenshots/stream-deck-original.png</image>
     </screenshot>
   </screenshots>
 
