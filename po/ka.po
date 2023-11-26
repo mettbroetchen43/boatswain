@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-10-15 22:57+0000\n"
-"PO-Revision-Date: 2023-10-16 05:08+0200\n"
+"POT-Creation-Date: 2023-11-24 15:58+0000\n"
+"PO-Revision-Date: 2023-11-26 09:21+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -63,11 +63,6 @@ msgid ""
 msgstr ""
 "აკონტროლეთ OBS Studio-ი Stream Deck-ის გამოყენებით (მოითხოვს obs-websocket "
 "გაფართოებას)"
-
-#. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
-msgid "Georges Basile Stavracas Neto"
-msgstr "Georges Basile Stavracas Neto"
 
 #: src/bs-application.c:52
 msgid "Enable debug messages"
@@ -162,12 +157,10 @@ msgid "Select icon"
 msgstr "არჩიეთ ხატულა"
 
 #: src/bs-stream-deck-button-editor.c:382
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
 msgid "_Open"
 msgstr "_გახსნა"
 
 #: src/bs-stream-deck-button-editor.c:383
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
 msgid "_Cancel"
 msgstr "_შეწყვეტა"
 
@@ -313,11 +306,11 @@ msgstr "მორგება"
 msgid "Profile"
 msgstr "პროფილი"
 
-#: src/plugins/gaming/gaming.js:43
+#: src/plugins/gaming/gaming.js:37
 msgid "Score"
 msgstr "ქულები"
 
-#: src/plugins/gaming/gaming.js:44
+#: src/plugins/gaming/gaming.js:38
 msgid "Keep track of your score. Reset with a long press."
 msgstr "იცოდეთ თქვენი ქულები. ჩამოყრა დიდხანს დაწოლით."
 
@@ -329,41 +322,46 @@ msgstr "თამაშები"
 msgid "score.txt"
 msgstr "score.txt"
 
-#: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
-msgid "Text File (.txt)"
-msgstr "ტექსტური ფაილი (*.txt)"
-
 #. Restore score
-#: src/plugins/gaming/score.js:346
+#: src/plugins/gaming/score.js:322
 msgid "Restore Score"
 msgstr "ქულების აღდგენა"
 
-#: src/plugins/gaming/score.js:365
+#: src/plugins/gaming/score.js:341
 msgid "Text Color"
 msgstr "ტექსტის ფერი"
 
-#: src/plugins/gaming/score.js:378
+#: src/plugins/gaming/score.js:354
 msgid "Save to File"
 msgstr "ფაილში შენახვა"
 
-#: src/plugins/gaming/score.js:379
+#: src/plugins/gaming/score.js:355
 msgid ""
 "Save score to a text file. Other apps such as OBS Studio may read from it."
 msgstr ""
 "ქულების ტექსტურ ფაილში შენახვა. ისეთი აპებს, როგორიცაა, მაგალითად OBS "
 "Studio, მისი წაკითხვა შეუძლიათ."
 
-#: src/plugins/gaming/score.js:388
+#: src/plugins/gaming/score.js:364
+#: src/plugins/launcher/launcher-open-file-action.c:209
 #: src/plugins/network/network-http-action-prefs.ui:61
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
 msgid "File"
 msgstr "ფაილი"
 
-#: src/plugins/launcher/launcher-action-factory.c:40
+#: src/plugins/gaming/score.js:383
+msgid "Text File (.txt)"
+msgstr "ტექსტური ფაილი (*.txt)"
+
+#: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
 msgstr "აპლიკაციის გაშვება"
 
-#: src/plugins/launcher/launcher-action-factory.c:46
+#: src/plugins/launcher/launcher-action-factory.c:47
+msgid "Open File"
+msgstr "ფაილის გახსნა"
+
+#: src/plugins/launcher/launcher-action-factory.c:53
 msgid "Open URL"
 msgstr "URL-ის გახსნა"
 
@@ -371,7 +369,15 @@ msgstr "URL-ის გახსნა"
 msgid "Choose Application"
 msgstr "აირჩიეთ აპლიკაცია"
 
-#: src/plugins/launcher/launcher-open-url-action.c:101
+#: src/plugins/launcher/launcher-open-file-action.c:68
+msgid "No file selected"
+msgstr "ფაილი არჩეული არაა"
+
+#: src/plugins/launcher/launcher-open-file-action.c:156
+msgid "Select File"
+msgstr "აირჩიეთ ფაილი"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
 msgstr "ბმული"
 
@@ -550,13 +556,13 @@ msgstr "დაკვრა/პაუზა"
 msgid "Playback Action"
 msgstr "ხმის დაკვრის ქმედება"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
-msgid "Select audio file"
-msgstr "აირჩიეთ აუდიო ფაილი"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:96
 msgid "Audio Files"
 msgstr "აუდიო ფაილები"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Select audio file"
+msgstr "აირჩიეთ აუდიო ფაილი"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
@@ -585,6 +591,9 @@ msgstr "ხმის სიმაღლე"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Soundboard"
+
+#~ msgid "Georges Basile Stavracas Neto"
+#~ msgstr "Georges Basile Stavracas Neto"
 
 #~ msgid "Profiles"
 #~ msgstr "პროფილები"
