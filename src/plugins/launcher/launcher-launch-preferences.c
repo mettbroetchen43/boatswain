@@ -70,7 +70,11 @@ on_app_chooser_response (GtkDialog                 *dialog,
 {
   if (response_id == GTK_RESPONSE_OK)
     {
-      GAppInfo *app_info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (dialog));
+      g_autoptr (GAppInfo) app_info = NULL;
+
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+      app_info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (dialog));
+G_GNUC_END_IGNORE_DEPRECATIONS
 
       launcher_launch_action_set_app (self->launch_action, app_info);
 
