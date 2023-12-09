@@ -1,0 +1,594 @@
+# Hebrew translation for boatswain.
+# Copyright (C) 2023 boatswain's COPYRIGHT HOLDER
+# This file is distributed under the same license as the boatswain package.
+# Yaron Shahrabani <sh.yaron@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: boatswain main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
+"POT-Creation-Date: 2023-11-30 18:14+0000\n"
+"PO-Revision-Date: 2023-12-09 22:46+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: Hebrew <he@li.org>\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#: data/com.feaneron.Boatswain.desktop.in.in:3
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+msgid "Boatswain"
+msgstr "Boatswain"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/com.feaneron.Boatswain.desktop.in.in:11
+msgid "stream deck;streaming;deck;elgato;"
+msgstr "stream deck;הזרמה;תזרים;שידור;deck;elgato;דק;סטרים דק;אלגאטו;אלגטו;"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+msgid "Control your Elgato Stream Decks"
+msgstr "שליטה ב־Stream Decks (לוחות בקרת שידור) של Elgato"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
+msgid "Boatswain allows you to control Elgato Stream Deck devices."
+msgstr ""
+"Boatswain מאפשר לך לשלוט בהתקני Stream Decks (לוחות בקרת שידור) של Elgato."
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+msgid "With Boatswain you will be able to:"
+msgstr "עם Boatswain אפשר:"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+msgid "Organize your actions in pages and profiles"
+msgstr "לסדר את הפעולות שלך בעמודים ופרופילים"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+msgid "Set custom icons to actions"
+msgstr "הגדרת סמלים מותאמים אישית לפעולות"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+msgid "Control your music player"
+msgstr "שליטה בנגן המוזיקה שלך"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
+msgid "Play sound effects during your streams"
+msgstr "השמעת אפקטים קוליים במהלך השידורים שלך"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
+msgid ""
+"Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
+msgstr "שליטה ב־OBS Studio באמצעות Stream Deck (דורש את הרחבת obs-websocket)"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "שליחת בקשות רשת"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Keep track of your gaming score"
+msgstr "מעקב אחר ניקוד המשחקים שלך"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+msgid "Open files and launch applications"
+msgstr "פתיחת קבצים ושיגור יישומים"
+
+#: src/bs-application.c:52
+msgid "Enable debug messages"
+msgstr "הפעלת הודעות ניפוי שגיאות"
+
+#: src/bs-application.c:115
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "מחובר להתקן"
+msgstr[1] "מחובר ל־%d התקנים"
+
+#: src/bs-application.c:167
+msgid ""
+"Boatswain needs to run in background to detect and execute Stream Deck "
+"actions."
+msgstr ""
+"יש להריץ את Boatswain ברקע כדי לזהות ולהפעיל את פעולות ה־Stream Deck."
+
+#: src/bs-profile.c:184
+msgid "Unnamed profile"
+msgstr "פרופיל ללא שם"
+
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
+msgid "Rename"
+msgstr "שינוי שם"
+
+#: src/bs-profile-row.ui:14
+msgid "Move up"
+msgstr "העלאה למעלה"
+
+#: src/bs-profile-row.ui:18
+msgid "Move down"
+msgstr "הורדה למטה"
+
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "מחיקה"
+
+#: src/bs-stream-deck.c:278
+msgid "Default"
+msgstr "ברירת מחדל"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
+msgid "Stream Deck Mini"
+msgstr "Stream Deck Mini"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/plugins/default/default-switch-profile-action.c:283
+#: src/plugins/default/default.plugin.desktop.in:3
+msgid "Stream Deck"
+msgstr "Stream Deck"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
+msgid "Stream Deck XL"
+msgstr "Stream Deck XL"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1004
+msgid "Stream Deck MK.2"
+msgstr "Stream Deck MK.2"
+
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1030
+msgid "Stream Deck Pedal"
+msgstr "Stream Deck Pedal"
+
+#: src/bs-stream-deck.c:1099
+msgid "Feaneron Hangar Original"
+msgstr "Feaneron Hangar Original"
+
+#: src/bs-stream-deck.c:1122
+msgid "Feaneron Hangar XL"
+msgstr "Feaneron Hangar XL"
+
+#: src/bs-stream-deck-button-editor.c:389
+msgid "All supported formats"
+msgstr "כל התסדירים הנתמכים"
+
+#: src/bs-stream-deck-button-editor.c:398
+msgid "Select icon"
+msgstr "בחירת סמל"
+
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "פתיחה"
+
+#: src/bs-stream-deck-button-editor.ui:27
+msgid "Select a button"
+msgstr "בחירת כפתור"
+
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "מאפייני כפתור"
+
+#: src/bs-stream-deck-button-editor.ui:221
+msgid "Name"
+msgstr "שם"
+
+#: src/bs-stream-deck-button-editor.ui:228
+msgid "Background Color"
+msgstr "צבע רקע"
+
+#: src/bs-stream-deck-button-editor.ui:264
+msgid "Select action"
+msgstr "בחירת פעולה"
+
+#: src/bs-stream-deck-button-editor.ui:285
+msgid "Remove Action"
+msgstr "הסרת פעולה"
+
+#: src/bs-stream-deck-button-editor.ui:308
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "פעולות"
+
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "פרופיל חדש…"
+
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:54
+msgid "Brightness"
+msgstr "בהירות"
+
+#: src/bs-window.ui:174
+msgid "Firmware"
+msgstr "קושחה"
+
+#: src/bs-window.ui:232
+msgid "No Stream Deck Found"
+msgstr "לא נמצא Stream Deck"
+
+#: src/bs-window.ui:233
+msgid "Plug in a Stream Deck device to use it."
+msgstr "יש לחבר התקן Stream Deck כדי להשתמש בו."
+
+#: src/bs-window.ui:256
+msgid "_Keyboard Shortcuts"
+msgstr "_קיצורי מקלדת"
+
+#: src/bs-window.ui:260
+msgid "_About Boatswain"
+msgstr "_gk Boatswain"
+
+#: src/bs-window.ui:264
+msgid "_Quit"
+msgstr "י_ציאה"
+
+#: src/bs-window.c:272
+msgid "Repository"
+msgstr "מאגר"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "כללי"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "הצגת קיצורי מקלדת"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "יציאה"
+
+#: src/plugins/default/default-action-factory.c:42
+msgid "Folder"
+msgstr "תיקייה"
+
+#: src/plugins/default/default-action-factory.c:48
+msgid "Switch Profile"
+msgstr "החלפת פרופיל"
+
+#: src/plugins/default/default-action-factory.c:60
+msgid "Multiple Actions"
+msgstr "מגוון פעולות"
+
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
+msgid "Constant"
+msgstr "קבוע"
+
+#: src/plugins/default/default-brightness-action.c:142
+msgid "Increase"
+msgstr "הגדלה"
+
+#: src/plugins/default/default-brightness-action.c:143
+msgid "Decrease"
+msgstr "הקטנה"
+
+#: src/plugins/default/default-brightness-action.c:146
+msgid "Mode"
+msgstr "מצב"
+
+#: src/plugins/default/default-brightness-action.c:153
+msgid "Value"
+msgstr "ערך"
+
+#: src/plugins/default/default-multi-action-editor.c:310
+#: src/plugins/default/default-multi-action-row.c:143
+msgid "Delay"
+msgstr "השהיה"
+
+#: src/plugins/default/default-multi-action-editor.ui:31
+msgid "Add action"
+msgstr "הוספת פעולה"
+
+#: src/plugins/default/default-multi-action-editor.ui:49
+msgid "Add Action"
+msgstr "הוספת פעולה"
+
+#: src/plugins/default/default-multi-action-editor.ui:73
+msgid "Others"
+msgstr "אחרים"
+
+#: src/plugins/default/default-multi-action-editor.ui:83
+msgid "Settings"
+msgstr "הגדרות"
+
+#: src/plugins/default/default-switch-profile-action.c:306
+msgid "Profile"
+msgstr "פרופיל"
+
+#: src/plugins/gaming/gaming.js:37
+msgid "Score"
+msgstr "ניקוד"
+
+#: src/plugins/gaming/gaming.js:38
+msgid "Keep track of your score. Reset with a long press."
+msgstr "מעקב אחר הניקוד שלך. אפשר לאפס בלחיצה ארוכה."
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "משחק"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "score.txt"
+
+#. Restore score
+#: src/plugins/gaming/score.js:322
+msgid "Restore Score"
+msgstr "שחזור ניקוד"
+
+#: src/plugins/gaming/score.js:341
+msgid "Text Color"
+msgstr "צבע טקסט"
+
+#: src/plugins/gaming/score.js:354
+msgid "Save to File"
+msgstr "שמירה לקובץ"
+
+#: src/plugins/gaming/score.js:355
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr ""
+"שמירת ניקוד לקובץ טקסט. יישומים אחרים כגון OBS Studio יכולים לקרוא ממנו."
+
+#: src/plugins/gaming/score.js:364
+#: src/plugins/launcher/launcher-open-file-action.c:209
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "קובץ"
+
+#: src/plugins/gaming/score.js:383
+msgid "Text File (.txt)"
+msgstr "קובץ טקסט (‎.txt)"
+
+#: src/plugins/launcher/launcher-action-factory.c:41
+msgid "Launch Application"
+msgstr "הפעלת יישום"
+
+#: src/plugins/launcher/launcher-action-factory.c:47
+msgid "Open File"
+msgstr "פתיחת קובץ"
+
+#: src/plugins/launcher/launcher-action-factory.c:53
+msgid "Open URL"
+msgstr "פתיחת כתובת"
+
+#: src/plugins/launcher/launcher-launch-preferences.ui:8
+msgid "Choose Application"
+msgstr "נא לבחור יישום"
+
+#: src/plugins/launcher/launcher-open-file-action.c:68
+msgid "No file selected"
+msgstr "לא נבחר קובץ"
+
+#: src/plugins/launcher/launcher-open-file-action.c:156
+msgid "Select File"
+msgstr "בחירת קובץ"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
+msgid "URL"
+msgstr "כתובת"
+
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "משגר"
+
+#: src/plugins/network/network-action-factory.c:41
+msgid "HTTP Request"
+msgstr "בקשת HTTP"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "שליחת בקשות GET ו־POST לשרת אינטרנט"
+
+#: src/plugins/network/network-http-action-prefs.c:146
+msgid "Select payload file"
+msgstr "בחירת קובץ מטען"
+
+#: src/plugins/network/network-http-action-prefs.ui:14
+msgid "URI"
+msgstr "כתובת מלאה"
+
+#: src/plugins/network/network-http-action-prefs.ui:22
+msgid "Method"
+msgstr "שיטה"
+
+#: src/plugins/network/network-http-action-prefs.ui:45
+msgid "Payload source"
+msgstr "מקור מטען"
+
+#: src/plugins/network/network-http-action-prefs.ui:82
+msgid "Edit payload"
+msgstr "עריכת מטען"
+
+#: src/plugins/network/network-http-action-prefs.ui:99
+msgid "HTTP Request Payload"
+msgstr "מטען בקשת HTTP"
+
+#: src/plugins/network/network.plugin.desktop.in:3
+msgid "Network"
+msgstr "רשת"
+
+#: src/plugins/obs-studio/obs-action-factory.c:46
+msgid "Switch Scene"
+msgstr "החלפת סצנה"
+
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:53
+msgid "Record"
+msgstr "הקלטה"
+
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:60
+msgid "Stream"
+msgstr "תזרים"
+
+#: src/plugins/obs-studio/obs-action-factory.c:66
+msgid "Virtual Camera"
+msgstr "מצלמה וירטואלית"
+
+#: src/plugins/obs-studio/obs-action-factory.c:72
+msgid "Toggle Mute"
+msgstr "החלפת מצב השתקה"
+
+#: src/plugins/obs-studio/obs-action-factory.c:78
+msgid "Show / Hide Source"
+msgstr "הצגת / הסתרת מקור"
+
+#: src/plugins/obs-studio/obs-connection.c:800
+msgid "Invalid password"
+msgstr "סיסמה שגויה"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:8
+msgid "Connection Settings"
+msgstr "הגדרות חיבור"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:12
+msgid "Host"
+msgstr "מארח"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:20
+msgid "Port"
+msgstr "פתחה"
+
+#: src/plugins/obs-studio/obs-connection-settings.ui:45
+msgid "Password"
+msgstr "סיסמה"
+
+#: src/plugins/obs-studio/obs-switch-scene-action.c:283
+msgid "Scene"
+msgstr "סצנה"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:124
+msgid "Toggle mute"
+msgstr "החלפת מצב השתקה"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:125
+msgid "Mute"
+msgstr "השתקה"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:126
+msgid "Unmute"
+msgstr "ביטול השתקה"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:130
+msgid "Toggle visibility"
+msgstr "חשיפה/הסתרה"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:131
+msgid "Hide"
+msgstr "הסתרה"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:132
+msgid "Show"
+msgstr "הצגה"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:479
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
+msgid "Behavior"
+msgstr "התנהגות"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:490
+msgid "Audio Source"
+msgstr "מקור שמע"
+
+#: src/plugins/obs-studio/obs-toggle-source-action.c:492
+msgid "Source"
+msgstr "מקור"
+
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:42
+msgid "Music Player"
+msgstr "נגן מוזיקה"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:43
+msgid "Control the active music player"
+msgstr "שליטה בנגן המוזיקה הפעיל"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:48
+msgid "Play Audio"
+msgstr "השמעה"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
+msgid "Next"
+msgstr "הבא"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
+msgid "Pause"
+msgstr "השהיה"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
+msgid "Play"
+msgstr "נגינה"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
+msgid "Previous"
+msgstr "הקודם"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
+msgid "Stop"
+msgstr "עצירה"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
+msgid "Play / Pause"
+msgstr "נגינה / השהיה"
+
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
+msgid "Playback Action"
+msgstr "פעולת נגינה"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:96
+msgid "Audio Files"
+msgstr "קובצי שמע"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Select audio file"
+msgstr "בחירת קובץ שמע"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
+msgid "Play / Stop"
+msgstr "נגינה / עצירה"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
+msgid "Play / Overlap"
+msgstr "נגינה / חפיפה"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
+msgid "Play / Restart"
+msgstr "נגינה / הפעלה מחדש"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:30
+msgid "Loop / Stop"
+msgstr "לולאה / עצירה"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:31
+msgid "Press & Hold"
+msgstr "לחיצה והחזקה"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
+msgid "Volume"
+msgstr "עוצמת שמע"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr "לוח שמע"
