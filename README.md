@@ -11,6 +11,12 @@ Control Elgato Stream Deck devices.
 
 ![Boatswain Screenshot](https://gitlab.gnome.org/World/boatswain/-/raw/main/data/stream-deck-original.png)
 
+## Contributing
+
+Contributions of all kinds are very welcome. Feature requests and support
+questions must be shared on the [#boatswain:gnome.org](https://matrix.to/#/#boatswain:gnome.org)
+channel.
+
 ## Code of conduct
 
 Boatswain follows the GNOME project [Code of Conduct](./code-of-conduct.md). All
