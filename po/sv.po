@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-10-15 22:57+0000\n"
-"PO-Revision-Date: 2023-10-30 11:17+0100\n"
+"POT-Creation-Date: 2023-11-26 15:32+0000\n"
+"PO-Revision-Date: 2023-11-26 21:39+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -62,10 +62,17 @@ msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr "Styra OBS Studio med Stream Deck (kräver tillägget obs-websocket)"
 
-#. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
-msgid "Georges Basile Stavracas Neto"
-msgstr "Georges Basile Stavracas Neto"
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "Skicka nätverksbegäran"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Keep track of your gaming score"
+msgstr "Håll koll på din spelpoäng"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+msgid "Open files and launch applications"
+msgstr "Öppna filer och starta program"
 
 #: src/bs-application.c:52
 msgid "Enable debug messages"
@@ -155,23 +162,18 @@ msgstr "Feaneron Hangar Original"
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:389
+msgid "All supported formats"
+msgstr "Alla format som stöds"
+
+#: src/bs-stream-deck-button-editor.c:398
 msgid "Select icon"
 msgstr "Välj ikon"
 
-#: src/bs-stream-deck-button-editor.c:382
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
-msgid "_Open"
-msgstr "Ö_ppna"
-
-#: src/bs-stream-deck-button-editor.c:383
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
-msgid "_Cancel"
-msgstr "A_vbryt"
-
-#: src/bs-stream-deck-button-editor.c:387
-msgid "All supported formats"
-msgstr "Alla format som stöds"
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Öppna"
 
 #: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
@@ -189,15 +191,15 @@ msgstr "Namn"
 msgid "Background Color"
 msgstr "Bakgrundsfärg"
 
-#: src/bs-stream-deck-button-editor.ui:259
+#: src/bs-stream-deck-button-editor.ui:264
 msgid "Select action"
 msgstr "Välj åtgärd"
 
-#: src/bs-stream-deck-button-editor.ui:280
+#: src/bs-stream-deck-button-editor.ui:285
 msgid "Remove Action"
 msgstr "Ta bort åtgärd"
 
-#: src/bs-stream-deck-button-editor.ui:303
+#: src/bs-stream-deck-button-editor.ui:308
 #: src/plugins/default/default-multi-action-editor.ui:67
 msgid "Actions"
 msgstr "Åtgärder"
@@ -311,11 +313,11 @@ msgstr "Inställningar"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/plugins/gaming/gaming.js:43
+#: src/plugins/gaming/gaming.js:37
 msgid "Score"
 msgstr "Poäng"
 
-#: src/plugins/gaming/gaming.js:44
+#: src/plugins/gaming/gaming.js:38
 msgid "Keep track of your score. Reset with a long press."
 msgstr "Håll koll på din poäng. Återställ med ett lång tryck."
 
@@ -327,41 +329,46 @@ msgstr "Spelande"
 msgid "score.txt"
 msgstr "poäng.txt"
 
-#: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
-msgid "Text File (.txt)"
-msgstr "Textfil (.txt)"
-
 #. Restore score
-#: src/plugins/gaming/score.js:346
+#: src/plugins/gaming/score.js:322
 msgid "Restore Score"
 msgstr "Återställ poäng"
 
-#: src/plugins/gaming/score.js:365
+#: src/plugins/gaming/score.js:341
 msgid "Text Color"
 msgstr "Textfärg"
 
-#: src/plugins/gaming/score.js:378
+#: src/plugins/gaming/score.js:354
 msgid "Save to File"
 msgstr "Spara till fil"
 
-#: src/plugins/gaming/score.js:379
+#: src/plugins/gaming/score.js:355
 msgid ""
 "Save score to a text file. Other apps such as OBS Studio may read from it."
 msgstr ""
-"Spara poäng till en textfil. Andra program som OBS Studio har möjlighet "
-"att läsa från den."
+"Spara poäng till en textfil. Andra program som OBS Studio har möjlighet att "
+"läsa från den."
 
-#: src/plugins/gaming/score.js:388
+#: src/plugins/gaming/score.js:364
+#: src/plugins/launcher/launcher-open-file-action.c:209
 #: src/plugins/network/network-http-action-prefs.ui:61
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
 msgid "File"
 msgstr "Fil"
 
-#: src/plugins/launcher/launcher-action-factory.c:40
+#: src/plugins/gaming/score.js:383
+msgid "Text File (.txt)"
+msgstr "Textfil (.txt)"
+
+#: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
 msgstr "Starta program"
 
-#: src/plugins/launcher/launcher-action-factory.c:46
+#: src/plugins/launcher/launcher-action-factory.c:47
+msgid "Open File"
+msgstr "Öppna fil"
+
+#: src/plugins/launcher/launcher-action-factory.c:53
 msgid "Open URL"
 msgstr "Öppna URL"
 
@@ -369,7 +376,15 @@ msgstr "Öppna URL"
 msgid "Choose Application"
 msgstr "Välj program"
 
-#: src/plugins/launcher/launcher-open-url-action.c:101
+#: src/plugins/launcher/launcher-open-file-action.c:68
+msgid "No file selected"
+msgstr "Ingen fil är vald"
+
+#: src/plugins/launcher/launcher-open-file-action.c:156
+msgid "Select File"
+msgstr "Välj fil"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
 msgstr "URL"
 
@@ -388,10 +403,6 @@ msgstr "Skicka GET- och POST-begäran till en webbserver"
 #: src/plugins/network/network-http-action-prefs.c:146
 msgid "Select payload file"
 msgstr "Välj nyttolastfil"
-
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Öppna"
 
 #: src/plugins/network/network-http-action-prefs.ui:14
 msgid "URI"
@@ -548,13 +559,13 @@ msgstr "Spela / Pausa"
 msgid "Playback Action"
 msgstr "Uppspelningsåtgärd"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
-msgid "Select audio file"
-msgstr "Välj ljudfil"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:96
 msgid "Audio Files"
 msgstr "Ljudfiler"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Select audio file"
+msgstr "Välj ljudfil"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
@@ -583,6 +594,15 @@ msgstr "Volym"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Mixerbord"
+
+#~ msgid "_Open"
+#~ msgstr "Ö_ppna"
+
+#~ msgid "_Cancel"
+#~ msgstr "A_vbryt"
+
+#~ msgid "Georges Basile Stavracas Neto"
+#~ msgstr "Georges Basile Stavracas Neto"
 
 #~ msgid "Profiles"
 #~ msgstr "Profiler"
