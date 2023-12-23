@@ -21,7 +21,7 @@
 #include "bs-action-factory.h"
 #include "bs-action-info.h"
 #include "bs-action-private.h"
-#include "bs-application.h"
+#include "bs-application-private.h"
 #include "bs-stream-deck.h"
 #include "bs-stream-deck-button.h"
 #include "default-multi-action-editor.h"

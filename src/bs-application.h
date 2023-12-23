@@ -28,10 +28,4 @@ G_BEGIN_DECLS
 #define BS_TYPE_APPLICATION (bs_application_get_type())
 G_DECLARE_FINAL_TYPE (BsApplication, bs_application, BS, APPLICATION, AdwApplication)
 
-BsApplication * bs_application_new (void);
-
-BsDeviceManager * bs_application_get_device_manager (BsApplication *self);
-
-PeasExtensionSet * bs_application_get_action_factory_set (BsApplication *self);
-
 G_END_DECLS

@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "bs-application.h"
+#include "bs-application-private.h"
 #include "bs-device-manager.h"
 #include "bs-icon.h"
 #include "bs-profile.h"

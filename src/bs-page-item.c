@@ -20,7 +20,7 @@
 
 #include "bs-action-private.h"
 #include "bs-action-factory.h"
-#include "bs-application.h"
+#include "bs-application-private.h"
 #include "bs-enum-types.h"
 #include "bs-empty-action.h"
 #include "bs-icon.h"

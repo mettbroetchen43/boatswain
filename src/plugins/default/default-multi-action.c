@@ -22,7 +22,7 @@
 
 #include "bs-action-factory.h"
 #include "bs-action-private.h"
-#include "bs-application.h"
+#include "bs-application-private.h"
 #include "bs-icon.h"
 #include "default-multi-action-editor.h"
 #include "default-multi-action-private.h"

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "bs-application.h"
+#include "bs-application-private.h"
 #include "bs-config.h"
 #include "bs-device-manager.h"
 #include "bs-profile.h"
