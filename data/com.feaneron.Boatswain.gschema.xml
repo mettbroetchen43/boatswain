@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="boatswain">
 	<schema id="com.feaneron.Boatswain" path="/com/feaneron/Boatswain/">
+
+    <key name="desktop-controller-restore-token" type="s">
+      <default>''</default>
+      <summary>Restore token for the desktop controller</summary>
+      <description>Restore token for the desktop controller</description>
+    </key>
+
 	</schema>
 </schemalist>
