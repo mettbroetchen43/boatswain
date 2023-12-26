@@ -9,6 +9,7 @@ plugins_libs = []
 plugins_confs = []
 
 subdir('default')
+subdir('desktop')
 subdir('gaming')
 subdir('gjs-base')
 subdir('launcher')

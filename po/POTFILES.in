@@ -19,6 +19,10 @@ src/plugins/default/default-multi-action-editor.ui
 src/plugins/default/default-multi-action-row.c
 src/plugins/default/default-switch-profile-action.c
 src/plugins/default/default.plugin.desktop.in
+src/plugins/desktop/desktop-action-factory.c
+src/plugins/desktop/desktop-keyboard-shortcut-action.c
+src/plugins/desktop/desktop-shortcut-dialog.ui
+src/plugins/desktop/desktop.plugin.desktop.in
 src/plugins/gaming/gaming.js
 src/plugins/gaming/gaming.plugin.desktop.in
 src/plugins/gaming/score.js

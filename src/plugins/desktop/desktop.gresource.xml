@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/feaneron/Boatswain/plugins/desktop">
+    <file alias="icons/scalable/emblems/preferences-desktop-keyboard-shortcuts-symbolic.svg">icons/preferences-desktop-keyboard-shortcuts-symbolic.svg</file>
+    <file alias="icons/scalable/emblems/preferences-desktop-remote-desktop-symbolic.svg">icons/preferences-desktop-remote-desktop-symbolic.svg</file>
+
+    <file>assets/enter-keyboard-shortcut.svg</file>
+
+    <file>desktop.plugin</file>
+    <file>desktop-shortcut-dialog.ui</file>
+  </gresource>
+</gresources>

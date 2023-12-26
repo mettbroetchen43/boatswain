@@ -1,0 +1,12 @@
+[Plugin]
+Name = Desktop
+Module = desktop
+Description = Control your desktop environment
+Icon = preferences-desktop-remote-desktop-symbolic
+Authors = Georges Basile Stavracas Neto
+Copyright = Copyleft © The Boatswain maintainers
+Builtin = true
+License = GPL
+Loader = C
+Embedded = desktop_plugin_register_types
+Depends =
