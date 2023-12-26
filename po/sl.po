@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-08-15 18:37+0000\n"
-"PO-Revision-Date: 2023-08-19 17:04+0200\n"
+"POT-Creation-Date: 2023-11-26 15:32+0000\n"
+"PO-Revision-Date: 2023-12-26 19:04+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups."
 "com>\n"
@@ -68,10 +68,17 @@ msgstr ""
 "nadzirati program OBS Studio z uporabo naprave Stream Deck (zahteva "
 "razširitev obs-websocket)"
 
-#. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
-msgid "Georges Basile Stavracas Neto"
-msgstr "Georges Basile Stavracas Neto"
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "Pošlji omrežne zahteve"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Keep track of your gaming score"
+msgstr "Spremljajte svoj igralski rezultat"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+msgid "Open files and launch applications"
+msgstr "Odprite datoteke in zaženite programe"
 
 #: src/bs-application.c:52
 msgid "Enable debug messages"
@@ -121,14 +128,14 @@ msgstr "Privzeto"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:848
+#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:874 src/bs-stream-deck.c:900
+#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -137,49 +144,44 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:926 src/bs-stream-deck.c:952
+#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:978
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1004
+#: src/bs-stream-deck.c:1030
 msgid "Stream Deck Pedal"
 msgstr "Pedal Stream Deck"
 
-#: src/bs-stream-deck.c:1073
+#: src/bs-stream-deck.c:1099
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1096
+#: src/bs-stream-deck.c:1122
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:380
+#: src/bs-stream-deck-button-editor.c:389
+msgid "All supported formats"
+msgstr "Vse podprte vrste datotek"
+
+#: src/bs-stream-deck-button-editor.c:398
 msgid "Select icon"
 msgstr "Izbor ikone"
 
-#: src/bs-stream-deck-button-editor.c:383
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
-msgid "_Open"
-msgstr "_Odpri"
-
-#: src/bs-stream-deck-button-editor.c:384
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
-msgid "_Cancel"
-msgstr "_Prekliči"
-
-#: src/bs-stream-deck-button-editor.c:388
-msgid "All supported formats"
-msgstr "Vse podprte vrste datotek"
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Odpri"
 
 #: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
@@ -197,15 +199,15 @@ msgstr "Ime"
 msgid "Background Color"
 msgstr "Barva ozadja"
 
-#: src/bs-stream-deck-button-editor.ui:259
+#: src/bs-stream-deck-button-editor.ui:264
 msgid "Select action"
 msgstr "Izbor dejanja"
 
-#: src/bs-stream-deck-button-editor.ui:280
+#: src/bs-stream-deck-button-editor.ui:285
 msgid "Remove Action"
 msgstr "Odstrani dejanje"
 
-#: src/bs-stream-deck-button-editor.ui:303
+#: src/bs-stream-deck-button-editor.ui:308
 #: src/plugins/default/default-multi-action-editor.ui:67
 msgid "Actions"
 msgstr "Dejanja"
@@ -214,7 +216,7 @@ msgstr "Dejanja"
 msgid "New profile…"
 msgstr "Nov profil …"
 
-#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:54
 msgid "Brightness"
 msgstr "Svetlost"
 
@@ -261,15 +263,15 @@ msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Konča program"
 
-#: src/plugins/default/default-action-factory.c:44
+#: src/plugins/default/default-action-factory.c:42
 msgid "Folder"
 msgstr "Mapa"
 
-#: src/plugins/default/default-action-factory.c:50
+#: src/plugins/default/default-action-factory.c:48
 msgid "Switch Profile"
 msgstr "Preklopi profil"
 
-#: src/plugins/default/default-action-factory.c:62
+#: src/plugins/default/default-action-factory.c:60
 msgid "Multiple Actions"
 msgstr "Več dejanj"
 
@@ -295,7 +297,7 @@ msgid "Value"
 msgstr "Vrednost"
 
 #: src/plugins/default/default-multi-action-editor.c:310
-#: src/plugins/default/default-multi-action-row.c:142
+#: src/plugins/default/default-multi-action-row.c:143
 msgid "Delay"
 msgstr "Časovni zamik"
 
@@ -319,11 +321,62 @@ msgstr "Nastavitve"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/plugins/launcher/launcher-action-factory.c:42
+#: src/plugins/gaming/gaming.js:37
+msgid "Score"
+msgstr "Rezultat"
+
+#: src/plugins/gaming/gaming.js:38
+msgid "Keep track of your score. Reset with a long press."
+msgstr "Spremljajte svoj rezultat. Ponastavite z dolgim pritiskom."
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "Igre"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "rezultat.txt"
+
+#. Restore score
+#: src/plugins/gaming/score.js:322
+msgid "Restore Score"
+msgstr "Obnovi rezultat"
+
+#: src/plugins/gaming/score.js:341
+msgid "Text Color"
+msgstr "Barva besedila"
+
+#: src/plugins/gaming/score.js:354
+msgid "Save to File"
+msgstr "Shrani v datoteko"
+
+#: src/plugins/gaming/score.js:355
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr ""
+"Shranite rezultat v besedilno datoteko. Drugi programi, kot je OBS Studio, "
+"lahko berejo iz nje."
+
+#: src/plugins/gaming/score.js:364
+#: src/plugins/launcher/launcher-open-file-action.c:209
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "Datoteka"
+
+#: src/plugins/gaming/score.js:383
+msgid "Text File (.txt)"
+msgstr "Besedilna datoteka (.txt)"
+
+#: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
 msgstr "Zaženi program"
 
-#: src/plugins/launcher/launcher-action-factory.c:48
+#: src/plugins/launcher/launcher-action-factory.c:47
+msgid "Open File"
+msgstr "Odpri datoteko"
+
+#: src/plugins/launcher/launcher-action-factory.c:53
 msgid "Open URL"
 msgstr "Odpri naslov URL"
 
@@ -331,7 +384,15 @@ msgstr "Odpri naslov URL"
 msgid "Choose Application"
 msgstr "Izbor programa"
 
-#: src/plugins/launcher/launcher-open-url-action.c:101
+#: src/plugins/launcher/launcher-open-file-action.c:68
+msgid "No file selected"
+msgstr "Izbrana ni nobena datoteka"
+
+#: src/plugins/launcher/launcher-open-file-action.c:156
+msgid "Select File"
+msgstr "Izberite datoteko"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
 msgstr "Naslov URL"
 
@@ -339,29 +400,69 @@ msgstr "Naslov URL"
 msgid "Launcher"
 msgstr "Zaganjalnik"
 
-#: src/plugins/obs-studio/obs-action-factory.c:48
+#: src/plugins/network/network-action-factory.c:41
+msgid "HTTP Request"
+msgstr "Zahteva HTTP"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "Pošlji zahteve GET in POST spletnemu strežniku"
+
+#: src/plugins/network/network-http-action-prefs.c:146
+#, fuzzy
+msgid "Select payload file"
+msgstr "Izberite datoteko obremenitve"
+
+#: src/plugins/network/network-http-action-prefs.ui:14
+msgid "URI"
+msgstr "URI"
+
+#: src/plugins/network/network-http-action-prefs.ui:22
+msgid "Method"
+msgstr "Metoda"
+
+#: src/plugins/network/network-http-action-prefs.ui:45
+#, fuzzy
+msgid "Payload source"
+msgstr "Vir obremenitve"
+
+#: src/plugins/network/network-http-action-prefs.ui:82
+#, fuzzy
+msgid "Edit payload"
+msgstr "Uredi obremenitev"
+
+#: src/plugins/network/network-http-action-prefs.ui:99
+#, fuzzy
+msgid "HTTP Request Payload"
+msgstr "Obremenitev zahteve HTTP"
+
+#: src/plugins/network/network.plugin.desktop.in:3
+msgid "Network"
+msgstr "Omrežje"
+
+#: src/plugins/obs-studio/obs-action-factory.c:46
 msgid "Switch Scene"
 msgstr "Preklopi sceno"
 
 #. Translators: "Record" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:55
+#: src/plugins/obs-studio/obs-action-factory.c:53
 msgid "Record"
 msgstr "Začne snemanje"
 
 #. Translators: "Stream" is a verb here
-#: src/plugins/obs-studio/obs-action-factory.c:62
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "Začni pretakanje"
 
-#: src/plugins/obs-studio/obs-action-factory.c:68
+#: src/plugins/obs-studio/obs-action-factory.c:66
 msgid "Virtual Camera"
 msgstr "Navidezna kamera"
 
-#: src/plugins/obs-studio/obs-action-factory.c:74
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "Preklopi nemost"
 
-#: src/plugins/obs-studio/obs-action-factory.c:80
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "Pokaži / Skrij vir"
 
@@ -430,15 +531,15 @@ msgstr "Vir"
 msgid "OBS Studio"
 msgstr "OBS Studio"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:45
+#: src/plugins/soundboard/soundboard-action-factory.c:42
 msgid "Music Player"
 msgstr "Predvajalnik glasbe"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:46
+#: src/plugins/soundboard/soundboard-action-factory.c:43
 msgid "Control the active music player"
 msgstr "Nadzornik predvajalnika glasbe"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:51
+#: src/plugins/soundboard/soundboard-action-factory.c:48
 msgid "Play Audio"
 msgstr "Predvajanje zvoka"
 
@@ -470,17 +571,13 @@ msgstr "Predvajaj / Premor"
 msgid "Playback Action"
 msgstr "Dejanje predvajanja"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
-msgid "Select audio file"
-msgstr "Izbor zvočne datoteke"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:96
 msgid "Audio Files"
 msgstr "Zvokovne datoteke"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "Datoteka"
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Select audio file"
+msgstr "Izbor zvočne datoteke"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
