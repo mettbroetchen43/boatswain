@@ -19,6 +19,7 @@
 #include "bs-action-factory.h"
 #include "bs-application.h"
 #include "bs-config.h"
+#include "bs-desktop-controller-private.h"
 #include "bs-device-manager.h"
 #include "bs-log.h"
 #include "bs-window.h"
@@ -37,6 +38,7 @@ struct _BsApplication
   PeasExtensionSet *action_factories_set;
   BsDeviceManager *device_manager;
   XdpPortal *portal;
+  BsDesktopController *desktop_controller;
 };
 
 static void on_request_background_called_cb (GObject      *object,
@@ -211,6 +213,7 @@ bs_application_startup (GApplication *application)
                                                        NULL);
 
   self->portal = xdp_portal_new ();
+  self->desktop_controller = bs_desktop_controller_new (self->portal);
 
   style_manager = adw_application_get_style_manager (ADW_APPLICATION (application));
   adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_PREFER_DARK);
@@ -342,4 +345,20 @@ bs_application_get_action_factory_set (BsApplication *self)
   g_return_val_if_fail (BS_IS_APPLICATION (self), NULL);
 
   return self->action_factories_set;
+}
+
+/**
+ * bs_application_get_desktop_controller:
+ * @self: a #BsApplication
+ *
+ * Retrieves the application-wide desktop controller.
+ *
+ * Returns: (transfer none): a #BsDesktopController
+ */
+BsDesktopController *
+bs_application_get_desktop_controller (BsApplication *self)
+{
+  g_return_val_if_fail (BS_IS_APPLICATION (self), NULL);
+
+  return self->desktop_controller;
 }
