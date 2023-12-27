@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-26 15:32+0000\n"
-"PO-Revision-Date: 2023-11-26 21:39+0200\n"
+"POT-Creation-Date: 2023-12-26 19:55+0000\n"
+"PO-Revision-Date: 2023-12-27 09:41+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -72,20 +72,23 @@ msgid "Send network requests"
 msgstr "Надсилати запити мережею"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:23
-#| msgid "Keep track of your score. Reset with a long press."
 msgid "Keep track of your gaming score"
 msgstr "Стежити за вашим ігровим рейтингом"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:24
-#| msgid "Launch Application"
 msgid "Open files and launch applications"
 msgstr "Відкрити файли і запустити програми"
 
-#: src/bs-application.c:52
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "Відновити жетон для контролера стільниці"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "Увімкнути діагностичні повідомлення"
 
-#: src/bs-application.c:115
+#: src/bs-application.c:117
 #, c-format
 msgid "Connected to %d device"
 msgid_plural "Connected to %d devices"
@@ -94,7 +97,7 @@ msgstr[1] "З'єднано із %d пристроями"
 msgstr[2] "З'єднано із %d пристроями"
 msgstr[3] "З'єднано із %d пристроєм"
 
-#: src/bs-application.c:167
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -322,6 +325,39 @@ msgstr "Параметри"
 msgid "Profile"
 msgstr "Профіль"
 
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+#| msgid "_Keyboard Shortcuts"
+msgid "Keyboard Shortcut"
+msgstr "Клавіатурне скорочення"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+#| msgid "_Keyboard Shortcuts"
+msgid "Trigger a keyboard shortcut"
+msgstr "Перемкнути клавіатурне скорочення"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+#| msgctxt "shortcut window"
+#| msgid "Show Shortcuts"
+msgid "Set Shortcut"
+msgstr "Встановити скорочення"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+msgid "Press Esc to cancel"
+msgstr "Натисніть Esc, щоб скасувати"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "_Скасувати"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "_Встановити"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "Стільниця"
+
 #: src/plugins/gaming/gaming.js:37
 msgid "Score"
 msgstr "Рейтинг"
@@ -374,7 +410,6 @@ msgid "Launch Application"
 msgstr "Запустити програму"
 
 #: src/plugins/launcher/launcher-action-factory.c:47
-#| msgid "File"
 msgid "Open File"
 msgstr "Відкрити файл"
 
@@ -391,7 +426,6 @@ msgid "No file selected"
 msgstr "Не вибрано файлів"
 
 #: src/plugins/launcher/launcher-open-file-action.c:156
-#| msgid "Select icon"
 msgid "Select File"
 msgstr "Виберіть файл"
 
@@ -611,9 +645,6 @@ msgstr "Музична дека"
 
 #~ msgid "_Open"
 #~ msgstr "_Відкрити"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Скасувати"
 
 #~ msgid "Profiles"
 #~ msgstr "Профілі"
