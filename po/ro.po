@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-10-19 17:01+0000\n"
-"PO-Revision-Date: 2023-10-21 14:07+0300\n"
+"POT-Creation-Date: 2023-12-26 19:55+0000\n"
+"PO-Revision-Date: 2023-12-27 16:15+0200\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -66,16 +66,28 @@ msgstr ""
 "Controlați Studio OBS utilizând puntea de stream (necesită extensia obs-"
 "websocket)"
 
-#. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
-msgid "Georges Basile Stavracas Neto"
-msgstr "Georges Basile Stavracas Neto"
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "Trimite cererile de rețea"
 
-#: src/bs-application.c:52
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Keep track of your gaming score"
+msgstr "Urmăriți scorul jocului"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+msgid "Open files and launch applications"
+msgstr "Deschide fișiere și lansează aplicații"
+
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "Restaurează jetonul pentru controlerul desktop"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "Activează mesajele de depanare"
 
-#: src/bs-application.c:115
+#: src/bs-application.c:117
 #, c-format
 msgid "Connected to %d device"
 msgid_plural "Connected to %d devices"
@@ -83,7 +95,7 @@ msgstr[0] "Conectat la %d dispozitiv"
 msgstr[1] "Conectat la %d dispozitive"
 msgstr[2] "Conectat la %d de dispozitive"
 
-#: src/bs-application.c:167
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -160,23 +172,18 @@ msgstr "Hangar Feaneron original"
 msgid "Feaneron Hangar XL"
 msgstr "Hangar Feaneron XL"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:389
+msgid "All supported formats"
+msgstr "Toate formatele suportate"
+
+#: src/bs-stream-deck-button-editor.c:398
 msgid "Select icon"
 msgstr "Selectează iconița"
 
-#: src/bs-stream-deck-button-editor.c:382
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
-msgid "_Open"
-msgstr "D_eschide"
-
-#: src/bs-stream-deck-button-editor.c:383
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
-msgid "_Cancel"
-msgstr "Anulează"
-
-#: src/bs-stream-deck-button-editor.c:387
-msgid "All supported formats"
-msgstr "Toate formatele suportate"
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Deschide"
 
 #: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
@@ -194,15 +201,15 @@ msgstr "Nume"
 msgid "Background Color"
 msgstr "Culoare de fundal"
 
-#: src/bs-stream-deck-button-editor.ui:259
+#: src/bs-stream-deck-button-editor.ui:264
 msgid "Select action"
 msgstr "Selectează acțiunea"
 
-#: src/bs-stream-deck-button-editor.ui:280
+#: src/bs-stream-deck-button-editor.ui:285
 msgid "Remove Action"
 msgstr "Elimină acțiunea"
 
-#: src/bs-stream-deck-button-editor.ui:303
+#: src/bs-stream-deck-button-editor.ui:308
 #: src/plugins/default/default-multi-action-editor.ui:67
 msgid "Actions"
 msgstr "Acțiuni"
@@ -316,6 +323,35 @@ msgstr "Configurări"
 msgid "Profile"
 msgstr "Profil"
 
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+msgid "Keyboard Shortcut"
+msgstr "Scurtătură de tastatură"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+msgid "Trigger a keyboard shortcut"
+msgstr "Declanșează o scurtătură de tastatură"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+msgid "Set Shortcut"
+msgstr "Stabilește scurtătura"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+msgid "Press Esc to cancel"
+msgstr "Apăsați Esc pentru a anula"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "Anulează"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "_Stabilește"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "Desktop"
+
 #: src/plugins/gaming/gaming.js:37
 msgid "Score"
 msgstr "Scor"
@@ -353,6 +389,7 @@ msgstr ""
 "pot citi din acesta."
 
 #: src/plugins/gaming/score.js:364
+#: src/plugins/launcher/launcher-open-file-action.c:209
 #: src/plugins/network/network-http-action-prefs.ui:61
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
 msgid "File"
@@ -362,11 +399,15 @@ msgstr "Fișier"
 msgid "Text File (.txt)"
 msgstr "Fișier text (.txt)"
 
-#: src/plugins/launcher/launcher-action-factory.c:40
+#: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
 msgstr "Lansează aplicația"
 
-#: src/plugins/launcher/launcher-action-factory.c:46
+#: src/plugins/launcher/launcher-action-factory.c:47
+msgid "Open File"
+msgstr "Deschide fișierul"
+
+#: src/plugins/launcher/launcher-action-factory.c:53
 msgid "Open URL"
 msgstr "Deschide URL-ul"
 
@@ -374,7 +415,15 @@ msgstr "Deschide URL-ul"
 msgid "Choose Application"
 msgstr "Alege aplicația"
 
-#: src/plugins/launcher/launcher-open-url-action.c:101
+#: src/plugins/launcher/launcher-open-file-action.c:68
+msgid "No file selected"
+msgstr "Niciun fișier selectat"
+
+#: src/plugins/launcher/launcher-open-file-action.c:156
+msgid "Select File"
+msgstr "Selectează fișierul"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
 msgstr "URL"
 
@@ -393,10 +442,6 @@ msgstr "Trimite cereri de GET și POST către un server web"
 #: src/plugins/network/network-http-action-prefs.c:146
 msgid "Select payload file"
 msgstr "Selectați fișierul de sarcină utilă"
-
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Deschide"
 
 #: src/plugins/network/network-http-action-prefs.ui:14
 msgid "URI"
@@ -553,13 +598,13 @@ msgstr "Redare / pauză"
 msgid "Playback Action"
 msgstr "Acțiuni redare"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
-msgid "Select audio file"
-msgstr "Selectați fișierul audio"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:96
 msgid "Audio Files"
 msgstr "Fișiere audio"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Select audio file"
+msgstr "Selectați fișierul audio"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
@@ -588,3 +633,9 @@ msgstr "Volum"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Placă de sunet"
+
+#~ msgid "Georges Basile Stavracas Neto"
+#~ msgstr "Georges Basile Stavracas Neto"
+
+#~ msgid "_Open"
+#~ msgstr "D_eschide"
