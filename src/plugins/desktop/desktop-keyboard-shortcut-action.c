@@ -26,6 +26,10 @@
 #include <adwaita.h>
 #include <glib/gi18n.h>
 
+#if !GTK_CHECK_VERSION (4, 13, 4)
+#define GDK_NO_MODIFIER_MASK 0
+#endif
+
 struct _DesktopKeyboardShortcutAction
 {
   BsAction parent_instance;
