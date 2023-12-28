@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-26 15:32+0000\n"
-"PO-Revision-Date: 2023-11-26 18:00+0100\n"
+"POT-Creation-Date: 2023-12-26 19:55+0000\n"
+"PO-Revision-Date: 2023-12-28 07:13+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "Language: ka\n"
@@ -76,18 +76,23 @@ msgstr "იცოდეთ თქვენი ქულები"
 msgid "Open files and launch applications"
 msgstr "ფაილების გახსნა და აპლიკაციების გაშვება"
 
-#: src/bs-application.c:52
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "კოდის აღდგენა სამუშაო მაგიდის კონტროლერისთვის"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "გამართვის შეტყობინებების ჩართვა"
 
-#: src/bs-application.c:115
+#: src/bs-application.c:117
 #, c-format
 msgid "Connected to %d device"
 msgid_plural "Connected to %d devices"
 msgstr[0] "დაკავშირებულია %d მოწყობილობასთან"
 msgstr[1] "დაკავშირებულია %d მოწყობილობასთან"
 
-#: src/bs-application.c:167
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -314,6 +319,35 @@ msgstr "მორგება"
 #: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "პროფილი"
+
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+msgid "Keyboard Shortcut"
+msgstr "კლავიატურის მალსახმობი"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+msgid "Trigger a keyboard shortcut"
+msgstr "კლავიატურის მალსახმობის ტრიგერი"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+msgid "Set Shortcut"
+msgstr "მალსახმობის დაყენება"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+msgid "Press Esc to cancel"
+msgstr "Esc გასაუქმებლად"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "_შეწყვეტა"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "_დაყენება"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "სამუშაო მაგიდა"
 
 #: src/plugins/gaming/gaming.js:37
 msgid "Score"
@@ -599,9 +633,6 @@ msgstr "Soundboard"
 
 #~ msgid "_Open"
 #~ msgstr "_გახსნა"
-
-#~ msgid "_Cancel"
-#~ msgstr "_შეწყვეტა"
 
 #~ msgid "Georges Basile Stavracas Neto"
 #~ msgstr "Georges Basile Stavracas Neto"
