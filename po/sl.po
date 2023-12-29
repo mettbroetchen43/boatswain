@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-26 15:32+0000\n"
-"PO-Revision-Date: 2023-12-26 19:04+0100\n"
+"POT-Creation-Date: 2023-12-26 19:55+0000\n"
+"PO-Revision-Date: 2023-12-29 16:11+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups."
 "com>\n"
@@ -80,11 +80,17 @@ msgstr "Spremljajte svoj igralski rezultat"
 msgid "Open files and launch applications"
 msgstr "Odprite datoteke in zaženite programe"
 
-#: src/bs-application.c:52
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+#, fuzzy
+msgid "Restore token for the desktop controller"
+msgstr "Obnovite žeton za namizni krmilnik"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "Omogoči sporočila za razhroščevanje"
 
-#: src/bs-application.c:115
+#: src/bs-application.c:117
 #, c-format
 msgid "Connected to %d device"
 msgid_plural "Connected to %d devices"
@@ -93,7 +99,7 @@ msgstr[1] "%d povezana naprava"
 msgstr[2] "%d povezani napravi"
 msgstr[3] "%d povezane naprave"
 
-#: src/bs-application.c:167
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -320,6 +326,39 @@ msgstr "Nastavitve"
 #: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Profil"
+
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+#, fuzzy
+msgid "Keyboard Shortcut"
+msgstr "Tipkovna bližnjica"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+#, fuzzy
+msgid "Trigger a keyboard shortcut"
+msgstr "Sprožite bližnjico na tipkovnici"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+#, fuzzy
+msgid "Set Shortcut"
+msgstr "Nastavi bližnjico"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+#, fuzzy
+msgid "Press Esc to cancel"
+msgstr "Pritisnite ubežnico (Esc) za preklic"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "Pre_kliči"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "_Nastavi"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "Namizje"
 
 #: src/plugins/gaming/gaming.js:37
 msgid "Score"
