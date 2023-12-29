@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-26 15:32+0000\n"
-"PO-Revision-Date: 2023-11-27 08:55+0800\n"
+"POT-Creation-Date: 2023-12-26 19:55+0000\n"
+"PO-Revision-Date: 2023-12-29 19:58+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -74,17 +74,22 @@ msgstr "保持对您游戏分数的追踪"
 msgid "Open files and launch applications"
 msgstr "打开文件和启动应用程序"
 
-#: src/bs-application.c:52
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "为桌面控制器恢复令牌"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "启用调试消息"
 
-#: src/bs-application.c:115
+#: src/bs-application.c:117
 #, c-format
 msgid "Connected to %d device"
 msgid_plural "Connected to %d devices"
 msgstr[0] "已连接到 %d 个设备"
 
-#: src/bs-application.c:167
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -309,6 +314,35 @@ msgstr "设置"
 #: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "配置文件"
+
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+msgid "Keyboard Shortcut"
+msgstr "键盘快捷键"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+msgid "Trigger a keyboard shortcut"
+msgstr "触发键盘快捷键"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+msgid "Set Shortcut"
+msgstr "设置快捷键"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+msgid "Press Esc to cancel"
+msgstr "按 Esc 以取消"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "设置(_S)"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "桌面"
 
 #: src/plugins/gaming/gaming.js:37
 msgid "Score"
@@ -595,9 +629,6 @@ msgstr "响板"
 
 #~ msgid "_Open"
 #~ msgstr "打开(_O)"
-
-#~ msgid "_Cancel"
-#~ msgstr "取消(_C)"
 
 #~ msgid "Profiles"
 #~ msgstr "配置文件"
