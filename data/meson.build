@@ -41,6 +41,16 @@ appstream_file = i18n.merge_file(
   install_dir: get_option('datadir') / 'appdata',
 )
 
+# Validate Appdata
+appstreamcli = find_program('appstreamcli', required: false)
+if (appstreamcli.found())
+  test('Validate appdata file',
+    appstreamcli,
+    args: ['validate', '--no-net', '--explain', appstream_file],
+    workdir: meson.current_build_dir()
+  )
+endif
+
 install_data('com.feaneron.Boatswain.gschema.xml',
   rename: '@0@.gschema.xml'.format(application_id),
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas',
