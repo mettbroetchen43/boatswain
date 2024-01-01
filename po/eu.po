@@ -1,16 +1,15 @@
 # Basque translation for boatswain.
 # Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
-# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2022, 2023.
+# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2022, 2023, 2024.
 #
 msgid ""
-msgstr ""
-"Project-Id-Version: boatswain main\n"
+msgstr "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-10-15 22:57+0000\n"
-"PO-Revision-Date: 2023-10-27 18:20+0000\n"
+"POT-Creation-Date: 2024-01-01 19:55+0000\n"
+"PO-Revision-Date: 2 18:20+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
-"Language-Team: Basque <librezale@librezale.eus>\n"
+"Language-Team: Basque <libre-ale@librezale.eus>-\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +19,7 @@ msgstr ""
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
 msgid "Boatswain"
-msgstr "dBoatswain"
+msgstr "Boatswain"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/com.feaneron.Boatswain.desktop.in.in:11
@@ -58,32 +57,41 @@ msgstr "Erreproduzitu soinu-efektua transmititzean"
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
-msgstr ""
-"OBS Studio kontrolatu Stream Deck erabilita (obs-websocket hedapena behar du)"
+msgstr "OBS Studio kontrolatu Stream Deck erabilita (obs-websocket hedapena behar du)"
 
-#. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
-msgid "Georges Basile Stavracas Neto"
-msgstr "Georges Basile Stavracas Neto"
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "Bidali sareko eskariak"
 
-#: src/bs-application.c:52
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Keep track of your gaming score"
+msgstr "Gogoratu jokoetako puntuazioak"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+msgid "Open files and launch applications"
+msgstr "Ireki fitxategiak eta abiarazi aplikazioak"
+
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "Leheneratu mahaigaineko kontrolatzailearen tokena"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
-msgstr "Arazketa-mezuak gaitu"
+msgstr "Gaitu arazketa-mezuak"
 
-#: src/bs-application.c:115
+#: src/bs-application.c:117
 #, c-format
 msgid "Connected to %d device"
 msgid_plural "Connected to %d devices"
 msgstr[0] "Gailu %dekin konektatuta"
 msgstr[1] "%d gailurekin konektatuta"
 
-#: src/bs-application.c:167
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
-msgstr ""
-"Boatswain atzeko planoa exekutatu behar da Stream Deck ekintzak detektatu "
-"eta exekutatzeko."
+msgstr "Boatswain atzeko planoa exekutatu behar da Stream Deck ekintzak detektatu eta exekutatzeko."
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
@@ -154,23 +162,18 @@ msgstr "Feaneron Hangar Original"
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:379
+#: src/bs-stream-deck-button-editor.c:389
+msgid "All supported formats"
+msgstr "Onartutako formatu guztiak"
+
+#: src/bs-stream-deck-button-editor.c:398
 msgid "Select icon"
 msgstr "Hautatu ikonoa"
 
-#: src/bs-stream-deck-button-editor.c:382
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
-msgid "_Open"
-msgstr "_Ireki"
-
-#: src/bs-stream-deck-button-editor.c:383
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
-msgid "_Cancel"
-msgstr "_Utzi"
-
-#: src/bs-stream-deck-button-editor.c:387
-msgid "All supported formats"
-msgstr "Onartutako formatu guztiak"
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Ireki"
 
 #: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
@@ -188,15 +191,15 @@ msgstr "Izena"
 msgid "Background Color"
 msgstr "Atzeko planoaren kolorea"
 
-#: src/bs-stream-deck-button-editor.ui:259
+#: src/bs-stream-deck-button-editor.ui:264
 msgid "Select action"
 msgstr "Hautatu ekintza"
 
-#: src/bs-stream-deck-button-editor.ui:280
+#: src/bs-stream-deck-button-editor.ui:285
 msgid "Remove Action"
 msgstr "Kendu ekintza"
 
-#: src/bs-stream-deck-button-editor.ui:303
+#: src/bs-stream-deck-button-editor.ui:308
 #: src/plugins/default/default-multi-action-editor.ui:67
 msgid "Actions"
 msgstr "Ekintzak"
@@ -310,11 +313,40 @@ msgstr "Ezarpenak"
 msgid "Profile"
 msgstr "Profila"
 
-#: src/plugins/gaming/gaming.js:43
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+msgid "Keyboard Shortcut"
+msgstr "Laster-tekla"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+msgid "Trigger a keyboard shortcut"
+msgstr "Abiarazi laster-tekla bat"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+msgid "Set Shortcut"
+msgstr "Ezarri laster-tekla"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+msgid "Press Esc to cancel"
+msgstr "Sakatu Esc uzteko"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "_Utzi"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "_Ezarri"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "Mahaigaina"
+
+#: src/plugins/gaming/gaming.js:37
 msgid "Score"
 msgstr "Puntuazioa"
 
-#: src/plugins/gaming/gaming.js:44
+#: src/plugins/gaming/gaming.js:38
 msgid "Keep track of your score. Reset with a long press."
 msgstr "Ezagutu zure puntuazioa. Berrezartzeko, sakatu tarte batez."
 
@@ -326,39 +358,44 @@ msgstr "Jokoa"
 msgid "score.txt"
 msgstr "puntuazioa.txt"
 
-#: src/plugins/gaming/score.js:170 src/plugins/gaming/score.js:407
-msgid "Text File (.txt)"
-msgstr "Testu-fitxategia (.txt)"
-
 #. Restore score
-#: src/plugins/gaming/score.js:346
+#: src/plugins/gaming/score.js:322
 msgid "Restore Score"
 msgstr "Berrezarri puntuazioa"
 
-#: src/plugins/gaming/score.js:365
+#: src/plugins/gaming/score.js:341
 msgid "Text Color"
 msgstr "Testu-kolorea"
 
-#: src/plugins/gaming/score.js:378
+#: src/plugins/gaming/score.js:354
 msgid "Save to File"
 msgstr "Gorde fitxategian"
 
-#: src/plugins/gaming/score.js:379
+#: src/plugins/gaming/score.js:355
 msgid ""
 "Save score to a text file. Other apps such as OBS Studio may read from it."
 msgstr "Gorde puntuazioa testu-fitxategi batean. Beste aplikazio batzuek, adibidez OBS Studio, handik irakurri dezakete."
 
-#: src/plugins/gaming/score.js:388
+#: src/plugins/gaming/score.js:364
+#: src/plugins/launcher/launcher-open-file-action.c:209
 #: src/plugins/network/network-http-action-prefs.ui:61
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
 msgid "File"
 msgstr "Fitxategia"
 
-#: src/plugins/launcher/launcher-action-factory.c:40
+#: src/plugins/gaming/score.js:383
+msgid "Text File (.txt)"
+msgstr "Testu-fitxategia (.txt)"
+
+#: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
 msgstr "Abiarazi aplikazioa"
 
-#: src/plugins/launcher/launcher-action-factory.c:46
+#: src/plugins/launcher/launcher-action-factory.c:47
+msgid "Open File"
+msgstr "Ireki fitxategia"
+
+#: src/plugins/launcher/launcher-action-factory.c:53
 msgid "Open URL"
 msgstr "Ireki URLa"
 
@@ -366,7 +403,15 @@ msgstr "Ireki URLa"
 msgid "Choose Application"
 msgstr "Aukeratu aplikazioa"
 
-#: src/plugins/launcher/launcher-open-url-action.c:101
+#: src/plugins/launcher/launcher-open-file-action.c:68
+msgid "No file selected"
+msgstr "Ez da fitxategirik hautatu"
+
+#: src/plugins/launcher/launcher-open-file-action.c:156
+msgid "Select File"
+msgstr "Hautatu fitxategia"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
 msgstr "URLa"
 
@@ -385,10 +430,6 @@ msgstr "Bidali GET eta POST eskariak web-zerbitzari bati"
 #: src/plugins/network/network-http-action-prefs.c:146
 msgid "Select payload file"
 msgstr "Hautatu karga erabilgarriaren fitxategia"
-
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Ireki"
 
 #: src/plugins/network/network-http-action-prefs.ui:14
 msgid "URI"
@@ -545,13 +586,13 @@ msgstr "Erreproduzitu/pausatu"
 msgid "Playback Action"
 msgstr "Erreprodukzio-ekintza"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
-msgid "Select audio file"
-msgstr "Hautatu audio-fitxategia"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:96
 msgid "Audio Files"
 msgstr "Audio-fitxategiak"
+
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Select audio file"
+msgstr "Hautatu audio-fitxategia"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
@@ -580,3 +621,9 @@ msgstr "Bolumena"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Soinu-panela"
+
+#~ msgid "Georges Basile Stavracas Neto"
+#~ msgstr "Georges Basile Stavracas Neto"
+
+#~ msgid "_Open"
+#~ msgstr "_Ireki"
