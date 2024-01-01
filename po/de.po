@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-26 15:32+0000\n"
-"PO-Revision-Date: 2023-11-26 20:10+0100\n"
+"POT-Creation-Date: 2023-12-26 19:55+0000\n"
+"PO-Revision-Date: 2023-12-27 15:22+0100\n"
 "Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -82,18 +82,23 @@ msgstr "Behalten Sie Ihren Spielstand im Auge"
 msgid "Open files and launch applications"
 msgstr "Dateien öffnen und Anwendungen starten"
 
-#: src/bs-application.c:52
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "Token für den Desktop-Controller wiederherstellen"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "Fehlermeldungen aktivieren"
 
-#: src/bs-application.c:115
+#: src/bs-application.c:117
 #, c-format
 msgid "Connected to %d device"
 msgid_plural "Connected to %d devices"
 msgstr[0] "Mit %d Gerät verbunden"
 msgstr[1] "Mit %d Geräten verbunden"
 
-#: src/bs-application.c:167
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -325,6 +330,35 @@ msgstr "Einstellungen"
 #: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Profil"
+
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+msgid "Keyboard Shortcut"
+msgstr "Tastenkürzel"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+msgid "Trigger a keyboard shortcut"
+msgstr "Ein Tastenkürzel auslösen"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+msgid "Set Shortcut"
+msgstr "Tastenkürzel festlegen"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+msgid "Press Esc to cancel"
+msgstr "Drücken Sie Esc zum Abbrechen"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "A_bbrechen"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "_Festlegen"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "Desktop"
 
 #: src/plugins/gaming/gaming.js:37
 msgid "Score"
@@ -613,9 +647,6 @@ msgstr "Soundboard"
 
 #~ msgid "_Open"
 #~ msgstr "Ö_ffnen"
-
-#~ msgid "_Cancel"
-#~ msgstr "A_bbrechen"
 
 #~ msgid "Georges Basile Stavracas Neto"
 #~ msgstr "Georges Basile Stavracas Neto"
