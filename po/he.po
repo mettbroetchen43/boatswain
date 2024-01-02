@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-30 18:14+0000\n"
-"PO-Revision-Date: 2023-12-09 22:46+0200\n"
+"POT-Creation-Date: 2023-12-26 19:55+0000\n"
+"PO-Revision-Date: 2024-01-03 00:07+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -74,23 +74,27 @@ msgstr "מעקב אחר ניקוד המשחקים שלך"
 msgid "Open files and launch applications"
 msgstr "פתיחת קבצים ושיגור יישומים"
 
-#: src/bs-application.c:52
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "שחזור אסימון לפקד שולחן העבודה"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "הפעלת הודעות ניפוי שגיאות"
 
-#: src/bs-application.c:115
+#: src/bs-application.c:117
 #, c-format
 msgid "Connected to %d device"
 msgid_plural "Connected to %d devices"
 msgstr[0] "מחובר להתקן"
 msgstr[1] "מחובר ל־%d התקנים"
 
-#: src/bs-application.c:167
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
-msgstr ""
-"יש להריץ את Boatswain ברקע כדי לזהות ולהפעיל את פעולות ה־Stream Deck."
+msgstr "יש להריץ את Boatswain ברקע כדי לזהות ולהפעיל את פעולות ה־Stream Deck."
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
@@ -311,6 +315,35 @@ msgstr "הגדרות"
 #: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "פרופיל"
+
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+msgid "Keyboard Shortcut"
+msgstr "קיצורי מקלדת"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+msgid "Trigger a keyboard shortcut"
+msgstr "הזנקת קיצור מקלדת"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+msgid "Set Shortcut"
+msgstr "הגדרת קיצור מקלדת"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+msgid "Press Esc to cancel"
+msgstr "נא ללחוץ Esc לביטול"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "_ביטול"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "ה_גדרה"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "שולחן עבודה"
 
 #: src/plugins/gaming/gaming.js:37
 msgid "Score"
