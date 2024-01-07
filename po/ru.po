@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-11-26 15:32+0000\n"
-"PO-Revision-Date: 2023-11-26 22:43+0300\n"
+"POT-Creation-Date: 2023-12-26 19:55+0000\n"
+"PO-Revision-Date: 2023-12-26 23:45+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -76,11 +76,16 @@ msgstr "Следить за своими игровыми результатам
 msgid "Open files and launch applications"
 msgstr "Открывать файлы и запускать приложения"
 
-#: src/bs-application.c:52
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "Токен восстановления для контроллера рабочего стола"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "Включить отладочные сообщения"
 
-#: src/bs-application.c:115
+#: src/bs-application.c:117
 #, c-format
 msgid "Connected to %d device"
 msgid_plural "Connected to %d devices"
@@ -88,7 +93,7 @@ msgstr[0] "Подключено к %d устройству"
 msgstr[1] "Подключено к %d устройствам"
 msgstr[2] "Подключено к %d устройствам"
 
-#: src/bs-application.c:167
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -315,6 +320,35 @@ msgstr "Настройки"
 #: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Профиль"
+
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+msgid "Keyboard Shortcut"
+msgstr "Комбинация клавиш"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+msgid "Trigger a keyboard shortcut"
+msgstr "Запуск комбинации клавиш"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+msgid "Set Shortcut"
+msgstr "Установить комбинацию клавиш"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+msgid "Press Esc to cancel"
+msgstr "Нажмите Esc для отмены"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "_Отменить"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "_Установить"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "Рабочий стол"
 
 #: src/plugins/gaming/gaming.js:37
 msgid "Score"
@@ -600,9 +634,6 @@ msgstr "Звуковая плата"
 
 #~ msgid "_Open"
 #~ msgstr "О_ткрыть"
-
-#~ msgid "_Cancel"
-#~ msgstr "_Отменить"
 
 #~ msgid "Georges Basile Stavracas Neto"
 #~ msgstr "Georges Basile Stavracas Neto"
