@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-12-26 19:55+0000\n"
-"PO-Revision-Date: 2023-12-29 16:11+0100\n"
+"POT-Creation-Date: 2023-12-29 15:12+0000\n"
+"PO-Revision-Date: 2024-01-09 22:09+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups."
 "com>\n"
@@ -328,8 +328,7 @@ msgid "Profile"
 msgstr "Profil"
 
 #: src/plugins/desktop/desktop-action-factory.c:41
-#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
-#, fuzzy
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:257
 msgid "Keyboard Shortcut"
 msgstr "Tipkovna bližnjica"
 
