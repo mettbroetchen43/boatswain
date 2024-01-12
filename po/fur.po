@@ -7,84 +7,104 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-12-08 18:07+0000\n"
-"PO-Revision-Date: 2023-01-08 16:35+0000\n"
+"POT-Creation-Date: 2023-12-26 19:55+0000\n"
+"PO-Revision-Date: 2024-01-12 14:18+0100\n"
 "Last-Translator: Fabio T. <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Editor: HaiPO 1.4 beta\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
 msgid "Boatswain"
 msgstr "Boatswain"
 
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/com.feaneron.Boatswain.desktop.in.in:11
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Controle i tiei Stream Decks di Elgato"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Boatswain ti permet di controlâ i dispositîfs Stream Deck di Elgato."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "Cun Boatswain tu podarâs:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Organizâ lis azions in pagjinis e profîi"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Configurâ iconis personalizadis a azions"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid "Control your music player"
 msgstr "Controlâ il to riprodutôr musicâl"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Riprodusi efiets sonôrs dilunc i tiei flus"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "Controlâ OBS Studio doprant Stream Deck (e covente la estension obs-"
 "websocket)"
 
-#. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
-msgid "Georges Basile Stavracas Neto"
-msgstr "Georges Basile Stavracas Neto"
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "Invie richiestis di rêt"
 
-#: src/bs-application.c:52
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Keep track of your gaming score"
+msgstr "Ten segnâts i ponts dal to zûc"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+msgid "Open files and launch applications"
+msgstr "Vierç files e invie aplicazions"
+
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "Ripristine gjeton pal controlôr dal scritori"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "Abilite messaçs di debug"
 
-#: src/bs-application.c:128
+#: src/bs-application.c:117
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "Conetût a %d dispositîf"
+msgstr[1] "Conetût a %d dispositîfs"
+
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
 msgstr ""
-"Al è necessari che Boatswain al ziri in sotfont cussì di rilevâ e eseguî lis"
-" azions dal Stream Deck."
+"Al è necessari che Boatswain al ziri in sotfont cussì di rilevâ e eseguî lis "
+"azions dal Stream Deck."
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
 msgstr "Profîl cence non"
 
-#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
 msgid "Rename"
 msgstr "Cambie non"
 
@@ -96,150 +116,134 @@ msgstr "Sposte in sù"
 msgid "Move down"
 msgstr "Sposte in jù"
 
-#: src/bs-profiles-dialog.ui:26
-msgid "Profiles"
-msgstr "Profîi"
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Elimine"
 
-#: src/bs-stream-deck.c:277
+#: src/bs-stream-deck.c:278
 msgid "Default"
 msgstr "Predefinît"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
-#: src/bs-stream-deck.c:847
+#.
+#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
-#: src/bs-stream-deck.c:873 src/bs-stream-deck.c:899
-#: src/plugins/default/default-switch-profile-action.c:285
+#.
+#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
-#: src/bs-stream-deck.c:925 src/bs-stream-deck.c:951
+#.
+#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
-#: src/bs-stream-deck.c:977
+#.
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
-#: src/bs-stream-deck.c:1003
+#.
+#: src/bs-stream-deck.c:1030
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1072
+#: src/bs-stream-deck.c:1099
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1095
+#: src/bs-stream-deck.c:1122
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:380
-msgid "Select icon"
-msgstr "Selezione icone"
-
-#: src/bs-stream-deck-button-editor.c:383
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
-msgid "_Open"
-msgstr "_Vierç"
-
-#: src/bs-stream-deck-button-editor.c:384
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
-msgid "_Cancel"
-msgstr "_Anule"
-
-#: src/bs-stream-deck-button-editor.c:388
+#: src/bs-stream-deck-button-editor.c:389
 msgid "All supported formats"
 msgstr "Ducj i formâts supuartâts"
 
-#: src/bs-stream-deck-button-editor.ui:17
+#: src/bs-stream-deck-button-editor.c:398
+msgid "Select icon"
+msgstr "Selezione icone"
+
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Vierç"
+
+#: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
 msgstr "Selezione un boton"
 
-#: src/bs-stream-deck-button-editor.ui:199
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Proprietâts dal boton"
+
+#: src/bs-stream-deck-button-editor.ui:221
 msgid "Name"
 msgstr "Non"
 
-#: src/bs-stream-deck-button-editor.ui:206
+#: src/bs-stream-deck-button-editor.ui:228
 msgid "Background Color"
 msgstr "Colôr di fonts"
 
-#: src/bs-stream-deck-button-editor.ui:237
-#: src/bs-stream-deck-button-editor.ui:300
+#: src/bs-stream-deck-button-editor.ui:264
 msgid "Select action"
 msgstr "Selezione azion"
 
-#: src/bs-stream-deck-button-editor.ui:258
+#: src/bs-stream-deck-button-editor.ui:285
 msgid "Remove Action"
 msgstr "Gjave azion"
 
-#: src/bs-window.ui:13
-msgid "New profile"
-msgstr "Gnûf profîl"
+#: src/bs-stream-deck-button-editor.ui:308
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Azions"
 
-#: src/bs-window.ui:19
-msgid "Manage profiles…"
-msgstr "Gjestìs profîi…"
+#: src/bs-window.ui:113
+msgid "New profile…"
+msgstr "Gnûf profîl…"
 
-#: src/bs-window.ui:64
-msgid "Create"
-msgstr "Cree"
-
-#: src/bs-window.ui:108
-msgid "Power"
-msgstr "Alimentazion"
-
-#: src/bs-window.ui:124 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:54
 msgid "Brightness"
 msgstr "Luminositât"
 
-#: src/bs-window.ui:160
-msgid "Device"
-msgstr "Dispositîf"
-
-#: src/bs-window.ui:176
-msgid "Serial Number"
-msgstr "Numar seriâl"
-
-#: src/bs-window.ui:203
+#: src/bs-window.ui:174
 msgid "Firmware"
 msgstr "Firmware"
 
-#: src/bs-window.ui:251
-msgid "Devices"
-msgstr "Dispositîfs"
-
-#: src/bs-window.ui:296
+#: src/bs-window.ui:232
 msgid "No Stream Deck Found"
 msgstr "Nissun Stream Deck cjatât"
 
-#: src/bs-window.ui:297
+#: src/bs-window.ui:233
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Tache un dispositîf Stream Deck par doprâlu."
 
-#: src/bs-window.ui:308
+#: src/bs-window.ui:256
 msgid "_Keyboard Shortcuts"
 msgstr "_Scurtis di tastiere"
 
-#: src/bs-window.ui:312
+#: src/bs-window.ui:260
 msgid "_About Boatswain"
 msgstr "_Informazions su Boatswain"
 
-#: src/bs-window.ui:316
+#: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "_Jes"
 
-#: src/bs-window.c:350
+#: src/bs-window.c:272
 msgid "Repository"
 msgstr "Repository"
 
@@ -258,40 +262,41 @@ msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Jes"
 
-#: src/plugins/default/default-action-factory.c:44
+#: src/plugins/default/default-action-factory.c:42
 msgid "Folder"
 msgstr "Cartele"
 
-#: src/plugins/default/default-action-factory.c:50
+#: src/plugins/default/default-action-factory.c:48
 msgid "Switch Profile"
 msgstr "Cambie profîl"
 
-#: src/plugins/default/default-action-factory.c:62
+#: src/plugins/default/default-action-factory.c:60
 msgid "Multiple Actions"
 msgstr "Azions multiplis"
 
-#: src/plugins/default/default-brightness-action.c:140
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
 msgid "Constant"
 msgstr "Costant"
 
-#: src/plugins/default/default-brightness-action.c:141
+#: src/plugins/default/default-brightness-action.c:142
 msgid "Increase"
 msgstr "Incrès"
 
-#: src/plugins/default/default-brightness-action.c:142
+#: src/plugins/default/default-brightness-action.c:143
 msgid "Decrease"
 msgstr "Cale"
 
-#: src/plugins/default/default-brightness-action.c:145
+#: src/plugins/default/default-brightness-action.c:146
 msgid "Mode"
 msgstr "Modalitât"
 
-#: src/plugins/default/default-brightness-action.c:152
+#: src/plugins/default/default-brightness-action.c:153
 msgid "Value"
 msgstr "Valôr"
 
 #: src/plugins/default/default-multi-action-editor.c:310
-#: src/plugins/default/default-multi-action-row.c:142
+#: src/plugins/default/default-multi-action-row.c:143
 msgid "Delay"
 msgstr "Ritart"
 
@@ -303,10 +308,6 @@ msgstr "Zonte azion"
 msgid "Add Action"
 msgstr "Zonte azion"
 
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Azions"
-
 #: src/plugins/default/default-multi-action-editor.ui:73
 msgid "Others"
 msgstr "Altris"
@@ -315,15 +316,95 @@ msgstr "Altris"
 msgid "Settings"
 msgstr "Impostazions"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Profîl"
 
-#: src/plugins/launcher/launcher-action-factory.c:42
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+msgid "Keyboard Shortcut"
+msgstr "Scurtis di tastiere"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+msgid "Trigger a keyboard shortcut"
+msgstr "Ative une scurte di tastiere"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+msgid "Set Shortcut"
+msgstr "Stabilìs scurte"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+msgid "Press Esc to cancel"
+msgstr "Frache Esc par anulâ"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "_Anule"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "_Stabilìs"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "Scritori"
+
+#: src/plugins/gaming/gaming.js:37
+msgid "Score"
+msgstr "Ponts"
+
+#: src/plugins/gaming/gaming.js:38
+msgid "Keep track of your score. Reset with a long press."
+msgstr "Ten segnâts i tiei ponts. Azere cuntune pression sprolungjade."
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "Zûc"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "ponts.txt"
+
+#. Restore score
+#: src/plugins/gaming/score.js:322
+msgid "Restore Score"
+msgstr "Ripristine ponts"
+
+#: src/plugins/gaming/score.js:341
+msgid "Text Color"
+msgstr "Colôr dal test"
+
+#: src/plugins/gaming/score.js:354
+msgid "Save to File"
+msgstr "Salve su file"
+
+#: src/plugins/gaming/score.js:355
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr ""
+"Salve i ponts suntun file di test. Altris aplicazions come OBS Studio a "
+"puedin rivâ a leiju."
+
+#: src/plugins/gaming/score.js:364
+#: src/plugins/launcher/launcher-open-file-action.c:209
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "File"
+
+#: src/plugins/gaming/score.js:383
+msgid "Text File (.txt)"
+msgstr "File di test (.txt)"
+
+#: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
 msgstr "Invie aplicazion"
 
-#: src/plugins/launcher/launcher-action-factory.c:48
+#: src/plugins/launcher/launcher-action-factory.c:47
+msgid "Open File"
+msgstr "Vierç file"
+
+#: src/plugins/launcher/launcher-action-factory.c:53
 msgid "Open URL"
 msgstr "Vierç URL"
 
@@ -331,7 +412,15 @@ msgstr "Vierç URL"
 msgid "Choose Application"
 msgstr "Sielç aplicazion"
 
-#: src/plugins/launcher/launcher-open-url-action.c:101
+#: src/plugins/launcher/launcher-open-file-action.c:68
+msgid "No file selected"
+msgstr "Nissun file selezionât"
+
+#: src/plugins/launcher/launcher-open-file-action.c:156
+msgid "Select File"
+msgstr "Selezione un file"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
 msgstr "URL"
 
@@ -339,14 +428,53 @@ msgstr "URL"
 msgid "Launcher"
 msgstr "Inviadôr"
 
-#: src/plugins/obs-studio/obs-action-factory.c:48
+#: src/plugins/network/network-action-factory.c:41
+msgid "HTTP Request"
+msgstr "Richieste HTTP"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "Invie richiestis GET e POST a un servidôr web"
+
+#: src/plugins/network/network-http-action-prefs.c:146
+msgid "Select payload file"
+msgstr "Selezione file di dâts utii"
+
+#: src/plugins/network/network-http-action-prefs.ui:14
+#| msgid "URL"
+msgid "URI"
+msgstr "URI"
+
+#: src/plugins/network/network-http-action-prefs.ui:22
+msgid "Method"
+msgstr "Metodi"
+
+#: src/plugins/network/network-http-action-prefs.ui:45
+msgid "Payload source"
+msgstr "Sorzint dâts utii"
+
+#: src/plugins/network/network-http-action-prefs.ui:82
+msgid "Edit payload"
+msgstr "Modifiche dâts utii"
+
+#: src/plugins/network/network-http-action-prefs.ui:99
+msgid "HTTP Request Payload"
+msgstr "Dâts utii de richieste HTTP"
+
+#: src/plugins/network/network.plugin.desktop.in:3
+msgid "Network"
+msgstr "Rêt"
+
+#: src/plugins/obs-studio/obs-action-factory.c:46
 msgid "Switch Scene"
 msgstr "Cambie sene"
 
-#: src/plugins/obs-studio/obs-action-factory.c:54
+#. Translators: "Record" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:53
 msgid "Record"
 msgstr "Regjistre"
 
+#. Translators: "Stream" is a verb here
 #: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "Flus"
@@ -428,15 +556,15 @@ msgstr "Sorzint"
 msgid "OBS Studio"
 msgstr "OBS Studio"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:45
+#: src/plugins/soundboard/soundboard-action-factory.c:42
 msgid "Music Player"
 msgstr "Letôr musicâl"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:46
+#: src/plugins/soundboard/soundboard-action-factory.c:43
 msgid "Control the active music player"
 msgstr "Controle la ativitât dal letôr musicâl"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:51
+#: src/plugins/soundboard/soundboard-action-factory.c:48
 msgid "Play Audio"
 msgstr "Riprodûs audio"
 
@@ -446,7 +574,7 @@ msgstr "Sucessîf"
 
 #: src/plugins/soundboard/soundboard-mpris-action.c:198
 msgid "Pause"
-msgstr "!"
+msgstr "Pause"
 
 #: src/plugins/soundboard/soundboard-mpris-action.c:199
 msgid "Play"
@@ -468,17 +596,13 @@ msgstr "Riprodûs / Pause"
 msgid "Playback Action"
 msgstr "Azion di riproduzion"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
-msgid "Select audio file"
-msgstr "Selezione file audio"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:96
 msgid "Audio Files"
 msgstr "Files audio"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "File"
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Select audio file"
+msgstr "Selezione file audio"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
@@ -507,3 +631,27 @@ msgstr "Volum"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Schede audio"
+
+#~ msgid "Georges Basile Stavracas Neto"
+#~ msgstr "Georges Basile Stavracas Neto"
+
+#~ msgid "Profiles"
+#~ msgstr "Profîi"
+
+#~ msgid "Manage profiles…"
+#~ msgstr "Gjestìs profîi…"
+
+#~ msgid "Create"
+#~ msgstr "Cree"
+
+#~ msgid "Power"
+#~ msgstr "Alimentazion"
+
+#~ msgid "Device"
+#~ msgstr "Dispositîf"
+
+#~ msgid "Serial Number"
+#~ msgstr "Numar seriâl"
+
+#~ msgid "Devices"
+#~ msgstr "Dispositîfs"
