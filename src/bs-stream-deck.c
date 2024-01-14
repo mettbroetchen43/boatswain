@@ -423,13 +423,15 @@ static gboolean
 read_button_states_mini (BsStreamDeck *self)
 {
   const BsStreamDeckButtonLayout *layout;
-  g_autofree uint8_t *states = NULL;
+  uint8_t *states;
   size_t states_length;
   int result;
 
   layout = &self->model_info->button_layout;
   states_length = layout->n_buttons + 1;
-  states = g_malloc0 (sizeof (uint8_t) * states_length);
+
+  g_assert (states_length < 8192);
+  states = g_alloca (sizeof (uint8_t) * states_length);
 
   result = hid_read (self->handle, states, states_length);
 
@@ -605,13 +607,15 @@ static gboolean
 read_button_states_original (BsStreamDeck *self)
 {
   const BsStreamDeckButtonLayout *layout;
-  g_autofree uint8_t *states = NULL;
+  uint8_t *states;
   size_t states_length;
   int result;
 
   layout = &self->model_info->button_layout;
   states_length = layout->n_buttons + 1;
-  states = g_malloc0 (sizeof (uint8_t) * states_length);
+
+  g_assert (states_length < 8192);
+  states = g_alloca (sizeof (uint8_t) * states_length);
 
   result = hid_read (self->handle, states, states_length);
 
@@ -774,13 +778,15 @@ static gboolean
 read_button_states_gen2 (BsStreamDeck *self)
 {
   const BsStreamDeckButtonLayout *layout;
-  g_autofree uint8_t *states = NULL;
+  uint8_t *states;
   size_t states_length;
   int result;
 
   layout = &self->model_info->button_layout;
   states_length = layout->n_buttons + 4;
-  states = g_malloc0 (sizeof (uint8_t) * states_length);
+
+  g_assert (states_length < 8192);
+  states = g_alloca (sizeof (uint8_t) * states_length);
 
   result = hid_read (self->handle, states, states_length);
 
