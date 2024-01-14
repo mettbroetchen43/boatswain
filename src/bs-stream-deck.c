@@ -458,7 +458,7 @@ read_button_states_mini (BsStreamDeck *self)
 static void
 reset_mini_original (BsStreamDeck *self)
 {
-  uint8_t reset_command[] = {
+  const uint8_t reset_command[] = {
     0x0b,
     0x63, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -511,8 +511,8 @@ static void
 set_brightness_mini_original (BsStreamDeck *self,
                               gdouble       brightness)
 {
-  uint8_t b = CLAMP (brightness * 100, 0, 100);
-  uint8_t data[] = {
+  const uint8_t b = CLAMP (brightness * 100, 0, 100);
+  const uint8_t data[] = {
     0x05,
     0x55, 0xaa, 0xd1, 0x01, b   , 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -698,8 +698,8 @@ static void
 set_brightness_gen2 (BsStreamDeck *self,
                      gdouble       brightness)
 {
-  uint8_t b = CLAMP (brightness * 100, 0, 100);
-  uint8_t data[] = {
+  const uint8_t b = CLAMP (brightness * 100, 0, 100);
+  const uint8_t data[] = {
     0x03,
     0x08, b   , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
