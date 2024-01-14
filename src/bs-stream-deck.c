@@ -141,20 +141,18 @@ static void
 update_pages (BsStreamDeck *self)
 {
   BsPage *active_page;
-  GList *l;
-  unsigned int i;
 
   BS_ENTRY;
 
   active_page = bs_stream_deck_get_active_page (self);
 
-  for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
+  for (size_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
     {
       BsStreamDeckButton *stream_deck_button = g_ptr_array_index (self->buttons, i);
       bs_page_update_item_from_button (active_page, stream_deck_button);
     }
 
-  for (l = g_queue_peek_head_link (self->active_pages); l; l = l->next)
+  for (GList *l = g_queue_peek_head_link (self->active_pages); l; l = l->next)
     bs_page_update_all_items (l->data);
 
   BS_EXIT;
@@ -169,7 +167,6 @@ save_profiles (BsStreamDeck *self)
   g_autoptr (GError) error = NULL;
   g_autofree char *profile_path = NULL;
   g_autofree char *json_str = NULL;
-  unsigned int i;
 
   BS_ENTRY;
 
@@ -189,7 +186,7 @@ save_profiles (BsStreamDeck *self)
 
   json_builder_set_member_name (builder, "profiles");
   json_builder_begin_array (builder);
-  for (i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->profiles)); i++)
+  for (size_t i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->profiles)); i++)
     {
       g_autoptr (BsProfile) profile = NULL;
 
@@ -223,11 +220,10 @@ load_profiles (BsStreamDeck  *self)
   g_autoptr (BsProfile) active_profile = NULL;
   g_autoptr (GError) local_error = NULL;
   g_autofree char *profile_path = NULL;
+  const char *active_profile_id;
   JsonObject *object;
   JsonArray *profiles_array;
   JsonNode *root;
-  unsigned int i;
-  const char *active_profile_id;
 
   BS_ENTRY;
 
@@ -253,7 +249,7 @@ load_profiles (BsStreamDeck  *self)
   active_profile_id = json_object_get_string_member (object, "active-profile");
 
   profiles_array = json_object_get_array_member (object, "profiles");
-  for (i = 0; i < json_array_get_length (profiles_array); i++)
+  for (size_t i = 0; i < json_array_get_length (profiles_array); i++)
     {
       g_autoptr (BsProfile) profile = NULL;
       JsonNode *profile_node;
@@ -290,13 +286,12 @@ static void
 load_active_page (BsStreamDeck *self)
 {
   BsPage *active_page;
-  uint8_t i;
 
   BS_ENTRY;
 
   active_page = bs_stream_deck_get_active_page (self);
 
-  for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
+  for (uint8_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
     {
       BsStreamDeckButton *stream_deck_button;
       g_autoptr (BsAction) action = NULL;
@@ -430,7 +425,6 @@ read_button_states_mini (BsStreamDeck *self)
   const BsStreamDeckButtonLayout *layout;
   g_autofree uint8_t *states = NULL;
   size_t states_length;
-  uint8_t i;
   int result;
 
   layout = &self->model_info->button_layout;
@@ -442,7 +436,7 @@ read_button_states_mini (BsStreamDeck *self)
   if (result == 0)
     return TRUE;
 
-  for (i = 0; i < layout->n_buttons; i++)
+  for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
       BsStreamDeckButton *button = g_ptr_array_index (self->buttons, i);
       gboolean pressed = (gboolean) states[i + 1];
@@ -613,7 +607,6 @@ read_button_states_original (BsStreamDeck *self)
   const BsStreamDeckButtonLayout *layout;
   g_autofree uint8_t *states = NULL;
   size_t states_length;
-  uint8_t i;
   int result;
 
   layout = &self->model_info->button_layout;
@@ -625,7 +618,7 @@ read_button_states_original (BsStreamDeck *self)
   if (result == 0)
     return TRUE;
 
-  for (i = 0; i < layout->n_buttons; i++)
+  for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
       uint8_t position = swap_button_index_original (self, i);
       BsStreamDeckButton *button = g_ptr_array_index (self->buttons, position);
@@ -783,7 +776,6 @@ read_button_states_gen2 (BsStreamDeck *self)
   const BsStreamDeckButtonLayout *layout;
   g_autofree uint8_t *states = NULL;
   size_t states_length;
-  uint8_t i;
   int result;
 
   layout = &self->model_info->button_layout;
@@ -795,7 +787,7 @@ read_button_states_gen2 (BsStreamDeck *self)
   if (result == 0)
     return TRUE;
 
-  for (i = 0; i < layout->n_buttons; i++)
+  for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
       BsStreamDeckButton *button = g_ptr_array_index (self->buttons, i);
       gboolean pressed = (gboolean) states[i + 4];
@@ -1201,7 +1193,6 @@ bs_stream_deck_initable_init (GInitable     *initable,
                               GError       **error)
 {
   BsStreamDeck *self = BS_STREAM_DECK (initable);
-  size_t i;
 
   BS_ENTRY;
 
@@ -1228,7 +1219,7 @@ bs_stream_deck_initable_init (GInitable     *initable,
       BS_RETURN (FALSE);
     }
 
-  for (i = 0; i < G_N_ELEMENTS (models_vtable); i++)
+  for (size_t i = 0; i < G_N_ELEMENTS (models_vtable); i++)
     {
       if (g_usb_device_get_pid (self->device) == models_vtable[i].product_id)
         {
@@ -1269,7 +1260,7 @@ out:
   self->icon_renderer = bs_icon_renderer_new (&self->model_info->icon_layout);
   self->icon = g_themed_icon_new (self->model_info->icon_name);
 
-  for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
+  for (size_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
     g_ptr_array_add (self->buttons, bs_stream_deck_button_new (self, i));
 
   self->initialized = TRUE;
@@ -1717,7 +1708,6 @@ void
 bs_stream_deck_pop_page (BsStreamDeck *self)
 {
   g_autoptr (BsPage) page = NULL;
-  unsigned int i;
 
   g_return_if_fail (BS_IS_STREAM_DECK (self));
   g_return_if_fail (g_queue_get_length (self->active_pages) > 1);
@@ -1726,7 +1716,7 @@ bs_stream_deck_pop_page (BsStreamDeck *self)
 
   page = g_queue_pop_head (self->active_pages);
 
-  for (i = 0; i < self->model_info->button_layout.n_buttons; i++)
+  for (size_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
     bs_page_update_item_from_button (page, g_ptr_array_index (self->buttons, i));
 
   bs_page_update_all_items (g_queue_peek_head (self->active_pages));
