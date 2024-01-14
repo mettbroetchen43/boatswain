@@ -476,8 +476,8 @@ reset_mini_original (BsStreamDeck *self)
 static char *
 get_serial_number_mini_original (BsStreamDeck *self)
 {
+  g_autofree char *serial = NULL;
   uint8_t data[17];
-  char *serial;
 
   BS_ENTRY;
 
@@ -488,14 +488,14 @@ get_serial_number_mini_original (BsStreamDeck *self)
   serial = g_malloc0 (sizeof (char) * 13);
   memcpy (serial, &data[5], 12);
 
-  BS_RETURN (serial);
+  BS_RETURN (g_steal_pointer (&serial));
 }
 
 static char *
 get_firmware_version_mini_original (BsStreamDeck *self)
 {
+  g_autofree char *firmware_version = NULL;
   uint8_t data[17];
-  char *serial;
 
   BS_ENTRY;
 
@@ -503,10 +503,10 @@ get_firmware_version_mini_original (BsStreamDeck *self)
 
   hid_get_feature_report (self->handle, data, sizeof (data));
 
-  serial = g_malloc0 (sizeof (char) * 13);
-  memcpy (serial, &data[5], 12);
+  firmware_version = g_malloc0 (sizeof (char) * 13);
+  memcpy (firmware_version, &data[5], 12);
 
-  BS_RETURN (serial);
+  BS_RETURN (g_steal_pointer (&firmware_version));
 }
 
 static void
