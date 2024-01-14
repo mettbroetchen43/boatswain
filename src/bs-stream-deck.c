@@ -35,6 +35,8 @@
 
 #define POLL_RATE_MS 16
 
+G_STATIC_ASSERT (sizeof (unsigned char) == sizeof (uint8_t));
+
 typedef struct {
   uint8_t product_id;
   const char *name;
@@ -362,8 +364,8 @@ set_button_texture_mini (BsStreamDeck  *self,
                          GdkTexture    *texture,
                          GError       **error)
 {
-  g_autofree unsigned char *payload = NULL;
-  g_autofree unsigned char *buffer = NULL;
+  g_autofree uint8_t *payload = NULL;
+  g_autofree uint8_t *buffer = NULL;
   const size_t package_size = 1024;
   const size_t header_size = 16;
   size_t bytes_remaining;
@@ -375,7 +377,7 @@ set_button_texture_mini (BsStreamDeck  *self,
   if (!bs_icon_renderer_convert_texture (self->icon_renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
-  payload = g_malloc (sizeof (unsigned char) * package_size);
+  payload = g_malloc (sizeof (uint8_t) * package_size);
   payload[0] = 0x02;
   payload[1] = 0x01;
   /* payload[2] set in loop */
@@ -425,15 +427,15 @@ set_button_texture_mini (BsStreamDeck  *self,
 static gboolean
 read_button_states_mini (BsStreamDeck *self)
 {
-  g_autofree unsigned char *states = NULL;
   const BsStreamDeckButtonLayout *layout;
+  g_autofree uint8_t *states = NULL;
   size_t states_length;
   uint8_t i;
   int result;
 
   layout = &self->model_info->button_layout;
   states_length = layout->n_buttons + 1;
-  states = g_malloc0 (sizeof (unsigned char) * states_length);
+  states = g_malloc0 (sizeof (uint8_t) * states_length);
 
   result = hid_read (self->handle, states, states_length);
 
@@ -462,7 +464,7 @@ read_button_states_mini (BsStreamDeck *self)
 static void
 reset_mini_original (BsStreamDeck *self)
 {
-  unsigned char reset_command[] = {
+  uint8_t reset_command[] = {
     0x0b,
     0x63, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -478,7 +480,7 @@ reset_mini_original (BsStreamDeck *self)
 static char *
 get_serial_number_mini_original (BsStreamDeck *self)
 {
-  unsigned char data[17];
+  uint8_t data[17];
   char *serial;
 
   BS_ENTRY;
@@ -496,7 +498,7 @@ get_serial_number_mini_original (BsStreamDeck *self)
 static char *
 get_firmware_version_mini_original (BsStreamDeck *self)
 {
-  unsigned char data[17];
+  uint8_t data[17];
   char *serial;
 
   BS_ENTRY;
@@ -515,8 +517,8 @@ static void
 set_brightness_mini_original (BsStreamDeck *self,
                               gdouble       brightness)
 {
-  unsigned char b = CLAMP (brightness * 100, 0, 100);
-  unsigned char data[] = {
+  uint8_t b = CLAMP (brightness * 100, 0, 100);
+  uint8_t data[] = {
     0x05,
     0x55, 0xaa, 0xd1, 0x01, b   , 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -535,8 +537,8 @@ set_button_texture_original (BsStreamDeck  *self,
                              GdkTexture    *texture,
                              GError       **error)
 {
-  g_autofree unsigned char *payload = NULL;
-  g_autofree unsigned char *buffer = NULL;
+  g_autofree uint8_t *payload = NULL;
+  g_autofree uint8_t *buffer = NULL;
   const size_t package_size = 8191;
   const size_t header_size = 16;
   size_t bytes_remaining;
@@ -558,7 +560,7 @@ set_button_texture_original (BsStreamDeck  *self,
   g_assert (buffer_size == 15606);
   g_assert (package_size - header_size >= report_size);
 
-  payload = g_malloc (sizeof (unsigned char) * package_size);
+  payload = g_malloc (sizeof (uint8_t) * package_size);
   payload[0] = 0x02;
   payload[1] = 0x01;
   /* payload[2] set in loop */
@@ -608,15 +610,15 @@ set_button_texture_original (BsStreamDeck  *self,
 static gboolean
 read_button_states_original (BsStreamDeck *self)
 {
-  g_autofree unsigned char *states = NULL;
   const BsStreamDeckButtonLayout *layout;
+  g_autofree uint8_t *states = NULL;
   size_t states_length;
   uint8_t i;
   int result;
 
   layout = &self->model_info->button_layout;
   states_length = layout->n_buttons + 1;
-  states = g_malloc0 (sizeof (unsigned char) * states_length);
+  states = g_malloc0 (sizeof (uint8_t) * states_length);
 
   result = hid_read (self->handle, states, states_length);
 
@@ -648,7 +650,7 @@ read_button_states_original (BsStreamDeck *self)
 static void
 reset_gen2 (BsStreamDeck *self)
 {
-  const unsigned char reset_command[] = {
+  const uint8_t reset_command[] = {
       0x03,
       0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -666,7 +668,7 @@ reset_gen2 (BsStreamDeck *self)
 static char *
 get_serial_number_gen2 (BsStreamDeck *self)
 {
-  unsigned char data[32];
+  uint8_t data[32];
   char *serial;
 
   BS_ENTRY;
@@ -684,7 +686,7 @@ get_serial_number_gen2 (BsStreamDeck *self)
 static char *
 get_firmware_version_gen2 (BsStreamDeck *self)
 {
-  unsigned char data[32];
+  uint8_t data[32];
   char *serial;
 
   BS_ENTRY;
@@ -703,8 +705,8 @@ static void
 set_brightness_gen2 (BsStreamDeck *self,
                      gdouble       brightness)
 {
-  unsigned char b = CLAMP (brightness * 100, 0, 100);
-  unsigned char data[] = {
+  uint8_t b = CLAMP (brightness * 100, 0, 100);
+  uint8_t data[] = {
     0x03,
     0x08, b   , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -725,8 +727,8 @@ set_button_texture_gen2 (BsStreamDeck  *self,
                          GdkTexture    *texture,
                          GError       **error)
 {
-  g_autofree unsigned char *payload = NULL;
-  g_autofree unsigned char *buffer = NULL;
+  g_autofree uint8_t *payload = NULL;
+  g_autofree uint8_t *buffer = NULL;
   const size_t package_size = 1024;
   const size_t header_size = 8;
   size_t bytes_remaining;
@@ -738,7 +740,7 @@ set_button_texture_gen2 (BsStreamDeck  *self,
   if (!bs_icon_renderer_convert_texture (self->icon_renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
-  payload = g_malloc (package_size * sizeof (unsigned char));
+  payload = g_malloc (package_size * sizeof (uint8_t));
   payload[0] = 0x02;
   payload[1] = 0x07;
   payload[2] = button;
@@ -766,7 +768,7 @@ set_button_texture_gen2 (BsStreamDeck  *self,
       if (padding_size > 0)
         memset (payload + header_size + chunk_size, 0, padding_size);
 
-      hid_write (self->handle, payload, package_size * sizeof (unsigned char));
+      hid_write (self->handle, payload, package_size * sizeof (uint8_t));
 
       bytes_remaining -= chunk_size;
       page++;
@@ -778,15 +780,15 @@ set_button_texture_gen2 (BsStreamDeck  *self,
 static gboolean
 read_button_states_gen2 (BsStreamDeck *self)
 {
-  g_autofree unsigned char *states = NULL;
   const BsStreamDeckButtonLayout *layout;
+  g_autofree uint8_t *states = NULL;
   size_t states_length;
   uint8_t i;
   int result;
 
   layout = &self->model_info->button_layout;
   states_length = layout->n_buttons + 4;
-  states = g_malloc0 (sizeof (unsigned char) * states_length);
+  states = g_malloc0 (sizeof (uint8_t) * states_length);
 
   result = hid_read (self->handle, states, states_length);
 
