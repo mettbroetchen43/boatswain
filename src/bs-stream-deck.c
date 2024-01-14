@@ -363,9 +363,9 @@ set_button_texture_mini (BsStreamDeck  *self,
   g_autofree uint8_t *buffer = NULL;
   const size_t package_size = 1024;
   const size_t header_size = 16;
+  uint8_t page;
   size_t bytes_remaining;
   size_t buffer_size;
-  size_t page;
 
   BS_ENTRY;
 
@@ -537,10 +537,10 @@ set_button_texture_original (BsStreamDeck  *self,
   g_autofree uint8_t *buffer = NULL;
   const size_t package_size = 8191;
   const size_t header_size = 16;
+  uint8_t page;
   size_t bytes_remaining;
   size_t report_size;
   size_t buffer_size;
-  size_t page;
 
   BS_ENTRY;
 
@@ -728,9 +728,9 @@ set_button_texture_gen2 (BsStreamDeck  *self,
   g_autofree uint8_t *buffer = NULL;
   const size_t package_size = 1024;
   const size_t header_size = 8;
+  uint8_t page;
   size_t bytes_remaining;
   size_t buffer_size;
-  size_t page;
 
   BS_ENTRY;
 
