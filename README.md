@@ -9,7 +9,7 @@ Control Elgato Stream Deck devices.
  * Play sound effects during your streams
  * Control OBS Studio using Stream Deck (requires the obs-websocket extension)
 
-![Boatswain Screenshot](https://gitlab.gnome.org/World/boatswain/-/raw/main/data/stream-deck-original.png)
+![Boatswain Screenshot](https://gitlab.gnome.org/World/boatswain/-/raw/main/data/screenshots/stream-deck-original.png)
 
 ## Contributing
 
