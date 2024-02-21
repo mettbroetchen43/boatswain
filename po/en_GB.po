@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2022-05-12 20:44+0000\n"
-"PO-Revision-Date: 2022-05-13 14:28+0100\n"
-"Last-Translator: Bruce Cowan <bruce@bcowan.me.uk>\n"
+"POT-Creation-Date: 2023-12-26 19:55+0000\n"
+"PO-Revision-Date: 2024-02-21 19:30+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English - United Kingdom <en@li.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 42.0\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -28,50 +28,71 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
-msgid "Control your Elgato Stream Deck devices"
-msgstr "Control your Elgato Stream Deck devices"
-
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#| msgid "Control your Elgato Stream Deck devices"
+msgid "Control your Elgato Stream Decks"
+msgstr "Control your Elgato Stream Decks"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Boatswain allows you to control Elgato Stream Deck devices."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "With Boatswain you will be able to:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Organise your actions in pages and profiles"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Set custom icons to actions"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid "Control your music player"
 msgstr "Control your music player"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Play sound effects during your streams"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 
-#. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
-msgid "Georges Basile Stavracas Neto"
-msgstr "Georges Basile Stavracas Neto"
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+msgid "Send network requests"
+msgstr "Send network requests"
 
-#: src/bs-application.c:53
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+msgid "Keep track of your gaming score"
+msgstr "Keep track of your gaming score"
+
+#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+#| msgid "Launch Application"
+msgid "Open files and launch applications"
+msgstr "Open files and launch applications"
+
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "Restore token for the desktop controller"
+
+#: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "Enable debug messages"
 
-#: src/bs-application.c:76
+#: src/bs-application.c:117
+#, c-format
+msgid "Connected to %d device"
+msgid_plural "Connected to %d devices"
+msgstr[0] "Connected to %d device"
+msgstr[1] "Connected to %d devices"
+
+#: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
@@ -83,155 +104,151 @@ msgstr ""
 msgid "Unnamed profile"
 msgstr "Unnamed profile"
 
-#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:58
+#: src/bs-profile-row.ui:8 src/bs-profile-row.ui:87
 msgid "Rename"
 msgstr "Rename"
 
 #: src/bs-profile-row.ui:14
-msgid "Move _up"
-msgstr "Move _up"
+#| msgid "Move _up"
+msgid "Move up"
+msgstr "Move up"
 
 #: src/bs-profile-row.ui:18
-msgid "Move _down"
-msgstr "Move _down"
+#| msgid "Move _down"
+msgid "Move down"
+msgstr "Move down"
 
-#: src/bs-profiles-dialog.ui:26
-msgid "Profiles"
-msgstr "Profiles"
+#: src/bs-profile-row.ui:24
+msgid "Delete"
+msgstr "Delete"
 
-#: src/bs-stream-deck.c:272
+#: src/bs-stream-deck.c:278
 msgid "Default"
 msgstr "Default"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:815
+#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:841 src/bs-stream-deck.c:867
-#: src/plugins/default/default-switch-profile-action.c:285
+#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/plugins/default/default-switch-profile-action.c:283
+#: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
 msgstr "Stream Deck"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:893
+#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:919
+#: src/bs-stream-deck.c:1004
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
-#: src/bs-stream-deck-button-editor.c:380
-msgid "Select icon"
-msgstr "Select icon"
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1030
+#| msgid "Stream Deck"
+msgid "Stream Deck Pedal"
+msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck-button-editor.c:383
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:98
-msgid "_Open"
-msgstr "_Open"
+#: src/bs-stream-deck.c:1099
+msgid "Feaneron Hangar Original"
+msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck-button-editor.c:384
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:99
-msgid "_Cancel"
-msgstr "_Cancel"
+#: src/bs-stream-deck.c:1122
+msgid "Feaneron Hangar XL"
+msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:388
+#: src/bs-stream-deck-button-editor.c:389
 msgid "All supported formats"
 msgstr "All supported formats"
 
-#: src/bs-stream-deck-button-editor.ui:17
+#: src/bs-stream-deck-button-editor.c:398
+msgid "Select icon"
+msgstr "Select icon"
+
+#: src/bs-stream-deck-button-editor.c:399
+#: src/plugins/network/network-http-action-prefs.c:147
+#| msgid "_Open"
+msgid "Open"
+msgstr "Open"
+
+#: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
 msgstr "Select a button"
 
-#: src/bs-stream-deck-button-editor.ui:188
+#: src/bs-stream-deck-button-editor.ui:45
+msgid "Button Properties"
+msgstr "Button Properties"
+
+#: src/bs-stream-deck-button-editor.ui:221
 msgid "Name"
 msgstr "Name"
 
-#: src/bs-stream-deck-button-editor.ui:195
+#: src/bs-stream-deck-button-editor.ui:228
 msgid "Background Color"
 msgstr "Background Colour"
 
-#: src/bs-stream-deck-button-editor.ui:226
-#: src/bs-stream-deck-button-editor.ui:288
+#: src/bs-stream-deck-button-editor.ui:264
 msgid "Select action"
 msgstr "Select action"
 
-#: src/bs-stream-deck-button-editor.ui:247
+#: src/bs-stream-deck-button-editor.ui:285
 msgid "Remove Action"
 msgstr "Remove Action"
 
-#: src/bs-window.ui:13
-msgid "_New profile"
-msgstr "_New profile"
+#: src/bs-stream-deck-button-editor.ui:308
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Actions"
 
-#: src/bs-window.ui:19
-msgid "Manage profiles…"
-msgstr "Manage profiles…"
+#: src/bs-window.ui:113
+#| msgid "_New profile"
+msgid "New profile…"
+msgstr "New profile…"
 
-#: src/bs-window.ui:60
-msgid "Create"
-msgstr "Create"
-
-#: src/bs-window.ui:112
-msgid "Power"
-msgstr "Power"
-
-#: src/bs-window.ui:128 src/plugins/default/default-action-factory.c:56
+#: src/bs-window.ui:138 src/plugins/default/default-action-factory.c:54
 msgid "Brightness"
 msgstr "Brightness"
 
-#: src/bs-window.ui:164
-msgid "Device"
-msgstr "Device"
-
-#: src/bs-window.ui:180
-msgid "Serial Number"
-msgstr "Serial Number"
-
-#: src/bs-window.ui:207
+#: src/bs-window.ui:174
 msgid "Firmware"
 msgstr "Firmware"
 
-#: src/bs-window.ui:255
-msgid "Devices"
-msgstr "Devices"
-
-#: src/bs-window.ui:299
+#: src/bs-window.ui:232
 msgid "No Stream Deck Found"
 msgstr "No Stream Deck Found"
 
-#: src/bs-window.ui:300
+#: src/bs-window.ui:233
 msgid "Plug in a Stream Deck device to use it."
 msgstr "Plug in a Stream Deck device to use it."
 
-#: src/bs-window.ui:311
+#: src/bs-window.ui:256
 msgid "_Keyboard Shortcuts"
 msgstr "_Keyboard Shortcuts"
 
-#: src/bs-window.ui:315
+#: src/bs-window.ui:260
 msgid "_About Boatswain"
 msgstr "_About Boatswain"
 
-#: src/bs-window.ui:319
+#: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "_Quit"
 
-#: src/bs-window.c:328
-msgid "Copyright © 2022 Georges Basile Stavracas Neto"
-msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
-
-#: src/bs-window.c:336
+#: src/bs-window.c:272
 msgid "Repository"
 msgstr "Repository"
 
@@ -250,40 +267,41 @@ msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Quit"
 
-#: src/plugins/default/default-action-factory.c:44
+#: src/plugins/default/default-action-factory.c:42
 msgid "Folder"
 msgstr "Folder"
 
-#: src/plugins/default/default-action-factory.c:50
+#: src/plugins/default/default-action-factory.c:48
 msgid "Switch Profile"
 msgstr "Switch Profile"
 
-#: src/plugins/default/default-action-factory.c:62
+#: src/plugins/default/default-action-factory.c:60
 msgid "Multiple Actions"
 msgstr "Multiple Actions"
 
-#: src/plugins/default/default-brightness-action.c:140
+#. Translators: "Constant" as in "Constant value of brightness"
+#: src/plugins/default/default-brightness-action.c:141
 msgid "Constant"
 msgstr "Constant"
 
-#: src/plugins/default/default-brightness-action.c:141
+#: src/plugins/default/default-brightness-action.c:142
 msgid "Increase"
 msgstr "Increase"
 
-#: src/plugins/default/default-brightness-action.c:142
+#: src/plugins/default/default-brightness-action.c:143
 msgid "Decrease"
 msgstr "Decrease"
 
-#: src/plugins/default/default-brightness-action.c:145
+#: src/plugins/default/default-brightness-action.c:146
 msgid "Mode"
 msgstr "Mode"
 
-#: src/plugins/default/default-brightness-action.c:152
+#: src/plugins/default/default-brightness-action.c:153
 msgid "Value"
 msgstr "Value"
 
 #: src/plugins/default/default-multi-action-editor.c:310
-#: src/plugins/default/default-multi-action-row.c:142
+#: src/plugins/default/default-multi-action-row.c:143
 msgid "Delay"
 msgstr "Delay"
 
@@ -295,10 +313,6 @@ msgstr "Add action"
 msgid "Add Action"
 msgstr "Add Action"
 
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Actions"
-
 #: src/plugins/default/default-multi-action-editor.ui:73
 msgid "Others"
 msgstr "Others"
@@ -307,15 +321,99 @@ msgstr "Others"
 msgid "Settings"
 msgstr "Settings"
 
-#: src/plugins/default/default-switch-profile-action.c:308
+#: src/plugins/default/default-switch-profile-action.c:306
 msgid "Profile"
 msgstr "Profile"
 
-#: src/plugins/launcher/launcher-action-factory.c:42
+#: src/plugins/desktop/desktop-action-factory.c:41
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+#| msgid "_Keyboard Shortcuts"
+msgid "Keyboard Shortcut"
+msgstr "Keyboard Shortcut"
+
+#: src/plugins/desktop/desktop-action-factory.c:42
+#| msgid "_Keyboard Shortcuts"
+msgid "Trigger a keyboard shortcut"
+msgstr "Trigger a keyboard shortcut"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:7
+#| msgctxt "shortcut window"
+#| msgid "Show Shortcuts"
+msgid "Set Shortcut"
+msgstr "Set Shortcut"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:66
+msgid "Press Esc to cancel"
+msgstr "Press Esc to cancel"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:100
+msgid "_Cancel"
+msgstr "_Cancel"
+
+#: src/plugins/desktop/desktop-shortcut-dialog.ui:109
+msgid "_Set"
+msgstr "_Set"
+
+#: src/plugins/desktop/desktop.plugin.desktop.in:3
+msgid "Desktop"
+msgstr "Desktop"
+
+#: src/plugins/gaming/gaming.js:37
+msgid "Score"
+msgstr "Score"
+
+#: src/plugins/gaming/gaming.js:38
+msgid "Keep track of your score. Reset with a long press."
+msgstr "Keep track of your score. Reset with a long press."
+
+#: src/plugins/gaming/gaming.plugin.desktop.in:3
+msgid "Gaming"
+msgstr "Gaming"
+
+#: src/plugins/gaming/score.js:39
+msgid "score.txt"
+msgstr "score.txt"
+
+#. Restore score
+#: src/plugins/gaming/score.js:322
+msgid "Restore Score"
+msgstr "Restore Score"
+
+#: src/plugins/gaming/score.js:341
+msgid "Text Color"
+msgstr "Text Colour"
+
+#: src/plugins/gaming/score.js:354
+msgid "Save to File"
+msgstr "Save to File"
+
+#: src/plugins/gaming/score.js:355
+msgid ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+msgstr ""
+"Save score to a text file. Other apps such as OBS Studio may read from it."
+
+#: src/plugins/gaming/score.js:364
+#: src/plugins/launcher/launcher-open-file-action.c:209
+#: src/plugins/network/network-http-action-prefs.ui:61
+#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
+msgid "File"
+msgstr "File"
+
+#: src/plugins/gaming/score.js:383
+msgid "Text File (.txt)"
+msgstr "Text File (.txt)"
+
+#: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
 msgstr "Launch Application"
 
-#: src/plugins/launcher/launcher-action-factory.c:48
+#: src/plugins/launcher/launcher-action-factory.c:47
+#| msgid "File"
+msgid "Open File"
+msgstr "Open File"
+
+#: src/plugins/launcher/launcher-action-factory.c:53
 msgid "Open URL"
 msgstr "Open URL"
 
@@ -323,31 +421,88 @@ msgstr "Open URL"
 msgid "Choose Application"
 msgstr "Choose Application"
 
-#: src/plugins/launcher/launcher-open-url-action.c:101
+#: src/plugins/launcher/launcher-open-file-action.c:68
+msgid "No file selected"
+msgstr "No file selected"
+
+#: src/plugins/launcher/launcher-open-file-action.c:156
+#| msgid "Select icon"
+msgid "Select File"
+msgstr "Select File"
+
+#: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
 msgstr "URL"
 
-#: src/plugins/obs-studio/obs-action-factory.c:47
+#: src/plugins/launcher/launcher.plugin.desktop.in:3
+msgid "Launcher"
+msgstr "Launcher"
+
+#: src/plugins/network/network-action-factory.c:41
+msgid "HTTP Request"
+msgstr "HTTP Request"
+
+#: src/plugins/network/network-action-factory.c:42
+msgid "Send GET and POST requests to a webserver"
+msgstr "Send GET and POST requests to a webserver"
+
+#: src/plugins/network/network-http-action-prefs.c:146
+#| msgid "Select audio file"
+msgid "Select payload file"
+msgstr "Select payload file"
+
+#: src/plugins/network/network-http-action-prefs.ui:14
+#| msgid "URL"
+msgid "URI"
+msgstr "URI"
+
+#: src/plugins/network/network-http-action-prefs.ui:22
+msgid "Method"
+msgstr "Method"
+
+#: src/plugins/network/network-http-action-prefs.ui:45
+msgid "Payload source"
+msgstr "Payload source"
+
+#: src/plugins/network/network-http-action-prefs.ui:82
+msgid "Edit payload"
+msgstr "Edit payload"
+
+#: src/plugins/network/network-http-action-prefs.ui:99
+msgid "HTTP Request Payload"
+msgstr "HTTP Request Payload"
+
+#: src/plugins/network/network.plugin.desktop.in:3
+msgid "Network"
+msgstr "Network"
+
+#: src/plugins/obs-studio/obs-action-factory.c:46
 msgid "Switch Scene"
 msgstr "Switch Scene"
 
+#. Translators: "Record" is a verb here
 #: src/plugins/obs-studio/obs-action-factory.c:53
 msgid "Record"
 msgstr "Record"
 
-#: src/plugins/obs-studio/obs-action-factory.c:59
+#. Translators: "Stream" is a verb here
+#: src/plugins/obs-studio/obs-action-factory.c:60
 msgid "Stream"
 msgstr "Stream"
 
-#: src/plugins/obs-studio/obs-action-factory.c:65
+#: src/plugins/obs-studio/obs-action-factory.c:66
+msgid "Virtual Camera"
+msgstr "Virtual Camera"
+
+#: src/plugins/obs-studio/obs-action-factory.c:72
 msgid "Toggle Mute"
 msgstr "Toggle Mute"
 
-#: src/plugins/obs-studio/obs-action-factory.c:71
+#: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
 msgstr "Show / Hide Source"
 
-#: src/plugins/obs-studio/obs-connection.c:770
+#: src/plugins/obs-studio/obs-connection.c:800
 msgid "Invalid password"
 msgstr "Invalid password"
 
@@ -408,57 +563,57 @@ msgstr "Audio Source"
 msgid "Source"
 msgstr "Source"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:45
+#: src/plugins/obs-studio/obs-studio.plugin.desktop.in:3
+msgid "OBS Studio"
+msgstr "OBS Studio"
+
+#: src/plugins/soundboard/soundboard-action-factory.c:42
 msgid "Music Player"
 msgstr "Music Player"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:46
+#: src/plugins/soundboard/soundboard-action-factory.c:43
 msgid "Control the active music player"
 msgstr "Control the active music player"
 
-#: src/plugins/soundboard/soundboard-action-factory.c:51
+#: src/plugins/soundboard/soundboard-action-factory.c:48
 msgid "Play Audio"
 msgstr "Play Audio"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:196
+#: src/plugins/soundboard/soundboard-mpris-action.c:197
 msgid "Next"
 msgstr "Next"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:197
+#: src/plugins/soundboard/soundboard-mpris-action.c:198
 msgid "Pause"
 msgstr "Pause"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:198
+#: src/plugins/soundboard/soundboard-mpris-action.c:199
 msgid "Play"
 msgstr "Play"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:199
+#: src/plugins/soundboard/soundboard-mpris-action.c:200
 msgid "Previous"
 msgstr "Previous"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:200
+#: src/plugins/soundboard/soundboard-mpris-action.c:201
 msgid "Stop"
 msgstr "Stop"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:201
+#: src/plugins/soundboard/soundboard-mpris-action.c:202
 msgid "Play / Pause"
 msgstr "Play / Pause"
 
-#: src/plugins/soundboard/soundboard-mpris-action.c:204
+#: src/plugins/soundboard/soundboard-mpris-action.c:205
 msgid "Playback Action"
 msgstr "Playback Action"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:95
-msgid "Select audio file"
-msgstr "Select audio file"
-
-#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:96
 msgid "Audio Files"
 msgstr "Audio Files"
 
-#: src/plugins/soundboard/soundboard-play-action-prefs.ui:8
-msgid "File"
-msgstr "File"
+#: src/plugins/soundboard/soundboard-play-action-prefs.c:103
+msgid "Select audio file"
+msgstr "Select audio file"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:27
 msgid "Play / Stop"
@@ -483,6 +638,37 @@ msgstr "Press & Hold"
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:40
 msgid "Volume"
 msgstr "Volume"
+
+#: src/plugins/soundboard/soundboard.plugin.desktop.in:3
+msgid "Soundboard"
+msgstr "Soundboard"
+
+#~ msgid "Georges Basile Stavracas Neto"
+#~ msgstr "Georges Basile Stavracas Neto"
+
+#~ msgid "Profiles"
+#~ msgstr "Profiles"
+
+#~ msgid "Manage profiles…"
+#~ msgstr "Manage profiles…"
+
+#~ msgid "Create"
+#~ msgstr "Create"
+
+#~ msgid "Power"
+#~ msgstr "Power"
+
+#~ msgid "Device"
+#~ msgstr "Device"
+
+#~ msgid "Serial Number"
+#~ msgstr "Serial Number"
+
+#~ msgid "Devices"
+#~ msgstr "Devices"
+
+#~ msgid "Copyright © 2022 Georges Basile Stavracas Neto"
+#~ msgstr "Copyright © 2022 Georges Basile Stavracas Neto"
 
 #~ msgid "OBS Studio requires a password to be controlled by Boatswain"
 #~ msgstr "OBS Studio requires a password to be controlled by Boatswain"
