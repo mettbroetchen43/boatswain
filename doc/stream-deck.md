@@ -12,11 +12,11 @@ These are the specs of each device and its buttons:
 |---------------|------------|------------|--------|-------|-----------------------|
 | Mini          | 0x0063     | 6  (2 x 3) | BMP    | 80x80 | Y-flipped, rotated 90 |
 | Mini (v2)     | 0x0090     | 6  (2 x 3) | BMP    | 80x80 | Y-flipped, rotated 90 |
+| MK.2          | 0x0080     | 15 (3 x 5) | JPEG   | 72x72 | X-flipped, Y-flipped  |
 | Original (v1) | 0x0060     | 15 (3 x 5) | BMP    | 72x72 | X-flipped, Y-flipped  |
 | Original (v2) | 0x006d     | 15 (3 x 5) | JPEG   | 72x72 | X-flipped, Y-flipped  |
-| XL            | 0x006c     | 32 (4 x 8) | JPEG   | 96x96 | X-flipped, Y-flipped  |
-| MK.2          | 0x0080     | 15 (3 x 5) | JPEG   | 72x72 | X-flipped, Y-flipped  |
 | Pedal         | 0x0086     | 3  (1 x 3) | none   | none  | none                  |
+| XL            | 0x006c     | 32 (4 x 8) | JPEG   | 96x96 | X-flipped, Y-flipped  |
 
 # Commands
 
