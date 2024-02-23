@@ -839,6 +839,114 @@ reset_pedal (BsStreamDeck *self)
   BS_EXIT;
 }
 
+/* Stream Deck Plus */
+
+static inline int
+convert_dial_value (uint8_t value)
+{
+  if (value < 0x80)
+    return value;
+  else
+    return -(0x100 - (int) value);
+}
+
+static gboolean
+read_button_states_plus (BsStreamDeck *self)
+{
+  const BsStreamDeckButtonLayout *layout;
+  const size_t states_length = 14;
+  uint8_t *states;
+  int result;
+
+  layout = &self->model_info->button_layout;
+
+  g_assert (states_length < 8192);
+  states = g_alloca (sizeof (uint8_t) * states_length);
+
+  result = hid_read (self->handle, states, states_length);
+
+  if (result == 0)
+    return TRUE;
+
+  enum {
+    BUTTON_EVENT = 0x00,
+    TOUCHSCREEN_EVENT = 0x02,
+    DIAL_EVENT = 0x03,
+  } event_type = states[1];
+
+  switch (event_type)
+    {
+    case BUTTON_EVENT:
+      for (uint8_t i = 0; i < layout->n_buttons; i++)
+        {
+          BsStreamDeckButton *button = g_ptr_array_index (self->buttons, i);
+          gboolean pressed = (gboolean) states[i + 4];
+
+          if (bs_stream_deck_button_get_pressed (button) == pressed)
+            continue;
+
+          bs_stream_deck_button_set_pressed (button, pressed);
+
+          if (pressed)
+            g_signal_emit (self, signals[BUTTON_PRESSED], 0, button);
+          else
+            g_signal_emit (self, signals[BUTTON_RELEASED], 0, button);
+        }
+      break;
+
+    case TOUCHSCREEN_EVENT:
+      {
+        enum {
+          SHORT_PRESS = 1,
+          LONG_PRESS = 2,
+          SWIPE = 3,
+        } touch_event_type = states[4];
+        graphene_point_t position;
+
+        graphene_point_init (&position,
+                             (states[7] << 8) + states[6],
+                             (states[9] << 8) + states[8]);
+
+        g_debug ("Touchscreen event (%.0fx%.0f)", position.x, position.y);
+
+        switch (touch_event_type)
+          {
+          case SHORT_PRESS:
+            g_debug ("  Short press");
+            break;
+
+          case LONG_PRESS:
+            g_debug ("  Long press");
+            break;
+
+          case SWIPE:
+            {
+              graphene_point_t release_position;
+              graphene_point_init (&release_position,
+                                   (states[11] << 8) + states[10],
+                                   (states[13] << 8) + states[12]);
+              g_debug ("  Swipe (released position: %.0fx%.0f)", release_position.x, release_position.y);
+            }
+            break;
+          }
+      }
+      break;
+
+    case DIAL_EVENT:
+      g_debug ("Dial event");
+      for (uint8_t i = 0; i < 4; i++)
+        {
+          if (states[4] == 0x01)
+            g_debug ("  Dial %u rotation: %d", i, convert_dial_value (states[i + 5]));
+          else
+            g_debug ("  Dial %u pressed: %u", i, states[i + 5]);
+        }
+      break;
+    }
+
+  return TRUE;
+}
+
 static const StreamDeckModelInfo models_vtable[] = {
   {
     .product_id = STREAMDECK_MINI_PRODUCT_ID,
@@ -1047,6 +1155,32 @@ static const StreamDeckModelInfo models_vtable[] = {
     .set_brightness = set_brightness_pedal,
     .set_button_texture = set_button_texture_pedal,
     .read_button_states = read_button_states_gen2,
+  },
+  {
+    .product_id = STREAMDECK_PLUS_PRODUCT_ID,
+    /* Translators: this is a product name. In most cases, it is not translated.
+     * Please verify if Elgato translates their product names on your locale.
+     */
+    .name = N_("Stream Deck +"),
+    .icon_name = "input-dialpad-symbolic",
+    .button_layout = {
+      .n_buttons = 8,
+      .rows = 2,
+      .columns = 4,
+      .icon_size = 120,
+    },
+    .icon_layout = {
+      .width = 120,
+      .height = 120,
+      .format = BS_ICON_FORMAT_JPEG,
+      .flags = BS_ICON_RENDERER_FLAG_NONE,
+    },
+    .reset = reset_gen2,
+    .get_serial_number = get_serial_number_gen2,
+    .get_firmware_version = get_firmware_version_gen2,
+    .set_brightness = set_brightness_gen2,
+    .set_button_texture = set_button_texture_gen2,
+    .read_button_states = read_button_states_plus,
   },
 };
 
