@@ -76,8 +76,6 @@ double bs_stream_deck_get_brightness (BsStreamDeck *self);
 void bs_stream_deck_set_brightness (BsStreamDeck *self,
                                     double        brightness);
 
-BsIconRenderer * bs_stream_deck_get_icon_renderer (BsStreamDeck *self);
-
 BsStreamDeckButton * bs_stream_deck_get_button (BsStreamDeck *self,
                                                 uint8_t       position);
 

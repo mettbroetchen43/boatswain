@@ -1737,22 +1737,6 @@ bs_stream_deck_set_button_icon (BsStreamDeck  *self,
 }
 
 /**
- * bs_stream_deck_get_icon_renderer:
- * @self: a #BsStreamDeck
- *
- * Retrieves the #BsIconRenderer of @self.
- *
- * Returns: (transfer none): a #BsIconRenderer
- */
-BsIconRenderer *
-bs_stream_deck_get_icon_renderer (BsStreamDeck *self)
-{
-  g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
-
-  return self->icon_renderer;
-}
-
-/**
  * bs_stream_deck_get_button:
  * @self: a #BsStreamDeck
  * @position: position of the button
