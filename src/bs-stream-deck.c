@@ -55,7 +55,6 @@ typedef struct {
                                   GdkTexture    *texture,
                                   GError       **error);
   gboolean (*read_button_states) (BsStreamDeck *self);
-  guint poll_timeout_id;
 } StreamDeckModelInfo;
 
 typedef struct
