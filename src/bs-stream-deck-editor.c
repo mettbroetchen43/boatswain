@@ -30,6 +30,7 @@
 #include "bs-stream-deck-button-editor.h"
 #include "bs-stream-deck-button-widget.h"
 #include "bs-stream-deck-editor.h"
+#include "bs-stream-deck-private.h"
 
 #include <glib/gi18n.h>
 #include <libpeas.h>

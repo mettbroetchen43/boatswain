@@ -1658,21 +1658,13 @@ bs_stream_deck_get_icon (BsStreamDeck *self)
 }
 
 /**
- * bs_stream_deck_get_button_layout:
+ * bs_stream_deck_get_brightness:
  * @self: a #BsStreamDeck
  *
- * Retrieves the #BS of @self.
+ * Retrieves the current brightness of the device.
  *
- * Returns: (transfer none): a #BsIconRenderer
+ * Returns: device brightness ranging between [0.0, 1.0]
  */
-const BsStreamDeckButtonLayout *
-bs_stream_deck_get_button_layout (BsStreamDeck *self)
-{
-  g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
-
-  return &self->model_info->button_layout;
-}
-
 double
 bs_stream_deck_get_brightness (BsStreamDeck *self)
 {
@@ -1705,14 +1697,14 @@ bs_stream_deck_set_brightness (BsStreamDeck *self,
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_BRIGHTNESS]);
 }
 
-/**
- * bs_stream_deck_set_button_texture:
- * @self: a #BsStreamDeck
- *
- * Retrieves the #BsIconRenderer of @self.
- *
- * Returns: (transfer none): a #BsIconRenderer
- */
+const BsStreamDeckButtonLayout *
+bs_stream_deck_get_button_layout (BsStreamDeck *self)
+{
+  g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
+
+  return &self->model_info->button_layout;
+}
+
 gboolean
 bs_stream_deck_set_button_icon (BsStreamDeck  *self,
                                 uint8_t        button,
@@ -1736,15 +1728,6 @@ bs_stream_deck_set_button_icon (BsStreamDeck  *self,
   return self->model_info->set_button_texture (self, button, texture, error);
 }
 
-/**
- * bs_stream_deck_get_button:
- * @self: a #BsStreamDeck
- * @position: position of the button
- *
- * Retrieves the #BsStreamDeckButton at @position.
- *
- * Returns: (transfer none): a #BsStreamDeckButton
- */
 BsStreamDeckButton *
 bs_stream_deck_get_button (BsStreamDeck *self,
                            uint8_t       position)

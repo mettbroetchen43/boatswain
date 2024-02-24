@@ -22,7 +22,29 @@
 
 #include "bs-stream-deck.h"
 
+#include <gusb.h>
+
 G_BEGIN_DECLS
+
+typedef struct
+{
+  uint8_t n_buttons;
+  uint8_t rows;
+  uint8_t columns;
+  uint32_t icon_size;
+} BsStreamDeckButtonLayout;
+
+BsStreamDeck * bs_stream_deck_new (GUsbDevice  *gusb_device,
+                                   GError     **error);
+
+BsStreamDeck * bs_stream_deck_new_fake (GError **error);
+
+GUsbDevice * bs_stream_deck_get_device (BsStreamDeck *self);
+
+const BsStreamDeckButtonLayout * bs_stream_deck_get_button_layout (BsStreamDeck *self);
+
+BsStreamDeckButton * bs_stream_deck_get_button (BsStreamDeck *self,
+                                                uint8_t       position);
 
 gboolean bs_stream_deck_set_button_icon (BsStreamDeck  *self,
                                          uint8_t        button,
