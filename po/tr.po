@@ -1,16 +1,16 @@
 # Turkish translation for boatswain.
-# Copyright (C) 2023 boatswain's COPYRIGHT HOLDER
+# Copyright (C) 2023-2024 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
 #
-# Sabri Ünal <libreajans@gmail.com>, 2023.
-# Emin Tufan Çetin <etcetin@gmail.com>, 2023.
+# Sabri Ünal <libreajans@gmail.com>, 2023, 2024.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-12-26 19:55+0000\n"
-"PO-Revision-Date: 2023-12-29 10:37+0300\n"
+"POT-Creation-Date: 2024-02-23 23:07+0000\n"
+"PO-Revision-Date: 2024-02-24 02:18+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -120,21 +120,21 @@ msgstr "Aşağı taşı"
 msgid "Delete"
 msgstr "Sil"
 
-#: src/bs-stream-deck.c:278
+#: src/bs-stream-deck.c:276
 msgid "Default"
 msgstr "Öntanımlı"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
+#: src/bs-stream-deck.c:956 src/bs-stream-deck.c:982
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/bs-stream-deck.c:1008 src/bs-stream-deck.c:1034
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -143,29 +143,37 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
+#: src/bs-stream-deck.c:1060 src/bs-stream-deck.c:1086
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1004
+#: src/bs-stream-deck.c:1112
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1030
+#: src/bs-stream-deck.c:1138
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1099
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1164
+#| msgid "Stream Deck"
+msgid "Stream Deck +"
+msgstr "Stream Deck +"
+
+#: src/bs-stream-deck.c:1233
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Özgün"
 
-#: src/bs-stream-deck.c:1122
+#: src/bs-stream-deck.c:1256
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -321,7 +329,7 @@ msgid "Profile"
 msgstr "Profil"
 
 #: src/plugins/desktop/desktop-action-factory.c:41
-#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:257
 msgid "Keyboard Shortcut"
 msgstr "Klavye Kısayolu"
 
@@ -630,10 +638,3 @@ msgstr "Ses"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Ses tahtası"
-
-#~ msgid "_Open"
-#~ msgstr "_Aç"
-
-# Geliştirici adı
-#~ msgid "Georges Basile Stavracas Neto"
-#~ msgstr "Georges Basile Stavracas Neto"
