@@ -2,21 +2,22 @@
 # Copyright (C) 2022 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2022-2023.
+# Julián Villodre <jvillodrede@gmail.com>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-12-26 19:55+0000\n"
-"PO-Revision-Date: 2023-08-22 14:04+0200\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"POT-Creation-Date: 2024-02-23 23:07+0000\n"
+"PO-Revision-Date: 2024-02-25 12:39+0100\n"
+"Last-Translator: Julián Villodre <jvillodrede@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
-"Language: es_ES\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 45.alpha0\n"
+"X-Generator: Gtranslator 45.3\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -64,22 +65,20 @@ msgstr ""
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:22
 msgid "Send network requests"
-msgstr ""
+msgstr "Enviar solicitudes de red"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:23
 msgid "Keep track of your gaming score"
-msgstr ""
+msgstr "Realice un seguimiento de su puntuación de juego"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:24
-#, fuzzy
-#| msgid "Launch Application"
 msgid "Open files and launch applications"
-msgstr "Lanzar aplicación"
+msgstr "Abrir archivos y lanzar aplicaciones"
 
 #: data/com.feaneron.Boatswain.gschema.xml:7
 #: data/com.feaneron.Boatswain.gschema.xml:8
 msgid "Restore token for the desktop controller"
-msgstr ""
+msgstr "Restaurar testigo para el controlador de escritorio"
 
 #: src/bs-application.c:54
 msgid "Enable debug messages"
@@ -120,21 +119,21 @@ msgstr "Bajar"
 msgid "Delete"
 msgstr "Eliminar"
 
-#: src/bs-stream-deck.c:278
+#: src/bs-stream-deck.c:276
 msgid "Default"
 msgstr "Predeterminado"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
+#: src/bs-stream-deck.c:956 src/bs-stream-deck.c:982
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/bs-stream-deck.c:1008 src/bs-stream-deck.c:1034
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -143,29 +142,36 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
+#: src/bs-stream-deck.c:1060 src/bs-stream-deck.c:1086
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1004
+#: src/bs-stream-deck.c:1112
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1030
+#: src/bs-stream-deck.c:1138
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1099
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1164
+msgid "Stream Deck +"
+msgstr "Stream Deck +"
+
+#: src/bs-stream-deck.c:1233
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1122
+#: src/bs-stream-deck.c:1256
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -179,10 +185,8 @@ msgstr "Seleccionar icono"
 
 #: src/bs-stream-deck-button-editor.c:399
 #: src/plugins/network/network-http-action-prefs.c:147
-#, fuzzy
-#| msgid "_Open"
 msgid "Open"
-msgstr "Ab_rir"
+msgstr "Abrir"
 
 #: src/bs-stream-deck-button-editor.ui:27
 msgid "Select a button"
@@ -323,28 +327,21 @@ msgid "Profile"
 msgstr "Perfil"
 
 #: src/plugins/desktop/desktop-action-factory.c:41
-#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
-#, fuzzy
-#| msgid "_Keyboard Shortcuts"
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:257
 msgid "Keyboard Shortcut"
-msgstr "Atajos del _teclado"
+msgstr "Atajo del teclado"
 
 #: src/plugins/desktop/desktop-action-factory.c:42
-#, fuzzy
-#| msgid "_Keyboard Shortcuts"
 msgid "Trigger a keyboard shortcut"
-msgstr "Atajos del _teclado"
+msgstr "Activar un atajo del teclado"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:7
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show Shortcuts"
 msgid "Set Shortcut"
-msgstr "Mostrar atajos"
+msgstr "Establecer atajo"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:66
 msgid "Press Esc to cancel"
-msgstr ""
+msgstr "Pulse Esc para cancelar"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:100
 msgid "_Cancel"
@@ -352,45 +349,48 @@ msgstr "C_ancelar"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:109
 msgid "_Set"
-msgstr ""
+msgstr "_Establecer"
 
 #: src/plugins/desktop/desktop.plugin.desktop.in:3
 msgid "Desktop"
-msgstr ""
+msgstr "Escritorio"
 
 #: src/plugins/gaming/gaming.js:37
 msgid "Score"
-msgstr ""
+msgstr "Puntuación"
 
 #: src/plugins/gaming/gaming.js:38
 msgid "Keep track of your score. Reset with a long press."
 msgstr ""
+"Realice un seguimiento de su puntuación. Reinicie con una pulsación larga."
 
 #: src/plugins/gaming/gaming.plugin.desktop.in:3
 msgid "Gaming"
-msgstr ""
+msgstr "Gaming"
 
 #: src/plugins/gaming/score.js:39
 msgid "score.txt"
-msgstr ""
+msgstr "score.txt"
 
 #. Restore score
 #: src/plugins/gaming/score.js:322
 msgid "Restore Score"
-msgstr ""
+msgstr "Reestablecer puntuación"
 
 #: src/plugins/gaming/score.js:341
 msgid "Text Color"
-msgstr ""
+msgstr "Color de texto"
 
 #: src/plugins/gaming/score.js:354
 msgid "Save to File"
-msgstr ""
+msgstr "Guardar en un archivo"
 
 #: src/plugins/gaming/score.js:355
 msgid ""
 "Save score to a text file. Other apps such as OBS Studio may read from it."
 msgstr ""
+"Guardar puntuación en un archivo de texto. Otras aplicaciones como OBS "
+"Studio pueden leerlo."
 
 #: src/plugins/gaming/score.js:364
 #: src/plugins/launcher/launcher-open-file-action.c:209
@@ -401,17 +401,15 @@ msgstr "Archivo"
 
 #: src/plugins/gaming/score.js:383
 msgid "Text File (.txt)"
-msgstr ""
+msgstr "Archivo de texto (.txt)"
 
 #: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
 msgstr "Lanzar aplicación"
 
 #: src/plugins/launcher/launcher-action-factory.c:47
-#, fuzzy
-#| msgid "File"
 msgid "Open File"
-msgstr "Archivo"
+msgstr "Abrir archivo"
 
 #: src/plugins/launcher/launcher-action-factory.c:53
 msgid "Open URL"
@@ -423,13 +421,11 @@ msgstr "Elija aplicación"
 
 #: src/plugins/launcher/launcher-open-file-action.c:68
 msgid "No file selected"
-msgstr ""
+msgstr "No se ha seleccionado ningún archivo"
 
 #: src/plugins/launcher/launcher-open-file-action.c:156
-#, fuzzy
-#| msgid "Select icon"
 msgid "Select File"
-msgstr "Seleccionar icono"
+msgstr "Seleccionar archivo"
 
 #: src/plugins/launcher/launcher-open-url-action.c:104
 msgid "URL"
@@ -441,43 +437,39 @@ msgstr "Lanzador"
 
 #: src/plugins/network/network-action-factory.c:41
 msgid "HTTP Request"
-msgstr ""
+msgstr "Petición HTTP"
 
 #: src/plugins/network/network-action-factory.c:42
 msgid "Send GET and POST requests to a webserver"
-msgstr ""
+msgstr "Enviar peticiones GET y POST a un servidor web"
 
 #: src/plugins/network/network-http-action-prefs.c:146
-#, fuzzy
-#| msgid "Select audio file"
 msgid "Select payload file"
-msgstr "Seleccionar archivo de sonido"
+msgstr "Seleccionar archivo de carga útil"
 
 #: src/plugins/network/network-http-action-prefs.ui:14
-#, fuzzy
-#| msgid "URL"
 msgid "URI"
-msgstr "URL"
+msgstr "URI"
 
 #: src/plugins/network/network-http-action-prefs.ui:22
 msgid "Method"
-msgstr ""
+msgstr "Método"
 
 #: src/plugins/network/network-http-action-prefs.ui:45
 msgid "Payload source"
-msgstr ""
+msgstr "Fuente de la carga útil"
 
 #: src/plugins/network/network-http-action-prefs.ui:82
 msgid "Edit payload"
-msgstr ""
+msgstr "Editar carga útil"
 
 #: src/plugins/network/network-http-action-prefs.ui:99
 msgid "HTTP Request Payload"
-msgstr ""
+msgstr "Carga útil de solicitud HTTP"
 
 #: src/plugins/network/network.plugin.desktop.in:3
 msgid "Network"
-msgstr ""
+msgstr "Red"
 
 #: src/plugins/obs-studio/obs-action-factory.c:46
 msgid "Switch Scene"
