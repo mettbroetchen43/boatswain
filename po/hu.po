@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-12-26 19:55+0000\n"
-"PO-Revision-Date: 2024-02-16 21:56+0100\n"
+"POT-Creation-Date: 2024-02-23 23:07+0000\n"
+"PO-Revision-Date: 2024-03-04 20:52+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -70,12 +70,10 @@ msgid "Send network requests"
 msgstr "Hálózati kérések küldése"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:23
-#| msgid "Keep track of your score. Reset with a long press."
 msgid "Keep track of your gaming score"
 msgstr "Játékeredmények nyomon követése"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:24
-#| msgid "Launch Application"
 msgid "Open files and launch applications"
 msgstr "Fájlok megnyitása és alkalmazások indítása"
 
@@ -123,21 +121,21 @@ msgstr "Mozgatás le"
 msgid "Delete"
 msgstr "Törlés"
 
-#: src/bs-stream-deck.c:278
+#: src/bs-stream-deck.c:276
 msgid "Default"
 msgstr "Alapértelmezett"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
+#: src/bs-stream-deck.c:956 src/bs-stream-deck.c:982
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/bs-stream-deck.c:1008 src/bs-stream-deck.c:1034
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -146,29 +144,37 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
+#: src/bs-stream-deck.c:1060 src/bs-stream-deck.c:1086
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1004
+#: src/bs-stream-deck.c:1112
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1030
+#: src/bs-stream-deck.c:1138
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1099
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1164
+#| msgid "Stream Deck"
+msgid "Stream Deck +"
+msgstr "Stream Deck +"
+
+#: src/bs-stream-deck.c:1233
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1122
+#: src/bs-stream-deck.c:1256
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
@@ -324,19 +330,15 @@ msgid "Profile"
 msgstr "Profil"
 
 #: src/plugins/desktop/desktop-action-factory.c:41
-#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
-#| msgid "_Keyboard Shortcuts"
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:257
 msgid "Keyboard Shortcut"
 msgstr "Gyorsbillentyű"
 
 #: src/plugins/desktop/desktop-action-factory.c:42
-#| msgid "_Keyboard Shortcuts"
 msgid "Trigger a keyboard shortcut"
 msgstr "Gyorsbillentyű aktiválása"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:7
-#| msgctxt "shortcut window"
-#| msgid "Show Shortcuts"
 msgid "Set Shortcut"
 msgstr "Gyorsbillentyű beállítása"
 
@@ -408,7 +410,6 @@ msgid "Launch Application"
 msgstr "Alkalmazás indítása"
 
 #: src/plugins/launcher/launcher-action-factory.c:47
-#| msgid "File"
 msgid "Open File"
 msgstr "Fájl megnyitása"
 
@@ -425,7 +426,6 @@ msgid "No file selected"
 msgstr "Nincs fájl kiválasztva"
 
 #: src/plugins/launcher/launcher-open-file-action.c:156
-#| msgid "Select icon"
 msgid "Select File"
 msgstr "Fájl kiválasztása"
 
