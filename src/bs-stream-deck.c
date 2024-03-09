@@ -147,15 +147,13 @@ get_profile_path (BsStreamDeck *self)
 
 static BsStreamDeckButton *
 find_button_at_region (BsStreamDeck *self,
-                       unsigned int  region_index,
+                       const char   *region_id,
                        size_t        button_index)
 {
   g_autoptr(BsStreamDeckButton) button = NULL;
-  g_autoptr(BsButtonGridRegion) region = NULL;
+  BsButtonGridRegion *region = NULL;
 
-  region = g_list_model_get_item (G_LIST_MODEL (self->regions), region_index);
-  g_assert (BS_IS_BUTTON_GRID_REGION (region));
-
+  region = BS_BUTTON_GRID_REGION (bs_stream_deck_get_region (self, region_id));
   button = g_list_model_get_item (bs_button_grid_region_get_buttons (region), button_index);
   g_assert (BS_IS_STREAM_DECK_BUTTON (button));
 
@@ -173,7 +171,7 @@ update_pages (BsStreamDeck *self)
 
   for (size_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
     {
-      BsStreamDeckButton *stream_deck_button = find_button_at_region (self, 0, i);
+      BsStreamDeckButton *stream_deck_button = find_button_at_region (self, "main-button-grid", i);
       bs_page_update_item_from_button (active_page, stream_deck_button);
     }
 
@@ -323,7 +321,7 @@ load_active_page (BsStreamDeck *self)
       g_autoptr (BsIcon) custom_icon = NULL;
       g_autoptr (GError) error = NULL;
 
-      stream_deck_button = find_button_at_region (self, 0, i);
+      stream_deck_button = find_button_at_region (self, "main-button-grid", i);
 
       bs_page_realize (active_page, stream_deck_button, &custom_icon, &action, &error);
 
@@ -465,7 +463,7 @@ read_button_states_mini (BsStreamDeck *self)
 
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
-      BsStreamDeckButton *button = find_button_at_region (self, 0, i);
+      BsStreamDeckButton *button = find_button_at_region (self, "main-button-grid", i);
       gboolean pressed = (gboolean) states[i + 1];
 
       if (bs_stream_deck_button_get_pressed (button) == pressed)
@@ -650,7 +648,7 @@ read_button_states_original (BsStreamDeck *self)
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
       uint8_t position = swap_button_index_original (self, i);
-      BsStreamDeckButton *button = find_button_at_region (self, 0, position);
+      BsStreamDeckButton *button = find_button_at_region (self, "main-button-grid", position);
       gboolean pressed = (gboolean) states[i + 1];
 
       if (bs_stream_deck_button_get_pressed (button) == pressed)
@@ -820,7 +818,7 @@ read_button_states_gen2 (BsStreamDeck *self)
 
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
-      BsStreamDeckButton *button = find_button_at_region (self, 0, i);
+      BsStreamDeckButton *button = find_button_at_region (self, "main-button-grid", i);
       gboolean pressed = (gboolean) states[i + 4];
 
       if (bs_stream_deck_button_get_pressed (button) == pressed)
@@ -904,7 +902,7 @@ read_button_states_plus (BsStreamDeck *self)
     case BUTTON_EVENT:
       for (uint8_t i = 0; i < layout->n_buttons; i++)
         {
-          BsStreamDeckButton *button = find_button_at_region (self, 0, i);
+          BsStreamDeckButton *button = find_button_at_region (self, "main-button-grid", i);
           gboolean pressed = (gboolean) states[i + 4];
 
           if (bs_stream_deck_button_get_pressed (button) == pressed)
@@ -1848,7 +1846,7 @@ bs_stream_deck_pop_page (BsStreamDeck *self)
   page = g_queue_pop_head (self->active_pages);
 
   for (size_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
-    bs_page_update_item_from_button (page, find_button_at_region (self, 0, i));
+    bs_page_update_item_from_button (page, find_button_at_region (self, "main-button-grid", i));
 
   bs_page_update_all_items (g_queue_peek_head (self->active_pages));
 
