@@ -93,7 +93,7 @@ build_button_grid (BsStreamDeckEditor *self)
 
       stream_deck_button = bs_stream_deck_get_button (self->stream_deck, i);
 
-      button = bs_stream_deck_button_widget_new (stream_deck_button, layout->icon_size);
+      button = bs_stream_deck_button_widget_new (stream_deck_button);
       gtk_flow_box_append (self->buttons_flowbox, button);
     }
 }

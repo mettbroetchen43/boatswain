@@ -42,7 +42,6 @@ struct _BsStreamDeckButtonWidget
   GtkPicture *picture;
 
   BsStreamDeckButton *button;
-  int icon_size;
 };
 
 G_DEFINE_FINAL_TYPE (BsStreamDeckButtonWidget, bs_stream_deck_button_widget, GTK_TYPE_FLOW_BOX_CHILD)
@@ -51,7 +50,6 @@ enum
 {
   PROP_0,
   PROP_BUTTON,
-  PROP_ICON_SIZE,
   N_PROPS
 };
 
@@ -228,10 +226,6 @@ bs_stream_deck_button_widget_get_property (GObject    *object,
       g_value_set_object (value, self->button);
       break;
 
-    case PROP_ICON_SIZE:
-      g_value_set_int (value, self->icon_size);
-      break;
-
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -263,11 +257,6 @@ bs_stream_deck_button_widget_set_property (GObject      *object,
       update_button_texture (self);
       break;
 
-    case PROP_ICON_SIZE:
-      self->icon_size = g_value_get_int (value);
-      g_object_notify_by_pspec (object, properties[PROP_ICON_SIZE]);
-      break;
-
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -286,10 +275,6 @@ bs_stream_deck_button_widget_class_init (BsStreamDeckButtonWidgetClass *klass)
                                                  BS_TYPE_STREAM_DECK_BUTTON,
                                                  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  properties[PROP_ICON_SIZE] = g_param_spec_int ("icon-size", NULL, NULL,
-                                                 -1, G_MAXINT, -1,
-                                                 G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
-
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-stream-deck-button-widget.ui");
@@ -306,8 +291,6 @@ bs_stream_deck_button_widget_class_init (BsStreamDeckButtonWidgetClass *klass)
 static void
 bs_stream_deck_button_widget_init (BsStreamDeckButtonWidget *self)
 {
-  self->icon_size = -1;
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->drop_target = gtk_drop_target_new (BS_TYPE_STREAM_DECK_BUTTON, GDK_ACTION_MOVE);
@@ -317,11 +300,9 @@ bs_stream_deck_button_widget_init (BsStreamDeckButtonWidget *self)
 }
 
 GtkWidget *
-bs_stream_deck_button_widget_new (BsStreamDeckButton *button,
-                                  int                 icon_size)
+bs_stream_deck_button_widget_new (BsStreamDeckButton *button)
 {
   return g_object_new (BS_TYPE_STREAM_DECK_BUTTON_WIDGET,
                        "button", button,
-                       "icon-size", icon_size,
                        NULL);
 }

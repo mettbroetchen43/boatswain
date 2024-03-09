@@ -16,10 +16,14 @@
         <property name="halign">center</property>
         <property name="overflow">hidden</property>
         <binding name="width-request">
-          <lookup name="icon-size">BsStreamDeckButtonWidget</lookup>
+          <lookup type="BsStreamDeckButton" name="icon-width">
+            <lookup name="button">BsStreamDeckButtonWidget</lookup>
+          </lookup>
         </binding>
         <binding name="height-request">
-          <lookup name="icon-size">BsStreamDeckButtonWidget</lookup>
+          <lookup type="BsStreamDeckButton" name="icon-height">
+            <lookup name="button">BsStreamDeckButtonWidget</lookup>
+          </lookup>
         </binding>"
         <style>
           <class name="card" />

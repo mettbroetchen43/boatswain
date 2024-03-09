@@ -30,7 +30,6 @@ G_BEGIN_DECLS
 #define BS_TYPE_STREAM_DECK_BUTTON_WIDGET (bs_stream_deck_button_widget_get_type())
 G_DECLARE_FINAL_TYPE (BsStreamDeckButtonWidget, bs_stream_deck_button_widget, BS, STREAM_DECK_BUTTON_WIDGET, GtkFlowBoxChild)
 
-GtkWidget *bs_stream_deck_button_widget_new (BsStreamDeckButton *button,
-                                             int                 icon_size);
+GtkWidget *bs_stream_deck_button_widget_new (BsStreamDeckButton *button);
 
 G_END_DECLS
