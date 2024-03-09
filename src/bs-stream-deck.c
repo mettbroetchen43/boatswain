@@ -21,8 +21,10 @@
 #define G_LOG_DOMAIN "Stream Deck"
 
 #include "bs-action.h"
+#include "bs-button-grid-region.h"
 #include "bs-debug.h"
 #include "bs-device-enums.h"
+#include "bs-device-region.h"
 #include "bs-icon.h"
 #include "bs-icon-renderer.h"
 #include "bs-page.h"
@@ -69,6 +71,7 @@ struct _BsStreamDeck
 
   BsIconRenderer *icon_renderer;
   GListStore *profiles;
+  GListStore *regions;
   BsProfile *active_profile;
   GQueue *active_pages;
   guint save_timeout_id;
@@ -81,7 +84,6 @@ struct _BsStreamDeck
   char *serial_number;
   char *firmware_version;
   GIcon *icon;
-  GPtrArray *buttons;
   GSource *poll_source;
   gboolean initialized;
   gboolean loaded;
@@ -136,6 +138,23 @@ get_profile_path (BsStreamDeck *self)
                            NULL);
 }
 
+static BsStreamDeckButton *
+find_button_at_region (BsStreamDeck *self,
+                       unsigned int  region_index,
+                       uint8_t       button_index)
+{
+  g_autoptr(BsStreamDeckButton) button = NULL;
+  g_autoptr(BsButtonGridRegion) region = NULL;
+
+  region = g_list_model_get_item (G_LIST_MODEL (self->regions), region_index);
+  g_assert (BS_IS_BUTTON_GRID_REGION (region));
+
+  button = g_list_model_get_item (bs_button_grid_region_get_buttons (region), button_index);
+  g_assert (BS_IS_STREAM_DECK_BUTTON (button));
+
+  return button;
+}
+
 static void
 update_pages (BsStreamDeck *self)
 {
@@ -147,7 +166,7 @@ update_pages (BsStreamDeck *self)
 
   for (size_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
     {
-      BsStreamDeckButton *stream_deck_button = g_ptr_array_index (self->buttons, i);
+      BsStreamDeckButton *stream_deck_button = find_button_at_region (self, 0, i);
       bs_page_update_item_from_button (active_page, stream_deck_button);
     }
 
@@ -297,7 +316,7 @@ load_active_page (BsStreamDeck *self)
       g_autoptr (BsIcon) custom_icon = NULL;
       g_autoptr (GError) error = NULL;
 
-      stream_deck_button = g_ptr_array_index (self->buttons, i);
+      stream_deck_button = find_button_at_region (self, 0, i);
 
       bs_page_realize (active_page, stream_deck_button, &custom_icon, &action, &error);
 
@@ -439,7 +458,7 @@ read_button_states_mini (BsStreamDeck *self)
 
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
-      BsStreamDeckButton *button = g_ptr_array_index (self->buttons, i);
+      BsStreamDeckButton *button = find_button_at_region (self, 0, i);
       gboolean pressed = (gboolean) states[i + 1];
 
       if (bs_stream_deck_button_get_pressed (button) == pressed)
@@ -624,7 +643,7 @@ read_button_states_original (BsStreamDeck *self)
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
       uint8_t position = swap_button_index_original (self, i);
-      BsStreamDeckButton *button = g_ptr_array_index (self->buttons, position);
+      BsStreamDeckButton *button = find_button_at_region (self, 0, position);
       gboolean pressed = (gboolean) states[i + 1];
 
       if (bs_stream_deck_button_get_pressed (button) == pressed)
@@ -794,7 +813,7 @@ read_button_states_gen2 (BsStreamDeck *self)
 
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
-      BsStreamDeckButton *button = g_ptr_array_index (self->buttons, i);
+      BsStreamDeckButton *button = find_button_at_region (self, 0, i);
       gboolean pressed = (gboolean) states[i + 4];
 
       if (bs_stream_deck_button_get_pressed (button) == pressed)
@@ -878,7 +897,7 @@ read_button_states_plus (BsStreamDeck *self)
     case BUTTON_EVENT:
       for (uint8_t i = 0; i < layout->n_buttons; i++)
         {
-          BsStreamDeckButton *button = g_ptr_array_index (self->buttons, i);
+          BsStreamDeckButton *button = find_button_at_region (self, 0, i);
           gboolean pressed = (gboolean) states[i + 4];
 
           if (bs_stream_deck_button_get_pressed (button) == pressed)
@@ -1399,8 +1418,17 @@ out:
   self->icon_renderer = bs_icon_renderer_new (&self->model_info->icon_layout);
   self->icon = g_themed_icon_new (self->model_info->icon_name);
 
-  for (size_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
-    g_ptr_array_add (self->buttons, bs_stream_deck_button_new (self, i));
+  /* All Elgato Stream Decks have one button grid */
+  {
+    g_autoptr(BsButtonGridRegion) button_grid = NULL;
+
+    button_grid = bs_button_grid_region_new (self,
+                                             &self->model_info->icon_layout,
+                                             self->model_info->button_layout.n_buttons,
+                                             self->model_info->button_layout.columns);
+
+    g_list_store_append (self->regions, button_grid);
+  }
 
   self->initialized = TRUE;
 
@@ -1439,9 +1467,9 @@ bs_stream_deck_finalize (GObject *object)
 
   g_clear_handle_id (&self->save_timeout_id, g_source_remove);
   g_clear_pointer (&self->serial_number, g_free);
-  g_clear_pointer (&self->buttons, g_ptr_array_unref);
   g_clear_pointer (&self->handle, hid_close);
   g_queue_free_full (self->active_pages, g_object_unref);
+  g_clear_object (&self->regions);
   g_clear_object (&self->device);
   g_clear_object (&self->profiles);
 
@@ -1582,8 +1610,8 @@ bs_stream_deck_class_init (BsStreamDeckClass *klass)
 static void
 bs_stream_deck_init (BsStreamDeck *self)
 {
-  self->buttons = g_ptr_array_new_with_free_func (g_object_unref);
   self->profiles = g_list_store_new (BS_TYPE_PROFILE);
+  self->regions = g_list_store_new (BS_TYPE_DEVICE_REGION);
   self->active_pages = g_queue_new ();
 }
 
@@ -1738,7 +1766,7 @@ bs_stream_deck_get_button (BsStreamDeck *self,
   g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
   g_return_val_if_fail (position < self->model_info->button_layout.n_buttons, NULL);
 
-  return g_ptr_array_index (self->buttons, position);
+  return find_button_at_region (self, 0, position);
 }
 
 GListModel *
@@ -1826,7 +1854,7 @@ bs_stream_deck_pop_page (BsStreamDeck *self)
   page = g_queue_pop_head (self->active_pages);
 
   for (size_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
-    bs_page_update_item_from_button (page, g_ptr_array_index (self->buttons, i));
+    bs_page_update_item_from_button (page, find_button_at_region (self, 0, i));
 
   bs_page_update_all_items (g_queue_peek_head (self->active_pages));
 
