@@ -39,6 +39,11 @@
 
 G_STATIC_ASSERT (sizeof (unsigned char) == sizeof (uint8_t));
 
+typedef enum
+{
+  BS_STREAM_DECK_FEATURE_BUTTONS = 1 << 0,
+} BsStreamDeckFeatureFlags;
+
 typedef struct
 {
   uint8_t n_buttons;
@@ -50,6 +55,7 @@ typedef struct
   uint8_t product_id;
   const char *name;
   const char *icon_name;
+  BsStreamDeckFeatureFlags features;
   BsButtonLayout button_layout;
   BsIconLayout icon_layout;
 
@@ -981,6 +987,7 @@ static const StreamDeckModelInfo models_vtable[] = {
      */
     .name = N_("Stream Deck Mini"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 6,
       .columns = 3,
@@ -1005,6 +1012,7 @@ static const StreamDeckModelInfo models_vtable[] = {
      */
     .name = N_("Stream Deck Mini"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 6,
       .columns = 3,
@@ -1029,6 +1037,7 @@ static const StreamDeckModelInfo models_vtable[] = {
      */
     .name = N_("Stream Deck"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
@@ -1053,6 +1062,7 @@ static const StreamDeckModelInfo models_vtable[] = {
      */
     .name = N_("Stream Deck"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
@@ -1077,6 +1087,7 @@ static const StreamDeckModelInfo models_vtable[] = {
      */
     .name = N_("Stream Deck XL"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 32,
       .columns = 8,
@@ -1101,6 +1112,7 @@ static const StreamDeckModelInfo models_vtable[] = {
      */
     .name = N_("Stream Deck XL"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 32,
       .columns = 8,
@@ -1125,6 +1137,7 @@ static const StreamDeckModelInfo models_vtable[] = {
      */
     .name = N_("Stream Deck MK.2"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
@@ -1149,6 +1162,7 @@ static const StreamDeckModelInfo models_vtable[] = {
      */
     .name = N_("Stream Deck Pedal"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 3,
       .columns = 3,
@@ -1173,6 +1187,7 @@ static const StreamDeckModelInfo models_vtable[] = {
      */
     .name = N_("Stream Deck +"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 8,
       .columns = 4,
@@ -1241,6 +1256,7 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
     .product_id = 0x0001,
     .name = N_("Feaneron Hangar Original"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
@@ -1262,6 +1278,7 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
     .product_id = 0x0001,
     .name = N_("Feaneron Hangar XL"),
     .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
     .button_layout = {
       .n_buttons = 32,
       .columns = 8,
@@ -1406,17 +1423,20 @@ out:
   self->icon = g_themed_icon_new (self->model_info->icon_name);
 
   /* All Elgato Stream Decks have one button grid */
-  {
-    g_autoptr(BsButtonGridRegion) button_grid = NULL;
+  g_assert (self->model_info->features & BS_STREAM_DECK_FEATURE_BUTTONS);
 
-    button_grid = bs_button_grid_region_new ("main-button-grid",
-                                             self,
-                                             &self->model_info->icon_layout,
-                                             self->model_info->button_layout.n_buttons,
-                                             self->model_info->button_layout.columns);
+  if (self->model_info->features & BS_STREAM_DECK_FEATURE_BUTTONS)
+    {
+      g_autoptr(BsButtonGridRegion) button_grid = NULL;
 
-    g_list_store_append (self->regions, button_grid);
-  }
+      button_grid = bs_button_grid_region_new ("main-button-grid",
+                                               self,
+                                               &self->model_info->icon_layout,
+                                               self->model_info->button_layout.n_buttons,
+                                               self->model_info->button_layout.columns);
+
+      g_list_store_append (self->regions, button_grid);
+    }
 
   self->initialized = TRUE;
 
