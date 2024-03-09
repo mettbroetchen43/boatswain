@@ -141,7 +141,7 @@ get_profile_path (BsStreamDeck *self)
 static BsStreamDeckButton *
 find_button_at_region (BsStreamDeck *self,
                        unsigned int  region_index,
-                       uint8_t       button_index)
+                       size_t        button_index)
 {
   g_autoptr(BsStreamDeckButton) button = NULL;
   g_autoptr(BsButtonGridRegion) region = NULL;
