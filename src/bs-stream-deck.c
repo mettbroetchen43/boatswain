@@ -1744,16 +1744,6 @@ bs_stream_deck_upload_button (BsStreamDeck        *self,
   return self->model_info->set_button_texture (self, position, texture, error);
 }
 
-BsStreamDeckButton *
-bs_stream_deck_get_button (BsStreamDeck *self,
-                           uint8_t       position)
-{
-  g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
-  g_return_val_if_fail (position < self->model_info->button_layout.n_buttons, NULL);
-
-  return find_button_at_region (self, 0, position);
-}
-
 GListModel *
 bs_stream_deck_get_profiles (BsStreamDeck *self)
 {
