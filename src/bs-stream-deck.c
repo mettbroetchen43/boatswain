@@ -25,6 +25,8 @@
 #include "bs-debug.h"
 #include "bs-device-enums.h"
 #include "bs-device-region.h"
+#include "bs-dial-private.h"
+#include "bs-dial-grid-region.h"
 #include "bs-icon.h"
 #include "bs-icon-renderer.h"
 #include "bs-page.h"
@@ -42,6 +44,7 @@ G_STATIC_ASSERT (sizeof (unsigned char) == sizeof (uint8_t));
 typedef enum
 {
   BS_STREAM_DECK_FEATURE_BUTTONS = 1 << 0,
+  BS_STREAM_DECK_FEATURE_DIALS = 1 << 2,
 } BsStreamDeckFeatureFlags;
 
 typedef struct
@@ -53,11 +56,18 @@ typedef struct
 
 typedef struct
 {
+  uint8_t n_dials;
+  uint8_t columns;
+} BsDialLayout;
+
+typedef struct
+{
   uint8_t product_id;
   const char *name;
   const char *icon_name;
   BsStreamDeckFeatureFlags features;
   BsButtonLayout button_layout;
+  BsDialLayout dial_layout;
 
   void (*reset) (BsStreamDeck *self);
   void (*set_brightness) (BsStreamDeck *self,
@@ -918,14 +928,38 @@ read_button_states_plus (BsStreamDeck *self)
       break;
 
     case DIAL_EVENT:
-      g_debug ("Dial event");
-      for (uint8_t i = 0; i < 4; i++)
-        {
-          if (states[4] == 0x01)
-            g_debug ("  Dial %u rotation: %d", i, convert_dial_value (states[i + 5]));
-          else
-            g_debug ("  Dial %u pressed: %u", i, states[i + 5]);
-        }
+      {
+        BsDialGridRegion *dial_grid;
+        GListModel *dials;
+
+        dial_grid = BS_DIAL_GRID_REGION (bs_stream_deck_get_region (self, "dial-grid"));
+        dials = bs_dial_grid_region_get_dials (dial_grid);
+
+        g_assert (g_list_model_get_n_items (dials) == 4);
+
+        for (uint8_t i = 0; i < 4; i++)
+          {
+            g_autoptr (BsDial) dial = g_list_model_get_item (dials, i);
+
+            if (states[4] == 0x01)
+              {
+                double new_value;
+                int rotation;
+
+                rotation = convert_dial_value (states[i + 5]);
+                new_value = bs_dial_get_value (dial) + rotation / 100.0;
+
+                g_debug ("  Dial %u rotation: %d", i, rotation);
+
+                bs_dial_set_value (dial, CLAMP (new_value, 0.0, 1.0));
+              }
+            else
+              {
+                g_debug ("  Dial %u pressed: %u", i, states[i + 5]);
+                bs_dial_set_pressed (dial, (gboolean) states[i + 5]);
+              }
+          }
+      }
       break;
     }
 
@@ -1140,7 +1174,8 @@ static const StreamDeckModelInfo models_vtable[] = {
      */
     .name = N_("Stream Deck +"),
     .icon_name = "input-dialpad-symbolic",
-    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS |
+                BS_STREAM_DECK_FEATURE_DIALS,
     .button_layout = {
       .n_buttons = 8,
       .columns = 4,
@@ -1150,6 +1185,10 @@ static const StreamDeckModelInfo models_vtable[] = {
         .format = BS_ICON_FORMAT_JPEG,
         .flags = BS_ICON_RENDERER_FLAG_NONE,
       },
+    },
+    .dial_layout = {
+      .n_dials = 4,
+      .columns = 4,
     },
     .reset = reset_gen2,
     .get_serial_number = get_serial_number_gen2,
@@ -1389,6 +1428,18 @@ out:
                                                self->model_info->button_layout.columns);
 
       g_list_store_append (self->regions, button_grid);
+    }
+
+  if (self->model_info->features & BS_STREAM_DECK_FEATURE_DIALS)
+    {
+      g_autoptr (BsDialGridRegion) dial_grid = NULL;
+
+      dial_grid = bs_dial_grid_region_new ("dial-grid",
+                                           self,
+                                           self->model_info->dial_layout.n_dials,
+                                           self->model_info->dial_layout.columns);
+
+      g_list_store_append (self->regions, dial_grid);
     }
 
   self->initialized = TRUE;
