@@ -5,6 +5,7 @@ boatswain_sources = [
   'bs-action-factory.c',
   'bs-action-info.c',
   'bs-application.c',
+  'bs-button-grid-region.c',
   'bs-desktop-controller.c',
   'bs-device-manager.c',
   'bs-device-region.c',
