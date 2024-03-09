@@ -28,7 +28,6 @@ struct _BsDial
   GObject parent_instance;
 
   gboolean pressed;
-  double value;
 
   BsStreamDeck *stream_deck;
   uint8_t position;
@@ -39,10 +38,15 @@ G_DEFINE_FINAL_TYPE (BsDial, bs_dial, G_TYPE_OBJECT)
 enum {
   PROP_0,
   PROP_PRESSED,
-  PROP_VALUE,
   N_PROPS,
 };
 
+enum {
+  ROTATED,
+  N_SIGNALS,
+};
+
+static guint signals [N_SIGNALS];
 static GParamSpec *properties [N_PROPS];
 
 
@@ -70,10 +74,6 @@ bs_dial_get_property (GObject    *object,
     {
     case PROP_PRESSED:
       g_value_set_boolean (value, self->pressed);
-      break;
-
-    case PROP_VALUE:
-      g_value_set_double (value, self->value);
       break;
 
     default:
@@ -109,11 +109,15 @@ bs_dial_class_init (BsDialClass *klass)
                                                    FALSE,
                                                    G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
-  properties[PROP_VALUE] = g_param_spec_double ("value", NULL, NULL,
-                                                0.0, 1.0, 0.0,
-                                                G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
-
   g_object_class_install_properties (object_class, N_PROPS, properties);
+
+  signals[ROTATED] = g_signal_new ("rotated",
+                                   BS_TYPE_DIAL,
+                                   G_SIGNAL_RUN_LAST,
+                                   0, NULL, NULL, NULL,
+                                   G_TYPE_NONE,
+                                   1,
+                                   G_TYPE_INT);
 }
 
 static void
@@ -155,24 +159,11 @@ bs_dial_set_pressed (BsDial   *self,
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_PRESSED]);
 }
 
-double
-bs_dial_get_value (BsDial *self)
-{
-  g_return_val_if_fail (BS_IS_DIAL (self), 0.0);
-
-  return self->value;
-}
-
 void
-bs_dial_set_value (BsDial *self,
-                   double  value)
+bs_dial_rotate (BsDial *self,
+                int     rotation)
 {
   g_assert (BS_IS_DIAL (self));
-  g_assert (value >= 0.0 && value <= 1.0);
 
-  if (G_APPROX_VALUE (self->value, value, DBL_EPSILON))
-    return;
-
-  self->value = value;
-  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_VALUE]);
+  g_signal_emit (self, signals[ROTATED], 0, rotation);
 }

@@ -31,7 +31,7 @@ BsDial *bs_dial_new (BsStreamDeck *stream_deck,
 void bs_dial_set_pressed (BsDial   *self,
                           gboolean  pressed);
 
-void bs_dial_set_value (BsDial *self,
-                        double  value);
+void bs_dial_rotate (BsDial *self,
+                     int     rotation);
 
 G_END_DECLS

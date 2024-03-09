@@ -36,6 +36,4 @@ uint8_t bs_dial_get_position (BsDial *self);
 
 gboolean bs_dial_get_pressed (BsDial *self);
 
-double bs_dial_get_value (BsDial *self);
-
 G_END_DECLS

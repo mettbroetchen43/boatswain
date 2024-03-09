@@ -943,15 +943,11 @@ read_button_states_plus (BsStreamDeck *self)
 
             if (states[4] == 0x01)
               {
-                double new_value;
-                int rotation;
-
-                rotation = convert_dial_value (states[i + 5]);
-                new_value = bs_dial_get_value (dial) + rotation / 100.0;
+                int rotation = convert_dial_value (states[i + 5]);
 
                 g_debug ("  Dial %u rotation: %d", i, rotation);
 
-                bs_dial_set_value (dial, CLAMP (new_value, 0.0, 1.0));
+                bs_dial_rotate (dial, rotation);
               }
             else
               {
