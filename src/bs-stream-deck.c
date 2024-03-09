@@ -124,14 +124,6 @@ enum
   N_PROPS,
 };
 
-enum
-{
-  BUTTON_PRESSED,
-  BUTTON_RELEASED,
-  N_SIGNALS,
-};
-
-static guint signals[N_SIGNALS];
 static GParamSpec *properties[N_PROPS];
 
 
@@ -470,17 +462,7 @@ read_button_states_mini (BsStreamDeck *self)
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
       BsButton *button = find_button_at_region (self, "main-button-grid", i);
-      gboolean pressed = (gboolean) states[i + 1];
-
-      if (bs_button_get_pressed (button) == pressed)
-        continue;
-
-      bs_button_set_pressed (button, pressed);
-
-      if (pressed)
-        g_signal_emit (self, signals[BUTTON_PRESSED], 0, button);
-      else
-        g_signal_emit (self, signals[BUTTON_RELEASED], 0, button);
+      bs_button_set_pressed (button, (gboolean) states[i + 1]);
     }
 
   return TRUE;
@@ -658,17 +640,8 @@ read_button_states_original (BsStreamDeck *self)
     {
       uint8_t position = swap_button_index_original (self, i);
       BsButton *button = find_button_at_region (self, "main-button-grid", position);
-      gboolean pressed = (gboolean) states[i + 1];
 
-      if (bs_button_get_pressed (button) == pressed)
-        continue;
-
-      bs_button_set_pressed (button, pressed);
-
-      if (pressed)
-        g_signal_emit (self, signals[BUTTON_PRESSED], 0, button);
-      else
-        g_signal_emit (self, signals[BUTTON_RELEASED], 0, button);
+      bs_button_set_pressed (button, (gboolean) states[i + 1]);
     }
 
   return TRUE;
@@ -828,17 +801,7 @@ read_button_states_gen2 (BsStreamDeck *self)
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
       BsButton *button = find_button_at_region (self, "main-button-grid", i);
-      gboolean pressed = (gboolean) states[i + 4];
-
-      if (bs_button_get_pressed (button) == pressed)
-        continue;
-
-      bs_button_set_pressed (button, pressed);
-
-      if (pressed)
-        g_signal_emit (self, signals[BUTTON_PRESSED], 0, button);
-      else
-        g_signal_emit (self, signals[BUTTON_RELEASED], 0, button);
+      bs_button_set_pressed (button, (gboolean) states[i + 4]);
     }
 
   return TRUE;
@@ -912,17 +875,7 @@ read_button_states_plus (BsStreamDeck *self)
       for (uint8_t i = 0; i < layout->n_buttons; i++)
         {
           BsButton *button = find_button_at_region (self, "main-button-grid", i);
-          gboolean pressed = (gboolean) states[i + 4];
-
-          if (bs_button_get_pressed (button) == pressed)
-            continue;
-
-          bs_button_set_pressed (button, pressed);
-
-          if (pressed)
-            g_signal_emit (self, signals[BUTTON_PRESSED], 0, button);
-          else
-            g_signal_emit (self, signals[BUTTON_RELEASED], 0, button);
+          bs_button_set_pressed (button, (gboolean) states[i + 4]);
         }
       break;
 
@@ -1597,22 +1550,6 @@ bs_stream_deck_class_init (BsStreamDeckClass *klass)
                                                         G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
-
-  signals[BUTTON_PRESSED] = g_signal_new ("button-pressed",
-                                          BS_TYPE_STREAM_DECK,
-                                          G_SIGNAL_RUN_LAST,
-                                          0, NULL, NULL, NULL,
-                                          G_TYPE_NONE,
-                                          1,
-                                          BS_TYPE_BUTTON);
-
-  signals[BUTTON_RELEASED] = g_signal_new ("button-released",
-                                           BS_TYPE_STREAM_DECK,
-                                           G_SIGNAL_RUN_LAST,
-                                           0, NULL, NULL, NULL,
-                                           G_TYPE_NONE,
-                                           1,
-                                           BS_TYPE_BUTTON);
 }
 
 static void
