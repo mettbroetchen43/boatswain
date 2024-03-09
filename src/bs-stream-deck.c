@@ -48,6 +48,7 @@ typedef struct
 {
   uint8_t n_buttons;
   uint8_t columns;
+  BsIconLayout icon_layout;
 } BsButtonLayout;
 
 typedef struct
@@ -57,7 +58,6 @@ typedef struct
   const char *icon_name;
   BsStreamDeckFeatureFlags features;
   BsButtonLayout button_layout;
-  BsIconLayout icon_layout;
 
   void (*reset) (BsStreamDeck *self);
   void (*set_brightness) (BsStreamDeck *self,
@@ -991,12 +991,12 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 6,
       .columns = 3,
-    },
-    .icon_layout = {
-      .width = 80,
-      .height = 80,
-      .format = BS_ICON_FORMAT_BMP,
-      .flags = BS_ICON_RENDERER_FLAG_FLIP_Y | BS_ICON_RENDERER_FLAG_ROTATE_90,
+      .icon_layout = {
+        .width = 80,
+        .height = 80,
+        .format = BS_ICON_FORMAT_BMP,
+        .flags = BS_ICON_RENDERER_FLAG_FLIP_Y | BS_ICON_RENDERER_FLAG_ROTATE_90,
+      },
     },
     .reset = reset_mini_original,
     .get_serial_number = get_serial_number_mini_original,
@@ -1016,12 +1016,12 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 6,
       .columns = 3,
-    },
-    .icon_layout = {
-      .width = 80,
-      .height = 80,
-      .format = BS_ICON_FORMAT_BMP,
-      .flags = BS_ICON_RENDERER_FLAG_FLIP_Y | BS_ICON_RENDERER_FLAG_ROTATE_90,
+      .icon_layout = {
+        .width = 80,
+        .height = 80,
+        .format = BS_ICON_FORMAT_BMP,
+        .flags = BS_ICON_RENDERER_FLAG_FLIP_Y | BS_ICON_RENDERER_FLAG_ROTATE_90,
+      },
     },
     .reset = reset_mini_original,
     .get_serial_number = get_serial_number_mini_original,
@@ -1041,12 +1041,12 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
-    },
-    .icon_layout = {
-      .width = 72,
-      .height = 72,
-      .format = BS_ICON_FORMAT_BMP,
-      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      .icon_layout = {
+        .width = 72,
+        .height = 72,
+        .format = BS_ICON_FORMAT_BMP,
+        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      },
     },
     .reset = reset_mini_original,
     .get_serial_number = get_serial_number_mini_original,
@@ -1066,12 +1066,12 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
-    },
-    .icon_layout = {
-      .width = 72,
-      .height = 72,
-      .format = BS_ICON_FORMAT_JPEG,
-      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      .icon_layout = {
+        .width = 72,
+        .height = 72,
+        .format = BS_ICON_FORMAT_JPEG,
+        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      },
     },
     .reset = reset_gen2,
     .get_serial_number = get_serial_number_gen2,
@@ -1091,12 +1091,12 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 32,
       .columns = 8,
-    },
-    .icon_layout = {
-      .width = 96,
-      .height = 96,
-      .format = BS_ICON_FORMAT_JPEG,
-      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      .icon_layout = {
+        .width = 96,
+        .height = 96,
+        .format = BS_ICON_FORMAT_JPEG,
+        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      },
     },
     .reset = reset_gen2,
     .get_serial_number = get_serial_number_gen2,
@@ -1116,12 +1116,12 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 32,
       .columns = 8,
-    },
-    .icon_layout = {
-      .width = 96,
-      .height = 96,
-      .format = BS_ICON_FORMAT_JPEG,
-      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      .icon_layout = {
+        .width = 96,
+        .height = 96,
+        .format = BS_ICON_FORMAT_JPEG,
+        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      },
     },
     .reset = reset_gen2,
     .get_serial_number = get_serial_number_gen2,
@@ -1141,12 +1141,12 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
-    },
-    .icon_layout = {
-      .width = 72,
-      .height = 72,
-      .format = BS_ICON_FORMAT_JPEG,
-      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      .icon_layout = {
+        .width = 72,
+        .height = 72,
+        .format = BS_ICON_FORMAT_JPEG,
+        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      },
     },
     .reset = reset_gen2,
     .get_serial_number = get_serial_number_gen2,
@@ -1166,12 +1166,12 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 3,
       .columns = 3,
-    },
-    .icon_layout = {
-      .width = 96,
-      .height = 96,
-      .format = BS_ICON_FORMAT_JPEG,
-      .flags = BS_ICON_RENDERER_FLAG_NONE,
+      .icon_layout = {
+        .width = 96,
+        .height = 96,
+        .format = BS_ICON_FORMAT_JPEG,
+        .flags = BS_ICON_RENDERER_FLAG_NONE,
+      },
     },
     .reset = reset_pedal,
     .get_serial_number = get_serial_number_gen2,
@@ -1191,12 +1191,12 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 8,
       .columns = 4,
-    },
-    .icon_layout = {
-      .width = 120,
-      .height = 120,
-      .format = BS_ICON_FORMAT_JPEG,
-      .flags = BS_ICON_RENDERER_FLAG_NONE,
+      .icon_layout = {
+        .width = 120,
+        .height = 120,
+        .format = BS_ICON_FORMAT_JPEG,
+        .flags = BS_ICON_RENDERER_FLAG_NONE,
+      },
     },
     .reset = reset_gen2,
     .get_serial_number = get_serial_number_gen2,
@@ -1260,12 +1260,12 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
-    },
-    .icon_layout = {
-      .width = 72,
-      .height = 72,
-      .format = BS_ICON_FORMAT_JPEG,
-      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      .icon_layout = {
+        .width = 72,
+        .height = 72,
+        .format = BS_ICON_FORMAT_JPEG,
+        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      },
     },
     .reset = reset_fake,
     .get_serial_number = get_serial_number_fake,
@@ -1282,12 +1282,12 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
     .button_layout = {
       .n_buttons = 32,
       .columns = 8,
-    },
-    .icon_layout = {
-      .width = 96,
-      .height = 96,
-      .format = BS_ICON_FORMAT_JPEG,
-      .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      .icon_layout = {
+        .width = 96,
+        .height = 96,
+        .format = BS_ICON_FORMAT_JPEG,
+        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+      },
     },
     .reset = reset_fake,
     .get_serial_number = get_serial_number_fake,
@@ -1419,7 +1419,7 @@ bs_stream_deck_initable_init (GInitable     *initable,
 out:
   self->serial_number = self->model_info->get_serial_number (self);
   self->firmware_version = self->model_info->get_firmware_version (self);
-  self->icon_renderer = bs_icon_renderer_new (&self->model_info->icon_layout);
+  self->icon_renderer = bs_icon_renderer_new (&self->model_info->button_layout.icon_layout);
   self->icon = g_themed_icon_new (self->model_info->icon_name);
 
   /* All Elgato Stream Decks have one button grid */
@@ -1431,7 +1431,7 @@ out:
 
       button_grid = bs_button_grid_region_new ("main-button-grid",
                                                self,
-                                               &self->model_info->icon_layout,
+                                               &self->model_info->button_layout.icon_layout,
                                                self->model_info->button_layout.n_buttons,
                                                self->model_info->button_layout.columns);
 
