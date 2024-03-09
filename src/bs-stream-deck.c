@@ -1733,14 +1733,6 @@ bs_stream_deck_get_regions (BsStreamDeck *self)
   return G_LIST_MODEL (self->regions);
 }
 
-const BsStreamDeckButtonLayout *
-bs_stream_deck_get_button_layout (BsStreamDeck *self)
-{
-  g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
-
-  return &self->model_info->button_layout;
-}
-
 gboolean
 bs_stream_deck_upload_button (BsStreamDeck        *self,
                               BsStreamDeckButton  *button,
