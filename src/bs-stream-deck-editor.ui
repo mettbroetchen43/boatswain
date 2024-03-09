@@ -34,10 +34,9 @@
                     <property name="ratio">1.8</property>
 
                     <child>
-                      <object class="GtkBox" id="regions_box">
+                      <object class="GtkGrid" id="regions_grid">
                         <property name="halign">center</property>
                         <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
 
                         <!-- Buttons -->
                         <child>

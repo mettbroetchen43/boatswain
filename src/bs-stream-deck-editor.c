@@ -41,6 +41,7 @@ struct _BsStreamDeckEditor
 
   BsStreamDeckButtonEditor *button_editor;
   GtkFlowBox *buttons_flowbox;
+  GtkGrid *regions_grid;
 
   BsStreamDeck *stream_deck;
 };
@@ -243,6 +244,7 @@ bs_stream_deck_editor_class_init (BsStreamDeckEditorClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, button_editor);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, buttons_flowbox);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, regions_grid);
 
   gtk_widget_class_bind_template_callback (widget_class, on_flowbox_child_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_flowbox_selected_children_changed_cb);
