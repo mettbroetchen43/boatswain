@@ -32,4 +32,6 @@ G_DECLARE_FINAL_TYPE (BsStreamDeckButtonWidget, bs_stream_deck_button_widget, BS
 
 GtkWidget *bs_stream_deck_button_widget_new (BsStreamDeckButton *button);
 
+BsStreamDeckButton * bs_stream_deck_button_widget_get_button (BsStreamDeckButtonWidget *self);
+
 G_END_DECLS

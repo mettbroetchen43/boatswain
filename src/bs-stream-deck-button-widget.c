@@ -306,3 +306,11 @@ bs_stream_deck_button_widget_new (BsStreamDeckButton *button)
                        "button", button,
                        NULL);
 }
+
+BsStreamDeckButton *
+bs_stream_deck_button_widget_get_button (BsStreamDeckButtonWidget *self)
+{
+  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON_WIDGET (self), NULL);
+
+  return self->button;
+}
