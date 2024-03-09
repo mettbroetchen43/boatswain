@@ -154,7 +154,7 @@ bs_button_grid_region_new_full (const char         *id,
                                 unsigned int        column_span,
                                 unsigned int        row_span)
 {
-  g_autoptr(BsButtonGridRegion) self = NULL;
+  g_autoptr (BsButtonGridRegion) self = NULL;
 
   g_assert (BS_IS_STREAM_DECK (stream_deck));
   g_assert (icon_layout != NULL);
@@ -176,7 +176,7 @@ bs_button_grid_region_new_full (const char         *id,
 
   for (unsigned int i = 0; i < n_buttons; i++)
     {
-      g_autoptr(BsButton) button = NULL;
+      g_autoptr (BsButton) button = NULL;
 
       button = bs_button_new (stream_deck,
                               i,

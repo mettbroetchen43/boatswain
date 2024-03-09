@@ -158,7 +158,7 @@ find_button_at_region (BsStreamDeck *self,
                        const char   *region_id,
                        size_t        button_index)
 {
-  g_autoptr(BsButton) button = NULL;
+  g_autoptr (BsButton) button = NULL;
   BsButtonGridRegion *region = NULL;
 
   region = BS_BUTTON_GRID_REGION (bs_stream_deck_get_region (self, region_id));
@@ -1419,7 +1419,7 @@ out:
 
   if (self->model_info->features & BS_STREAM_DECK_FEATURE_BUTTONS)
     {
-      g_autoptr(BsButtonGridRegion) button_grid = NULL;
+      g_autoptr (BsButtonGridRegion) button_grid = NULL;
 
       button_grid = bs_button_grid_region_new ("main-button-grid",
                                                self,
@@ -1738,7 +1738,7 @@ bs_stream_deck_get_region (BsStreamDeck *self,
 
   for (unsigned int i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->regions)); i++)
     {
-      g_autoptr(BsDeviceRegion) region = g_list_model_get_item (G_LIST_MODEL (self->regions), i);
+      g_autoptr (BsDeviceRegion) region = g_list_model_get_item (G_LIST_MODEL (self->regions), i);
 
       if (g_strcmp0 (bs_device_region_get_id (region), region_id) == 0)
         return region;

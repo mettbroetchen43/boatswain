@@ -121,7 +121,7 @@ add_button_grid (BsStreamDeckEditor *self,
 
   for (unsigned int i = 0; i < g_list_model_get_n_items (buttons); i++)
     {
-      g_autoptr(BsButton) button = NULL;
+      g_autoptr (BsButton) button = NULL;
       GtkWidget *widget;
 
       button = g_list_model_get_item (buttons, i);
@@ -155,7 +155,7 @@ build_regions (BsStreamDeckEditor *self)
 
   for (unsigned int i = 0; i < g_list_model_get_n_items (regions); i++)
     {
-      g_autoptr(BsDeviceRegion) region = g_list_model_get_item (regions, i);
+      g_autoptr (BsDeviceRegion) region = g_list_model_get_item (regions, i);
 
       if (BS_IS_BUTTON_GRID_REGION (region))
         add_button_grid (self, BS_BUTTON_GRID_REGION (region));
@@ -223,7 +223,7 @@ on_stream_deck_active_page_changed_cb (BsStreamDeck       *stream_deck,
   regions = bs_stream_deck_get_regions (self->stream_deck);
   for (unsigned int i = 0; i < g_list_model_get_n_items (regions); i++)
     {
-      g_autoptr(BsDeviceRegion) region = g_list_model_get_item (regions, i);
+      g_autoptr (BsDeviceRegion) region = g_list_model_get_item (regions, i);
 
       if (BS_IS_BUTTON_GRID_REGION (region))
         {
