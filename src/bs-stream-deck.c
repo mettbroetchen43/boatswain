@@ -1205,7 +1205,8 @@ reset_fake (BsStreamDeck *self)
 static char *
 get_serial_number_fake (BsStreamDeck *self)
 {
-  return g_strdup ("feaneron-hangar-xl-serial");
+  static unsigned int counter = 0;
+  return g_strdup_printf ("feaneron-hangar-xl-serial-%u", counter++);
 }
 
 static char *
