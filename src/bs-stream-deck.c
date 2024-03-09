@@ -1407,7 +1407,8 @@ out:
   {
     g_autoptr(BsButtonGridRegion) button_grid = NULL;
 
-    button_grid = bs_button_grid_region_new (self,
+    button_grid = bs_button_grid_region_new ("main-button-grid",
+                                             self,
                                              &self->model_info->icon_layout,
                                              self->model_info->button_layout.n_buttons,
                                              self->model_info->button_layout.columns);

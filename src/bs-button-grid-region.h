@@ -31,12 +31,14 @@ G_BEGIN_DECLS
 #define BS_TYPE_BUTTON_GRID_REGION (bs_button_grid_region_get_type())
 G_DECLARE_FINAL_TYPE (BsButtonGridRegion, bs_button_grid_region, BS, BUTTON_GRID_REGION, BsDeviceRegion)
 
-BsButtonGridRegion * bs_button_grid_region_new (BsStreamDeck       *stream_deck,
+BsButtonGridRegion * bs_button_grid_region_new (const char         *id,
+                                                BsStreamDeck       *stream_deck,
                                                 const BsIconLayout *icon_layout,
                                                 unsigned int        n_buttons,
                                                 unsigned int        grid_columns);
 
-BsButtonGridRegion * bs_button_grid_region_new_full (BsStreamDeck       *stream_deck,
+BsButtonGridRegion * bs_button_grid_region_new_full (const char         *id,
+                                                     BsStreamDeck       *stream_deck,
                                                      const BsIconLayout *icon_layout,
                                                      unsigned int        n_buttons,
                                                      unsigned int        grid_columns,

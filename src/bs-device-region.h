@@ -35,6 +35,8 @@ struct _BsDeviceRegionClass
   GObjectClass parent_class;
 };
 
+const char * bs_device_region_get_id (BsDeviceRegion *self);
+
 unsigned int bs_device_region_get_column (BsDeviceRegion *self);
 unsigned int bs_device_region_get_column_span (BsDeviceRegion *self);
 

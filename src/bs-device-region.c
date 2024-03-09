@@ -33,6 +33,7 @@ typedef struct
   unsigned int row_span;
 
   BsStreamDeck *stream_deck;
+  char *id;
 } BsDeviceRegionPrivate;
 
 G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (BsDeviceRegion, bs_device_region, G_TYPE_OBJECT)
@@ -41,6 +42,7 @@ enum {
   PROP_0,
   PROP_COLUMN,
   PROP_COLUMN_SPAN,
+  PROP_ID,
   PROP_ROW,
   PROP_ROW_SPAN,
   PROP_STREAM_DECK,
@@ -48,6 +50,22 @@ enum {
 };
 
 static GParamSpec *properties [N_PROPS];
+
+
+/*
+ * GObject overrides
+ */
+
+static void
+bs_device_region_finalize (GObject *object)
+{
+  BsDeviceRegion *self = (BsDeviceRegion *) object;
+  BsDeviceRegionPrivate *priv = bs_device_region_get_instance_private (self);
+
+  g_clear_pointer (&priv->id, g_free);
+
+  G_OBJECT_CLASS (bs_device_region_parent_class)->finalize (object);
+}
 
 static void
 bs_device_region_get_property (GObject    *object,
@@ -66,6 +84,10 @@ bs_device_region_get_property (GObject    *object,
 
     case PROP_COLUMN_SPAN:
       g_value_set_uint (value, priv->column_span);
+      break;
+
+    case PROP_ID:
+      g_value_set_string (value, priv->id);
       break;
 
     case PROP_ROW:
@@ -104,6 +126,10 @@ bs_device_region_set_property (GObject      *object,
       priv->column_span = g_value_get_uint (value);
       break;
 
+    case PROP_ID:
+      priv->id = g_value_dup_string (value);
+      break;
+
     case PROP_ROW:
       priv->row = g_value_get_uint (value);
       break;
@@ -126,6 +152,7 @@ bs_device_region_class_init (BsDeviceRegionClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+  object_class->finalize = bs_device_region_finalize;
   object_class->get_property = bs_device_region_get_property;
   object_class->set_property = bs_device_region_set_property;
 
@@ -136,6 +163,10 @@ bs_device_region_class_init (BsDeviceRegionClass *klass)
   properties[PROP_COLUMN_SPAN] = g_param_spec_uint ("column-span", NULL, NULL,
                                                     1, G_MAXUINT, 1,
                                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_ID] = g_param_spec_string ("id", NULL, NULL,
+                                             NULL,
+                                             G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_ROW] = g_param_spec_uint ("row", NULL, NULL,
                                             0, G_MAXUINT, 0,
@@ -159,6 +190,17 @@ bs_device_region_init (BsDeviceRegion *self)
 
   priv->column_span = 1;
   priv->row_span = 1;
+}
+
+const char *
+bs_device_region_get_id (BsDeviceRegion *self)
+{
+  BsDeviceRegionPrivate *priv;
+
+  g_return_val_if_fail (BS_IS_DEVICE_REGION (self), NULL);
+
+  priv = bs_device_region_get_instance_private (self);
+  return priv->id;
 }
 
 unsigned int

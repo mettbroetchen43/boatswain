@@ -129,12 +129,14 @@ bs_button_grid_region_init (BsButtonGridRegion *self)
 }
 
 BsButtonGridRegion *
-bs_button_grid_region_new (BsStreamDeck       *stream_deck,
+bs_button_grid_region_new (const char         *id,
+                           BsStreamDeck       *stream_deck,
                            const BsIconLayout *icon_layout,
                            unsigned int        n_buttons,
                            unsigned int        grid_columns)
 {
-  return bs_button_grid_region_new_full (stream_deck,
+  return bs_button_grid_region_new_full (id,
+                                         stream_deck,
                                          icon_layout,
                                          n_buttons,
                                          grid_columns,
@@ -142,7 +144,8 @@ bs_button_grid_region_new (BsStreamDeck       *stream_deck,
 }
 
 BsButtonGridRegion *
-bs_button_grid_region_new_full (BsStreamDeck       *stream_deck,
+bs_button_grid_region_new_full (const char         *id,
+                                BsStreamDeck       *stream_deck,
                                 const BsIconLayout *icon_layout,
                                 unsigned int        n_buttons,
                                 unsigned int        grid_columns,
@@ -157,6 +160,7 @@ bs_button_grid_region_new_full (BsStreamDeck       *stream_deck,
   g_assert (icon_layout != NULL);
 
   self = g_object_new (BS_TYPE_BUTTON_GRID_REGION,
+                       "id", id,
                        "stream-deck", stream_deck,
                        "grid-columns", grid_columns,
                        "column", column,
