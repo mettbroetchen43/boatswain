@@ -168,10 +168,8 @@ on_flowbox_child_activated_cb (GtkFlowBox         *flowbox,
 {
   BsStreamDeckButton *button;
   BsAction *action;
-  int position;
 
-  position = gtk_flow_box_child_get_index (child);
-  button = bs_stream_deck_get_button (self->stream_deck, position);
+  button = bs_stream_deck_button_widget_get_button (BS_STREAM_DECK_BUTTON_WIDGET (child));
   action = bs_stream_deck_button_get_action (button);
 
   if (action && is_switch_page_action (action))
@@ -191,10 +189,8 @@ on_flowbox_selected_children_changed_cb (GtkFlowBox         *flowbox,
   if (child)
     {
       BsStreamDeckButton *stream_deck_button;
-      int position;
 
-      position = gtk_flow_box_child_get_index (child);
-      stream_deck_button = bs_stream_deck_get_button (self->stream_deck, position);
+      stream_deck_button = bs_stream_deck_button_widget_get_button (BS_STREAM_DECK_BUTTON_WIDGET (child));
 
       bs_stream_deck_button_editor_set_button (self->button_editor, stream_deck_button);
     }
