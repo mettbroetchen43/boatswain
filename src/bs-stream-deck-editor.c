@@ -21,6 +21,7 @@
 #define G_LOG_DOMAIN "Stream Deck Editor"
 
 #include "bs-action-private.h"
+#include "bs-button-grid-region.h"
 #include "bs-debug.h"
 #include "bs-icon.h"
 #include "bs-icon-renderer.h"
@@ -40,11 +41,19 @@ struct _BsStreamDeckEditor
   AdwBin parent_instance;
 
   BsStreamDeckButtonEditor *button_editor;
-  GtkFlowBox *buttons_flowbox;
   GtkGrid *regions_grid;
 
   BsStreamDeck *stream_deck;
+
+  GHashTable *region_to_widget;
 };
+
+static void on_flowbox_child_activated_cb (GtkFlowBox         *flowbox,
+                                           GtkFlowBoxChild    *child,
+                                           BsStreamDeckEditor *self);
+
+static void on_flowbox_selected_children_changed_cb (GtkFlowBox         *flowbox,
+                                                     BsStreamDeckEditor *self);
 
 G_DEFINE_FINAL_TYPE (BsStreamDeckEditor, bs_stream_deck_editor, ADW_TYPE_BIN)
 
@@ -76,24 +85,74 @@ is_switch_page_action (BsAction *action)
 }
 
 static void
-build_button_grid (BsStreamDeckEditor *self)
+add_button_grid (BsStreamDeckEditor *self,
+                 BsButtonGridRegion *button_grid)
 {
-  const BsStreamDeckButtonLayout *layout;
-  uint8_t i;
+  BsDeviceRegion *region;
+  GtkFlowBox *buttons_flowbox;
+  GListModel *buttons;
+  unsigned int grid_columns;
 
-  layout = bs_stream_deck_get_button_layout (self->stream_deck);
-  gtk_flow_box_set_max_children_per_line (self->buttons_flowbox, layout->columns);
-  gtk_flow_box_set_min_children_per_line (self->buttons_flowbox, layout->columns);
+  buttons = bs_button_grid_region_get_buttons (button_grid);
+  grid_columns = bs_button_grid_region_get_grid_columns (button_grid);
 
-  for (i = 0; i < layout->n_buttons; i++)
+  buttons_flowbox = g_object_new (GTK_TYPE_FLOW_BOX,
+                                  "halign", GTK_ALIGN_CENTER,
+                                  "valign", GTK_ALIGN_CENTER,
+                                  "homogeneous", TRUE,
+                                  "activate-on-single-click", FALSE,
+                                  "selection-mode", GTK_SELECTION_SINGLE,
+                                  "column-spacing", 18,
+                                  "row-spacing", 18,
+                                  "min-children-per-line", grid_columns,
+                                  "max-children-per-line", grid_columns,
+                                  NULL);
+
+  g_signal_connect (buttons_flowbox,
+                    "child-activated",
+                    G_CALLBACK (on_flowbox_child_activated_cb),
+                    self);
+
+  g_signal_connect (buttons_flowbox,
+                    "selected-children-changed",
+                    G_CALLBACK (on_flowbox_selected_children_changed_cb),
+                    self);
+
+  for (unsigned int i = 0; i < g_list_model_get_n_items (buttons); i++)
     {
-      BsStreamDeckButton *stream_deck_button;
+      g_autoptr(BsStreamDeckButton) stream_deck_button = NULL;
       GtkWidget *button;
 
-      stream_deck_button = bs_stream_deck_get_button (self->stream_deck, i);
+      stream_deck_button = g_list_model_get_item (buttons, i);
 
       button = bs_stream_deck_button_widget_new (stream_deck_button);
-      gtk_flow_box_append (self->buttons_flowbox, button);
+      gtk_flow_box_append (buttons_flowbox, button);
+    }
+
+  region = BS_DEVICE_REGION (button_grid);
+  gtk_grid_attach (self->regions_grid,
+                   GTK_WIDGET (buttons_flowbox),
+                   bs_device_region_get_column (region),
+                   bs_device_region_get_row (region),
+                   bs_device_region_get_column_span (region),
+                   bs_device_region_get_row_span (region));
+
+  g_hash_table_insert (self->region_to_widget, region, buttons_flowbox);
+}
+
+static void
+build_regions (BsStreamDeckEditor *self)
+{
+  GListModel *regions = bs_stream_deck_get_regions (self->stream_deck);
+
+  for (unsigned int i = 0; i < g_list_model_get_n_items (regions); i++)
+    {
+      g_autoptr(BsDeviceRegion) region = g_list_model_get_item (regions, i);
+
+      if (BS_IS_BUTTON_GRID_REGION (region))
+        add_button_grid (self, BS_BUTTON_GRID_REGION (region));
+      else
+        g_assert_not_reached ();
     }
 }
 
@@ -146,7 +205,7 @@ on_stream_deck_active_page_changed_cb (BsStreamDeck       *stream_deck,
                                        GParamSpec         *pspec,
                                        BsStreamDeckEditor *self)
 {
-  GtkFlowBoxChild *flowbox_child;
+  GListModel *regions;
   BsPage *active_page;
   BsPage *parent;
 
@@ -154,10 +213,26 @@ on_stream_deck_active_page_changed_cb (BsStreamDeck       *stream_deck,
 
   active_page = bs_stream_deck_get_active_page (stream_deck);
   parent = bs_page_get_parent (active_page);
-  flowbox_child = gtk_flow_box_get_child_at_index (self->buttons_flowbox, parent ? 1 : 0);
-  g_assert (flowbox_child != NULL);
 
-  gtk_flow_box_select_child (self->buttons_flowbox, flowbox_child);
+  regions = bs_stream_deck_get_regions (self->stream_deck);
+  for (unsigned int i = 0; i < g_list_model_get_n_items (regions); i++)
+    {
+      g_autoptr(BsDeviceRegion) region = g_list_model_get_item (regions, i);
+
+      if (BS_IS_BUTTON_GRID_REGION (region))
+        {
+          GtkFlowBoxChild *flowbox_child;
+          GtkFlowBox *flowbox;
+
+          flowbox = g_hash_table_lookup (self->region_to_widget, region);
+          g_assert (GTK_IS_FLOW_BOX (flowbox));
+
+          flowbox_child = gtk_flow_box_get_child_at_index (flowbox, parent ? 1 : 0);
+          g_assert (flowbox_child != NULL);
+
+          gtk_flow_box_select_child (flowbox, flowbox_child);
+        }
+    }
 
   BS_EXIT;
 }
@@ -172,6 +247,7 @@ bs_stream_deck_editor_finalize (GObject *object)
 {
   BsStreamDeckEditor *self = (BsStreamDeckEditor *)object;
 
+  g_clear_pointer (&self->region_to_widget, g_hash_table_destroy);
   g_clear_object (&self->stream_deck);
 
   G_OBJECT_CLASS (bs_stream_deck_editor_parent_class)->finalize (object);
@@ -209,7 +285,7 @@ bs_stream_deck_editor_set_property (GObject      *object,
     case PROP_STREAM_DECK:
       g_assert (self->stream_deck == NULL);
       self->stream_deck = g_value_dup_object (value);
-      build_button_grid (self);
+      build_regions (self);
       g_signal_connect_object (self->stream_deck,
                                "notify::active-page",
                                G_CALLBACK (on_stream_deck_active_page_changed_cb),
@@ -243,11 +319,7 @@ bs_stream_deck_editor_class_init (BsStreamDeckEditorClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-stream-deck-editor.ui");
 
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, button_editor);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, buttons_flowbox);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, regions_grid);
-
-  gtk_widget_class_bind_template_callback (widget_class, on_flowbox_child_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_flowbox_selected_children_changed_cb);
 
   gtk_widget_class_set_css_name (widget_class, "streamdeckeditor");
 }
@@ -256,6 +328,8 @@ static void
 bs_stream_deck_editor_init (BsStreamDeckEditor *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  self->region_to_widget = g_hash_table_new (g_direct_hash, g_direct_equal);
 }
 
 GtkWidget *
