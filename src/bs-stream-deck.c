@@ -1725,6 +1725,14 @@ bs_stream_deck_set_brightness (BsStreamDeck *self,
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_BRIGHTNESS]);
 }
 
+GListModel *
+bs_stream_deck_get_regions (BsStreamDeck *self)
+{
+  g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
+
+  return G_LIST_MODEL (self->regions);
+}
+
 const BsStreamDeckButtonLayout *
 bs_stream_deck_get_button_layout (BsStreamDeck *self)
 {

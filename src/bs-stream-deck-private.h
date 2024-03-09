@@ -41,6 +41,8 @@ BsStreamDeck * bs_stream_deck_new_fake (GError **error);
 
 GUsbDevice * bs_stream_deck_get_device (BsStreamDeck *self);
 
+GListModel * bs_stream_deck_get_regions (BsStreamDeck *self);
+
 const BsStreamDeckButtonLayout * bs_stream_deck_get_button_layout (BsStreamDeck *self);
 
 BsStreamDeckButton * bs_stream_deck_get_button (BsStreamDeck *self,
