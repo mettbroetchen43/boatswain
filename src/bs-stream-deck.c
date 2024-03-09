@@ -42,9 +42,7 @@ G_STATIC_ASSERT (sizeof (unsigned char) == sizeof (uint8_t));
 typedef struct
 {
   uint8_t n_buttons;
-  uint8_t rows;
   uint8_t columns;
-  uint32_t icon_size;
 } BsStreamDeckButtonLayout;
 
 typedef struct
@@ -984,9 +982,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 6,
-      .rows = 2,
       .columns = 3,
-      .icon_size = 80,
     },
     .icon_layout = {
       .width = 80,
@@ -1010,9 +1006,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 6,
-      .rows = 2,
       .columns = 3,
-      .icon_size = 80,
     },
     .icon_layout = {
       .width = 80,
@@ -1036,9 +1030,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 15,
-      .rows = 3,
       .columns = 5,
-      .icon_size = 72,
     },
     .icon_layout = {
       .width = 72,
@@ -1062,9 +1054,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 15,
-      .rows = 3,
       .columns = 5,
-      .icon_size = 72,
     },
     .icon_layout = {
       .width = 72,
@@ -1088,9 +1078,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 32,
-      .rows = 4,
       .columns = 8,
-      .icon_size = 96,
     },
     .icon_layout = {
       .width = 96,
@@ -1114,9 +1102,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 32,
-      .rows = 4,
       .columns = 8,
-      .icon_size = 96,
     },
     .icon_layout = {
       .width = 96,
@@ -1140,9 +1126,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 15,
-      .rows = 3,
       .columns = 5,
-      .icon_size = 72,
     },
     .icon_layout = {
       .width = 72,
@@ -1166,9 +1150,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 3,
-      .rows = 1,
       .columns = 3,
-      .icon_size = 96,
     },
     .icon_layout = {
       .width = 96,
@@ -1192,9 +1174,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 8,
-      .rows = 2,
       .columns = 4,
-      .icon_size = 120,
     },
     .icon_layout = {
       .width = 120,
@@ -1261,9 +1241,7 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 15,
-      .rows = 3,
       .columns = 5,
-      .icon_size = 72,
     },
     .icon_layout = {
       .width = 72,
@@ -1284,9 +1262,7 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
     .icon_name = "input-dialpad-symbolic",
     .button_layout = {
       .n_buttons = 32,
-      .rows = 4,
       .columns = 8,
-      .icon_size = 96,
     },
     .icon_layout = {
       .width = 96,
