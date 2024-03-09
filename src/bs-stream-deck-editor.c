@@ -42,8 +42,6 @@ struct _BsStreamDeckEditor
   BsStreamDeckButtonEditor *button_editor;
   GtkFlowBox *buttons_flowbox;
 
-  GtkFlowBoxChild *active_button;
-
   BsStreamDeck *stream_deck;
 };
 
@@ -129,8 +127,6 @@ on_flowbox_selected_children_changed_cb (GtkFlowBox         *flowbox,
 
   selected_children = gtk_flow_box_get_selected_children (flowbox);
   child = selected_children ? selected_children->data : NULL;
-
-  self->active_button = child;
 
   if (child)
     {
