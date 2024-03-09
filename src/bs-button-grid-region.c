@@ -114,7 +114,7 @@ bs_button_grid_region_class_init (BsButtonGridRegionClass *klass)
                                                   G_TYPE_LIST_MODEL,
                                                   G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
-  properties[PROP_GRID_COLUMNS] = g_param_spec_uint ("grid-column", NULL, NULL,
+  properties[PROP_GRID_COLUMNS] = g_param_spec_uint ("grid-columns", NULL, NULL,
                                                      1, G_MAXUINT, 1,
                                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
