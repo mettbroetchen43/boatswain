@@ -46,10 +46,9 @@ const BsStreamDeckButtonLayout * bs_stream_deck_get_button_layout (BsStreamDeck 
 BsStreamDeckButton * bs_stream_deck_get_button (BsStreamDeck *self,
                                                 uint8_t       position);
 
-gboolean bs_stream_deck_set_button_icon (BsStreamDeck  *self,
-                                         uint8_t        button,
-                                         BsIcon        *icon,
-                                         GError       **error);
+gboolean bs_stream_deck_upload_button (BsStreamDeck        *self,
+                                       BsStreamDeckButton  *button,
+                                       GError             **error);
 
 void bs_stream_deck_load (BsStreamDeck *self);
 

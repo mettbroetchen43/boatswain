@@ -96,14 +96,8 @@ static void
 update_icon (BsStreamDeckButton *self)
 {
   g_autoptr (GError) error = NULL;
-  BsIcon *icon;
 
-  icon = bs_stream_deck_button_get_icon (self);
-
-  bs_stream_deck_set_button_icon (self->stream_deck,
-                                  self->position,
-                                  icon,
-                                  &error);
+  bs_stream_deck_upload_button (self->stream_deck, self, &error);
 
   if (error)
     g_warning ("Error updating Stream Deck button icon: %s", error->message);

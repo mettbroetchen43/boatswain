@@ -1706,17 +1706,18 @@ bs_stream_deck_get_button_layout (BsStreamDeck *self)
 }
 
 gboolean
-bs_stream_deck_set_button_icon (BsStreamDeck  *self,
-                                uint8_t        button,
-                                BsIcon        *icon,
-                                GError       **error)
+bs_stream_deck_upload_button (BsStreamDeck        *self,
+                              BsStreamDeckButton  *button,
+                              GError             **error)
 {
   g_autoptr (GdkTexture) texture = NULL;
+  BsIcon *icon;
+  uint8_t position;
 
   g_return_val_if_fail (BS_IS_STREAM_DECK (self), FALSE);
-  g_return_val_if_fail (button < self->model_info->button_layout.n_buttons, FALSE);
   g_return_val_if_fail (self->model_info->set_button_texture != NULL, FALSE);
 
+  icon = bs_stream_deck_button_get_icon (button);
   texture = bs_icon_renderer_compose_icon (self->icon_renderer,
                                            BS_ICON_COMPOSE_FLAG_NONE,
                                            icon,
@@ -1725,7 +1726,9 @@ bs_stream_deck_set_button_icon (BsStreamDeck  *self,
   if (!texture)
     return FALSE;
 
-  return self->model_info->set_button_texture (self, button, texture, error);
+  position = bs_stream_deck_button_get_position (button);
+
+  return self->model_info->set_button_texture (self, position, texture, error);
 }
 
 BsStreamDeckButton *
