@@ -1719,6 +1719,24 @@ bs_stream_deck_get_regions (BsStreamDeck *self)
   return G_LIST_MODEL (self->regions);
 }
 
+BsDeviceRegion *
+bs_stream_deck_get_region (BsStreamDeck *self,
+                           const char   *region_id)
+{
+  g_return_val_if_fail (BS_IS_STREAM_DECK (self), NULL);
+  g_return_val_if_fail (region_id && g_utf8_validate (region_id, -1, NULL), NULL);
+
+  for (unsigned int i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (self->regions)); i++)
+    {
+      g_autoptr(BsDeviceRegion) region = g_list_model_get_item (G_LIST_MODEL (self->regions), i);
+
+      if (g_strcmp0 (bs_device_region_get_id (region), region_id) == 0)
+        return region;
+    }
+
+  return NULL;
+}
+
 gboolean
 bs_stream_deck_upload_button (BsStreamDeck        *self,
                               BsStreamDeckButton  *button,
