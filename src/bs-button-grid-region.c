@@ -186,3 +186,11 @@ bs_button_grid_region_get_buttons (BsButtonGridRegion *self)
 
   return G_LIST_MODEL (self->buttons);
 }
+
+unsigned int
+bs_button_grid_region_get_grid_columns (BsButtonGridRegion *self)
+{
+  g_return_val_if_fail (BS_IS_BUTTON_GRID_REGION (self), 0);
+
+  return self->grid_columns;
+}

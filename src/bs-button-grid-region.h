@@ -47,4 +47,6 @@ BsButtonGridRegion * bs_button_grid_region_new_full (BsStreamDeck       *stream_
 
 GListModel * bs_button_grid_region_get_buttons (BsButtonGridRegion *self);
 
+unsigned int bs_button_grid_region_get_grid_columns (BsButtonGridRegion *self);
+
 G_END_DECLS
