@@ -23,6 +23,7 @@
 #include "bs-action-private.h"
 #include "bs-button-grid-region.h"
 #include "bs-debug.h"
+#include "bs-dial-grid-region.h"
 #include "bs-icon.h"
 #include "bs-icon-renderer.h"
 #include "bs-page.h"
@@ -141,6 +142,13 @@ add_button_grid (BsStreamDeckEditor *self,
 }
 
 static void
+add_dial_grid (BsStreamDeckEditor *self,
+               BsDialGridRegion   *dial_grid)
+{
+  BS_TODO ("Implement dial grid widgetry");
+}
+
+static void
 build_regions (BsStreamDeckEditor *self)
 {
   GListModel *regions = bs_stream_deck_get_regions (self->stream_deck);
@@ -151,6 +159,8 @@ build_regions (BsStreamDeckEditor *self)
 
       if (BS_IS_BUTTON_GRID_REGION (region))
         add_button_grid (self, BS_BUTTON_GRID_REGION (region));
+      else if (BS_IS_DIAL_GRID_REGION (region))
+        add_dial_grid (self, BS_DIAL_GRID_REGION (region));
       else
         g_assert_not_reached ();
     }
