@@ -31,6 +31,8 @@ struct _BsStreamDeckButton
   BsAction *action;
   BsIcon *custom_icon;
   BsStreamDeck *stream_deck;
+  unsigned int icon_width;
+  unsigned int icon_height;
   uint8_t position;
   gulong custom_contents_changed_id;
   gulong custom_size_changed_id;
@@ -50,6 +52,8 @@ enum
   PROP_0,
   PROP_ACTION,
   PROP_ICON,
+  PROP_ICON_HEIGHT,
+  PROP_ICON_WIDTH,
   PROP_CUSTOM_ICON,
   PROP_PRESSED,
   N_PROPS,
@@ -186,6 +190,14 @@ bs_stream_deck_button_get_property (GObject    *object,
       g_value_set_object (value, bs_stream_deck_button_get_icon (self));
       break;
 
+    case PROP_ICON_HEIGHT:
+      g_value_set_uint (value, self->icon_height);
+      break;
+
+    case PROP_ICON_WIDTH:
+      g_value_set_uint (value, self->icon_width);
+      break;
+
     case PROP_CUSTOM_ICON:
       g_value_set_object (value, self->custom_icon);
       break;
@@ -231,6 +243,14 @@ bs_stream_deck_button_class_init (BsStreamDeckButtonClass *klass)
                                                BS_TYPE_ICON,
                                                G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
+  properties[PROP_ICON_HEIGHT] = g_param_spec_uint ("icon-height", NULL, NULL,
+                                                    1, G_MAXUINT, 1,
+                                                    G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_ICON_WIDTH] = g_param_spec_uint ("icon-width", NULL, NULL,
+                                                   1, G_MAXUINT, 1,
+                                                   G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+
   properties[PROP_CUSTOM_ICON] = g_param_spec_object ("custom-icon", NULL, NULL,
                                                       BS_TYPE_ICON,
                                                       G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
@@ -258,7 +278,9 @@ bs_stream_deck_button_init (BsStreamDeckButton *self)
 
 BsStreamDeckButton *
 bs_stream_deck_button_new (BsStreamDeck *stream_deck,
-                           uint8_t       position)
+                           uint8_t       position,
+                           unsigned int  icon_width,
+                           unsigned int  icon_height)
 {
   g_autoptr (BsIcon) empty_icon = NULL;
   BsStreamDeckButton *self;
@@ -266,6 +288,8 @@ bs_stream_deck_button_new (BsStreamDeck *stream_deck,
   self = g_object_new (BS_TYPE_STREAM_DECK_BUTTON, NULL);
   self->stream_deck = stream_deck;
   self->position = position;
+  self->icon_width = icon_width;
+  self->icon_height = icon_height;
 
   empty_icon = bs_icon_new_empty ();
   bs_stream_deck_button_set_custom_icon (self, empty_icon);
@@ -442,4 +466,20 @@ bs_stream_deck_button_uninhibit_page_updates (BsStreamDeckButton *self)
   g_return_if_fail (self->inhibit_page_updates_counter > 0);
 
   self->inhibit_page_updates_counter--;
+}
+
+unsigned int
+bs_stream_deck_button_get_icon_width (BsStreamDeckButton *self)
+{
+  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), 0);
+
+  return self->icon_width;
+}
+
+unsigned int
+bs_stream_deck_button_get_icon_height (BsStreamDeckButton *self)
+{
+  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), 0);
+
+  return self->icon_height;
 }

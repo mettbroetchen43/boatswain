@@ -28,12 +28,17 @@
 G_BEGIN_DECLS
 
 BsStreamDeckButton * bs_stream_deck_button_new (BsStreamDeck *stream_deck,
-                                                uint8_t       position);
+                                                uint8_t       position,
+                                                unsigned int  icon_width,
+                                                unsigned int  icon_height);
 
 void bs_stream_deck_button_set_pressed (BsStreamDeckButton *self,
                                         gboolean            pressed);
 
 void bs_stream_deck_button_inhibit_page_updates (BsStreamDeckButton *self);
 void bs_stream_deck_button_uninhibit_page_updates (BsStreamDeckButton *self);
+
+unsigned int bs_stream_deck_button_get_icon_width (BsStreamDeckButton *self);
+unsigned int bs_stream_deck_button_get_icon_height (BsStreamDeckButton *self);
 
 G_END_DECLS

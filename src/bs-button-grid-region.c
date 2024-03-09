@@ -172,7 +172,13 @@ bs_button_grid_region_new_full (BsStreamDeck       *stream_deck,
 
   for (unsigned int i = 0; i < n_buttons; i++)
     {
-      g_autoptr(BsStreamDeckButton) button = bs_stream_deck_button_new (stream_deck, i);
+      g_autoptr(BsStreamDeckButton) button = NULL;
+
+      button = bs_stream_deck_button_new (stream_deck,
+                                          i,
+                                          icon_layout->width,
+                                          icon_layout->height);
+
       g_list_store_append (self->buttons, button);
     }
 
