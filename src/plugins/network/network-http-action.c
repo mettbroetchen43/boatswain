@@ -378,11 +378,11 @@ network_http_action_init (NetworkHttpAction *self)
 }
 
 BsAction *
-network_http_action_new (BsStreamDeckButton *stream_deck_button,
+network_http_action_new (BsButton *button,
                          SoupSession        *session)
 {
   return g_object_new (NETWORK_TYPE_HTTP_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        "session", session,
                        NULL);
 }

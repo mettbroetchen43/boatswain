@@ -4,11 +4,11 @@ data/com.feaneron.Boatswain.desktop.in.in
 data/com.feaneron.Boatswain.appdata.xml.in.in
 data/com.feaneron.Boatswain.gschema.xml
 src/bs-application.c
+src/bs-button-editor.c
+src/bs-button-editor.ui
 src/bs-profile.c
 src/bs-profile-row.ui
 src/bs-stream-deck.c
-src/bs-stream-deck-button-editor.c
-src/bs-stream-deck-button-editor.ui
 src/bs-window.ui
 src/bs-window.c
 src/gtk/help-overlay.ui

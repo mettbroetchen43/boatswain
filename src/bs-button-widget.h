@@ -1,4 +1,5 @@
-/* bs-stream-deck-button-private.h
+/*
+ * bs-button-widget.h
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -20,25 +21,17 @@
 
 #pragma once
 
-#include "bs-stream-deck-button.h"
 #include "bs-types.h"
 
-#include <stdint.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-BsStreamDeckButton * bs_stream_deck_button_new (BsStreamDeck *stream_deck,
-                                                uint8_t       position,
-                                                unsigned int  icon_width,
-                                                unsigned int  icon_height);
+#define BS_TYPE_BUTTON_WIDGET (bs_button_widget_get_type())
+G_DECLARE_FINAL_TYPE (BsButtonWidget, bs_button_widget, BS, BUTTON_WIDGET, GtkFlowBoxChild)
 
-void bs_stream_deck_button_set_pressed (BsStreamDeckButton *self,
-                                        gboolean            pressed);
+GtkWidget *bs_button_widget_new (BsButton *button);
 
-void bs_stream_deck_button_inhibit_page_updates (BsStreamDeckButton *self);
-void bs_stream_deck_button_uninhibit_page_updates (BsStreamDeckButton *self);
-
-unsigned int bs_stream_deck_button_get_icon_width (BsStreamDeckButton *self);
-unsigned int bs_stream_deck_button_get_icon_height (BsStreamDeckButton *self);
+BsButton * bs_button_widget_get_button (BsButtonWidget *self);
 
 G_END_DECLS

@@ -644,12 +644,12 @@ obs_toggle_source_action_init (ObsToggleSourceAction *self)
 }
 
 BsAction *
-obs_toggle_source_action_new (BsStreamDeckButton   *stream_deck_button,
+obs_toggle_source_action_new (BsButton             *button,
                               ObsConnectionManager *connection_manager,
                               ObsSourceCaps         source_caps)
 {
   return g_object_new (OBS_TYPE_TOGGLE_SOURCE_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        "connection-manager", connection_manager,
                        "source-caps", source_caps,
                        NULL);

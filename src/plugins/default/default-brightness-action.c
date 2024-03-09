@@ -20,7 +20,7 @@
 
 #include "bs-icon.h"
 #include "bs-stream-deck.h"
-#include "bs-stream-deck-button.h"
+#include "bs-button.h"
 #include "default-brightness-action.h"
 
 #include <glib/gi18n.h>
@@ -95,12 +95,12 @@ static void
 default_brightness_action_activate (BsAction *action)
 {
   DefaultBrightnessAction *self = DEFAULT_BRIGHTNESS_ACTION (action);
-  BsStreamDeckButton *stream_deck_button;
+  BsButton *button;
   BsStreamDeck *stream_deck;
   double brightness;
 
-  stream_deck_button = bs_action_get_stream_deck_button (action);
-  stream_deck = bs_stream_deck_button_get_stream_deck (stream_deck_button);
+  button = bs_action_get_button (action);
+  stream_deck = bs_button_get_stream_deck (button);
   brightness = bs_stream_deck_get_brightness (stream_deck);
 
   switch (self->mode)
@@ -294,9 +294,9 @@ default_brightness_action_init (DefaultBrightnessAction *self)
 }
 
 BsAction *
-default_brightness_action_new (BsStreamDeckButton *stream_deck_button)
+default_brightness_action_new (BsButton *button)
 {
   return g_object_new (DEFAULT_TYPE_BRIGHTNESS_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        NULL);
 }

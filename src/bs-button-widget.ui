@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="BsStreamDeckButtonWidget" parent="GtkFlowBoxChild">
+  <template class="BsButtonWidget" parent="GtkFlowBoxChild">
 
     <child>
       <object class="GtkDragSource" id="drag_source">
         <property name="actions">move</property>
-        <signal name="prepare" handler="on_drag_prepare_cb" object="BsStreamDeckButtonWidget" swapped="no" />
-        <signal name="drag-begin" handler="on_drag_begin_cb" object="BsStreamDeckButtonWidget" swapped="no" />
+        <signal name="prepare" handler="on_drag_prepare_cb" object="BsButtonWidget" swapped="no" />
+        <signal name="drag-begin" handler="on_drag_begin_cb" object="BsButtonWidget" swapped="no" />
       </object>
     </child>
 
@@ -16,13 +16,13 @@
         <property name="halign">center</property>
         <property name="overflow">hidden</property>
         <binding name="width-request">
-          <lookup type="BsStreamDeckButton" name="icon-width">
-            <lookup name="button">BsStreamDeckButtonWidget</lookup>
+          <lookup type="BsButton" name="icon-width">
+            <lookup name="button">BsButtonWidget</lookup>
           </lookup>
         </binding>
         <binding name="height-request">
-          <lookup type="BsStreamDeckButton" name="icon-height">
-            <lookup name="button">BsStreamDeckButtonWidget</lookup>
+          <lookup type="BsButton" name="icon-height">
+            <lookup name="button">BsButtonWidget</lookup>
           </lookup>
         </binding>"
         <style>

@@ -63,18 +63,18 @@ static const BsActionEntry entries[] = {
 };
 
 static BsAction *
-default_action_factory_create_action (BsActionFactory    *action_factory,
-                                      BsStreamDeckButton *stream_deck_button,
-                                      BsActionInfo       *action_info)
+default_action_factory_create_action (BsActionFactory *action_factory,
+                                      BsButton        *button,
+                                      BsActionInfo    *action_info)
 {
   if (g_strcmp0 (bs_action_info_get_id (action_info), "default-switch-profile-action") == 0)
-    return default_switch_profile_action_new (stream_deck_button);
+    return default_switch_profile_action_new (button);
   else if (g_strcmp0 (bs_action_info_get_id (action_info), "default-brightness-action") == 0)
-    return default_brightness_action_new (stream_deck_button);
+    return default_brightness_action_new (button);
   else if (g_strcmp0 (bs_action_info_get_id (action_info), "default-switch-page-action") == 0)
-    return default_switch_page_action_new (stream_deck_button);
+    return default_switch_page_action_new (button);
   else if (g_strcmp0 (bs_action_info_get_id (action_info), "default-multi-action") == 0)
-    return default_multi_action_new (stream_deck_button);
+    return default_multi_action_new (button);
 
   return NULL;
 }

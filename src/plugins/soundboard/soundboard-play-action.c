@@ -333,10 +333,10 @@ soundboard_play_action_init (SoundboardPlayAction *self)
 }
 
 BsAction *
-soundboard_play_action_new (BsStreamDeckButton *stream_deck_button)
+soundboard_play_action_new (BsButton *button)
 {
   return g_object_new (SOUNDBOARD_TYPE_PLAY_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        NULL);
 }
 

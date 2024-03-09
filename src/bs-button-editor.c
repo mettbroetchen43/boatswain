@@ -1,4 +1,4 @@
-/* bs-stream-deck-button-editor.c
+/* bs-button-editor.c
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -28,13 +28,13 @@
 #include "bs-page.h"
 #include "bs-page-item.h"
 #include "bs-stream-deck.h"
-#include "bs-stream-deck-button.h"
-#include "bs-stream-deck-button-editor.h"
+#include "bs-button.h"
+#include "bs-button-editor.h"
 
 #include <glib/gi18n.h>
 #include <libpeas.h>
 
-struct _BsStreamDeckButtonEditor
+struct _BsButtonEditor
 {
   AdwBin parent_instance;
 
@@ -51,7 +51,7 @@ struct _BsStreamDeckButtonEditor
   GtkWidget *remove_custom_icon_button;
   GtkStack *stack;
 
-  BsStreamDeckButton *button;
+  BsButton *button;
   GtkWidget *action_preferences;
 
   gulong action_changed_id;
@@ -59,14 +59,14 @@ struct _BsStreamDeckButtonEditor
   gulong icon_changed_id;
 };
 
-static void on_action_row_activated_cb (GtkListBoxRow            *row,
-                                        BsStreamDeckButtonEditor *self);
+static void on_action_row_activated_cb (GtkListBoxRow  *row,
+                                        BsButtonEditor *self);
 
-static void on_custom_icon_text_row_text_changed_cb (GtkEditable              *entry,
-                                                     GParamSpec               *pspec,
-                                                     BsStreamDeckButtonEditor *self);
+static void on_custom_icon_text_row_text_changed_cb (GtkEditable    *entry,
+                                                     GParamSpec     *pspec,
+                                                     BsButtonEditor *self);
 
-G_DEFINE_FINAL_TYPE (BsStreamDeckButtonEditor, bs_stream_deck_button_editor, ADW_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (BsButtonEditor, bs_button_editor, ADW_TYPE_BIN)
 
 enum
 {
@@ -83,8 +83,8 @@ static GParamSpec *properties [N_PROPS];
  */
 
 static void
-add_action_factory (BsStreamDeckButtonEditor *self,
-                    BsActionFactory          *action_factory)
+add_action_factory (BsButtonEditor  *self,
+                    BsActionFactory *action_factory)
 {
   PeasPluginInfo *plugin_info;
   GtkWidget *expander_row;
@@ -126,16 +126,16 @@ add_action_factory (BsStreamDeckButtonEditor *self,
 }
 
 static void
-setup_button (BsStreamDeckButtonEditor *self)
+setup_button (BsButtonEditor *self)
 {
   BsStreamDeck *stream_deck;
   BsIcon *custom_icon;
 
-  stream_deck = bs_stream_deck_button_get_stream_deck (self->button);
-  custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+  stream_deck = bs_button_get_stream_deck (self->button);
+  custom_icon = bs_button_get_custom_icon (self->button);
 
   gtk_widget_set_sensitive (GTK_WIDGET (self),
-                            bs_stream_deck_button_get_position (self->button) != 0 ||
+                            bs_button_get_position (self->button) != 0 ||
                             bs_page_get_parent (bs_stream_deck_get_active_page (stream_deck)) == NULL);
 
   gtk_widget_set_visible (self->remove_custom_icon_button, custom_icon != NULL);
@@ -167,12 +167,12 @@ setup_button (BsStreamDeckButtonEditor *self)
 }
 
 static void
-update_action_preferences_group (BsStreamDeckButtonEditor *self)
+update_action_preferences_group (BsButtonEditor *self)
 {
   GtkWidget *action_preferences;
   BsAction *action;
 
-  action = self->button ? bs_stream_deck_button_get_action (self->button) : NULL;
+  action = self->button ? bs_button_get_action (self->button) : NULL;
   action_preferences = action ? bs_action_get_preferences (action) : NULL;
 
   gtk_widget_set_visible (self->remove_action_button,
@@ -194,17 +194,17 @@ update_action_preferences_group (BsStreamDeckButtonEditor *self)
 }
 
 static void
-update_icon (BsStreamDeckButtonEditor *self)
+update_icon (BsButtonEditor *self)
 {
-  BsIcon *icon = bs_stream_deck_button_get_icon (self->button);
+  BsIcon *icon = bs_button_get_icon (self->button);
 
   gtk_image_set_from_paintable (self->icon_image, GDK_PAINTABLE (icon));
 }
 
 static void
-maybe_remove_custom_icon (BsStreamDeckButtonEditor *self)
+maybe_remove_custom_icon (BsButtonEditor *self)
 {
-  BsIcon *custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+  BsIcon *custom_icon = bs_button_get_custom_icon (self->button);
   GdkRGBA transparent = { 0.0, 0.0, 0.0, 0.0 };
   const char *text;
 
@@ -219,7 +219,7 @@ maybe_remove_custom_icon (BsStreamDeckButtonEditor *self)
       !bs_icon_get_paintable (custom_icon) &&
       (!text || strlen (text) == 0))
     {
-      bs_stream_deck_button_set_custom_icon (self->button, NULL);
+      bs_button_set_custom_icon (self->button, NULL);
     }
 
 }
@@ -230,8 +230,8 @@ maybe_remove_custom_icon (BsStreamDeckButtonEditor *self)
  */
 
 static void
-on_action_row_activated_cb (GtkListBoxRow            *row,
-                            BsStreamDeckButtonEditor *self)
+on_action_row_activated_cb (GtkListBoxRow  *row,
+                            BsButtonEditor *self)
 {
   g_autoptr (BsAction) new_action = NULL;
   g_autoptr (BsIcon) new_custom_icon = NULL;
@@ -243,17 +243,17 @@ on_action_row_activated_cb (GtkListBoxRow            *row,
   BsIcon *custom_icon;
   BsPage *active_page;
 
-  stream_deck = bs_stream_deck_button_get_stream_deck (self->button);
+  stream_deck = bs_button_get_stream_deck (self->button);
   active_page = bs_stream_deck_get_active_page (stream_deck);
   plugin_info = g_object_get_data (G_OBJECT (row), "plugin-info");
   action_info = g_object_get_data (G_OBJECT (row), "action-info");
 
-  item = bs_page_get_item (active_page, bs_stream_deck_button_get_position (self->button));
+  item = bs_page_get_item (active_page, bs_button_get_position (self->button));
   bs_page_item_set_item_type (item, BS_PAGE_ITEM_ACTION);
   bs_page_item_set_factory (item, peas_plugin_info_get_module_name (plugin_info));
   bs_page_item_set_action (item, bs_action_info_get_id (action_info));
 
-  custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+  custom_icon = bs_button_get_custom_icon (self->button);
   if (custom_icon)
     bs_page_item_set_custom_icon (item, bs_icon_to_json (custom_icon));
 
@@ -262,8 +262,8 @@ on_action_row_activated_cb (GtkListBoxRow            *row,
   if (error)
     g_warning ("Error realizing action: %s", error->message);
 
-  bs_stream_deck_button_set_action (self->button, new_action);
-  bs_stream_deck_button_set_custom_icon (self->button, new_custom_icon);
+  bs_button_set_action (self->button, new_action);
+  bs_button_set_custom_icon (self->button, new_custom_icon);
   update_action_preferences_group (self);
 
   adw_navigation_view_pop (self->navigation_view);
@@ -275,7 +275,7 @@ on_action_factory_added_cb (PeasExtensionSet *extension_set,
                             GObject          *extension,
                             gpointer          user_data)
 {
-  BsStreamDeckButtonEditor *self = BS_STREAM_DECK_BUTTON_EDITOR (user_data);
+  BsButtonEditor *self = BS_BUTTON_EDITOR (user_data);
 
   add_action_factory (self, BS_ACTION_FACTORY (extension));
 }
@@ -289,9 +289,9 @@ on_action_factory_removed_cb (PeasExtensionSet *extension_set,
 }
 
 static void
-on_action_changed_cb (BsStreamDeckButton       *stream_deck_button,
-                      GParamSpec               *pspec,
-                      BsStreamDeckButtonEditor *self)
+on_action_changed_cb (BsButton       *button,
+                      GParamSpec     *pspec,
+                      BsButtonEditor *self)
 {
   update_action_preferences_group (self);
   setup_button (self);
@@ -299,14 +299,14 @@ on_action_changed_cb (BsStreamDeckButton       *stream_deck_button,
 }
 
 static void
-on_background_color_dialog_button_rgba_changed_cb (GtkColorDialogButton     *button,
-                                                   GParamSpec               *pspec,
-                                                   BsStreamDeckButtonEditor *self)
+on_background_color_dialog_button_rgba_changed_cb (GtkColorDialogButton *button,
+                                                   GParamSpec           *pspec,
+                                                   BsButtonEditor       *self)
 {
   g_autoptr (BsIcon) icon = NULL;
   const GdkRGBA *background_color;
 
-  icon = bs_stream_deck_button_get_custom_icon (self->button);
+  icon = bs_button_get_custom_icon (self->button);
   if (!icon)
     icon = bs_icon_new_empty ();
   else
@@ -314,21 +314,21 @@ on_background_color_dialog_button_rgba_changed_cb (GtkColorDialogButton     *but
   background_color = gtk_color_dialog_button_get_rgba (button);
 
   bs_icon_set_background_color (icon, background_color);
-  bs_stream_deck_button_set_custom_icon (self->button, icon);
+  bs_button_set_custom_icon (self->button, icon);
 }
 
 static void
-on_button_custom_icon_changed_cb (BsStreamDeckButton       *stream_deck_button,
-                                  GParamSpec               *pspec,
-                                  BsStreamDeckButtonEditor *self)
+on_button_custom_icon_changed_cb (BsButton       *button,
+                                  GParamSpec     *pspec,
+                                  BsButtonEditor *self)
 {
   setup_button (self);
 }
 
 static void
-on_button_icon_changed_cb (BsStreamDeckButton       *stream_deck_button,
-                           BsIcon                   *icon,
-                           BsStreamDeckButtonEditor *self)
+on_button_icon_changed_cb (BsButton       *button,
+                           BsIcon         *icon,
+                           BsButtonEditor *self)
 {
   setup_button (self);
   update_icon (self);
@@ -340,7 +340,7 @@ on_file_dialog_file_opened_cb (GObject      *source,
                                GAsyncResult *result,
                                gpointer      user_data)
 {
-  BsStreamDeckButtonEditor *self;
+  BsButtonEditor *self;
   g_autoptr (GError) error = NULL;
   g_autoptr (BsIcon) icon = NULL;
   g_autoptr (GFile) file = NULL;
@@ -357,8 +357,8 @@ on_file_dialog_file_opened_cb (GObject      *source,
       return;
     }
 
-  self = BS_STREAM_DECK_BUTTON_EDITOR (user_data);
-  icon = bs_stream_deck_button_get_custom_icon (self->button);
+  self = BS_BUTTON_EDITOR (user_data);
+  icon = bs_button_get_custom_icon (self->button);
 
   if (!icon)
     icon = bs_icon_new_empty ();
@@ -372,12 +372,12 @@ on_file_dialog_file_opened_cb (GObject      *source,
       return;
     }
 
-  bs_stream_deck_button_set_custom_icon (self->button, icon);
+  bs_button_set_custom_icon (self->button, icon);
 }
 
 static void
-on_custom_icon_button_clicked_cb (AdwPreferencesRow        *row,
-                                  BsStreamDeckButtonEditor *self)
+on_custom_icon_button_clicked_cb (AdwPreferencesRow *row,
+                                  BsButtonEditor    *self)
 {
   g_autoptr (GtkFileDialog) dialog = NULL;
   g_autoptr (GtkFileFilter) filter = NULL;
@@ -407,15 +407,15 @@ on_custom_icon_button_clicked_cb (AdwPreferencesRow        *row,
 }
 
 static void
-on_custom_icon_text_row_text_changed_cb (GtkEditable              *row,
-                                         GParamSpec               *pspec,
-                                         BsStreamDeckButtonEditor *self)
+on_custom_icon_text_row_text_changed_cb (GtkEditable    *row,
+                                         GParamSpec     *pspec,
+                                         BsButtonEditor *self)
 {
   g_autoptr (BsIcon) custom_icon = NULL;
   const char *text;
 
   text = gtk_editable_get_text (row);
-  custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+  custom_icon = bs_button_get_custom_icon (self->button);
 
   if (custom_icon)
     g_object_ref (custom_icon);
@@ -427,7 +427,7 @@ on_custom_icon_text_row_text_changed_cb (GtkEditable              *row,
       else
         g_object_ref (custom_icon);
       bs_icon_set_text (custom_icon, text);
-      bs_stream_deck_button_set_custom_icon (self->button, custom_icon);
+      bs_button_set_custom_icon (self->button, custom_icon);
     }
   else
     {
@@ -438,9 +438,9 @@ on_custom_icon_text_row_text_changed_cb (GtkEditable              *row,
 }
 
 static void
-on_icons_gridview_activate_cb (GtkGridView              *grid_view,
-                               unsigned int              position,
-                               BsStreamDeckButtonEditor *self)
+on_icons_gridview_activate_cb (GtkGridView    *grid_view,
+                               unsigned int    position,
+                               BsButtonEditor *self)
 {
   g_autoptr (GtkStringObject) string_object = NULL;
   g_autoptr (BsIcon) custom_icon = NULL;
@@ -449,7 +449,7 @@ on_icons_gridview_activate_cb (GtkGridView              *grid_view,
   selection_model = gtk_grid_view_get_model (grid_view);
   string_object = g_list_model_get_item (G_LIST_MODEL (selection_model), position);
 
-  custom_icon = bs_stream_deck_button_get_custom_icon (self->button);
+  custom_icon = bs_button_get_custom_icon (self->button);
   if (!custom_icon)
     custom_icon = bs_icon_new_empty ();
   else
@@ -458,31 +458,31 @@ on_icons_gridview_activate_cb (GtkGridView              *grid_view,
   bs_icon_set_file (custom_icon, NULL, NULL);
   bs_icon_set_paintable (custom_icon, NULL);
   bs_icon_set_icon_name (custom_icon, gtk_string_object_get_string (string_object));
-  bs_stream_deck_button_set_custom_icon (self->button, custom_icon);
+  bs_button_set_custom_icon (self->button, custom_icon);
 }
 
 static void
-on_remove_action_button_clicked_cb (GtkButton                *button,
-                                    BsStreamDeckButtonEditor *self)
+on_remove_action_button_clicked_cb (GtkButton      *button,
+                                    BsButtonEditor *self)
 {
   g_autoptr (BsAction) empty_action = NULL;
 
   empty_action = bs_empty_action_new (self->button);
-  bs_stream_deck_button_set_action (self->button, empty_action);
+  bs_button_set_action (self->button, empty_action);
 }
 
 static void
-on_remove_custom_icon_button_clicked_cb (GtkButton                *button,
-                                         BsStreamDeckButtonEditor *self)
+on_remove_custom_icon_button_clicked_cb (GtkButton      *button,
+                                         BsButtonEditor *self)
 {
-  bs_stream_deck_button_set_custom_icon (self->button, NULL);
+  bs_button_set_custom_icon (self->button, NULL);
   gtk_color_dialog_button_set_rgba (self->background_color_dialog_button,
                                     &(GdkRGBA) { 0.0, 0.0, 0.0, 0.0 });
 }
 
 static void
-on_select_action_row_activated_cb (GtkListBoxRow            *row,
-                                   BsStreamDeckButtonEditor *self)
+on_select_action_row_activated_cb (GtkListBoxRow  *row,
+                                   BsButtonEditor *self)
 {
   /* Collapse all expander rows */
   for (GtkWidget *child = gtk_widget_get_first_child (GTK_WIDGET (self->actions_listbox));
@@ -501,25 +501,25 @@ on_select_action_row_activated_cb (GtkListBoxRow            *row,
  */
 
 static void
-bs_stream_deck_button_editor_finalize (GObject *object)
+bs_button_editor_finalize (GObject *object)
 {
-  BsStreamDeckButtonEditor *self = (BsStreamDeckButtonEditor *)object;
+  BsButtonEditor *self = (BsButtonEditor *)object;
 
   g_clear_signal_handler (&self->action_changed_id, self->button);
   g_clear_signal_handler (&self->custom_icon_changed_id, self->button);
   g_clear_signal_handler (&self->icon_changed_id, self->button);
   g_clear_object (&self->button);
 
-  G_OBJECT_CLASS (bs_stream_deck_button_editor_parent_class)->finalize (object);
+  G_OBJECT_CLASS (bs_button_editor_parent_class)->finalize (object);
 }
 
 static void
-bs_stream_deck_button_editor_get_property (GObject    *object,
-                                           guint       prop_id,
-                                           GValue     *value,
-                                           GParamSpec *pspec)
+bs_button_editor_get_property (GObject    *object,
+                               guint       prop_id,
+                               GValue     *value,
+                               GParamSpec *pspec)
 {
-  BsStreamDeckButtonEditor *self = BS_STREAM_DECK_BUTTON_EDITOR (object);
+  BsButtonEditor *self = BS_BUTTON_EDITOR (object);
 
   switch (prop_id)
     {
@@ -533,17 +533,17 @@ bs_stream_deck_button_editor_get_property (GObject    *object,
 }
 
 static void
-bs_stream_deck_button_editor_set_property (GObject      *object,
-                                           guint         prop_id,
-                                           const GValue *value,
-                                           GParamSpec   *pspec)
+bs_button_editor_set_property (GObject      *object,
+                               guint         prop_id,
+                               const GValue *value,
+                               GParamSpec   *pspec)
 {
-  BsStreamDeckButtonEditor *self = BS_STREAM_DECK_BUTTON_EDITOR (object);
+  BsButtonEditor *self = BS_BUTTON_EDITOR (object);
 
   switch (prop_id)
     {
     case PROP_BUTTON:
-      bs_stream_deck_button_editor_set_button (self, g_value_get_object (value));
+      bs_button_editor_set_button (self, g_value_get_object (value));
       break;
 
     default:
@@ -552,35 +552,35 @@ bs_stream_deck_button_editor_set_property (GObject      *object,
 }
 
 static void
-bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
+bs_button_editor_class_init (BsButtonEditorClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize = bs_stream_deck_button_editor_finalize;
-  object_class->get_property = bs_stream_deck_button_editor_get_property;
-  object_class->set_property = bs_stream_deck_button_editor_set_property;
+  object_class->finalize = bs_button_editor_finalize;
+  object_class->get_property = bs_button_editor_get_property;
+  object_class->set_property = bs_button_editor_set_property;
 
   properties[PROP_BUTTON] = g_param_spec_object ("button", NULL, NULL,
-                                                 BS_TYPE_STREAM_DECK_BUTTON,
+                                                 BS_TYPE_BUTTON,
                                                  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-stream-deck-button-editor.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-button-editor.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, action_preferences_group);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, actions_listbox);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, background_color_dialog_button);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, builtin_icons_stringlist);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, button_preferences_page);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_menubutton);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, custom_icon_text_row);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, icon_image);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, navigation_view);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, remove_action_button);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, remove_custom_icon_button);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckButtonEditor, stack);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, action_preferences_group);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, actions_listbox);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, background_color_dialog_button);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, builtin_icons_stringlist);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, button_preferences_page);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, custom_icon_menubutton);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, custom_icon_text_row);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, icon_image);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, navigation_view);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, remove_action_button);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, remove_custom_icon_button);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, on_background_color_dialog_button_rgba_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_button_clicked_cb);
@@ -594,7 +594,7 @@ bs_stream_deck_button_editor_class_init (BsStreamDeckButtonEditorClass *klass)
 }
 
 static void
-bs_stream_deck_button_editor_init (BsStreamDeckButtonEditor *self)
+bs_button_editor_init (BsButtonEditor *self)
 {
   PeasExtensionSet *extension_set;
   g_auto (GStrv) icon_names = NULL;
@@ -623,19 +623,19 @@ bs_stream_deck_button_editor_init (BsStreamDeckButtonEditor *self)
     }
 }
 
-BsStreamDeckButton *
-bs_stream_deck_button_editor_get_button (BsStreamDeckButtonEditor *self)
+BsButton *
+bs_button_editor_get_button (BsButtonEditor *self)
 {
-  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON_EDITOR (self), NULL);
+  g_return_val_if_fail (BS_IS_BUTTON_EDITOR (self), NULL);
 
   return self->button;
 }
 
 void
-bs_stream_deck_button_editor_set_button (BsStreamDeckButtonEditor *self,
-                                         BsStreamDeckButton       *button)
+bs_button_editor_set_button (BsButtonEditor *self,
+                             BsButton       *button)
 {
-  g_return_if_fail (BS_IS_STREAM_DECK_BUTTON_EDITOR (self));
+  g_return_if_fail (BS_IS_BUTTON_EDITOR (self));
 
   g_clear_signal_handler (&self->action_changed_id, self->button);
   g_clear_signal_handler (&self->custom_icon_changed_id, self->button);

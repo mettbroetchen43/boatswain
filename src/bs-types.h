@@ -43,7 +43,7 @@ typedef struct _BsPage BsPage;
 typedef struct _BsPageItem BsPageItem;
 typedef struct _BsProfile BsProfile;
 typedef struct _BsStreamDeck BsStreamDeck;
-typedef struct _BsStreamDeckButton BsStreamDeckButton;
+typedef struct _BsButton BsButton;
 typedef struct _BsStreamDeckEditor BsStreamDeckEditor;
 typedef struct _BsWindow BsWindow;
 

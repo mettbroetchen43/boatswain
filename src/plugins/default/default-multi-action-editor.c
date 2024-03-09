@@ -23,7 +23,7 @@
 #include "bs-action-private.h"
 #include "bs-application-private.h"
 #include "bs-stream-deck.h"
-#include "bs-stream-deck-button.h"
+#include "bs-button.h"
 #include "default-multi-action-editor.h"
 #include "default-multi-action-private.h"
 #include "default-multi-action-row.h"
@@ -136,11 +136,11 @@ on_action_row_activated_cb (AdwActionRow             *row,
                             DefaultMultiActionEditor *self)
 {
   g_autoptr (BsAction) new_action = NULL;
-  BsStreamDeckButton *button;
+  BsButton *button;
   BsActionFactory *factory;
   BsActionInfo *action_info;
 
-  button = bs_action_get_stream_deck_button (BS_ACTION (self->multi_action));
+  button = bs_action_get_button (BS_ACTION (self->multi_action));
   factory = g_object_get_data (G_OBJECT (row), "factory");
   action_info = g_object_get_data (G_OBJECT (row), "action-info");
 

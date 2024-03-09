@@ -182,10 +182,10 @@ launcher_open_url_action_init (LauncherOpenUrlAction *self)
 }
 
 BsAction *
-launcher_open_url_action_new (BsStreamDeckButton *stream_deck_button)
+launcher_open_url_action_new (BsButton *button)
 {
   return g_object_new (LAUNCHER_TYPE_OPEN_URL_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        NULL);
 }
 

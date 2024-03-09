@@ -140,17 +140,17 @@ bs_action_factory_get_info (BsActionFactory *self,
 /**
  * bs_action_factory_create_action:
  * @self: a #BsAction
- * @stream_deck_button: a #BsStreamDeckButton
+ * @button: a #BsButton
  * @action_info: a #BsActionInfo
  *
  * Creates an instance of the action represented by #BsActionInfo against
- * the physical button @stream_deck_button.
+ * the physical button @button.
  *
  * Returns: (transfer full)(nullable): a #BsAction
  */
 BsAction *
 bs_action_factory_create_action (BsActionFactory    *self,
-                                 BsStreamDeckButton *stream_deck_button,
+                                 BsButton *button,
                                  BsActionInfo       *action_info)
 {
   BsAction *action;
@@ -159,7 +159,7 @@ bs_action_factory_create_action (BsActionFactory    *self,
   g_return_val_if_fail (BS_ACTION_FACTORY_GET_CLASS (self)->create_action, NULL);
 
   action = BS_ACTION_FACTORY_GET_CLASS (self)->create_action (self,
-                                                              stream_deck_button,
+                                                              button,
                                                               action_info);
 
   if (!action)

@@ -281,13 +281,13 @@ soundboard_mpris_action_init (SoundboardMprisAction *self)
 }
 
 BsAction *
-soundboard_mpris_action_new (BsStreamDeckButton *stream_deck_button,
-                             MprisController    *mpris_controller)
+soundboard_mpris_action_new (BsButton        *button,
+                             MprisController *mpris_controller)
 {
   SoundboardMprisAction *self;
 
   self = g_object_new (SOUNDBOARD_TYPE_MPRIS_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        NULL);
 
   self->mpris_controller = g_object_ref (mpris_controller);

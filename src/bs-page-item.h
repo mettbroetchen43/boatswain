@@ -65,7 +65,7 @@ void bs_page_item_set_settings (BsPageItem *self,
                                 JsonNode   *settings);
 
 gboolean bs_page_item_realize (BsPageItem          *self,
-                               BsStreamDeckButton  *stream_deck_button,
+                               BsButton  *button,
                                BsIcon             **out_custom_icon,
                                BsAction           **out_action,
                                GError             **error);

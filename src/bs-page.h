@@ -47,12 +47,12 @@ BsPageItem * bs_page_get_item (BsPage  *self,
                                uint8_t  position);
 
 void bs_page_update_item_from_button (BsPage             *self,
-                                      BsStreamDeckButton *button);
+                                      BsButton *button);
 
 void bs_page_update_all_items (BsPage *self);
 
 gboolean bs_page_realize (BsPage              *self,
-                          BsStreamDeckButton  *stream_deck_button,
+                          BsButton  *button,
                           BsIcon             **out_custom_icon,
                           BsAction           **out_action,
                           GError             **error);

@@ -27,9 +27,9 @@
 #include "bs-icon-renderer.h"
 #include "bs-page.h"
 #include "bs-stream-deck.h"
-#include "bs-stream-deck-button.h"
-#include "bs-stream-deck-button-editor.h"
-#include "bs-stream-deck-button-widget.h"
+#include "bs-button.h"
+#include "bs-button-editor.h"
+#include "bs-button-widget.h"
 #include "bs-stream-deck-editor.h"
 #include "bs-stream-deck-private.h"
 
@@ -40,7 +40,7 @@ struct _BsStreamDeckEditor
 {
   AdwBin parent_instance;
 
-  BsStreamDeckButtonEditor *button_editor;
+  BsButtonEditor *button_editor;
   GtkGrid *regions_grid;
 
   BsStreamDeck *stream_deck;
@@ -120,13 +120,13 @@ add_button_grid (BsStreamDeckEditor *self,
 
   for (unsigned int i = 0; i < g_list_model_get_n_items (buttons); i++)
     {
-      g_autoptr(BsStreamDeckButton) stream_deck_button = NULL;
-      GtkWidget *button;
+      g_autoptr(BsButton) button = NULL;
+      GtkWidget *widget;
 
-      stream_deck_button = g_list_model_get_item (buttons, i);
+      button = g_list_model_get_item (buttons, i);
 
-      button = bs_stream_deck_button_widget_new (stream_deck_button);
-      gtk_flow_box_append (buttons_flowbox, button);
+      widget = bs_button_widget_new (button);
+      gtk_flow_box_append (buttons_flowbox, widget);
     }
 
   region = BS_DEVICE_REGION (button_grid);
@@ -166,11 +166,11 @@ on_flowbox_child_activated_cb (GtkFlowBox         *flowbox,
                                GtkFlowBoxChild    *child,
                                BsStreamDeckEditor *self)
 {
-  BsStreamDeckButton *button;
+  BsButton *button;
   BsAction *action;
 
-  button = bs_stream_deck_button_widget_get_button (BS_STREAM_DECK_BUTTON_WIDGET (child));
-  action = bs_stream_deck_button_get_action (button);
+  button = bs_button_widget_get_button (BS_BUTTON_WIDGET (child));
+  action = bs_button_get_action (button);
 
   if (action && is_switch_page_action (action))
     bs_action_activate (action);
@@ -188,11 +188,11 @@ on_flowbox_selected_children_changed_cb (GtkFlowBox         *flowbox,
 
   if (child)
     {
-      BsStreamDeckButton *stream_deck_button;
+      BsButton *button;
 
-      stream_deck_button = bs_stream_deck_button_widget_get_button (BS_STREAM_DECK_BUTTON_WIDGET (child));
+      button = bs_button_widget_get_button (BS_BUTTON_WIDGET (child));
 
-      bs_stream_deck_button_editor_set_button (self->button_editor, stream_deck_button);
+      bs_button_editor_set_button (self->button_editor, button);
     }
 }
 
@@ -300,7 +300,7 @@ bs_stream_deck_editor_class_init (BsStreamDeckEditorClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  g_type_ensure (BS_TYPE_STREAM_DECK_BUTTON_EDITOR);
+  g_type_ensure (BS_TYPE_BUTTON_EDITOR);
 
   object_class->finalize = bs_stream_deck_editor_finalize;
   object_class->get_property = bs_stream_deck_editor_get_property;

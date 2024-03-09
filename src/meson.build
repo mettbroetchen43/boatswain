@@ -18,9 +18,9 @@ boatswain_sources = [
   'bs-profile.c',
   'bs-profile-row.c',
   'bs-stream-deck.c',
-  'bs-stream-deck-button.c',
-  'bs-stream-deck-button-editor.c',
-  'bs-stream-deck-button-widget.c',
+  'bs-button.c',
+  'bs-button-editor.c',
+  'bs-button-widget.c',
   'bs-stream-deck-editor.c',
   'bs-window.c',
 ]
@@ -93,7 +93,7 @@ gir_headers = [
   'bs-page-item.h',
   'bs-profile.h',
   'bs-stream-deck.h',
-  'bs-stream-deck-button.h',
+  'bs-button.h',
 ]
 
 gnome.generate_gir(

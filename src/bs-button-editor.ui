@@ -2,7 +2,7 @@
 <interface>
   <requires lib="Gtk" version="4.0"/>
   <requires lib="Adw" version="1.0"/>
-  <template class="BsStreamDeckButtonEditor" parent="AdwBin">
+  <template class="BsButtonEditor" parent="AdwBin">
     <property name="width-request">300</property>
 
     <child>
@@ -94,7 +94,7 @@
                                         <child>
                                           <object class="GtkButton" id="remove_custom_icon_button">
                                             <property name="icon-name">window-close-symbolic</property>
-                                            <signal name="clicked" handler="on_remove_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                            <signal name="clicked" handler="on_remove_custom_icon_button_clicked_cb" object="BsButtonEditor" swapped="no" />
                                             <style>
                                               <class name="circular" />
                                               <class name="outline" />
@@ -137,7 +137,7 @@
                                                     <child>
                                                       <object class="GtkButton">
                                                         <property name="icon-name">document-open-symbolic</property>
-                                                        <signal name="clicked" handler="on_custom_icon_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                                        <signal name="clicked" handler="on_custom_icon_button_clicked_cb" object="BsButtonEditor" swapped="no" />
                                                       </object>
                                                     </child>
 
@@ -187,7 +187,7 @@
                                                             ]]></property>
                                                           </object>
                                                         </property>
-                                                        <signal name="activate" handler="on_icons_gridview_activate_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                                        <signal name="activate" handler="on_icons_gridview_activate_cb" object="BsButtonEditor" swapped="no" />
                                                       </object>
                                                     </property>
 
@@ -219,7 +219,7 @@
                                     <child>
                                       <object class="AdwEntryRow" id="custom_icon_text_row">
                                         <property name="title" translatable="yes">Name</property>
-                                        <signal name="notify::text" handler="on_custom_icon_text_row_text_changed_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                        <signal name="notify::text" handler="on_custom_icon_text_row_text_changed_cb" object="BsButtonEditor" swapped="no" />
                                       </object>
                                     </child>
 
@@ -236,7 +236,7 @@
                                                 <property name="with-alpha">False</property>
                                               </object>
                                             </property>
-                                            <signal name="notify::rgba" handler="on_background_color_dialog_button_rgba_changed_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                            <signal name="notify::rgba" handler="on_background_color_dialog_button_rgba_changed_cb" object="BsButtonEditor" swapped="no" />
                                           </object>
                                         </child>
                                       </object>
@@ -263,7 +263,7 @@
                                   <object class="AdwActionRow">
                                     <property name="title" translatable="yes">Select action</property>
                                     <property name="activatable">True</property>
-                                    <signal name="activated" handler="on_select_action_row_activated_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                    <signal name="activated" handler="on_select_action_row_activated_cb" object="BsButtonEditor" swapped="no" />
                                     <child>
                                       <object class="GtkImage">
                                         <property name="valign">center</property>
@@ -283,7 +283,7 @@
                                   <object class="GtkButton" id="remove_action_button">
                                     <property name="visible">False</property>
                                     <property name="label" translatable="yes">Remove Action</property>
-                                    <signal name="clicked" handler="on_remove_action_button_clicked_cb" object="BsStreamDeckButtonEditor" swapped="no" />
+                                    <signal name="clicked" handler="on_remove_action_button_clicked_cb" object="BsButtonEditor" swapped="no" />
                                     <style>
                                       <class name="destructive-action" />
                                       <class name="remove-button" />

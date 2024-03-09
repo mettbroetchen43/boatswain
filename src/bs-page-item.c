@@ -481,7 +481,7 @@ bs_page_item_set_settings (BsPageItem *self,
 
 gboolean
 bs_page_item_realize (BsPageItem          *self,
-                      BsStreamDeckButton  *stream_deck_button,
+                      BsButton  *button,
                       BsIcon             **out_custom_icon,
                       BsAction           **out_action,
                       GError             **error)
@@ -501,7 +501,7 @@ bs_page_item_realize (BsPageItem          *self,
       switch (self->item_type)
         {
         case BS_PAGE_ITEM_EMPTY:
-          action = bs_empty_action_new (stream_deck_button);
+          action = bs_empty_action_new (button);
           break;
 
         case BS_PAGE_ITEM_ACTION:
@@ -518,7 +518,7 @@ bs_page_item_realize (BsPageItem          *self,
 
           action_info = bs_action_factory_get_info (action_factory, self->action);
           action = bs_action_factory_create_action (action_factory,
-                                                    stream_deck_button,
+                                                    button,
                                                     action_info);
           if (self->settings)
             bs_action_deserialize_settings (action, json_node_get_object (self->settings));

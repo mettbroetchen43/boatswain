@@ -297,12 +297,12 @@ default_multi_action_deserialize_settings (BsAction   *action,
         }
       else if (g_strcmp0 (type, "action") == 0)
         {
-          BsStreamDeckButton *button;
+          BsButton *button;
           BsActionFactory *factory;
           BsActionInfo *action_info;
           JsonNode *settings;
 
-          button = bs_action_get_stream_deck_button (action);
+          button = bs_action_get_button (action);
           factory = get_action_factory (json_object_get_string_member (json_entry, "factory"));
           action_info = bs_action_factory_get_info (factory, json_object_get_string_member (json_entry, "action"));
 
@@ -374,10 +374,10 @@ default_multi_action_init (DefaultMultiAction *self)
 }
 
 BsAction *
-default_multi_action_new (BsStreamDeckButton *stream_deck_button)
+default_multi_action_new (BsButton *button)
 {
   return g_object_new (DEFAULT_TYPE_MULTI_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        NULL);
 }
 

@@ -39,7 +39,7 @@ BsDeviceRegion * bs_stream_deck_get_region (BsStreamDeck *self,
                                             const char   *region_id);
 
 gboolean bs_stream_deck_upload_button (BsStreamDeck        *self,
-                                       BsStreamDeckButton  *button,
+                                       BsButton  *button,
                                        GError             **error);
 
 void bs_stream_deck_load (BsStreamDeck *self);

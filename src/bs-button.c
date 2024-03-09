@@ -1,4 +1,4 @@
-/* bs-stream-deck-button.c
+/* bs-button.c
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -22,9 +22,9 @@
 #include "bs-icon.h"
 #include "bs-page.h"
 #include "bs-stream-deck-private.h"
-#include "bs-stream-deck-button-private.h"
+#include "bs-button-private.h"
 
-struct _BsStreamDeckButton
+struct _BsButton
 {
   GObject parent_instance;
 
@@ -45,7 +45,7 @@ struct _BsStreamDeckButton
   gboolean pressed;
 };
 
-G_DEFINE_FINAL_TYPE (BsStreamDeckButton, bs_stream_deck_button, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (BsButton, bs_button, G_TYPE_OBJECT)
 
 enum
 {
@@ -74,7 +74,7 @@ static GParamSpec *properties[N_PROPS];
  */
 
 static void
-update_page (BsStreamDeckButton *self)
+update_page (BsButton *self)
 {
   BsPage *page = bs_stream_deck_get_active_page (self->stream_deck);
 
@@ -86,7 +86,7 @@ update_page (BsStreamDeckButton *self)
 }
 
 static void
-update_relative_icon (BsStreamDeckButton *self)
+update_relative_icon (BsButton *self)
 {
 
   if (!self->custom_icon)
@@ -97,7 +97,7 @@ update_relative_icon (BsStreamDeckButton *self)
 }
 
 static void
-upload_icon (BsStreamDeckButton *self)
+upload_icon (BsButton *self)
 {
   g_autoptr (GError) error = NULL;
 
@@ -108,7 +108,7 @@ upload_icon (BsStreamDeckButton *self)
 }
 
 static void
-remove_custom_icon (BsStreamDeckButton *self)
+remove_custom_icon (BsButton *self)
 {
   if (self->custom_icon)
     {
@@ -125,15 +125,15 @@ remove_custom_icon (BsStreamDeckButton *self)
  */
 
 static void
-on_action_changed_cb (BsAction           *action,
-                      BsStreamDeckButton *self)
+on_action_changed_cb (BsAction *action,
+                      BsButton *self)
 {
   bs_stream_deck_save (self->stream_deck);
 }
 
 static void
-on_icon_changed_cb (BsIcon             *icon,
-                    BsStreamDeckButton *self)
+on_icon_changed_cb (BsIcon   *icon,
+                    BsButton *self)
 {
   update_relative_icon (self);
   upload_icon (self);
@@ -141,9 +141,9 @@ on_icon_changed_cb (BsIcon             *icon,
 }
 
 static void
-on_icon_properties_changed_cb (BsIcon             *icon,
-                               GParamSpec         *pspec,
-                               BsStreamDeckButton *self)
+on_icon_properties_changed_cb (BsIcon     *icon,
+                               GParamSpec *pspec,
+                               BsButton   *self)
 {
   bs_stream_deck_save (self->stream_deck);
 }
@@ -154,9 +154,9 @@ on_icon_properties_changed_cb (BsIcon             *icon,
  */
 
 static void
-bs_stream_deck_button_finalize (GObject *object)
+bs_button_finalize (GObject *object)
 {
-  BsStreamDeckButton *self = (BsStreamDeckButton *)object;
+  BsButton *self = (BsButton *)object;
 
   remove_custom_icon (self);
 
@@ -169,16 +169,16 @@ bs_stream_deck_button_finalize (GObject *object)
       g_clear_object (&self->action);
     }
 
-  G_OBJECT_CLASS (bs_stream_deck_button_parent_class)->finalize (object);
+  G_OBJECT_CLASS (bs_button_parent_class)->finalize (object);
 }
 
 static void
-bs_stream_deck_button_get_property (GObject    *object,
-                                    guint       prop_id,
-                                    GValue     *value,
-                                    GParamSpec *pspec)
+bs_button_get_property (GObject    *object,
+                        guint       prop_id,
+                        GValue     *value,
+                        GParamSpec *pspec)
 {
-  BsStreamDeckButton *self = BS_STREAM_DECK_BUTTON (object);
+  BsButton *self = BS_BUTTON (object);
 
   switch (prop_id)
     {
@@ -187,7 +187,7 @@ bs_stream_deck_button_get_property (GObject    *object,
       break;
 
     case PROP_ICON:
-      g_value_set_object (value, bs_stream_deck_button_get_icon (self));
+      g_value_set_object (value, bs_button_get_icon (self));
       break;
 
     case PROP_ICON_HEIGHT:
@@ -208,17 +208,17 @@ bs_stream_deck_button_get_property (GObject    *object,
 }
 
 static void
-bs_stream_deck_button_set_property (GObject      *object,
-                                    guint         prop_id,
-                                    const GValue *value,
-                                    GParamSpec   *pspec)
+bs_button_set_property (GObject      *object,
+                        guint         prop_id,
+                        const GValue *value,
+                        GParamSpec   *pspec)
 {
-  BsStreamDeckButton *self = BS_STREAM_DECK_BUTTON (object);
+  BsButton *self = BS_BUTTON (object);
 
   switch (prop_id)
     {
     case PROP_ACTION:
-      bs_stream_deck_button_set_action (self, g_value_get_object (value));
+      bs_button_set_action (self, g_value_get_object (value));
       break;
 
     default:
@@ -227,13 +227,13 @@ bs_stream_deck_button_set_property (GObject      *object,
 }
 
 static void
-bs_stream_deck_button_class_init (BsStreamDeckButtonClass *klass)
+bs_button_class_init (BsButtonClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = bs_stream_deck_button_finalize;
-  object_class->get_property = bs_stream_deck_button_get_property;
-  object_class->set_property = bs_stream_deck_button_set_property;
+  object_class->finalize = bs_button_finalize;
+  object_class->get_property = bs_button_get_property;
+  object_class->set_property = bs_button_set_property;
 
   properties[PROP_ACTION] = g_param_spec_object ("action", NULL, NULL,
                                                  BS_TYPE_ACTION,
@@ -262,7 +262,7 @@ bs_stream_deck_button_class_init (BsStreamDeckButtonClass *klass)
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   signals[ICON_CHANGED] = g_signal_new ("icon-changed",
-                                        BS_TYPE_STREAM_DECK_BUTTON,
+                                        BS_TYPE_BUTTON,
                                         G_SIGNAL_RUN_LAST,
                                         0, NULL, NULL, NULL,
                                         G_TYPE_NONE,
@@ -271,61 +271,61 @@ bs_stream_deck_button_class_init (BsStreamDeckButtonClass *klass)
 }
 
 static void
-bs_stream_deck_button_init (BsStreamDeckButton *self)
+bs_button_init (BsButton *self)
 {
   self->pressed = FALSE;
 }
 
-BsStreamDeckButton *
-bs_stream_deck_button_new (BsStreamDeck *stream_deck,
-                           uint8_t       position,
-                           unsigned int  icon_width,
-                           unsigned int  icon_height)
+BsButton *
+bs_button_new (BsStreamDeck *stream_deck,
+               uint8_t       position,
+               unsigned int  icon_width,
+               unsigned int  icon_height)
 {
   g_autoptr (BsIcon) empty_icon = NULL;
-  BsStreamDeckButton *self;
+  BsButton *self;
 
-  self = g_object_new (BS_TYPE_STREAM_DECK_BUTTON, NULL);
+  self = g_object_new (BS_TYPE_BUTTON, NULL);
   self->stream_deck = stream_deck;
   self->position = position;
   self->icon_width = icon_width;
   self->icon_height = icon_height;
 
   empty_icon = bs_icon_new_empty ();
-  bs_stream_deck_button_set_custom_icon (self, empty_icon);
+  bs_button_set_custom_icon (self, empty_icon);
 
   return self;
 }
 
 BsStreamDeck *
-bs_stream_deck_button_get_stream_deck (BsStreamDeckButton *self)
+bs_button_get_stream_deck (BsButton *self)
 {
-  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), NULL);
+  g_return_val_if_fail (BS_IS_BUTTON (self), NULL);
 
   return self->stream_deck;
 }
 
 uint8_t
-bs_stream_deck_button_get_position (BsStreamDeckButton *self)
+bs_button_get_position (BsButton *self)
 {
-  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), 0);
+  g_return_val_if_fail (BS_IS_BUTTON (self), 0);
 
   return self->position;
 }
 
 gboolean
-bs_stream_deck_button_get_pressed (BsStreamDeckButton *self)
+bs_button_get_pressed (BsButton *self)
 {
-  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), FALSE);
+  g_return_val_if_fail (BS_IS_BUTTON (self), FALSE);
 
   return self->pressed;
 }
 
 void
-bs_stream_deck_button_set_pressed (BsStreamDeckButton *self,
-                                   gboolean            pressed)
+bs_button_set_pressed (BsButton *self,
+                       gboolean  pressed)
 {
-  g_return_if_fail (BS_IS_STREAM_DECK_BUTTON (self));
+  g_return_if_fail (BS_IS_BUTTON (self));
 
   if (self->pressed == pressed)
     return;
@@ -343,9 +343,9 @@ bs_stream_deck_button_set_pressed (BsStreamDeckButton *self,
 }
 
 BsIcon *
-bs_stream_deck_button_get_icon (BsStreamDeckButton *self)
+bs_button_get_icon (BsButton *self)
 {
-  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), NULL);
+  g_return_val_if_fail (BS_IS_BUTTON (self), NULL);
 
   if (self->custom_icon)
     return self->custom_icon;
@@ -357,18 +357,18 @@ bs_stream_deck_button_get_icon (BsStreamDeckButton *self)
 }
 
 BsIcon *
-bs_stream_deck_button_get_custom_icon (BsStreamDeckButton *self)
+bs_button_get_custom_icon (BsButton *self)
 {
-  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), NULL);
+  g_return_val_if_fail (BS_IS_BUTTON (self), NULL);
 
   return self->custom_icon;
 }
 
 void
-bs_stream_deck_button_set_custom_icon (BsStreamDeckButton  *self,
-                                       BsIcon              *icon)
+bs_button_set_custom_icon (BsButton *self,
+                           BsIcon   *icon)
 {
-  g_return_if_fail (BS_IS_STREAM_DECK_BUTTON (self));
+  g_return_if_fail (BS_IS_BUTTON (self));
 
   if (self->custom_icon == icon)
     return;
@@ -398,20 +398,20 @@ bs_stream_deck_button_set_custom_icon (BsStreamDeckButton  *self,
 
 
 BsAction *
-bs_stream_deck_button_get_action (BsStreamDeckButton *self)
+bs_button_get_action (BsButton *self)
 {
-  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), NULL);
+  g_return_val_if_fail (BS_IS_BUTTON (self), NULL);
 
   return self->action;
 }
 
 void
-bs_stream_deck_button_set_action (BsStreamDeckButton *self,
-                                  BsAction           *action)
+bs_button_set_action (BsButton *self,
+                      BsAction *action)
 {
   BsIcon *action_icon;
 
-  g_return_if_fail (BS_IS_STREAM_DECK_BUTTON (self));
+  g_return_if_fail (BS_IS_BUTTON (self));
 
   if (self->action == action)
     return;
@@ -448,38 +448,38 @@ bs_stream_deck_button_set_action (BsStreamDeckButton *self,
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ICON]);
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_CUSTOM_ICON]);
 
-  g_signal_emit (self, signals[ICON_CHANGED], 0, bs_stream_deck_button_get_icon (self));
+  g_signal_emit (self, signals[ICON_CHANGED], 0, bs_button_get_icon (self));
 }
 
 void
-bs_stream_deck_button_inhibit_page_updates (BsStreamDeckButton *self)
+bs_button_inhibit_page_updates (BsButton *self)
 {
-  g_return_if_fail (BS_IS_STREAM_DECK_BUTTON (self));
+  g_return_if_fail (BS_IS_BUTTON (self));
 
   self->inhibit_page_updates_counter++;
 }
 
 void
-bs_stream_deck_button_uninhibit_page_updates (BsStreamDeckButton *self)
+bs_button_uninhibit_page_updates (BsButton *self)
 {
-  g_return_if_fail (BS_IS_STREAM_DECK_BUTTON (self));
+  g_return_if_fail (BS_IS_BUTTON (self));
   g_return_if_fail (self->inhibit_page_updates_counter > 0);
 
   self->inhibit_page_updates_counter--;
 }
 
 unsigned int
-bs_stream_deck_button_get_icon_width (BsStreamDeckButton *self)
+bs_button_get_icon_width (BsButton *self)
 {
-  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), 0);
+  g_return_val_if_fail (BS_IS_BUTTON (self), 0);
 
   return self->icon_width;
 }
 
 unsigned int
-bs_stream_deck_button_get_icon_height (BsStreamDeckButton *self)
+bs_button_get_icon_height (BsButton *self)
 {
-  g_return_val_if_fail (BS_IS_STREAM_DECK_BUTTON (self), 0);
+  g_return_val_if_fail (BS_IS_BUTTON (self), 0);
 
   return self->icon_height;
 }

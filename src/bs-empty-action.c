@@ -38,9 +38,9 @@ bs_empty_action_init (BsEmptyAction *self)
 }
 
 BsAction *
-bs_empty_action_new (BsStreamDeckButton *stream_deck_button)
+bs_empty_action_new (BsButton *button)
 {
   return g_object_new (BS_TYPE_EMPTY_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        NULL);
 }

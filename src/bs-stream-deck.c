@@ -30,7 +30,7 @@
 #include "bs-page.h"
 #include "bs-profile.h"
 #include "bs-stream-deck-private.h"
-#include "bs-stream-deck-button-private.h"
+#include "bs-button-private.h"
 
 #include <glib/gi18n.h>
 #include <hidapi.h>
@@ -43,14 +43,14 @@ typedef struct
 {
   uint8_t n_buttons;
   uint8_t columns;
-} BsStreamDeckButtonLayout;
+} BsButtonLayout;
 
 typedef struct
 {
   uint8_t product_id;
   const char *name;
   const char *icon_name;
-  BsStreamDeckButtonLayout button_layout;
+  BsButtonLayout button_layout;
   BsIconLayout icon_layout;
 
   void (*reset) (BsStreamDeck *self);
@@ -60,7 +60,7 @@ typedef struct
   char * (*get_serial_number) (BsStreamDeck *self);
   char * (*get_firmware_version) (BsStreamDeck *self);
   gboolean (*set_button_texture) (BsStreamDeck        *self,
-                                  BsStreamDeckButton  *button,
+                                  BsButton  *button,
                                   GdkTexture          *texture,
                                   GError             **error);
   gboolean (*read_button_states) (BsStreamDeck *self);
@@ -145,17 +145,17 @@ get_profile_path (BsStreamDeck *self)
                            NULL);
 }
 
-static BsStreamDeckButton *
+static BsButton *
 find_button_at_region (BsStreamDeck *self,
                        const char   *region_id,
                        size_t        button_index)
 {
-  g_autoptr(BsStreamDeckButton) button = NULL;
+  g_autoptr(BsButton) button = NULL;
   BsButtonGridRegion *region = NULL;
 
   region = BS_BUTTON_GRID_REGION (bs_stream_deck_get_region (self, region_id));
   button = g_list_model_get_item (bs_button_grid_region_get_buttons (region), button_index);
-  g_assert (BS_IS_STREAM_DECK_BUTTON (button));
+  g_assert (BS_IS_BUTTON (button));
 
   return button;
 }
@@ -171,8 +171,8 @@ update_pages (BsStreamDeck *self)
 
   for (size_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
     {
-      BsStreamDeckButton *stream_deck_button = find_button_at_region (self, "main-button-grid", i);
-      bs_page_update_item_from_button (active_page, stream_deck_button);
+      BsButton *button = find_button_at_region (self, "main-button-grid", i);
+      bs_page_update_item_from_button (active_page, button);
     }
 
   for (GList *l = g_queue_peek_head_link (self->active_pages); l; l = l->next)
@@ -316,14 +316,14 @@ load_active_page (BsStreamDeck *self)
 
   for (uint8_t i = 0; i < self->model_info->button_layout.n_buttons; i++)
     {
-      BsStreamDeckButton *stream_deck_button;
+      BsButton *button;
       g_autoptr (BsAction) action = NULL;
       g_autoptr (BsIcon) custom_icon = NULL;
       g_autoptr (GError) error = NULL;
 
-      stream_deck_button = find_button_at_region (self, "main-button-grid", i);
+      button = find_button_at_region (self, "main-button-grid", i);
 
-      bs_page_realize (active_page, stream_deck_button, &custom_icon, &action, &error);
+      bs_page_realize (active_page, button, &custom_icon, &action, &error);
 
       if (error)
         {
@@ -331,12 +331,12 @@ load_active_page (BsStreamDeck *self)
           continue;
         }
 
-      bs_stream_deck_button_inhibit_page_updates (stream_deck_button);
+      bs_button_inhibit_page_updates (button);
 
-      bs_stream_deck_button_set_action (stream_deck_button, action);
-      bs_stream_deck_button_set_custom_icon (stream_deck_button, custom_icon);
+      bs_button_set_action (button, action);
+      bs_button_set_custom_icon (button, custom_icon);
 
-      bs_stream_deck_button_uninhibit_page_updates (stream_deck_button);
+      bs_button_uninhibit_page_updates (button);
     }
 
   BS_EXIT;
@@ -378,7 +378,7 @@ save_after_timeout_cb (gpointer data)
 
 static gboolean
 set_button_texture_mini (BsStreamDeck        *self,
-                         BsStreamDeckButton  *button,
+                         BsButton  *button,
                          GdkTexture          *texture,
                          GError             **error)
 {
@@ -401,7 +401,7 @@ set_button_texture_mini (BsStreamDeck        *self,
   /* payload[2] set in loop */
   payload[3] = 0;
   /* payload[4] set in loop */
-  payload[5] = bs_stream_deck_button_get_position (button) + 1;
+  payload[5] = bs_button_get_position (button) + 1;
   payload[6] = 0;
   payload[7] = 0;
   payload[8] = 0;
@@ -445,7 +445,7 @@ set_button_texture_mini (BsStreamDeck        *self,
 static gboolean
 read_button_states_mini (BsStreamDeck *self)
 {
-  const BsStreamDeckButtonLayout *layout;
+  const BsButtonLayout *layout;
   uint8_t *states;
   size_t states_length;
   int result;
@@ -463,13 +463,13 @@ read_button_states_mini (BsStreamDeck *self)
 
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
-      BsStreamDeckButton *button = find_button_at_region (self, "main-button-grid", i);
+      BsButton *button = find_button_at_region (self, "main-button-grid", i);
       gboolean pressed = (gboolean) states[i + 1];
 
-      if (bs_stream_deck_button_get_pressed (button) == pressed)
+      if (bs_button_get_pressed (button) == pressed)
         continue;
 
-      bs_stream_deck_button_set_pressed (button, pressed);
+      bs_button_set_pressed (button, pressed);
 
       if (pressed)
         g_signal_emit (self, signals[BUTTON_PRESSED], 0, button);
@@ -552,7 +552,7 @@ set_brightness_mini_original (BsStreamDeck *self,
 
 static gboolean
 set_button_texture_original (BsStreamDeck        *self,
-                             BsStreamDeckButton  *button,
+                             BsButton  *button,
                              GdkTexture          *texture,
                              GError             **error)
 {
@@ -580,7 +580,7 @@ set_button_texture_original (BsStreamDeck        *self,
   g_assert (buffer_size == 15606);
   g_assert (package_size - header_size >= report_size);
 
-  button_index = bs_stream_deck_button_get_position (button);
+  button_index = bs_button_get_position (button);
 
   payload = g_malloc (sizeof (uint8_t) * package_size);
   payload[0] = 0x02;
@@ -632,7 +632,7 @@ set_button_texture_original (BsStreamDeck        *self,
 static gboolean
 read_button_states_original (BsStreamDeck *self)
 {
-  const BsStreamDeckButtonLayout *layout;
+  const BsButtonLayout *layout;
   uint8_t *states;
   size_t states_length;
   int result;
@@ -651,13 +651,13 @@ read_button_states_original (BsStreamDeck *self)
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
       uint8_t position = swap_button_index_original (self, i);
-      BsStreamDeckButton *button = find_button_at_region (self, "main-button-grid", position);
+      BsButton *button = find_button_at_region (self, "main-button-grid", position);
       gboolean pressed = (gboolean) states[i + 1];
 
-      if (bs_stream_deck_button_get_pressed (button) == pressed)
+      if (bs_button_get_pressed (button) == pressed)
         continue;
 
-      bs_stream_deck_button_set_pressed (button, pressed);
+      bs_button_set_pressed (button, pressed);
 
       if (pressed)
         g_signal_emit (self, signals[BUTTON_PRESSED], 0, button);
@@ -746,7 +746,7 @@ set_brightness_gen2 (BsStreamDeck *self,
 
 static gboolean
 set_button_texture_gen2 (BsStreamDeck        *self,
-                         BsStreamDeckButton  *button,
+                         BsButton  *button,
                          GdkTexture          *texture,
                          GError             **error)
 {
@@ -766,7 +766,7 @@ set_button_texture_gen2 (BsStreamDeck        *self,
   payload = g_malloc (package_size * sizeof (uint8_t));
   payload[0] = 0x02;
   payload[1] = 0x07;
-  payload[2] = bs_stream_deck_button_get_position (button);
+  payload[2] = bs_button_get_position (button);
 
   page = 0;
   bytes_remaining = buffer_size;
@@ -803,7 +803,7 @@ set_button_texture_gen2 (BsStreamDeck        *self,
 static gboolean
 read_button_states_gen2 (BsStreamDeck *self)
 {
-  const BsStreamDeckButtonLayout *layout;
+  const BsButtonLayout *layout;
   uint8_t *states;
   size_t states_length;
   int result;
@@ -821,13 +821,13 @@ read_button_states_gen2 (BsStreamDeck *self)
 
   for (uint8_t i = 0; i < layout->n_buttons; i++)
     {
-      BsStreamDeckButton *button = find_button_at_region (self, "main-button-grid", i);
+      BsButton *button = find_button_at_region (self, "main-button-grid", i);
       gboolean pressed = (gboolean) states[i + 4];
 
-      if (bs_stream_deck_button_get_pressed (button) == pressed)
+      if (bs_button_get_pressed (button) == pressed)
         continue;
 
-      bs_stream_deck_button_set_pressed (button, pressed);
+      bs_button_set_pressed (button, pressed);
 
       if (pressed)
         g_signal_emit (self, signals[BUTTON_PRESSED], 0, button);
@@ -850,7 +850,7 @@ set_brightness_pedal (BsStreamDeck *self,
 
 static gboolean
 set_button_texture_pedal (BsStreamDeck        *self,
-                          BsStreamDeckButton  *button,
+                          BsButton  *button,
                           GdkTexture          *texture,
                           GError             **error)
 {
@@ -879,7 +879,7 @@ convert_dial_value (uint8_t value)
 static gboolean
 read_button_states_plus (BsStreamDeck *self)
 {
-  const BsStreamDeckButtonLayout *layout;
+  const BsButtonLayout *layout;
   const size_t states_length = 14;
   uint8_t *states;
   int result;
@@ -905,13 +905,13 @@ read_button_states_plus (BsStreamDeck *self)
     case BUTTON_EVENT:
       for (uint8_t i = 0; i < layout->n_buttons; i++)
         {
-          BsStreamDeckButton *button = find_button_at_region (self, "main-button-grid", i);
+          BsButton *button = find_button_at_region (self, "main-button-grid", i);
           gboolean pressed = (gboolean) states[i + 4];
 
-          if (bs_stream_deck_button_get_pressed (button) == pressed)
+          if (bs_button_get_pressed (button) == pressed)
             continue;
 
-          bs_stream_deck_button_set_pressed (button, pressed);
+          bs_button_set_pressed (button, pressed);
 
           if (pressed)
             g_signal_emit (self, signals[BUTTON_PRESSED], 0, button);
@@ -1222,7 +1222,7 @@ set_brightness_fake (BsStreamDeck *self,
 
 static gboolean
 set_button_texture_fake (BsStreamDeck        *self,
-                         BsStreamDeckButton  *button,
+                         BsButton  *button,
                          GdkTexture          *texture,
                          GError             **error)
 {
@@ -1583,7 +1583,7 @@ bs_stream_deck_class_init (BsStreamDeckClass *klass)
                                           0, NULL, NULL, NULL,
                                           G_TYPE_NONE,
                                           1,
-                                          BS_TYPE_STREAM_DECK_BUTTON);
+                                          BS_TYPE_BUTTON);
 
   signals[BUTTON_RELEASED] = g_signal_new ("button-released",
                                            BS_TYPE_STREAM_DECK,
@@ -1591,7 +1591,7 @@ bs_stream_deck_class_init (BsStreamDeckClass *klass)
                                            0, NULL, NULL, NULL,
                                            G_TYPE_NONE,
                                            1,
-                                           BS_TYPE_STREAM_DECK_BUTTON);
+                                           BS_TYPE_BUTTON);
 }
 
 static void
@@ -1740,7 +1740,7 @@ bs_stream_deck_get_region (BsStreamDeck *self,
 
 gboolean
 bs_stream_deck_upload_button (BsStreamDeck        *self,
-                              BsStreamDeckButton  *button,
+                              BsButton  *button,
                               GError             **error)
 {
   g_autoptr (GdkTexture) texture = NULL;
@@ -1749,7 +1749,7 @@ bs_stream_deck_upload_button (BsStreamDeck        *self,
   g_return_val_if_fail (BS_IS_STREAM_DECK (self), FALSE);
   g_return_val_if_fail (self->model_info->set_button_texture != NULL, FALSE);
 
-  icon = bs_stream_deck_button_get_icon (button);
+  icon = bs_button_get_icon (button);
   texture = bs_icon_renderer_compose_icon (self->icon_renderer,
                                            BS_ICON_COMPOSE_FLAG_NONE,
                                            icon,

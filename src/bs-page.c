@@ -24,7 +24,7 @@
 #include "bs-page.h"
 #include "bs-page-item.h"
 #include "bs-profile.h"
-#include "bs-stream-deck-button.h"
+#include "bs-button.h"
 
 #include <libpeas.h>
 
@@ -297,7 +297,7 @@ bs_page_get_profile (BsPage *self)
 
 void
 bs_page_update_item_from_button (BsPage             *self,
-                                 BsStreamDeckButton *button)
+                                 BsButton *button)
 {
   BsPageItem *item;
   BsAction *action;
@@ -306,9 +306,9 @@ bs_page_update_item_from_button (BsPage             *self,
   uint8_t position;
 
   g_return_if_fail (BS_IS_PAGE (self));
-  g_return_if_fail (BS_IS_STREAM_DECK_BUTTON (button));
+  g_return_if_fail (BS_IS_BUTTON (button));
 
-  position = bs_stream_deck_button_get_position (button);
+  position = bs_button_get_position (button);
   item = get_item (self, position);
 
   if (!item)
@@ -317,10 +317,10 @@ bs_page_update_item_from_button (BsPage             *self,
       g_ptr_array_insert (self->items, position, item);
     }
 
-  action = bs_stream_deck_button_get_action (button);
+  action = bs_button_get_action (button);
   action_type = G_OBJECT_TYPE (action);
 
-  custom_icon = bs_stream_deck_button_get_custom_icon (button);
+  custom_icon = bs_button_get_custom_icon (button);
   bs_page_item_set_custom_icon (item, custom_icon ? bs_icon_to_json (custom_icon) : NULL);
 
   if (action_type == BS_TYPE_EMPTY_ACTION)
@@ -364,7 +364,7 @@ bs_page_update_all_items (BsPage *self)
 
 gboolean
 bs_page_realize (BsPage              *self,
-                 BsStreamDeckButton  *stream_deck_button,
+                 BsButton  *button,
                  BsIcon             **out_custom_icon,
                  BsAction           **out_action,
                  GError             **error)
@@ -375,17 +375,17 @@ bs_page_realize (BsPage              *self,
   g_return_val_if_fail (out_custom_icon != NULL, FALSE);
   g_return_val_if_fail (out_action != NULL, FALSE);
 
-  item = get_item (self, bs_stream_deck_button_get_position (stream_deck_button));
+  item = get_item (self, bs_button_get_position (button));
 
   if (!item)
     {
       *out_custom_icon = NULL;
-      *out_action = bs_empty_action_new (stream_deck_button);
+      *out_action = bs_empty_action_new (button);
       return FALSE;
     }
 
   return bs_page_item_realize (item,
-                               stream_deck_button,
+                               button,
                                out_custom_icon,
                                out_action,
                                error);

@@ -1,4 +1,4 @@
-/* soundboard-mpris-action.h
+/* bs-button-private.h
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -20,15 +20,25 @@
 
 #pragma once
 
-#include "bs-action.h"
-#include "mpris-controller.h"
+#include "bs-button.h"
+#include "bs-types.h"
+
+#include <stdint.h>
 
 G_BEGIN_DECLS
 
-#define SOUNDBOARD_TYPE_MPRIS_ACTION (soundboard_mpris_action_get_type())
-G_DECLARE_FINAL_TYPE (SoundboardMprisAction, soundboard_mpris_action, SOUNDBOARD, MPRIS_ACTION, BsAction)
+BsButton * bs_button_new (BsStreamDeck *stream_deck,
+                          uint8_t       position,
+                          unsigned int  icon_width,
+                          unsigned int  icon_height);
 
-BsAction * soundboard_mpris_action_new (BsButton        *button,
-                                        MprisController *mpris_controller);
+void bs_button_set_pressed (BsButton *self,
+                            gboolean  pressed);
+
+void bs_button_inhibit_page_updates (BsButton *self);
+void bs_button_uninhibit_page_updates (BsButton *self);
+
+unsigned int bs_button_get_icon_width (BsButton *self);
+unsigned int bs_button_get_icon_height (BsButton *self);
 
 G_END_DECLS

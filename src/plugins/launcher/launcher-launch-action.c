@@ -203,10 +203,10 @@ launcher_launch_action_init (LauncherLaunchAction *self)
 }
 
 BsAction *
-launcher_launch_action_new (BsStreamDeckButton *stream_deck_button)
+launcher_launch_action_new (BsButton *button)
 {
   return g_object_new (LAUNCHER_TYPE_LAUNCH_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        NULL);
 }
 

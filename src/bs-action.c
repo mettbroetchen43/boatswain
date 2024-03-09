@@ -23,7 +23,7 @@
 #include "bs-action-private.h"
 #include "bs-debug.h"
 #include "bs-icon.h"
-#include "bs-stream-deck-button.h"
+#include "bs-button.h"
 
 typedef struct
 {
@@ -31,7 +31,7 @@ typedef struct
   char *name;
   BsActionFactory *factory;
   BsIcon *icon;
-  BsStreamDeckButton *stream_deck_button;
+  BsButton *button;
 } BsActionPrivate;
 
 G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (BsAction, bs_action, G_TYPE_OBJECT)
@@ -39,7 +39,7 @@ G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (BsAction, bs_action, G_TYPE_OBJECT)
 enum
 {
   PROP_0,
-  PROP_STREAM_DECK_BUTTON,
+  PROP_BUTTON,
   N_PROPS,
 };
 
@@ -99,8 +99,8 @@ bs_action_get_property (GObject    *object,
 
   switch (prop_id)
     {
-    case PROP_STREAM_DECK_BUTTON:
-      g_value_set_object (value, priv->stream_deck_button);
+    case PROP_BUTTON:
+      g_value_set_object (value, priv->button);
       break;
 
     default:
@@ -119,9 +119,9 @@ bs_action_set_property (GObject      *object,
 
   switch (prop_id)
     {
-    case PROP_STREAM_DECK_BUTTON:
-      g_assert (priv->stream_deck_button == NULL);
-      priv->stream_deck_button = g_value_get_object (value);
+    case PROP_BUTTON:
+      g_assert (priv->button == NULL);
+      priv->button = g_value_get_object (value);
       break;
 
     default:
@@ -140,9 +140,9 @@ bs_action_class_init (BsActionClass *klass)
 
   klass->get_icon = bs_action_real_get_icon;
 
-  properties[PROP_STREAM_DECK_BUTTON] = g_param_spec_object ("stream-deck-button", NULL, NULL,
-                                                             BS_TYPE_STREAM_DECK_BUTTON,
-                                                             G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+  properties[PROP_BUTTON] = g_param_spec_object ("button", NULL, NULL,
+                                                 BS_TYPE_BUTTON,
+                                                 G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
@@ -356,23 +356,23 @@ bs_action_deserialize_settings (BsAction   *self,
 }
 
 /**
- * bs_action_get_stream_deck_button:
+ * bs_action_get_button:
  * @self: a #BsAction
  *
- * Retrieves the #BsStreamDeckButton that @self is attached
+ * Retrieves the #BsButton that @self is attached
  * to, or %NULL if it's not attached to any physical button.
  *
- * Returns: (transfer none)(nullable): a #BsStreamDeckButton
+ * Returns: (transfer none)(nullable): a #BsButton
  */
-BsStreamDeckButton *
-bs_action_get_stream_deck_button (BsAction *self)
+BsButton *
+bs_action_get_button (BsAction *self)
 {
   BsActionPrivate *priv;
 
   g_return_val_if_fail (BS_IS_ACTION (self), NULL);
 
   priv = bs_action_get_instance_private (self);
-  return priv->stream_deck_button;
+  return priv->button;
 }
 
 /**

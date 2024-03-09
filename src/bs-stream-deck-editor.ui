@@ -50,7 +50,7 @@
         </property>
 
         <property name="sidebar">
-          <object class="BsStreamDeckButtonEditor" id="button_editor">
+          <object class="BsButtonEditor" id="button_editor">
             <property name="hexpand">True</property>
           </object>
         </property>

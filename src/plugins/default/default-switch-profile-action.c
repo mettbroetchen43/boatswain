@@ -23,7 +23,7 @@
 #include "bs-icon.h"
 #include "bs-profile.h"
 #include "bs-stream-deck.h"
-#include "bs-stream-deck-button.h"
+#include "bs-button.h"
 #include "default-switch-profile-action.h"
 
 #include <glib/gi18n.h>
@@ -398,15 +398,15 @@ static void
 default_switch_profile_action_constructed (GObject *object)
 {
   DefaultSwitchProfileAction *self = (DefaultSwitchProfileAction *)object;
-  BsStreamDeckButton *stream_deck_button;
+  BsButton *button;
   BsStreamDeck *stream_deck;
   GListModel *profiles;
   BsIcon *icon;
 
   G_OBJECT_CLASS (default_switch_profile_action_parent_class)->constructed (object);
 
-  stream_deck_button = bs_action_get_stream_deck_button (BS_ACTION (self));
-  stream_deck = bs_stream_deck_button_get_stream_deck (stream_deck_button);
+  button = bs_action_get_button (BS_ACTION (self));
+  stream_deck = bs_button_get_stream_deck (button);
 
   self->serial_number = g_strdup (bs_stream_deck_get_serial_number (stream_deck));
   if (bs_stream_deck_get_active_profile (stream_deck))
@@ -458,9 +458,9 @@ default_switch_profile_action_init (DefaultSwitchProfileAction *self)
 }
 
 BsAction *
-default_switch_profile_action_new (BsStreamDeckButton *stream_deck_button)
+default_switch_profile_action_new (BsButton *button)
 {
   return g_object_new (DEFAULT_TYPE_SWITCH_PROFILE_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        NULL);
 }

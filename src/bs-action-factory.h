@@ -42,7 +42,7 @@ struct _BsActionFactoryClass
   PeasExtensionBaseClass parent_class;
 
   BsAction * (*create_action) (BsActionFactory    *self,
-                               BsStreamDeckButton *stream_deck_button,
+                               BsButton *button,
                                BsActionInfo       *action_info);
 };
 
@@ -50,7 +50,7 @@ BsActionInfo * bs_action_factory_get_info (BsActionFactory *self,
                                            const char      *id);
 
 BsAction * bs_action_factory_create_action (BsActionFactory    *self,
-                                            BsStreamDeckButton *stream_deck_button,
+                                            BsButton *button,
                                             BsActionInfo       *action_info);
 
 

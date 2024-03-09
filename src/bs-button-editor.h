@@ -1,5 +1,4 @@
-/*
- * bs-stream-deck-button-widget.h
+/* bs-button-editor.h
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -21,17 +20,17 @@
 
 #pragma once
 
-#include "bs-types.h"
+#include <adwaita.h>
 
-#include <gtk/gtk.h>
+#include "bs-types.h"
 
 G_BEGIN_DECLS
 
-#define BS_TYPE_STREAM_DECK_BUTTON_WIDGET (bs_stream_deck_button_widget_get_type())
-G_DECLARE_FINAL_TYPE (BsStreamDeckButtonWidget, bs_stream_deck_button_widget, BS, STREAM_DECK_BUTTON_WIDGET, GtkFlowBoxChild)
+#define BS_TYPE_BUTTON_EDITOR (bs_button_editor_get_type())
+G_DECLARE_FINAL_TYPE (BsButtonEditor, bs_button_editor, BS, BUTTON_EDITOR, AdwBin)
 
-GtkWidget *bs_stream_deck_button_widget_new (BsStreamDeckButton *button);
-
-BsStreamDeckButton * bs_stream_deck_button_widget_get_button (BsStreamDeckButtonWidget *self);
+BsButton * bs_button_editor_get_button (BsButtonEditor *self);
+void bs_button_editor_set_button (BsButtonEditor *self,
+                                  BsButton       *button);
 
 G_END_DECLS

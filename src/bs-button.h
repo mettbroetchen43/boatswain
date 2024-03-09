@@ -1,4 +1,4 @@
-/* bs-stream-deck-button-editor.h
+/* bs-button.h
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -20,17 +20,29 @@
 
 #pragma once
 
-#include <adwaita.h>
+#include <gtk/gtk.h>
 
 #include "bs-types.h"
 
 G_BEGIN_DECLS
 
-#define BS_TYPE_STREAM_DECK_BUTTON_EDITOR (bs_stream_deck_button_editor_get_type())
-G_DECLARE_FINAL_TYPE (BsStreamDeckButtonEditor, bs_stream_deck_button_editor, BS, STREAM_DECK_BUTTON_EDITOR, AdwBin)
+#define BS_TYPE_BUTTON (bs_button_get_type())
+G_DECLARE_FINAL_TYPE (BsButton, bs_button, BS, BUTTON, GObject)
 
-BsStreamDeckButton * bs_stream_deck_button_editor_get_button (BsStreamDeckButtonEditor *self);
-void bs_stream_deck_button_editor_set_button (BsStreamDeckButtonEditor *self,
-                                              BsStreamDeckButton       *button);
+BsStreamDeck * bs_button_get_stream_deck (BsButton *self);
+
+uint8_t bs_button_get_position (BsButton *self);
+
+gboolean bs_button_get_pressed (BsButton *self);
+
+BsIcon * bs_button_get_icon (BsButton *self);
+
+BsIcon * bs_button_get_custom_icon (BsButton *self);
+void bs_button_set_custom_icon (BsButton *self,
+                                BsIcon   *icon);
+
+BsAction * bs_button_get_action (BsButton *self);
+void bs_button_set_action (BsButton *self,
+                           BsAction *action);
 
 G_END_DECLS

@@ -311,10 +311,10 @@ launcher_open_file_action_init (LauncherOpenFileAction *self)
 }
 
 BsAction *
-launcher_open_file_action_new (BsStreamDeckButton *stream_deck_button)
+launcher_open_file_action_new (BsButton *button)
 {
   return g_object_new (LAUNCHER_TYPE_OPEN_FILE_ACTION,
-                       "stream-deck-button", stream_deck_button,
+                       "button", button,
                        NULL);
 }
 

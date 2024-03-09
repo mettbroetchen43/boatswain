@@ -56,16 +56,16 @@ static const BsActionEntry entries[] = {
 };
 
 static BsAction *
-launcher_action_factory_create_action (BsActionFactory    *action_factory,
-                                       BsStreamDeckButton *stream_deck_button,
-                                       BsActionInfo       *action_info)
+launcher_action_factory_create_action (BsActionFactory *action_factory,
+                                       BsButton        *button,
+                                       BsActionInfo    *action_info)
 {
   if (g_strcmp0 (bs_action_info_get_id (action_info), "launch-action") == 0)
-    return launcher_launch_action_new (stream_deck_button);
+    return launcher_launch_action_new (button);
   else if (g_strcmp0 (bs_action_info_get_id (action_info), "launcher-open-file-action") == 0)
-    return launcher_open_file_action_new (stream_deck_button);
+    return launcher_open_file_action_new (button);
   else if (g_strcmp0 (bs_action_info_get_id (action_info), "launcher-open-url-action") == 0)
-    return launcher_open_url_action_new (stream_deck_button);
+    return launcher_open_url_action_new (button);
 
   return NULL;
 }

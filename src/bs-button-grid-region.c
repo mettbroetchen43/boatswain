@@ -24,7 +24,7 @@
 #include "bs-device-region.h"
 #include "bs-icon-renderer.h"
 #include "bs-stream-deck.h"
-#include "bs-stream-deck-button-private.h"
+#include "bs-button-private.h"
 
 struct _BsButtonGridRegion
 {
@@ -124,7 +124,7 @@ bs_button_grid_region_class_init (BsButtonGridRegionClass *klass)
 static void
 bs_button_grid_region_init (BsButtonGridRegion *self)
 {
-  self->buttons = g_list_store_new (BS_TYPE_STREAM_DECK_BUTTON);
+  self->buttons = g_list_store_new (BS_TYPE_BUTTON);
   self->grid_columns = 1;
 }
 
@@ -176,12 +176,12 @@ bs_button_grid_region_new_full (const char         *id,
 
   for (unsigned int i = 0; i < n_buttons; i++)
     {
-      g_autoptr(BsStreamDeckButton) button = NULL;
+      g_autoptr(BsButton) button = NULL;
 
-      button = bs_stream_deck_button_new (stream_deck,
-                                          i,
-                                          icon_layout->width,
-                                          icon_layout->height);
+      button = bs_button_new (stream_deck,
+                              i,
+                              icon_layout->width,
+                              icon_layout->height);
 
       g_list_store_append (self->buttons, button);
     }
