@@ -26,14 +26,6 @@
 
 G_BEGIN_DECLS
 
-typedef struct
-{
-  uint8_t n_buttons;
-  uint8_t rows;
-  uint8_t columns;
-  uint32_t icon_size;
-} BsStreamDeckButtonLayout;
-
 BsStreamDeck * bs_stream_deck_new (GUsbDevice  *gusb_device,
                                    GError     **error);
 

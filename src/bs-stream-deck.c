@@ -39,7 +39,16 @@
 
 G_STATIC_ASSERT (sizeof (unsigned char) == sizeof (uint8_t));
 
-typedef struct {
+typedef struct
+{
+  uint8_t n_buttons;
+  uint8_t rows;
+  uint8_t columns;
+  uint32_t icon_size;
+} BsStreamDeckButtonLayout;
+
+typedef struct
+{
   uint8_t product_id;
   const char *name;
   const char *icon_name;
