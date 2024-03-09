@@ -815,7 +815,7 @@ read_button_states_gen2 (BsStreamDeck *self)
 
 static void
 set_brightness_pedal (BsStreamDeck *self,
-                     gdouble       brightness)
+                      double        brightness)
 {
   BS_ENTRY;
   BS_EXIT;
@@ -823,9 +823,9 @@ set_brightness_pedal (BsStreamDeck *self,
 
 static gboolean
 set_button_texture_pedal (BsStreamDeck  *self,
-                         uint8_t        button,
-                         GdkTexture    *texture,
-                         GError       **error)
+                          uint8_t        button,
+                          GdkTexture    *texture,
+                          GError       **error)
 {
   BS_ENTRY;
   BS_RETURN (TRUE);
