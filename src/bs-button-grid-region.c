@@ -31,7 +31,6 @@ struct _BsButtonGridRegion
   BsDeviceRegion parent_instance;
 
   GListStore *buttons;
-  BsIconRenderer *renderer;
 
   BsIconLayout icon_layout;
   unsigned int grid_columns;
@@ -54,7 +53,6 @@ bs_button_grid_region_finalize (GObject *object)
   BsButtonGridRegion *self = (BsButtonGridRegion *)object;
 
   g_clear_object (&self->buttons);
-  g_clear_object (&self->renderer);
 
   G_OBJECT_CLASS (bs_button_grid_region_parent_class)->finalize (object);
 }
@@ -171,8 +169,6 @@ bs_button_grid_region_new_full (const char         *id,
 
   /* TODO: make it a construct-only property */
   self->icon_layout = *icon_layout;
-
-  self->renderer = bs_icon_renderer_new (&self->icon_layout);
 
   for (unsigned int i = 0; i < n_buttons; i++)
     {
