@@ -75,10 +75,10 @@ typedef struct
 
   char * (*get_serial_number) (BsStreamDeck *self);
   char * (*get_firmware_version) (BsStreamDeck *self);
-  gboolean (*set_button_texture) (BsStreamDeck        *self,
-                                  BsButton  *button,
-                                  GdkTexture          *texture,
-                                  GError             **error);
+  gboolean (*set_button_texture) (BsStreamDeck  *self,
+                                  BsButton      *button,
+                                  GdkTexture    *texture,
+                                  GError       **error);
   gboolean (*read_button_states) (BsStreamDeck *self);
 } StreamDeckModelInfo;
 
@@ -385,10 +385,10 @@ save_after_timeout_cb (gpointer data)
 /* Mini & Original (gen 1) */
 
 static gboolean
-set_button_texture_mini (BsStreamDeck        *self,
-                         BsButton  *button,
-                         GdkTexture          *texture,
-                         GError             **error)
+set_button_texture_mini (BsStreamDeck  *self,
+                         BsButton      *button,
+                         GdkTexture    *texture,
+                         GError       **error)
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
@@ -549,10 +549,10 @@ set_brightness_mini_original (BsStreamDeck *self,
 }
 
 static gboolean
-set_button_texture_original (BsStreamDeck        *self,
-                             BsButton  *button,
-                             GdkTexture          *texture,
-                             GError             **error)
+set_button_texture_original (BsStreamDeck  *self,
+                             BsButton      *button,
+                             GdkTexture    *texture,
+                             GError       **error)
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
@@ -734,10 +734,10 @@ set_brightness_gen2 (BsStreamDeck *self,
 }
 
 static gboolean
-set_button_texture_gen2 (BsStreamDeck        *self,
-                         BsButton  *button,
-                         GdkTexture          *texture,
-                         GError             **error)
+set_button_texture_gen2 (BsStreamDeck  *self,
+                         BsButton      *button,
+                         GdkTexture    *texture,
+                         GError       **error)
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
@@ -828,10 +828,10 @@ set_brightness_pedal (BsStreamDeck *self,
 }
 
 static gboolean
-set_button_texture_pedal (BsStreamDeck        *self,
-                          BsButton  *button,
-                          GdkTexture          *texture,
-                          GError             **error)
+set_button_texture_pedal (BsStreamDeck  *self,
+                          BsButton      *button,
+                          GdkTexture    *texture,
+                          GError       **error)
 {
   BS_ENTRY;
   BS_RETURN (TRUE);
@@ -1225,10 +1225,10 @@ set_brightness_fake (BsStreamDeck *self,
 }
 
 static gboolean
-set_button_texture_fake (BsStreamDeck        *self,
-                         BsButton  *button,
-                         GdkTexture          *texture,
-                         GError             **error)
+set_button_texture_fake (BsStreamDeck  *self,
+                         BsButton      *button,
+                         GdkTexture    *texture,
+                         GError       **error)
 {
   return TRUE;
 }
@@ -1747,9 +1747,9 @@ bs_stream_deck_get_region (BsStreamDeck *self,
 }
 
 gboolean
-bs_stream_deck_upload_button (BsStreamDeck        *self,
-                              BsButton  *button,
-                              GError             **error)
+bs_stream_deck_upload_button (BsStreamDeck  *self,
+                              BsButton      *button,
+                              GError       **error)
 {
   g_autoptr (GdkTexture) texture = NULL;
   BsIcon *icon;
