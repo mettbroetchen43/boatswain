@@ -99,6 +99,8 @@ struct _BsStreamDeck
   GQueue *active_pages;
   guint save_timeout_id;
 
+  GHashTable *renderers;
+
   const StreamDeckModelInfo *model_info;
   GUsbDevice *device;
   hid_device *handle;
@@ -1417,6 +1419,7 @@ out:
   if (self->model_info->features & BS_STREAM_DECK_FEATURE_BUTTONS)
     {
       g_autoptr (BsButtonGridRegion) button_grid = NULL;
+      g_autoptr (BsIconRenderer) renderer = NULL;
 
       button_grid = bs_button_grid_region_new_full ("main-button-grid",
                                                     self,
@@ -1426,6 +1429,9 @@ out:
                                                     0, row++, 1, 1);
 
       g_list_store_append (self->regions, button_grid);
+
+      renderer = bs_icon_renderer_new (&self->model_info->button_layout.icon_layout);
+      g_hash_table_insert (self->renderers, button_grid, g_steal_pointer (&renderer));
     }
 
   if (self->model_info->features & BS_STREAM_DECK_FEATURE_DIALS)
@@ -1480,6 +1486,7 @@ bs_stream_deck_finalize (GObject *object)
   g_clear_pointer (&self->serial_number, g_free);
   g_clear_pointer (&self->handle, hid_close);
   g_queue_free_full (self->active_pages, g_object_unref);
+  g_clear_pointer (&self->renderers, g_hash_table_destroy);
   g_clear_object (&self->regions);
   g_clear_object (&self->device);
   g_clear_object (&self->profiles);
@@ -1608,6 +1615,7 @@ bs_stream_deck_init (BsStreamDeck *self)
   self->profiles = g_list_store_new (BS_TYPE_PROFILE);
   self->regions = g_list_store_new (BS_TYPE_DEVICE_REGION);
   self->active_pages = g_queue_new ();
+  self->renderers = g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_object_unref);
 }
 
 BsStreamDeck *
