@@ -92,7 +92,6 @@ struct _BsStreamDeck
 {
   GObject parent_instance;
 
-  BsIconRenderer *icon_renderer;
   GListStore *profiles;
   GListStore *regions;
   BsProfile *active_profile;
@@ -168,6 +167,13 @@ find_button_at_region (BsStreamDeck *self,
   g_assert (BS_IS_BUTTON (button));
 
   return button;
+}
+
+static inline BsIconRenderer *
+get_renderer_for_region (BsStreamDeck   *self,
+                         BsDeviceRegion *region)
+{
+  return g_hash_table_lookup (self->renderers, region);
 }
 
 static void
@@ -394,6 +400,7 @@ set_button_texture_mini (BsStreamDeck  *self,
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
+  BsIconRenderer *renderer;
   const size_t package_size = 1024;
   const size_t header_size = 16;
   uint8_t page;
@@ -402,7 +409,8 @@ set_button_texture_mini (BsStreamDeck  *self,
 
   BS_ENTRY;
 
-  if (!bs_icon_renderer_convert_texture (self->icon_renderer, texture, (char **) &buffer, &buffer_size, error))
+  renderer = get_renderer_for_region (self, bs_button_get_region (button));
+  if (!bs_icon_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
   payload = g_malloc (sizeof (uint8_t) * package_size);
@@ -558,6 +566,7 @@ set_button_texture_original (BsStreamDeck  *self,
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
+  BsIconRenderer *renderer;
   const size_t package_size = 8191;
   const size_t header_size = 16;
   uint8_t button_index;
@@ -568,7 +577,8 @@ set_button_texture_original (BsStreamDeck  *self,
 
   BS_ENTRY;
 
-  if (!bs_icon_renderer_convert_texture (self->icon_renderer, texture, (char **) &buffer, &buffer_size, error))
+  renderer = get_renderer_for_region (self, bs_button_get_region (button));
+  if (!bs_icon_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
   report_size = buffer_size / 2;
@@ -743,6 +753,7 @@ set_button_texture_gen2 (BsStreamDeck  *self,
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
+  BsIconRenderer *renderer;
   const size_t package_size = 1024;
   const size_t header_size = 8;
   uint8_t page;
@@ -751,7 +762,8 @@ set_button_texture_gen2 (BsStreamDeck  *self,
 
   BS_ENTRY;
 
-  if (!bs_icon_renderer_convert_texture (self->icon_renderer, texture, (char **) &buffer, &buffer_size, error))
+  renderer = get_renderer_for_region (self, bs_button_get_region (button));
+  if (!bs_icon_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
   payload = g_malloc (package_size * sizeof (uint8_t));
@@ -1410,7 +1422,6 @@ bs_stream_deck_initable_init (GInitable     *initable,
 out:
   self->serial_number = self->model_info->get_serial_number (self);
   self->firmware_version = self->model_info->get_firmware_version (self);
-  self->icon_renderer = bs_icon_renderer_new (&self->model_info->button_layout.icon_layout);
   self->icon = g_themed_icon_new (self->model_info->icon_name);
 
   /* All Elgato Stream Decks have one button grid */
@@ -1760,13 +1771,15 @@ bs_stream_deck_upload_button (BsStreamDeck  *self,
                               GError       **error)
 {
   g_autoptr (GdkTexture) texture = NULL;
+  BsIconRenderer *renderer;
   BsIcon *icon;
 
   g_return_val_if_fail (BS_IS_STREAM_DECK (self), FALSE);
   g_return_val_if_fail (self->model_info->set_button_texture != NULL, FALSE);
 
   icon = bs_button_get_icon (button);
-  texture = bs_icon_renderer_compose_icon (self->icon_renderer,
+  renderer = get_renderer_for_region (self, bs_button_get_region (button));
+  texture = bs_icon_renderer_compose_icon (renderer,
                                            BS_ICON_COMPOSE_FLAG_NONE,
                                            icon,
                                            error);
