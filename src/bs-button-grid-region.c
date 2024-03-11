@@ -175,6 +175,7 @@ bs_button_grid_region_new_full (const char         *id,
       g_autoptr (BsButton) button = NULL;
 
       button = bs_button_new (stream_deck,
+                              BS_DEVICE_REGION (self),
                               i,
                               icon_layout->width,
                               icon_layout->height);

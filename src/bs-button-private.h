@@ -27,10 +27,11 @@
 
 G_BEGIN_DECLS
 
-BsButton * bs_button_new (BsStreamDeck *stream_deck,
-                          uint8_t       position,
-                          unsigned int  icon_width,
-                          unsigned int  icon_height);
+BsButton * bs_button_new (BsStreamDeck   *stream_deck,
+                          BsDeviceRegion *region,
+                          uint8_t         position,
+                          unsigned int    icon_width,
+                          unsigned int    icon_height);
 
 void bs_button_set_pressed (BsButton *self,
                             gboolean  pressed);
@@ -40,5 +41,7 @@ void bs_button_uninhibit_page_updates (BsButton *self);
 
 unsigned int bs_button_get_icon_width (BsButton *self);
 unsigned int bs_button_get_icon_height (BsButton *self);
+
+BsDeviceRegion * bs_button_get_region (BsButton *self);
 
 G_END_DECLS

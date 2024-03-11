@@ -31,6 +31,7 @@ struct _BsButton
   BsAction *action;
   BsIcon *custom_icon;
   BsStreamDeck *stream_deck;
+  BsDeviceRegion *region; /* unowned */
   unsigned int icon_width;
   unsigned int icon_height;
   uint8_t position;
@@ -277,16 +278,18 @@ bs_button_init (BsButton *self)
 }
 
 BsButton *
-bs_button_new (BsStreamDeck *stream_deck,
-               uint8_t       position,
-               unsigned int  icon_width,
-               unsigned int  icon_height)
+bs_button_new (BsStreamDeck   *stream_deck,
+               BsDeviceRegion *region,
+               uint8_t         position,
+               unsigned int    icon_width,
+               unsigned int    icon_height)
 {
   g_autoptr (BsIcon) empty_icon = NULL;
   BsButton *self;
 
   self = g_object_new (BS_TYPE_BUTTON, NULL);
   self->stream_deck = stream_deck;
+  self->region = region;
   self->position = position;
   self->icon_width = icon_width;
   self->icon_height = icon_height;
@@ -482,4 +485,12 @@ bs_button_get_icon_height (BsButton *self)
   g_return_val_if_fail (BS_IS_BUTTON (self), 0);
 
   return self->icon_height;
+}
+
+BsDeviceRegion *
+bs_button_get_region (BsButton *self)
+{
+  g_assert (BS_IS_BUTTON (self));
+
+  return self->region;
 }
