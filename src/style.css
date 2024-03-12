@@ -60,3 +60,11 @@ popover.custom-icon-popover gridview,
 popover.custom-icon-popover gridview image {
   padding: 12px;
 }
+
+/* Dials */
+streamdeckdialwidget {
+  min-width: 72px;
+  min-height: 72px;
+  border-radius: 9999px;
+  background-color: @card_bg_color;
+}
