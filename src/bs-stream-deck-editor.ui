@@ -29,19 +29,11 @@
                 <property name="tightening-threshold">500</property>
 
                 <child>
-                  <object class="GtkAspectFrame">
-                    <property name="obey-child">False</property>
-                    <property name="ratio">1.8</property>
-
-                    <child>
-                      <object class="GtkGrid" id="regions_grid">
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="column-spacing">24</property>
-                        <property name="row-spacing">24</property>
-                      </object>
-                    </child>
-
+                  <object class="GtkGrid" id="regions_grid">
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="column-spacing">24</property>
+                    <property name="row-spacing">24</property>
                   </object>
                 </child>
 
