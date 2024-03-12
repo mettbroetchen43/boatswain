@@ -1766,6 +1766,14 @@ bs_stream_deck_get_region (BsStreamDeck *self,
 }
 
 gboolean
+bs_stream_deck_is_initialized (BsStreamDeck *self)
+{
+  g_assert (BS_IS_STREAM_DECK (self));
+
+  return self->initialized;
+}
+
+gboolean
 bs_stream_deck_upload_button (BsStreamDeck  *self,
                               BsButton      *button,
                               GError       **error)

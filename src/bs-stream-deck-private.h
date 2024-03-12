@@ -38,6 +38,8 @@ GListModel * bs_stream_deck_get_regions (BsStreamDeck *self);
 BsDeviceRegion * bs_stream_deck_get_region (BsStreamDeck *self,
                                             const char   *region_id);
 
+gboolean bs_stream_deck_is_initialized (BsStreamDeck *self);
+
 gboolean bs_stream_deck_upload_button (BsStreamDeck        *self,
                                        BsButton  *button,
                                        GError             **error);
