@@ -23,7 +23,9 @@
 #include "bs-action-private.h"
 #include "bs-button-grid-region.h"
 #include "bs-debug.h"
+#include "bs-dial.h"
 #include "bs-dial-grid-region.h"
+#include "bs-dial-widget.h"
 #include "bs-icon.h"
 #include "bs-icon-renderer.h"
 #include "bs-page.h"
@@ -145,7 +147,45 @@ static void
 add_dial_grid (BsStreamDeckEditor *self,
                BsDialGridRegion   *dial_grid)
 {
-  BS_TODO ("Implement dial grid widgetry");
+  BsDeviceRegion *region;
+  GtkFlowBox *dials_flowbox;
+  GListModel *dials;
+  unsigned int grid_columns;
+
+  dials = bs_dial_grid_region_get_dials (dial_grid);
+  grid_columns = bs_dial_grid_region_get_grid_columns (dial_grid);
+
+  dials_flowbox = g_object_new (GTK_TYPE_FLOW_BOX,
+                                "valign", GTK_ALIGN_CENTER,
+                                "homogeneous", TRUE,
+                                "activate-on-single-click", FALSE,
+                                "selection-mode", GTK_SELECTION_SINGLE,
+                                "column-spacing", 18,
+                                "row-spacing", 18,
+                                "min-children-per-line", grid_columns,
+                                "max-children-per-line", grid_columns,
+                                NULL);
+
+  for (size_t i = 0; i < g_list_model_get_n_items (dials); i++)
+    {
+      g_autoptr (BsDial) dial = NULL;
+      GtkWidget *widget;
+
+      dial = g_list_model_get_item (dials, i);
+      widget = bs_dial_widget_new (dial);
+
+      gtk_flow_box_append (dials_flowbox, widget);
+    }
+
+  region = BS_DEVICE_REGION (dial_grid);
+  gtk_grid_attach (self->regions_grid,
+                   GTK_WIDGET (dials_flowbox),
+                   bs_device_region_get_column (region),
+                   bs_device_region_get_row (region),
+                   bs_device_region_get_column_span (region),
+                   bs_device_region_get_row_span (region));
+
+  g_hash_table_insert (self->region_to_widget, region, dials_flowbox);
 }
 
 static void
