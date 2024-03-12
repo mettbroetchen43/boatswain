@@ -25,6 +25,7 @@ boatswain_sources = [
   'bs-button-editor.c',
   'bs-button-widget.c',
   'bs-stream-deck-editor.c',
+  'bs-touchscreen.c',
   'bs-window.c',
 ]
 

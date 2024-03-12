@@ -46,6 +46,7 @@ typedef struct _BsProfile BsProfile;
 typedef struct _BsStreamDeck BsStreamDeck;
 typedef struct _BsButton BsButton;
 typedef struct _BsStreamDeckEditor BsStreamDeckEditor;
+typedef struct _BsTouchscreen BsTouchscreen;
 typedef struct _BsWindow BsWindow;
 
 G_END_DECLS
