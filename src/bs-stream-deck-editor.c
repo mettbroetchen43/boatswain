@@ -35,6 +35,8 @@
 #include "bs-button-widget.h"
 #include "bs-stream-deck-editor.h"
 #include "bs-stream-deck-private.h"
+#include "bs-touchscreen-private.h"
+#include "bs-touchscreen-region.h"
 
 #include <glib/gi18n.h>
 #include <libpeas.h>
@@ -189,6 +191,28 @@ add_dial_grid (BsStreamDeckEditor *self,
 }
 
 static void
+add_touchscreen (BsStreamDeckEditor  *self,
+                 BsTouchscreenRegion *touchscreen_region)
+{
+  BsDeviceRegion *region;
+  GtkWidget *widget;
+
+  widget = adw_bin_new ();
+  gtk_widget_set_size_request (widget, -1, 100);
+  gtk_widget_add_css_class (widget, "card");
+
+  region = BS_DEVICE_REGION (touchscreen_region);
+  gtk_grid_attach (self->regions_grid,
+                   widget,
+                   bs_device_region_get_column (region),
+                   bs_device_region_get_row (region),
+                   bs_device_region_get_column_span (region),
+                   bs_device_region_get_row_span (region));
+
+  g_hash_table_insert (self->region_to_widget, region, widget);
+}
+
+static void
 build_regions (BsStreamDeckEditor *self)
 {
   GListModel *regions = bs_stream_deck_get_regions (self->stream_deck);
@@ -201,6 +225,8 @@ build_regions (BsStreamDeckEditor *self)
         add_button_grid (self, BS_BUTTON_GRID_REGION (region));
       else if (BS_IS_DIAL_GRID_REGION (region))
         add_dial_grid (self, BS_DIAL_GRID_REGION (region));
+      else if (BS_IS_TOUCHSCREEN_REGION (region))
+        add_touchscreen (self, BS_TOUCHSCREEN_REGION (region));
       else
         g_assert_not_reached ();
     }
