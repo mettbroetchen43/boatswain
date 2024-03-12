@@ -32,6 +32,8 @@
 #include "bs-page.h"
 #include "bs-profile.h"
 #include "bs-stream-deck-private.h"
+#include "bs-touchscreen-private.h"
+#include "bs-touchscreen-region.h"
 #include "bs-button-private.h"
 
 #include <glib/gi18n.h>
@@ -1461,7 +1463,15 @@ out:
 
   if (self->model_info->features & BS_STREAM_DECK_FEATURE_TOUCHSCREEN)
     {
-      BS_TODO ("Touchscreen region");
+      g_autoptr (BsTouchscreenRegion) touchscreen_region = NULL;
+
+      touchscreen_region = bs_touchscreen_region_new ("touchscreen",
+                                                      self,
+                                                      self->model_info->touchscreen_layout.width,
+                                                      self->model_info->touchscreen_layout.height,
+                                                      0, row++, 1, 1);
+
+      g_list_store_append (self->regions, touchscreen_region);
     }
 
   if (self->model_info->features & BS_STREAM_DECK_FEATURE_DIALS)
