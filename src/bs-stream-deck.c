@@ -44,6 +44,7 @@ G_STATIC_ASSERT (sizeof (unsigned char) == sizeof (uint8_t));
 typedef enum
 {
   BS_STREAM_DECK_FEATURE_BUTTONS = 1 << 0,
+  BS_STREAM_DECK_FEATURE_TOUCHSCREEN = 1 << 1,
   BS_STREAM_DECK_FEATURE_DIALS = 1 << 2,
 } BsStreamDeckFeatureFlags;
 
@@ -62,12 +63,20 @@ typedef struct
 
 typedef struct
 {
+  /* TODO: renderer */
+  size_t width;
+  size_t height;
+} BsTouchscreenLayout;
+
+typedef struct
+{
   uint8_t product_id;
   const char *name;
   const char *icon_name;
   BsStreamDeckFeatureFlags features;
   BsButtonLayout button_layout;
   BsDialLayout dial_layout;
+  BsTouchscreenLayout touchscreen_layout;
 
   void (*reset) (BsStreamDeck *self);
   void (*set_brightness) (BsStreamDeck *self,
@@ -1185,6 +1194,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .name = N_("Stream Deck +"),
     .icon_name = "input-dialpad-symbolic",
     .features = BS_STREAM_DECK_FEATURE_BUTTONS |
+                BS_STREAM_DECK_FEATURE_TOUCHSCREEN |
                 BS_STREAM_DECK_FEATURE_DIALS,
     .button_layout = {
       .n_buttons = 8,
@@ -1199,6 +1209,10 @@ static const StreamDeckModelInfo models_vtable[] = {
     .dial_layout = {
       .n_dials = 4,
       .columns = 4,
+    },
+    .touchscreen_layout = {
+      .width = 800,
+      .height = 200,
     },
     .reset = reset_gen2,
     .get_serial_number = get_serial_number_gen2,
@@ -1443,6 +1457,11 @@ out:
 
       renderer = bs_icon_renderer_new (&self->model_info->button_layout.icon_layout);
       g_hash_table_insert (self->renderers, button_grid, g_steal_pointer (&renderer));
+    }
+
+  if (self->model_info->features & BS_STREAM_DECK_FEATURE_TOUCHSCREEN)
+    {
+      BS_TODO ("Touchscreen region");
     }
 
   if (self->model_info->features & BS_STREAM_DECK_FEATURE_DIALS)
