@@ -324,7 +324,7 @@
       </object>
     </property>
     <property name="model">
-      <object class="GtkFilterListModel">
+      <object class="GtkFilterListModel" id="icons_filter_list_model">
         <property name="filter">
           <object class="GtkStringFilter">
             <property name="match-mode">substring</property>
@@ -335,9 +335,6 @@
               <lookup name="text">builtin_icons_search_entry</lookup>
             </binding>
           </object>
-        </property>
-        <property name="model">
-          <object class="GtkStringList" id="builtin_icons_stringlist" />
         </property>
       </object>
     </property>

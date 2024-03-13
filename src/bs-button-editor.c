@@ -41,11 +41,11 @@ struct _BsButtonEditor
   AdwPreferencesGroup *action_preferences_group;
   GtkListBox *actions_listbox;
   GtkColorDialogButton *background_color_dialog_button;
-  GtkStringList *builtin_icons_stringlist;
   AdwPreferencesPage *button_preferences_page;
   GtkMenuButton *custom_icon_menubutton;
   GtkEditable *custom_icon_text_row;
   GtkImage *icon_image;
+  GtkFilterListModel *icons_filter_list_model;
   AdwNavigationView *navigation_view;
   GtkWidget *remove_action_button;
   GtkWidget *remove_custom_icon_button;
@@ -605,11 +605,11 @@ bs_button_editor_class_init (BsButtonEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, action_preferences_group);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, actions_listbox);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, background_color_dialog_button);
-  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, builtin_icons_stringlist);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, button_preferences_page);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, custom_icon_menubutton);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, custom_icon_text_row);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, icon_image);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, icons_filter_list_model);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, navigation_view);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, remove_action_button);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, remove_custom_icon_button);
@@ -628,10 +628,9 @@ bs_button_editor_class_init (BsButtonEditorClass *klass)
 static void
 bs_button_editor_init (BsButtonEditor *self)
 {
+  static GtkStringList *builtin_icons_list = NULL;
   PeasExtensionSet *extension_set;
-  g_auto (GStrv) icon_names = NULL;
   GApplication *application;
-  GtkIconTheme *icon_theme;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -645,14 +644,26 @@ bs_button_editor_init (BsButtonEditor *self)
   g_signal_connect (extension_set, "extension-added", G_CALLBACK (on_action_factory_added_cb), self);
   g_signal_connect (extension_set, "extension-removed", G_CALLBACK (on_action_factory_removed_cb), self);
 
-  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
-  icon_names = gtk_icon_theme_get_icon_names (icon_theme);
-
-  for (size_t i = 0; icon_names && icon_names[i]; i++)
+  if (g_once_init_enter_pointer (&builtin_icons_list))
     {
-      if (g_str_has_suffix (icon_names[i], "-symbolic"))
-        gtk_string_list_append (self->builtin_icons_stringlist, icon_names[i]);
+      g_autoptr (GtkStringList) list = NULL;
+      g_auto (GStrv) icon_names = NULL;
+      GtkIconTheme *icon_theme;
+
+      list = gtk_string_list_new (NULL);
+      icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
+      icon_names = gtk_icon_theme_get_icon_names (icon_theme);
+
+      for (size_t i = 0; icon_names && icon_names[i]; i++)
+        {
+          if (g_str_has_suffix (icon_names[i], "-symbolic"))
+            gtk_string_list_append (list, icon_names[i]);
+        }
+
+      g_once_init_leave_pointer (&builtin_icons_list, g_steal_pointer (&list));
     }
+
+  gtk_filter_list_model_set_model (self->icons_filter_list_model, G_LIST_MODEL (builtin_icons_list));
 }
 
 GtkWidget *
