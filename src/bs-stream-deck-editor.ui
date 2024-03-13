@@ -46,6 +46,24 @@
         <property name="sidebar">
           <object class="AdwBin" id="editor_bin">
             <property name="hexpand">True</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <property name="top-bar-style">flat</property>
+
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="show-start-title-buttons">False</property>
+                  </object>
+                </child>
+
+                <property name="content">
+                  <object class="AdwStatusPage">
+                    <property name="title" translatable="yes">Select a button</property>
+                  </object>
+                </property>
+
+              </object>
+            </property>
           </object>
         </property>
 
