@@ -45,12 +45,15 @@ struct _BsStreamDeckEditor
 {
   AdwBin parent_instance;
 
-  BsButtonEditor *button_editor;
+  AdwBin *editor_bin;
   GtkGrid *regions_grid;
 
   BsStreamDeck *stream_deck;
 
   GHashTable *region_to_widget;
+
+  /* Can be a BsButton, BsDial, or BsTouchscreen */
+  gpointer selected_item;
 };
 
 static void on_flowbox_child_activated_cb (GtkFlowBox         *flowbox,
@@ -75,6 +78,34 @@ static GParamSpec *properties [N_PROPS];
 /*
  * Auxiliary methods
  */
+
+static inline void
+set_selected_item (BsStreamDeckEditor *self,
+                   gpointer            selected_item)
+{
+  if (self->selected_item == selected_item)
+    return;
+
+  self->selected_item = selected_item;
+
+  if (BS_IS_BUTTON (selected_item))
+    {
+      GtkWidget *button_editor = bs_button_editor_new (selected_item);
+      adw_bin_set_child (self->editor_bin, button_editor);
+    }
+  else if (BS_IS_DIAL (selected_item))
+    {
+      BS_TODO ("Dial editor");
+    }
+  else if (BS_IS_TOUCHSCREEN (selected_item))
+    {
+      BS_TODO ("Touchscreen editor");
+    }
+  else
+    {
+      g_assert_not_reached ();
+    }
+}
 
 static inline gboolean
 is_switch_page_action (BsAction *action)
@@ -263,13 +294,7 @@ on_flowbox_selected_children_changed_cb (GtkFlowBox         *flowbox,
   child = selected_children ? selected_children->data : NULL;
 
   if (child)
-    {
-      BsButton *button;
-
-      button = bs_button_widget_get_button (BS_BUTTON_WIDGET (child));
-
-      bs_button_editor_set_button (self->button_editor, button);
-    }
+    set_selected_item (self, bs_button_widget_get_button (BS_BUTTON_WIDGET (child)));
 }
 
 static void
@@ -376,8 +401,6 @@ bs_stream_deck_editor_class_init (BsStreamDeckEditorClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  g_type_ensure (BS_TYPE_BUTTON_EDITOR);
-
   object_class->finalize = bs_stream_deck_editor_finalize;
   object_class->get_property = bs_stream_deck_editor_get_property;
   object_class->set_property = bs_stream_deck_editor_set_property;
@@ -390,7 +413,7 @@ bs_stream_deck_editor_class_init (BsStreamDeckEditorClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-stream-deck-editor.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, button_editor);
+  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, editor_bin);
   gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, regions_grid);
 
   gtk_widget_class_set_css_name (widget_class, "streamdeckeditor");

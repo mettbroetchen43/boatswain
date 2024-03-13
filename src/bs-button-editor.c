@@ -514,6 +514,38 @@ bs_button_editor_finalize (GObject *object)
 }
 
 static void
+bs_button_editor_constructed (GObject *object)
+{
+  BsButtonEditor *self = (BsButtonEditor *)object;
+
+  G_OBJECT_CLASS (bs_button_editor_parent_class)->constructed (object);
+
+  gtk_stack_set_visible_child_name (self->stack, "button");
+  update_action_preferences_group (self);
+  setup_button (self);
+  update_icon (self);
+
+  adw_navigation_view_pop (self->navigation_view);
+
+  self->action_changed_id = g_signal_connect (self->button,
+                                              "notify::action",
+                                              G_CALLBACK (on_action_changed_cb),
+                                              self);
+
+  self->custom_icon_changed_id = g_signal_connect (self->button,
+                                                   "notify::custom-icon",
+                                                   G_CALLBACK (on_button_custom_icon_changed_cb),
+                                                   self);
+
+  self->icon_changed_id = g_signal_connect (self->button,
+                                            "icon-changed",
+                                            G_CALLBACK (on_button_icon_changed_cb),
+                                            self);
+
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_BUTTON]);
+}
+
+static void
 bs_button_editor_get_property (GObject    *object,
                                guint       prop_id,
                                GValue     *value,
@@ -543,7 +575,9 @@ bs_button_editor_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_BUTTON:
-      bs_button_editor_set_button (self, g_value_get_object (value));
+      g_assert (self->button == NULL);
+      self->button = g_value_dup_object (value);
+      g_assert (self->button != NULL);
       break;
 
     default:
@@ -558,6 +592,7 @@ bs_button_editor_class_init (BsButtonEditorClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = bs_button_editor_finalize;
+  object_class->constructed = bs_button_editor_constructed;
   object_class->get_property = bs_button_editor_get_property;
   object_class->set_property = bs_button_editor_set_property;
 
@@ -623,40 +658,12 @@ bs_button_editor_init (BsButtonEditor *self)
     }
 }
 
-void
-bs_button_editor_set_button (BsButtonEditor *self,
-                             BsButton       *button)
+GtkWidget *
+bs_button_editor_new (BsButton *button)
 {
-  g_return_if_fail (BS_IS_BUTTON_EDITOR (self));
+  g_assert (BS_IS_BUTTON (button));
 
-  g_clear_signal_handler (&self->action_changed_id, self->button);
-  g_clear_signal_handler (&self->custom_icon_changed_id, self->button);
-  g_clear_signal_handler (&self->icon_changed_id, self->button);
-
-  if (g_set_object (&self->button, button))
-    {
-      gtk_stack_set_visible_child_name (self->stack, button ? "button" : "empty");
-      update_action_preferences_group (self);
-      setup_button (self);
-      update_icon (self);
-
-      adw_navigation_view_pop (self->navigation_view);
-
-      self->action_changed_id = g_signal_connect (button,
-                                                  "notify::action",
-                                                  G_CALLBACK (on_action_changed_cb),
-                                                  self);
-
-      self->custom_icon_changed_id = g_signal_connect (button,
-                                                       "notify::custom-icon",
-                                                       G_CALLBACK (on_button_custom_icon_changed_cb),
-                                                       self);
-
-      self->icon_changed_id = g_signal_connect (button,
-                                                "icon-changed",
-                                                G_CALLBACK (on_button_icon_changed_cb),
-                                                self);
-
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_BUTTON]);
-    }
+  return g_object_new (BS_TYPE_BUTTON_EDITOR,
+                       "button", button,
+                       NULL);
 }

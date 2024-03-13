@@ -44,7 +44,7 @@
         </property>
 
         <property name="sidebar">
-          <object class="BsButtonEditor" id="button_editor">
+          <object class="AdwBin" id="editor_bin">
             <property name="hexpand">True</property>
           </object>
         </property>
