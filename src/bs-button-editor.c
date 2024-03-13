@@ -49,7 +49,6 @@ struct _BsButtonEditor
   AdwNavigationView *navigation_view;
   GtkWidget *remove_action_button;
   GtkWidget *remove_custom_icon_button;
-  GtkStack *stack;
 
   BsButton *button;
   GtkWidget *action_preferences;
@@ -520,7 +519,6 @@ bs_button_editor_constructed (GObject *object)
 
   G_OBJECT_CLASS (bs_button_editor_parent_class)->constructed (object);
 
-  gtk_stack_set_visible_child_name (self->stack, "button");
   update_action_preferences_group (self);
   setup_button (self);
   update_icon (self);
@@ -615,7 +613,6 @@ bs_button_editor_class_init (BsButtonEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, navigation_view);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, remove_action_button);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, remove_custom_icon_button);
-  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, on_background_color_dialog_button_rgba_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_button_clicked_cb);
