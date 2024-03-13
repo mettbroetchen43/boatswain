@@ -29,7 +29,6 @@ G_BEGIN_DECLS
 #define BS_TYPE_BUTTON_EDITOR (bs_button_editor_get_type())
 G_DECLARE_FINAL_TYPE (BsButtonEditor, bs_button_editor, BS, BUTTON_EDITOR, AdwBin)
 
-BsButton * bs_button_editor_get_button (BsButtonEditor *self);
 void bs_button_editor_set_button (BsButtonEditor *self,
                                   BsButton       *button);
 

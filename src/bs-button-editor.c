@@ -623,14 +623,6 @@ bs_button_editor_init (BsButtonEditor *self)
     }
 }
 
-BsButton *
-bs_button_editor_get_button (BsButtonEditor *self)
-{
-  g_return_val_if_fail (BS_IS_BUTTON_EDITOR (self), NULL);
-
-  return self->button;
-}
-
 void
 bs_button_editor_set_button (BsButtonEditor *self,
                              BsButton       *button)
