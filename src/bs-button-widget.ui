@@ -24,7 +24,7 @@
           <lookup type="BsButton" name="icon-height">
             <lookup name="button">BsButtonWidget</lookup>
           </lookup>
-        </binding>"
+        </binding>
         <style>
           <class name="card" />
         </style>
