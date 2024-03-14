@@ -229,43 +229,6 @@ on_button_grid_widget_button_selected_cb (BsButtonGridWidget *button_grid_widget
   set_selected_item (self, button);
 }
 
-static void
-on_stream_deck_active_page_changed_cb (BsStreamDeck       *stream_deck,
-                                       GParamSpec         *pspec,
-                                       BsStreamDeckEditor *self)
-{
-  GListModel *regions;
-  BsPage *active_page;
-  BsPage *parent;
-
-  BS_ENTRY;
-
-  active_page = bs_stream_deck_get_active_page (stream_deck);
-  parent = bs_page_get_parent (active_page);
-
-  regions = bs_stream_deck_get_regions (self->stream_deck);
-  for (unsigned int i = 0; i < g_list_model_get_n_items (regions); i++)
-    {
-      g_autoptr (BsDeviceRegion) region = g_list_model_get_item (regions, i);
-
-      if (BS_IS_BUTTON_GRID_REGION (region))
-        {
-          GtkFlowBoxChild *flowbox_child;
-          GtkFlowBox *flowbox;
-
-          flowbox = g_hash_table_lookup (self->region_to_widget, region);
-          g_assert (GTK_IS_FLOW_BOX (flowbox));
-
-          flowbox_child = gtk_flow_box_get_child_at_index (flowbox, parent ? 1 : 0);
-          g_assert (flowbox_child != NULL);
-
-          gtk_flow_box_select_child (flowbox, flowbox_child);
-        }
-    }
-
-  BS_EXIT;
-}
-
 
 /*
  * GObject overrides
@@ -315,11 +278,6 @@ bs_stream_deck_editor_set_property (GObject      *object,
       g_assert (self->stream_deck == NULL);
       self->stream_deck = g_value_dup_object (value);
       build_regions (self);
-      g_signal_connect_object (self->stream_deck,
-                               "notify::active-page",
-                               G_CALLBACK (on_stream_deck_active_page_changed_cb),
-                               self,
-                               0);
       break;
 
     default:
