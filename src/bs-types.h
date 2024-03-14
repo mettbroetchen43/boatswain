@@ -33,6 +33,7 @@ typedef struct _BsActionFactory BsActionFactory;
 typedef struct _BsActionInfo BsActionInfo;
 typedef struct _BsApplication BsApplication;
 typedef struct _BsButton BsButton;
+typedef struct _BsButtonGridRegion BsButtonGridRegion;
 typedef struct _BsDesktopController BsDesktopController;
 typedef struct _BsDeviceManager BsDeviceManager;
 typedef struct _BsDeviceRegion BsDeviceRegion;
