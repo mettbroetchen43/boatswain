@@ -32,6 +32,7 @@
 #include "bs-stream-deck.h"
 #include "bs-button.h"
 #include "bs-button-editor.h"
+#include "bs-button-grid-widget.h"
 #include "bs-button-widget.h"
 #include "bs-stream-deck-editor.h"
 #include "bs-stream-deck-private.h"
@@ -56,12 +57,9 @@ struct _BsStreamDeckEditor
   gpointer selected_item;
 };
 
-static void on_flowbox_child_activated_cb (GtkFlowBox         *flowbox,
-                                           GtkFlowBoxChild    *child,
-                                           BsStreamDeckEditor *self);
-
-static void on_flowbox_selected_children_changed_cb (GtkFlowBox         *flowbox,
-                                                     BsStreamDeckEditor *self);
+static void on_button_grid_widget_button_selected_cb (BsButtonGridWidget *button_grid_widget,
+                                                      BsButton           *button,
+                                                      BsStreamDeckEditor *self);
 
 G_DEFINE_FINAL_TYPE (BsStreamDeckEditor, bs_stream_deck_editor, ADW_TYPE_BIN)
 
@@ -107,73 +105,28 @@ set_selected_item (BsStreamDeckEditor *self,
     }
 }
 
-static inline gboolean
-is_switch_page_action (BsAction *action)
-{
-  const PeasPluginInfo *plugin_info;
-  BsActionFactory *factory;
-
-  factory = bs_action_get_factory (action);
-  plugin_info = peas_extension_base_get_plugin_info (PEAS_EXTENSION_BASE (factory));
-
-  return g_strcmp0 (peas_plugin_info_get_module_name (plugin_info), "default") == 0 &&
-         g_strcmp0 (bs_action_get_id (action), "default-switch-page-action") == 0;
-}
-
 static void
 add_button_grid (BsStreamDeckEditor *self,
                  BsButtonGridRegion *button_grid)
 {
   BsDeviceRegion *region;
-  GtkFlowBox *buttons_flowbox;
-  GListModel *buttons;
-  unsigned int grid_columns;
+  GtkWidget *widget;
 
-  buttons = bs_button_grid_region_get_buttons (button_grid);
-  grid_columns = bs_button_grid_region_get_grid_columns (button_grid);
-
-  buttons_flowbox = g_object_new (GTK_TYPE_FLOW_BOX,
-                                  "halign", GTK_ALIGN_CENTER,
-                                  "valign", GTK_ALIGN_CENTER,
-                                  "homogeneous", TRUE,
-                                  "activate-on-single-click", FALSE,
-                                  "selection-mode", GTK_SELECTION_SINGLE,
-                                  "column-spacing", 18,
-                                  "row-spacing", 18,
-                                  "min-children-per-line", grid_columns,
-                                  "max-children-per-line", grid_columns,
-                                  NULL);
-
-  g_signal_connect (buttons_flowbox,
-                    "child-activated",
-                    G_CALLBACK (on_flowbox_child_activated_cb),
+  widget = bs_button_grid_widget_new (button_grid);
+  g_signal_connect (widget,
+                    "button-selected",
+                    G_CALLBACK (on_button_grid_widget_button_selected_cb),
                     self);
-
-  g_signal_connect (buttons_flowbox,
-                    "selected-children-changed",
-                    G_CALLBACK (on_flowbox_selected_children_changed_cb),
-                    self);
-
-  for (unsigned int i = 0; i < g_list_model_get_n_items (buttons); i++)
-    {
-      g_autoptr (BsButton) button = NULL;
-      GtkWidget *widget;
-
-      button = g_list_model_get_item (buttons, i);
-
-      widget = bs_button_widget_new (button);
-      gtk_flow_box_append (buttons_flowbox, widget);
-    }
 
   region = BS_DEVICE_REGION (button_grid);
   gtk_grid_attach (self->regions_grid,
-                   GTK_WIDGET (buttons_flowbox),
+                   widget,
                    bs_device_region_get_column (region),
                    bs_device_region_get_row (region),
                    bs_device_region_get_column_span (region),
                    bs_device_region_get_row_span (region));
 
-  g_hash_table_insert (self->region_to_widget, region, buttons_flowbox);
+  g_hash_table_insert (self->region_to_widget, region, widget);
 }
 
 static void
@@ -269,32 +222,11 @@ build_regions (BsStreamDeckEditor *self)
  */
 
 static void
-on_flowbox_child_activated_cb (GtkFlowBox         *flowbox,
-                               GtkFlowBoxChild    *child,
-                               BsStreamDeckEditor *self)
+on_button_grid_widget_button_selected_cb (BsButtonGridWidget *button_grid_widget,
+                                          BsButton           *button,
+                                          BsStreamDeckEditor *self)
 {
-  BsButton *button;
-  BsAction *action;
-
-  button = bs_button_widget_get_button (BS_BUTTON_WIDGET (child));
-  action = bs_button_get_action (button);
-
-  if (action && is_switch_page_action (action))
-    bs_action_activate (action);
-}
-
-static void
-on_flowbox_selected_children_changed_cb (GtkFlowBox         *flowbox,
-                                         BsStreamDeckEditor *self)
-{
-  g_autoptr (GList) selected_children = NULL;
-  GtkFlowBoxChild *child;
-
-  selected_children = gtk_flow_box_get_selected_children (flowbox);
-  child = selected_children ? selected_children->data : NULL;
-
-  if (child)
-    set_selected_item (self, bs_button_widget_get_button (BS_BUTTON_WIDGET (child)));
+  set_selected_item (self, button);
 }
 
 static void
