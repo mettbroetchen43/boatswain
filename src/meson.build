@@ -8,6 +8,7 @@ boatswain_sources = [
   'bs-button.c',
   'bs-button-editor.c',
   'bs-button-grid-region.c',
+  'bs-button-grid-widget.c',
   'bs-button-widget.c',
   'bs-desktop-controller.c',
   'bs-device-manager.c',

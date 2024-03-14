@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="BsButtonGridWidget" parent="GtkWidget">
+
+    <child>
+      <object class="GtkFlowBox" id="flowbox">
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="homogeneous">True</property>
+        <property name="activate-on-single-click">False</property>
+        <property name="selection-mode">single</property>
+        <property name="column-spacing">18</property>
+        <property name="row-spacing">18</property>
+        <signal name="child-activated" handler="on_flowbox_child_activated_cb" object="BsButtonGridWidget" swapped="no" />
+        <signal name="selected-children-changed" handler="on_flowbox_selected_children_changed_cb" object="BsButtonGridWidget" swapped="no" />
+      </object>
+    </child>
+
+  </template>
+</interface>

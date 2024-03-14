@@ -3,6 +3,7 @@
 
   <gresource prefix="/com/feaneron/Boatswain">
     <file>bs-button-editor.ui</file>
+    <file>bs-button-grid-widget.ui</file>
     <file>bs-button-widget.ui</file>
     <file>bs-dial-widget.ui</file>
     <file>bs-profile-row.ui</file>
