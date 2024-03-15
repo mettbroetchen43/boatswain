@@ -1448,12 +1448,12 @@ out:
       g_autoptr (BsButtonGridRegion) button_grid = NULL;
       g_autoptr (BsIconRenderer) renderer = NULL;
 
-      button_grid = bs_button_grid_region_new_full ("main-button-grid",
-                                                    self,
-                                                    &self->model_info->button_layout.icon_layout,
-                                                    self->model_info->button_layout.n_buttons,
-                                                    self->model_info->button_layout.columns,
-                                                    0, row++, 1, 1);
+      button_grid = bs_button_grid_region_new ("main-button-grid",
+                                               self,
+                                               &self->model_info->button_layout.icon_layout,
+                                               self->model_info->button_layout.n_buttons,
+                                               self->model_info->button_layout.columns,
+                                               0, row++, 1, 1);
 
       g_list_store_append (self->regions, button_grid);
 
@@ -1478,11 +1478,11 @@ out:
     {
       g_autoptr (BsDialGridRegion) dial_grid = NULL;
 
-      dial_grid = bs_dial_grid_region_new_full ("dial-grid",
-                                                self,
-                                                self->model_info->dial_layout.n_dials,
-                                                self->model_info->dial_layout.columns,
-                                                0, row++, 1, 1);
+      dial_grid = bs_dial_grid_region_new ("dial-grid",
+                                           self,
+                                           self->model_info->dial_layout.n_dials,
+                                           self->model_info->dial_layout.columns,
+                                           0, row++, 1, 1);
 
       g_list_store_append (self->regions, dial_grid);
     }

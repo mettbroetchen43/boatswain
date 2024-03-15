@@ -35,17 +35,11 @@ BsButtonGridRegion * bs_button_grid_region_new (const char         *id,
                                                 BsStreamDeck       *stream_deck,
                                                 const BsIconLayout *icon_layout,
                                                 unsigned int        n_buttons,
-                                                unsigned int        grid_columns);
-
-BsButtonGridRegion * bs_button_grid_region_new_full (const char         *id,
-                                                     BsStreamDeck       *stream_deck,
-                                                     const BsIconLayout *icon_layout,
-                                                     unsigned int        n_buttons,
-                                                     unsigned int        grid_columns,
-                                                     unsigned int        column,
-                                                     unsigned int        row,
-                                                     unsigned int        column_span,
-                                                     unsigned int        row_span);
+                                                unsigned int        grid_columns,
+                                                unsigned int        column,
+                                                unsigned int        row,
+                                                unsigned int        column_span,
+                                                unsigned int        row_span);
 
 GListModel * bs_button_grid_region_get_buttons (BsButtonGridRegion *self);
 

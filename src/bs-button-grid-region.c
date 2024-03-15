@@ -131,26 +131,11 @@ bs_button_grid_region_new (const char         *id,
                            BsStreamDeck       *stream_deck,
                            const BsIconLayout *icon_layout,
                            unsigned int        n_buttons,
-                           unsigned int        grid_columns)
-{
-  return bs_button_grid_region_new_full (id,
-                                         stream_deck,
-                                         icon_layout,
-                                         n_buttons,
-                                         grid_columns,
-                                         0, 0, 1, 1);
-}
-
-BsButtonGridRegion *
-bs_button_grid_region_new_full (const char         *id,
-                                BsStreamDeck       *stream_deck,
-                                const BsIconLayout *icon_layout,
-                                unsigned int        n_buttons,
-                                unsigned int        grid_columns,
-                                unsigned int        column,
-                                unsigned int        row,
-                                unsigned int        column_span,
-                                unsigned int        row_span)
+                           unsigned int        grid_columns,
+                           unsigned int        column,
+                           unsigned int        row,
+                           unsigned int        column_span,
+                           unsigned int        row_span)
 {
   g_autoptr (BsButtonGridRegion) self = NULL;
 

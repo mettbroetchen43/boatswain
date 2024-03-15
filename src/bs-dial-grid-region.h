@@ -34,16 +34,11 @@ G_DECLARE_FINAL_TYPE (BsDialGridRegion, bs_dial_grid_region, BS, DIAL_GRID_REGIO
 BsDialGridRegion * bs_dial_grid_region_new (const char   *id,
                                             BsStreamDeck *stream_deck,
                                             unsigned int  n_dials,
-                                            unsigned int  grid_columns);
-
-BsDialGridRegion * bs_dial_grid_region_new_full (const char   *id,
-                                                 BsStreamDeck *stream_deck,
-                                                 unsigned int  n_dials,
-                                                 unsigned int  grid_columns,
-                                                 unsigned int  column,
-                                                 unsigned int  row,
-                                                 unsigned int  column_span,
-                                                 unsigned int  row_span);
+                                            unsigned int  grid_columns,
+                                            unsigned int  column,
+                                            unsigned int  row,
+                                            unsigned int  column_span,
+                                            unsigned int  row_span);
 
 GListModel * bs_dial_grid_region_get_dials (BsDialGridRegion *self);
 
