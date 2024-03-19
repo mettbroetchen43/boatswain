@@ -31,7 +31,7 @@ BsTouchscreen * bs_touchscreen_new (BsStreamDeck *stream_deck,
 
 BsStreamDeck * bs_touchscreen_get_stream_deck (BsTouchscreen *self);
 
-uint32_t bs_dial_get_width (BsTouchscreen *self);
-uint32_t bs_dial_get_height (BsTouchscreen *self);
+uint32_t bs_touchscreen_get_width (BsTouchscreen *self);
+uint32_t bs_touchscreen_get_height (BsTouchscreen *self);
 
 G_END_DECLS

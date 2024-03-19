@@ -139,7 +139,7 @@ bs_touchscreen_get_stream_deck (BsTouchscreen *self)
 }
 
 uint32_t
-bs_dial_get_width (BsTouchscreen *self)
+bs_touchscreen_get_width (BsTouchscreen *self)
 {
   g_assert (BS_IS_TOUCHSCREEN (self));
 
@@ -147,7 +147,7 @@ bs_dial_get_width (BsTouchscreen *self)
 }
 
 uint32_t
-bs_dial_get_height (BsTouchscreen *self)
+bs_touchscreen_get_height (BsTouchscreen *self)
 {
   g_assert (BS_IS_TOUCHSCREEN (self));
 
