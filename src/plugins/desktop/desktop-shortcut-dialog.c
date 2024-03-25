@@ -195,7 +195,6 @@ review_shortcut (DesktopShortcutDialog *self)
 {
   g_autofree char *accelerator = NULL;
 
-  g_assert (self->new_modifiers != GDK_NO_MODIFIER_MASK);
   g_assert (self->new_keysym != 0);
 
   gtk_stack_set_visible_child_name (self->stack, "review");
@@ -247,7 +246,7 @@ on_key_pressed_cb (GtkEventControllerKey *key_controller,
   /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
   self->new_modifiers &= ~GDK_LOCK_MASK;
 
-  if (self->new_modifiers != GDK_NO_MODIFIER_MASK && self->new_keysym != 0)
+  if (!gdk_key_event_is_modifier (event) && self->new_keysym != 0)
     review_shortcut (self);
 
   return GDK_EVENT_STOP;
@@ -260,7 +259,6 @@ on_set_button_clicked_cb (GtkButton             *button,
   g_autoptr (ShortcutResult) shortcut_result = NULL;
   g_autoptr (GTask) task = NULL;
 
-  g_assert (self->new_modifiers != GDK_NO_MODIFIER_MASK);
   g_assert (self->new_keysym != 0);
 
   shortcut_result = g_new0 (ShortcutResult, 1);
