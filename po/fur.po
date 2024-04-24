@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-12-26 19:55+0000\n"
-"PO-Revision-Date: 2024-01-12 14:18+0100\n"
+"POT-Creation-Date: 2024-03-14 13:01+0000\n"
+"PO-Revision-Date: 2024-04-24 17:20+0200\n"
 "Last-Translator: Fabio T. <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -100,6 +100,44 @@ msgstr ""
 "Al è necessari che Boatswain al ziri in sotfont cussì di rilevâ e eseguî lis "
 "azions dal Stream Deck."
 
+#: src/bs-button-editor.c:388
+msgid "All supported formats"
+msgstr "Ducj i formâts supuartâts"
+
+#: src/bs-button-editor.c:397
+msgid "Select icon"
+msgstr "Selezione icone"
+
+#: src/bs-button-editor.c:398
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Vierç"
+
+#: src/bs-button-editor.ui:14
+msgid "Button Properties"
+msgstr "Proprietâts dal boton"
+
+#: src/bs-button-editor.ui:190
+msgid "Name"
+msgstr "Non"
+
+#: src/bs-button-editor.ui:197
+msgid "Background Color"
+msgstr "Colôr di fonts"
+
+#: src/bs-button-editor.ui:233
+msgid "Select action"
+msgstr "Selezione azion"
+
+#: src/bs-button-editor.ui:254
+msgid "Remove Action"
+msgstr "Gjave azion"
+
+#: src/bs-button-editor.ui:277
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Azions"
+
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
 msgstr "Profîl cence non"
@@ -120,21 +158,21 @@ msgstr "Sposte in jù"
 msgid "Delete"
 msgstr "Elimine"
 
-#: src/bs-stream-deck.c:278
+#: src/bs-stream-deck.c:326
 msgid "Default"
 msgstr "Predefinît"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
+#: src/bs-stream-deck.c:996 src/bs-stream-deck.c:1021
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/bs-stream-deck.c:1046 src/bs-stream-deck.c:1071
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -143,73 +181,43 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
+#: src/bs-stream-deck.c:1096 src/bs-stream-deck.c:1121
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1004
+#: src/bs-stream-deck.c:1146
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1030
+#: src/bs-stream-deck.c:1171
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
-#: src/bs-stream-deck.c:1099
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1196
+#| msgid "Stream Deck"
+msgid "Stream Deck +"
+msgstr "Stream Deck +"
+
+#: src/bs-stream-deck.c:1275
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1122
+#: src/bs-stream-deck.c:1297
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:389
-msgid "All supported formats"
-msgstr "Ducj i formâts supuartâts"
-
-#: src/bs-stream-deck-button-editor.c:398
-msgid "Select icon"
-msgstr "Selezione icone"
-
-#: src/bs-stream-deck-button-editor.c:399
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Vierç"
-
-#: src/bs-stream-deck-button-editor.ui:27
+#: src/bs-stream-deck-editor.ui:61
 msgid "Select a button"
 msgstr "Selezione un boton"
-
-#: src/bs-stream-deck-button-editor.ui:45
-msgid "Button Properties"
-msgstr "Proprietâts dal boton"
-
-#: src/bs-stream-deck-button-editor.ui:221
-msgid "Name"
-msgstr "Non"
-
-#: src/bs-stream-deck-button-editor.ui:228
-msgid "Background Color"
-msgstr "Colôr di fonts"
-
-#: src/bs-stream-deck-button-editor.ui:264
-msgid "Select action"
-msgstr "Selezione azion"
-
-#: src/bs-stream-deck-button-editor.ui:285
-msgid "Remove Action"
-msgstr "Gjave azion"
-
-#: src/bs-stream-deck-button-editor.ui:308
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Azions"
 
 #: src/bs-window.ui:113
 msgid "New profile…"
@@ -321,7 +329,7 @@ msgid "Profile"
 msgstr "Profîl"
 
 #: src/plugins/desktop/desktop-action-factory.c:41
-#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:257
 msgid "Keyboard Shortcut"
 msgstr "Scurtis di tastiere"
 
@@ -441,7 +449,6 @@ msgid "Select payload file"
 msgstr "Selezione file di dâts utii"
 
 #: src/plugins/network/network-http-action-prefs.ui:14
-#| msgid "URL"
 msgid "URI"
 msgstr "URI"
 
