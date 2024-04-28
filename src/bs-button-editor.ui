@@ -226,19 +226,16 @@
 
                     <child>
                       <object class="AdwPreferencesGroup">
-                        <property name="visible" bind-source="remove_action_button" bind-property="visible" bind-flags="default|sync-create|invert-boolean" />
+                        <property name="visible" bind-source="remove_group" bind-property="visible" bind-flags="default|sync-create|invert-boolean" />
 
                         <child>
-                          <object class="AdwActionRow">
-                            <property name="title" translatable="yes">Select action</property>
-                            <property name="activatable">True</property>
-                            <signal name="activated" handler="on_select_action_row_activated_cb" object="BsButtonEditor" swapped="no" />
-                            <child>
-                              <object class="GtkImage">
-                                <property name="valign">center</property>
-                                <property name="icon-name">go-next-symbolic</property>
-                              </object>
-                            </child>
+                          <object class="AdwButtonRow">
+                            <property name="title" translatable="yes">Select Action</property>
+                            <property name="end-icon-name">go-next-symbolic</property>
+                            <signal name="activated" handler="on_select_row_activated_cb" object="BsButtonEditor" swapped="no" />
+                            <style>
+                              <class name="suggested-action"/>
+                            </style>
                           </object>
                         </child>
 
@@ -246,16 +243,14 @@
                     </child>
 
                     <child>
-                      <object class="AdwPreferencesGroup">
+                      <object class="AdwPreferencesGroup" id="remove_group">
 
                         <child>
-                          <object class="GtkButton" id="remove_action_button">
-                            <property name="visible">False</property>
-                            <property name="label" translatable="yes">Remove Action</property>
-                            <signal name="clicked" handler="on_remove_action_button_clicked_cb" object="BsButtonEditor" swapped="no" />
+                          <object class="AdwButtonRow">
+                            <property name="title" translatable="yes">Remove Action</property>
+                            <signal name="activated" handler="on_remove_row_activated_cb" object="BsButtonEditor" swapped="no" />
                             <style>
-                              <class name="destructive-action" />
-                              <class name="remove-button" />
+                              <class name="destructive-action"/>
                             </style>
                           </object>
                         </child>

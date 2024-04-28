@@ -32,7 +32,7 @@ boatswain_sources = [
 ]
 
 boatswain_deps = [
-  dependency('libadwaita-1', version: '>= 1.2'),
+  dependency('libadwaita-1', version: '>= 1.6.alpha'),
   dependency('libpeas-2'),
   dependency('libportal-gtk4'),
   dependency('gusb', version: '>= 0.3.0'),

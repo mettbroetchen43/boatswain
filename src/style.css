@@ -43,11 +43,6 @@ streamdeckbuttoneditor .cutout {
   padding: 2px;
 }
 
-streamdeckbuttoneditor button.remove-button {
-  min-height: 44px;
-  border-radius: 12px;
-}
-
 popover.custom-icon-popover > contents {
   padding: 0;
 }

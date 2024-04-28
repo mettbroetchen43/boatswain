@@ -47,7 +47,7 @@ struct _BsButtonEditor
   GtkImage *icon_image;
   GtkFilterListModel *icons_filter_list_model;
   AdwNavigationView *navigation_view;
-  GtkWidget *remove_action_button;
+  GtkWidget *remove_group;
   GtkWidget *remove_custom_icon_button;
 
   BsButton *button;
@@ -174,7 +174,7 @@ update_action_preferences_group (BsButtonEditor *self)
   action = self->button ? bs_button_get_action (self->button) : NULL;
   action_preferences = action ? bs_action_get_preferences (action) : NULL;
 
-  gtk_widget_set_visible (self->remove_action_button,
+  gtk_widget_set_visible (self->remove_group,
                           action != NULL && !BS_IS_EMPTY_ACTION (action));
 
   if (self->action_preferences != action_preferences)
@@ -461,8 +461,8 @@ on_icons_gridview_activate_cb (GtkGridView    *grid_view,
 }
 
 static void
-on_remove_action_button_clicked_cb (GtkButton      *button,
-                                    BsButtonEditor *self)
+on_remove_row_activated_cb (GtkButton      *button,
+                            BsButtonEditor *self)
 {
   g_autoptr (BsAction) empty_action = NULL;
 
@@ -480,8 +480,8 @@ on_remove_custom_icon_button_clicked_cb (GtkButton      *button,
 }
 
 static void
-on_select_action_row_activated_cb (GtkListBoxRow  *row,
-                                   BsButtonEditor *self)
+on_select_row_activated_cb (GtkListBoxRow  *row,
+                            BsButtonEditor *self)
 {
   /* Collapse all expander rows */
   for (GtkWidget *child = gtk_widget_get_first_child (GTK_WIDGET (self->actions_listbox));
@@ -611,16 +611,16 @@ bs_button_editor_class_init (BsButtonEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, icon_image);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, icons_filter_list_model);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, navigation_view);
-  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, remove_action_button);
+  gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, remove_group);
   gtk_widget_class_bind_template_child (widget_class, BsButtonEditor, remove_custom_icon_button);
 
   gtk_widget_class_bind_template_callback (widget_class, on_background_color_dialog_button_rgba_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_custom_icon_text_row_text_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_icons_gridview_activate_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_remove_action_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_remove_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_remove_custom_icon_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_select_action_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_select_row_activated_cb);
 
   gtk_widget_class_set_css_name (widget_class, "streamdeckbuttoneditor");
 }
