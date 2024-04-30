@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2024-03-14 13:01+0000\n"
-"PO-Revision-Date: 2024-03-17 09:40+0100\n"
+"POT-Creation-Date: 2024-04-30 19:27+0000\n"
+"PO-Revision-Date: 2024-05-01 00:08+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups."
 "com>\n"
@@ -132,14 +132,14 @@ msgid "Background Color"
 msgstr "Barva ozadja"
 
 #: src/bs-button-editor.ui:233
-msgid "Select action"
+msgid "Select Action"
 msgstr "Izbor dejanja"
 
-#: src/bs-button-editor.ui:254
+#: src/bs-button-editor.ui:250
 msgid "Remove Action"
 msgstr "Odstrani dejanje"
 
-#: src/bs-button-editor.ui:277
+#: src/bs-button-editor.ui:272
 #: src/plugins/default/default-multi-action-editor.ui:67
 msgid "Actions"
 msgstr "Dejanja"
