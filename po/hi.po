@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2024-03-25 18:16+0000\n"
-"PO-Revision-Date: 2024-03-30 23:16+0530\n"
+"POT-Creation-Date: 2024-04-30 19:27+0000\n"
+"PO-Revision-Date: 2024-05-01 15:09+0530\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi\n"
 "Language: hi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 46.0\n"
+"X-Generator: Gtranslator 46.1\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -43,11 +43,11 @@ msgstr "Boatswain के साथ आप यह कर सकेंगे:"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
-msgstr "अपने कार्यों को पृष्ठों और प्रोफाइलों में व्यवस्थित करें"
+msgstr "अपनी कार्रवाइयों को पृष्ठों और प्रोफाइलों में व्यवस्थित करें"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:18
 msgid "Set custom icons to actions"
-msgstr "क्रियाओं के लिए कस्टम आइकन सेट करें"
+msgstr "कार्रवाइयों के लिए तदनुकूल चिह्न निर्धारित करें"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:19
 msgid "Control your music player"
@@ -55,13 +55,13 @@ msgstr "अपने म्यूजिक प्लेयर को निय�
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:20
 msgid "Play sound effects during your streams"
-msgstr "अपनी स्ट्रीम के दौरान ध्वनि प्रभाव चलाएँ"
+msgstr "अपनी स्ट्रीम के दौरान ध्वनि प्रभाव चलाएं"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
-"Stream Deck का उपयोग करके OBS Studio को नियंत्रित करें (obs-websocket एक्सटेंशन की "
+"Stream Deck का उपयोग करके OBS Studio को नियंत्रित करें (obs-websocket विस्तार की "
 "आवश्यकता है)"
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:22
@@ -74,7 +74,7 @@ msgstr "अपने गेमिंग स्कोर पर नज़र र�
 
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:24
 msgid "Open files and launch applications"
-msgstr "फाइलें खोलें और एप्लिकेशन लॉन्च करें"
+msgstr "फाइलें खोलें और अनुप्रयोग लॉन्च करें"
 
 #: data/com.feaneron.Boatswain.gschema.xml:7
 #: data/com.feaneron.Boatswain.gschema.xml:8
@@ -89,16 +89,16 @@ msgstr "डिबग संदेशों को सक्षम करें"
 #, c-format
 msgid "Connected to %d device"
 msgid_plural "Connected to %d devices"
-msgstr[0] "%d उपकरण से कनेक्ट किया गया"
-msgstr[1] "%d उपकरणों से कनेक्ट किया गया"
+msgstr[0] "%d उपकरण से जुड़ा गया"
+msgstr[1] "%d उपकरणों से जुड़ा गया"
 
 #: src/bs-application.c:169
 msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
 msgstr ""
-"Stream Deck क्रियाओं का पता लगाने और उन्हें निष्पादित करने के लिए Boatswain को पृष्ठभूमि "
-"में चलने की आवश्यकता है।"
+"Stream Deck कार्रवाइयों का पता लगाने और उन्हें निष्पादित करने के लिए Boatswain को "
+"पृष्ठभूमि में चलने की आवश्यकता है।"
 
 #: src/bs-button-editor.c:388
 msgid "All supported formats"
@@ -106,12 +106,12 @@ msgstr "सभी समर्थित प्रारूप"
 
 #: src/bs-button-editor.c:397
 msgid "Select icon"
-msgstr "आइकन चुनें"
+msgstr "चिह्न चुनें"
 
 #: src/bs-button-editor.c:398
 #: src/plugins/network/network-http-action-prefs.c:147
 msgid "Open"
-msgstr "खोले"
+msgstr "खोलें"
 
 #: src/bs-button-editor.ui:14
 msgid "Button Properties"
@@ -126,14 +126,14 @@ msgid "Background Color"
 msgstr "पृष्ठभूमि रंग"
 
 #: src/bs-button-editor.ui:233
-msgid "Select action"
+msgid "Select Action"
 msgstr "कार्रवाई चुनें"
 
-#: src/bs-button-editor.ui:254
+#: src/bs-button-editor.ui:250
 msgid "Remove Action"
-msgstr "कार्रवाई हटाएँ"
+msgstr "कार्रवाई हटाएं"
 
-#: src/bs-button-editor.ui:277
+#: src/bs-button-editor.ui:272
 #: src/plugins/default/default-multi-action-editor.ui:67
 msgid "Actions"
 msgstr "कार्रवाई"
@@ -148,19 +148,19 @@ msgstr "नाम बदलें"
 
 #: src/bs-profile-row.ui:14
 msgid "Move up"
-msgstr "ऊपर ले जाएँ"
+msgstr "ऊपर ले जाएं"
 
 #: src/bs-profile-row.ui:18
 msgid "Move down"
-msgstr "नीचे ले जाएँ"
+msgstr "नीचे ले जाएं"
 
 #: src/bs-profile-row.ui:24
 msgid "Delete"
-msgstr "हटाएँ"
+msgstr "मिटाएं"
 
 #: src/bs-stream-deck.c:326
 msgid "Default"
-msgstr "डिफ़ॉल्ट"
+msgstr "तयशुदा"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
@@ -257,12 +257,12 @@ msgstr "रिपॉजिटरी"
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "जनरल"
+msgstr "सामान्य"
 
 #: src/gtk/help-overlay.ui:14
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "शॉर्टकट दिखाएँ"
+msgstr "शॉर्टकट दिखाएं"
 
 #: src/gtk/help-overlay.ui:20
 msgctxt "shortcut window"
@@ -279,7 +279,7 @@ msgstr "प्रोफाइल बदलें"
 
 #: src/plugins/default/default-action-factory.c:60
 msgid "Multiple Actions"
-msgstr "एकाधिक क्रियाएँ"
+msgstr "एकाधिक कार्रवाइयां"
 
 #. Translators: "Constant" as in "Constant value of brightness"
 #: src/plugins/default/default-brightness-action.c:141
@@ -288,11 +288,11 @@ msgstr "स्थिरांक"
 
 #: src/plugins/default/default-brightness-action.c:142
 msgid "Increase"
-msgstr "बढ़ाएँ"
+msgstr "बढ़ाएं"
 
 #: src/plugins/default/default-brightness-action.c:143
 msgid "Decrease"
-msgstr "घटाएँ"
+msgstr "घटाएं"
 
 #: src/plugins/default/default-brightness-action.c:146
 msgid "Mode"
@@ -342,11 +342,11 @@ msgstr "शॉर्टकट निर्धारित करें"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:66
 msgid "Press Esc to cancel"
-msgstr "रद्द करने के लिए Esc दबाएँ"
+msgstr "रद्द करने के लिए Esc दबाएं"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:100
 msgid "_Cancel"
-msgstr "रद्द (_C)"
+msgstr "रद्द करें (_C)"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:109
 msgid "_Set"
@@ -362,7 +362,7 @@ msgstr "स्कोर"
 
 #: src/plugins/gaming/gaming.js:38
 msgid "Keep track of your score. Reset with a long press."
-msgstr "अपने स्कोर पर नज़र रखें. लंबे प्रेस के साथ रीसेट करें।"
+msgstr "अपने स्कोर पर नज़र रखें. लंबे दबाव के साथ रीसेट करें।"
 
 #: src/plugins/gaming/gaming.plugin.desktop.in:3
 msgid "Gaming"
@@ -379,7 +379,7 @@ msgstr "स्कोर पुनर्स्थापित करें"
 
 #: src/plugins/gaming/score.js:341
 msgid "Text Color"
-msgstr "टेक्स्ट का रंग"
+msgstr "पाठ का रंग"
 
 #: src/plugins/gaming/score.js:354
 msgid "Save to File"
@@ -388,7 +388,7 @@ msgstr "फाइल में सहेजें"
 #: src/plugins/gaming/score.js:355
 msgid ""
 "Save score to a text file. Other apps such as OBS Studio may read from it."
-msgstr "स्कोर को टेक्स्ट फाइल में सहेजें. OBS Studio जैसे अन्य ऐप्स इससे पढ़ सकते हैं।"
+msgstr "स्कोर को पाठ फाइल में सहेजें. OBS Studio जैसे अन्य ऐप्स इससे पढ़ सकते हैं।"
 
 #: src/plugins/gaming/score.js:364
 #: src/plugins/launcher/launcher-open-file-action.c:209
@@ -399,11 +399,11 @@ msgstr "फाइल"
 
 #: src/plugins/gaming/score.js:383
 msgid "Text File (.txt)"
-msgstr "टेक्स्ट फाइल (.txt)"
+msgstr "पाठ फाइल (.txt)"
 
 #: src/plugins/launcher/launcher-action-factory.c:41
 msgid "Launch Application"
-msgstr "एप्लिकेशन लांच करें"
+msgstr "अनुप्रयोग लांच करें"
 
 #: src/plugins/launcher/launcher-action-factory.c:47
 msgid "Open File"
@@ -415,7 +415,7 @@ msgstr "URL खोलें"
 
 #: src/plugins/launcher/launcher-launch-preferences.ui:8
 msgid "Choose Application"
-msgstr "एप्लिकेशन चुनें"
+msgstr "अनुप्रयोग चुनें"
 
 #: src/plugins/launcher/launcher-open-file-action.c:68
 msgid "No file selected"
@@ -493,7 +493,7 @@ msgstr "मूक टॉगल करें"
 
 #: src/plugins/obs-studio/obs-action-factory.c:78
 msgid "Show / Hide Source"
-msgstr "स्रोत दिखाएँ / छिपाएँ"
+msgstr "स्रोत दिखाएं / छिपाएं"
 
 #: src/plugins/obs-studio/obs-connection.c:800
 msgid "Invalid password"
@@ -541,7 +541,7 @@ msgstr "छुपाएं"
 
 #: src/plugins/obs-studio/obs-toggle-source-action.c:132
 msgid "Show"
-msgstr "दिखाएँ"
+msgstr "दिखाएं"
 
 #: src/plugins/obs-studio/obs-toggle-source-action.c:479
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:22
@@ -582,7 +582,7 @@ msgstr "विराम"
 
 #: src/plugins/soundboard/soundboard-mpris-action.c:199
 msgid "Play"
-msgstr "चलाएँ"
+msgstr "चलाएं"
 
 #: src/plugins/soundboard/soundboard-mpris-action.c:200
 msgid "Previous"
@@ -594,7 +594,7 @@ msgstr "रोकें"
 
 #: src/plugins/soundboard/soundboard-mpris-action.c:202
 msgid "Play / Pause"
-msgstr "चलाएँ / रोकें"
+msgstr "चलाएं / रोकें"
 
 #: src/plugins/soundboard/soundboard-mpris-action.c:205
 msgid "Playback Action"
@@ -614,7 +614,7 @@ msgstr "चलायें / रोकें"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:28
 msgid "Play / Overlap"
-msgstr "प्ले / ओवरलैप"
+msgstr "प्ले / अतिव्याप"
 
 #: src/plugins/soundboard/soundboard-play-action-prefs.ui:29
 msgid "Play / Restart"
