@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2024-02-23 23:07+0000\n"
-"PO-Revision-Date: 2024-02-24 10:25+0300\n"
+"POT-Creation-Date: 2024-04-30 19:27+0000\n"
+"PO-Revision-Date: 2024-05-02 16:05+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -101,6 +101,44 @@ msgstr ""
 "Boatswain должен работать в фоновом режиме для обнаружения и выполнения "
 "действий Stream Deck."
 
+#: src/bs-button-editor.c:388
+msgid "All supported formats"
+msgstr "Все поддерживаемые форматы"
+
+#: src/bs-button-editor.c:397
+msgid "Select icon"
+msgstr "Выбрать значок"
+
+#: src/bs-button-editor.c:398
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Открыть"
+
+#: src/bs-button-editor.ui:14
+msgid "Button Properties"
+msgstr "Свойства кнопки"
+
+#: src/bs-button-editor.ui:190
+msgid "Name"
+msgstr "Имя"
+
+#: src/bs-button-editor.ui:197
+msgid "Background Color"
+msgstr "Цвет фона"
+
+#: src/bs-button-editor.ui:233
+msgid "Select Action"
+msgstr "Выбрать действие"
+
+#: src/bs-button-editor.ui:250
+msgid "Remove Action"
+msgstr "Удалить действие"
+
+#: src/bs-button-editor.ui:272
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Действия"
+
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
 msgstr "Безымянный профиль"
@@ -121,21 +159,21 @@ msgstr "Переместить вниз"
 msgid "Delete"
 msgstr "Удалить"
 
-#: src/bs-stream-deck.c:276
+#: src/bs-stream-deck.c:326
 msgid "Default"
 msgstr "По умолчанию"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:956 src/bs-stream-deck.c:982
+#: src/bs-stream-deck.c:996 src/bs-stream-deck.c:1021
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1008 src/bs-stream-deck.c:1034
+#: src/bs-stream-deck.c:1046 src/bs-stream-deck.c:1071
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -144,80 +182,42 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1060 src/bs-stream-deck.c:1086
+#: src/bs-stream-deck.c:1096 src/bs-stream-deck.c:1121
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1112
+#: src/bs-stream-deck.c:1146
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1138
+#: src/bs-stream-deck.c:1171
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1164
+#: src/bs-stream-deck.c:1196
 msgid "Stream Deck +"
 msgstr "Stream Deck +"
 
-#: src/bs-stream-deck.c:1233
+#: src/bs-stream-deck.c:1275
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1256
+#: src/bs-stream-deck.c:1297
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:389
-msgid "All supported formats"
-msgstr "Все поддерживаемые форматы"
-
-#: src/bs-stream-deck-button-editor.c:398
-msgid "Select icon"
-msgstr "Выбрать значок"
-
-#: src/bs-stream-deck-button-editor.c:399
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Открыть"
-
-#: src/bs-stream-deck-button-editor.ui:27
+#: src/bs-stream-deck-editor.ui:61
 msgid "Select a button"
 msgstr "Выбрать кнопку"
-
-#: src/bs-stream-deck-button-editor.ui:45
-msgid "Button Properties"
-msgstr "Свойства кнопки"
-
-#: src/bs-stream-deck-button-editor.ui:221
-msgid "Name"
-msgstr "Имя"
-
-#: src/bs-stream-deck-button-editor.ui:228
-msgid "Background Color"
-msgstr "Цвет фона"
-
-#: src/bs-stream-deck-button-editor.ui:264
-msgid "Select action"
-msgstr "Выбрать действие"
-
-#: src/bs-stream-deck-button-editor.ui:285
-msgid "Remove Action"
-msgstr "Удалить действие"
-
-#: src/bs-stream-deck-button-editor.ui:308
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Действия"
 
 #: src/bs-window.ui:113
 msgid "New profile…"
