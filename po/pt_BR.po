@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2024-02-23 23:07+0000\n"
-"PO-Revision-Date: 2024-03-08 13:09-0300\n"
+"POT-Creation-Date: 2024-04-30 19:27+0000\n"
+"PO-Revision-Date: 2024-05-15 15:59-0300\n"
 "Last-Translator: Leônidas Araújo <leorusvellt@hotmail.com>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
 "Language: pt_BR\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -104,6 +104,44 @@ msgstr ""
 "Boatswain precisa ser executado em segundo plano para detectar e executar "
 "ações do Stream Deck."
 
+#: src/bs-button-editor.c:388
+msgid "All supported formats"
+msgstr "Todos os formatos suportados"
+
+#: src/bs-button-editor.c:397
+msgid "Select icon"
+msgstr "Selecionar ícone"
+
+#: src/bs-button-editor.c:398
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Abrir"
+
+#: src/bs-button-editor.ui:14
+msgid "Button Properties"
+msgstr "Propriedades do botão"
+
+#: src/bs-button-editor.ui:190
+msgid "Name"
+msgstr "Nome"
+
+#: src/bs-button-editor.ui:197
+msgid "Background Color"
+msgstr "Cor de fundo"
+
+#: src/bs-button-editor.ui:233
+msgid "Select Action"
+msgstr "Selecionar ação"
+
+#: src/bs-button-editor.ui:250
+msgid "Remove Action"
+msgstr "Remover ação"
+
+#: src/bs-button-editor.ui:272
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Ações"
+
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
 msgstr "Perfil sem nome"
@@ -124,21 +162,21 @@ msgstr "Mover para baixo"
 msgid "Delete"
 msgstr "Excluir"
 
-#: src/bs-stream-deck.c:276
+#: src/bs-stream-deck.c:326
 msgid "Default"
 msgstr "Padrão"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:956 src/bs-stream-deck.c:982
+#: src/bs-stream-deck.c:996 src/bs-stream-deck.c:1021
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1008 src/bs-stream-deck.c:1034
+#: src/bs-stream-deck.c:1046 src/bs-stream-deck.c:1071
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -147,81 +185,42 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1060 src/bs-stream-deck.c:1086
+#: src/bs-stream-deck.c:1096 src/bs-stream-deck.c:1121
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1112
+#: src/bs-stream-deck.c:1146
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1138
+#: src/bs-stream-deck.c:1171
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1164
-#| msgid "Stream Deck"
+#: src/bs-stream-deck.c:1196
 msgid "Stream Deck +"
 msgstr "Stream Deck +"
 
-#: src/bs-stream-deck.c:1233
+#: src/bs-stream-deck.c:1275
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1256
+#: src/bs-stream-deck.c:1297
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:389
-msgid "All supported formats"
-msgstr "Todos os formatos suportados"
-
-#: src/bs-stream-deck-button-editor.c:398
-msgid "Select icon"
-msgstr "Selecionar ícone"
-
-#: src/bs-stream-deck-button-editor.c:399
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Abrir"
-
-#: src/bs-stream-deck-button-editor.ui:27
+#: src/bs-stream-deck-editor.ui:61
 msgid "Select a button"
 msgstr "Selecionar um botão"
-
-#: src/bs-stream-deck-button-editor.ui:45
-msgid "Button Properties"
-msgstr "Propriedades do botão"
-
-#: src/bs-stream-deck-button-editor.ui:221
-msgid "Name"
-msgstr "Nome"
-
-#: src/bs-stream-deck-button-editor.ui:228
-msgid "Background Color"
-msgstr "Cor de fundo"
-
-#: src/bs-stream-deck-button-editor.ui:264
-msgid "Select action"
-msgstr "Selecionar ação"
-
-#: src/bs-stream-deck-button-editor.ui:285
-msgid "Remove Action"
-msgstr "Remover ação"
-
-#: src/bs-stream-deck-button-editor.ui:308
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Ações"
 
 #: src/bs-window.ui:113
 msgid "New profile…"
