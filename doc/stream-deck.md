@@ -314,7 +314,7 @@ be changed visually (as it don't have a display)
 
 Stream Deck Plus shares the same USB protocol as of Original (v2), XL, and MK.2,
 with the exception of reading buttons states, and with the addition of sending
-and image to the touchscreen.
+an image to the touchscreen.
 
 ### Read Buttons
 
