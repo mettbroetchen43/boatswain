@@ -340,12 +340,12 @@ an image to the touchscreen.
        * `array[4]` is the dial event type
          * **0x00**: dial press or release
            * `array[5:8]` are the dial buttons pressed state (0: released, 1: pressed)
-           * Button order: left to right
+           * Dial order: left to right
          * **0x01**: dial rotation
            * `array[5:8]` are the relative dial rotations
              * If value < `0x80`, this is a clockwise rotation by the same amount
              * If value >= `0x80`, this is a counter-clockwise rotation by the opposite amount (i.e. `0x100 - value`)
-           * Button order: left to right
+           * Dial order: left to right
  * **Command**: (none)
 
 ### Upload Touchscreen Image
