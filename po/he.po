@@ -2,22 +2,23 @@
 # Copyright (C) 2023 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
 # Yaron Shahrabani <sh.yaron@gmail.com>, 2023.
+# Yosef Or Boczko <yoseforb@gmail.com>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2024-02-23 23:07+0000\n"
-"PO-Revision-Date: 2024-02-29 09:27+0200\n"
-"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <he@li.org>\n"
+"POT-Creation-Date: 2024-04-30 19:27+0000\n"
+"PO-Revision-Date: 2024-06-28 10:38+0300\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
+"Language-Team: Hebrew\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
-"2 : 3);\n"
-"X-Generator: Poedit 3.4.2\n"
+"2 : 3)\n"
+"X-Generator: Gtranslator 46.1\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.appdata.xml.in.in:6
@@ -99,6 +100,44 @@ msgid ""
 "actions."
 msgstr "יש להריץ את Boatswain ברקע כדי לזהות ולהפעיל את פעולות ה־Stream Deck."
 
+#: src/bs-button-editor.c:388
+msgid "All supported formats"
+msgstr "כל התסדירים הנתמכים"
+
+#: src/bs-button-editor.c:397
+msgid "Select icon"
+msgstr "בחירת סמל"
+
+#: src/bs-button-editor.c:398
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "פתיחה"
+
+#: src/bs-button-editor.ui:14
+msgid "Button Properties"
+msgstr "מאפייני כפתור"
+
+#: src/bs-button-editor.ui:190
+msgid "Name"
+msgstr "שם"
+
+#: src/bs-button-editor.ui:197
+msgid "Background Color"
+msgstr "צבע רקע"
+
+#: src/bs-button-editor.ui:233
+msgid "Select Action"
+msgstr "בחירת פעולה"
+
+#: src/bs-button-editor.ui:250
+msgid "Remove Action"
+msgstr "הסרת פעולה"
+
+#: src/bs-button-editor.ui:272
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "פעולות"
+
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
 msgstr "פרופיל ללא שם"
@@ -119,21 +158,21 @@ msgstr "הורדה למטה"
 msgid "Delete"
 msgstr "מחיקה"
 
-#: src/bs-stream-deck.c:276
+#: src/bs-stream-deck.c:326
 msgid "Default"
 msgstr "ברירת מחדל"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:956 src/bs-stream-deck.c:982
+#: src/bs-stream-deck.c:996 src/bs-stream-deck.c:1021
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1008 src/bs-stream-deck.c:1034
+#: src/bs-stream-deck.c:1046 src/bs-stream-deck.c:1071
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -142,81 +181,42 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1060 src/bs-stream-deck.c:1086
+#: src/bs-stream-deck.c:1096 src/bs-stream-deck.c:1121
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1112
+#: src/bs-stream-deck.c:1146
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1138
+#: src/bs-stream-deck.c:1171
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1164
-#| msgid "Stream Deck"
+#: src/bs-stream-deck.c:1196
 msgid "Stream Deck +"
 msgstr "‫Stream Deck +‎"
 
-#: src/bs-stream-deck.c:1233
+#: src/bs-stream-deck.c:1275
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1256
+#: src/bs-stream-deck.c:1297
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:389
-msgid "All supported formats"
-msgstr "כל התסדירים הנתמכים"
-
-#: src/bs-stream-deck-button-editor.c:398
-msgid "Select icon"
-msgstr "בחירת סמל"
-
-#: src/bs-stream-deck-button-editor.c:399
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "פתיחה"
-
-#: src/bs-stream-deck-button-editor.ui:27
+#: src/bs-stream-deck-editor.ui:61
 msgid "Select a button"
 msgstr "בחירת כפתור"
-
-#: src/bs-stream-deck-button-editor.ui:45
-msgid "Button Properties"
-msgstr "מאפייני כפתור"
-
-#: src/bs-stream-deck-button-editor.ui:221
-msgid "Name"
-msgstr "שם"
-
-#: src/bs-stream-deck-button-editor.ui:228
-msgid "Background Color"
-msgstr "צבע רקע"
-
-#: src/bs-stream-deck-button-editor.ui:264
-msgid "Select action"
-msgstr "בחירת פעולה"
-
-#: src/bs-stream-deck-button-editor.ui:285
-msgid "Remove Action"
-msgstr "הסרת פעולה"
-
-#: src/bs-stream-deck-button-editor.ui:308
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "פעולות"
 
 #: src/bs-window.ui:113
 msgid "New profile…"
