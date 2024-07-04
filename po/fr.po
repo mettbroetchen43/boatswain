@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr "Boatswain"
 
@@ -28,35 +28,35 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;diffusion;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:10
 msgid "Control your Elgato Stream Decks"
 msgstr "Contrôlez vos appareils Elgato Stream Decks"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Boatswain vous permet de contrôler vos appareils Elgato Stream Deck."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:13
 msgid "With Boatswain you will be able to:"
 msgstr "Avec Boatswain vous pouvez :"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "Organize your actions in pages and profiles"
 msgstr "Organiser vos actions en pages et profils"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:16
 msgid "Set custom icons to actions"
 msgstr "Définir des icônes personnalisées pour des actions"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Control your music player"
 msgstr "Contrôler votre lecteur de musique"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Play sound effects during your streams"
 msgstr "Jouer des effets sonores pendant vos diffusions"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
@@ -64,7 +64,7 @@ msgstr ""
 "websocket)"
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:23
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 

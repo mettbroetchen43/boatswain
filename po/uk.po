@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Lokalize 23.04.3\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr "Боутсвейн"
 
@@ -30,52 +30,52 @@ msgid "stream deck;streaming;deck;elgato;"
 msgstr ""
 "stream deck;streaming;deck;elgato;потокове відтворення;потік;дека;ельгато;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Керування вашими пристроями дек Elgato"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
 "За допомогою «Боутсвейн» надає вам змогу керувати пристроями потокових дек "
 "Elgato."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "За допомогою «Боутсвейн» ви зможете:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Упорядкувати ваші дії за сторінками і профілями"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Встановити нетипові піктограми для дій"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid "Control your music player"
 msgstr "Керування вашим звуковим програвачем"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Відтворювати звукові ефекти під час ваших трансляцій"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "Керувати OBS Studio за допомогою потокової деки (потребує розширення obs-"
 "websocket)"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:22
 msgid "Send network requests"
 msgstr "Надсилати запити мережею"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:23
 msgid "Keep track of your gaming score"
 msgstr "Стежити за вашим ігровим рейтингом"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:24
 msgid "Open files and launch applications"
 msgstr "Відкрити файли і запустити програми"
 

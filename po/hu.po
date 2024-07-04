@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Lokalize 23.08.4\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr "Fedélzetmester"
 
@@ -29,51 +29,51 @@ msgstr "Fedélzetmester"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;adatfolyam;műsorszórás;közvetítés;deck;elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Az Elgato Stream Deckek vezérlése"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
 "A Fedélzetmester lehetővé teszi az Elgato Stream Deck eszközök vezérlését."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "A Fedélzetmesterrel a következőkre lesz képes:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Az oldalakon és profilokban lévő műveletek szervezése"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Egyéni ikonok beállítása a műveletekhez"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid "Control your music player"
 msgstr "Zenelejátszó vezérlése"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Hanghatások lejátszása az adatfolyamok során"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "OBS Studio vezérlése Stream Deck használatával (az obs-websocket "
 "kiterjesztést igényli)"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:22
 msgid "Send network requests"
 msgstr "Hálózati kérések küldése"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:23
 msgid "Keep track of your gaming score"
 msgstr "Játékeredmények nyomon követése"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:24
 msgid "Open files and launch applications"
 msgstr "Fájlok megnyitása és alkalmazások indítása"
 

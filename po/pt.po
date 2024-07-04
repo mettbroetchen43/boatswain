@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Poedit 3.3.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr "Boatswain"
 
@@ -28,43 +28,43 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;fluxo de media;deck;elgato;transmissão;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Controle os seus Elgato Stream Decks"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
 "O Boatswain permite-lhe controlar os seus dispositivos Elgato Stream Deck."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "Com o Boatswain, será capaz de:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Organizar suas ações em páginas e perfis"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Definir ícones personalizados para ações"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid "Control your music player"
 msgstr "Controla seu reprodutor de música"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Reproduzir efeitos de sons durante suas transmissões"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "Controlar o OBS Studio usando Stream Deck (requer a extensão obs-websocket)"
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:25
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:25
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 

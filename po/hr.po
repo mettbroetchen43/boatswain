@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr "Boatswain"
 
@@ -29,35 +29,35 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;emitiranje;deck;elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:10
 msgid "Control your Elgato Stream Decks"
 msgstr "Upravljajte svojim Elgato Stream Deck uređajem"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Boatswain vam omogućuje upravljanje Elgato Stream Deck uređajima."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:13
 msgid "With Boatswain you will be able to:"
 msgstr "Pomoću Boatswaina možete:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "Organize your actions in pages and profiles"
 msgstr "Organizirati svoje radnje u stranicama i profilima"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:16
 msgid "Set custom icons to actions"
 msgstr "Postaviti prilagođene ikone za radnje"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Control your music player"
 msgstr "Upravljati svojim reproduktorom glazbe"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Play sound effects during your streams"
 msgstr "Reproducirati zvučne efekte tijekom vaših emitiranja"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
@@ -65,7 +65,7 @@ msgstr ""
 "websocket proširenje)"
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:23
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 

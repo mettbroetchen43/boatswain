@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr "Boatswain"
 
@@ -30,50 +30,50 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;akış;yayın;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Elgato Stream Deck’lerini denetle"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Boatswain, Elgato Stream Deck aygıtlarını denetlemenizi sağlar."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "Boatswain ile yapabilecekleriniz:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Eylemlerini sayfalarda ve profillerde düzenle"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "İşlemlere özel simgeler ekle"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid "Control your music player"
 msgstr "Müzik çaları denetle"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Akışların sırasında ses efektleri oynat"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "Stream Deck kullanarak OBS Studio’yu denetle (obs-websocket uzantısını "
 "gerektirir)"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:22
 msgid "Send network requests"
 msgstr "Ağ istekleri gönder"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:23
 msgid "Keep track of your gaming score"
 msgstr "Oyun skorunu izle"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:24
 msgid "Open files and launch applications"
 msgstr "Dosyaları aç ve uygulamaları başlat"
 

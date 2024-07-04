@@ -27,24 +27,24 @@ endif
 # AppStream #
 #############
 
-appdata_conf = configuration_data()
-appdata_conf.set('appid', application_id)
+metainfo_conf = configuration_data()
+metainfo_conf.set('appid', application_id)
 appstream_file = i18n.merge_file(
   input: configure_file(
-    input: files('com.feaneron.Boatswain.appdata.xml.in.in'),
-    output: 'com.feaneron.Boatswain.appdata.xml.in',
-    configuration: appdata_conf
+    input: files('com.feaneron.Boatswain.metainfo.xml.in.in'),
+    output: 'com.feaneron.Boatswain.metainfo.xml.in',
+    configuration: metainfo_conf
   ),
-  output: '@0@.appdata.xml'.format(application_id),
+  output: '@0@.metainfo.xml'.format(application_id),
   po_dir: '../po',
   install: true,
-  install_dir: get_option('datadir') / 'appdata',
+  install_dir: get_option('datadir') / 'metainfo',
 )
 
-# Validate Appdata
+# Validate AppStream file
 appstreamcli = find_program('appstreamcli', required: false)
 if (appstreamcli.found())
-  test('Validate appdata file',
+  test('Validate metainfo file',
     appstreamcli,
     args: ['validate', '--no-net', '--explain', appstream_file],
     workdir: meson.current_build_dir()

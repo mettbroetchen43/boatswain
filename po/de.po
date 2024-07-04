@@ -23,7 +23,7 @@ msgstr ""
 "X-Generator: Poedit 3.4.2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr "Boatswain"
 
@@ -35,50 +35,50 @@ msgstr ""
 "stream deck;streaming;deck;elgato;Stream Deck, Streaming-Gerät;Streaming;"
 "Elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "Steuern Sie Ihre Elgato Stream Decks"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Boatswain ermöglicht es Ihnen, Elgato Stream-Deck-Geräte zu steuern."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "Mit Boatswain können Sie Folgendes tun:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "Ihre Aktionen in Seiten und Profilen organisieren"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "Benutzerdefinierte Symbole für Aktionen festlegen"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid "Control your music player"
 msgstr "Ihre Musikwiedergabe steuern"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "Klangeffekte während Ihrer Streams abspielen"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "OBS Studio mithilfe von Stream Deck steuern (erfordert die obs-websocket-"
 "Erweiterung)"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:22
 msgid "Send network requests"
 msgstr "Netzwerkanfragen senden"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:23
 msgid "Keep track of your gaming score"
 msgstr "Behalten Sie Ihren Spielstand im Auge"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:24
 msgid "Open files and launch applications"
 msgstr "Dateien öffnen und Anwendungen starten"
 

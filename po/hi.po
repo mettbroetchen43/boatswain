@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Gtranslator 46.1\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr "Boatswain"
 
@@ -28,51 +28,51 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;स्ट्रीम डेक;स्ट्रीमिंग;डेक;एल्गाटो;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
 msgstr "अपने Elgato Stream Decks को नियंत्रित करें"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:14
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:14
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
 "Boatswain आपको Elgato Stream Deck उपकरणों को नियंत्रित करने की अनुमति देता है।"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "With Boatswain you will be able to:"
 msgstr "Boatswain के साथ आप यह कर सकेंगे:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Organize your actions in pages and profiles"
 msgstr "अपनी कार्रवाइयों को पृष्ठों और प्रोफाइलों में व्यवस्थित करें"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Set custom icons to actions"
 msgstr "कार्रवाइयों के लिए तदनुकूल चिह्न निर्धारित करें"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid "Control your music player"
 msgstr "अपने म्यूजिक प्लेयर को नियंत्रित करें"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:20
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:20
 msgid "Play sound effects during your streams"
 msgstr "अपनी स्ट्रीम के दौरान ध्वनि प्रभाव चलाएं"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:21
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:21
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 "Stream Deck का उपयोग करके OBS Studio को नियंत्रित करें (obs-websocket विस्तार की "
 "आवश्यकता है)"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:22
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:22
 msgid "Send network requests"
 msgstr "नेटवर्क अनुरोध भेजें"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:23
 msgid "Keep track of your gaming score"
 msgstr "अपने गेमिंग स्कोर पर नज़र रखें"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:24
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:24
 msgid "Open files and launch applications"
 msgstr "फाइलें खोलें और अनुप्रयोग लॉन्च करें"
 

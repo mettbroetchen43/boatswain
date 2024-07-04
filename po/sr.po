@@ -19,7 +19,7 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr "Боатсвајн"
 
@@ -28,37 +28,37 @@ msgstr "Боатсвајн"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "ток;дек тока;дек;stream deck;streaming;deck;elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:10
 #| msgid "Control your Elgato Stream Deck devices"
 msgid "Control your Elgato Stream Decks"
 msgstr "Управљајте вашим „Elgato Stream Deck“-овима"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
 "Боатсвајн вам омогућава да управљате вашим „Elgato Stream Deck“ уређајима."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:13
 msgid "With Boatswain you will be able to:"
 msgstr "Са Боатсвајном бићете у могућности да:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "Organize your actions in pages and profiles"
 msgstr "Организујете ваше радње у страницама и профилима"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:16
 msgid "Set custom icons to actions"
 msgstr "Поставите произвољне иконице за радње"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Control your music player"
 msgstr "Управљате вашим програмом за пуштање музике"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Play sound effects during your streams"
 msgstr "Пуштате звучна дејства за време ваших стримовања"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
@@ -66,7 +66,7 @@ msgstr ""
 "websocket“)"
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:23
 msgid "Georges Basile Stavracas Neto"
 msgstr "Џорџ Базиле Ставракас Нето"
 

@@ -1,8 +1,8 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
 data/com.feaneron.Boatswain.desktop.in.in
-data/com.feaneron.Boatswain.appdata.xml.in.in
 data/com.feaneron.Boatswain.gschema.xml
+data/com.feaneron.Boatswain.metainfo.xml.in.in
 src/bs-application.c
 src/bs-button-editor.c
 src/bs-button-editor.ui

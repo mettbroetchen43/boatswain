@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr ""
 
@@ -27,60 +27,60 @@ msgstr ""
 msgid "stream deck;streaming;deck;elgato;"
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:10
 msgid "Control your Elgato Stream Decks"
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:13
 msgid "With Boatswain you will be able to:"
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "Organize your actions in pages and profiles"
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:16
 msgid "Set custom icons to actions"
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Control your music player"
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Play sound effects during your streams"
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr ""
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:23
 msgid "Georges Basile Stavracas Neto"
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:48
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:48
 msgid ""
 "This is a bugfix release, fixing the parsing of OBS Studio source actions."
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:56
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:56
 msgid "This is the debut release of Boatswain!"
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:59
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:59
 msgid ""
 "This release supports all known models of Elgato Stream Deck devices, and "
 "comes with an initial set of actions focused on streaming use cases."
 msgstr ""
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:64
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:64
 msgid ""
 "Boatswain also supports folders, chained actions, and multiple profiles for "
 "each device."

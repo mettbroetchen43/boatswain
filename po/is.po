@@ -22,7 +22,7 @@ msgstr ""
 "X-Generator: Lokalize 21.12.3\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:6
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
 msgid "Boatswain"
 msgstr "Boatswain"
 
@@ -31,41 +31,41 @@ msgstr "Boatswain"
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streymi;deck;elgato;"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:10
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:10
 msgid "Control your Elgato Stream Decks"
 msgstr "Stjórnaðu þínum Elgato Elgato Stream Deck hljóðbrettum"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:12
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Boatswain allows you to control Elgato Stream Deck devices."
 msgstr "Með Botswain getur þú stjórnað Elgato Stream Deck tækjunum þínum."
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:13
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:13
 msgid "With Boatswain you will be able to:"
 msgstr "Með Boatswain getur þú:"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:15
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:15
 msgid "Organize your actions in pages and profiles"
 msgstr "Skipulagt aðgerðir þínar á síðum og í notkunarsniðum"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:16
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:16
 msgid "Set custom icons to actions"
 msgstr "Stillt sérsniðnar táknmyndir fyrir aðgerðir"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:17
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:17
 msgid "Control your music player"
 msgstr "Stjórnað tónlistarspilaranum þínum"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:18
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:18
 msgid "Play sound effects during your streams"
 msgstr "Spilað hljóðbrellur meðan á streymi stendur"
 
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:19
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:19
 msgid ""
 "Control OBS Studio using Stream Deck (requires the obs-websocket extension)"
 msgstr "Stjórnað OBS Studio með Stream Deck (rkrefst obs-websocket viðaukans)"
 
 #. Translators: please do NOT translate this
-#: data/com.feaneron.Boatswain.appdata.xml.in.in:23
+#: data/com.feaneron.Boatswain.metainfo.xml.in.in:23
 msgid "Georges Basile Stavracas Neto"
 msgstr "Georges Basile Stavracas Neto"
 
