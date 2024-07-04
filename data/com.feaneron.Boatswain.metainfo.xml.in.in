@@ -32,7 +32,7 @@
   <provides>
     <binary>boatswain</binary>
   </provides>
-  <launchable type="desktop-id">com.feaneron.Boatswain.desktop</launchable>
+  <launchable type="desktop-id">@appid@.desktop</launchable>
   
   <screenshots>
     <screenshot type="default" width="2644" height="1692">
