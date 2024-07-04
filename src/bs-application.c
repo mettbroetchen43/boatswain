@@ -191,6 +191,9 @@ bs_application_startup (GApplication *application)
 
   self = BS_APPLICATION (application);
 
+  /* Add legacy gdk-pixbuf loaders to the search path */
+  gdk_pixbuf_init_modules ("/app/lib/gdk-pixbuf-2.0/2.10.0", NULL);
+
   G_APPLICATION_CLASS (bs_application_parent_class)->startup (application);
 
   /* All plugins must be loaded before profiles and Stream Decks */
