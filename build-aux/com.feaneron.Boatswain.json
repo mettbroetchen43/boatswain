@@ -122,8 +122,7 @@
             "sources" : [
                 {
                     "type" : "dir",
-                    "url" : "https://gitlab.gnome.org/World/boatswain.git",
-                    "branch" : "main"
+                    "path" : "../"
                 }
             ]
         }
