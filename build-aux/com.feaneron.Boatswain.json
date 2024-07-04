@@ -107,6 +107,13 @@
                 "-Dman=false",
                 "-Dothers=enabled"
             ],
+            "cleanup" : [
+                "/bin/*"
+            ],
+            "post-install" : [
+                "rm /app/lib/libgdk_pixbuf-2.0.so*",
+                "rm /app/lib/pkgconfig/gdk-pixbuf-2.0.pc"
+            ],
             "sources" : [
                 {
                     "type" : "git",
