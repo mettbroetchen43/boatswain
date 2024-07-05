@@ -35,10 +35,10 @@ enum _BsIconRendererFlags
   BS_ICON_RENDERER_FLAG_ROTATE_90 = 1 << 2,
 };
 
-enum _BsIconFormat
+enum _BsImageFormat
 {
-  BS_ICON_FORMAT_BMP,
-  BS_ICON_FORMAT_JPEG,
+  BS_IMAGE_FORMAT_BMP,
+  BS_IMAGE_FORMAT_JPEG,
 };
 
 enum _BsIconComposeFlags
@@ -49,7 +49,7 @@ enum _BsIconComposeFlags
 
 struct _BsIconLayout
 {
-  BsIconFormat format;
+  BsImageFormat format;
   BsIconRendererFlags flags;
   int8_t width;
   int8_t height;

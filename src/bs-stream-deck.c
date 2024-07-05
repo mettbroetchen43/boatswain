@@ -1002,7 +1002,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .icon_layout = {
         .width = 80,
         .height = 80,
-        .format = BS_ICON_FORMAT_BMP,
+        .format = BS_IMAGE_FORMAT_BMP,
         .flags = BS_ICON_RENDERER_FLAG_FLIP_Y | BS_ICON_RENDERER_FLAG_ROTATE_90,
       },
     },
@@ -1027,7 +1027,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .icon_layout = {
         .width = 80,
         .height = 80,
-        .format = BS_ICON_FORMAT_BMP,
+        .format = BS_IMAGE_FORMAT_BMP,
         .flags = BS_ICON_RENDERER_FLAG_FLIP_Y | BS_ICON_RENDERER_FLAG_ROTATE_90,
       },
     },
@@ -1052,7 +1052,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .icon_layout = {
         .width = 72,
         .height = 72,
-        .format = BS_ICON_FORMAT_BMP,
+        .format = BS_IMAGE_FORMAT_BMP,
         .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
       },
     },
@@ -1077,7 +1077,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .icon_layout = {
         .width = 72,
         .height = 72,
-        .format = BS_ICON_FORMAT_JPEG,
+        .format = BS_IMAGE_FORMAT_JPEG,
         .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
       },
     },
@@ -1102,7 +1102,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .icon_layout = {
         .width = 96,
         .height = 96,
-        .format = BS_ICON_FORMAT_JPEG,
+        .format = BS_IMAGE_FORMAT_JPEG,
         .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
       },
     },
@@ -1127,7 +1127,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .icon_layout = {
         .width = 96,
         .height = 96,
-        .format = BS_ICON_FORMAT_JPEG,
+        .format = BS_IMAGE_FORMAT_JPEG,
         .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
       },
     },
@@ -1152,7 +1152,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .icon_layout = {
         .width = 72,
         .height = 72,
-        .format = BS_ICON_FORMAT_JPEG,
+        .format = BS_IMAGE_FORMAT_JPEG,
         .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
       },
     },
@@ -1177,7 +1177,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .icon_layout = {
         .width = 96,
         .height = 96,
-        .format = BS_ICON_FORMAT_JPEG,
+        .format = BS_IMAGE_FORMAT_JPEG,
         .flags = BS_ICON_RENDERER_FLAG_NONE,
       },
     },
@@ -1204,7 +1204,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .icon_layout = {
         .width = 120,
         .height = 120,
-        .format = BS_ICON_FORMAT_JPEG,
+        .format = BS_IMAGE_FORMAT_JPEG,
         .flags = BS_ICON_RENDERER_FLAG_NONE,
       },
     },
@@ -1281,7 +1281,7 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
       .icon_layout = {
         .width = 72,
         .height = 72,
-        .format = BS_ICON_FORMAT_JPEG,
+        .format = BS_IMAGE_FORMAT_JPEG,
         .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
       },
     },
@@ -1303,7 +1303,7 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
       .icon_layout = {
         .width = 96,
         .height = 96,
-        .format = BS_ICON_FORMAT_JPEG,
+        .format = BS_IMAGE_FORMAT_JPEG,
         .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
       },
     },

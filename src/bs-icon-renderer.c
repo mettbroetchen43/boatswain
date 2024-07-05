@@ -150,7 +150,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
   switch (self->layout->format)
     {
-    case BS_ICON_FORMAT_BMP:
+    case BS_IMAGE_FORMAT_BMP:
       return gdk_pixbuf_save_to_buffer (pixbuf,
                                         buffer,
                                         buffer_len,
@@ -158,7 +158,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
                                         error,
                                         NULL);
 
-    case BS_ICON_FORMAT_JPEG:
+    case BS_IMAGE_FORMAT_JPEG:
       return gdk_pixbuf_save_to_buffer (pixbuf,
                                         buffer,
                                         buffer_len,
