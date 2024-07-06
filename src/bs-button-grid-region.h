@@ -33,7 +33,7 @@ G_DECLARE_FINAL_TYPE (BsButtonGridRegion, bs_button_grid_region, BS, BUTTON_GRID
 
 BsButtonGridRegion * bs_button_grid_region_new (const char         *id,
                                                 BsStreamDeck       *stream_deck,
-                                                const BsIconLayout *icon_layout,
+                                                const BsImageInfo  *image_info,
                                                 unsigned int        n_buttons,
                                                 unsigned int        grid_columns,
                                                 unsigned int        column,

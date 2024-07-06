@@ -25,7 +25,7 @@ struct _BsIconRenderer
 {
   GObject parent_instance;
 
-  const BsIconLayout *layout;
+  BsImageInfo image_info;
   GskRenderer *renderer;
 };
 
@@ -56,12 +56,12 @@ bs_icon_renderer_init (BsIconRenderer *self)
 }
 
 BsIconRenderer *
-bs_icon_renderer_new (const BsIconLayout *layout)
+bs_icon_renderer_new (const BsImageInfo *image_info)
 {
   BsIconRenderer *self;
 
   self = g_object_new (BS_TYPE_ICON_RENDERER, NULL);
-  self->layout = layout;
+  self->image_info = *image_info;
 
   return self;
 }
@@ -85,23 +85,23 @@ bs_icon_renderer_compose_icon (BsIconRenderer      *self,
 
   if (!(compose_flags & BS_ICON_COMPOSE_FLAG_IGNORE_TRANSFORMS))
     {
-      gboolean flip_x = self->layout->flags & BS_ICON_RENDERER_FLAG_FLIP_X;
-      gboolean flip_y = self->layout->flags & BS_ICON_RENDERER_FLAG_FLIP_Y;
+      gboolean flip_x = self->image_info.flags & BS_ICON_RENDERER_FLAG_FLIP_X;
+      gboolean flip_y = self->image_info.flags & BS_ICON_RENDERER_FLAG_FLIP_Y;
 
-      if (self->layout->flags & BS_ICON_RENDERER_FLAG_ROTATE_90)
+      if (self->image_info.flags & BS_ICON_RENDERER_FLAG_ROTATE_90)
         {
           gtk_snapshot_translate (snapshot,
-                                  &GRAPHENE_POINT_INIT (self->layout->width / 2,
-                                                        self->layout->height / 2));
+                                  &GRAPHENE_POINT_INIT (self->image_info.width / 2,
+                                                        self->image_info.height / 2));
           gtk_snapshot_rotate (snapshot, 90.0);
           gtk_snapshot_translate (snapshot,
-                                  &GRAPHENE_POINT_INIT (- self->layout->width / 2,
-                                                        - self->layout->height / 2));
+                                  &GRAPHENE_POINT_INIT (- self->image_info.width / 2,
+                                                        - self->image_info.height / 2));
         }
 
       gtk_snapshot_translate (snapshot,
-                              &GRAPHENE_POINT_INIT (flip_x ? self->layout->width : 0,
-                                                    flip_y ? self->layout->height : 0));
+                              &GRAPHENE_POINT_INIT (flip_x ? self->image_info.width : 0,
+                                                    flip_y ? self->image_info.height : 0));
       gtk_snapshot_scale (snapshot,
                           flip_x ? -1.0 : 1.0,
                           flip_y ? -1.0 : 1.0);
@@ -109,22 +109,22 @@ bs_icon_renderer_compose_icon (BsIconRenderer      *self,
 
   if (icon)
     {
-      bs_icon_snapshot_premultiplied (icon, snapshot, self->layout->width, self->layout->height);
+      bs_icon_snapshot_premultiplied (icon, snapshot, self->image_info.width, self->image_info.height);
     }
   else
     {
       gtk_snapshot_append_color (snapshot,
                                  &(GdkRGBA) { 0.0, 0.0, 0.0, 1.0, },
                                  &GRAPHENE_RECT_INIT (0, 0,
-                                                      self->layout->width,
-                                                      self->layout->height));
+                                                      self->image_info.width,
+                                                      self->image_info.height));
     }
 
   node = gtk_snapshot_free_to_node (g_steal_pointer (&snapshot));
 
   texture = gsk_renderer_render_texture (self->renderer,
                                          node,
-                                         &GRAPHENE_RECT_INIT (0, 0, self->layout->width, self->layout->height));
+                                         &GRAPHENE_RECT_INIT (0, 0, self->image_info.width, self->image_info.height));
   gsk_renderer_unrealize (self->renderer);
 
   return g_steal_pointer (&texture);
@@ -148,7 +148,7 @@ G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   pixbuf = gdk_pixbuf_get_from_texture (texture);
 G_GNUC_END_IGNORE_DEPRECATIONS
 
-  switch (self->layout->format)
+  switch (self->image_info.format)
     {
     case BS_IMAGE_FORMAT_BMP:
       return gdk_pixbuf_save_to_buffer (pixbuf,

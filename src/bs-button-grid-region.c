@@ -32,7 +32,7 @@ struct _BsButtonGridRegion
 
   GListStore *buttons;
 
-  BsIconLayout icon_layout;
+  BsImageInfo image_info;
   unsigned int grid_columns;
 };
 
@@ -129,7 +129,7 @@ bs_button_grid_region_init (BsButtonGridRegion *self)
 BsButtonGridRegion *
 bs_button_grid_region_new (const char         *id,
                            BsStreamDeck       *stream_deck,
-                           const BsIconLayout *icon_layout,
+                           const BsImageInfo  *image_info,
                            unsigned int        n_buttons,
                            unsigned int        grid_columns,
                            unsigned int        column,
@@ -140,7 +140,7 @@ bs_button_grid_region_new (const char         *id,
   g_autoptr (BsButtonGridRegion) self = NULL;
 
   g_assert (BS_IS_STREAM_DECK (stream_deck));
-  g_assert (icon_layout != NULL);
+  g_assert (image_info != NULL);
 
   self = g_object_new (BS_TYPE_BUTTON_GRID_REGION,
                        "id", id,
@@ -153,7 +153,7 @@ bs_button_grid_region_new (const char         *id,
                        NULL);
 
   /* TODO: make it a construct-only property */
-  self->icon_layout = *icon_layout;
+  self->image_info = *image_info;
 
   for (unsigned int i = 0; i < n_buttons; i++)
     {
@@ -162,8 +162,8 @@ bs_button_grid_region_new (const char         *id,
       button = bs_button_new (stream_deck,
                               BS_DEVICE_REGION (self),
                               i,
-                              icon_layout->width,
-                              icon_layout->height);
+                              image_info->width,
+                              image_info->height);
 
       g_list_store_append (self->buttons, button);
     }

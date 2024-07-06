@@ -47,7 +47,7 @@ enum _BsIconComposeFlags
   BS_ICON_COMPOSE_FLAG_IGNORE_TRANSFORMS = 1 << 0,
 };
 
-struct _BsIconLayout
+struct _BsImageInfo
 {
   BsImageFormat format;
   BsIconRendererFlags flags;
@@ -58,7 +58,7 @@ struct _BsIconLayout
 #define BS_TYPE_ICON_RENDERER (bs_icon_renderer_get_type())
 G_DECLARE_FINAL_TYPE (BsIconRenderer, bs_icon_renderer, BS, ICON_RENDERER, GObject)
 
-BsIconRenderer * bs_icon_renderer_new (const BsIconLayout *layout);
+BsIconRenderer * bs_icon_renderer_new (const BsImageInfo *layout);
 
 GdkTexture * bs_icon_renderer_compose_icon (BsIconRenderer      *self,
                                             BsIconComposeFlags   compose_flags,

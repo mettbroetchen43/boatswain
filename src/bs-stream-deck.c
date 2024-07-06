@@ -54,7 +54,7 @@ typedef struct
 {
   uint8_t n_buttons;
   uint8_t columns;
-  BsIconLayout icon_layout;
+  BsImageInfo image_info;
 } BsButtonLayout;
 
 typedef struct
@@ -999,7 +999,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 6,
       .columns = 3,
-      .icon_layout = {
+      .image_info = {
         .width = 80,
         .height = 80,
         .format = BS_IMAGE_FORMAT_BMP,
@@ -1024,7 +1024,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 6,
       .columns = 3,
-      .icon_layout = {
+      .image_info = {
         .width = 80,
         .height = 80,
         .format = BS_IMAGE_FORMAT_BMP,
@@ -1049,7 +1049,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
-      .icon_layout = {
+      .image_info = {
         .width = 72,
         .height = 72,
         .format = BS_IMAGE_FORMAT_BMP,
@@ -1074,7 +1074,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
-      .icon_layout = {
+      .image_info = {
         .width = 72,
         .height = 72,
         .format = BS_IMAGE_FORMAT_JPEG,
@@ -1099,7 +1099,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 32,
       .columns = 8,
-      .icon_layout = {
+      .image_info = {
         .width = 96,
         .height = 96,
         .format = BS_IMAGE_FORMAT_JPEG,
@@ -1124,7 +1124,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 32,
       .columns = 8,
-      .icon_layout = {
+      .image_info = {
         .width = 96,
         .height = 96,
         .format = BS_IMAGE_FORMAT_JPEG,
@@ -1149,7 +1149,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
-      .icon_layout = {
+      .image_info = {
         .width = 72,
         .height = 72,
         .format = BS_IMAGE_FORMAT_JPEG,
@@ -1174,7 +1174,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 3,
       .columns = 3,
-      .icon_layout = {
+      .image_info = {
         .width = 96,
         .height = 96,
         .format = BS_IMAGE_FORMAT_JPEG,
@@ -1201,7 +1201,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .button_layout = {
       .n_buttons = 8,
       .columns = 4,
-      .icon_layout = {
+      .image_info = {
         .width = 120,
         .height = 120,
         .format = BS_IMAGE_FORMAT_JPEG,
@@ -1278,7 +1278,7 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
     .button_layout = {
       .n_buttons = 15,
       .columns = 5,
-      .icon_layout = {
+      .image_info = {
         .width = 72,
         .height = 72,
         .format = BS_IMAGE_FORMAT_JPEG,
@@ -1300,7 +1300,7 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
     .button_layout = {
       .n_buttons = 32,
       .columns = 8,
-      .icon_layout = {
+      .image_info = {
         .width = 96,
         .height = 96,
         .format = BS_IMAGE_FORMAT_JPEG,
@@ -1450,14 +1450,14 @@ out:
 
       button_grid = bs_button_grid_region_new ("main-button-grid",
                                                self,
-                                               &self->model_info->button_layout.icon_layout,
+                                               &self->model_info->button_layout.image_info,
                                                self->model_info->button_layout.n_buttons,
                                                self->model_info->button_layout.columns,
                                                0, row++, 1, 1);
 
       g_list_store_append (self->regions, button_grid);
 
-      renderer = bs_icon_renderer_new (&self->model_info->button_layout.icon_layout);
+      renderer = bs_icon_renderer_new (&self->model_info->button_layout.image_info);
       g_hash_table_insert (self->renderers, button_grid, g_steal_pointer (&renderer));
     }
 
