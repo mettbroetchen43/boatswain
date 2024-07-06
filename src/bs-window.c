@@ -259,7 +259,7 @@ on_show_about_action_activated_cb (GSimpleAction *action,
 
   g_assert (BS_IS_WINDOW (self));
 
-  adw_show_about_window (GTK_WINDOW (self),
+  adw_show_about_dialog (GTK_WIDGET (self),
                          "application-name", "Boatswain",
                          "application-icon", APPLICATION_ID,
                          "version", PACKAGE_VERSION,
