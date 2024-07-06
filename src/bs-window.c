@@ -269,8 +269,6 @@ on_show_about_action_activated_cb (GSimpleAction *action,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "website", "https://gitlab.gnome.org/World/boatswain",
                          "issue-url", "https://gitlab.gnome.org/World/boatswain/issues",
-                         "website-label", _("Repository"),
-                         "transient-for", GTK_WINDOW (self),
                          NULL);
 }
 
