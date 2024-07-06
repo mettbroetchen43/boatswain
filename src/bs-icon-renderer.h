@@ -51,8 +51,8 @@ struct _BsImageInfo
 {
   BsImageFormat format;
   BsIconRendererFlags flags;
-  int8_t width;
-  int8_t height;
+  uint32_t width;
+  uint32_t height;
 };
 
 #define BS_TYPE_ICON_RENDERER (bs_icon_renderer_get_type())
