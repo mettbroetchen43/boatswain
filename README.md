@@ -1,6 +1,6 @@
 Control Elgato Stream Deck devices.
 
-[<img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png' />](https://flathub.org/apps/details/com.feaneron.Boatswain)
+[<img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en' />](https://flathub.org/apps/details/com.feaneron.Boatswain)
 
 ## Features
 
