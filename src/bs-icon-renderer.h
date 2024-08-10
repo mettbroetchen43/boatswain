@@ -41,12 +41,6 @@ enum _BsImageFormat
   BS_IMAGE_FORMAT_JPEG,
 };
 
-enum _BsIconComposeFlags
-{
-  BS_ICON_COMPOSE_FLAG_NONE = 0,
-  BS_ICON_COMPOSE_FLAG_IGNORE_TRANSFORMS = 1 << 0,
-};
-
 struct _BsImageInfo
 {
   BsImageFormat format;
@@ -60,10 +54,9 @@ G_DECLARE_FINAL_TYPE (BsIconRenderer, bs_icon_renderer, BS, ICON_RENDERER, GObje
 
 BsIconRenderer * bs_icon_renderer_new (const BsImageInfo *layout);
 
-GdkTexture * bs_icon_renderer_compose_icon (BsIconRenderer      *self,
-                                            BsIconComposeFlags   compose_flags,
-                                            BsIcon              *icon,
-                                            GError             **error);
+GdkTexture * bs_icon_renderer_compose_icon (BsIconRenderer  *self,
+                                            BsIcon          *icon,
+                                            GError         **error);
 
 gboolean bs_icon_renderer_convert_texture (BsIconRenderer  *self,
                                            GdkTexture      *texture,

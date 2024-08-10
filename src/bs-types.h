@@ -24,7 +24,6 @@
 
 G_BEGIN_DECLS
 
-typedef enum _BsIconComposeFlags BsIconComposeFlags;
 typedef enum _BsIconRendererFlags BsIconRendererFlags;
 typedef enum _BsImageFormat BsImageFormat;
 

@@ -1816,10 +1816,7 @@ bs_stream_deck_upload_button (BsStreamDeck  *self,
 
   icon = bs_button_get_icon (button);
   renderer = get_renderer_for_region (self, bs_button_get_region (button));
-  texture = bs_icon_renderer_compose_icon (renderer,
-                                           BS_ICON_COMPOSE_FLAG_NONE,
-                                           icon,
-                                           error);
+  texture = bs_icon_renderer_compose_icon (renderer, icon, error);
 
   if (!texture)
     return FALSE;

@@ -67,14 +67,15 @@ bs_icon_renderer_new (const BsImageInfo *image_info)
 }
 
 GdkTexture *
-bs_icon_renderer_compose_icon (BsIconRenderer      *self,
-                               BsIconComposeFlags   compose_flags,
-                               BsIcon              *icon,
-                               GError             **error)
+bs_icon_renderer_compose_icon (BsIconRenderer  *self,
+                               BsIcon          *icon,
+                               GError         **error)
 {
   g_autoptr (GtkSnapshot) snapshot = NULL;
   g_autoptr (GskRenderNode) node = NULL;
   g_autoptr (GdkTexture) texture = NULL;
+  gboolean flip_x;
+  gboolean flip_y;
 
   g_return_val_if_fail (BS_IS_ICON_RENDERER (self), NULL);
 
@@ -83,29 +84,26 @@ bs_icon_renderer_compose_icon (BsIconRenderer      *self,
 
   snapshot = gtk_snapshot_new ();
 
-  if (!(compose_flags & BS_ICON_COMPOSE_FLAG_IGNORE_TRANSFORMS))
+  flip_x = self->image_info.flags & BS_ICON_RENDERER_FLAG_FLIP_X;
+  flip_y = self->image_info.flags & BS_ICON_RENDERER_FLAG_FLIP_Y;
+
+  if (self->image_info.flags & BS_ICON_RENDERER_FLAG_ROTATE_90)
     {
-      gboolean flip_x = self->image_info.flags & BS_ICON_RENDERER_FLAG_FLIP_X;
-      gboolean flip_y = self->image_info.flags & BS_ICON_RENDERER_FLAG_FLIP_Y;
-
-      if (self->image_info.flags & BS_ICON_RENDERER_FLAG_ROTATE_90)
-        {
-          gtk_snapshot_translate (snapshot,
-                                  &GRAPHENE_POINT_INIT (self->image_info.width / 2,
-                                                        self->image_info.height / 2));
-          gtk_snapshot_rotate (snapshot, 90.0);
-          gtk_snapshot_translate (snapshot,
-                                  &GRAPHENE_POINT_INIT (- self->image_info.width / 2,
-                                                        - self->image_info.height / 2));
-        }
-
       gtk_snapshot_translate (snapshot,
-                              &GRAPHENE_POINT_INIT (flip_x ? self->image_info.width : 0,
-                                                    flip_y ? self->image_info.height : 0));
-      gtk_snapshot_scale (snapshot,
-                          flip_x ? -1.0 : 1.0,
-                          flip_y ? -1.0 : 1.0);
+                              &GRAPHENE_POINT_INIT (self->image_info.width / 2,
+                                                    self->image_info.height / 2));
+      gtk_snapshot_rotate (snapshot, 90.0);
+      gtk_snapshot_translate (snapshot,
+                              &GRAPHENE_POINT_INIT (- self->image_info.width / 2,
+                                                    - self->image_info.height / 2));
     }
+
+  gtk_snapshot_translate (snapshot,
+                          &GRAPHENE_POINT_INIT (flip_x ? self->image_info.width : 0,
+                                                flip_y ? self->image_info.height : 0));
+  gtk_snapshot_scale (snapshot,
+                      flip_x ? -1.0 : 1.0,
+                      flip_y ? -1.0 : 1.0);
 
   if (icon)
     {
