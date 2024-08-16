@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2023-12-26 19:55+0000\n"
-"PO-Revision-Date: 2023-12-27 16:15+0200\n"
+"POT-Creation-Date: 2024-08-10 01:14+0000\n"
+"PO-Revision-Date: 2024-08-15 19:21+0300\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: data/com.feaneron.Boatswain.desktop.in.in:3
 #: data/com.feaneron.Boatswain.metainfo.xml.in.in:6
@@ -29,6 +29,11 @@ msgstr "Boatswain"
 #: data/com.feaneron.Boatswain.desktop.in.in:11
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;punte stream;punte;"
+
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "Restaurează jetonul pentru controlerul desktop"
 
 #: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
@@ -78,11 +83,6 @@ msgstr "Urmăriți scorul jocului"
 msgid "Open files and launch applications"
 msgstr "Deschide fișiere și lansează aplicații"
 
-#: data/com.feaneron.Boatswain.gschema.xml:7
-#: data/com.feaneron.Boatswain.gschema.xml:8
-msgid "Restore token for the desktop controller"
-msgstr "Restaurează jetonul pentru controlerul desktop"
-
 #: src/bs-application.c:54
 msgid "Enable debug messages"
 msgstr "Activează mesajele de depanare"
@@ -102,6 +102,44 @@ msgid ""
 msgstr ""
 "Boatswain trebuie să ruleze pe fundal pentru a detecta și executa acțiuni "
 "punte de stream."
+
+#: src/bs-button-editor.c:388
+msgid "All supported formats"
+msgstr "Toate formatele suportate"
+
+#: src/bs-button-editor.c:397
+msgid "Select icon"
+msgstr "Selectează iconița"
+
+#: src/bs-button-editor.c:398
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Deschide"
+
+#: src/bs-button-editor.ui:14
+msgid "Button Properties"
+msgstr "Proprietăți buton"
+
+#: src/bs-button-editor.ui:190
+msgid "Name"
+msgstr "Nume"
+
+#: src/bs-button-editor.ui:197
+msgid "Background Color"
+msgstr "Culoare de fundal"
+
+#: src/bs-button-editor.ui:233
+msgid "Select Action"
+msgstr "Selectează acțiunea"
+
+#: src/bs-button-editor.ui:250
+msgid "Remove Action"
+msgstr "Elimină acțiunea"
+
+#: src/bs-button-editor.ui:272
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Acțiuni"
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
@@ -123,21 +161,21 @@ msgstr "Mută în jos"
 msgid "Delete"
 msgstr "Șterge"
 
-#: src/bs-stream-deck.c:278
+#: src/bs-stream-deck.c:326
 msgid "Default"
 msgstr "Implicit"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:848 src/bs-stream-deck.c:874
+#: src/bs-stream-deck.c:996 src/bs-stream-deck.c:1021
 msgid "Stream Deck Mini"
 msgstr "Punte de stream mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:900 src/bs-stream-deck.c:926
+#: src/bs-stream-deck.c:1046 src/bs-stream-deck.c:1071
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -146,73 +184,42 @@ msgstr "Punte de stream"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:952 src/bs-stream-deck.c:978
+#: src/bs-stream-deck.c:1096 src/bs-stream-deck.c:1121
 msgid "Stream Deck XL"
 msgstr "Punte de stream XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1004
+#: src/bs-stream-deck.c:1146
 msgid "Stream Deck MK.2"
 msgstr "Punte de stream MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1030
+#: src/bs-stream-deck.c:1171
 msgid "Stream Deck Pedal"
 msgstr "Pedală punte de stream"
 
-#: src/bs-stream-deck.c:1099
+#. Translators: this is a product name. In most cases, it is not translated.
+#. * Please verify if Elgato translates their product names on your locale.
+#.
+#: src/bs-stream-deck.c:1196
+msgid "Stream Deck +"
+msgstr "Stream Deck +"
+
+#: src/bs-stream-deck.c:1275
 msgid "Feaneron Hangar Original"
 msgstr "Hangar Feaneron original"
 
-#: src/bs-stream-deck.c:1122
+#: src/bs-stream-deck.c:1297
 msgid "Feaneron Hangar XL"
 msgstr "Hangar Feaneron XL"
 
-#: src/bs-stream-deck-button-editor.c:389
-msgid "All supported formats"
-msgstr "Toate formatele suportate"
-
-#: src/bs-stream-deck-button-editor.c:398
-msgid "Select icon"
-msgstr "Selectează iconița"
-
-#: src/bs-stream-deck-button-editor.c:399
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Deschide"
-
-#: src/bs-stream-deck-button-editor.ui:27
+#: src/bs-stream-deck-editor.ui:61
 msgid "Select a button"
 msgstr "Selectați un buton"
-
-#: src/bs-stream-deck-button-editor.ui:45
-msgid "Button Properties"
-msgstr "Proprietăți buton"
-
-#: src/bs-stream-deck-button-editor.ui:221
-msgid "Name"
-msgstr "Nume"
-
-#: src/bs-stream-deck-button-editor.ui:228
-msgid "Background Color"
-msgstr "Culoare de fundal"
-
-#: src/bs-stream-deck-button-editor.ui:264
-msgid "Select action"
-msgstr "Selectează acțiunea"
-
-#: src/bs-stream-deck-button-editor.ui:285
-msgid "Remove Action"
-msgstr "Elimină acțiunea"
-
-#: src/bs-stream-deck-button-editor.ui:308
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Acțiuni"
 
 #: src/bs-window.ui:113
 msgid "New profile…"
@@ -245,10 +252,6 @@ msgstr "_Despre Boatswain"
 #: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "_Ieși"
-
-#: src/bs-window.c:272
-msgid "Repository"
-msgstr "Depozit"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -324,7 +327,7 @@ msgid "Profile"
 msgstr "Profil"
 
 #: src/plugins/desktop/desktop-action-factory.c:41
-#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:253
+#: src/plugins/desktop/desktop-keyboard-shortcut-action.c:257
 msgid "Keyboard Shortcut"
 msgstr "Scurtătură de tastatură"
 
@@ -633,6 +636,9 @@ msgstr "Volum"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Placă de sunet"
+
+#~ msgid "Repository"
+#~ msgstr "Depozit"
 
 #~ msgid "Georges Basile Stavracas Neto"
 #~ msgstr "Georges Basile Stavracas Neto"
