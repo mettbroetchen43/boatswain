@@ -33,6 +33,11 @@
     <binary>boatswain</binary>
   </provides>
   <launchable type="desktop-id">@appid@.desktop</launchable>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#13ff7f</color>
+    <color type="primary" scheme_preference="dark">#00ae5f</color>
+  </branding>
   
   <screenshots>
     <screenshot type="default" width="2644" height="1692">
@@ -46,15 +51,17 @@
     </screenshot>
   </screenshots>
 
-  <kudos>
-    <kudo>HiDpiIcon</kudo>
-    <kudo>Notifications</kudo>
-    <kudo>ModernToolkit</kudo>
-  </kudos>
-
-  <custom>
-    <value key="Purism::form_factor">workstation</value>
-  </custom>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  <recommends>
+    <internet>always</internet>
+  </recommends>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
 
   <releases>
     <release date="2023-11-26" version="0.4.0">
