@@ -33,6 +33,8 @@ G_DECLARE_DERIVABLE_TYPE (BsDeviceRegion, bs_device_region, BS, DEVICE_REGION, G
 struct _BsDeviceRegionClass
 {
   GObjectClass parent_class;
+
+  BsRenderer * (*get_renderer) (BsDeviceRegion *self);
 };
 
 const char * bs_device_region_get_id (BsDeviceRegion *self);
@@ -44,5 +46,7 @@ unsigned int bs_device_region_get_row (BsDeviceRegion *self);
 unsigned int bs_device_region_get_row_span (BsDeviceRegion *self);
 
 BsStreamDeck * bs_device_region_get_stream_deck (BsDeviceRegion *self);
+
+BsRenderer * bs_device_region_get_renderer (BsDeviceRegion *self);
 
 G_END_DECLS

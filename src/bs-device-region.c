@@ -53,6 +53,17 @@ static GParamSpec *properties [N_PROPS];
 
 
 /*
+ * BsDeviceRegion overrides
+ */
+
+static BsRenderer *
+bs_device_region_real_get_renderer (BsDeviceRegion *self)
+{
+  return NULL;
+}
+
+
+/*
  * GObject overrides
  */
 
@@ -156,6 +167,8 @@ bs_device_region_class_init (BsDeviceRegionClass *klass)
   object_class->get_property = bs_device_region_get_property;
   object_class->set_property = bs_device_region_set_property;
 
+  klass->get_renderer = bs_device_region_real_get_renderer;
+
   properties[PROP_COLUMN] = g_param_spec_uint ("column", NULL, NULL,
                                                0, G_MAXUINT, 0,
                                                G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
@@ -255,4 +268,12 @@ bs_device_region_get_stream_deck (BsDeviceRegion *self)
 
   priv = bs_device_region_get_instance_private (self);
   return priv->stream_deck;
+}
+
+BsRenderer *
+bs_device_region_get_renderer (BsDeviceRegion *self)
+{
+  g_return_val_if_fail (BS_IS_DEVICE_REGION (self), NULL);
+
+  return BS_DEVICE_REGION_GET_CLASS (self)->get_renderer (self);
 }
