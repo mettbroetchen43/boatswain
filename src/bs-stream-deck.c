@@ -65,9 +65,8 @@ typedef struct
 
 typedef struct
 {
-  /* TODO: renderer */
-  size_t width;
-  size_t height;
+  uint32_t n_slots;
+  BsImageInfo image_info;
 } BsTouchscreenLayout;
 
 typedef struct
@@ -1213,8 +1212,13 @@ static const StreamDeckModelInfo models_vtable[] = {
       .columns = 4,
     },
     .touchscreen_layout = {
-      .width = 800,
-      .height = 200,
+      .n_slots = 4,
+      .image_info = {
+        .width = 800,
+        .height = 200,
+        .format = BS_IMAGE_FORMAT_JPEG,
+        .flags = BS_ICON_RENDERER_FLAG_NONE,
+      },
     },
     .reset = reset_gen2,
     .get_serial_number = get_serial_number_gen2,
@@ -1467,8 +1471,9 @@ out:
 
       touchscreen_region = bs_touchscreen_region_new ("touchscreen",
                                                       self,
-                                                      self->model_info->touchscreen_layout.width,
-                                                      self->model_info->touchscreen_layout.height,
+                                                      self->model_info->touchscreen_layout.n_slots,
+                                                      self->model_info->touchscreen_layout.image_info.width,
+                                                      self->model_info->touchscreen_layout.image_info.height,
                                                       0, row++, 1, 1);
 
       g_list_store_append (self->regions, touchscreen_region);

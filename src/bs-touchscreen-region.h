@@ -33,6 +33,7 @@ G_DECLARE_FINAL_TYPE (BsTouchscreenRegion, bs_touchscreen_region, BS, TOUCHSCREE
 
 BsTouchscreenRegion * bs_touchscreen_region_new (const char   *id,
                                                  BsStreamDeck *stream_deck,
+                                                 uint32_t      n_slots,
                                                  uint32_t      width,
                                                  uint32_t      height,
                                                  unsigned int  column,

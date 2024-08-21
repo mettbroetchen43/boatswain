@@ -109,6 +109,7 @@ bs_touchscreen_region_init (BsTouchscreenRegion *self)
 BsTouchscreenRegion *
 bs_touchscreen_region_new (const char   *id,
                            BsStreamDeck *stream_deck,
+                           uint32_t      n_slots,
                            uint32_t      width,
                            uint32_t      height,
                            unsigned int  column,
@@ -131,7 +132,7 @@ bs_touchscreen_region_new (const char   *id,
                        "row-span", row_span,
                        NULL);
 
-  self->touchscreen = bs_touchscreen_new (stream_deck,  width, height);
+  self->touchscreen = bs_touchscreen_new (stream_deck, n_slots, width, height);
 
   return g_steal_pointer (&self);
 }

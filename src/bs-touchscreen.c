@@ -20,6 +20,9 @@
  */
 
 #include "bs-touchscreen.h"
+#include "bs-touchscreen-slot-private.h"
+
+#include <gio/gio.h>
 
 struct _BsTouchscreen
 {
@@ -27,6 +30,7 @@ struct _BsTouchscreen
 
   uint32_t width;
   uint32_t height;
+  GListStore *slots;
 
   BsStreamDeck *stream_deck;
 };
@@ -41,6 +45,16 @@ enum {
 };
 
 static GParamSpec *properties [N_PROPS];
+
+static void
+bs_touchscreen_dispose (GObject *object)
+{
+  BsTouchscreen *self = (BsTouchscreen *) object;
+
+  g_clear_object (&self->slots);
+
+  G_OBJECT_CLASS (bs_touchscreen_parent_class)->dispose (object);
+}
 
 static void
 bs_touchscreen_get_property (GObject    *object,
@@ -93,6 +107,7 @@ bs_touchscreen_class_init (BsTouchscreenClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+  object_class->dispose = bs_touchscreen_dispose;
   object_class->get_property = bs_touchscreen_get_property;
   object_class->set_property = bs_touchscreen_set_property;
 
@@ -110,12 +125,14 @@ bs_touchscreen_class_init (BsTouchscreenClass *klass)
 static void
 bs_touchscreen_init (BsTouchscreen *self)
 {
+  self->slots = g_list_store_new (BS_TYPE_TOUCHSCREEN_SLOT);
   self->width = 1;
   self->height = 1;
 }
 
 BsTouchscreen *
 bs_touchscreen_new (BsStreamDeck *stream_deck,
+                    uint32_t      n_slots,
                     uint32_t      width,
                     uint32_t      height)
 {
@@ -126,6 +143,15 @@ bs_touchscreen_new (BsStreamDeck *stream_deck,
                        "height", height,
                        NULL);
   self->stream_deck = stream_deck;
+
+  for (uint32_t i = 0; i < n_slots; i++)
+    {
+      g_autoptr (BsTouchscreenSlot) slot = NULL;
+
+      slot = bs_touchscreen_slot_new (self, width / n_slots, height);
+
+      g_list_store_append (self->slots, slot);
+    }
 
   return g_steal_pointer (&self);
 }

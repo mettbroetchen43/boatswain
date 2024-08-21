@@ -26,6 +26,7 @@
 G_BEGIN_DECLS
 
 BsTouchscreen * bs_touchscreen_new (BsStreamDeck *stream_deck,
+                                    uint32_t      n_slots,
                                     uint32_t      width,
                                     uint32_t      height);
 
