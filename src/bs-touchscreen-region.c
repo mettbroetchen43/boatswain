@@ -21,6 +21,7 @@
 
 #include "bs-touchscreen-region.h"
 
+#include "bs-renderer.h"
 #include "bs-stream-deck.h"
 #include "bs-touchscreen-private.h"
 
@@ -29,6 +30,7 @@ struct _BsTouchscreenRegion
   BsDeviceRegion parent_instance;
 
   BsTouchscreen *touchscreen;
+  BsRenderer *renderer;
 };
 
 G_DEFINE_FINAL_TYPE (BsTouchscreenRegion, bs_touchscreen_region, BS_TYPE_DEVICE_REGION)
@@ -41,12 +43,33 @@ enum {
 
 static GParamSpec *properties [N_PROPS];
 
+
+/*
+ * BsDeviceRegion overrides
+ */
+
+static BsRenderer *
+bs_touchscreen_region_get_renderer (BsDeviceRegion *region)
+{
+  BsTouchscreenRegion *self = (BsTouchscreenRegion *) region;
+
+  g_assert (BS_IS_TOUCHSCREEN_REGION (self));
+
+  return self->renderer;
+}
+
+
+/*
+ * GObject overrides
+ */
+
 static void
 bs_touchscreen_region_finalize (GObject *object)
 {
   BsTouchscreenRegion *self = (BsTouchscreenRegion *)object;
 
   g_clear_object (&self->touchscreen);
+  g_clear_object (&self->renderer);
 
   G_OBJECT_CLASS (bs_touchscreen_region_parent_class)->finalize (object);
 }
@@ -89,10 +112,13 @@ static void
 bs_touchscreen_region_class_init (BsTouchscreenRegionClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  BsDeviceRegionClass *device_region_class = BS_DEVICE_REGION_CLASS (klass);
 
   object_class->finalize = bs_touchscreen_region_finalize;
   object_class->get_property = bs_touchscreen_region_get_property;
   object_class->set_property = bs_touchscreen_region_set_property;
+
+  device_region_class->get_renderer = bs_touchscreen_region_get_renderer;
 
   properties[PROP_TOUCHSCREEN] = g_param_spec_object ("touchscreen", NULL, NULL,
                                                       BS_TYPE_TOUCHSCREEN,
@@ -107,21 +133,19 @@ bs_touchscreen_region_init (BsTouchscreenRegion *self)
 }
 
 BsTouchscreenRegion *
-bs_touchscreen_region_new (const char   *id,
-                           BsStreamDeck *stream_deck,
-                           uint32_t      n_slots,
-                           uint32_t      width,
-                           uint32_t      height,
-                           unsigned int  column,
-                           unsigned int  row,
-                           unsigned int  column_span,
-                           unsigned int  row_span)
+bs_touchscreen_region_new (const char        *id,
+                           BsStreamDeck      *stream_deck,
+                           const BsImageInfo *image_info,
+                           uint32_t           n_slots,
+                           unsigned int       column,
+                           unsigned int       row,
+                           unsigned int       column_span,
+                           unsigned int       row_span)
 {
   g_autoptr (BsTouchscreenRegion) self = NULL;
 
   g_assert (BS_IS_STREAM_DECK (stream_deck));
-  g_assert (width > 0);
-  g_assert (height > 0);
+  g_assert (image_info != NULL);
 
   self = g_object_new (BS_TYPE_TOUCHSCREEN_REGION,
                        "id", id,
@@ -132,7 +156,8 @@ bs_touchscreen_region_new (const char   *id,
                        "row-span", row_span,
                        NULL);
 
-  self->touchscreen = bs_touchscreen_new (stream_deck, n_slots, width, height);
+  self->renderer = bs_renderer_new (image_info);
+  self->touchscreen = bs_touchscreen_new (stream_deck, n_slots, image_info->width, image_info->height);
 
   return g_steal_pointer (&self);
 }

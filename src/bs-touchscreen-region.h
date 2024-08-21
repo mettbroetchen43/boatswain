@@ -31,14 +31,13 @@ G_BEGIN_DECLS
 #define BS_TYPE_TOUCHSCREEN_REGION (bs_touchscreen_region_get_type())
 G_DECLARE_FINAL_TYPE (BsTouchscreenRegion, bs_touchscreen_region, BS, TOUCHSCREEN_REGION, BsDeviceRegion)
 
-BsTouchscreenRegion * bs_touchscreen_region_new (const char   *id,
-                                                 BsStreamDeck *stream_deck,
-                                                 uint32_t      n_slots,
-                                                 uint32_t      width,
-                                                 uint32_t      height,
-                                                 unsigned int  column,
-                                                 unsigned int  row,
-                                                 unsigned int  column_span,
-                                                 unsigned int  row_span);
+BsTouchscreenRegion * bs_touchscreen_region_new (const char        *id,
+                                                 BsStreamDeck      *stream_deck,
+                                                 const BsImageInfo *image_info,
+                                                 uint32_t           n_slots,
+                                                 unsigned int       column,
+                                                 unsigned int       row,
+                                                 unsigned int       column_span,
+                                                 unsigned int       row_span);
 
 G_END_DECLS

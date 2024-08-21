@@ -1467,9 +1467,8 @@ out:
 
       touchscreen_region = bs_touchscreen_region_new ("touchscreen",
                                                       self,
+                                                      &self->model_info->touchscreen_layout.image_info,
                                                       self->model_info->touchscreen_layout.n_slots,
-                                                      self->model_info->touchscreen_layout.image_info.width,
-                                                      self->model_info->touchscreen_layout.image_info.height,
                                                       0, row++, 1, 1);
 
       g_list_store_append (self->regions, touchscreen_region);
