@@ -31,6 +31,7 @@ struct _BsButtonGridRegion
   BsDeviceRegion parent_instance;
 
   GListStore *buttons;
+  BsRenderer *renderer;
 
   BsImageInfo image_info;
   unsigned int grid_columns;
@@ -47,12 +48,32 @@ enum {
 
 static GParamSpec *properties [N_PROPS];
 
+
+/*
+ * BsDeviceRegion overrides
+ */
+
+static BsRenderer *
+bs_button_grid_region_get_renderer (BsDeviceRegion *region)
+{
+  BsButtonGridRegion *self = (BsButtonGridRegion *) region;
+
+  g_assert (BS_IS_BUTTON_GRID_REGION (self));
+
+  return self->renderer;
+}
+
+/*
+ * GObject overrides
+ */
+
 static void
 bs_button_grid_region_finalize (GObject *object)
 {
   BsButtonGridRegion *self = (BsButtonGridRegion *)object;
 
   g_clear_object (&self->buttons);
+  g_clear_object (&self->renderer);
 
   G_OBJECT_CLASS (bs_button_grid_region_parent_class)->finalize (object);
 }
@@ -103,10 +124,13 @@ static void
 bs_button_grid_region_class_init (BsButtonGridRegionClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  BsDeviceRegionClass *device_region_class = BS_DEVICE_REGION_CLASS (klass);
 
   object_class->finalize = bs_button_grid_region_finalize;
   object_class->get_property = bs_button_grid_region_get_property;
   object_class->set_property = bs_button_grid_region_set_property;
+
+  device_region_class->get_renderer = bs_button_grid_region_get_renderer;
 
   properties[PROP_BUTTONS] = g_param_spec_object ("buttons", NULL, NULL,
                                                   G_TYPE_LIST_MODEL,
@@ -154,6 +178,7 @@ bs_button_grid_region_new (const char         *id,
 
   /* TODO: make it a construct-only property */
   self->image_info = *image_info;
+  self->renderer = bs_renderer_new (&self->image_info);
 
   for (unsigned int i = 0; i < n_buttons; i++)
     {
