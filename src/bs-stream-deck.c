@@ -179,13 +179,6 @@ find_button_at_region (BsStreamDeck *self,
   return button;
 }
 
-static inline BsRenderer *
-get_renderer_for_region (BsStreamDeck   *self,
-                         BsDeviceRegion *region)
-{
-  return g_hash_table_lookup (self->renderers, region);
-}
-
 static void
 update_pages (BsStreamDeck *self)
 {
@@ -410,6 +403,7 @@ set_button_texture_mini (BsStreamDeck  *self,
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
+  BsDeviceRegion *region;
   BsRenderer *renderer;
   const size_t package_size = 1024;
   const size_t header_size = 16;
@@ -419,7 +413,9 @@ set_button_texture_mini (BsStreamDeck  *self,
 
   BS_ENTRY;
 
-  renderer = get_renderer_for_region (self, bs_button_get_region (button));
+  region = bs_button_get_region (button);
+  renderer = bs_device_region_get_renderer (region);
+
   if (!bs_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
@@ -576,6 +572,7 @@ set_button_texture_original (BsStreamDeck  *self,
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
+  BsDeviceRegion *region;
   BsRenderer *renderer;
   const size_t package_size = 8191;
   const size_t header_size = 16;
@@ -587,7 +584,9 @@ set_button_texture_original (BsStreamDeck  *self,
 
   BS_ENTRY;
 
-  renderer = get_renderer_for_region (self, bs_button_get_region (button));
+  region = bs_button_get_region (button);
+  renderer = bs_device_region_get_renderer (region);
+
   if (!bs_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
@@ -763,6 +762,7 @@ set_button_texture_gen2 (BsStreamDeck  *self,
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
+  BsDeviceRegion *region;
   BsRenderer *renderer;
   const size_t package_size = 1024;
   const size_t header_size = 8;
@@ -772,7 +772,9 @@ set_button_texture_gen2 (BsStreamDeck  *self,
 
   BS_ENTRY;
 
-  renderer = get_renderer_for_region (self, bs_button_get_region (button));
+  region = bs_button_get_region (button);
+  renderer = bs_device_region_get_renderer (region);
+
   if (!bs_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
@@ -1813,6 +1815,7 @@ bs_stream_deck_upload_button (BsStreamDeck  *self,
                               GError       **error)
 {
   g_autoptr (GdkTexture) texture = NULL;
+  BsDeviceRegion *region;
   BsRenderer *renderer;
   BsIcon *icon;
 
@@ -1820,7 +1823,8 @@ bs_stream_deck_upload_button (BsStreamDeck  *self,
   g_return_val_if_fail (self->model_info->set_button_texture != NULL, FALSE);
 
   icon = bs_button_get_icon (button);
-  renderer = get_renderer_for_region (self, bs_button_get_region (button));
+  region = bs_button_get_region (button);
+  renderer = bs_device_region_get_renderer (region);
   texture = bs_renderer_compose_icon (renderer, icon, error);
 
   if (!texture)
