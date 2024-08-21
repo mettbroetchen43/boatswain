@@ -1,4 +1,4 @@
-/* bs-icon-renderer.c
+/* bs-renderer.c
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -19,9 +19,9 @@
  */
 
 #include "bs-icon.h"
-#include "bs-icon-renderer.h"
+#include "bs-renderer.h"
 
-struct _BsIconRenderer
+struct _BsRenderer
 {
   GObject parent_instance;
 
@@ -29,47 +29,47 @@ struct _BsIconRenderer
   GskRenderer *renderer;
 };
 
-G_DEFINE_FINAL_TYPE (BsIconRenderer, bs_icon_renderer, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (BsRenderer, bs_renderer, G_TYPE_OBJECT)
 
 static void
-bs_icon_renderer_finalize (GObject *object)
+bs_renderer_finalize (GObject *object)
 {
-  BsIconRenderer *self = (BsIconRenderer *)object;
+  BsRenderer *self = (BsRenderer *)object;
 
   g_clear_object (&self->renderer);
 
-  G_OBJECT_CLASS (bs_icon_renderer_parent_class)->finalize (object);
+  G_OBJECT_CLASS (bs_renderer_parent_class)->finalize (object);
 }
 
 static void
-bs_icon_renderer_class_init (BsIconRendererClass *klass)
+bs_renderer_class_init (BsRendererClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = bs_icon_renderer_finalize;
+  object_class->finalize = bs_renderer_finalize;
 }
 
 static void
-bs_icon_renderer_init (BsIconRenderer *self)
+bs_renderer_init (BsRenderer *self)
 {
   self->renderer = gsk_cairo_renderer_new ();
 }
 
-BsIconRenderer *
-bs_icon_renderer_new (const BsImageInfo *image_info)
+BsRenderer *
+bs_renderer_new (const BsImageInfo *image_info)
 {
-  BsIconRenderer *self;
+  BsRenderer *self;
 
-  self = g_object_new (BS_TYPE_ICON_RENDERER, NULL);
+  self = g_object_new (BS_TYPE_RENDERER, NULL);
   self->image_info = *image_info;
 
   return self;
 }
 
 GdkTexture *
-bs_icon_renderer_compose_icon (BsIconRenderer  *self,
-                               BsIcon          *icon,
-                               GError         **error)
+bs_renderer_compose_icon (BsRenderer  *self,
+                          BsIcon      *icon,
+                          GError     **error)
 {
   g_autoptr (GtkSnapshot) snapshot = NULL;
   g_autoptr (GskRenderNode) node = NULL;
@@ -77,17 +77,17 @@ bs_icon_renderer_compose_icon (BsIconRenderer  *self,
   gboolean flip_x;
   gboolean flip_y;
 
-  g_return_val_if_fail (BS_IS_ICON_RENDERER (self), NULL);
+  g_return_val_if_fail (BS_IS_RENDERER (self), NULL);
 
   if (!gsk_renderer_realize (self->renderer, NULL, error))
     return NULL;
 
   snapshot = gtk_snapshot_new ();
 
-  flip_x = self->image_info.flags & BS_ICON_RENDERER_FLAG_FLIP_X;
-  flip_y = self->image_info.flags & BS_ICON_RENDERER_FLAG_FLIP_Y;
+  flip_x = self->image_info.flags & BS_RENDERER_FLAG_FLIP_X;
+  flip_y = self->image_info.flags & BS_RENDERER_FLAG_FLIP_Y;
 
-  if (self->image_info.flags & BS_ICON_RENDERER_FLAG_ROTATE_90)
+  if (self->image_info.flags & BS_RENDERER_FLAG_ROTATE_90)
     {
       gtk_snapshot_translate (snapshot,
                               &GRAPHENE_POINT_INIT (self->image_info.width / 2,
@@ -129,15 +129,15 @@ bs_icon_renderer_compose_icon (BsIconRenderer  *self,
 }
 
 gboolean
-bs_icon_renderer_convert_texture (BsIconRenderer  *self,
-                                  GdkTexture      *texture,
-                                  char           **buffer,
-                                  size_t          *buffer_len,
-                                  GError         **error)
+bs_renderer_convert_texture (BsRenderer  *self,
+                             GdkTexture  *texture,
+                             char       **buffer,
+                             size_t      *buffer_len,
+                             GError     **error)
 {
   g_autoptr (GdkPixbuf) pixbuf = NULL;
 
-  g_return_val_if_fail (BS_IS_ICON_RENDERER (self), FALSE);
+  g_return_val_if_fail (BS_IS_RENDERER (self), FALSE);
   g_return_val_if_fail (GDK_IS_TEXTURE (texture), FALSE);
   g_return_val_if_fail (buffer != NULL, FALSE);
   g_return_val_if_fail (buffer_len != NULL, FALSE);

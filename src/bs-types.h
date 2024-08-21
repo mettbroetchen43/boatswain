@@ -24,8 +24,8 @@
 
 G_BEGIN_DECLS
 
-typedef enum _BsIconRendererFlags BsIconRendererFlags;
 typedef enum _BsImageFormat BsImageFormat;
+typedef enum _BsRendererFlags BsRendererFlags;
 
 typedef struct _BsAction BsAction;
 typedef struct _BsActionFactory BsActionFactory;
@@ -39,11 +39,11 @@ typedef struct _BsDeviceRegion BsDeviceRegion;
 typedef struct _BsDial BsDial;
 typedef struct _BsEmptyAction BsEmptyAction;
 typedef struct _BsIcon BsIcon;
-typedef struct _BsIconRenderer BsIconRenderer;
 typedef struct _BsImageInfo BsImageInfo;
 typedef struct _BsPage BsPage;
 typedef struct _BsPageItem BsPageItem;
 typedef struct _BsProfile BsProfile;
+typedef struct _BsRenderer BsRenderer;
 typedef struct _BsStreamDeck BsStreamDeck;
 typedef struct _BsStreamDeckEditor BsStreamDeckEditor;
 typedef struct _BsTouchscreen BsTouchscreen;

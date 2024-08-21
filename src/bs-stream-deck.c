@@ -22,19 +22,19 @@
 
 #include "bs-action.h"
 #include "bs-button-grid-region.h"
+#include "bs-button-private.h"
 #include "bs-debug.h"
 #include "bs-device-enums.h"
 #include "bs-device-region.h"
 #include "bs-dial-private.h"
 #include "bs-dial-grid-region.h"
 #include "bs-icon.h"
-#include "bs-icon-renderer.h"
 #include "bs-page.h"
 #include "bs-profile.h"
+#include "bs-renderer.h"
 #include "bs-stream-deck-private.h"
 #include "bs-touchscreen-private.h"
 #include "bs-touchscreen-region.h"
-#include "bs-button-private.h"
 
 #include <glib/gi18n.h>
 #include <hidapi.h>
@@ -179,7 +179,7 @@ find_button_at_region (BsStreamDeck *self,
   return button;
 }
 
-static inline BsIconRenderer *
+static inline BsRenderer *
 get_renderer_for_region (BsStreamDeck   *self,
                          BsDeviceRegion *region)
 {
@@ -410,7 +410,7 @@ set_button_texture_mini (BsStreamDeck  *self,
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
-  BsIconRenderer *renderer;
+  BsRenderer *renderer;
   const size_t package_size = 1024;
   const size_t header_size = 16;
   uint8_t page;
@@ -420,7 +420,7 @@ set_button_texture_mini (BsStreamDeck  *self,
   BS_ENTRY;
 
   renderer = get_renderer_for_region (self, bs_button_get_region (button));
-  if (!bs_icon_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
+  if (!bs_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
   payload = g_malloc (sizeof (uint8_t) * package_size);
@@ -576,7 +576,7 @@ set_button_texture_original (BsStreamDeck  *self,
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
-  BsIconRenderer *renderer;
+  BsRenderer *renderer;
   const size_t package_size = 8191;
   const size_t header_size = 16;
   uint8_t button_index;
@@ -588,7 +588,7 @@ set_button_texture_original (BsStreamDeck  *self,
   BS_ENTRY;
 
   renderer = get_renderer_for_region (self, bs_button_get_region (button));
-  if (!bs_icon_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
+  if (!bs_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
   report_size = buffer_size / 2;
@@ -763,7 +763,7 @@ set_button_texture_gen2 (BsStreamDeck  *self,
 {
   g_autofree uint8_t *payload = NULL;
   g_autofree uint8_t *buffer = NULL;
-  BsIconRenderer *renderer;
+  BsRenderer *renderer;
   const size_t package_size = 1024;
   const size_t header_size = 8;
   uint8_t page;
@@ -773,7 +773,7 @@ set_button_texture_gen2 (BsStreamDeck  *self,
   BS_ENTRY;
 
   renderer = get_renderer_for_region (self, bs_button_get_region (button));
-  if (!bs_icon_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
+  if (!bs_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
     BS_RETURN (FALSE);
 
   payload = g_malloc (package_size * sizeof (uint8_t));
@@ -1002,7 +1002,7 @@ static const StreamDeckModelInfo models_vtable[] = {
         .width = 80,
         .height = 80,
         .format = BS_IMAGE_FORMAT_BMP,
-        .flags = BS_ICON_RENDERER_FLAG_FLIP_Y | BS_ICON_RENDERER_FLAG_ROTATE_90,
+        .flags = BS_RENDERER_FLAG_FLIP_Y | BS_RENDERER_FLAG_ROTATE_90,
       },
     },
     .reset = reset_mini_original,
@@ -1027,7 +1027,7 @@ static const StreamDeckModelInfo models_vtable[] = {
         .width = 80,
         .height = 80,
         .format = BS_IMAGE_FORMAT_BMP,
-        .flags = BS_ICON_RENDERER_FLAG_FLIP_Y | BS_ICON_RENDERER_FLAG_ROTATE_90,
+        .flags = BS_RENDERER_FLAG_FLIP_Y | BS_RENDERER_FLAG_ROTATE_90,
       },
     },
     .reset = reset_mini_original,
@@ -1052,7 +1052,7 @@ static const StreamDeckModelInfo models_vtable[] = {
         .width = 72,
         .height = 72,
         .format = BS_IMAGE_FORMAT_BMP,
-        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+        .flags = BS_RENDERER_FLAG_FLIP_X | BS_RENDERER_FLAG_FLIP_Y,
       },
     },
     .reset = reset_mini_original,
@@ -1077,7 +1077,7 @@ static const StreamDeckModelInfo models_vtable[] = {
         .width = 72,
         .height = 72,
         .format = BS_IMAGE_FORMAT_JPEG,
-        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+        .flags = BS_RENDERER_FLAG_FLIP_X | BS_RENDERER_FLAG_FLIP_Y,
       },
     },
     .reset = reset_gen2,
@@ -1102,7 +1102,7 @@ static const StreamDeckModelInfo models_vtable[] = {
         .width = 96,
         .height = 96,
         .format = BS_IMAGE_FORMAT_JPEG,
-        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+        .flags = BS_RENDERER_FLAG_FLIP_X | BS_RENDERER_FLAG_FLIP_Y,
       },
     },
     .reset = reset_gen2,
@@ -1127,7 +1127,7 @@ static const StreamDeckModelInfo models_vtable[] = {
         .width = 96,
         .height = 96,
         .format = BS_IMAGE_FORMAT_JPEG,
-        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+        .flags = BS_RENDERER_FLAG_FLIP_X | BS_RENDERER_FLAG_FLIP_Y,
       },
     },
     .reset = reset_gen2,
@@ -1152,7 +1152,7 @@ static const StreamDeckModelInfo models_vtable[] = {
         .width = 72,
         .height = 72,
         .format = BS_IMAGE_FORMAT_JPEG,
-        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+        .flags = BS_RENDERER_FLAG_FLIP_X | BS_RENDERER_FLAG_FLIP_Y,
       },
     },
     .reset = reset_gen2,
@@ -1177,7 +1177,7 @@ static const StreamDeckModelInfo models_vtable[] = {
         .width = 96,
         .height = 96,
         .format = BS_IMAGE_FORMAT_JPEG,
-        .flags = BS_ICON_RENDERER_FLAG_NONE,
+        .flags = BS_RENDERER_FLAG_NONE,
       },
     },
     .reset = reset_pedal,
@@ -1204,7 +1204,7 @@ static const StreamDeckModelInfo models_vtable[] = {
         .width = 120,
         .height = 120,
         .format = BS_IMAGE_FORMAT_JPEG,
-        .flags = BS_ICON_RENDERER_FLAG_NONE,
+        .flags = BS_RENDERER_FLAG_NONE,
       },
     },
     .dial_layout = {
@@ -1217,7 +1217,7 @@ static const StreamDeckModelInfo models_vtable[] = {
         .width = 800,
         .height = 200,
         .format = BS_IMAGE_FORMAT_JPEG,
-        .flags = BS_ICON_RENDERER_FLAG_NONE,
+        .flags = BS_RENDERER_FLAG_NONE,
       },
     },
     .reset = reset_gen2,
@@ -1286,7 +1286,7 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
         .width = 72,
         .height = 72,
         .format = BS_IMAGE_FORMAT_JPEG,
-        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+        .flags = BS_RENDERER_FLAG_FLIP_X | BS_RENDERER_FLAG_FLIP_Y,
       },
     },
     .reset = reset_fake,
@@ -1308,7 +1308,7 @@ static const StreamDeckModelInfo fake_models_vtable[] = {
         .width = 96,
         .height = 96,
         .format = BS_IMAGE_FORMAT_JPEG,
-        .flags = BS_ICON_RENDERER_FLAG_FLIP_X | BS_ICON_RENDERER_FLAG_FLIP_Y,
+        .flags = BS_RENDERER_FLAG_FLIP_X | BS_RENDERER_FLAG_FLIP_Y,
       },
     },
     .reset = reset_fake,
@@ -1450,7 +1450,7 @@ out:
   if (self->model_info->features & BS_STREAM_DECK_FEATURE_BUTTONS)
     {
       g_autoptr (BsButtonGridRegion) button_grid = NULL;
-      g_autoptr (BsIconRenderer) renderer = NULL;
+      g_autoptr (BsRenderer) renderer = NULL;
 
       button_grid = bs_button_grid_region_new ("main-button-grid",
                                                self,
@@ -1461,7 +1461,7 @@ out:
 
       g_list_store_append (self->regions, button_grid);
 
-      renderer = bs_icon_renderer_new (&self->model_info->button_layout.image_info);
+      renderer = bs_renderer_new (&self->model_info->button_layout.image_info);
       g_hash_table_insert (self->renderers, button_grid, g_steal_pointer (&renderer));
     }
 
@@ -1813,7 +1813,7 @@ bs_stream_deck_upload_button (BsStreamDeck  *self,
                               GError       **error)
 {
   g_autoptr (GdkTexture) texture = NULL;
-  BsIconRenderer *renderer;
+  BsRenderer *renderer;
   BsIcon *icon;
 
   g_return_val_if_fail (BS_IS_STREAM_DECK (self), FALSE);
@@ -1821,7 +1821,7 @@ bs_stream_deck_upload_button (BsStreamDeck  *self,
 
   icon = bs_button_get_icon (button);
   renderer = get_renderer_for_region (self, bs_button_get_region (button));
-  texture = bs_icon_renderer_compose_icon (renderer, icon, error);
+  texture = bs_renderer_compose_icon (renderer, icon, error);
 
   if (!texture)
     return FALSE;

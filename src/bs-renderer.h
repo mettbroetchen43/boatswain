@@ -1,4 +1,4 @@
-/* bs-icon-renderer.h
+/* bs-renderer.h
  *
  * Copyright 2022 Georges Basile Stavracas Neto <georges.stavracas@gmail.com>
  *
@@ -27,12 +27,12 @@
 
 G_BEGIN_DECLS
 
-enum _BsIconRendererFlags
+enum _BsRendererFlags
 {
-  BS_ICON_RENDERER_FLAG_NONE = 0,
-  BS_ICON_RENDERER_FLAG_FLIP_X = 1 << 0,
-  BS_ICON_RENDERER_FLAG_FLIP_Y = 1 << 1,
-  BS_ICON_RENDERER_FLAG_ROTATE_90 = 1 << 2,
+  BS_RENDERER_FLAG_NONE = 0,
+  BS_RENDERER_FLAG_FLIP_X = 1 << 0,
+  BS_RENDERER_FLAG_FLIP_Y = 1 << 1,
+  BS_RENDERER_FLAG_ROTATE_90 = 1 << 2,
 };
 
 enum _BsImageFormat
@@ -44,24 +44,24 @@ enum _BsImageFormat
 struct _BsImageInfo
 {
   BsImageFormat format;
-  BsIconRendererFlags flags;
+  BsRendererFlags flags;
   uint32_t width;
   uint32_t height;
 };
 
-#define BS_TYPE_ICON_RENDERER (bs_icon_renderer_get_type())
-G_DECLARE_FINAL_TYPE (BsIconRenderer, bs_icon_renderer, BS, ICON_RENDERER, GObject)
+#define BS_TYPE_RENDERER (bs_renderer_get_type())
+G_DECLARE_FINAL_TYPE (BsRenderer, bs_renderer, BS, RENDERER, GObject)
 
-BsIconRenderer * bs_icon_renderer_new (const BsImageInfo *layout);
+BsRenderer * bs_renderer_new (const BsImageInfo *layout);
 
-GdkTexture * bs_icon_renderer_compose_icon (BsIconRenderer  *self,
-                                            BsIcon          *icon,
-                                            GError         **error);
+GdkTexture * bs_renderer_compose_icon (BsRenderer  *self,
+                                       BsIcon      *icon,
+                                       GError     **error);
 
-gboolean bs_icon_renderer_convert_texture (BsIconRenderer  *self,
-                                           GdkTexture      *texture,
-                                           char           **buffer,
-                                           size_t          *buffer_len,
-                                           GError         **error);
+gboolean bs_renderer_convert_texture (BsRenderer  *self,
+                                      GdkTexture  *texture,
+                                      char       **buffer,
+                                      size_t      *buffer_len,
+                                      GError     **error);
 
 G_END_DECLS

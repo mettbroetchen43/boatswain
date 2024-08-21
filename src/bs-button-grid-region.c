@@ -21,10 +21,10 @@
 
 #include "bs-button-grid-region.h"
 
-#include "bs-device-region.h"
-#include "bs-icon-renderer.h"
-#include "bs-stream-deck.h"
 #include "bs-button-private.h"
+#include "bs-device-region.h"
+#include "bs-renderer.h"
+#include "bs-stream-deck.h"
 
 struct _BsButtonGridRegion
 {

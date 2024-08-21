@@ -27,7 +27,6 @@
 #include "bs-dial-grid-region.h"
 #include "bs-dial-widget.h"
 #include "bs-icon.h"
-#include "bs-icon-renderer.h"
 #include "bs-page.h"
 #include "bs-stream-deck.h"
 #include "bs-button.h"
