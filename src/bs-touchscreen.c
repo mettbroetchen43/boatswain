@@ -184,3 +184,11 @@ bs_touchscreen_get_height (BsTouchscreen *self)
 
   return self->height;
 }
+
+BsTouchscreenContent *
+bs_touchscreen_get_content (BsTouchscreen *self)
+{
+  g_assert (BS_IS_TOUCHSCREEN (self));
+
+  return self->content;
+}
