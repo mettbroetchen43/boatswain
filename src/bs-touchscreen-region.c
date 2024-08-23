@@ -157,7 +157,10 @@ bs_touchscreen_region_new (const char        *id,
                        NULL);
 
   self->renderer = bs_renderer_new (image_info);
-  self->touchscreen = bs_touchscreen_new (stream_deck, n_slots, image_info->width, image_info->height);
+  self->touchscreen = bs_touchscreen_new (BS_DEVICE_REGION (self),
+                                          n_slots,
+                                          image_info->width,
+                                          image_info->height);
 
   return g_steal_pointer (&self);
 }

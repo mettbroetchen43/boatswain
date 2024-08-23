@@ -35,7 +35,7 @@ struct _BsTouchscreen
 
   BsTouchscreenContent *content;
 
-  BsStreamDeck *stream_deck;
+  BsDeviceRegion *region;
 };
 
 G_DEFINE_FINAL_TYPE (BsTouchscreen, bs_touchscreen, G_TYPE_OBJECT)
@@ -134,10 +134,10 @@ bs_touchscreen_init (BsTouchscreen *self)
 }
 
 BsTouchscreen *
-bs_touchscreen_new (BsStreamDeck *stream_deck,
-                    uint32_t      n_slots,
-                    uint32_t      width,
-                    uint32_t      height)
+bs_touchscreen_new (BsDeviceRegion *region,
+                    uint32_t        n_slots,
+                    uint32_t        width,
+                    uint32_t        height)
 {
   g_autoptr (BsTouchscreen) self = NULL;
 
@@ -145,7 +145,7 @@ bs_touchscreen_new (BsStreamDeck *stream_deck,
                        "width", width,
                        "height", height,
                        NULL);
-  self->stream_deck = stream_deck;
+  self->region = region;
 
   for (uint32_t i = 0; i < n_slots; i++)
     {
@@ -161,12 +161,12 @@ bs_touchscreen_new (BsStreamDeck *stream_deck,
   return g_steal_pointer (&self);
 }
 
-BsStreamDeck *
-bs_touchscreen_get_stream_deck (BsTouchscreen *self)
+BsDeviceRegion *
+bs_touchscreen_get_region (BsTouchscreen *self)
 {
   g_assert (BS_IS_TOUCHSCREEN (self));
 
-  return self->stream_deck;
+  return self->region;
 }
 
 uint32_t

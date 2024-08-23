@@ -25,12 +25,12 @@
 
 G_BEGIN_DECLS
 
-BsTouchscreen * bs_touchscreen_new (BsStreamDeck *stream_deck,
-                                    uint32_t      n_slots,
-                                    uint32_t      width,
-                                    uint32_t      height);
+BsTouchscreen * bs_touchscreen_new (BsDeviceRegion *region,
+                                    uint32_t        n_slots,
+                                    uint32_t        width,
+                                    uint32_t        height);
 
-BsStreamDeck * bs_touchscreen_get_stream_deck (BsTouchscreen *self);
+BsDeviceRegion * bs_touchscreen_get_region (BsTouchscreen *self);
 
 uint32_t bs_touchscreen_get_width (BsTouchscreen *self);
 uint32_t bs_touchscreen_get_height (BsTouchscreen *self);
