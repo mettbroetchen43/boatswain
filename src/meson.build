@@ -27,6 +27,7 @@ boatswain_sources = [
   'bs-stream-deck.c',
   'bs-stream-deck-editor.c',
   'bs-touchscreen.c',
+  'bs-touchscreen-content.c',
   'bs-touchscreen-region.c',
   'bs-touchscreen-slot.c',
   'bs-window.c',
