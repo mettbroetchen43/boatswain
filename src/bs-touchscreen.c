@@ -20,6 +20,7 @@
  */
 
 #include "bs-touchscreen.h"
+#include "bs-touchscreen-content.h"
 #include "bs-touchscreen-slot-private.h"
 
 #include <gio/gio.h>
@@ -31,6 +32,8 @@ struct _BsTouchscreen
   uint32_t width;
   uint32_t height;
   GListStore *slots;
+
+  BsTouchscreenContent *content;
 
   BsStreamDeck *stream_deck;
 };
@@ -152,6 +155,8 @@ bs_touchscreen_new (BsStreamDeck *stream_deck,
 
       g_list_store_append (self->slots, slot);
     }
+
+  self->content = bs_touchscreen_content_new (G_LIST_MODEL (self->slots), width, height);
 
   return g_steal_pointer (&self);
 }
