@@ -128,6 +128,60 @@ bs_renderer_compose_icon (BsRenderer  *self,
   return g_steal_pointer (&texture);
 }
 
+GdkTexture *
+bs_renderer_compose_touchscreen_content (BsRenderer            *self,
+                                         BsTouchscreenContent  *content,
+                                         GError               **error)
+{
+  g_autoptr (GskRenderNode) node = NULL;
+  g_autoptr (GtkSnapshot) snapshot = NULL;
+  g_autoptr (GdkTexture) texture = NULL;
+  gboolean flip_x;
+  gboolean flip_y;
+
+  g_return_val_if_fail (BS_IS_RENDERER (self), NULL);
+
+  if (!gsk_renderer_realize (self->renderer, NULL, error))
+    return NULL;
+
+  flip_x = self->image_info.flags & BS_RENDERER_FLAG_FLIP_X;
+  flip_y = self->image_info.flags & BS_RENDERER_FLAG_FLIP_Y;
+
+  snapshot = gtk_snapshot_new ();
+
+  if (self->image_info.flags & BS_RENDERER_FLAG_ROTATE_90)
+    {
+      gtk_snapshot_translate (snapshot,
+                              &GRAPHENE_POINT_INIT (self->image_info.width / 2,
+                                                    self->image_info.height / 2));
+      gtk_snapshot_rotate (snapshot, 90.0);
+      gtk_snapshot_translate (snapshot,
+                              &GRAPHENE_POINT_INIT (- self->image_info.width / 2,
+                                                    - self->image_info.height / 2));
+    }
+
+  gtk_snapshot_translate (snapshot,
+                          &GRAPHENE_POINT_INIT (flip_x ? self->image_info.width : 0,
+                                                flip_y ? self->image_info.height : 0));
+  gtk_snapshot_scale (snapshot,
+                      flip_x ? -1.0 : 1.0,
+                      flip_y ? -1.0 : 1.0);
+
+  gdk_paintable_snapshot (GDK_PAINTABLE (content),
+                          snapshot,
+                          self->image_info.width,
+                          self->image_info.height);
+
+  node = gtk_snapshot_free_to_node (g_steal_pointer (&snapshot));
+
+  texture = gsk_renderer_render_texture (self->renderer,
+                                         node,
+                                         &GRAPHENE_RECT_INIT (0, 0, self->image_info.width, self->image_info.height));
+  gsk_renderer_unrealize (self->renderer);
+
+  return g_steal_pointer (&texture);
+}
+
 gboolean
 bs_renderer_convert_texture (BsRenderer  *self,
                              GdkTexture  *texture,

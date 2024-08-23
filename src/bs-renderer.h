@@ -58,6 +58,10 @@ GdkTexture * bs_renderer_compose_icon (BsRenderer  *self,
                                        BsIcon      *icon,
                                        GError     **error);
 
+GdkTexture * bs_renderer_compose_touchscreen_content (BsRenderer            *self,
+                                                      BsTouchscreenContent  *content,
+                                                      GError               **error);
+
 gboolean bs_renderer_convert_texture (BsRenderer  *self,
                                       GdkTexture  *texture,
                                       char       **buffer,
