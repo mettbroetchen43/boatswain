@@ -2,14 +2,14 @@
 # Copyright (C) 2023-2024 boatswain's COPYRIGHT HOLDER
 # This file is distributed under the same license as the boatswain package.
 #
-# Sabri Ünal <libreajans@gmail.com>, 2023, 2024.
+# Sabri Ünal <yakushabb@gmail.com>, 2023, 2024.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2024-04-30 19:27+0000\n"
+"POT-Creation-Date: 2024-08-10 01:14+0000\n"
 "PO-Revision-Date: 2024-05-01 02:10+0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
@@ -29,6 +29,11 @@ msgstr "Boatswain"
 #: data/com.feaneron.Boatswain.desktop.in.in:11
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream deck;streaming;deck;elgato;akış;yayın;"
+
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "Masaüstü denetleyicisi için geri yükleme jetonu"
 
 #: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
@@ -76,11 +81,6 @@ msgstr "Oyun skorunu izle"
 #: data/com.feaneron.Boatswain.metainfo.xml.in.in:24
 msgid "Open files and launch applications"
 msgstr "Dosyaları aç ve uygulamaları başlat"
-
-#: data/com.feaneron.Boatswain.gschema.xml:7
-#: data/com.feaneron.Boatswain.gschema.xml:8
-msgid "Restore token for the desktop controller"
-msgstr "Masaüstü denetleyicisi için geri yükleme jetonu"
 
 #: src/bs-application.c:54
 msgid "Enable debug messages"
@@ -249,10 +249,6 @@ msgstr "Bootswain _Hakkında…"
 #: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "_Çık"
-
-#: src/bs-window.c:272
-msgid "Repository"
-msgstr "Depo"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
