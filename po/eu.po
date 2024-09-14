@@ -6,8 +6,8 @@
 msgid ""
 msgstr "Project-Id-Version: boatswain main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/World/boatswain/issues\n"
-"POT-Creation-Date: 2024-02-23 23:07+0000\n"
-"PO-Revision-Date: 2024-03-02 18:20+0000\n"
+"POT-Creation-Date: 2024-08-10 01:14+0000\n"
+"PO-Revision-Date: 2024-09-14 18:20+0000\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <libre-ale@librezale.eus>-\n"
 "Language: eu\n"
@@ -25,6 +25,11 @@ msgstr "Boatswain"
 #: data/com.feaneron.Boatswain.desktop.in.in:11
 msgid "stream deck;streaming;deck;elgato;"
 msgstr "stream-mahaia;stream;mahaia;elgato;"
+
+#: data/com.feaneron.Boatswain.gschema.xml:7
+#: data/com.feaneron.Boatswain.gschema.xml:8
+msgid "Restore token for the desktop controller"
+msgstr "Leheneratu mahaigaineko kontrolatzailearen tokena"
 
 #: data/com.feaneron.Boatswain.metainfo.xml.in.in:12
 msgid "Control your Elgato Stream Decks"
@@ -71,14 +76,9 @@ msgstr "Gogoratu jokoetako puntuazioak"
 msgid "Open files and launch applications"
 msgstr "Ireki fitxategiak eta abiarazi aplikazioak"
 
-#: data/com.feaneron.Boatswain.gschema.xml:7
-#: data/com.feaneron.Boatswain.gschema.xml:8
-msgid "Restore token for the desktop controller"
-msgstr "Leheneratu mahaigaineko kontrolatzailearen tokena"
-
 #: src/bs-application.c:54
 msgid "Enable debug messages"
-msgstr "Gaitu arazketa-mezuak"
+msgstr "Gaitu mezuak araztea"
 
 #: src/bs-application.c:117
 #, c-format
@@ -92,6 +92,44 @@ msgid ""
 "Boatswain needs to run in background to detect and execute Stream Deck "
 "actions."
 msgstr "Boatswain atzeko planoa exekutatu behar da Stream Deck ekintzak detektatu eta exekutatzeko."
+
+#: src/bs-button-editor.c:388
+msgid "All supported formats"
+msgstr "Onartutako formatu guztiak"
+
+#: src/bs-button-editor.c:397
+msgid "Select icon"
+msgstr "Hautatu ikonoa"
+
+#: src/bs-button-editor.c:398
+#: src/plugins/network/network-http-action-prefs.c:147
+msgid "Open"
+msgstr "Ireki"
+
+#: src/bs-button-editor.ui:14
+msgid "Button Properties"
+msgstr "Botoi-propietateak"
+
+#: src/bs-button-editor.ui:190
+msgid "Name"
+msgstr "Izena"
+
+#: src/bs-button-editor.ui:197
+msgid "Background Color"
+msgstr "Atzeko planoaren kolorea"
+
+#: src/bs-button-editor.ui:233
+msgid "Select Action"
+msgstr "Hautatu ekintza"
+
+#: src/bs-button-editor.ui:250
+msgid "Remove Action"
+msgstr "Kendu ekintza"
+
+#: src/bs-button-editor.ui:272
+#: src/plugins/default/default-multi-action-editor.ui:67
+msgid "Actions"
+msgstr "Ekintzak"
 
 #: src/bs-profile.c:184
 msgid "Unnamed profile"
@@ -113,21 +151,21 @@ msgstr "Eraman behera"
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: src/bs-stream-deck.c:276
+#: src/bs-stream-deck.c:326
 msgid "Default"
 msgstr "Lehenetsia"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:956 src/bs-stream-deck.c:982
+#: src/bs-stream-deck.c:996 src/bs-stream-deck.c:1021
 msgid "Stream Deck Mini"
 msgstr "Stream Deck Mini"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1008 src/bs-stream-deck.c:1034
+#: src/bs-stream-deck.c:1046 src/bs-stream-deck.c:1071
 #: src/plugins/default/default-switch-profile-action.c:283
 #: src/plugins/default/default.plugin.desktop.in:3
 msgid "Stream Deck"
@@ -136,80 +174,42 @@ msgstr "Stream Deck"
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1060 src/bs-stream-deck.c:1086
+#: src/bs-stream-deck.c:1096 src/bs-stream-deck.c:1121
 msgid "Stream Deck XL"
 msgstr "Stream Deck XL"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1112
+#: src/bs-stream-deck.c:1146
 msgid "Stream Deck MK.2"
 msgstr "Stream Deck MK.2"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1138
+#: src/bs-stream-deck.c:1171
 msgid "Stream Deck Pedal"
 msgstr "Stream Deck Pedal"
 
 #. Translators: this is a product name. In most cases, it is not translated.
 #. * Please verify if Elgato translates their product names on your locale.
 #.
-#: src/bs-stream-deck.c:1164
+#: src/bs-stream-deck.c:1196
 msgid "Stream Deck +"
 msgstr "Stream Deck +"
 
-#: src/bs-stream-deck.c:1233
+#: src/bs-stream-deck.c:1275
 msgid "Feaneron Hangar Original"
 msgstr "Feaneron Hangar Original"
 
-#: src/bs-stream-deck.c:1256
+#: src/bs-stream-deck.c:1297
 msgid "Feaneron Hangar XL"
 msgstr "Feaneron Hangar XL"
 
-#: src/bs-stream-deck-button-editor.c:389
-msgid "All supported formats"
-msgstr "Onartutako formatu guztiak"
-
-#: src/bs-stream-deck-button-editor.c:398
-msgid "Select icon"
-msgstr "Hautatu ikonoa"
-
-#: src/bs-stream-deck-button-editor.c:399
-#: src/plugins/network/network-http-action-prefs.c:147
-msgid "Open"
-msgstr "Ireki"
-
-#: src/bs-stream-deck-button-editor.ui:27
+#: src/bs-stream-deck-editor.ui:61
 msgid "Select a button"
 msgstr "Hautatu botoi bat"
-
-#: src/bs-stream-deck-button-editor.ui:45
-msgid "Button Properties"
-msgstr "Botoi-propietateak"
-
-#: src/bs-stream-deck-button-editor.ui:221
-msgid "Name"
-msgstr "Izena"
-
-#: src/bs-stream-deck-button-editor.ui:228
-msgid "Background Color"
-msgstr "Atzeko planoaren kolorea"
-
-#: src/bs-stream-deck-button-editor.ui:264
-msgid "Select action"
-msgstr "Hautatu ekintza"
-
-#: src/bs-stream-deck-button-editor.ui:285
-msgid "Remove Action"
-msgstr "Kendu ekintza"
-
-#: src/bs-stream-deck-button-editor.ui:308
-#: src/plugins/default/default-multi-action-editor.ui:67
-msgid "Actions"
-msgstr "Ekintzak"
 
 #: src/bs-window.ui:113
 msgid "New profile…"
@@ -242,10 +242,6 @@ msgstr "Boatswain aplikazioari _buruz"
 #: src/bs-window.ui:264
 msgid "_Quit"
 msgstr "I_rten"
-
-#: src/bs-window.c:272
-msgid "Repository"
-msgstr "Biltegia"
 
 #: src/gtk/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -310,7 +306,7 @@ msgstr "Gehitu ekintza"
 
 #: src/plugins/default/default-multi-action-editor.ui:73
 msgid "Others"
-msgstr "Beste batzuk"
+msgstr "Bestelakoak"
 
 #: src/plugins/default/default-multi-action-editor.ui:83
 msgid "Settings"
@@ -331,7 +327,7 @@ msgstr "Abiarazi laster-tekla bat"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:7
 msgid "Set Shortcut"
-msgstr "Ezarri laster-tekla"
+msgstr "Ezarri lasterbidea"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:66
 msgid "Press Esc to cancel"
@@ -343,7 +339,7 @@ msgstr "_Utzi"
 
 #: src/plugins/desktop/desktop-shortcut-dialog.ui:109
 msgid "_Set"
-msgstr "_Ezarri"
+msgstr "E_zarri"
 
 #: src/plugins/desktop/desktop.plugin.desktop.in:3
 msgid "Desktop"
@@ -372,7 +368,7 @@ msgstr "Berrezarri puntuazioa"
 
 #: src/plugins/gaming/score.js:341
 msgid "Text Color"
-msgstr "Testu-kolorea"
+msgstr "Testuaren kolorea"
 
 #: src/plugins/gaming/score.js:354
 msgid "Save to File"
@@ -555,7 +551,7 @@ msgstr "OBS Studio"
 
 #: src/plugins/soundboard/soundboard-action-factory.c:42
 msgid "Music Player"
-msgstr "Musika-erreproduzigailua"
+msgstr "Musika-erreproduzitzailea"
 
 #: src/plugins/soundboard/soundboard-action-factory.c:43
 msgid "Control the active music player"
@@ -587,7 +583,7 @@ msgstr "Gelditu"
 
 #: src/plugins/soundboard/soundboard-mpris-action.c:202
 msgid "Play / Pause"
-msgstr "Erreproduzitu/pausatu"
+msgstr "Erreproduzitu / pausarazi"
 
 #: src/plugins/soundboard/soundboard-mpris-action.c:205
 msgid "Playback Action"
@@ -628,6 +624,9 @@ msgstr "Bolumena"
 #: src/plugins/soundboard/soundboard.plugin.desktop.in:3
 msgid "Soundboard"
 msgstr "Soinu-panela"
+
+#~ msgid "Repository"
+#~ msgstr "Biltegia"
 
 #~ msgid "Georges Basile Stavracas Neto"
 #~ msgstr "Georges Basile Stavracas Neto"
