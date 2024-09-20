@@ -76,6 +76,8 @@ bs_renderer_compose_icon (BsRenderer  *self,
   g_autoptr (GdkTexture) texture = NULL;
   gboolean flip_x;
   gboolean flip_y;
+  double height;
+  double width;
 
   g_return_val_if_fail (BS_IS_RENDERER (self), NULL);
 
@@ -87,42 +89,42 @@ bs_renderer_compose_icon (BsRenderer  *self,
   flip_x = self->image_info.flags & BS_RENDERER_FLAG_FLIP_X;
   flip_y = self->image_info.flags & BS_RENDERER_FLAG_FLIP_Y;
 
+  width = (double) self->image_info.width;
+  height = (double) self->image_info.height;
+
   if (self->image_info.flags & BS_RENDERER_FLAG_ROTATE_90)
     {
       gtk_snapshot_translate (snapshot,
-                              &GRAPHENE_POINT_INIT (self->image_info.width / 2,
-                                                    self->image_info.height / 2));
+                              &GRAPHENE_POINT_INIT (width / 2.0, height / 2.0));
       gtk_snapshot_rotate (snapshot, 90.0);
       gtk_snapshot_translate (snapshot,
-                              &GRAPHENE_POINT_INIT (- self->image_info.width / 2,
-                                                    - self->image_info.height / 2));
+                              &GRAPHENE_POINT_INIT (-width / 2.0, -height / 2.0));
     }
 
   gtk_snapshot_translate (snapshot,
-                          &GRAPHENE_POINT_INIT (flip_x ? self->image_info.width : 0,
-                                                flip_y ? self->image_info.height : 0));
+                          &GRAPHENE_POINT_INIT (flip_x ? width : 0.0,
+                                                flip_y ? height : 0.0));
+
   gtk_snapshot_scale (snapshot,
                       flip_x ? -1.0 : 1.0,
                       flip_y ? -1.0 : 1.0);
 
   if (icon)
     {
-      bs_icon_snapshot_premultiplied (icon, snapshot, self->image_info.width, self->image_info.height);
+      bs_icon_snapshot_premultiplied (icon, snapshot, width, height);
     }
   else
     {
       gtk_snapshot_append_color (snapshot,
                                  &(GdkRGBA) { 0.0, 0.0, 0.0, 1.0, },
-                                 &GRAPHENE_RECT_INIT (0, 0,
-                                                      self->image_info.width,
-                                                      self->image_info.height));
+                                 &GRAPHENE_RECT_INIT (0, 0, width, height));
     }
 
   node = gtk_snapshot_free_to_node (g_steal_pointer (&snapshot));
 
   texture = gsk_renderer_render_texture (self->renderer,
                                          node,
-                                         &GRAPHENE_RECT_INIT (0, 0, self->image_info.width, self->image_info.height));
+                                         &GRAPHENE_RECT_INIT (0, 0, width, height));
   gsk_renderer_unrealize (self->renderer);
 
   return g_steal_pointer (&texture);
