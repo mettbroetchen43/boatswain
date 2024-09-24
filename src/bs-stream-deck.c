@@ -1215,7 +1215,7 @@ static const StreamDeckModelInfo models_vtable[] = {
       .n_slots = 4,
       .image_info = {
         .width = 800,
-        .height = 200,
+        .height = 100,
         .format = BS_IMAGE_FORMAT_JPEG,
         .flags = BS_RENDERER_FLAG_NONE,
       },
