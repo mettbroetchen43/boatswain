@@ -33,6 +33,7 @@
 #include "bs-button-editor.h"
 #include "bs-button-grid-widget.h"
 #include "bs-button-widget.h"
+#include "bs-selection-controller.h"
 #include "bs-stream-deck-editor.h"
 #include "bs-stream-deck-private.h"
 #include "bs-touchscreen-private.h"
@@ -54,6 +55,7 @@ struct _BsStreamDeckEditor
   GHashTable *region_to_widget;
 
   /* Can be a BsButton, BsDial, or BsTouchscreen */
+  BsSelectionController *selection_controller;
   gpointer selected_item;
 };
 
@@ -227,6 +229,18 @@ on_button_grid_widget_button_selected_cb (BsButtonGridWidget *button_grid_widget
   set_selected_item (self, button);
 }
 
+static void
+on_selection_controller_selection_changed_cb (BsSelectionController *selection_controller,
+                                              BsStreamDeckEditor    *self)
+{
+  gpointer owner, item;
+
+  if (!bs_selection_controller_get_selection (selection_controller, &owner, &item))
+    return; // TODO: set empty page
+
+  set_selected_item (self, item);
+}
+
 
 /*
  * GObject overrides
@@ -238,6 +252,7 @@ bs_stream_deck_editor_finalize (GObject *object)
   BsStreamDeckEditor *self = (BsStreamDeckEditor *)object;
 
   g_clear_pointer (&self->region_to_widget, g_hash_table_destroy);
+  g_clear_object (&self->selection_controller);
   g_clear_object (&self->stream_deck);
 
   G_OBJECT_CLASS (bs_stream_deck_editor_parent_class)->finalize (object);
@@ -313,6 +328,11 @@ bs_stream_deck_editor_init (BsStreamDeckEditor *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->region_to_widget = g_hash_table_new (g_direct_hash, g_direct_equal);
+  self->selection_controller = bs_selection_controller_new ();
+  g_signal_connect (self->selection_controller,
+                    "selection-changed",
+                    G_CALLBACK (on_selection_controller_selection_changed_cb),
+                    self);
 }
 
 GtkWidget *
