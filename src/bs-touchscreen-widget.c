@@ -24,6 +24,7 @@
 #include "bs-selection-controller.h"
 #include "bs-touchscreen-private.h"
 #include "bs-touchscreen-region.h"
+#include "bs-touchscreen-slot-widget.h"
 #include "bs-touchscreen-slot.h"
 #include "bs-debug.h"
 
@@ -65,7 +66,11 @@ on_slots_flowbox_selected_children_changed_cb (GtkFlowBox          *flowbox,
 
   if (child)
     {
-      gpointer slot = g_object_get_data (G_OBJECT (child), "slot");
+      BsTouchscreenSlot *slot;
+
+      g_assert (BS_IS_TOUCHSCREEN_SLOT_WIDGET (child));
+
+      slot = bs_touchscreen_slot_widget_get_slot (BS_TOUCHSCREEN_SLOT_WIDGET (child));
 
       bs_selection_controller_set_selection (self->selection_controller,
                                              self->touchscreen_region,
@@ -119,12 +124,9 @@ bs_touchscreen_widget_constructed (GObject *object)
   for (size_t i = 0; i < g_list_model_get_n_items (slots); i++)
     {
       g_autoptr (BsTouchscreenSlot) slot = g_list_model_get_item (slots, i);
-      g_autofree char *stub_title = g_strdup_printf ("Slot %lu", i);
       GtkWidget *child;
 
-      child = gtk_flow_box_child_new ();
-      gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (child), gtk_label_new (stub_title));
-      g_object_set_data (G_OBJECT (child), "slot", slot);
+      child = bs_touchscreen_slot_widget_new (slot);
 
       gtk_flow_box_append (self->slots_flowbox, child);
     }
