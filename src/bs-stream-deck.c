@@ -89,6 +89,10 @@ typedef struct
                                   BsButton      *button,
                                   GdkTexture    *texture,
                                   GError       **error);
+  gboolean (*set_touchscreen_texture) (BsStreamDeck   *self,
+                                       BsTouchscreen  *touchscreen,
+                                       GdkTexture     *texture,
+                                       GError        **error);
   gboolean (*read_button_states) (BsStreamDeck *self);
 } StreamDeckModelInfo;
 
@@ -986,6 +990,80 @@ read_button_states_plus (BsStreamDeck *self)
   return TRUE;
 }
 
+static gboolean
+set_touchscreen_texture_plus (BsStreamDeck   *self,
+                              BsTouchscreen  *touchscreen,
+                              GdkTexture     *texture,
+                              GError        **error)
+{
+  g_autofree uint8_t *payload = NULL;
+  g_autofree uint8_t *buffer = NULL;
+  BsDeviceRegion *region;
+  BsRenderer *renderer;
+  const size_t package_size = 1024;
+  const size_t header_size = 16;
+  uint8_t x, y;
+  uint8_t page;
+  size_t bytes_remaining;
+  size_t buffer_size;
+
+  BS_ENTRY;
+
+  region = bs_touchscreen_get_region (touchscreen);
+  renderer = bs_device_region_get_renderer (region);
+
+  if (!bs_renderer_convert_texture (renderer, texture, (char **) &buffer, &buffer_size, error))
+    BS_RETURN (FALSE);
+
+  /* FIXME: we upload the whole texture every time */
+  x = 0;
+  y = 0;
+
+  payload = g_malloc (package_size * sizeof (uint8_t));
+  payload[0] = 0x02;
+  payload[1] = 0x0c;
+  payload[2] = x & 0xff;
+  payload[3] = x >> 8;
+  payload[4] = y & 0xff;
+  payload[5] = y >> 8;
+  payload[6] = (bs_touchscreen_get_width (touchscreen) & 0xff);
+  payload[7] = (bs_touchscreen_get_width (touchscreen) >> 8) & 0xff;
+  payload[8] = (bs_touchscreen_get_height (touchscreen) & 0xff);
+  payload[9] = (bs_touchscreen_get_height (touchscreen) >> 8) & 0xff;
+
+  page = 0;
+  bytes_remaining = buffer_size;
+  while (bytes_remaining > 0)
+    {
+      size_t padding_size;
+      size_t chunk_size;
+      size_t bytes_sent;
+
+      chunk_size = MIN (bytes_remaining, package_size - header_size);
+
+      payload[10] = chunk_size == bytes_remaining ? 1 : 0;
+      payload[11] = page & 0xff;
+      payload[12] = page >> 8;
+      payload[13] = chunk_size & 0xff;
+      payload[14] = chunk_size >> 8;
+      payload[15] = 0;
+
+      bytes_sent = page * (package_size - header_size);
+      memcpy (payload + header_size, buffer + bytes_sent, chunk_size);
+
+      padding_size = package_size - header_size - chunk_size;
+      if (padding_size > 0)
+        memset (payload + header_size + chunk_size, 0, padding_size);
+
+      hid_write (self->handle, payload, package_size * sizeof (uint8_t));
+
+      bytes_remaining -= chunk_size;
+      page++;
+    }
+
+  BS_RETURN (TRUE);
+}
+
 static const StreamDeckModelInfo models_vtable[] = {
   {
     .product_id = STREAMDECK_MINI_PRODUCT_ID,
@@ -1225,6 +1303,7 @@ static const StreamDeckModelInfo models_vtable[] = {
     .get_firmware_version = get_firmware_version_gen2,
     .set_brightness = set_brightness_gen2,
     .set_button_texture = set_button_texture_gen2,
+    .set_touchscreen_texture = set_touchscreen_texture_plus,
     .read_button_states = read_button_states_plus,
   },
 };
