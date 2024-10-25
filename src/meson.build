@@ -24,6 +24,7 @@ boatswain_sources = [
   'bs-profile.c',
   'bs-profile-row.c',
   'bs-renderer.c',
+  'bs-selection-controller.c',
   'bs-stream-deck.c',
   'bs-stream-deck-editor.c',
   'bs-touchscreen.c',
