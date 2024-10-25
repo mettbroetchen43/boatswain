@@ -37,6 +37,7 @@
 #include "bs-stream-deck-private.h"
 #include "bs-touchscreen-private.h"
 #include "bs-touchscreen-region.h"
+#include "bs-touchscreen-widget.h"
 
 #include <glib/gi18n.h>
 #include <libpeas.h>
@@ -180,9 +181,7 @@ add_touchscreen (BsStreamDeckEditor  *self,
   BsDeviceRegion *region;
   GtkWidget *widget;
 
-  widget = adw_bin_new ();
-  gtk_widget_set_size_request (widget, -1, 100);
-  gtk_widget_add_css_class (widget, "card");
+  widget = bs_touchscreen_widget_new (touchscreen_region);
 
   region = BS_DEVICE_REGION (touchscreen_region);
   gtk_grid_attach (self->regions_grid,
