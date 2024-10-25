@@ -23,6 +23,8 @@
 
 #include "bs-touchscreen.h"
 
+#include <gio/gio.h>
+
 G_BEGIN_DECLS
 
 BsTouchscreen * bs_touchscreen_new (BsDeviceRegion *region,
@@ -36,5 +38,7 @@ uint32_t bs_touchscreen_get_width (BsTouchscreen *self);
 uint32_t bs_touchscreen_get_height (BsTouchscreen *self);
 
 BsTouchscreenContent * bs_touchscreen_get_content (BsTouchscreen *self);
+
+GListModel * bs_touchscreen_get_slots (BsTouchscreen *self);
 
 G_END_DECLS

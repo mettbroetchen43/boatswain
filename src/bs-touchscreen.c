@@ -192,3 +192,11 @@ bs_touchscreen_get_content (BsTouchscreen *self)
 
   return self->content;
 }
+
+GListModel *
+bs_touchscreen_get_slots (BsTouchscreen *self)
+{
+  g_assert (BS_IS_TOUCHSCREEN (self));
+
+  return G_LIST_MODEL (self->slots);
+}
