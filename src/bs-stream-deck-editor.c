@@ -36,8 +36,8 @@
 #include "bs-selection-controller.h"
 #include "bs-stream-deck-editor.h"
 #include "bs-stream-deck-private.h"
-#include "bs-touchscreen-private.h"
 #include "bs-touchscreen-region.h"
+#include "bs-touchscreen-slot.h"
 #include "bs-touchscreen-widget.h"
 
 #include <glib/gi18n.h>
@@ -54,7 +54,7 @@ struct _BsStreamDeckEditor
 
   GHashTable *region_to_widget;
 
-  /* Can be a BsButton, BsDial, or BsTouchscreen */
+  /* Can be a BsButton, BsDial, or BsTouchscreenSlot */
   BsSelectionController *selection_controller;
   gpointer selected_item;
 };
@@ -93,9 +93,9 @@ set_selected_item (BsStreamDeckEditor *self,
     {
       BS_TODO ("Dial editor");
     }
-  else if (BS_IS_TOUCHSCREEN (selected_item))
+  else if (BS_IS_TOUCHSCREEN_SLOT (selected_item))
     {
-      BS_TODO ("Touchscreen editor");
+      BS_TODO ("Touchscreen slot editor");
     }
   else
     {
