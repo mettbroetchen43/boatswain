@@ -44,6 +44,10 @@ gboolean bs_stream_deck_upload_button (BsStreamDeck  *self,
                                        BsButton      *button,
                                        GError       **error);
 
+gboolean bs_stream_deck_upload_touchscreen (BsStreamDeck   *self,
+                                            BsTouchscreen  *touchscreen,
+                                            GError        **error);
+
 void bs_stream_deck_load (BsStreamDeck *self);
 
 void bs_stream_deck_save (BsStreamDeck *self);

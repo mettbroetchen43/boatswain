@@ -1903,6 +1903,30 @@ bs_stream_deck_upload_button (BsStreamDeck  *self,
   return self->model_info->set_button_texture (self, button, texture, error);
 }
 
+gboolean
+bs_stream_deck_upload_touchscreen (BsStreamDeck   *self,
+                                   BsTouchscreen  *touchscreen,
+                                   GError        **error)
+{
+  g_autoptr (GdkTexture) texture = NULL;
+  BsTouchscreenContent *content;
+  BsDeviceRegion *region;
+  BsRenderer *renderer;
+
+  g_return_val_if_fail (BS_IS_STREAM_DECK (self), FALSE);
+  g_return_val_if_fail (self->model_info->set_button_texture != NULL, FALSE);
+
+  content = bs_touchscreen_get_content (touchscreen);
+  region = bs_touchscreen_get_region (touchscreen);
+  renderer = bs_device_region_get_renderer (region);
+  texture = bs_renderer_compose_touchscreen_content (renderer, content, error);
+
+  if (!texture)
+    return FALSE;
+
+  return self->model_info->set_touchscreen_texture (self, touchscreen, texture, error);
+}
+
 GListModel *
 bs_stream_deck_get_profiles (BsStreamDeck *self)
 {
