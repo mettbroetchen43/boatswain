@@ -2,7 +2,6 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="BsTouchscreenWidget" parent="GtkWidget">
-    <property name="overflow">hidden</property>
 
     <child>
       <object class="GtkFlowBox" id="slots_flowbox">
