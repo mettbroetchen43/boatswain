@@ -50,6 +50,7 @@ typedef struct _BsStreamDeckEditor BsStreamDeckEditor;
 typedef struct _BsTouchscreen BsTouchscreen;
 typedef struct _BsTouchscreenContent BsTouchscreenContent;
 typedef struct _BsTouchscreenRegion BsTouchscreenRegion;
+typedef struct _BsTouchscreenSlot BsTouchscreenSlot;
 typedef struct _BsWindow BsWindow;
 
 G_END_DECLS
