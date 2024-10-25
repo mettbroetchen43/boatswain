@@ -138,10 +138,10 @@ on_drop_target_drop_cb (GtkDropTarget            *drop_target,
 {
   g_autoptr (BsAction) dragged_button_action = NULL;
   g_autoptr (BsAction) dropped_button_action = NULL;
-  BsButton *dragged_button;
-  BsButton *dropped_button;
   g_autoptr (BsIcon) dragged_button_icon = NULL;
   g_autoptr (BsIcon) dropped_button_icon = NULL;
+  BsButton *dragged_button;
+  BsButton *dropped_button;
 
   BS_ENTRY;
 
