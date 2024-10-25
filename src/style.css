@@ -63,3 +63,30 @@ streamdeckdialwidget {
   border-radius: 9999px;
   background-color: @card_bg_color;
 }
+
+/* Touchscreen */
+touchscreenslotwidget {
+  outline-color: transparent;
+  outline-offset: -2px;
+  transition: outline 250ms;
+}
+
+touchscreenslotwidget:first-child,
+touchscreenslotwidget:dir(rtl):last-child {
+  border-top-left-radius: var(--window-radius);
+  border-bottom-left-radius: var(--window-radius);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+touchscreenslotwidget:last-child,
+touchscreenslotwidget:dir(rtl):first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--window-radius);
+  border-bottom-right-radius: var(--window-radius);
+}
+
+touchscreenslotwidget:selected {
+  outline: 2px solid @accent_color;
+}
