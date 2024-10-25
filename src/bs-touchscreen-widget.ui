@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="BsTouchscreenWidget" parent="GtkWidget">
+    <property name="overflow">hidden</property>
+
+    <child>
+      <object class="GtkFlowBox" id="slots_flowbox">
+        <property name="selection-mode">single</property>
+        <property name="homogeneous">True</property>
+        <property name="min-children-per-line">1</property>
+        <property name="max-children-per-line">4</property>
+      </object>
+    </child>
+
+  </template>
+</interface>

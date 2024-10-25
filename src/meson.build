@@ -29,6 +29,7 @@ boatswain_sources = [
   'bs-touchscreen.c',
   'bs-touchscreen-content.c',
   'bs-touchscreen-region.c',
+  'bs-touchscreen-widget.c',
   'bs-touchscreen-slot.c',
   'bs-window.c',
 ]

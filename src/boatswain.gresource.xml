@@ -8,6 +8,7 @@
     <file>bs-dial-widget.ui</file>
     <file>bs-profile-row.ui</file>
     <file>bs-stream-deck-editor.ui</file>
+    <file>bs-touchscreen-widget.ui</file>
     <file>bs-window.ui</file>
     <file>gtk/help-overlay.ui</file>
     <file>style.css</file>
