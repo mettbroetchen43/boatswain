@@ -1306,6 +1306,31 @@ static const StreamDeckModelInfo models_vtable[] = {
     .set_touchscreen_texture = set_touchscreen_texture_plus,
     .read_button_states = read_button_states_plus,
   },
+  {
+    .product_id = STREAMDECK_NEO_PRODUCT_ID,
+    /* Translators: this is a product name. In most cases, it is not translated.
+     * Please verify if Elgato translates their product names on your locale.
+     */
+    .name = N_("Stream Deck Neo"),
+    .icon_name = "input-dialpad-symbolic",
+    .features = BS_STREAM_DECK_FEATURE_BUTTONS,
+    .button_layout = {
+      .n_buttons = 8,
+      .columns = 4,
+      .image_info = {
+        .width = 96,
+        .height = 96,
+        .format = BS_IMAGE_FORMAT_JPEG,
+        .flags = BS_RENDERER_FLAG_FLIP_X | BS_RENDERER_FLAG_FLIP_Y,
+      },
+    },
+    .reset = reset_gen2,
+    .get_serial_number = get_serial_number_gen2,
+    .get_firmware_version = get_firmware_version_gen2,
+    .set_brightness = set_brightness_gen2,
+    .set_button_texture = set_button_texture_gen2,
+    .read_button_states = read_button_states_gen2,
+  },
 };
 
 

@@ -3,8 +3,8 @@ around the internet, but centralizing that here too is helpful.
 
 # Models
 
-As of today (03-10-2022) there are 6 known Stream Deck models: Original (v1 and
-v2), Mini, XL, MK.2, and Pedal.
+As of today (25-10-2024) there are 8 known Stream Deck models: Original (v1 and
+v2), Mini, XL, MK.2, Pedal, Plus, and Neo.
 
 These are the specs of each device and its buttons:
 
@@ -13,6 +13,7 @@ These are the specs of each device and its buttons:
 | Mini          | 0x0063     | 6  (2 x 3) | BMP    | 80x80   | Y-flipped, rotated 90 |
 | Mini (v2)     | 0x0090     | 6  (2 x 3) | BMP    | 80x80   | Y-flipped, rotated 90 |
 | MK.2          | 0x0080     | 15 (3 x 5) | JPEG   | 72x72   | X-flipped, Y-flipped  |
+| Neo           | 0x009a     | 8  (2 x 4) | JPEG   | 96x96   | X-flipped, Y-flipped  |
 | Original (v1) | 0x0060     | 15 (3 x 5) | BMP    | 72x72   | X-flipped, Y-flipped  |
 | Original (v2) | 0x006d     | 15 (3 x 5) | JPEG   | 72x72   | X-flipped, Y-flipped  |
 | Pedal         | 0x0086     | 3  (1 x 3) | none   | none    | none                  |
