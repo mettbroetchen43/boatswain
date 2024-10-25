@@ -56,7 +56,6 @@ struct _BsStreamDeckEditor
 
   /* Can be a BsButton, BsDial, or BsTouchscreenSlot */
   BsSelectionController *selection_controller;
-  gpointer selected_item;
 };
 
 G_DEFINE_FINAL_TYPE (BsStreamDeckEditor, bs_stream_deck_editor, ADW_TYPE_BIN)
@@ -79,11 +78,6 @@ static inline void
 set_selected_item (BsStreamDeckEditor *self,
                    gpointer            selected_item)
 {
-  if (self->selected_item == selected_item)
-    return;
-
-  self->selected_item = selected_item;
-
   if (BS_IS_BUTTON (selected_item))
     {
       GtkWidget *button_editor = bs_button_editor_new (selected_item);
