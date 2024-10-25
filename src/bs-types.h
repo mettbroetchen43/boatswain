@@ -44,6 +44,7 @@ typedef struct _BsPage BsPage;
 typedef struct _BsPageItem BsPageItem;
 typedef struct _BsProfile BsProfile;
 typedef struct _BsRenderer BsRenderer;
+typedef struct _BsSelectionController BsSelectionController;
 typedef struct _BsStreamDeck BsStreamDeck;
 typedef struct _BsStreamDeckEditor BsStreamDeckEditor;
 typedef struct _BsTouchscreen BsTouchscreen;
