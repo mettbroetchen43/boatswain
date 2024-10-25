@@ -54,6 +54,25 @@ static GParamSpec *properties [N_PROPS];
  */
 
 static void
+on_slots_flowbox_selected_children_changed_cb (GtkFlowBox          *flowbox,
+                                               BsTouchscreenWidget *self)
+{
+  g_autoptr (GList) selected_children = NULL;
+  GtkFlowBoxChild *child;
+
+  selected_children = gtk_flow_box_get_selected_children (flowbox);
+  child = selected_children ? selected_children->data : NULL;
+
+  if (child)
+    {
+      gpointer slot = g_object_get_data (G_OBJECT (child), "slot");
+
+      bs_selection_controller_set_selection (self->selection_controller,
+                                             self->touchscreen_region,
+                                             slot);
+    }
+}
+static void
 on_selection_controller_selection_changed_cb (BsSelectionController *selection_controller,
                                               BsTouchscreenWidget   *self)
 {
@@ -101,8 +120,13 @@ bs_touchscreen_widget_constructed (GObject *object)
     {
       g_autoptr (BsTouchscreenSlot) slot = g_list_model_get_item (slots, i);
       g_autofree char *stub_title = g_strdup_printf ("Slot %lu", i);
+      GtkWidget *child;
 
-      gtk_flow_box_append (self->slots_flowbox, gtk_label_new (stub_title));
+      child = gtk_flow_box_child_new ();
+      gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (child), gtk_label_new (stub_title));
+      g_object_set_data (G_OBJECT (child), "slot", slot);
+
+      gtk_flow_box_append (self->slots_flowbox, child);
     }
 }
 
@@ -188,6 +212,8 @@ bs_touchscreen_widget_class_init (BsTouchscreenWidgetClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-touchscreen-widget.ui");
 
   gtk_widget_class_bind_template_child (widget_class, BsTouchscreenWidget, slots_flowbox);
+
+  gtk_widget_class_bind_template_callback (widget_class, on_slots_flowbox_selected_children_changed_cb);
 
   gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BIN_LAYOUT);
 
