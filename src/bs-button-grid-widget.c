@@ -28,6 +28,7 @@
 #include "bs-button-grid-region.h"
 #include "bs-button-widget.h"
 #include "bs-debug.h"
+#include "bs-selection-controller.h"
 
 #include <libpeas.h>
 
@@ -38,24 +39,19 @@ struct _BsButtonGridWidget
   GtkFlowBox *flowbox;
 
   BsButtonGridRegion *button_grid;
+  BsSelectionController *selection_controller;
 };
 
 G_DEFINE_FINAL_TYPE (BsButtonGridWidget, bs_button_grid_widget, GTK_TYPE_WIDGET)
 
 enum
 {
-  BUTTON_SELECTED,
-  N_SIGNALS,
-};
-
-enum
-{
   PROP_0,
   PROP_BUTTON_GRID,
+  PROP_SELECTION_CONTROLLER,
   N_PROPS,
 };
 
-static guint signals [N_SIGNALS];
 static GParamSpec *properties [N_PROPS];
 
 
@@ -105,10 +101,28 @@ on_flowbox_selected_children_changed_cb (GtkFlowBox         *flowbox,
 
   selected_children = gtk_flow_box_get_selected_children (flowbox);
   child = selected_children ? selected_children->data : NULL;
-  g_assert (BS_IS_BUTTON_WIDGET (child));
 
   if (child)
-    g_signal_emit (self, signals[BUTTON_SELECTED], 0, bs_button_widget_get_button (child));
+    {
+      g_assert (BS_IS_BUTTON_WIDGET (child));
+
+      bs_selection_controller_set_selection (self->selection_controller,
+                                             self->button_grid,
+                                             bs_button_widget_get_button (child));
+    }
+}
+
+static void
+on_selection_controller_selection_changed_cb (BsSelectionController *selection_controller,
+                                              BsButtonGridWidget    *self)
+{
+  gpointer owner, item;
+
+  if (!bs_selection_controller_get_selection (selection_controller, &owner, &item) ||
+      owner != self->button_grid)
+    {
+      gtk_flow_box_unselect_all (self->flowbox);
+    }
 }
 
 
@@ -122,6 +136,7 @@ bs_button_grid_widget_finalize (GObject *object)
   BsButtonGridWidget *self = (BsButtonGridWidget *)object;
 
   g_clear_object (&self->button_grid);
+  g_clear_object (&self->selection_controller);
 
   G_OBJECT_CLASS (bs_button_grid_widget_parent_class)->finalize (object);
 }
@@ -167,6 +182,10 @@ bs_button_grid_widget_get_property (GObject    *object,
       g_value_set_object (value, self->button_grid);
       break;
 
+    case PROP_SELECTION_CONTROLLER:
+      g_value_set_object (value, self->selection_controller);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -186,6 +205,18 @@ bs_button_grid_widget_set_property (GObject      *object,
       g_assert (self->button_grid == NULL);
       self->button_grid = g_value_dup_object (value);
       g_assert (self->button_grid != NULL);
+      break;
+
+    case PROP_SELECTION_CONTROLLER:
+      g_assert (self->selection_controller == NULL);
+      self->selection_controller = g_value_dup_object (value);
+      g_assert (self->selection_controller != NULL);
+
+      g_signal_connect_object (self->selection_controller,
+                               "selection-changed",
+                               G_CALLBACK (on_selection_controller_selection_changed_cb),
+                               self, 0);
+
       break;
 
     default:
@@ -208,15 +239,12 @@ bs_button_grid_widget_class_init (BsButtonGridWidgetClass *klass)
                                                       BS_TYPE_BUTTON_GRID_REGION,
                                                       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  g_object_class_install_properties (object_class, N_PROPS, properties);
+  properties[PROP_SELECTION_CONTROLLER] =
+    g_param_spec_object ("selection-controller", NULL, NULL,
+                         BS_TYPE_SELECTION_CONTROLLER,
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  signals[BUTTON_SELECTED] = g_signal_new ("button-selected",
-                                           BS_TYPE_BUTTON_GRID_WIDGET,
-                                           G_SIGNAL_RUN_LAST,
-                                           0, NULL, NULL, NULL,
-                                           G_TYPE_NONE,
-                                           1,
-                                           BS_TYPE_BUTTON);
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-button-grid-widget.ui");
 
@@ -237,11 +265,13 @@ bs_button_grid_widget_init (BsButtonGridWidget *self)
 }
 
 GtkWidget *
-bs_button_grid_widget_new (BsButtonGridRegion *button_grid)
+bs_button_grid_widget_new (BsButtonGridRegion    *button_grid,
+                           BsSelectionController *selection_controller)
 {
   g_assert (BS_IS_BUTTON_GRID_REGION (button_grid));
 
   return g_object_new (BS_TYPE_BUTTON_GRID_WIDGET,
                        "button-grid", button_grid,
+                       "selection-controller", selection_controller,
                        NULL);
 }

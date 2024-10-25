@@ -59,10 +59,6 @@ struct _BsStreamDeckEditor
   gpointer selected_item;
 };
 
-static void on_button_grid_widget_button_selected_cb (BsButtonGridWidget *button_grid_widget,
-                                                      BsButton           *button,
-                                                      BsStreamDeckEditor *self);
-
 G_DEFINE_FINAL_TYPE (BsStreamDeckEditor, bs_stream_deck_editor, ADW_TYPE_BIN)
 
 enum
@@ -114,12 +110,7 @@ add_button_grid (BsStreamDeckEditor *self,
   BsDeviceRegion *region;
   GtkWidget *widget;
 
-  widget = bs_button_grid_widget_new (button_grid);
-  g_signal_connect (widget,
-                    "button-selected",
-                    G_CALLBACK (on_button_grid_widget_button_selected_cb),
-                    self);
-
+  widget = bs_button_grid_widget_new (button_grid, self->selection_controller);
   region = BS_DEVICE_REGION (button_grid);
   gtk_grid_attach (self->regions_grid,
                    widget,
@@ -220,14 +211,6 @@ build_regions (BsStreamDeckEditor *self)
 /*
  * Callbacks
  */
-
-static void
-on_button_grid_widget_button_selected_cb (BsButtonGridWidget *button_grid_widget,
-                                          BsButton           *button,
-                                          BsStreamDeckEditor *self)
-{
-  set_selected_item (self, button);
-}
 
 static void
 on_selection_controller_selection_changed_cb (BsSelectionController *selection_controller,
