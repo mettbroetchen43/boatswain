@@ -164,3 +164,11 @@ bs_touchscreen_region_new (const char        *id,
 
   return g_steal_pointer (&self);
 }
+
+BsTouchscreen *
+bs_touchscreen_region_get_touchscreen (BsTouchscreenRegion *self)
+{
+  g_assert (BS_IS_TOUCHSCREEN_REGION (self));
+
+  return self->touchscreen;
+}

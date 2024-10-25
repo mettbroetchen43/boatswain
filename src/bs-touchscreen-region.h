@@ -40,4 +40,6 @@ BsTouchscreenRegion * bs_touchscreen_region_new (const char        *id,
                                                  unsigned int       column_span,
                                                  unsigned int       row_span);
 
+BsTouchscreen * bs_touchscreen_region_get_touchscreen (BsTouchscreenRegion *self);
+
 G_END_DECLS
