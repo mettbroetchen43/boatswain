@@ -19,6 +19,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include "bs-device-region.h"
+#include "bs-stream-deck-private.h"
 #include "bs-touchscreen.h"
 #include "bs-touchscreen-content.h"
 #include "bs-touchscreen-slot-private.h"
@@ -133,6 +135,24 @@ bs_touchscreen_init (BsTouchscreen *self)
   self->height = 1;
 }
 
+static void
+on_contents_invalidated_cb (GdkPaintable  *paintable,
+                            BsTouchscreen *self)
+{
+  g_autoptr (GError) error = NULL;
+  BsStreamDeck *stream_deck;
+
+  stream_deck = bs_device_region_get_stream_deck (self->region);
+
+  if (!bs_stream_deck_is_initialized (stream_deck))
+    return;
+
+  bs_stream_deck_upload_touchscreen (stream_deck, self, &error);
+
+  if (error)
+    g_warning ("Error updating Stream Deck touchscreen: %s", error->message);
+}
+
 BsTouchscreen *
 bs_touchscreen_new (BsDeviceRegion *region,
                     uint32_t        n_slots,
@@ -157,6 +177,7 @@ bs_touchscreen_new (BsDeviceRegion *region,
     }
 
   self->content = bs_touchscreen_content_new (G_LIST_MODEL (self->slots), width, height);
+  g_signal_connect (self->content, "invalidate-contents", G_CALLBACK (on_contents_invalidated_cb), self);
 
   return g_steal_pointer (&self);
 }
