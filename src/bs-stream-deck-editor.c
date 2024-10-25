@@ -174,7 +174,7 @@ add_touchscreen (BsStreamDeckEditor  *self,
   BsDeviceRegion *region;
   GtkWidget *widget;
 
-  widget = bs_touchscreen_widget_new (touchscreen_region);
+  widget = bs_touchscreen_widget_new (touchscreen_region, self->selection_controller);
 
   region = BS_DEVICE_REGION (touchscreen_region);
   gtk_grid_attach (self->regions_grid,

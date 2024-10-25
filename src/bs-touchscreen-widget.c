@@ -21,6 +21,7 @@
 
 #include "bs-touchscreen-widget.h"
 
+#include "bs-selection-controller.h"
 #include "bs-touchscreen-private.h"
 #include "bs-touchscreen-region.h"
 #include "bs-touchscreen-slot.h"
@@ -33,6 +34,7 @@ struct _BsTouchscreenWidget
   GtkFlowBox *slots_flowbox;
 
   BsTouchscreenRegion *touchscreen_region;
+  BsSelectionController *selection_controller;
 };
 
 G_DEFINE_FINAL_TYPE (BsTouchscreenWidget, bs_touchscreen_widget, GTK_TYPE_WIDGET)
@@ -40,10 +42,34 @@ G_DEFINE_FINAL_TYPE (BsTouchscreenWidget, bs_touchscreen_widget, GTK_TYPE_WIDGET
 enum {
   PROP_0,
   PROP_TOUCHSCREEN_REGION,
+  PROP_SELECTION_CONTROLLER,
   N_PROPS
 };
 
 static GParamSpec *properties [N_PROPS];
+
+
+/*
+ * Callbacks
+ */
+
+static void
+on_selection_controller_selection_changed_cb (BsSelectionController *selection_controller,
+                                              BsTouchscreenWidget   *self)
+{
+  gpointer owner, item;
+
+  if (!bs_selection_controller_get_selection (selection_controller, &owner, &item) ||
+      owner != self->touchscreen_region)
+    {
+      gtk_flow_box_unselect_all (self->slots_flowbox);
+    }
+}
+
+
+/*
+ * GObject overrides
+ */
 
 static void
 bs_touchscreen_widget_dispose (GObject *object)
@@ -51,6 +77,7 @@ bs_touchscreen_widget_dispose (GObject *object)
   BsTouchscreenWidget *self = (BsTouchscreenWidget *)object;
 
   g_clear_object (&self->touchscreen_region);
+  g_clear_object (&self->selection_controller);
 
   G_OBJECT_CLASS (bs_touchscreen_widget_parent_class)->dispose (object);
 }
@@ -93,6 +120,10 @@ bs_touchscreen_widget_get_property (GObject    *object,
       g_value_set_object (value, self->touchscreen_region);
       break;
 
+    case PROP_SELECTION_CONTROLLER:
+      g_value_set_object (value, self->selection_controller);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -112,6 +143,18 @@ bs_touchscreen_widget_set_property (GObject      *object,
       g_assert (self->touchscreen_region == NULL);
       self->touchscreen_region = g_value_dup_object (value);
       g_assert (self->touchscreen_region != NULL);
+      break;
+
+    case PROP_SELECTION_CONTROLLER:
+      g_assert (self->selection_controller == NULL);
+      self->selection_controller = g_value_dup_object (value);
+      g_assert (self->selection_controller != NULL);
+
+      g_signal_connect_object (self->selection_controller,
+                               "selection-changed",
+                               G_CALLBACK (on_selection_controller_selection_changed_cb),
+                               self, 0);
+
       break;
 
     default:
@@ -135,6 +178,11 @@ bs_touchscreen_widget_class_init (BsTouchscreenWidgetClass *klass)
                          BS_TYPE_TOUCHSCREEN_REGION,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
+  properties[PROP_SELECTION_CONTROLLER] =
+    g_param_spec_object ("selection-controller", NULL, NULL,
+                         BS_TYPE_SELECTION_CONTROLLER,
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-touchscreen-widget.ui");
@@ -156,10 +204,12 @@ bs_touchscreen_widget_init (BsTouchscreenWidget *self)
 }
 
 GtkWidget *
-bs_touchscreen_widget_new (BsTouchscreenRegion *touchscreen_region)
+bs_touchscreen_widget_new (BsTouchscreenRegion   *touchscreen_region,
+                           BsSelectionController *selection_controller)
 {
   return g_object_new (BS_TYPE_TOUCHSCREEN_WIDGET,
                        "touchscreen-region", touchscreen_region,
+                       "selection-controller", selection_controller,
                        NULL);
 }
 
