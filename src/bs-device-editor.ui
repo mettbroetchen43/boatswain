@@ -46,6 +46,8 @@
         <property name="sidebar">
           <object class="AdwBin" id="editor_bin">
             <property name="hexpand">True</property>
+            <property name="width-request">280</property>
+
             <property name="child">
               <object class="AdwToolbarView" id="empty_page">
                 <property name="top-bar-style">flat</property>
