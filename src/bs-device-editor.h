@@ -26,11 +26,11 @@
 
 G_BEGIN_DECLS
 
-#define BS_TYPE_STREAM_DECK_EDITOR (bs_stream_deck_editor_get_type())
-G_DECLARE_FINAL_TYPE (BsStreamDeckEditor, bs_stream_deck_editor, BS, STREAM_DECK_EDITOR, AdwBin)
+#define BS_TYPE_DEVICE_EDITOR (bs_device_editor_get_type())
+G_DECLARE_FINAL_TYPE (BsDeviceEditor, bs_device_editor, BS, DEVICE_EDITOR, AdwBin)
 
-GtkWidget * bs_stream_deck_editor_new (BsStreamDeck *stream_deck);
+GtkWidget * bs_device_editor_new (BsStreamDeck *stream_deck);
 
-BsStreamDeck * bs_stream_deck_editor_get_stream_deck (BsStreamDeckEditor *self);
+BsStreamDeck * bs_device_editor_get_stream_deck (BsDeviceEditor *self);
 
 G_END_DECLS

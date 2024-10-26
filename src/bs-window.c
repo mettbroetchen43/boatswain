@@ -18,11 +18,11 @@
 
 #include "bs-application-private.h"
 #include "bs-config.h"
+#include "bs-device-editor.h"
 #include "bs-device-manager.h"
 #include "bs-profile.h"
 #include "bs-profile-row.h"
 #include "bs-stream-deck.h"
-#include "bs-stream-deck-editor.h"
 #include "bs-window.h"
 
 #include <glib/gi18n.h>
@@ -216,7 +216,7 @@ on_device_manager_stream_deck_added_cb (BsDeviceManager *device_manager,
   g_autofree char *page_name = NULL;
   GtkWidget *editor;
 
-  editor = bs_stream_deck_editor_new (stream_deck);
+  editor = bs_device_editor_new (stream_deck);
   page_name = g_strdup_printf ("%p", stream_deck);
   gtk_stack_add_named (self->main_stack, editor, page_name);
 
@@ -337,7 +337,7 @@ bs_window_constructed (GObject *object)
       GtkWidget *editor;
 
       stream_deck = g_list_model_get_item (G_LIST_MODEL (device_manager), i);
-      editor = bs_stream_deck_editor_new (stream_deck);
+      editor = bs_device_editor_new (stream_deck);
       page_name = g_strdup_printf ("%p", stream_deck);
       gtk_stack_add_named (self->main_stack, editor, page_name);
 

@@ -6,10 +6,10 @@ data/com.feaneron.Boatswain.metainfo.xml.in.in
 src/bs-application.c
 src/bs-button-editor.c
 src/bs-button-editor.ui
+src/bs-device-editor.ui
 src/bs-profile.c
 src/bs-profile-row.ui
 src/bs-stream-deck.c
-src/bs-stream-deck-editor.ui
 src/bs-window.ui
 src/bs-window.c
 src/gtk/help-overlay.ui

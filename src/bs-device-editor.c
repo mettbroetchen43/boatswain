@@ -20,6 +20,8 @@
 
 #define G_LOG_DOMAIN "Stream Deck Editor"
 
+#include "bs-device-editor.h"
+
 #include "bs-action-private.h"
 #include "bs-button-grid-region.h"
 #include "bs-debug.h"
@@ -34,7 +36,6 @@
 #include "bs-button-grid-widget.h"
 #include "bs-button-widget.h"
 #include "bs-selection-controller.h"
-#include "bs-stream-deck-editor.h"
 #include "bs-stream-deck-private.h"
 #include "bs-touchscreen-region.h"
 #include "bs-touchscreen-slot.h"
@@ -43,7 +44,7 @@
 #include <glib/gi18n.h>
 #include <libpeas.h>
 
-struct _BsStreamDeckEditor
+struct _BsDeviceEditor
 {
   AdwBin parent_instance;
 
@@ -58,7 +59,7 @@ struct _BsStreamDeckEditor
   BsSelectionController *selection_controller;
 };
 
-G_DEFINE_FINAL_TYPE (BsStreamDeckEditor, bs_stream_deck_editor, ADW_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (BsDeviceEditor, bs_device_editor, ADW_TYPE_BIN)
 
 enum
 {
@@ -75,8 +76,8 @@ static GParamSpec *properties [N_PROPS];
  */
 
 static inline void
-set_selected_item (BsStreamDeckEditor *self,
-                   gpointer            selected_item)
+set_selected_item (BsDeviceEditor *self,
+                   gpointer        selected_item)
 {
   if (BS_IS_BUTTON (selected_item))
     {
@@ -98,7 +99,7 @@ set_selected_item (BsStreamDeckEditor *self,
 }
 
 static void
-add_button_grid (BsStreamDeckEditor *self,
+add_button_grid (BsDeviceEditor     *self,
                  BsButtonGridRegion *button_grid)
 {
   BsDeviceRegion *region;
@@ -117,8 +118,8 @@ add_button_grid (BsStreamDeckEditor *self,
 }
 
 static void
-add_dial_grid (BsStreamDeckEditor *self,
-               BsDialGridRegion   *dial_grid)
+add_dial_grid (BsDeviceEditor   *self,
+               BsDialGridRegion *dial_grid)
 {
   BsDeviceRegion *region;
   GtkFlowBox *dials_flowbox;
@@ -162,7 +163,7 @@ add_dial_grid (BsStreamDeckEditor *self,
 }
 
 static void
-add_touchscreen (BsStreamDeckEditor  *self,
+add_touchscreen (BsDeviceEditor      *self,
                  BsTouchscreenRegion *touchscreen_region)
 {
   BsDeviceRegion *region;
@@ -182,7 +183,7 @@ add_touchscreen (BsStreamDeckEditor  *self,
 }
 
 static void
-build_regions (BsStreamDeckEditor *self)
+build_regions (BsDeviceEditor *self)
 {
   GListModel *regions = bs_stream_deck_get_regions (self->stream_deck);
 
@@ -208,7 +209,7 @@ build_regions (BsStreamDeckEditor *self)
 
 static void
 on_selection_controller_selection_changed_cb (BsSelectionController *selection_controller,
-                                              BsStreamDeckEditor    *self)
+                                              BsDeviceEditor        *self)
 {
   gpointer owner, item;
 
@@ -224,24 +225,24 @@ on_selection_controller_selection_changed_cb (BsSelectionController *selection_c
  */
 
 static void
-bs_stream_deck_editor_finalize (GObject *object)
+bs_device_editor_finalize (GObject *object)
 {
-  BsStreamDeckEditor *self = (BsStreamDeckEditor *)object;
+  BsDeviceEditor *self = (BsDeviceEditor *)object;
 
   g_clear_pointer (&self->region_to_widget, g_hash_table_destroy);
   g_clear_object (&self->selection_controller);
   g_clear_object (&self->stream_deck);
 
-  G_OBJECT_CLASS (bs_stream_deck_editor_parent_class)->finalize (object);
+  G_OBJECT_CLASS (bs_device_editor_parent_class)->finalize (object);
 }
 
 static void
-bs_stream_deck_editor_get_property (GObject    *object,
-                                    guint       prop_id,
-                                    GValue     *value,
-                                    GParamSpec *pspec)
+bs_device_editor_get_property (GObject    *object,
+                               guint       prop_id,
+                               GValue     *value,
+                               GParamSpec *pspec)
 {
-  BsStreamDeckEditor *self = BS_STREAM_DECK_EDITOR (object);
+  BsDeviceEditor *self = BS_DEVICE_EDITOR (object);
 
   switch (prop_id)
     {
@@ -255,12 +256,12 @@ bs_stream_deck_editor_get_property (GObject    *object,
 }
 
 static void
-bs_stream_deck_editor_set_property (GObject      *object,
-                                    guint         prop_id,
-                                    const GValue *value,
-                                    GParamSpec   *pspec)
+bs_device_editor_set_property (GObject      *object,
+                               guint         prop_id,
+                               const GValue *value,
+                               GParamSpec   *pspec)
 {
-  BsStreamDeckEditor *self = BS_STREAM_DECK_EDITOR (object);
+  BsDeviceEditor *self = BS_DEVICE_EDITOR (object);
 
   switch (prop_id)
     {
@@ -276,14 +277,14 @@ bs_stream_deck_editor_set_property (GObject      *object,
 }
 
 static void
-bs_stream_deck_editor_class_init (BsStreamDeckEditorClass *klass)
+bs_device_editor_class_init (BsDeviceEditorClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize = bs_stream_deck_editor_finalize;
-  object_class->get_property = bs_stream_deck_editor_get_property;
-  object_class->set_property = bs_stream_deck_editor_set_property;
+  object_class->finalize = bs_device_editor_finalize;
+  object_class->get_property = bs_device_editor_get_property;
+  object_class->set_property = bs_device_editor_set_property;
 
   properties[PROP_STREAM_DECK] = g_param_spec_object ("stream-deck", NULL, NULL,
                                                       BS_TYPE_STREAM_DECK,
@@ -291,16 +292,16 @@ bs_stream_deck_editor_class_init (BsStreamDeckEditorClass *klass)
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-stream-deck-editor.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-device-editor.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, editor_bin);
-  gtk_widget_class_bind_template_child (widget_class, BsStreamDeckEditor, regions_grid);
+  gtk_widget_class_bind_template_child (widget_class, BsDeviceEditor, editor_bin);
+  gtk_widget_class_bind_template_child (widget_class, BsDeviceEditor, regions_grid);
 
   gtk_widget_class_set_css_name (widget_class, "streamdeckeditor");
 }
 
 static void
-bs_stream_deck_editor_init (BsStreamDeckEditor *self)
+bs_device_editor_init (BsDeviceEditor *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -313,17 +314,17 @@ bs_stream_deck_editor_init (BsStreamDeckEditor *self)
 }
 
 GtkWidget *
-bs_stream_deck_editor_new (BsStreamDeck *stream_deck)
+bs_device_editor_new (BsStreamDeck *stream_deck)
 {
-  return g_object_new (BS_TYPE_STREAM_DECK_EDITOR,
+  return g_object_new (BS_TYPE_DEVICE_EDITOR,
                        "stream-deck", stream_deck,
                        NULL);
 }
 
 BsStreamDeck *
-bs_stream_deck_editor_get_stream_deck (BsStreamDeckEditor *self)
+bs_device_editor_get_stream_deck (BsDeviceEditor *self)
 {
-  g_return_val_if_fail (BS_IS_STREAM_DECK_EDITOR (self), NULL);
+  g_return_val_if_fail (BS_IS_DEVICE_EDITOR (self), NULL);
 
   return self->stream_deck;
 }
