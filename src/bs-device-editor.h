@@ -31,6 +31,4 @@ G_DECLARE_FINAL_TYPE (BsDeviceEditor, bs_device_editor, BS, DEVICE_EDITOR, AdwBi
 
 GtkWidget * bs_device_editor_new (BsStreamDeck *stream_deck);
 
-BsStreamDeck * bs_device_editor_get_stream_deck (BsDeviceEditor *self);
-
 G_END_DECLS

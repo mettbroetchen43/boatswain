@@ -320,11 +320,3 @@ bs_device_editor_new (BsStreamDeck *stream_deck)
                        "stream-deck", stream_deck,
                        NULL);
 }
-
-BsStreamDeck *
-bs_device_editor_get_stream_deck (BsDeviceEditor *self)
-{
-  g_return_val_if_fail (BS_IS_DEVICE_EDITOR (self), NULL);
-
-  return self->stream_deck;
-}
