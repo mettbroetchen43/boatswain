@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#define G_LOG_DOMAIN "Stream Deck Editor"
+#define G_LOG_DOMAIN "Device Editor"
 
 #include "bs-device-editor.h"
 
