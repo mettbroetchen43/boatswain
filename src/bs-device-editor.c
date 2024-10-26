@@ -49,6 +49,7 @@ struct _BsDeviceEditor
   AdwBin parent_instance;
 
   AdwBin *editor_bin;
+  AdwToolbarView *empty_page;
   GtkGrid *regions_grid;
 
   BsStreamDeck *stream_deck;
@@ -87,10 +88,12 @@ set_selected_item (BsDeviceEditor *self,
   else if (BS_IS_DIAL (selected_item))
     {
       BS_TODO ("Dial editor");
+      adw_bin_set_child (self->editor_bin, GTK_WIDGET (self->empty_page));
     }
   else if (BS_IS_TOUCHSCREEN_SLOT (selected_item))
     {
       BS_TODO ("Touchscreen slot editor");
+      adw_bin_set_child (self->editor_bin, GTK_WIDGET (self->empty_page));
     }
   else
     {
@@ -295,6 +298,7 @@ bs_device_editor_class_init (BsDeviceEditorClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/com/feaneron/Boatswain/bs-device-editor.ui");
 
   gtk_widget_class_bind_template_child (widget_class, BsDeviceEditor, editor_bin);
+  gtk_widget_class_bind_template_child (widget_class, BsDeviceEditor, empty_page);
   gtk_widget_class_bind_template_child (widget_class, BsDeviceEditor, regions_grid);
 
   gtk_widget_class_set_css_name (widget_class, "streamdeckeditor");
